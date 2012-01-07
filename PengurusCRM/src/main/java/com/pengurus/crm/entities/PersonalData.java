@@ -1,4 +1,4 @@
-package com.pengurus.entities;
+package com.pengurus.crm.entities;
 
 import java.util.List;
 

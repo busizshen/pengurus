@@ -1,4 +1,4 @@
-package com.pengurus.entities;
+package com.pengurus.crm.entities;
 
 public class Price {
 

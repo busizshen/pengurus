@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2012-01-07 17:29:58 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.pengurus.crm.entities.User" table="USER" abstract="true">
+        <id name="login" type="java.lang.String">
+            <column name="LOGIN" />
+            <generator class="assigned" />
+        </id>
+        <list name="permission" inverse="false" table="USER" lazy="true">
+            <key>
+                <column name="LOGIN" />
+            </key>
+            <list-index></list-index>
+            <element type="com.pengurus.crm.enums.UserRole">
+                <column name="PERMISSION" />
+            </element>
+        </list>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="DESCRIPTION" />
+        </property>
+    </class>
+</hibernate-mapping>

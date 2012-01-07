@@ -1,4 +1,4 @@
-package com.pengurus.enums;
+package com.pengurus.crm.enums;
 
 public enum Status {
     

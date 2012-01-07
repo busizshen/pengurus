@@ -1,8 +1,8 @@
-package com.pengurus.entities;
+package com.pengurus.crm.entities;
 
 import java.util.List;
+import com.pengurus.crm.enums.Status;
 
-import com.pengurus.enums.Status;
 
 public class Project {
 
