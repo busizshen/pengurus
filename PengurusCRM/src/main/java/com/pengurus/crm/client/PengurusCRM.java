@@ -1,5 +1,7 @@
 package com.pengurus.crm.client;
 
+import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Timer;
@@ -10,34 +12,11 @@ import com.pengurus.crm.client.service.NumberService;
 import com.pengurus.crm.client.service.NumberServiceAsync;
 
 public class PengurusCRM implements EntryPoint {
-
 	public void onModuleLoad() {
-		final Label quoteText = new Label();
-
-		Timer timer = new Timer() {
-
-			public void run() {
-				// create an async callback to handle the result:
-				AsyncCallback<String> callback = new AsyncCallback<String>() {
-
-					public void onFailure(Throwable t) {
-						// display error text if we can't get the number:
-						quoteText.setText("Failed to get a number");
-					}
-
-					public void onSuccess(String result) {
-						// display the retrieved number in the label:
-						quoteText.setText(result);
-					}
-				};
-				NumberServiceAsync service = (NumberServiceAsync) GWT
-						.create(NumberService.class);
-				service.getNumber(callback);
-			}
-		};
-
-		timer.scheduleRepeating(3000);
-		RootPanel.get().add(quoteText);
+	
+		MessageBox.info("Message", "Hello World!!", null);
+		//RootPanel.get().add(b);
+	    
 	}
 
 	/*
