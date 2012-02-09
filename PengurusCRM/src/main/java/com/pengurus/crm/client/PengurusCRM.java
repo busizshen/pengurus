@@ -1,22 +1,11 @@
 package com.pengurus.crm.client;
 
 import com.extjs.gxt.ui.client.widget.MessageBox;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.pengurus.crm.client.service.NumberService;
-import com.pengurus.crm.client.service.NumberServiceAsync;
 
 public class PengurusCRM implements EntryPoint {
 	public void onModuleLoad() {
-	
 		MessageBox.info("Message", "Hello World!!", null);
-		//RootPanel.get().add(b);
-	    
 	}
 
 	/*
