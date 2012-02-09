@@ -6,6 +6,7 @@
 
 	<import resource="gwt-wrapper-beans.xml"/>
 	<import resource="webservice-beans.xml"/>
+	<import resource="dao-beans.xml"/>
 	
 	<bean id="urlMapping"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
