@@ -1,7 +1,7 @@
 package com.pengurus.crm.entities;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +13,7 @@ public class User implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	private List<UserRole> permission;
+	private Set<UserRole> permission;
     private String username;
     private String password;
     private String description;
@@ -22,7 +22,7 @@ public class User implements UserDetails {
         super();
     }
     
-    public User(List<UserRole> permission, String username, String password,
+    public User(Set<UserRole> permission, String username, String password,
                 String description) {
         super();
         this.permission = permission;
@@ -40,11 +40,11 @@ public class User implements UserDetails {
 		this.id = id;
 	}
 
-    public List<UserRole> getPermission() {
+    public Set<UserRole> getPermission() {
         return permission;
     }
     
-    public void setPermission(List<UserRole> permission) {
+    public void setPermission(Set<UserRole> permission) {
         this.permission = permission;
     }
     

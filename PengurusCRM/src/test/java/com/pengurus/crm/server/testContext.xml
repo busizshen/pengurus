@@ -63,6 +63,10 @@
 	<bean id="userDao" class="com.pengurus.crm.daos.impl.UserDAOImpl">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
+	
+	<bean id="userRoleDao" class="com.pengurus.crm.daos.impl.UserRoleDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
 
 	<bean id="userDetailsService"
 		class="com.pengurus.crm.server.UserDetailsServiceImpl">

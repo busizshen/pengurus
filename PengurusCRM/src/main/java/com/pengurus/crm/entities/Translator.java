@@ -1,6 +1,7 @@
 package com.pengurus.crm.entities;
 
 import java.util.List;
+import java.util.Set;
 
 import com.pengurus.crm.enums.UserRole;
 
@@ -14,7 +15,7 @@ public class Translator extends Worker{
         super();
     }
 
-    public Translator(List<UserRole> permission, String login, String password,
+    public Translator(Set<UserRole> permission, String login, String password,
                       String description, PersonalData data,
                       List<Translation> translations) {
         super(permission, login, password, description, data);

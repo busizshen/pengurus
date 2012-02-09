@@ -26,7 +26,7 @@
 		<property name="hibernateProperties">
 			<value>
 				hibernate.default_schema=public
-				hibernate.hbm2ddl.auto=create
+				hibernate.hbm2ddl.auto=update
 				hibernate.id.new_generator_mappings=true
 				hibernate.show_sql=true
 				hibernate.format_sql=true
@@ -55,6 +55,10 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+	<bean id="userRoleDao" class="com.pengurus.crm.daos.impl.UserRoleDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	
 	<bean id="userDao" class="com.pengurus.crm.daos.impl.UserDAOImpl">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>

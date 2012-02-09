@@ -1,6 +1,6 @@
 package com.pengurus.crm.entities;
 
-import java.util.List;
+import java.util.Set;
 
 import com.pengurus.crm.enums.UserRole;
 
@@ -14,7 +14,7 @@ public class Worker extends User {
         super();
     }
     
-    public Worker(List<UserRole> permission, String login, String password,
+    public Worker(Set<UserRole> permission, String login, String password,
                   String description, PersonalData data) {
         super(permission, login, password, description);
         this.data = data;

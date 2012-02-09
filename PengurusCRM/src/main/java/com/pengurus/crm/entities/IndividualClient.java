@@ -1,6 +1,6 @@
 package com.pengurus.crm.entities;
 
-import java.util.List;
+import java.util.Set;
 
 import com.pengurus.crm.enums.UserRole;
 
@@ -14,7 +14,7 @@ public class IndividualClient extends Client{
         super();
     }
 
-    public IndividualClient(List<UserRole> permission, String login,
+    public IndividualClient(Set<UserRole> permission, String login,
                             String password, String description, 
                             PersonalData data) {
         super(permission, login, password, description);

@@ -1,5 +1,7 @@
 package com.pengurus.crm.server;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 public class AuthorizationService extends HibernateDaoSupport {
 
+	protected static final Logger log = LoggerFactory.getLogger(AuthorizationService.class);
 	@Autowired
 	private AuthenticationManager am;
 	

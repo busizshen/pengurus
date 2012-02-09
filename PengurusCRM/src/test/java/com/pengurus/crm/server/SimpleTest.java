@@ -1,7 +1,7 @@
 package com.pengurus.crm.server;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import com.pengurus.crm.daos.UserDAO;
+import com.pengurus.crm.daos.UserRoleDAO;
 import com.pengurus.crm.entities.User;
 import com.pengurus.crm.enums.UserRole;
 
@@ -23,13 +25,19 @@ public class SimpleTest {
 	private UserDAO ud;
 	
 	@Autowired
+	private UserRoleDAO urd;
+	
+	@Autowired
 	private AuthorizationService authService;
 	
 	private Long id;
 	
 	@Before 
 	public void createUser(){
-		List<UserRole> li = new ArrayList<UserRole>();
+		Set<UserRole> li = new HashSet<UserRole>();
+		UserRole ur = UserRole.USER_ROLE;
+		urd.create(ur);
+		li.add(ur);
 		User u = new User(li, "Username", "pass", "descr");
 		Assert.assertNotNull(u);
 		id = ud.create(u);
