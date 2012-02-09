@@ -12,6 +12,7 @@
 
 	<properties>
 		<gwt.version>2.4.0</gwt.version>
+		<gxt.version>2.2.5</gxt.version>
 		<springframework.version>3.1.0.RELEASE</springframework.version>
 
 		<hibernate.version>3.6.7.Final</hibernate.version>
@@ -164,7 +165,7 @@
 		<dependency>
 			<groupId>com.extjs</groupId>
 			<artifactId>gxt</artifactId>
-			<version>2.2.0</version>
+			<version>${gxt.version}</version>
 		</dependency>
 
 
