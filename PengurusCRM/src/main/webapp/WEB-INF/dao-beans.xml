@@ -37,6 +37,7 @@
 		<property name="mappingResources">
 			<list>
 				<value>User.hbm.xml</value>
+				<value>UserRole.hbm.xml</value>
 			</list>
 		</property>
 
@@ -54,11 +55,8 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="userDao" class="com.pengurus.crm.daos.UserDAOImpl">
+	<bean id="userDao" class="com.pengurus.crm.daos.impl.UserDAOImpl">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
-	</bean>
-
-	<bean id="userDetailsService" class="com.pengurus.crm.server.UserDetailsServiceImpl">
 	</bean>
 
 </beans>

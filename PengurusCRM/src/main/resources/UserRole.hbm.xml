@@ -1,15 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2011-11-17 21:34:36 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2012-02-09 11:53:55 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.pengurus.crm.server.Kupa" table="KUPA">
-        <id name="id" type="int">
+    <class name="com.pengurus.crm.enums.UserRole" table="USERROLE" abstract="true">
+        <id name="id" type="java.lang.Long">
             <column name="ID" />
             <generator class="assigned" />
         </id>
-        <property name="serialVersionUID" type="long" access="field">
-            <column name="SERIALVERSIONUID" />
-        </property>
     </class>
 </hibernate-mapping>

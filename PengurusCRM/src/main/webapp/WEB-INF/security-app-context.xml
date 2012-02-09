@@ -12,6 +12,9 @@
 		<intercept-url pattern="/**" access="ROLE_USER"/>
 	</http>
 	
+	<beans:bean id="userDetailsService" class="com.pengurus.crm.server.UserDetailsServiceImpl">
+	</beans:bean>
+	
 	<authentication-manager>
 		<authentication-provider user-service-ref='userDetailsService'/>
 		<authentication-provider>
