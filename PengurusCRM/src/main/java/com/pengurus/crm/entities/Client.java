@@ -6,7 +6,9 @@ import com.pengurus.crm.enums.UserRole;
 
 public abstract class Client extends User {
 
-    public Client() {
+	private static final long serialVersionUID = -764945155580666817L;
+
+	public Client() {
         super();
     }
 

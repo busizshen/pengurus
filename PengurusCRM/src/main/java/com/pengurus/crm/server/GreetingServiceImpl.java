@@ -1,8 +1,8 @@
 package com.pengurus.crm.server;
 
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.pengurus.crm.client.service.GreetingService;
 import com.pengurus.crm.shared.FieldVerifier;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
  * The server side implementation of the RPC service.

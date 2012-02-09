@@ -12,12 +12,13 @@
 
 	<properties>
 		<gwt.version>2.4.0</gwt.version>
-		<gxt.version>2.2.5</gxt.version>
 		<springframework.version>3.1.0.RELEASE</springframework.version>
+		<gxt.version>2.2.5</gxt.version>
 
 		<hibernate.version>3.6.7.Final</hibernate.version>
 		<hibernate.validator.version>4.0.2.GA</hibernate.validator.version>
-		<slf4j.version>1.5.6</slf4j.version>
+ 		<slf4j.version>1.5.6</slf4j.version>
+		<aspectjrt.version>1.6.11</aspectjrt.version>
 		<javassist.version>3.8.0.GA</javassist.version>
 		<validation-api.version>1.0.0.GA</validation-api.version>
 		<postgresql.version>8.4-702.jdbc4</postgresql.version>
@@ -39,7 +40,7 @@
 		<!-- begin: Spring Framework -->
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
+			<artifactId>spring-aop</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
 		<dependency>
@@ -59,8 +60,29 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${springframework.version}</version>
+    	</dependency>
+    	<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${springframework.version}</version>
+    	</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${springframework.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -72,23 +94,6 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${springframework.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>${springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>${springframework.version}</version>
-		</dependency>
-
 		<!-- end: Spring Framework -->
 		<!-- begin: Google Web Toolkit -->
 		<dependency>
@@ -167,8 +172,21 @@
 			<artifactId>gxt</artifactId>
 			<version>${gxt.version}</version>
 		</dependency>
-
-
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspectjrt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+			<version>${aspectjrt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectjrt.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

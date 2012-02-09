@@ -5,8 +5,10 @@ import java.util.List;
 import com.pengurus.crm.enums.UserRole;
 
 public class IndividualClient extends Client{
-    
-    private PersonalData data;
+
+	private static final long serialVersionUID = -4250995438524672861L;
+
+	private PersonalData data;
 
     public IndividualClient() {
         super();

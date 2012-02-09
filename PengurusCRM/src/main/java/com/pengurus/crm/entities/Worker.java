@@ -1,11 +1,14 @@
 package com.pengurus.crm.entities;
 
 import java.util.List;
+
 import com.pengurus.crm.enums.UserRole;
 
 public class Worker extends User {
     
-    private PersonalData data;
+	private static final long serialVersionUID = -8500283670801168363L;
+	
+	private PersonalData data;
         
     public Worker() {
         super();

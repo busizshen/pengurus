@@ -7,7 +7,9 @@ import com.pengurus.crm.enums.UserRole;
 
 public class BussinessClient extends Client{
     
-    private String name;
+	private static final long serialVersionUID = 5061179436088302516L;
+	
+	private String name;
     private List<PersonalData> agents;
     
     public BussinessClient() {

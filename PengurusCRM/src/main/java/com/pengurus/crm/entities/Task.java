@@ -1,6 +1,7 @@
 package com.pengurus.crm.entities;
 
 import java.util.Calendar;
+
 import com.pengurus.crm.enums.Rating;
 import com.pengurus.crm.enums.Status;
 

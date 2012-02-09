@@ -1,6 +1,7 @@
 package com.pengurus.crm.entities;
 
 import java.util.List;
+
 import com.pengurus.crm.enums.Status;
 
 public class Quote {
