@@ -9,6 +9,7 @@
 		<property name="mappings">
 			<value>
 				/**/number.rpc=numberController
+				/**/currentSession.rpc=currentSessionController
 			</value>
 		</property>
 	</bean>

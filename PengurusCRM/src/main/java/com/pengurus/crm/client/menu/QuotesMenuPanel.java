@@ -3,8 +3,15 @@ package com.pengurus.crm.client.menu;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Label;
+import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.center.QuotePanel;
+import com.pengurus.crm.client.service.CurrentSessionService;
+import com.pengurus.crm.client.service.CurrentSessionServiceAsync;
+import com.pengurus.crm.shared.UserEntity;
 
 public class QuotesMenuPanel extends TabMenuPanel {
 
@@ -14,7 +21,20 @@ public class QuotesMenuPanel extends TabMenuPanel {
 	    panel.setHeading("QUOTES");
 	    panel.setBodyStyleName("pad-text");  
 	    
-	    
+		AsyncCallback<UserEntity> callback = new AsyncCallback<UserEntity>() {
+
+			public void onFailure(Throwable t) {
+				MessageBox.info("Message", "Nie udalo sie", null);
+			}
+
+			public void onSuccess(UserEntity result) {
+				MessageBox.info("Message", result.getUsername(), null);
+			}
+		};
+		CurrentSessionServiceAsync service = (CurrentSessionServiceAsync) GWT
+				.create(CurrentSessionService.class);
+		service.getCurrentUser(callback);
+		
 	    Button b = new Button("Last Edited");
 	    b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 			@Override

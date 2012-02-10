@@ -5,6 +5,7 @@
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 	<bean id="numberServiceBean" class="com.pengurus.crm.server.NumberServiceImpl" />
+	<bean id="currentSessionServiceBean" class="com.pengurus.crm.server.CurrentSessionServiceImpl" />
 	
 	<bean id="userDetailsService" class="com.pengurus.crm.server.UserDetailsServiceImpl">
 		<property name="userDAO" ref="userDao"/>
