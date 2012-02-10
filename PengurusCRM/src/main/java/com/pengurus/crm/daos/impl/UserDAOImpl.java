@@ -20,7 +20,6 @@ public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public User findByUsername(String name) {
-		log.error("looking for Username named ::" + name);
 		return (User) ((ArrayList<User>) getHibernateTemplate().find("select u from User u where u.username = '" + name + "'")).get(0);
 	}
 	

@@ -13,10 +13,8 @@
 	</http>
 	
 	<beans:import resource="dao-beans.xml"/>
-	
-	<beans:bean id="userDetailsService" class="com.pengurus.crm.server.UserDetailsServiceImpl">
-		<beans:property name="userDAO" ref="userDao"/>
-	</beans:bean>
+	<beans:import resource="webservice-beans.xml"/>	
+	<beans:import resource="gwt-wrapper-beans.xml"/>
 	
 	<authentication-manager>
 		<authentication-provider user-service-ref='userDetailsService'/>

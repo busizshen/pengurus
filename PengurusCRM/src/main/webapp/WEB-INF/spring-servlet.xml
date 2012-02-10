@@ -4,10 +4,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<import resource="gwt-wrapper-beans.xml"/>
-	<import resource="webservice-beans.xml"/>
-	<import resource="dao-beans.xml"/>
-	
 	<bean id="urlMapping"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
