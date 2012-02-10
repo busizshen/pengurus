@@ -39,5 +39,10 @@ public class UserRole implements GrantedAuthority {
 		return role;
 	}
 	
+	@Override
+	public String toString() {
+		return getAuthority();
+	}
+	
 }
 

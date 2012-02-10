@@ -13,7 +13,7 @@ public class User implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	private Set<UserRole> permission;
+	private Set<UserRole> authorities;
     private String username;
     private String password;
     private String description;
@@ -25,7 +25,7 @@ public class User implements UserDetails {
     public User(Set<UserRole> permission, String username, String password,
                 String description) {
         super();
-        this.permission = permission;
+        this.authorities = permission;
         this.username = username;
         this.password = password;
         this.description = description;
@@ -41,11 +41,11 @@ public class User implements UserDetails {
 	}
 
     public Set<UserRole> getPermission() {
-        return permission;
+        return authorities;
     }
     
     public void setPermission(Set<UserRole> permission) {
-        this.permission = permission;
+        this.authorities = permission;
     }
     
     public String getUsername() {
@@ -74,8 +74,7 @@ public class User implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		return authorities;
 	}
 
 	@Override
@@ -102,4 +101,16 @@ public class User implements UserDetails {
 		return true;
 	}
     
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("User: ");
+		sb.append(username);
+		sb.append("; Desription: ");
+		sb.append(description);
+		sb.append("; Authorities:");
+		sb.append(authorities);
+		return sb.toString();
+	}
+	
 }

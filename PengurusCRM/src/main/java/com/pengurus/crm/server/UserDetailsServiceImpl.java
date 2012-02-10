@@ -1,6 +1,7 @@
 package com.pengurus.crm.server;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,7 +15,8 @@ import com.pengurus.crm.entities.User;
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	@Autowired
+	protected static final Logger log = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
+	
 	private UserDAO userDAO;
 	
 	public UserDAO getUserDAO() {
@@ -30,6 +32,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username)
 	throws UsernameNotFoundException, DataAccessException {
 		User user = userDAO.findByUsername(username);
+		
+		log.error(user.toString());
+		
 		if (user == null)
 			throw new UsernameNotFoundException("User not found");
 		return user;
