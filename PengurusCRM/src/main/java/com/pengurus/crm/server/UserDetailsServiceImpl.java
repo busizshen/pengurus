@@ -1,5 +1,6 @@
 package com.pengurus.crm.server;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +14,7 @@ import com.pengurus.crm.entities.User;
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+	@Autowired
 	private UserDAO userDAO;
 	
 	public UserDAO getUserDAO() {

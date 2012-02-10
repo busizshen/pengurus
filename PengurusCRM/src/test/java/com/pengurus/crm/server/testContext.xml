@@ -16,60 +16,11 @@
 
 	<aop:aspectj-autoproxy/>
 	
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://localhost/postgres" />
-		<property name="username" value="postgres" />
-		<property name="password" value="postgres" />
-	</bean>
- 
- 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="hibernateProperties">
-			<value>
-				hibernate.default_schema=public
-				hibernate.hbm2ddl.auto=create
-				hibernate.id.new_generator_mappings=true
-				hibernate.show_sql=true
-				hibernate.format_sql=true
-				hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-			</value>
-		</property>
-		
-		<property name="mappingResources">
-			<list>
-				<value>User.hbm.xml</value>
-				<value>UserRole.hbm.xml</value>
-			</list>
-		</property>
-				
-	</bean>
-
-	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	<tx:annotation-driven />
-
-	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
-		<property name="allowCreate" value="true" />
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+	<import resource="file:src/main/webapp/WEB-INF/dao-beans.xml"/>
+	<import resource="file:src/main/webapp/WEB-INF/webservice-beans.xml"/>
 	
 	<bean id="authHelp" class="com.pengurus.crm.server.AuthorizationService">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
-	</bean>
-		
-	<bean id="userDao" class="com.pengurus.crm.daos.impl.UserDAOImpl">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
-	</bean>
-	
-	<bean id="userRoleDao" class="com.pengurus.crm.daos.impl.UserRoleDAOImpl">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
-	</bean>
-
-	<bean id="userDetailsService"
-		class="com.pengurus.crm.server.UserDetailsServiceImpl">
 	</bean>
 
 	<security:authentication-manager>
