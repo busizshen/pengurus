@@ -2,9 +2,10 @@ package com.pengurus.crm.entities;
 
 import java.util.List;
 
+import com.extjs.gxt.ui.client.data.BaseModel;
 import com.pengurus.crm.enums.Status;
 
-public class Quote {
+public class Quote extends BaseModel{
     
     private Status status;
     private Client client;
