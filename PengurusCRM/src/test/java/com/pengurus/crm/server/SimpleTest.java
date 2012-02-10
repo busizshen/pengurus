@@ -1,7 +1,6 @@
 package com.pengurus.crm.server;
 
 import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,8 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.pengurus.crm.daos.UserDAO;
 import com.pengurus.crm.daos.UserRoleDAO;
-import com.pengurus.crm.entities.User;
-import com.pengurus.crm.enums.UserRole;
+import com.pengurus.crm.shared.User;
+import com.pengurus.crm.shared.UserRole;
 
 @ContextConfiguration(locations = {"classpath:com/pengurus/crm/server/testContext.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,8 +33,8 @@ public class SimpleTest {
 	
 	@Before 
 	public void createUser(){
-		Set<UserRole> li = new HashSet<UserRole>();
-		UserRole ur = UserRole.USER_ROLE;
+		HashSet<UserRole> li = new HashSet<UserRole>();
+		UserRole ur = UserRole.ROLE_USER;
 		urd.create(ur);
 		li.add(ur);
 		User u = new User(li, "Username", "pass", "descr");

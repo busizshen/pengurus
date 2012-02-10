@@ -8,24 +8,8 @@ package com.pengurus.crm.client.menu;
  * http://extjs.com/license 
  */   
   
-import com.extjs.gxt.ui.client.data.BaseModelData;  
-import com.extjs.gxt.ui.client.data.ModelData;  
-import com.extjs.gxt.ui.client.data.ModelIconProvider;  
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.store.TreeStore;  
-import com.extjs.gxt.ui.client.util.IconHelper;  
-import com.extjs.gxt.ui.client.widget.ContentPanel;  
-import com.extjs.gxt.ui.client.widget.LayoutContainer;  
-import com.extjs.gxt.ui.client.widget.MessageBox;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;  
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;  
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;  
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;  
-import com.google.gwt.user.client.Element;  
-import com.google.gwt.user.client.ui.AbstractImagePrototype;  
-import com.pengurus.crm.client.MainWindow;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
   
 public class MenuPanel {  
 	

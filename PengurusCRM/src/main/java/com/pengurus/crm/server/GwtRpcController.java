@@ -4,6 +4,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
@@ -18,6 +20,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class GwtRpcController extends RemoteServiceServlet implements
 		Controller, ServletContextAware {
 	private static final long serialVersionUID = -3618261744853211777L;
+	
+	Logger log = LoggerFactory.getLogger("GwtRpcController");
 
 	private ServletContext servletContext;
 	private RemoteService remoteService;
@@ -60,6 +64,14 @@ public class GwtRpcController extends RemoteServiceServlet implements
 	public void setRemoteService(RemoteService remoteService) {
 		this.remoteService = remoteService;
 		this.remoteServiceClass = this.remoteService.getClass();
+	}
+	
+	@Override
+	protected void doUnexpectedFailure(Throwable e) {
+		log.error("=====> ERROR ");
+		log.error(e.toString());
+		log.error("<===== ERROR ");
+		super.doUnexpectedFailure(e);
 	}
 
 }

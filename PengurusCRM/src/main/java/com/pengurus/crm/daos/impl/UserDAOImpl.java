@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.pengurus.crm.daos.UserDAO;
-import com.pengurus.crm.entities.User;
+import com.pengurus.crm.shared.User;
 
 
 public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO {

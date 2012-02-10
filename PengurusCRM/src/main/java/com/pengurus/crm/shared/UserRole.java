@@ -1,15 +1,13 @@
-package com.pengurus.crm.enums;
+package com.pengurus.crm.shared;
 
-import org.springframework.security.core.GrantedAuthority;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class UserRole implements GrantedAuthority {
+public class UserRole implements IsSerializable {
 	
-	private static final long serialVersionUID = 2643977776593782708L;
-	 
 	private Long id;
 	private String role;
 	
-	static public UserRole USER_ROLE = new UserRole("USER_ROLE");
+	static public UserRole ROLE_USER = new UserRole("ROLE_USER");
 	
 	public UserRole(){
 		
@@ -33,15 +31,10 @@ public class UserRole implements GrantedAuthority {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	@Override
-	public String getAuthority() {
-		return role;
-	}
 	
 	@Override
 	public String toString() {
-		return getAuthority();
+		return getRole();
 	}
 	
 }

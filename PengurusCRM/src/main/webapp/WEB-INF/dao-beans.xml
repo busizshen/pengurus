@@ -40,7 +40,6 @@
 				<value>UserRole.hbm.xml</value>
 			</list>
 		</property>
-
 	</bean>
 
 	<bean id="transactionManager"

@@ -3,7 +3,7 @@ package com.pengurus.crm.entities;
 import java.util.List;
 import java.util.Set;
 
-import com.pengurus.crm.enums.UserRole;
+import com.pengurus.crm.shared.UserRole;
 
 public class Translator extends Worker{
 
