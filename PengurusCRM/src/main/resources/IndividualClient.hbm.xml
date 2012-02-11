@@ -1,11 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2012-02-11 15:48:19 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2012-02-11 21:15:48 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <subclass name="com.pengurus.crm.entities.IndividualClient" extends="com.pengurus.crm.entities.Client" discriminator-value="IndividualClient" lazy="false">
+    <joined-subclass name="com.pengurus.crm.entities.IndividualClient" extends="com.pengurus.crm.entities.Client" lazy="false">
+        <key>
+            <column name="USER_ID" />
+        </key>
         <many-to-one name="data" class="com.pengurus.crm.entities.PersonalData" fetch="join">
             <column name="DATA" />
         </many-to-one>
-    </subclass>
+    </joined-subclass>
 </hibernate-mapping>

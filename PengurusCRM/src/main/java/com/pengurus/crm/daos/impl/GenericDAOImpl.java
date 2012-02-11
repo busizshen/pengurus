@@ -1,5 +1,6 @@
 package com.pengurus.crm.daos.impl;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.pengurus.crm.daos.GenericDAO;
@@ -10,13 +11,8 @@ public class GenericDAOImpl<T> extends HibernateDaoSupport implements GenericDAO
 	protected Class<T> type;
 	
 	@Override
-	public long create(T newInstance) {
-		try{
-			return (Long) getHibernateTemplate().save(newInstance);
-		} catch(Exception e) {
-			System.err.println(e.getMessage());
-			return Long.parseLong("-1");
-		}
+	public void create(T newInstance) throws DataAccessException {
+		getHibernateTemplate().save(newInstance);
 	}
 
 	@Override

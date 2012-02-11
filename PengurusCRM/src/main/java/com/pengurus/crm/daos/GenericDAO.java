@@ -3,7 +3,7 @@ package com.pengurus.crm.daos;
 public interface GenericDAO <T> {
 
 	    /** Persist the newInstance object into database */
-	    long create(T newInstance);
+	    void create(T newInstance);
 
 	    /** Retrieve an object that was previously persisted to the database using
 	     *   the indicated id as primary key
