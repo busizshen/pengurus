@@ -1,13 +1,10 @@
 package com.pengurus.crm.entities;
 
 import java.util.Set;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-import com.pengurus.crm.shared.User;
-import com.pengurus.crm.shared.UserRole;
 
-public abstract class Client extends User {
-
-	private static final long serialVersionUID = -764945155580666817L;
+public abstract class Client extends User implements IsSerializable {
 
 	public Client() {
         super();

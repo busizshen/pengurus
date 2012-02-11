@@ -3,11 +3,8 @@ package com.pengurus.crm.entities;
 import java.util.List;
 import java.util.Set;
 
-import com.pengurus.crm.shared.UserRole;
 
 public class Translator extends Worker{
-
-	private static final long serialVersionUID = -3444544579987402428L;
 
 	private List<Translation> translations;
 

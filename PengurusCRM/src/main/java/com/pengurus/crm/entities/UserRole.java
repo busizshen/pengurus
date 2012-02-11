@@ -1,4 +1,4 @@
-package com.pengurus.crm.shared;
+package com.pengurus.crm.entities;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 

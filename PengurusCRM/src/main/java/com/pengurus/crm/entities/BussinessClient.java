@@ -3,13 +3,10 @@ package com.pengurus.crm.entities;
 import java.util.List;
 import java.util.Set;
 
-import com.pengurus.crm.shared.UserRole;
 
 
-public class BussinessClient extends Client{
+public class BussinessClient extends Client {
     
-	private static final long serialVersionUID = 5061179436088302516L;
-	
 	private String name;
     private List<PersonalData> agents;
     

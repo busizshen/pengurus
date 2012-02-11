@@ -2,13 +2,9 @@ package com.pengurus.crm.entities;
 
 import java.util.Set;
 
-import com.pengurus.crm.shared.User;
-import com.pengurus.crm.shared.UserRole;
 
 public class Worker extends User {
     
-	private static final long serialVersionUID = -8500283670801168363L;
-	
 	private PersonalData data;
         
     public Worker() {
