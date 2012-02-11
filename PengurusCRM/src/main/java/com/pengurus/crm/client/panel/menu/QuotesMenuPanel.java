@@ -1,4 +1,4 @@
-package com.pengurus.crm.client.menu;
+package com.pengurus.crm.client.panel.menu;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
@@ -7,7 +7,7 @@ import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.pengurus.crm.client.center.QuotePanel;
+import com.pengurus.crm.client.panel.center.QuotePanel;
 import com.pengurus.crm.client.service.CurrentSessionService;
 import com.pengurus.crm.client.service.CurrentSessionServiceAsync;
 import com.pengurus.crm.shared.dto.UserDTO;

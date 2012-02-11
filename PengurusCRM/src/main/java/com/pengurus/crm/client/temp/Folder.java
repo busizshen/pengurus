@@ -6,8 +6,8 @@ import com.extjs.gxt.ui.client.data.BaseTreeModel;
 import com.extjs.gxt.ui.client.data.ModelData;
 
 public class Folder extends BaseTreeModel implements Serializable {
-
-  private static int ID = 0;
+	private static final long serialVersionUID = -8405594503138703961L;
+	private static int ID = 0;
   
   public Folder() {
     set("id", ID++);

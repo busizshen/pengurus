@@ -6,13 +6,13 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 public class PengurusCRM implements EntryPoint {
 	public MainWindow mainWindow;
+	
 	public void onModuleLoad() {
-		
 		mainWindow = GWT.create(MainWindow.class);
 		RootPanel.get().add(mainWindow);
-	
 	}
-	public MainWindow getMain_window() {
+	
+	public MainWindow getMainWindow() {
 		return mainWindow;
 	}
 

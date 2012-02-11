@@ -1,13 +1,13 @@
-package com.pengurus.crm.client.menu;
+package com.pengurus.crm.client.panel.menu;
 
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 
-public class ContactsMenuPanel extends TabMenuPanel {
+public class AdministrationMenuPanel extends TabMenuPanel {
 
 	@Override
 	public ContentPanel getPanel() {
 		panel = new ContentPanel();
-		panel.setHeading("Contacts");
+		panel.setHeading("Administration");
 		return panel;
 	}
 

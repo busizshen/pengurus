@@ -1,4 +1,4 @@
-package com.pengurus.crm.client.center;
+package com.pengurus.crm.client.panel.center;
 
 public interface CenterPanel {
 	public void LastEdited();

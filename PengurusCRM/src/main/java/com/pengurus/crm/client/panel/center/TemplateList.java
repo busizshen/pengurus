@@ -1,10 +1,6 @@
-package com.pengurus.crm.client.center;
+package com.pengurus.crm.client.panel.center;
 
-import com.extjs.gxt.ui.client.data.BasePagingLoader;
-import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-import com.google.gwt.user.client.Element;
 
 public abstract class TemplateList extends LayoutContainer {
 /*	@Override  

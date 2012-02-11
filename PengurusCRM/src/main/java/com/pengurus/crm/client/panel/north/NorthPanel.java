@@ -1,11 +1,11 @@
-package com.pengurus.crm.client;
+package com.pengurus.crm.client.panel.north;
 
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Label;
 
-public class NorthPanel {
+public class NorthPanel extends ContentPanel {
 
-	public ContentPanel getPanel() {
+	public static ContentPanel getPanel() {
 		// TODO Auto-generated method stub
 		ContentPanel north_panel = new ContentPanel();
 		north_panel.add(new Label("Pengurus CRM"));
