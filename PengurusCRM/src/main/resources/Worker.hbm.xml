@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2012-02-11 15:48:19 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <joined-subclass name="com.pengurus.crm.entities.Worker" extends="com.pengurus.crm.entities.User" table="WORKER" lazy="false">
+        <key>
+            <column name="ID" />
+        </key>
+        <many-to-one name="data" class="com.pengurus.crm.entities.PersonalData" fetch="join">
+            <column name="DATA" />
+        </many-to-one>
+    </joined-subclass>
+</hibernate-mapping>

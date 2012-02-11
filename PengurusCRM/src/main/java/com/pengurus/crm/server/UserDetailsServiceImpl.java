@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pengurus.crm.daos.UserDAO;
-import com.pengurus.crm.shared.User;
-import com.pengurus.crm.shared.UserRole;
+import com.pengurus.crm.entities.User;
+import com.pengurus.crm.entities.UserRole;
 
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -49,8 +49,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException, DataAccessException {
+		
 		User user = userDAO.findByUsername(username);
 		log.error(user.toString());
 		return createUserDetailsFromUser(user);
+		
 	}
 }

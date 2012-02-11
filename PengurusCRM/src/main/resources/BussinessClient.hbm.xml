@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2012-02-11 15:48:19 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <subclass name="com.pengurus.crm.entities.BussinessClient" extends="com.pengurus.crm.entities.Client" discriminator-value="BussinessClient" lazy="false">
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <list name="agents" inverse="false" table="PERSONALDATA" lazy="true">
+            <key>
+                <column name="NAME" />
+            </key>
+            <list-index></list-index>
+            <one-to-many class="com.pengurus.crm.entities.PersonalData" />
+        </list>
+    </subclass>
+</hibernate-mapping>

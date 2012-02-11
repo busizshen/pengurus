@@ -13,8 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.pengurus.crm.daos.UserDAO;
 import com.pengurus.crm.daos.UserRoleDAO;
-import com.pengurus.crm.shared.User;
-import com.pengurus.crm.shared.UserRole;
+import com.pengurus.crm.entities.User;
+import com.pengurus.crm.entities.UserRole;
 
 @ContextConfiguration(locations = {"classpath:com/pengurus/crm/server/testContext.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -51,5 +51,10 @@ public class SimpleTest {
 		Assert.assertTrue(SecurityContextHolder.getContext().getAuthentication().isAuthenticated());
 	}
 	
+	@Test
+	public void logInNoUser(){
+		authService.login("Username3", "pass");
+		Assert.assertTrue(SecurityContextHolder.getContext().getAuthentication().isAuthenticated());
+	}
 
 }

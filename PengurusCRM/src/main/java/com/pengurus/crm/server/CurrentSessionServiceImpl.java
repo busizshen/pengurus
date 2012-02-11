@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.pengurus.crm.client.service.CurrentSessionService;
 import com.pengurus.crm.daos.UserDAO;
-import com.pengurus.crm.shared.User;
-import com.pengurus.crm.shared.UserRole;
+import com.pengurus.crm.entities.User;
+import com.pengurus.crm.entities.UserRole;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
