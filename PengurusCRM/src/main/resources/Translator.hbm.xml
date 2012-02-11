@@ -1,19 +1,17 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2012-02-11 15:48:19 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2012-02-11 20:36:37 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <joined-subclass name="com.pengurus.crm.entities.Translator" extends="com.pengurus.crm.entities.Worker" table="TRANSLATOR" lazy="false">
         <key>
-            <column name="ID" />
+            <column name="USER_ID" />
         </key>
-        <property name="id" type="java.lang.Long">
-            <column name="ID" />
-        </property>
-        <list name="translations" inverse="false" table="TRANSLATION" lazy="true">
-            <key></key>
-            <list-index></list-index>
+        <set name="translations" table="TRANSLATION" inverse="false" lazy="true">
+            <key>
+            	<column name="USER_ID"></column>
+            </key>
             <one-to-many class="com.pengurus.crm.entities.Translation" />
-        </list>
+        </set>
     </joined-subclass>
 </hibernate-mapping>

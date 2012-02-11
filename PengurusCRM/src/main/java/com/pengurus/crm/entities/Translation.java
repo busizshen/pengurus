@@ -2,21 +2,22 @@ package com.pengurus.crm.entities;
 
 public class Translation {
 
+    private Long id;
     private TranslationType type;
-    private Language from;
-    private Language to;
+    private Language lfrom;
+    private Language lto;
     private Price defaultPrice;
 
     public Translation() {
         super();
     }
 
-    public Translation(TranslationType type, Language from, Language to,
+    public Translation(TranslationType type, Language lfrom, Language lto,
                        Price defaultPrice) {
         super();
         this.type = type;
-        this.from = from;
-        this.to = to;
+        this.lfrom = lfrom;
+        this.lto = lto;
         this.defaultPrice = defaultPrice;
     }
 
@@ -36,20 +37,28 @@ public class Translation {
         this.type = type;
     }
 
-    public Language getFrom() {
-        return from;
+    public Language getLfrom() {
+        return lfrom;
     }
 
-    public void setFrom(Language from) {
-        this.from = from;
+    public void setLfrom(Language lfrom) {
+        this.lfrom = lfrom;
     }
 
-    public Language getTo() {
-        return to;
+    public Language getLto() {
+        return lto;
     }
 
-    public void setTo(Language to) {
-        this.to = to;
+    public void setLto(Language lto) {
+        this.lto = lto;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
 }

@@ -1,36 +1,39 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2012-02-11 15:48:19 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2012-02-11 20:24:01 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.pengurus.crm.entities.PersonalData" table="PERSONALDATA">
-        <id name="firstName" type="java.lang.String">
-            <column name="FIRSTNAME" />
-            <generator class="assigned" />
+        <id name="id" type="java.lang.Long">
+            <column name="ID" />
+            <generator class="native" />
         </id>
+        <property name="firstName" type="java.lang.String">
+            <column name="FIRSTNAME" />
+        </property>
         <property name="lastName" type="java.lang.String">
             <column name="LASTNAME" />
         </property>
         <property name="address" type="java.lang.String">
             <column name="ADDRESS" />
         </property>
-        <list name="phoneNumber" inverse="false" table="PERSONALDATA" lazy="true">
+        
+        <set name="phoneNumber" table="PHONENUMBERS" inverse="false" lazy="true">
             <key>
-                <column name="FIRSTNAME" />
+                <column name="ID" />
             </key>
-            <list-index></list-index>
             <element type="java.lang.String">
                 <column name="PHONENUMBER" />
             </element>
-        </list>
-        <list name="email" inverse="false" table="PERSONALDATA" lazy="true">
+        </set>
+        
+        <set name="email" table="EMAILS" inverse="false" lazy="true">
             <key>
-                <column name="FIRSTNAME" />
+                <column name="ID" />
             </key>
-            <list-index></list-index>
             <element type="java.lang.String">
                 <column name="EMAIL" />
             </element>
-        </list>
+        </set>
     </class>
 </hibernate-mapping>

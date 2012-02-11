@@ -1,18 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2012-02-11 15:48:19 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2012-02-11 20:35:49 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.pengurus.crm.entities.Translation" table="TRANSLATION">
-        <id name="type" type="com.pengurus.crm.entities.TranslationType">
-            <column name="TYPE" />
-            <generator class="assigned" />
+        <id name="id" type="java.lang.Long">
+            <column name="TRANSLATION_ID" />
+            <generator class="native" />
         </id>
-        <many-to-one name="from" class="com.pengurus.crm.entities.Language" fetch="join">
-            <column name="FROM" />
+        <many-to-one name="type" class="com.pengurus.crm.entities.TranslationType" fetch="join">
+            <column name="TYPE" />
         </many-to-one>
-        <many-to-one name="to" class="com.pengurus.crm.entities.Language" fetch="join">
-            <column name="TO" />
+        <many-to-one name="lfrom" class="com.pengurus.crm.entities.Language" fetch="join">
+            <column name="LFROM" />
+        </many-to-one>
+        <many-to-one name="lto" class="com.pengurus.crm.entities.Language" fetch="join">
+            <column name="LTO" />
         </many-to-one>
         <many-to-one name="defaultPrice" class="com.pengurus.crm.entities.Price" fetch="join">
             <column name="DEFAULTPRICE" />

@@ -2,6 +2,7 @@ package com.pengurus.crm.entities;
 
 public class TranslationType {
     
+    private Long id; 
     private String description;
     private String unit;
 
@@ -15,6 +16,14 @@ public class TranslationType {
         this.unit = unit;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getDescription() {
         return description;
     }
@@ -31,7 +40,4 @@ public class TranslationType {
         this.unit = unit;
     }
     
-       
-    
-
 }
