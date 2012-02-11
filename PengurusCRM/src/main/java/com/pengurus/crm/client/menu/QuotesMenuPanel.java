@@ -10,7 +10,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.center.QuotePanel;
 import com.pengurus.crm.client.service.CurrentSessionService;
 import com.pengurus.crm.client.service.CurrentSessionServiceAsync;
-import com.pengurus.crm.shared.User;
+import com.pengurus.crm.shared.dto.UserDTO;
 
 public class QuotesMenuPanel extends TabMenuPanel {
 
@@ -20,13 +20,13 @@ public class QuotesMenuPanel extends TabMenuPanel {
 	    panel.setHeading("QUOTES");
 	    panel.setBodyStyleName("pad-text");  
 	    
-		AsyncCallback<User> callback = new AsyncCallback<User>() {
+		AsyncCallback<UserDTO> callback = new AsyncCallback<UserDTO>() {
 
 			public void onFailure(Throwable t) {
 				MessageBox.info("Message", t.toString(), null);
 			}
 
-			public void onSuccess(User result) {
+			public void onSuccess(UserDTO result) {
 				MessageBox.info("Message", result.getUsername(), null);
 			}
 		};
