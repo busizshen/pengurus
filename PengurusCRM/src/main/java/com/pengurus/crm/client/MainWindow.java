@@ -8,12 +8,12 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
+import com.pengurus.crm.client.panel.header.HeaderPanel;
 import com.pengurus.crm.client.panel.menu.MenuPanel;
-import com.pengurus.crm.client.panel.north.NorthPanel;
 
 public class MainWindow extends LayoutContainer {
 	private static ContentPanel menuPanel = MenuPanel.getPanel();
-	private static ContentPanel northPanel = NorthPanel.getPanel();
+	private static ContentPanel northPanel = HeaderPanel.getPanel();
 	private static ContentPanel centerPanel = new ContentPanel();
 
 	protected void onRender(Element target, int index) {
