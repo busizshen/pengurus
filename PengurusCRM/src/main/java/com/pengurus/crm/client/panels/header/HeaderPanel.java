@@ -1,4 +1,4 @@
-package com.pengurus.crm.client.panel.header;
+package com.pengurus.crm.client.panels.header;
 
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Label;

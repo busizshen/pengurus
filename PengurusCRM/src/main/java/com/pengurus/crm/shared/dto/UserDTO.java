@@ -3,7 +3,6 @@ package com.pengurus.crm.shared.dto;
 import java.util.Set;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
-import com.pengurus.crm.entities.UserRole;
 
 public class UserDTO implements IsSerializable {
 

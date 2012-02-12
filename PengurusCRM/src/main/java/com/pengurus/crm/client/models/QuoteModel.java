@@ -12,10 +12,10 @@ public class QuoteModel extends BaseModel {
 
 	private QuoteDTO quoteDTO;
 	public QuoteModel(QuoteDTO quoteDTO){
-		setQuoteModel(quoteDTO);
+		setQuoteDTO(quoteDTO);
 	}
 	
-	public void setQuoteModel(QuoteDTO quoteDTO){
+	public void setQuoteDTO(QuoteDTO quoteDTO){
 		this.quoteDTO = quoteDTO;
 		if(quoteDTO.getStatus() != null)
 			set("status",quoteDTO.getStatus().toString());
@@ -40,6 +40,10 @@ public class QuoteModel extends BaseModel {
 	
 	public String getDescription(){
 		return get("descritpion");
+	}
+
+	public QuoteDTO getQuoteDTO() {
+		return this.quoteDTO;
 	}
 	
 }

@@ -1,4 +1,4 @@
-package com.pengurus.crm.client.panel.menu;
+package com.pengurus.crm.client.panels.menu;
 
 /* 
  * Ext GWT 2.2.5 - Ext for GWT 

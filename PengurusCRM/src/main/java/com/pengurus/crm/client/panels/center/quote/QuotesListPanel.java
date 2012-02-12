@@ -1,5 +1,4 @@
-package com.pengurus.crm.client.center.quote;
-
+package com.pengurus.crm.client.panels.center.quote;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +6,21 @@ import java.util.List;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.data.ModelData;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.GridEvent;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
+import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.grid.filters.DateFilter;
 import com.extjs.gxt.ui.client.widget.grid.filters.GridFilters;
 import com.extjs.gxt.ui.client.widget.grid.filters.ListFilter;
@@ -23,38 +31,18 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.google.gwt.user.client.Element;
 import com.pengurus.crm.client.models.QuoteModel;
 
-public abstract class QuotePanel  {
+public abstract class QuotesListPanel  {
   	
 	class QuoteList extends LayoutContainer{
 		@Override  
-		  protected void onRender(Element parent, int index) {  
+		protected void onRender(Element parent, int index) {  
 		    super.onRender(parent, index);  
 		    setLayout(new FlowLayout(10));  
 		    getAriaSupport().setPresentation(true);  
 		  
-		    ListStore<QuoteModel> store = getList();//pobieramy liste quotes tu trzeba zrobić odpowiedniego callbacka
-		  
+		    ListStore<QuoteModel> store = getList();
 		    
-		  /*  final NumberFormat currency = NumberFormat.getCurrencyFormat();  
-		    final NumberFormat number = NumberFormat.getFormat("0.00");  
-		    final NumberCellRenderer<Grid<QuoteDTO>> numberRenderer = new NumberCellRenderer<Grid<QuoteDTO>>(currency);  
-		  
-		    GridCellRenderer<QuoteDTO> change = new GridCellRenderer<QuoteDTO>() {  
-		      public String render(QuoteDTO model, String property, ColumnData config, int rowIndex, int colIndex,  
-		          ListStore<QuoteDTO> store, Grid<QuoteDTO> grid) {  
-		        double val = (Double) model.get(property);  
-		        String style = val < 0 ? "red" : GXT.isHighContrastMode ? "#00ff5a" : "green";  
-		        return "<span style='font-weight: bold;color:" + style + "'>" + number.format(val) + "</span>";  
-		      }  
-		    };  
-		  
-		    GridCellRenderer<QuoteDTO> gridNumber = new GridCellRenderer<QuoteDTO>() {  
-		      public String render(QuoteDTO model, String property, ColumnData config, int rowIndex, int colIndex,  
-		          ListStore<QuoteDTO> store, Grid<QuoteDTO> grid) {  
-		        return numberRenderer.render(null, property, model.get(property));  
-		      }  
-		    };  
-		  */
+		    
 		    List<ColumnConfig> configs = getColumns();		  
 		    ColumnModel cm = new ColumnModel(configs);  
 		  
@@ -76,18 +64,13 @@ public abstract class QuotePanel  {
 		    });*/  
 		    grid.getView().setForceFit(true);  
 		    grid.setStyleAttribute("borderTop", "none"); 
-		    /* grid.setAutoExpandColumn("name"); */ 
+		    grid.setAutoExpandColumn("id"); 
 		    grid.setBorders(false);  
 		    grid.setStripeRows(true);  
 		    grid.setColumnLines(true);  
 		    grid.addPlugin(filters);  
 		    cp.add(grid);  
 	  
-		 /*   final PagingToolBar toolBar = new PagingToolBar(25);  
-		    toolBar.bind(loader);   
-		  
-		    cp.setBottomComponent(toolBar);  
-*/		  
 		    add(cp);  
 		  }  
 		  
@@ -106,23 +89,25 @@ public abstract class QuotePanel  {
 			  
 			    column = new ColumnConfig();  
 			    column.setId("client");  
-			    column.setHeader("Client");
-			    //column.setRenderer(gridNumber);  
+			    column.setHeader("Client");  
 			    configs.add(column);  
 			  
 			    column = new ColumnConfig();  
 			    column.setId("supervisor");  
-			    column.setHeader("Supervisor");
-			    //column.setRenderer(gridNumber);  
+			    column.setHeader("Supervisor"); 
 			    configs.add(column);  
 			      
 
 			    column = new ColumnConfig();  
 			    column.setId("description");  
-			    column.setHeader("Description");
-			    //column.setRenderer(gridNumber);  
+			    column.setHeader("Description");  
 			    configs.add(column);  
-			    
+
+			    column = new ColumnConfig(); 
+			    column.setId("preview");  
+			    column.setHeader("Preview");  
+			    column.setRenderer(getButtonRenderer()); 
+			    configs.add(column);  
 /*			    column = new ColumnConfig();  
 			    column.setId("dateFrom");  
 			    column.setHeader("Date From");
@@ -173,8 +158,44 @@ public abstract class QuotePanel  {
 		    ModelData model = new BaseModelData();  
 		    model.set("status", type);  
 		    return model;  
-		  }  
-          
+		}
+		
+		private GridCellRenderer<QuoteModel> getButtonRenderer(){
+			
+			GridCellRenderer<QuoteModel> buttonRenderer = new GridCellRenderer<QuoteModel>() {  
+				  
+			      private boolean init;  
+			  
+			      public Object render(final QuoteModel model, String property, ColumnData config, final int rowIndex,  
+			          final int colIndex, ListStore<QuoteModel> store, Grid<QuoteModel> grid) {  
+			        if (!init) {  
+			          init = true;  
+			          grid.addListener(Events.OnClick, new Listener<GridEvent<QuoteModel>>() {  
+			  
+			            public void handleEvent(GridEvent<QuoteModel> be) {  
+			              for (int i = 0; i < be.getGrid().getStore().getCount(); i++) {  
+			                if (be.getGrid().getView().getWidget(i, be.getColIndex()) != null  
+			                    && be.getGrid().getView().getWidget(i, be.getColIndex()) instanceof BoxComponent) {  
+			                  ((BoxComponent) be.getGrid().getView().getWidget(i, be.getColIndex())).setWidth(be.getWidth() - 10);  
+			                }  
+			              }  
+			            }  
+			          });  
+			        }  
+			  
+			        Button b = new Button("PREVIEW", new SelectionListener<ButtonEvent>() {  
+			          @Override  
+			          public void componentSelected(ButtonEvent ce) {  
+			              new QuotePanel(model.getQuoteDTO());
+			          }  
+			        });  
+			        b.setToolTip("Click to see");  
+			  
+			        return b;  
+			      }  
+			    };
+			return buttonRenderer;
+		}
 		  
 		
 	}

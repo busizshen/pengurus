@@ -65,4 +65,9 @@ public class QuoteDTO {
 	    public void setDescription(String description) {
 	        this.description = description;
 	    }
+
+		public Object get(String property) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 }

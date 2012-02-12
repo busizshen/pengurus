@@ -1,18 +1,10 @@
-package com.pengurus.crm.client.panel.menu;
+package com.pengurus.crm.client.panels.menu;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.pengurus.crm.client.PengurusCRM;
-import com.pengurus.crm.client.center.quote.QuotePanel;
-import com.pengurus.crm.client.center.quote.QuotePanelLastEdited;
-import com.pengurus.crm.client.service.CurrentSessionService;
-import com.pengurus.crm.client.service.CurrentSessionServiceAsync;
-import com.pengurus.crm.shared.dto.UserDTO;
+import com.pengurus.crm.client.panels.center.quote.QuotesListPanelLastEdited;
 
 public class QuotesMenuPanel extends TabMenuPanel {
 
@@ -25,7 +17,7 @@ public class QuotesMenuPanel extends TabMenuPanel {
 	    b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				QuotePanel ql = new QuotePanelLastEdited();
+				new QuotesListPanelLastEdited();
 			}
 	    });
         panel.add(b);

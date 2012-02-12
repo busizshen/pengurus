@@ -1,4 +1,4 @@
-package com.pengurus.crm.client.panel.header;
+package com.pengurus.crm.client.panels.header;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
@@ -14,7 +14,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.Window;
 import com.pengurus.crm.client.MainWindow;
 import com.pengurus.crm.client.PengurusCRM;
-import com.pengurus.crm.client.panel.center.ChangePasswordPanel;
+import com.pengurus.crm.client.panels.center.ChangePasswordPanel;
 
 public class HeaderMenu extends ToolBar {
 	
