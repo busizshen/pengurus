@@ -20,7 +20,11 @@ public class ChangePasswordPanel extends LayoutContainer {
 	private TextField<String> oldPassword, newPassword, confirmedPassword;
 
 	private ChangePasswordPanel() {
-		createForm();
+		form = new FormPanel();
+		form.setHeading("Change Password");
+		form.setFrame(true);
+		form.setLabelAlign(LabelAlign.TOP);
+
 		addOldPasswordField();
 		addNewPasswordField();
 		addConfirmedPasswordField();
@@ -32,13 +36,6 @@ public class ChangePasswordPanel extends LayoutContainer {
 		add(verticalPanel);
 	}
 
-	private void createForm() {
-		form = new FormPanel();
-		form.setHeading("Change Password");
-		form.setFrame(true);
-		form.setLabelAlign(LabelAlign.TOP);
-	}
-
 	private void addOldPasswordField() {
 		oldPassword = new TextField<String>();
 		oldPassword.setPassword(true);
@@ -46,14 +43,14 @@ public class ChangePasswordPanel extends LayoutContainer {
 		oldPassword.setAllowBlank(false);
 		form.add(oldPassword, formData);
 	}
-	
+
 	private void addNewPasswordField() {
 		newPassword = new TextField<String>();
 		newPassword.setPassword(true);
 		newPassword.setFieldLabel("New password");
 		newPassword.setAllowBlank(false);
 		newPassword.setValidator(new Validator() {
-			
+
 			@Override
 			public String validate(Field<?> field, String value) {
 				if (value.length() < 8) {
@@ -77,7 +74,7 @@ public class ChangePasswordPanel extends LayoutContainer {
 		confirmedPassword.setFieldLabel("Confirm new password");
 		confirmedPassword.setAllowBlank(false);
 		confirmedPassword.setValidator(new Validator() {
-			
+
 			@Override
 			public String validate(Field<?> field, String value) {
 				if (!value.equals(newPassword.getValue())) {
