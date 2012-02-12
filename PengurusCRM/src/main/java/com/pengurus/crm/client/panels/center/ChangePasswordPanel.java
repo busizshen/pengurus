@@ -20,11 +20,7 @@ public class ChangePasswordPanel extends LayoutContainer {
 	private TextField<String> oldPassword, newPassword, confirmedPassword;
 
 	private ChangePasswordPanel() {
-		form = new FormPanel();
-		form.setHeading("Change Password");
-		form.setFrame(true);
-		form.setLabelAlign(LabelAlign.TOP);
-
+		createForm();
 		addOldPasswordField();
 		addNewPasswordField();
 		addConfirmedPasswordField();
@@ -34,6 +30,13 @@ public class ChangePasswordPanel extends LayoutContainer {
 		verticalPanel.setSpacing(20);
 		verticalPanel.add(form);
 		add(verticalPanel);
+	}
+
+	private void createForm() {
+		form = new FormPanel();
+		form.setHeading("Change Password");
+		form.setFrame(true);
+		form.setLabelAlign(LabelAlign.TOP);
 	}
 
 	private void addOldPasswordField() {
