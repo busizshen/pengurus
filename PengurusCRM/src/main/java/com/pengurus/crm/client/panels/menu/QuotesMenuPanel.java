@@ -5,7 +5,6 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.panels.center.quote.QuotesListPanelLastEdited;
-
 public class QuotesMenuPanel extends TabMenuPanel {
 
 	public ContentPanel getPanel() {

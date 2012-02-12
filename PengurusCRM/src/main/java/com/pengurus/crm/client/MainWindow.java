@@ -8,8 +8,8 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
-import com.pengurus.crm.client.panel.header.HeaderPanel;
-import com.pengurus.crm.client.panel.menu.MenuPanel;
+import com.pengurus.crm.client.panels.header.HeaderPanel;
+import com.pengurus.crm.client.panels.menu.MenuPanel;
 
 public class MainWindow extends LayoutContainer {
 	private static ContentPanel menuPanel = MenuPanel.getPanel();

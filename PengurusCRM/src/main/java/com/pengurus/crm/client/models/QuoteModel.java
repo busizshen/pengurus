@@ -4,10 +4,7 @@ import com.extjs.gxt.ui.client.data.BaseModel;
 import com.pengurus.crm.shared.dto.QuoteDTO;
 
 public class QuoteModel extends BaseModel {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -274993927725641112L;
 
 	private QuoteDTO quoteDTO;
