@@ -59,4 +59,5 @@ public class CurrentSessionServiceImpl implements CurrentSessionService {
 	    return new UserRoleDTO(userRole.getId(), userRole.getRole());
 	}
 
+
 }

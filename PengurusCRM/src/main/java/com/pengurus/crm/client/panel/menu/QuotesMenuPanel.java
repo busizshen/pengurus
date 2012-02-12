@@ -8,7 +8,8 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.PengurusCRM;
-import com.pengurus.crm.client.panel.center.QuotePanel;
+import com.pengurus.crm.client.center.quote.QuotePanel;
+import com.pengurus.crm.client.center.quote.QuotePanelLastEdited;
 import com.pengurus.crm.client.service.CurrentSessionService;
 import com.pengurus.crm.client.service.CurrentSessionServiceAsync;
 import com.pengurus.crm.shared.dto.UserDTO;
@@ -24,8 +25,7 @@ public class QuotesMenuPanel extends TabMenuPanel {
 	    b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-			   QuotePanel ql = new QuotePanel();
-				   ql.LastEdited();
+				QuotePanel ql = new QuotePanelLastEdited();
 			}
 	    });
         panel.add(b);
