@@ -7,7 +7,7 @@ import com.pengurus.crm.client.models.QuoteModel;
 public class QuotesListPanelAll extends QuotesListPanel {
 
 	public QuotesListPanelAll(){
-		QuoteList ql = new QuoteList();
+		ModelList ql = new ModelList();
 		MainWindow.addWidgetCenterPanel(ql);
 	}
 
@@ -37,4 +37,8 @@ public class QuotesListPanelAll extends QuotesListPanel {
 	    return new ListStore<Stock>(loader); 
   */
 		}
+	@Override
+	protected String getName() {
+		return "Quote List - All";
+	}
 }

@@ -8,6 +8,7 @@ public class ContactsMenuPanel extends TabMenuPanel {
 	public ContentPanel getPanel() {
 		panel = new ContentPanel();
 		panel.setHeading("Contacts");
+		setPanelStyle();
 		return panel;
 	}
 

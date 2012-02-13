@@ -19,8 +19,7 @@ public class QuotesMenuPanel extends TabMenuPanel {
 		panel = new ContentPanel();  
 	    panel.setAnimCollapse(false);  
 	    panel.setHeading("QUOTES");
-	    panel.setBodyStyleName("pad-text");  
-	    
+	    setPanelStyle();
         ButtonLastEdited(panel);
 	    ButtonAll(panel);
 	    ButtonMine(panel);
@@ -31,7 +30,7 @@ public class QuotesMenuPanel extends TabMenuPanel {
 
 	private void ButtonCreate(ContentPanel panel) {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		if(PengurusCRM.getCurrentUser().checkRole(roles)){ 
+		if(PengurusCRM.getCurrentUser().haveAuthority(roles)){ 
 			Button b = new Button("Create New");
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
@@ -39,13 +38,14 @@ public class QuotesMenuPanel extends TabMenuPanel {
 					new QuotesPanelCreate();
 				}
 			});
+			setButtonStyle(b);
 		    panel.add(b);
 		}
 	}
 
 	private void ButtonMine(ContentPanel panel) {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		if(PengurusCRM.getCurrentUser().checkRole(roles)){ 
+		if(PengurusCRM.getCurrentUser().haveAuthority(roles)){ 
 			Button b = new Button("Mine");
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
@@ -53,13 +53,14 @@ public class QuotesMenuPanel extends TabMenuPanel {
 					new QuotesListPanelMine();
 				}
 			});
+			setButtonStyle(b);
 		    panel.add(b);
 		}
 	}
 
 	private void ButtonAll(ContentPanel panel) {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		if(PengurusCRM.getCurrentUser().checkRole(roles)){ 
+		if(PengurusCRM.getCurrentUser().haveAuthority(roles)){ 
 			Button b = new Button("All");
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
@@ -67,13 +68,14 @@ public class QuotesMenuPanel extends TabMenuPanel {
 					new QuotesListPanelAll();
 				}
 			});
+			setButtonStyle(b);
 		    panel.add(b);
 		}
 	}
 
 	private void ButtonLastEdited(ContentPanel panel) {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		if(PengurusCRM.getCurrentUser().checkRole(roles)){ 
+		if(PengurusCRM.getCurrentUser().haveAuthority(roles)){ 
 			Button b = new Button("Last Edited");
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
@@ -81,6 +83,7 @@ public class QuotesMenuPanel extends TabMenuPanel {
 					new QuotesListPanelLastEdited();
 				}
 			});
+			setButtonStyle(b);
 		    panel.add(b);
 		} 
 	}
