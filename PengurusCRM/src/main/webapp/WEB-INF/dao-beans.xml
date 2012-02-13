@@ -26,7 +26,7 @@
 		<property name="hibernateProperties">
 			<value>
 				hibernate.default_schema=public
-				hibernate.hbm2ddl.auto=update
+				hibernate.hbm2ddl.auto=create
 				hibernate.id.new_generator_mappings=true
 				hibernate.show_sql=true
 				hibernate.format_sql=true
@@ -49,6 +49,10 @@
 				<value>Client.hbm.xml</value>
 				<value>IndividualClient.hbm.xml</value>
 				<value>BussinessClient.hbm.xml</value>
+				<value>Task.hbm.xml</value>
+				<value>Job.hbm.xml</value>
+				<value>Quote.hbm.xml</value>
+				<value>Project.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -116,4 +120,21 @@
 	<bean id="bussinessClientDao" class="com.pengurus.crm.daos.impl.BussinessClientDAOImpl">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
+	
+	<bean id="taskDao" class="com.pengurus.crm.daos.impl.TaskDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	
+	<bean id="jobDao" class="com.pengurus.crm.daos.impl.JobDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	
+	<bean id="quoteDao" class="com.pengurus.crm.daos.impl.QuoteDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	
+	<bean id="projectDao" class="com.pengurus.crm.daos.impl.ProjectDAOImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	
 </beans>

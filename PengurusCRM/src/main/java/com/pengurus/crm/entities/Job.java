@@ -1,27 +1,28 @@
 package com.pengurus.crm.entities;
 
-import java.util.Calendar;
-import java.util.List;
+import java.util.Date;
+import java.util.Set;
 
 import com.pengurus.crm.enums.Status;
 
 public class Job {
 
+    private Long id;
     private Status status;
-    private Calendar deadline;
+    private Date deadline;
     private Translation translation;
     private Integer amount;
     private Price price;
     private String description;
-    private List<Task> task;
+    private Set<Task> task;
 
     public Job() {
         super();
     }
 
-    public Job(Status status, Calendar deadline, Translation translation,
+    public Job(Status status, Date deadline, Translation translation,
                Integer amount, Price price, String description,
-               List<Task> task){
+               Set<Task> task){
         super();
         this.status = status;
         this.deadline = deadline;
@@ -30,6 +31,14 @@ public class Job {
         this.price = price;
         this.description = description;
         this.task = task;
+    }
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Status getStatus() {
@@ -40,11 +49,11 @@ public class Job {
         this.status = status;
     }
 
-    public Calendar getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Calendar deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
@@ -80,11 +89,11 @@ public class Job {
         this.description = description;
     }
 
-    public List<Task> getTask() {
+    public Set<Task> getTask() {
         return task;
     }
 
-    public void setTask(List<Task> task) {
+    public void setTask(Set<Task> task) {
         this.task = task;
     }
     

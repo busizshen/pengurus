@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2012-02-13 22:07:08 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.pengurus.crm.entities.Quote" table="QUOTE">
+        <id name="id" type="java.lang.Long">
+            <column name="QUOTE_ID" />
+            <generator class="native" />
+        </id>
+        <property name="status">
+            <column name="STATUS" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="type">12</param>
+                <param name="enumClass">com.pengurus.crm.enums.Status</param>
+            </type>
+        </property>
+        <many-to-one name="client" class="com.pengurus.crm.entities.Client" fetch="join">
+            <column name="CLIENT" />
+        </many-to-one>
+        <many-to-one name="supervisor" class="com.pengurus.crm.entities.Worker" fetch="join">
+            <column name="SUPERVISOR" />
+        </many-to-one>
+        <set name="jobs" table="JOB" inverse="false" lazy="true" cascade="save-update">
+            <key>
+                <column name="QUOTE_ID" />
+            </key>
+            <one-to-many class="com.pengurus.crm.entities.Job" />
+        </set>
+        <property name="description" type="java.lang.String">
+            <column name="DESCRIPTION" />
+        </property>
+    </class>
+</hibernate-mapping>
