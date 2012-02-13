@@ -9,7 +9,7 @@ import com.pengurus.crm.shared.shared.StatusDTO;
 public class QuotesListPanelLastEdited extends QuotesListPanel{
 
 	public QuotesListPanelLastEdited(){
-		QuoteList ql = new QuoteList();
+		ModelList ql = new ModelList();
 		MainWindow.addWidgetCenterPanel(ql);
 	}
 	
@@ -25,5 +25,10 @@ public class QuotesListPanelLastEdited extends QuotesListPanel{
 		quoteList.add(new QuoteModel(qd));
 		return quoteList;
   }
+
+	@Override
+	protected String getName() {
+		return "Quote List - Last Edited";
+	}
 
 }

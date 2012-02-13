@@ -8,6 +8,7 @@ public class AdministrationMenuPanel extends TabMenuPanel {
 	public ContentPanel getPanel() {
 		panel = new ContentPanel();
 		panel.setHeading("Administration");
+		setPanelStyle();
 		return panel;
 	}
 

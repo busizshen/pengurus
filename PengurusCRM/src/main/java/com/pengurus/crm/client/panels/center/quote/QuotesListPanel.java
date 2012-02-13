@@ -3,7 +3,6 @@ package com.pengurus.crm.client.panels.center.quote;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
@@ -13,12 +12,9 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.BoxComponent;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
-import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.grid.filters.DateFilter;
@@ -26,14 +22,12 @@ import com.extjs.gxt.ui.client.widget.grid.filters.GridFilters;
 import com.extjs.gxt.ui.client.widget.grid.filters.ListFilter;
 import com.extjs.gxt.ui.client.widget.grid.filters.NumericFilter;
 import com.extjs.gxt.ui.client.widget.grid.filters.StringFilter;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-import com.google.gwt.user.client.Element;
 import com.pengurus.crm.client.models.QuoteModel;
+import com.pengurus.crm.client.panels.center.ListPanel;
 
-public abstract class QuotesListPanel  {
+public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
   	
-	class QuoteList extends LayoutContainer{
+	/*class QuoteList extends LayoutContainer{
 		@Override  
 		protected void onRender(Element parent, int index) {  
 		    super.onRender(parent, index);  
@@ -57,11 +51,11 @@ public abstract class QuotesListPanel  {
 		    GridFilters filters = getFilters();
 		  
 		    final Grid<QuoteModel> grid = new Grid<QuoteModel>(store, cm);  
-		 /*   grid.addListener(Events.Attach, new Listener<BaseEvent>() {  
+		    grid.addListener(Events.Attach, new Listener<BaseEvent>() {  
 		      public void handleEvent(BaseEvent be) {  
 		        loader.load(0, 25);  
 		      }  
-		    });*/  
+		    });  
 		    grid.getView().setForceFit(true);  
 		    grid.setStyleAttribute("borderTop", "none"); 
 		    grid.setAutoExpandColumn("id"); 
@@ -72,9 +66,9 @@ public abstract class QuotesListPanel  {
 		    cp.add(grid);  
 	  
 		    add(cp);  
-		  }  
+		  } */ 
 		  
-		  private List<ColumnConfig> getColumns() {
+		  protected List<ColumnConfig> getColumns() {
 			  	List<ColumnConfig> configs   = new ArrayList<ColumnConfig>();  
 			  
 			    ColumnConfig column = new ColumnConfig();  
@@ -122,7 +116,7 @@ public abstract class QuotesListPanel  {
 			    return configs;
 		}
 
-		private GridFilters getFilters() {
+		protected GridFilters getFilters() {
 			    GridFilters filters = new GridFilters();  
 			    NumericFilter idFilter = new NumericFilter("id");    
 			    StringFilter clientFilter = new StringFilter("client");  
@@ -198,8 +192,6 @@ public abstract class QuotesListPanel  {
 		}
 		  
 		
-	}
-	
 	protected abstract ListStore<QuoteModel> getList();
 	
 }

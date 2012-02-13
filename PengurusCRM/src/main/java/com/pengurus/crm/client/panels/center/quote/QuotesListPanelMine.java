@@ -7,13 +7,18 @@ import com.pengurus.crm.client.models.QuoteModel;
 public class QuotesListPanelMine extends QuotesListPanel {
 
 	public QuotesListPanelMine(){
-		QuoteList ql = new QuoteList();
+		ModelList ql = new ModelList();
 		MainWindow.addWidgetCenterPanel(ql);
 	}
 	
 	@Override
 	protected ListStore<QuoteModel> getList() {
 		return new ListStore<QuoteModel>();
+	}
+
+	@Override
+	protected String getName() {
+		return "Quote List - Mine";
 	}
 
 }
