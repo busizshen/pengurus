@@ -17,12 +17,10 @@ public class QuotesListPanelLastEdited extends QuotesListPanel{
 		ListStore<QuoteModel> quoteList = new ListStore<QuoteModel>();
 		QuoteDTO qd = new QuoteDTO();
 		qd.setDescription("assssss");
-
 		qd.setStatus(StatusDTO.acceppted);
 		quoteList.add(new QuoteModel(qd));	
 		qd = new QuoteDTO();
 		qd.setDescription("B");
-
 		qd.setStatus(StatusDTO.open);
 		quoteList.add(new QuoteModel(qd));
 		return quoteList;

@@ -68,5 +68,15 @@ public class UserDTO implements IsSerializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+	public boolean checkRole(Set<UserRoleDTO> roles) {
+		if(roles.size() == 0)
+			return true;
+		for(UserRoleDTO role : roles){
+			if( authorities.contains(role))
+				return true;
+		}
+		return false;
+	}
     
 }

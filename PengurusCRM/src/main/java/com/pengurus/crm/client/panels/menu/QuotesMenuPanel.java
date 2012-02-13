@@ -1,10 +1,18 @@
 package com.pengurus.crm.client.panels.menu;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.pengurus.crm.client.PengurusCRM;
+import com.pengurus.crm.client.panels.center.quote.QuotesListPanelAll;
 import com.pengurus.crm.client.panels.center.quote.QuotesListPanelLastEdited;
+import com.pengurus.crm.client.panels.center.quote.QuotesListPanelMine;
+import com.pengurus.crm.client.panels.center.quote.QuotesPanelCreate;
+import com.pengurus.crm.shared.dto.UserRoleDTO;
 public class QuotesMenuPanel extends TabMenuPanel {
 
 	public ContentPanel getPanel() {
@@ -12,16 +20,68 @@ public class QuotesMenuPanel extends TabMenuPanel {
 	    panel.setAnimCollapse(false);  
 	    panel.setHeading("QUOTES");
 	    panel.setBodyStyleName("pad-text");  
-	    Button b = new Button("Last Edited");
-	    b.addSelectionListener(new SelectionListener<ButtonEvent>(){
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				new QuotesListPanelLastEdited();
-			}
-	    });
-        panel.add(b);
 	    
+        ButtonLastEdited(panel);
+	    ButtonAll(panel);
+	    ButtonMine(panel);
+	    ButtonCreate(panel);
 		return panel;
+
+}
+
+	private void ButtonCreate(ContentPanel panel) {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		if(PengurusCRM.getCurrentUser().checkRole(roles)){ 
+			Button b = new Button("Create New");
+			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
+				@Override
+				public void componentSelected(ButtonEvent ce) {
+					new QuotesPanelCreate();
+				}
+			});
+		    panel.add(b);
+		}
 	}
 
+	private void ButtonMine(ContentPanel panel) {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		if(PengurusCRM.getCurrentUser().checkRole(roles)){ 
+			Button b = new Button("Mine");
+			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
+				@Override
+				public void componentSelected(ButtonEvent ce) {
+					new QuotesListPanelMine();
+				}
+			});
+		    panel.add(b);
+		}
+	}
+
+	private void ButtonAll(ContentPanel panel) {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		if(PengurusCRM.getCurrentUser().checkRole(roles)){ 
+			Button b = new Button("All");
+			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
+				@Override
+				public void componentSelected(ButtonEvent ce) {
+					new QuotesListPanelAll();
+				}
+			});
+		    panel.add(b);
+		}
+	}
+
+	private void ButtonLastEdited(ContentPanel panel) {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		if(PengurusCRM.getCurrentUser().checkRole(roles)){ 
+			Button b = new Button("Last Edited");
+			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
+				@Override
+				public void componentSelected(ButtonEvent ce) {
+					new QuotesListPanelLastEdited();
+				}
+			});
+		    panel.add(b);
+		} 
+	}
 }

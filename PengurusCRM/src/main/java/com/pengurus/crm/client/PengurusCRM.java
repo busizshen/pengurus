@@ -43,5 +43,9 @@ public class PengurusCRM implements EntryPoint {
 	public MainWindow getMainWindow() {
 		return mainWindow;
 	}
+	
+	public static UserDTO getCurrentUser(){
+		return PengurusCRM.currentUser;
+	}
 
 }
