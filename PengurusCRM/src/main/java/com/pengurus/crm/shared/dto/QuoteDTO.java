@@ -1,6 +1,6 @@
 package com.pengurus.crm.shared.dto;
 
-import java.util.List;
+import java.util.Set;
 
 import com.pengurus.crm.shared.shared.StatusDTO;
 
@@ -9,14 +9,14 @@ public class QuoteDTO {
 	private StatusDTO status;
 	    private ClientDTO client;
 	    private WorkerDTO supervisor;
-	    private List<JobDTO> jobs;
+	    private Set<JobDTO> jobs;
 	    private String description;
 
 	    public QuoteDTO() {
 	    }
 
 	    public QuoteDTO(StatusDTO status, ClientDTO client, WorkerDTO supervisor,
-	            List<JobDTO> jobs, String description) {
+	            Set<JobDTO> jobs, String description) {
 	        super();
 	        this.status = status;
 	        this.client = client;
@@ -49,11 +49,11 @@ public class QuoteDTO {
 	    	this.supervisor = supervisor;
 	    }
 
-	    public List<JobDTO> getJobs() {
+	    public Set<JobDTO> getJobs() {
 	        return jobs;
 	    }
 
-	    public void setJobs(List<JobDTO> jobs) {
+	    public void setJobs(Set<JobDTO> jobs) {
 	        this.jobs = jobs;
 	    }
 

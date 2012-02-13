@@ -11,7 +11,7 @@
         <property name="price" type="java.lang.Integer">
             <column name="PRICE" />
         </property>
-        <many-to-one name="currency" class="com.pengurus.crm.entities.CurrencyType" fetch="join">
+        <many-to-one name="currency" class="com.pengurus.crm.entities.CurrencyType" fetch="join" cascade="save-update">
             <column name="CURRENCY" />
         </many-to-one>
     </class>

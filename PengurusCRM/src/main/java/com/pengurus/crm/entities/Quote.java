@@ -1,15 +1,16 @@
 package com.pengurus.crm.entities;
 
-import java.util.List;
+import java.util.Set;
 
 import com.pengurus.crm.enums.Status;
 
 public class Quote {
     
+    private Long id;
     private Status status;
     private Client client;
     private Worker supervisor;
-    private List<Job> jobs;
+    private Set<Job> jobs;
     private String description;
 
     public Quote() {
@@ -17,7 +18,7 @@ public class Quote {
     }
 
     public Quote(Status status, Client client, Worker supervisor,
-            List<Job> jobs, String description) {
+            Set<Job> jobs, String description) {
         super();
         this.status = status;
         this.client = client;
@@ -50,11 +51,11 @@ public class Quote {
         this.supervisor = supervisor;
     }
 
-    public List<Job> getJobs() {
+    public Set<Job> getJobs() {
         return jobs;
     }
 
-    public void setJobs(List<Job> jobs) {
+    public void setJobs(Set<Job> jobs) {
         this.jobs = jobs;
     }
 
@@ -66,4 +67,11 @@ public class Quote {
         this.description = description;
     }
     
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2012-02-13 22:28:55 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.pengurus.crm.entities.Project" table="PROJECT">
+        <id name="id" type="java.lang.Long">
+            <column name="PROJECT_ID" />
+            <generator class="native" />
+        </id>
+        <property name="status">
+            <column name="STATUS" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="type">12</param>
+                <param name="enumClass">com.pengurus.crm.enums.Status</param>
+            </type>
+        </property>
+        <many-to-one name="client" class="com.pengurus.crm.entities.Client" fetch="join">
+            <column name="CLIENT" />
+        </many-to-one>
+        <many-to-one name="supervisor" class="com.pengurus.crm.entities.Worker" fetch="join">
+            <column name="SUPERVISOR" />
+        </many-to-one>
+        <set name="projectManagers" table="PROJECT_WORKER" inverse="false" lazy="true">
+            <key>
+                <column name="PROJECT_ID" />
+            </key>
+            <many-to-many class="com.pengurus.crm.entities.Worker" column="USER_ID" />
+        </set>
+        <set name="experts" table="PROJECT_EXPERTS" inverse="false" lazy="true">
+            <key>
+                <column name="PROJECT_ID" />
+            </key>
+            <many-to-many class="com.pengurus.crm.entities.Translator" column="USER_ID" />
+        </set>
+        <set name="freelancers" table="PROJECT_FREELANCERS" inverse="false" lazy="true">
+            <key>
+                <column name="PROJECT_ID" />
+            </key>
+            <many-to-many class="com.pengurus.crm.entities.Translator" column="USER_ID"/>
+        </set>
+        <set name="jobs" table="JOB" inverse="false" lazy="true">
+            <key>
+                <column name="PROJECT_ID" />
+            </key>
+            <one-to-many class="com.pengurus.crm.entities.Job" />
+        </set>
+        <property name="description" type="java.lang.String">
+            <column name="DESCRIPTION" />
+        </property>
+    </class>
+</hibernate-mapping>

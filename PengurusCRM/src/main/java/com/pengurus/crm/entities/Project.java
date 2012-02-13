@@ -1,19 +1,28 @@
 package com.pengurus.crm.entities;
 
-import java.util.List;
+import java.util.Set;
 
 import com.pengurus.crm.enums.Status;
 
 
 public class Project {
 
+    private Long id;
     private Status status;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     private Client client;
     private Worker supervisor;
-    private List<Worker> projectManagers;
-    private List<Translator> experts;
-    private List<Translator> freelancers;
-    private List<Job> jobs;
+    private Set<Worker> projectManagers;
+    private Set<Translator> experts;
+    private Set<Translator> freelancers;
+    private Set<Job> jobs;
     private String description;
 
     public Project() {
@@ -21,8 +30,8 @@ public class Project {
     }
 
     public Project(Status status, Client client, Worker supervisor,
-                   List<Worker> projectManagers, List<Translator> experts,
-                   List<Translator> freelancers, List<Job> jobs,
+                   Set<Worker> projectManagers, Set<Translator> experts,
+                   Set<Translator> freelancers, Set<Job> jobs,
                    String description) {
         super();
         this.status = status;
@@ -59,35 +68,35 @@ public class Project {
         this.supervisor = supervisor;
     }
 
-    public List<Worker> getProjectManagers() {
+    public Set<Worker> getProjectManagers() {
         return projectManagers;
     }
 
-    public void setProjectManagers(List<Worker> projectManagers) {
+    public void setProjectManagers(Set<Worker> projectManagers) {
         this.projectManagers = projectManagers;
     }
 
-    public List<Translator> getExperts() {
+    public Set<Translator> getExperts() {
         return experts;
     }
 
-    public void setExperts(List<Translator> experts) {
+    public void setExperts(Set<Translator> experts) {
         this.experts = experts;
     }
 
-    public List<Translator> getFreelancers() {
+    public Set<Translator> getFreelancers() {
         return freelancers;
     }
 
-    public void setFreelancers(List<Translator> freelancers) {
+    public void setFreelancers(Set<Translator> freelancers) {
         this.freelancers = freelancers;
     }
 
-    public List<Job> getJobs() {
+    public Set<Job> getJobs() {
         return jobs;
     }
 
-    public void setJobs(List<Job> jobs) {
+    public void setJobs(Set<Job> jobs) {
         this.jobs = jobs;
     }
 
