@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<value>
+				hibernate.default_schema=public
+				hibernate.hbm2ddl.auto=create
+				hibernate.id.new_generator_mappings=true
+				hibernate.show_sql=true
+				hibernate.format_sql=true
+				hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+			</value>
+		</property>
+
+		<property name="mappingResources">
+			<list>
+				<value>User.hbm.xml</value>
+				<value>UserRole.hbm.xml</value>
+				<value>TranslationType.hbm.xml</value>
+				<value>CurrencyType.hbm.xml</value>
+				<value>Price.hbm.xml</value>
+				<value>Language.hbm.xml</value>
+				<value>Translation.hbm.xml</value>
+				<value>PersonalData.hbm.xml</value>
+				<value>Worker.hbm.xml</value>
+				<value>Translator.hbm.xml</value>
+				<value>Client.hbm.xml</value>
+				<value>IndividualClient.hbm.xml</value>
+				<value>BussinessClient.hbm.xml</value>
+				<value>Task.hbm.xml</value>
+				<value>Job.hbm.xml</value>
+				<value>Quote.hbm.xml</value>
+				<value>Project.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+</beans>
