@@ -21,7 +21,7 @@ public class GwtRpcController extends RemoteServiceServlet implements
 		Controller, ServletContextAware {
 	private static final long serialVersionUID = -3618261744853211777L;
 	
-	Logger log = LoggerFactory.getLogger("GwtRpcController");
+	transient private Logger log = LoggerFactory.getLogger("GwtRpcController");
 
 	private ServletContext servletContext;
 	private RemoteService remoteService;

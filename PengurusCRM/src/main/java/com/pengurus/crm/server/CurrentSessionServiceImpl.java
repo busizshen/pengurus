@@ -1,7 +1,5 @@
 package com.pengurus.crm.server;
 
-import java.util.HashSet;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,9 +9,7 @@ import com.pengurus.crm.client.service.CurrentSessionService;
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.daos.UserDAO;
 import com.pengurus.crm.entities.User;
-import com.pengurus.crm.entities.UserRole;
 import com.pengurus.crm.shared.dto.UserDTO;
-import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 public class CurrentSessionServiceImpl implements CurrentSessionService {
 

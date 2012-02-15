@@ -1,7 +1,5 @@
 package com.pengurus.crm.client.panels.center;
 
-import java.util.regex.Pattern;
-
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;

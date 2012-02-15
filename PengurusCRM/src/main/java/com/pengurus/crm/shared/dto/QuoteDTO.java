@@ -5,7 +5,7 @@ import java.util.Set;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 
-public class QuoteDTO implements IsSerializable{
+public class QuoteDTO implements IsSerializable {
 
 	private StatusDTO status;
 	    private ClientDTO client;
