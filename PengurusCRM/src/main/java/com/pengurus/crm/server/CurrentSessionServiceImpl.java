@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.pengurus.crm.client.service.CurrentSessionService;
+import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.daos.UserDAO;
 import com.pengurus.crm.entities.User;
 import com.pengurus.crm.entities.UserRole;
@@ -19,6 +20,7 @@ public class CurrentSessionServiceImpl implements CurrentSessionService {
 	private final Logger log = LoggerFactory.getLogger("CurrentSessionServiceImpl");
 	
 	private UserDAO userDAO;
+	private UserService userService;
 	
 	public UserDAO getUserDAO() {
 		return userDAO;
@@ -28,35 +30,31 @@ public class CurrentSessionServiceImpl implements CurrentSessionService {
 		this.userDAO = userDAO;
 	}
 
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 	@Override
 	public UserDTO getCurrentUser() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		log.error("===> Wchodze");
-		
 		if (principal instanceof UserDetails) {
 			User user = userDAO.findByUsername(((UserDetails) principal).getUsername());
-		//	User user = new User(new HashSet<UserRole>(), "a", "b", "c");
 			log.error(user.toString());
-			return createUserDTO(user);
+			return user.toUserDTO();
 		}
-		
-		log.error("===> Null");
-		
 		return null;
 	}
-	
-	private UserDTO createUserDTO(User user){
-	    HashSet<UserRoleDTO> authoritiesDTOs = new HashSet<UserRoleDTO>();
-	    for(UserRole userRole : user.getAuthorities())
-	        authoritiesDTOs.add(createUserRoleDTO(userRole));
-	    return new UserDTO(user.getId(), authoritiesDTOs,
-	                       user.getUsername(), user.getPassword(),
-	                       user.getDescription());
-	}
-	
-	private UserRoleDTO createUserRoleDTO(UserRole userRole){
-	    return new UserRoleDTO(userRole.getId(), userRole.getRole());
+
+	@Override
+	public Void setPassword(String password) {
+		UserDTO user = getCurrentUser();
+		user.setPassword(password);
+		userService.updateUserWithPassword(user);
+		return null;
 	}
 
 

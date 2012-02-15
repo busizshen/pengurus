@@ -8,6 +8,10 @@
 		<property name="remoteService" ref="numberServiceBean" />
 	</bean>
 	
+	<bean id="userController" class="com.pengurus.crm.server.GwtRpcController">
+		<property name="remoteService" ref="userServiceBean" />
+	</bean>
+	
 	<bean id="currentSessionController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="currentSessionServiceBean" />
 	</bean>

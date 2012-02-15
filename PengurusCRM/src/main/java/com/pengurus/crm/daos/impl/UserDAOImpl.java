@@ -11,7 +11,7 @@ import com.pengurus.crm.entities.User;
 public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO {
 	
 	protected static final Logger log = LoggerFactory.getLogger(UserDAOImpl.class);
-	
+
 	public UserDAOImpl(){
 		this.type = User.class;
 	}
@@ -25,5 +25,4 @@ public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO {
 			throw new UsernameNotFoundException(username);
 		}
 	}
-
 }

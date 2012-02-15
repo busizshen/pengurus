@@ -120,21 +120,21 @@
 	<bean id="bussinessClientDao" class="com.pengurus.crm.daos.impl.BussinessClientDAOImpl">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
-	
+
 	<bean id="taskDao" class="com.pengurus.crm.daos.impl.TaskDAOImpl">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
-	
+
 	<bean id="jobDao" class="com.pengurus.crm.daos.impl.JobDAOImpl">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
-	
+
 	<bean id="quoteDao" class="com.pengurus.crm.daos.impl.QuoteDAOImpl">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
-	
+
 	<bean id="projectDao" class="com.pengurus.crm.daos.impl.ProjectDAOImpl">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
-	
+
 </beans>

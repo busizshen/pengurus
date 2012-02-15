@@ -35,7 +35,7 @@ import com.pengurus.crm.entities.User;
 import com.pengurus.crm.entities.UserRole;
 import com.pengurus.crm.entities.Worker;
 
-@ContextConfiguration(locations = { "classpath:com/pengurus/crm/server/testContext.xml" })
+@ContextConfiguration(locations = { "testContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class SimpleTest {
 
@@ -93,7 +93,6 @@ public class SimpleTest {
     @Test
     public void createTranlsation() {
 
-        try {
             TranslationType translationType = new TranslationType("test",
                     "test");
             translationTypeDAO.create(translationType);
@@ -119,10 +118,6 @@ public class SimpleTest {
             } catch (DataAccessException e) {
                 Assert.fail();
             }
-        } catch (DataAccessException e) {
-            Assert.fail();
-        }
-
     }
 
     @Test
@@ -195,6 +190,7 @@ public class SimpleTest {
 
     @Test
     public void logIn() {
+    	// trzeba encodowac haslo
         authService.login("Username", "pass");
         Assert.assertTrue(SecurityContextHolder.getContext()
                 .getAuthentication().isAuthenticated());

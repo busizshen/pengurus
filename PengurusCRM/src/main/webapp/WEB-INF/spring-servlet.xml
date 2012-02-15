@@ -10,6 +10,7 @@
 			<value>
 				/**/number.rpc=numberController
 				/**/currentSession.rpc=currentSessionController
+				/**/user.rpc=userController
 			</value>
 		</property>
 	</bean>

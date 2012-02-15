@@ -1,10 +1,18 @@
 package com.pengurus.crm.entities;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-public class User implements IsSerializable {
+import com.pengurus.crm.shared.dto.UserDTO;
+import com.pengurus.crm.shared.dto.UserRoleDTO;
+
+public class User {
 
 	private Long id;
 	private Set<UserRole> authorities;
@@ -18,12 +26,21 @@ public class User implements IsSerializable {
 
 	public User(Set<UserRole> authorities, String username, String password,
 			String description) {
-		super();
+		this();
 		this.authorities = authorities;
 		this.username = username;
 		this.password = password;
 		this.description = description;
-
+	}
+	
+	public User(UserDTO userDTO) {
+		this.authorities = new HashSet<UserRole>();
+		for (UserRoleDTO userRole: userDTO.getAuthorities()) {
+			authorities.add(new UserRole(userRole.getRole()));
+		}
+		this.username = userDTO.getUsername();
+		this.password = userDTO.getPassword();
+		this.description = userDTO.getDescription();
 	}
 
 	public Long getId() {
@@ -66,6 +83,10 @@ public class User implements IsSerializable {
 		this.authorities = authorities;
 	}
 
+	public boolean isPasswordCorrect(String password) {
+		return false;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -76,5 +97,25 @@ public class User implements IsSerializable {
 		sb.append("; Authorities:");
 		sb.append(authorities);
 		return sb.toString();
+	}
+	
+	public UserDetails toUserDetails() {
+		Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+		for (UserRole userRole : getAuthorities()) {
+			grantedAuthorities.add(new SimpleGrantedAuthority(userRole
+					.toString()));
+		}
+		UserDetails userDetails = new org.springframework.security.core.userdetails.User(
+				getUsername(), getPassword(), grantedAuthorities);
+		return userDetails;
+	}
+
+	public UserDTO toUserDTO() {
+	    HashSet<UserRoleDTO> authoritiesDTOs = new HashSet<UserRoleDTO>();
+	    for(UserRole userRole : getAuthorities())
+			authoritiesDTOs.add(userRole.toUserRoleDTO());
+	    return new UserDTO(getId(), authoritiesDTOs,
+	                       getUsername(), getPassword(),
+	                       getDescription());
 	}
 }

@@ -1,6 +1,7 @@
 package com.pengurus.crm.entities;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 public class UserRole implements IsSerializable {
 	
@@ -35,6 +36,11 @@ public class UserRole implements IsSerializable {
 	@Override
 	public String toString() {
 		return getRole();
+	}
+	
+	public UserRoleDTO toUserRoleDTO() {
+	    return new UserRoleDTO(getId(), getRole());
+		
 	}
 	
 }

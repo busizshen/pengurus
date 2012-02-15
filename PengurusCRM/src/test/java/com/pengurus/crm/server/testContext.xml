@@ -11,12 +11,14 @@
 	<import resource="file:src/main/webapp/WEB-INF/webservice-beans.xml"/>
 	<import resource="file:src/main/webapp/WEB-INF/test-context.xml"/>
 	
-	<bean id="authHelp" class="com.pengurus.crm.server.AuthorizationService">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
-	</bean>
-
 	<security:authentication-manager>
-		<security:authentication-provider user-service-ref='userDetailsService'/>
+		<security:authentication-provider user-service-ref='userDetailsService'>
+			<security:password-encoder ref='passwordEncoder' />
+		</security:authentication-provider>
 	</security:authentication-manager>
+
+	<bean id="userServiceTest" class="com.pengurus.crm.server.UserServiceTest">
+		<property name="userService" ref="userServiceBean" />
+	</bean>
 
 </beans>

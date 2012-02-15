@@ -7,4 +7,5 @@ import com.pengurus.crm.shared.dto.UserDTO;
 @RemoteServiceRelativePath("currentSession.rpc")
 public interface CurrentSessionService extends RemoteService {
 	public UserDTO getCurrentUser();
+	public Void setPassword(String password);
 }
