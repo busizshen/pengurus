@@ -2,9 +2,10 @@ package com.pengurus.crm.shared.dto;
 
 import java.util.Set;
 
-import com.pengurus.crm.shared.shared.StatusDTO;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class QuoteDTO {
+
+public class QuoteDTO implements IsSerializable{
 
 	private StatusDTO status;
 	    private ClientDTO client;

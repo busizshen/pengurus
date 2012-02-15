@@ -4,7 +4,7 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.pengurus.crm.client.MainWindow;
 import com.pengurus.crm.client.models.QuoteModel;
 import com.pengurus.crm.shared.dto.QuoteDTO;
-import com.pengurus.crm.shared.shared.StatusDTO;
+import com.pengurus.crm.shared.dto.StatusDTO;
 
 public class QuotesListPanelLastEdited extends QuotesListPanel{
 

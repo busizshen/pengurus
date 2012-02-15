@@ -1,22 +1,20 @@
 package com.pengurus.crm.shared.dto;
 
-import com.pengurus.crm.entities.Language;
-import com.pengurus.crm.entities.Price;
-import com.pengurus.crm.entities.TranslationType;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class TranslationDTO {
+public class TranslationDTO implements IsSerializable {
 
-    private TranslationType type;
-    private Language from;
-    private Language to;
-    private Price defaultPrice;
+    private TranslationTypeDTO type;
+    private LanguageDTO from;
+    private LanguageDTO to;
+    private PriceDTO defaultPrice;
 
     public TranslationDTO() {
         super();
     }
 
-    public TranslationDTO(TranslationType type, Language from, Language to,
-                       Price defaultPrice) {
+    public TranslationDTO(TranslationTypeDTO type, LanguageDTO from, LanguageDTO to,
+                       PriceDTO defaultPrice) {
         super();
         this.type = type;
         this.from = from;
@@ -24,35 +22,35 @@ public class TranslationDTO {
         this.defaultPrice = defaultPrice;
     }
 
-    public Price getDefaultPrice() {
+    public PriceDTO getDefaultPrice() {
         return defaultPrice;
     }
 
-    public void setDefaultPrice(Price defaultPrice) {
+    public void setDefaultPrice(PriceDTO defaultPrice) {
         this.defaultPrice = defaultPrice;
     }
 
-    public TranslationType getType() {
+    public TranslationTypeDTO getType() {
         return type;
     }
 
-    public void setType(TranslationType type) {
+    public void setType(TranslationTypeDTO type) {
         this.type = type;
     }
 
-    public Language getFrom() {
+    public LanguageDTO getFrom() {
         return from;
     }
 
-    public void setFrom(Language from) {
+    public void setFrom(LanguageDTO from) {
         this.from = from;
     }
 
-    public Language getTo() {
+    public LanguageDTO getTo() {
         return to;
     }
 
-    public void setTo(Language to) {
+    public void setTo(LanguageDTO to) {
         this.to = to;
     }
     
