@@ -1,7 +1,8 @@
 package com.pengurus.crm.shared.dto;
 import java.util.List;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class PersonalDataDTO {
+public class PersonalDataDTO implements IsSerializable {
     
     private String firstName;
     private String lastName;
