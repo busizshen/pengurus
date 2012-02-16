@@ -62,12 +62,12 @@ public class UserServiceTest {
 	@Test public void passwordEncodingWhileCreating() {
 		// given
 		PasswordEncoder encoder = new ShaPasswordEncoder();
-		userService.createUser(new UserDTO(null, new HashSet<UserRoleDTO>(), "userServiceTestPasswordEncodingCreating", "pass", "Decrtiption"));
 		
 		// when
-		UserDTO userDTO = userService.getUser("userServiceTestPasswordEncodingCreating");
+		userService.createUser(new UserDTO(null, new HashSet<UserRoleDTO>(), "userServiceTestPasswordEncodingCreating", "pass", "Decrtiption"));
 		
 		// then
+		UserDTO userDTO = userService.getUser("userServiceTestPasswordEncodingCreating");
 		Assert.isTrue(encoder.encodePassword("pass", saltSource.getSalt(new User(userDTO).toUserDetails())).equals(userDTO.getPassword()));
 	}
 	
@@ -76,12 +76,12 @@ public class UserServiceTest {
 		UserDTO userDTO = new UserDTO(null, new HashSet<UserRoleDTO>(), "userServiceTestPasswordEncodingUpdating", "pass", "Decrtiption");
 		userService.createUser(userDTO);
 		userDTO.setPassword("updated");
-		userService.updateUserWithPassword(userDTO);
 		
 		// when
-		userDTO = userService.getUser("userServiceTestPasswordEncodingCreating");
+		userService.updateUserWithPassword(userDTO);
 		
 		// then
+		userDTO = userService.getUser("userServiceTestPasswordEncodingUpdating");
 		Assert.isTrue(passwordEncoder.encodePassword("updated", saltSource.getSalt(new User(userDTO).toUserDetails())).equals(userDTO.getPassword()));
 	}
 	

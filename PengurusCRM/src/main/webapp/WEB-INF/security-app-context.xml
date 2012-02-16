@@ -17,7 +17,9 @@
 
 	<authentication-manager>
 		<authentication-provider user-service-ref='userDetailsService'>
-			<password-encoder ref='passwordEncoder' />
+			<password-encoder ref='passwordEncoder'>
+				<salt-source ref='saltSource' />
+			</password-encoder>
 		</authentication-provider>
 		<authentication-provider>
 			<user-service>
