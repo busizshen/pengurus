@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,7 +22,6 @@ import com.pengurus.crm.daos.TranslationDAO;
 import com.pengurus.crm.daos.TranslationTypeDAO;
 import com.pengurus.crm.daos.TranslatorDAO;
 import com.pengurus.crm.daos.UserDAO;
-import com.pengurus.crm.daos.UserRoleDAO;
 import com.pengurus.crm.daos.WorkerDAO;
 import com.pengurus.crm.entities.CurrencyType;
 import com.pengurus.crm.entities.Language;
@@ -33,15 +31,16 @@ import com.pengurus.crm.entities.Translation;
 import com.pengurus.crm.entities.TranslationType;
 import com.pengurus.crm.entities.Translator;
 import com.pengurus.crm.entities.User;
-import com.pengurus.crm.entities.UserRole;
 import com.pengurus.crm.entities.Worker;
+import com.pengurus.crm.shared.dto.UserDTO;
+import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 @ContextConfiguration(locations = { "testContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class SimpleTest {
 
 	@Autowired
-	private UserDAO ud;
+	private UserDAO userDAO;
 
 	@Autowired
 	private TranslationTypeDAO translationTypeDAO;
@@ -51,9 +50,6 @@ public class SimpleTest {
 
 	@Autowired
 	private PriceDAO priceDAO;
-
-	@Autowired
-	private UserRoleDAO urd;
 
 	@Autowired
 	private TranslationDAO translationDAO;
@@ -78,18 +74,19 @@ public class SimpleTest {
 
 	@Before
 	public void createUser() {
-		HashSet<UserRole> li = new HashSet<UserRole>();
-		UserRole ur = UserRole.ROLE_USER;
-		urd.create(ur);
-		li.add(ur);
+		HashSet<UserRoleDTO> userRoles = new HashSet<UserRoleDTO>();
+		UserRoleDTO userRole = UserRoleDTO.ROLE_USER;
+		userRoles.add(userRole);
 
-		User u = new User(li, "Username", "pass", "descr");
-		Assert.assertNotNull(u);
-		ud.create(u);
-		User u2 = new User(li, "Username2", "pass", "descr2");
-		ud.create(u2);
-		User u3 = new User(li, "Username3", "pass", "descr2");
-		userService.createUser(u3.toUserDTO());
+		User user = new User(userRoles, "Username", "pass", "descr");
+		UserDTO userDTO = user.toUserDTO();
+		userService.createUser(userDTO);
+		
+	}
+
+	@Test
+	public void empty() {
+
 	}
 
 	@Test
@@ -112,81 +109,63 @@ public class SimpleTest {
 
 		Language lto = new Language("Spanish");
 		languageDAO.create(lto);
-		try {
-			Translation translation = new Translation(translationType, lfrom,
-					lto, price);
-			translationDAO.create(translation);
-		} catch (DataAccessException e) {
-			Assert.fail();
-		}
+
+		Translation translation = new Translation(translationType, lfrom, lto,
+				price);
+		translationDAO.create(translation);
+
 	}
 
 	@Test
 	public void workerTest() {
-		try {
-
-			Set<UserRole> userRoles = new HashSet<UserRole>();
-			UserRole userRole = UserRole.ROLE_USER;
-			urd.create(userRole);
-			userRoles.add(userRole);
-
-			PersonalData personalData = new PersonalData("John", "Doe",
-					"address", new HashSet<String>(), new HashSet<String>());
-			personalDataDAO.create(personalData);
-			Worker worker = new Worker(userRoles, "worker", "pass", "descr",
-					personalData);
-			workerDAO.create(worker);
-		} catch (DataAccessException e) {
-			Assert.fail();
-		}
+		Set<UserRoleDTO> userRoles = new HashSet<UserRoleDTO>();
+		UserRoleDTO userRole = UserRoleDTO.ROLE_USER;
+		userRoles.add(userRole);
+		PersonalData personalData = new PersonalData("John", "Doe", "address",
+				new HashSet<String>(), new HashSet<String>());
+		personalDataDAO.create(personalData);
+		Worker worker = new Worker(userRoles, "worker", "pass", "descr",
+				personalData);
+		workerDAO.create(worker);
 	}
 
 	@Test
 	public void translatorTest() {
-		try {
-			TranslationType translationType = new TranslationType("test",
-					"test");
-			translationTypeDAO.create(translationType);
-			CurrencyType currencyType = new CurrencyType("Pound2");
-			Price price = new Price(100, currencyType);
-			currencyTypeDAO.create(currencyType);
+		TranslationType translationType = new TranslationType("test", "test");
+		translationTypeDAO.create(translationType);
+		CurrencyType currencyType = new CurrencyType("Pound2");
+		Price price = new Price(100, currencyType);
+		currencyTypeDAO.create(currencyType);
 
-			priceDAO.create(price);
+		priceDAO.create(price);
 
-			price = new Price(200, currencyType);
-			priceDAO.create(price);
+		price = new Price(200, currencyType);
+		priceDAO.create(price);
 
-			Language lfrom = new Language("English2");
-			languageDAO.create(lfrom);
+		Language lfrom = new Language("English2");
+		languageDAO.create(lfrom);
 
-			Language lto = new Language("Spanish2");
-			languageDAO.create(lto);
+		Language lto = new Language("Spanish2");
+		languageDAO.create(lto);
 
-			Translation translation = new Translation(translationType, lfrom,
-					lto, price);
-			translationDAO.create(translation);
+		Translation translation = new Translation(translationType, lfrom, lto,
+				price);
+		translationDAO.create(translation);
 
-			try {
-				Set<UserRole> userRoles = new HashSet<UserRole>();
-				UserRole userRole = UserRole.ROLE_USER;
-				urd.create(userRole);
-				userRoles.add(userRole);
+		Set<UserRoleDTO> userRoles = new HashSet<UserRoleDTO>();
+		UserRoleDTO userRole = UserRoleDTO.ROLE_USER;
+		userRoles.add(userRole);
 
-				Set<Translation> translations = new HashSet<Translation>();
-				translations.add(translation);
+		Set<Translation> translations = new HashSet<Translation>();
+		translations.add(translation);
 
-				PersonalData personalData = new PersonalData("John", "Doe",
-						"address", new HashSet<String>(), new HashSet<String>());
-				personalDataDAO.create(personalData);
-				Translator translator = new Translator(userRoles, "worker",
-						"pass", "descr", personalData, translations);
-				translatorDAO.create(translator);
-			} catch (DataAccessException e) {
-				Assert.fail();
-			}
-		} catch (DataAccessException e) {
-			Assert.fail();
-		}
+		PersonalData personalData = new PersonalData("John", "Doe", "address",
+				new HashSet<String>(), new HashSet<String>());
+		personalDataDAO.create(personalData);
+		Translator translator = new Translator(userRoles, "worker", "pass",
+				"descr", personalData, translations);
+		translatorDAO.create(translator);
+
 	}
 
 	@Test

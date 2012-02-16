@@ -2,6 +2,8 @@ package com.pengurus.crm.entities;
 
 import java.util.Set;
 
+import com.pengurus.crm.shared.dto.UserRoleDTO;
+
 
 public class IndividualClient extends Client{
 
@@ -11,7 +13,7 @@ public class IndividualClient extends Client{
         super();
     }
 
-    public IndividualClient(Set<UserRole> permission, String login,
+    public IndividualClient(Set<UserRoleDTO> permission, String login,
                             String password, String description, 
                             PersonalData data) {
         super(permission, login, password, description);

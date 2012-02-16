@@ -15,7 +15,7 @@ import com.pengurus.crm.shared.dto.UserRoleDTO;
 public class User {
 
 	private Long id;
-	private Set<UserRole> authorities;
+	private Set<UserRoleDTO> authorities;
 	private String username;
 	private String password;
 	private String description;
@@ -24,7 +24,7 @@ public class User {
 		super();
 	}
 
-	public User(Set<UserRole> authorities, String username, String password,
+	public User(Set<UserRoleDTO> authorities, String username, String password,
 			String description) {
 		this();
 		this.authorities = authorities;
@@ -35,10 +35,7 @@ public class User {
 	
 	public User(UserDTO userDTO) {
 		this.id = userDTO.getId();
-		this.authorities = new HashSet<UserRole>();
-		for (UserRoleDTO userRole: userDTO.getAuthorities()) {
-			authorities.add(new UserRole(userRole.getId(), userRole.getRole()));
-		}
+		this.authorities = userDTO.getAuthorities();
 		this.username = userDTO.getUsername();
 		this.password = userDTO.getPassword();
 		this.description = userDTO.getDescription();
@@ -76,11 +73,11 @@ public class User {
 		this.description = description;
 	}
 
-	public Set<UserRole> getAuthorities() {
+	public Set<UserRoleDTO> getAuthorities() {
 		return authorities;
 	}
 
-	public void setAuthorities(Set<UserRole> authorities) {
+	public void setAuthorities(Set<UserRoleDTO> authorities) {
 		this.authorities = authorities;
 	}
 
@@ -102,7 +99,7 @@ public class User {
 	
 	public UserDetails toUserDetails() {
 		Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-		for (UserRole userRole : getAuthorities()) {
+		for (UserRoleDTO userRole : getAuthorities()) {
 			grantedAuthorities.add(new SimpleGrantedAuthority(userRole
 					.toString()));
 		}
@@ -112,9 +109,7 @@ public class User {
 	}
 
 	public UserDTO toUserDTO() {
-	    HashSet<UserRoleDTO> authoritiesDTOs = new HashSet<UserRoleDTO>();
-	    for(UserRole userRole : getAuthorities())
-			authoritiesDTOs.add(userRole.toUserRoleDTO());
+	    HashSet<UserRoleDTO> authoritiesDTOs = new HashSet<UserRoleDTO>(getAuthorities());
 	    return new UserDTO(getId(), authoritiesDTOs,
 	                       getUsername(), getPassword(),
 	                       getDescription());

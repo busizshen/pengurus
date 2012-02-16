@@ -22,7 +22,6 @@
 		<property name="mappingResources">
 			<list>
 				<value>User.hbm.xml</value>
-				<value>UserRole.hbm.xml</value>
 				<value>TranslationType.hbm.xml</value>
 				<value>CurrencyType.hbm.xml</value>
 				<value>Price.hbm.xml</value>

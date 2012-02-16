@@ -1,7 +1,9 @@
 package com.pengurus.crm.entities;
 
 import java.util.Set;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 
 public abstract class Client extends User implements IsSerializable {
@@ -10,7 +12,7 @@ public abstract class Client extends User implements IsSerializable {
         super();
     }
 
-    public Client(Set<UserRole> permission, String login, String password,
+    public Client(Set<UserRoleDTO> permission, String login, String password,
                   String description) {
         super(permission, login, password, description);
     }

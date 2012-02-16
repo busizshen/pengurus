@@ -3,16 +3,18 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2012-02-09 11:53:55 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
+	<typedef name="userRole" class="org.hibernate.type.EnumType">
+		<param name="type">12</param>
+        <param name="enumClass">com.pengurus.crm.shared.dto.UserRoleDTO</param>
+    </typedef>
     <class name="com.pengurus.crm.entities.User" table="USER">
         <id name="id" type="java.lang.Long">
             <column name="USER_ID" />
             <generator class="native" />
         </id>
-        <set name="authorities" inverse="false" table="USER_USERROLE" lazy="false">
-            <key>
-                <column name="USER_ID" />
-            </key>
-            <many-to-many column="USERROLE_ID" class="com.pengurus.crm.entities.UserRole" />
+        <set name="authorities" table="USER_USERROLE" inverse="false" lazy="false">
+            <key column="USER_ID" not-null="true" />
+            <element type="userRole" column="USER_ROLE" />
         </set>
         <property name="username" type="java.lang.String">
             <column name="USERNAME" />
