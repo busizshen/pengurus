@@ -34,6 +34,7 @@ public class User {
 	}
 	
 	public User(UserDTO userDTO) {
+		this.id = userDTO.getId();
 		this.authorities = new HashSet<UserRole>();
 		for (UserRoleDTO userRole: userDTO.getAuthorities()) {
 			authorities.add(new UserRole(userRole.getId(), userRole.getRole()));

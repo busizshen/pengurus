@@ -81,8 +81,8 @@ public class UserServiceTest {
 		userService.updateUserWithPassword(userDTO);
 		
 		// then
-		userDTO = userService.getUser("userServiceTestPasswordEncodingUpdating");
-		Assert.isTrue(passwordEncoder.encodePassword("updated", saltSource.getSalt(new User(userDTO).toUserDetails())).equals(userDTO.getPassword()));
+		UserDTO newUserDTO = userService.getUser("userServiceTestPasswordEncodingUpdating");
+		Assert.isTrue(passwordEncoder.encodePassword("updated", saltSource.getSalt(new User(newUserDTO).toUserDetails())).equals(userDTO.getPassword()));
 	}
 	
 }
