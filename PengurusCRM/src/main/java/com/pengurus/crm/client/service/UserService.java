@@ -10,4 +10,5 @@ public interface UserService extends RemoteService {
 	public Void updateUser(UserDTO user);
 	public Void updateUserWithPassword(UserDTO user);
 	public Void createUser(UserDTO user);
+	public Boolean checkPassword(String currentPassword, UserDTO user);
 }

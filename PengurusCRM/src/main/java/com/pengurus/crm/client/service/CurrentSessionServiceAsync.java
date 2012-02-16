@@ -5,5 +5,5 @@ import com.pengurus.crm.shared.dto.UserDTO;
 
 public interface CurrentSessionServiceAsync {
 	public void getCurrentUser(AsyncCallback<UserDTO> callback);
-	public void setPassword(String password, AsyncCallback<Void> callback);
+	public void setPassword(String currentPassword, String password, AsyncCallback<Void> callback);
 }

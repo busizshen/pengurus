@@ -18,6 +18,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.service.CurrentSessionService;
 import com.pengurus.crm.client.service.CurrentSessionServiceAsync;
+import com.pengurus.crm.client.service.exceptions.IncorrectPasswordException;
 
 public class ChangePasswordPanel extends LayoutContainer {
 
@@ -109,19 +110,19 @@ public class ChangePasswordPanel extends LayoutContainer {
 					
 					@Override
 					public void onSuccess(Void result) {
-						MessageBox.info("Success", "Your password was sucessfully changed", null);
+						MessageBox.info("Success", "Your password was sucessfully changed.", null);
 					}
 					
 					@Override
 					public void onFailure(Throwable caught) {
-						MessageBox.info("Failure", "Failed", null);
+						if (caught instanceof IncorrectPasswordException) {
+							MessageBox.info("Failure", "The password you have entered does not match your current one.", null);
+						}
 					}
 				};
 				CurrentSessionServiceAsync service = (CurrentSessionServiceAsync) GWT
 						.create(CurrentSessionService.class);
-				
-				// TODO jo: A co ze starym hasłem?
-				service.setPassword(newPassword.getValue(), callback);
+				service.setPassword(currentPassword.getValue(), newPassword.getValue(), callback);
 			}
 		});
 		form.addButton(b);

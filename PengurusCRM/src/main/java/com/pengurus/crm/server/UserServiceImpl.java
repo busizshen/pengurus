@@ -66,4 +66,12 @@ public class UserServiceImpl implements UserService {
 		String encodedPassword = passwordEncoder.encodePassword(user.getPassword(), saltSource.getSalt(new User(user).toUserDetails()));
 		user.setPassword(encodedPassword);
 	}
+
+	@Override
+	public Boolean checkPassword(String currentPassword, UserDTO user) {
+		String password = user.getPassword();
+		user.setPassword(currentPassword);
+		encodePassword(user);
+		return (user.getPassword().equals(password));
+	}
 }
