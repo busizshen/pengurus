@@ -9,6 +9,6 @@ public enum UserRole {
     ROLE_USER,
     ROLE_CLIENT,
     ROLE_VERIFICATOR,
-    ROLE_PROJECTMNAGER;
+    ROLE_PROJECTMANAGER;
 	
 }
