@@ -1,6 +1,8 @@
 package com.pengurus.crm.shared.dto;
 
-public enum UserRoleDTO {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public enum UserRoleDTO implements IsSerializable {
     
 	ROLE_ACCOUNTANT,
 	ROLE_EXECUTIVE,
