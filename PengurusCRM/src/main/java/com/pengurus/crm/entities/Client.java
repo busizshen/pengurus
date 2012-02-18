@@ -16,6 +16,7 @@ public abstract class Client extends User implements IsSerializable {
                   String description) {
         super(permission, login, password, description);
     }
+
  
     
 
