@@ -1,5 +1,7 @@
 package com.pengurus.crm.daos;
 
+import java.util.List;
+
 public interface GenericDAO <T> {
 
 	    /** Persist the newInstance object into database */
@@ -15,5 +17,8 @@ public interface GenericDAO <T> {
 
 	    /** Remove an object from persistent storage in the database */
 	    boolean delete(T persistentObject);
+	    
+	    /**Load all elements of class **/
+	    List<T> loadAll();
 	    
 }

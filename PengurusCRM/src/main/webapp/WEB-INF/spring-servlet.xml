@@ -11,6 +11,7 @@
 				/**/number.rpc=numberController
 				/**/currentSession.rpc=currentSessionController
 				/**/user.rpc=userController
+				/**/quote.rpc=quoteController
 			</value>
 		</property>
 	</bean>

@@ -14,6 +14,8 @@ public class QuoteModel extends BaseModel {
 	
 	public void setQuoteDTO(QuoteDTO quoteDTO){
 		this.quoteDTO = quoteDTO;
+		if(quoteDTO.getId() != null)
+			set("id",quoteDTO.getId().toString());
 		if(quoteDTO.getStatus() != null)
 			set("status",quoteDTO.getStatus().toString());
 		if(quoteDTO.getClient() != null)
@@ -21,6 +23,10 @@ public class QuoteModel extends BaseModel {
 		if(quoteDTO.getSupervisor() != null)
 			set("supervisor",quoteDTO.getSupervisor().getUsername());
 		set("description",quoteDTO.getDescription());
+	}
+
+	public String getId(){
+		return get("id");
 	}
 	
 	public String getStatus(){

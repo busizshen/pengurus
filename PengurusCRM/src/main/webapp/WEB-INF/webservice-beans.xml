@@ -29,5 +29,8 @@
 	<bean id="userDetailsService" class="com.pengurus.crm.server.UserDetailsServiceImpl">
 		<property name="userDAO" ref="userDao" />
 	</bean>
+	<bean id="quoteServiceBean" class="com.pengurus.crm.server.QuoteServiceImpl">
+		<property name="quoteDAO" ref="quoteDao" />
+	</bean>
 
 </beans>

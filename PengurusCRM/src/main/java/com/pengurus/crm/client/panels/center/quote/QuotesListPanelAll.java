@@ -1,8 +1,16 @@
 package com.pengurus.crm.client.panels.center.quote;
 
+import java.util.Set;
+
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.MainWindow;
 import com.pengurus.crm.client.models.QuoteModel;
+import com.pengurus.crm.client.service.QuoteService;
+import com.pengurus.crm.client.service.QuoteServiceAsync;
+import com.pengurus.crm.shared.dto.QuoteDTO;
 
 public class QuotesListPanelAll extends QuotesListPanel {
 
@@ -13,29 +21,24 @@ public class QuotesListPanelAll extends QuotesListPanel {
 
 	@Override
 	protected ListStore<QuoteModel> getList() {
-		return new ListStore<QuoteModel>();
-	/*	final ExampleServiceAsync service = (ExampleServiceAsync) Registry.get(Examples.SERVICE);  
-		  
-	    RpcProxy<PagingLoadResult<Stock>> proxy = new RpcProxy<PagingLoadResult<Stock>>() {  
-	      @Override  
-	      public void load(Object loadConfig, AsyncCallback<PagingLoadResult<Stock>> callback) {  
-	        service.getStocks((FilterPagingLoadConfig) loadConfig, callback);  
-	      }  
-	    };
-	  
-	    // loader  
-	    final PagingLoader<PagingLoadResult<ModelData>> loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy) {  
-	      @Override  
-	      protected Object newLoadConfig() {  
-	        BasePagingLoadConfig config = new BaseFilterPagingLoadConfig();  
-	        return config;  
-	      }  
+		final ListStore<QuoteModel> list = new ListStore<QuoteModel>();
+		AsyncCallback<Set<QuoteDTO> > callback = new AsyncCallback<Set<QuoteDTO> >() {
 
-	    };  
-	    loader.setRemoteSort(true);  
-	  
-	    return new ListStore<Stock>(loader); 
-  */
+			public void onFailure(Throwable t) {
+				Window.Location.assign("/spring_security_login");
+			}
+
+			public void onSuccess(Set<QuoteDTO> result) {
+				for(QuoteDTO q: result){
+					list.add(new QuoteModel(q));
+				}
+			}
+		};
+		QuoteServiceAsync service = (QuoteServiceAsync) GWT
+				.create(QuoteService.class);
+		service.getQuotes(callback);
+
+		return list;
 		}
 	@Override
 	protected String getName() {

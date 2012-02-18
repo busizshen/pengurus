@@ -1,5 +1,7 @@
 package com.pengurus.crm.daos.impl;
 
+import java.util.List;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -43,6 +45,11 @@ public class GenericDAOImpl<T> extends HibernateDaoSupport implements GenericDAO
 			return false;
 		}
 		
+	}
+
+	@Override
+	public List<T> loadAll() {
+		return getHibernateTemplate().loadAll(type);
 	}
 
 }

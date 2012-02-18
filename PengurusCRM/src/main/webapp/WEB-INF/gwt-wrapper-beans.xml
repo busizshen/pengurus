@@ -15,5 +15,9 @@
 	<bean id="currentSessionController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="currentSessionServiceBean" />
 	</bean>
-
+	
+	<bean id="quoteController" class="com.pengurus.crm.server.GwtRpcController">
+		<property name="remoteService" ref="quoteServiceBean" />
+	</bean>
+	
 </beans>

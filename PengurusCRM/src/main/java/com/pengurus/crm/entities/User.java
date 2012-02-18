@@ -114,4 +114,10 @@ public class User {
 	                       getUsername(), getPassword(),
 	                       getDescription());
 	}
+	public UserDTO toUserDTOWithoutPassword() {
+	   HashSet<UserRoleDTO> authoritiesDTOs = new HashSet<UserRoleDTO>(getAuthorities());
+	   return new UserDTO(getId(), authoritiesDTOs,
+	                       getUsername(), "",
+	                       getDescription());
+	}
 }
