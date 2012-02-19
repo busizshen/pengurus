@@ -2,11 +2,7 @@ package com.pengurus.crm.entities;
 
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.pengurus.crm.enums.Status;
-import com.pengurus.crm.server.UserDetailsServiceImpl;
 import com.pengurus.crm.shared.dto.ClientDTO;
 import com.pengurus.crm.shared.dto.QuoteDTO;
 import com.pengurus.crm.shared.dto.StatusDTO;

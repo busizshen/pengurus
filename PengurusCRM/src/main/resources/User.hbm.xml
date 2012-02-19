@@ -17,7 +17,7 @@
             <element type="userRole" column="USER_ROLE" />
         </set>
         <property name="username" type="java.lang.String">
-            <column name="USERNAME" />
+            <column name="USERNAME" unique="true" />
         </property>
         <property name="password" type="java.lang.String">
             <column name="PASSWORD" />

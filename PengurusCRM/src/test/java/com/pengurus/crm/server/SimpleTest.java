@@ -3,6 +3,7 @@ package com.pengurus.crm.server;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -80,8 +81,13 @@ public class SimpleTest {
 
 		User user = new User(userRoles, "Username", "pass", "descr");
 		UserDTO userDTO = user.toUserDTO();
-		userService.createUser(userDTO);
-		
+		userService.createUser(userDTO);	
+	}
+	
+	@After
+	public void deleteUser(){
+	    userDAO.delete(userDAO.findByUsername("Username"));
+	    
 	}
 
 	@Test
@@ -162,7 +168,7 @@ public class SimpleTest {
 		PersonalData personalData = new PersonalData("John", "Doe", "address",
 				new HashSet<String>(), new HashSet<String>());
 		personalDataDAO.create(personalData);
-		Translator translator = new Translator(userRoles, "worker", "pass",
+		Translator translator = new Translator(userRoles, "translator", "pass",
 				"descr", personalData, translations);
 		translatorDAO.create(translator);
 

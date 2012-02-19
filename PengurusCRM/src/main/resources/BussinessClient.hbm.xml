@@ -10,7 +10,7 @@
         <property name="name" type="java.lang.String">
             <column name="NAME" />
         </property>
-        <set name="agents" table="PERSONALDATA" inverse="false" lazy="true">
+        <set name="agents" table="PERSONALDATA" inverse="false" lazy="true" cascade="save-update">
             <key>
                 <column name="USER_ID" />
             </key>
