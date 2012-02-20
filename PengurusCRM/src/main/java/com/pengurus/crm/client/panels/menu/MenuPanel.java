@@ -35,6 +35,7 @@ public class MenuPanel extends ContentPanel {
 		add(tasksMenu);
 		add(administrationMenu);
 		add(contactsMenu);
+		add(new UsersMenuPanel());
 		setSize(200, 325);
 	}
 
