@@ -5,7 +5,6 @@ import java.util.Set;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.PengurusCRM;
 import com.pengurus.crm.client.panels.center.quote.QuotesListPanelAll;
@@ -15,20 +14,19 @@ import com.pengurus.crm.client.panels.center.quote.QuotesPanelCreate;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 public class QuotesMenuPanel extends TabMenuPanel {
 
-	public ContentPanel getPanel() {
-		panel = new ContentPanel();  
-	    panel.setAnimCollapse(false);  
-	    panel.setHeading("QUOTES");
-	    setPanelStyle();
-        ButtonLastEdited(panel);
-	    ButtonAll(panel);
-	    ButtonMine(panel);
-	    ButtonCreate(panel);
-		return panel;
+	public QuotesMenuPanel() { 
+	    super("Quotes");
+        ButtonLastEdited();
+	    ButtonAll();
+	    ButtonMine();
+	    ButtonCreate();
+	}
+	
+	public TabMenuPanel getPanel() {
+		return new QuotesMenuPanel(); 
+	}
 
-}
-
-	private void ButtonCreate(ContentPanel panel) {
+	private void ButtonCreate() {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		if(PengurusCRM.getCurrentUser().haveAuthority(roles)){ 
 			Button b = new Button("Create New");
@@ -38,12 +36,11 @@ public class QuotesMenuPanel extends TabMenuPanel {
 					new QuotesPanelCreate();
 				}
 			});
-			setButtonStyle(b);
-		    panel.add(b);
+		    add(b);
 		}
 	}
 
-	private void ButtonMine(ContentPanel panel) {
+	private void ButtonMine() {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		if(PengurusCRM.getCurrentUser().haveAuthority(roles)){ 
 			Button b = new Button("Mine");
@@ -53,12 +50,11 @@ public class QuotesMenuPanel extends TabMenuPanel {
 					new QuotesListPanelMine();
 				}
 			});
-			setButtonStyle(b);
-		    panel.add(b);
+		    add(b);
 		}
 	}
 
-	private void ButtonAll(ContentPanel panel) {
+	private void ButtonAll() {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		if(PengurusCRM.getCurrentUser().haveAuthority(roles)){ 
 			Button b = new Button("All");
@@ -68,12 +64,11 @@ public class QuotesMenuPanel extends TabMenuPanel {
 					new QuotesListPanelAll();
 				}
 			});
-			setButtonStyle(b);
-		    panel.add(b);
+		    add(b);
 		}
 	}
 
-	private void ButtonLastEdited(ContentPanel panel) {
+	private void ButtonLastEdited() {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		if(PengurusCRM.getCurrentUser().haveAuthority(roles)){ 
 			Button b = new Button("Last Edited");
@@ -83,8 +78,7 @@ public class QuotesMenuPanel extends TabMenuPanel {
 					new QuotesListPanelLastEdited();
 				}
 			});
-			setButtonStyle(b);
-		    panel.add(b);
+		    add(b);
 		} 
 	}
 }
