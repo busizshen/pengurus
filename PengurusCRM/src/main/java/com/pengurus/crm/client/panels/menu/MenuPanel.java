@@ -19,15 +19,22 @@ public class MenuPanel extends ContentPanel {
 	private AdministrationMenuPanel administrationMenu = new AdministrationMenuPanel();
 	private ContactsMenuPanel contactsMenu = new ContactsMenuPanel();
 
+	public boolean add(TabMenuPanel tabMenuPanel) {
+		if (tabMenuPanel.isEmpty()){
+			return false;
+		}
+		return super.add(tabMenuPanel);
+	}
+	
 	private MenuPanel() {
 		setHeading("MENU");
 		setBodyBorder(false);
 		setLayout(new AccordionLayout());
-		add(quotesMenu.getPanel());
-		add(projectsMenu.getPanel());
-		add(tasksMenu.getPanel());
-		add(administrationMenu.getPanel());
-		add(contactsMenu.getPanel());
+		add(quotesMenu);
+		add(projectsMenu);
+		add(tasksMenu);
+		add(administrationMenu);
+		add(contactsMenu);
 		setSize(200, 325);
 	}
 
