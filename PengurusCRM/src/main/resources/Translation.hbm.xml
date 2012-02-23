@@ -8,7 +8,7 @@
             <column name="TRANSLATION_ID" />
             <generator class="native" />
         </id>
-        <many-to-one name="type" class="com.pengurus.crm.entities.TranslationType" fetch="join">
+        <many-to-one name="type" class="com.pengurus.crm.entities.TranslationType" fetch="join" cascade="all">
             <column name="TYPE" />
         </many-to-one>
         <many-to-one name="lfrom" class="com.pengurus.crm.entities.Language" fetch="join">

@@ -18,7 +18,7 @@ import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 @ContextConfiguration(locations = { "../testContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class WorkerCRUD {
+public class WorkerCRUDTest {
 
     @Autowired
     private WorkerDAO workerDAO;
@@ -40,7 +40,6 @@ public class WorkerCRUD {
         emails.add("john2@yahoo.com");
         personalData = new PersonalData("Firstame", "Lastname", "Address",
                 phoneNumbers, emails);
-        // personalDataDAO.create(personalData);
     }
 
     @Test

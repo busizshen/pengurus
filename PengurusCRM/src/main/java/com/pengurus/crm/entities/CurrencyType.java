@@ -2,7 +2,7 @@ package com.pengurus.crm.entities;
 
 public class CurrencyType {
     
-//    private Long id;
+    private Long id;
     private String currency;
 
     public CurrencyType() {
@@ -22,12 +22,12 @@ public class CurrencyType {
         this.currency = currency;
     }
     
-/*    public Long getId() {
+    public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
-  */  
+    
 }

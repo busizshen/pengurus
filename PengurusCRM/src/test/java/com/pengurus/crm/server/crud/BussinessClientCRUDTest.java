@@ -19,7 +19,7 @@ import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 @ContextConfiguration(locations = { "../testContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class BussinessClientCRUD {
+public class BussinessClientCRUDTest {
     @Autowired
     private BussinessClientDAO bussinessClientDAO;
 

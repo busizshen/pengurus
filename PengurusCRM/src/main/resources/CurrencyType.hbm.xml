@@ -1,12 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2012-02-11 19:23:16 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2012-02-23 16:09:53 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.pengurus.crm.entities.CurrencyType" table="CURRENCYTYPE">
-        <id name="currency" type="java.lang.String">
-            <column name="CURRENCY" />
-            <generator class="assigned" />
+        <id name="id" type="java.lang.Long">
+            <column name="ID" />
+            <generator class="native" />
         </id>
+        <property name="currency" type="java.lang.String">
+            <column name="CURRENCY" unique="true"/>
+        </property>
     </class>
 </hibernate-mapping>

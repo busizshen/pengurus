@@ -30,7 +30,7 @@ import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 @ContextConfiguration(locations = { "../testContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class TranslatorCRUD {
+public class TranslatorCRUDTest {
 
     @Autowired
     private TranslatorDAO tranaslatorDAO;
