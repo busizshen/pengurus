@@ -34,22 +34,23 @@ public class QuoteDAOTest {
 	
 	@Before
 	public void createQuotes(){
-		Quote q1 = new Quote();
+		/* Quote q1 = new Quote();
 		q1.setDescription("one");
 		quoteDAO.create(q1);
 		BusinessClient bc = new BusinessClient();
 		bc.setDescription("Business Client");
 		bc.setUsername("BC first");
 		Set<PersonalData> agents = new HashSet<PersonalData>();
+		*/
 		PersonalData pd = new PersonalData("Name","Last Name", "Address", null,null);
-		personalDataDAO.create(pd);
+		personalDataDAO.create(pd); /*
 		agents.add(pd);
 		bc.setAgents(agents );
 		businessClientDAO.create(bc);
 		Quote q2 = new Quote();
 		q2.setDescription("two");
 		q2.setClient(bc);
-		quoteDAO.create(q2);
+		quoteDAO.create(q2); */
 	}
 	
 	@Test
