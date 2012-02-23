@@ -2,6 +2,7 @@ package com.pengurus.crm.entities;
 
 import java.util.Set;
 
+import com.pengurus.crm.shared.dto.ClientDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 
@@ -27,6 +28,12 @@ public class IndividualClient extends Client{
     public void setData(PersonalData data) {
         this.data = data;
     }
+
+	@Override
+	public ClientDTO toDTO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
     
 }

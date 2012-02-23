@@ -2,6 +2,8 @@ package com.pengurus.crm.entities;
 
 import java.util.Set;
 
+import com.pengurus.crm.shared.dto.BussinessClientDTO;
+import com.pengurus.crm.shared.dto.ClientDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 public class BussinessClient extends Client {
@@ -36,5 +38,20 @@ public class BussinessClient extends Client {
     public void setAgents(Set<PersonalData> agents) {
         this.agents = agents;
     }
+
+	@Override
+	public ClientDTO toDTO() {
+		BussinessClientDTO bcDTO = new BussinessClientDTO();
+		bcDTO.setId(this.getId());
+		bcDTO.setUsername(this.getUsername());
+		bcDTO.setDescription(this.getDescription());
+		/*for(PersonalData pd : agents){
+			bcDTO.addAgent(pd.toPersonalDataDTO());
+		}
+		for(UserRoleDTO a : this.getAuthorities()){
+			this.getAuthorities().add(a);
+		}*/
+		return bcDTO;
+	}
 
 }

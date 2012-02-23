@@ -31,6 +31,10 @@
 	</bean>
 	<bean id="quoteServiceBean" class="com.pengurus.crm.server.QuoteServiceImpl">
 		<property name="quoteDAO" ref="quoteDao" />
+		<property name="clientDAO" ref="clientDao" />
+	</bean>
+	<bean id="clientServiceBean" class="com.pengurus.crm.server.ClientServiceImpl">
+		<property name="clientDAO" ref="clientDao" />
 	</bean>
 
 </beans>

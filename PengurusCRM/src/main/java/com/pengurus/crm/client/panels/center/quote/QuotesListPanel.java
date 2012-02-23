@@ -12,6 +12,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.BoxComponent;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
@@ -135,11 +136,12 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 			            }  
 			          });  
 			        }  
-			  
+			   
 			        Button b = new Button("PREVIEW", new SelectionListener<ButtonEvent>() {  
 			          @Override  
-			          public void componentSelected(ButtonEvent ce) {  
-			              new QuotePanel(model.getQuoteDTO());
+			          public void componentSelected(ButtonEvent ce) {
+			              QuotePanel qp = new QuotePanel(model.getQuoteDTONonLazy());
+			              qp.getPanel();
 			          }  
 			        });  
 			        b.setToolTip("Click to see");  
@@ -152,6 +154,12 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 		  
 		
 	protected abstract ListStore<QuoteModel> getList();
+	
+	@Override
+	protected void setStyle(ContentPanel cp) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
 

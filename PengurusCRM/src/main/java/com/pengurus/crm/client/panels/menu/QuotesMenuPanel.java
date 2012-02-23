@@ -25,7 +25,7 @@ public class QuotesMenuPanel extends TabMenuPanel {
 	public TabMenuPanel getPanel() {
 		return new QuotesMenuPanel(); 
 	}
-
+	
 	private void ButtonCreate() {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		if(PengurusCRM.getCurrentUser().haveAuthority(roles)){ 

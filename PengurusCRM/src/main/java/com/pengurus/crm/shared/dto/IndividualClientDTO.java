@@ -25,5 +25,10 @@ public class IndividualClientDTO extends ClientDTO {
     public void setData(PersonalDataDTO data) {
         this.data = data;
     }
+
+	@Override
+	public String getType() {
+		return "Individual Client";
+	}
     
 }

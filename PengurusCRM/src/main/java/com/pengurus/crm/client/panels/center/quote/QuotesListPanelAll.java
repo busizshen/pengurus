@@ -44,4 +44,5 @@ public class QuotesListPanelAll extends QuotesListPanel {
 	protected String getName() {
 		return "Quote List - All";
 	}
+
 }

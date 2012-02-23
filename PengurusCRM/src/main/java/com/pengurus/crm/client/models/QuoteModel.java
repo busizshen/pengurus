@@ -48,5 +48,10 @@ public class QuoteModel extends BaseModel {
 	public QuoteDTO getQuoteDTO() {
 		return this.quoteDTO;
 	}
+
+	public QuoteDTO getQuoteDTONonLazy() {
+		
+		return this.quoteDTO;
+	}
 	
 }

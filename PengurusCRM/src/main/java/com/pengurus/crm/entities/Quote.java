@@ -6,7 +6,6 @@ import com.pengurus.crm.enums.Status;
 import com.pengurus.crm.shared.dto.ClientDTO;
 import com.pengurus.crm.shared.dto.QuoteDTO;
 import com.pengurus.crm.shared.dto.StatusDTO;
-import com.pengurus.crm.shared.dto.StatusDTOCreater;
 import com.pengurus.crm.shared.dto.WorkerDTO;
 
 public class Quote {
@@ -32,7 +31,18 @@ public class Quote {
         this.description = description;
     }
 
-    public Status getStatus() {
+
+	public Quote(QuoteDTO quoteDTO) {
+		super();
+		/*tu wyskakuje błąd nie wiem dlaczego
+		 * if(quoteDTO.getClient() != null){
+			this.client = new Client();
+		}*/
+		//if(quoteDTO.)
+		
+	}
+
+	public Status getStatus() {
         return status;
     }
 
@@ -86,12 +96,10 @@ public class Quote {
     	ClientDTO client = null;
     	WorkerDTO supervisor = null;
     	if(this.status != null){
-    		StatusDTOCreater statusDTO = new StatusDTOCreater();
-    		String s = this.status.toString();
-    		status = statusDTO.getStatusDTO(s);
+    		status = this.status.toStatusDTO();
     	}
     	if(this.client != null )
-    		client = (ClientDTO) this.client.toUserDTOWithoutPassword();
+    		client = this.client.toDTO();
     	if(this.supervisor != null)
     		supervisor = (WorkerDTO) this.supervisor.toUserDTOWithoutPassword();
 		return new QuoteDTO(this.id,status,client,supervisor,null,this.description );

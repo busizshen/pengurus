@@ -2,6 +2,8 @@ package com.pengurus.crm.entities;
 
 import java.util.Set;
 
+import com.pengurus.crm.shared.dto.PersonalDataDTO;
+
 public class PersonalData {
     
     private Long id;
@@ -72,6 +74,11 @@ public class PersonalData {
     public void setEmail(Set<String> email) {
         this.email = email;
     }
+
+	public PersonalDataDTO toPersonalDataDTO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
     
 }

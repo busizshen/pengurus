@@ -1,12 +1,11 @@
 package com.pengurus.crm.shared.dto;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 public class BussinessClientDTO extends ClientDTO{
 	
-	private String name;
-    private List<PersonalDataDTO> agents;
+    private Set<PersonalDataDTO> agents = new HashSet<PersonalDataDTO>();
     
     public BussinessClientDTO() {
         super();
@@ -14,26 +13,27 @@ public class BussinessClientDTO extends ClientDTO{
 
     public BussinessClientDTO(Long id, Set<UserRoleDTO> permission, String login,
                            String password, String description, String name,
-                           List<PersonalDataDTO> agents) {
+                           Set<PersonalDataDTO> agents) {
         super(id, permission, login, password, description);
-        this.name = name;
         this.agents = agents;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<PersonalDataDTO> getAgents() {
+    public Set<PersonalDataDTO> getAgents() {
         return agents;
     }
 
-    public void setAgents(List<PersonalDataDTO> agents) {
+    public void setAgents(Set<PersonalDataDTO> agents) {
         this.agents = agents;
     }
+
+	public void addAgent(PersonalDataDTO personalDataDTO) {
+		this.agents.add(personalDataDTO);
+		
+	}
+
+	@Override
+	public String getType() {
+		return "Bussines Client";
+	}
 
 }

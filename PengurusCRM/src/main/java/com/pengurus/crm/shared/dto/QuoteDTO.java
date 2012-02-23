@@ -2,7 +2,14 @@ package com.pengurus.crm.shared.dto;
 
 import java.util.Set;
 
+import com.extjs.gxt.ui.client.event.DomEvent;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.pengurus.crm.client.service.QuoteService;
+import com.pengurus.crm.client.service.QuoteServiceAsync;
 
 
 public class QuoteDTO implements IsSerializable {
@@ -82,4 +89,53 @@ public class QuoteDTO implements IsSerializable {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+		public Listener<DomEvent> changeStatus(final QuoteDTO quoteDTO) {
+			
+			return new Listener<DomEvent>(){
+				@Override
+				public void handleEvent(DomEvent be) {
+					if(quoteDTO.status != null)
+						quoteDTO.status = quoteDTO.status.increase();
+					else quoteDTO.status = StatusDTO.getFirstStatus();
+					AsyncCallback<Void> callback = new AsyncCallback<Void>() {
+
+						public void onFailure(Throwable t) {
+							Window.Location.assign("/spring_security_login");
+						}
+						@Override
+						public void onSuccess(Void arg0) {
+							
+						}
+					};
+					QuoteServiceAsync service = (QuoteServiceAsync) GWT
+					.create(QuoteService.class);
+					service.updateQuoteStatus(quoteDTO, callback);
+					
+			}};
+		}
+		
+public Listener<DomEvent> update(final QuoteDTO quoteDTO) {
+			
+			return new Listener<DomEvent>(){
+				@Override
+				public void handleEvent(DomEvent be) {
+					AsyncCallback<Void> callback = new AsyncCallback<Void>() {
+
+						public void onFailure(Throwable t) {
+							Window.Location.assign("/spring_security_login");
+						}
+						@Override
+						public void onSuccess(Void arg0) {
+							
+						}
+					};
+					QuoteServiceAsync service = (QuoteServiceAsync) GWT
+					.create(QuoteService.class);
+					service.updateQuote(quoteDTO, callback);
+					
+			}};
+		}
+
+
 }

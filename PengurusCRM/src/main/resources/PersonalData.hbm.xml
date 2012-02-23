@@ -18,7 +18,7 @@
             <column name="ADDRESS" />
         </property>
         
-        <set name="phoneNumber" table="PHONENUMBERS" inverse="false" lazy="true">
+        <set name="phoneNumber" table="PHONENUMBERS" inverse="false" lazy="false">
             <key>
                 <column name="ID" />
             </key>
@@ -27,7 +27,7 @@
             </element>
         </set>
         
-        <set name="email" table="EMAILS" inverse="false" lazy="true">
+        <set name="email" table="EMAILS" inverse="false" lazy="false">
             <key>
                 <column name="ID" />
             </key>

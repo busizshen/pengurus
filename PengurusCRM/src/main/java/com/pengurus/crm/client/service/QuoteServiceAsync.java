@@ -7,4 +7,6 @@ import com.pengurus.crm.shared.dto.QuoteDTO;
 
 public interface QuoteServiceAsync {
 	public void getQuotes(AsyncCallback<Set<QuoteDTO>> callback);
+	public void updateQuoteStatus(QuoteDTO quote, AsyncCallback<Void> callback);
+	public void updateQuote(QuoteDTO quoteDTO, AsyncCallback<Void> callback);
 }

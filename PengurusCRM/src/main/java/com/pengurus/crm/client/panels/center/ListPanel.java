@@ -19,7 +19,12 @@ import com.google.gwt.user.client.Element;
 public abstract class ListPanel<T extends ModelData>  {
 
 	public class ModelList extends LayoutContainer{
-
+		
+		protected ContentPanel cp = new ContentPanel();
+		public ModelList(){
+			setStyle(cp);
+		}
+		
 		@Override  
 		protected void onRender(Element parent, int index) { 
 			super.onRender(parent, index);  
@@ -32,7 +37,7 @@ public abstract class ListPanel<T extends ModelData>  {
 		    List<ColumnConfig> configs = getColumns();		  
 		    ColumnModel cm = new ColumnModel(configs);  
 		  
-		    ContentPanel cp = new ContentPanel();  
+		    setStyle(cp);
 		    cp.setBodyBorder(true);  
 		   // cp.setIcon(Resources.ICONS.table());  
 		    cp.setHeading(getName());  
@@ -59,6 +64,8 @@ public abstract class ListPanel<T extends ModelData>  {
 	  
 		    add(cp);  
 		}
+
+
 		
 	}
 	
@@ -69,7 +76,8 @@ public abstract class ListPanel<T extends ModelData>  {
 	protected abstract ListStore<T> getList();
 	
 	protected abstract GridFilters getFilters();
-	
-	
+
+	protected abstract void setStyle(ContentPanel cp);
+
 }
 

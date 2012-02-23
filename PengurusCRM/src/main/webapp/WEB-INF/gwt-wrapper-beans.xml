@@ -20,4 +20,8 @@
 		<property name="remoteService" ref="quoteServiceBean" />
 	</bean>
 	
+	<bean id="clientController" class="com.pengurus.crm.server.GwtRpcController">
+		<property name="remoteService" ref="clientServiceBean" />
+	</bean>
+	
 </beans>

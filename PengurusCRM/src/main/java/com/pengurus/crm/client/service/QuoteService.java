@@ -9,4 +9,6 @@ import com.pengurus.crm.shared.dto.QuoteDTO;
 @RemoteServiceRelativePath("quote.rpc")
 public interface QuoteService extends RemoteService {
 	public Set<QuoteDTO> getQuotes();
+	public void updateQuoteStatus(QuoteDTO quote);
+	public void updateQuote(QuoteDTO quoteDTO);
 }
