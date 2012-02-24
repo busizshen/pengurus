@@ -33,12 +33,17 @@ public class User {
 		this.description = description;
 	}
 	
-	public User(UserDTO userDTO) {
+	protected void init(UserDTO userDTO) {
 		this.id = userDTO.getId();
 		this.authorities = userDTO.getAuthorities();
 		this.username = userDTO.getUsername();
 		this.password = userDTO.getPassword();
 		this.description = userDTO.getDescription();
+		
+	}
+	
+	public User(UserDTO userDTO) {
+		init(userDTO);
 	}
 
 	public Long getId() {

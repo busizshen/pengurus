@@ -47,7 +47,7 @@
 				<value>Translator.hbm.xml</value>
 				<value>Client.hbm.xml</value>
 				<value>IndividualClient.hbm.xml</value>
-				<value>BussinessClient.hbm.xml</value>
+				<value>BusinessClient.hbm.xml</value>
 				<value>Task.hbm.xml</value>
 				<value>Job.hbm.xml</value>
 				<value>Quote.hbm.xml</value>
@@ -112,7 +112,7 @@
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
-	<bean id="bussinessClientDao" class="com.pengurus.crm.daos.impl.BussinessClientDAOImpl">
+	<bean id="businessClientDao" class="com.pengurus.crm.daos.impl.BusinessClientDAOImpl">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 

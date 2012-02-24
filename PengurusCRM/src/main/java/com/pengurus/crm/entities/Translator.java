@@ -2,6 +2,7 @@ package com.pengurus.crm.entities;
 
 import java.util.Set;
 
+import com.pengurus.crm.shared.dto.TranslatorDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 
@@ -20,7 +21,11 @@ public class Translator extends Worker{
         this.translations = translations;
     }
 
-    public Set<Translation> getTranslations() {
+    public Translator(TranslatorDTO userDTO) {
+    	init(userDTO);
+	}
+
+	public Set<Translation> getTranslations() {
         return translations;
     }
 

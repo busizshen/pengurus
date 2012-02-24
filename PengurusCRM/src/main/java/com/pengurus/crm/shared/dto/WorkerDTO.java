@@ -5,23 +5,23 @@ import java.util.Set;
 
 public class WorkerDTO extends UserDTO {
 	
-	private PersonalDataDTO data;
+	private PersonalDataDTO personalData;
         
     public WorkerDTO() {
         super();
     }
     
     public WorkerDTO(Long id, Set<UserRoleDTO> permission, String login, String password,
-                  String description, PersonalDataDTO data) {
+                  String description, PersonalDataDTO personalData) {
         super(id, permission, login, password, description);
-        this.data = data;
+        this.personalData = personalData;
     }
 
-    public PersonalDataDTO getData() {
-        return data;
+    public PersonalDataDTO getPersonalData() {
+        return personalData;
     }
 
-    public void setData(PersonalDataDTO data) {
-        this.data = data;
+    public void setPersonalData(PersonalDataDTO personalData) {
+        this.personalData = personalData;
     }
 }

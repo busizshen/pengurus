@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.pengurus.crm.enums.Status;
-import com.pengurus.crm.shared.dto.BussinessClientDTO;
+import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.ClientDTO;
 import com.pengurus.crm.shared.dto.IndividualClientDTO;
 import com.pengurus.crm.shared.dto.JobDTO;
@@ -40,8 +40,8 @@ public class Quote {
 		super();
 		this.client = null;
 		if(quoteDTO.getClient() != null){
-			if(quoteDTO.getClient() instanceof BussinessClientDTO)
-				this.client = new BussinessClient();
+			if(quoteDTO.getClient() instanceof BusinessClientDTO)
+				this.client = new BusinessClient();
 			else if(quoteDTO.getClient() instanceof IndividualClientDTO)
 				this.client = new IndividualClient(); 
 			this.client.setId(quoteDTO.getClient().getId());

@@ -7,7 +7,7 @@
         <key>
             <column name="USER_ID" />
         </key>
-        <many-to-one name="data" class="com.pengurus.crm.entities.PersonalData" fetch="join" cascade="save-update">
+        <many-to-one name="personalData" class="com.pengurus.crm.entities.PersonalData" fetch="join" cascade="save-update">
             <column name="DATA" />
         </many-to-one>
     </joined-subclass>

@@ -32,7 +32,7 @@
 				<value>Translator.hbm.xml</value>
 				<value>Client.hbm.xml</value>
 				<value>IndividualClient.hbm.xml</value>
-				<value>BussinessClient.hbm.xml</value>
+				<value>BusinessClient.hbm.xml</value>
 				<value>Task.hbm.xml</value>
 				<value>Job.hbm.xml</value>
 				<value>Quote.hbm.xml</value>

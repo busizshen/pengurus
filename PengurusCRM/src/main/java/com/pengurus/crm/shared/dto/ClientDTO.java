@@ -13,7 +13,7 @@ public abstract class ClientDTO extends UserDTO {
         super(id, permission, login, password, description);
     }
 
-	public String getName() {
+	public String getFullName() {
 		//to będzie funkcja która będzie umożliwiała odczytywanie dane 
 		// TODO Auto-generated method stub
 		return null;

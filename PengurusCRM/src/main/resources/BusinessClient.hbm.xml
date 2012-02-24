@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2012-02-11 21:20:45 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <joined-subclass name="com.pengurus.crm.entities.BussinessClient" extends="com.pengurus.crm.entities.Client" lazy="false">
+    <joined-subclass name="com.pengurus.crm.entities.BusinessClient" extends="com.pengurus.crm.entities.Client" lazy="false">
         <key>
             <column name="USER_ID" />
         </key>

@@ -1,21 +1,23 @@
 package com.pengurus.crm.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import com.pengurus.crm.shared.dto.BussinessClientDTO;
+import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.ClientDTO;
+import com.pengurus.crm.shared.dto.PersonalDataDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
-public class BussinessClient extends Client {
+public class BusinessClient extends Client {
     
 	private String name;
     private Set<PersonalData> agents;
     
-    public BussinessClient() {
+    public BusinessClient() {
         super();
     }
 
-    public BussinessClient(Set<UserRoleDTO> permission, String login,
+    public BusinessClient(Set<UserRoleDTO> permission, String login,
                            String password, String description, String name,
                            Set<PersonalData> agents) {
         super(permission, login, password, description);
@@ -23,7 +25,16 @@ public class BussinessClient extends Client {
         this.agents = agents;
     }
 
-    public String getName() {
+    public BusinessClient(BusinessClientDTO user) {
+		init(user);
+		this.name = user.getName();
+		this.agents = new HashSet<PersonalData>();
+		for (PersonalDataDTO personalDataDTO: user.getAgents()) {
+			this.agents.add(new PersonalData(personalDataDTO));
+		}
+	}
+
+	public String getName() {
         return name;
     }
 
@@ -41,7 +52,7 @@ public class BussinessClient extends Client {
 
 	@Override
 	public ClientDTO toDTO() {
-		BussinessClientDTO bcDTO = new BussinessClientDTO();
+		BusinessClientDTO bcDTO = new BusinessClientDTO();
 		bcDTO.setId(this.getId());
 		bcDTO.setUsername(this.getUsername());
 		bcDTO.setDescription(this.getDescription());

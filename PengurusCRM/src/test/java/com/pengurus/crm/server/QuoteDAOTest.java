@@ -13,10 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.pengurus.crm.daos.BussinessClientDAO;
+import com.pengurus.crm.daos.BusinessClientDAO;
 import com.pengurus.crm.daos.PersonalDataDAO;
 import com.pengurus.crm.daos.QuoteDAO;
-import com.pengurus.crm.entities.BussinessClient;
+import com.pengurus.crm.entities.BusinessClient;
 import com.pengurus.crm.entities.PersonalData;
 import com.pengurus.crm.entities.Quote;
 
@@ -28,7 +28,7 @@ public class QuoteDAOTest {
 	private QuoteDAO quoteDAO;
 	
 	@Autowired
-	private BussinessClientDAO bussinessClientDAO;
+	private BusinessClientDAO businessClientDAO;
 	@Autowired
 	private PersonalDataDAO personalDataDAO;
 	
@@ -37,15 +37,15 @@ public class QuoteDAOTest {
 		Quote q1 = new Quote();
 		q1.setDescription("one");
 		quoteDAO.create(q1);
-		BussinessClient bc = new BussinessClient();
-		bc.setDescription("Bussiness Client");
+		BusinessClient bc = new BusinessClient();
+		bc.setDescription("Business Client");
 		bc.setUsername("BC first");
 		Set<PersonalData> agents = new HashSet<PersonalData>();
 		PersonalData pd = new PersonalData("Name","Last Name", "Address", null,null);
 		personalDataDAO.create(pd);
 		agents.add(pd);
 		bc.setAgents(agents );
-		bussinessClientDAO.create(bc);
+		businessClientDAO.create(bc);
 		Quote q2 = new Quote();
 		q2.setDescription("two");
 		q2.setClient(bc);
