@@ -1,5 +1,8 @@
 package com.pengurus.crm.server;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
@@ -7,6 +10,7 @@ import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.daos.UserDAO;
 import com.pengurus.crm.entities.User;
 import com.pengurus.crm.shared.dto.UserDTO;
+import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 public class UserServiceImpl implements UserService {
 
@@ -73,5 +77,10 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(currentPassword);
 		encodePassword(user);
 		return (user.getPassword().equals(password));
+	}
+
+	@Override
+	public Set<UserDTO> getUsersByRole(Set<UserRoleDTO> roles) {
+		return new HashSet<UserDTO>();
 	}
 }

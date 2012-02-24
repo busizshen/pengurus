@@ -7,21 +7,21 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.pengurus.crm.daos.GenericDAO;
 
+public class GenericDAOImpl<T> extends HibernateDaoSupport implements
+		GenericDAO<T> {
 
-public class GenericDAOImpl<T> extends HibernateDaoSupport implements GenericDAO<T>{
-	
 	protected Class<T> type;
-	
+
 	@Override
-	public void create(T newInstance) throws DataAccessException {
-		getHibernateTemplate().save(newInstance);
+	public Long create(T newInstance) throws DataAccessException {
+		return (Long) getHibernateTemplate().save(newInstance);
 	}
 
 	@Override
 	public T read(long id) {
-		try{
+		try {
 			return getHibernateTemplate().get(type, id);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -31,20 +31,20 @@ public class GenericDAOImpl<T> extends HibernateDaoSupport implements GenericDAO
 		try {
 			getHibernateTemplate().update(transientObject);
 			return true;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			return false;
 		}
 	}
 
 	@Override
 	public boolean delete(T persistentObject) {
-		try{
+		try {
 			getHibernateTemplate().delete(persistentObject);
 			return true;
-		} catch(Exception e){
+		} catch (Exception e) {
 			return false;
 		}
-		
+
 	}
 
 	@Override

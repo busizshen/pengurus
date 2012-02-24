@@ -1,19 +1,20 @@
 package com.pengurus.crm.client.panels.center.user.worker;
 
-import com.google.gwt.user.client.ui.Widget;
 import com.pengurus.crm.client.panels.center.user.UserPanel;
 import com.pengurus.crm.shared.dto.WorkerDTO;
 
-public class WorkerPanel extends UserPanel {
+public abstract class WorkerPanel extends UserPanel {
 
 	WorkerDTO workerDTO;
 	public WorkerPanel(WorkerDTO workerDTO) {
+		super(workerDTO);
 		this.workerDTO = workerDTO; 
+		userInfoPanel = new UserViewInfo();
 	}
 
-	public Widget getInfoPanel() {
-		// TODO Auto-generated method stub
-		return null;
+	public WorkerPanel() {
+		super(null);
+		userInfoPanel = new UserViewInfo();
 	}
 
 	@Override
@@ -22,19 +23,12 @@ public class WorkerPanel extends UserPanel {
 	}
 
 	@Override
-	protected String getUsername() {
-		return workerDTO.getUsername();
-	}
-
-	@Override
 	protected String getUserDescription() {
-		return workerDTO.getDescription();
+		if(workerDTO != null)
+			return workerDTO.getDescription();
+		return null;
 	}
 
-	@Override
-	protected void addEditionPanel(UserViewInfo userViewInfo) {
-		// TODO Auto-generated method stub
-		
-	}
+	public abstract WorkerDTO getChosenWorker();
 
 }

@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import com.pengurus.crm.client.service.QuoteService;
 import com.pengurus.crm.daos.ClientDAO;
 import com.pengurus.crm.daos.QuoteDAO;
-import com.pengurus.crm.entities.Client;
 import com.pengurus.crm.entities.Quote;
 import com.pengurus.crm.enums.Status;
 import com.pengurus.crm.shared.dto.QuoteDTO;
@@ -54,20 +53,21 @@ public class QuoteServiceImpl implements QuoteService {
 		quote.setStatus(Status.toStatus(quoteDTO.getStatus()));
 		this.quoteDAO.update(quote);
 	}
-
+	
 	@Override
 	public void updateQuote(QuoteDTO quoteDTO) {
-		/*
-		 * Gdzie robić zapytanie do clientDAO
-		 */
-		Client client = null;
-		if(quoteDTO.getClient() != null){
-			client = clientDAO.read(quoteDTO.getClient().getId());
-		}
-		Quote quote = new Quote(quoteDTO);
-		Quote quote1 = this.quoteDAO.read(quoteDTO.getId());
-		quote1.setClient(client);
-		this.quoteDAO.update(quote);
+		this.quoteDAO.update(new Quote(quoteDTO));
+	}
+	
+	@Override
+	public void deleteQuote(QuoteDTO quoteDTO) {
+		this.quoteDAO.delete(new Quote(quoteDTO));
+	}
+
+	@Override
+	public QuoteDTO createQuote(QuoteDTO quoteDTO) {
+		quoteDTO.setId(quoteDAO.create(new Quote(quoteDTO)));
+		return quoteDTO;
 	}
 
 }

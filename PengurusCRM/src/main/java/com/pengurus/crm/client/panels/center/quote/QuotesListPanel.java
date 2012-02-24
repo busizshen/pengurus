@@ -140,7 +140,7 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 			        Button b = new Button("PREVIEW", new SelectionListener<ButtonEvent>() {  
 			          @Override  
 			          public void componentSelected(ButtonEvent ce) {
-			              QuotePanel qp = new QuotePanel(model.getQuoteDTONonLazy());
+			              QuotePanelView qp = new QuotePanelView(model.getQuoteDTONonLazy());
 			              qp.getPanel();
 			          }  
 			        });  
@@ -157,7 +157,6 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 	
 	@Override
 	protected void setStyle(ContentPanel cp) {
-		// TODO Auto-generated method stub
 		
 	}
 	

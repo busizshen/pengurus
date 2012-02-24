@@ -1,18 +1,64 @@
 package com.pengurus.crm.client.panels.center.user.client;
 
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.DomEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.Window;
+import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.shared.dto.ClientDTO;
 
-public class ClientPanelEdit extends ClientPanel{
+public class ClientPanelEdit extends ClientPanel {
 
-	public ClientPanelEdit(ClientDTO client) {
+	private Listener<DomEvent> listenerChangeClient;
+	ClientsListPanel cl;
+
+	public ClientPanelEdit(ClientDTO client, Listener<DomEvent> listener) {
 		super(client);
-		// TODO Auto-generated constructor stub
+		this.listenerChangeClient = listener;
+		userInfoPanel = new UserViewInfo();
+		addEditionPanel(userInfoPanel);
 	}
-	
-	@Override
+
+	public ClientPanelEdit(Listener<DomEvent> listener) {
+		super();
+		this.listenerChangeClient = listener;
+		addEditionPanel(userInfoPanel);
+	}
+
 	protected void addEditionPanel(UserViewInfo userViewInfo) {
-		ClientsListPanel cl = new ClientsListPanel();
-		userViewInfo.add(cl.getPanel());
+		final Window w = new Window();
+		Listener<DomEvent> listenerCloseTab = new Listener<DomEvent>() {
+			@Override
+			public void handleEvent(DomEvent be) {
+				w.hide();
+			}
+		};
+		cl = new ClientsListPanel(this.listenerChangeClient, listenerCloseTab);
+		w.add(cl.getPanel());
+		w.setAutoWidth(true);
+		w.setAutoHide(true);
+		w.setEnabled(true);
+		w.setHeading("ChangeClient");
+		w.setClosable(false);
+		Button b2 = new Button("Cancel");
+		b2.addListener(Events.OnClick, listenerCloseTab);
+		w.add(b2);
+		Button b = new Button("Change Client",
+				new SelectionListener<ButtonEvent>() {
+					@Override
+					public void componentSelected(ButtonEvent ce) {
+						w.show();
+
+					}
+				});
+		userViewInfo.add(b);
+	}
+
+	@Override
+	public ClientDTO getChosenClient() {
+		return cl.getChosenClient();
 	}
 
 }

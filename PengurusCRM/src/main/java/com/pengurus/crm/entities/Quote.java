@@ -1,9 +1,13 @@
 package com.pengurus.crm.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.pengurus.crm.enums.Status;
+import com.pengurus.crm.shared.dto.BussinessClientDTO;
 import com.pengurus.crm.shared.dto.ClientDTO;
+import com.pengurus.crm.shared.dto.IndividualClientDTO;
+import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.QuoteDTO;
 import com.pengurus.crm.shared.dto.StatusDTO;
 import com.pengurus.crm.shared.dto.WorkerDTO;
@@ -34,12 +38,33 @@ public class Quote {
 
 	public Quote(QuoteDTO quoteDTO) {
 		super();
-		/*tu wyskakuje błąd nie wiem dlaczego
-		 * if(quoteDTO.getClient() != null){
-			this.client = new Client();
-		}*/
-		//if(quoteDTO.)
-		
+		this.client = null;
+		if(quoteDTO.getClient() != null){
+			if(quoteDTO.getClient() instanceof BussinessClientDTO)
+				this.client = new BussinessClient();
+			else if(quoteDTO.getClient() instanceof IndividualClientDTO)
+				this.client = new IndividualClient(); 
+			this.client.setId(quoteDTO.getClient().getId());
+		}
+		this.description = quoteDTO.getDescription();
+		this.id = quoteDTO.getId();
+		this.supervisor = null;
+		if(quoteDTO.getSupervisor() != null){
+			this.supervisor = new Worker(); 
+			this.supervisor.setId(quoteDTO.getSupervisor().getId());
+		}
+		this.status = null;
+		if(quoteDTO.getStatus() != null){
+			this.status = Status.toStatus(quoteDTO.getStatus());
+		}
+		this.jobs = new HashSet<Job>();
+		if(quoteDTO.getJobs() != null){
+			for(JobDTO j :quoteDTO.getJobs()){
+				Job job = new Job();
+				job.setId(j.getId());
+				this.jobs.add(job);
+			}
+		}
 	}
 
 	public Status getStatus() {

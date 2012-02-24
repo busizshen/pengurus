@@ -1,5 +1,6 @@
-package com.pengurus.crm.client.panels.center.user.client;
+package com.pengurus.crm.client.panels.center.user.worker;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
@@ -17,40 +18,41 @@ import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.pengurus.crm.client.models.ClientModel;
+import com.pengurus.crm.client.models.WorkerModel;
 import com.pengurus.crm.client.panels.center.user.UsersListPanel;
-import com.pengurus.crm.client.service.ClientService;
-import com.pengurus.crm.client.service.ClientServiceAsync;
-import com.pengurus.crm.shared.dto.ClientDTO;
+import com.pengurus.crm.client.service.UserService;
+import com.pengurus.crm.client.service.UserServiceAsync;
+import com.pengurus.crm.shared.dto.UserDTO;
+import com.pengurus.crm.shared.dto.UserRoleDTO;
+import com.pengurus.crm.shared.dto.WorkerDTO;
 
-public class ClientsListPanel extends UsersListPanel<ClientModel> {
+public class WorkersListPanel extends UsersListPanel<WorkerModel> {
 
-	ClientDTO chosen;
-	private Listener<DomEvent> listenerChangeClient;
+	WorkerDTO chosen;
+	private Listener<DomEvent> listenerChangeWorker;
 	private Listener<DomEvent> listenerCloseTab;
-
-	public ClientsListPanel(Listener<DomEvent> listenerChangeClient2,
-			Listener<DomEvent> listenerCloseTab3) {
-		this.listenerChangeClient = listenerChangeClient2;
-		this.listenerCloseTab = listenerCloseTab3;
+	public WorkersListPanel(Listener<DomEvent> listenerChangeWorker,
+			Listener<DomEvent> listenerCloseTab) {
+		this.listenerChangeWorker = listenerChangeWorker;
+		this.listenerCloseTab = listenerCloseTab;
 	}
 
 	@Override
 	protected GridCellRenderer getButtonRenderer() {
-		GridCellRenderer<ClientModel> buttonRenderer = new GridCellRenderer<ClientModel>() {
+		GridCellRenderer<WorkerModel> buttonRenderer = new GridCellRenderer<WorkerModel>() {
 
 			private boolean init;
 
-			public Object render(final ClientModel model, String property,
+			public Object render(final WorkerModel model, String property,
 					ColumnData config, final int rowIndex, final int colIndex,
-					ListStore<ClientModel> store, Grid<ClientModel> grid) {
+					ListStore<WorkerModel> store, Grid<WorkerModel> grid) {
 				if (!init) {
 					init = true;
 					grid.addListener(Events.OnClick,
-							new Listener<GridEvent<ClientModel>>() {
+							new Listener<GridEvent<WorkerModel>>() {
 
 								public void handleEvent(
-										GridEvent<ClientModel> be) {
+										GridEvent<WorkerModel> be) {
 									for (int i = 0; i < be.getGrid().getStore()
 											.getCount(); i++) {
 										if (be.getGrid().getView()
@@ -76,12 +78,12 @@ public class ClientsListPanel extends UsersListPanel<ClientModel> {
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
-								chosen = model.getClientDTO();
+								chosen = model.getWorkerDTO();
 							}
 						});
 
 				b.addListener(Events.OnClick, listenerCloseTab);
-				b.addListener(Events.OnClick, listenerChangeClient);
+				b.addListener(Events.OnClick, listenerChangeWorker);
 				b.setToolTip("Click to see");
 
 				return b;
@@ -92,32 +94,35 @@ public class ClientsListPanel extends UsersListPanel<ClientModel> {
 
 	@Override
 	protected String getName() {
-		return "Clients list";
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	protected ListStore<ClientModel> getList() {
-		final ListStore<ClientModel> list = new ListStore<ClientModel>();
-		AsyncCallback<Set<ClientDTO>> callback = new AsyncCallback<Set<ClientDTO>>() {
+	protected ListStore<WorkerModel> getList() {
+		final ListStore<WorkerModel> list = new ListStore<WorkerModel>();
+		AsyncCallback<Set<UserDTO>> callback = new AsyncCallback<Set<UserDTO>>() {
 
 			public void onFailure(Throwable t) {
 				Window.Location.assign("/spring_security_login");
 			}
 
-			public void onSuccess(Set<ClientDTO> result) {
-				for (ClientDTO q : result) {
-					list.add(new ClientModel(q));
+			public void onSuccess(Set<UserDTO> result) {
+				for (UserDTO q : result) {
+					list.add(new WorkerModel((WorkerDTO)q));
 				}
 			}
 		};
-		ClientServiceAsync service = (ClientServiceAsync) GWT
-				.create(ClientService.class);
-		service.getClients(callback);
+		UserServiceAsync service = (UserServiceAsync) GWT
+				.create(UserService.class);
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		service.getUsersByRole(roles, callback);
 
 		return list;
 	}
 
-	public ClientDTO getChosenClient() {
+	public WorkerDTO getChosenWorker() {
 		return chosen;
 	}
 

@@ -7,16 +7,15 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.PengurusCRM;
+import com.pengurus.crm.client.panels.center.quote.QuotePanelCreate;
 import com.pengurus.crm.client.panels.center.quote.QuotesListPanelAll;
-import com.pengurus.crm.client.panels.center.quote.QuotesListPanelLastEdited;
 import com.pengurus.crm.client.panels.center.quote.QuotesListPanelMine;
-import com.pengurus.crm.client.panels.center.quote.QuotesPanelCreate;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 public class QuotesMenuPanel extends TabMenuPanel {
 
 	public QuotesMenuPanel() { 
 	    super("Quotes");
-        ButtonLastEdited();
+        //ButtonLastEdited();
 	    ButtonAll();
 	    ButtonMine();
 	    ButtonCreate();
@@ -33,7 +32,8 @@ public class QuotesMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					new QuotesPanelCreate();
+					QuotePanelCreate qp = new QuotePanelCreate();
+					qp.getPanel();
 				}
 			});
 		    add(b);
@@ -68,7 +68,7 @@ public class QuotesMenuPanel extends TabMenuPanel {
 		}
 	}
 
-	private void ButtonLastEdited() {
+	/*private void ButtonLastEdited() {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		if(PengurusCRM.getCurrentUser().haveAuthority(roles)){ 
 			Button b = new Button("Last Edited");
@@ -80,5 +80,5 @@ public class QuotesMenuPanel extends TabMenuPanel {
 			});
 		    add(b);
 		} 
-	}
+	}*/
 }

@@ -7,17 +7,13 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.PengurusCRM;
-import com.pengurus.crm.client.panels.center.quote.QuotesListPanelAll;
-import com.pengurus.crm.client.panels.center.quote.QuotesListPanelLastEdited;
-import com.pengurus.crm.client.panels.center.quote.QuotesListPanelMine;
-import com.pengurus.crm.client.panels.center.quote.QuotesPanelCreate;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 public class ProjectsMenuPanel extends TabMenuPanel {
 
 	public ProjectsMenuPanel() {
 		super("Projects");
-		ButtonLastEdited();
+		//ButtonLastEdited();
 	    ButtonAll();
 	    ButtonMine();
 	    ButtonCreate();
@@ -34,7 +30,7 @@ public class ProjectsMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					new QuotesPanelCreate();
+					//new QuotesPanelCreate();
 				}
 			});
 		    add(b);
@@ -48,7 +44,7 @@ public class ProjectsMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					new QuotesListPanelMine();
+				//	new QuotesListPanelMine();
 				}
 			});
 		    add(b);
@@ -62,14 +58,14 @@ public class ProjectsMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					new QuotesListPanelAll();
+				//	new QuotesListPanelAll();
 				}
 			});
 		    add(b);
 		}
 	}
 
-	private void ButtonLastEdited() {
+	/*private void ButtonLastEdited() {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		if(PengurusCRM.getCurrentUser().haveAuthority(roles)){ 
 			Button b = new Button("Last Edited");
@@ -81,6 +77,6 @@ public class ProjectsMenuPanel extends TabMenuPanel {
 			});
 		    add(b);
 		} 
-	}
+	}*/
 
 }

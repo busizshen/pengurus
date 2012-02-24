@@ -45,12 +45,12 @@ public class BussinessClient extends Client {
 		bcDTO.setId(this.getId());
 		bcDTO.setUsername(this.getUsername());
 		bcDTO.setDescription(this.getDescription());
-		/*for(PersonalData pd : agents){
+		for(PersonalData pd : agents){
 			bcDTO.addAgent(pd.toPersonalDataDTO());
 		}
 		for(UserRoleDTO a : this.getAuthorities()){
 			this.getAuthorities().add(a);
-		}*/
+		}
 		return bcDTO;
 	}
 

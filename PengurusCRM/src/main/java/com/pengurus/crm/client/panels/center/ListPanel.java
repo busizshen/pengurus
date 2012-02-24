@@ -39,7 +39,6 @@ public abstract class ListPanel<T extends ModelData>  {
 		  
 		    setStyle(cp);
 		    cp.setBodyBorder(true);  
-		   // cp.setIcon(Resources.ICONS.table());  
 		    cp.setHeading(getName());  
 		    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 		    cp.setLayout(new FitLayout());  
@@ -48,15 +47,8 @@ public abstract class ListPanel<T extends ModelData>  {
 		    GridFilters filters = getFilters();
 		  
 		    final Grid<T> grid = new Grid<T>(store, cm);  
-		 /*   grid.addListener(Events.Attach, new Listener<BaseEvent>() {  
-		      public void handleEvent(BaseEvent be) {  
-		        loader.load(0, 25);  
-		      }  
-		    });*/  
 		    grid.getView().setForceFit(true);  
-		    grid.setStyleAttribute("borderTop", "none"); 
-		    grid.setAutoExpandColumn("id"); 
-		    grid.setBorders(false);  
+		    grid.setAutoExpandColumn("id");  
 		    grid.setStripeRows(true);  
 		    grid.setColumnLines(true);  
 		    grid.addPlugin(filters);  

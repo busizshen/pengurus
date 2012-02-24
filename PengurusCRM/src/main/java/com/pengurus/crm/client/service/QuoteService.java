@@ -11,4 +11,7 @@ public interface QuoteService extends RemoteService {
 	public Set<QuoteDTO> getQuotes();
 	public void updateQuoteStatus(QuoteDTO quote);
 	public void updateQuote(QuoteDTO quoteDTO);
+	public void deleteQuote(QuoteDTO quoteDTO);
+	public QuoteDTO createQuote(QuoteDTO quoteDTO);
+
 }

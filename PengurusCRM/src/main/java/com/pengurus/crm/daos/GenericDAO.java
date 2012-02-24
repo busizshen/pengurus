@@ -5,7 +5,7 @@ import java.util.List;
 public interface GenericDAO <T> {
 
 	    /** Persist the newInstance object into database */
-	    void create(T newInstance);
+	    Long create(T newInstance);
 
 	    /** Retrieve an object that was previously persisted to the database using
 	     *   the indicated id as primary key

@@ -3,17 +3,19 @@ package com.pengurus.crm.client.panels.center.user.client;
 import com.pengurus.crm.client.panels.center.user.UserPanel;
 import com.pengurus.crm.shared.dto.ClientDTO;
 
-public class ClientPanel extends UserPanel {
+public abstract class ClientPanel extends UserPanel {
 
 	protected ClientDTO clientDTO;
 	public ClientPanel(ClientDTO client) {
+		super(client);
 		this.clientDTO = client;
-	}
+		userInfoPanel = new UserViewInfo();
+	}	
 
-	public UserViewInfo getInfoPanel() {
-		return new UserViewInfo();
+	public ClientPanel() {
+		super(null);
+		userInfoPanel = new UserViewInfo();
 	}
-	
 
 	@Override
 	protected String getUserHeading() {
@@ -21,19 +23,14 @@ public class ClientPanel extends UserPanel {
 	}
 
 	@Override
-	protected String getUsername() {
-		return clientDTO.getUsername();
-	}
-
-	@Override
 	protected String getUserDescription() {
-		return clientDTO.getDescription();
+		if(clientDTO != null)
+			return clientDTO.getDescription();
+		else 
+			return null;
 	}
 
-	@Override
-	protected void addEditionPanel(UserViewInfo userViewInfo) {
-		
-	}
+	public abstract ClientDTO getChosenClient();
 	
 
 }

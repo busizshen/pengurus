@@ -43,6 +43,22 @@ public class JobModel  extends BaseModel{
 		return get("status");
 	}
 	
+	public String getDeadline(){
+		return get("deadline");
+	}
+	
+	public String getTranslationFrom(){
+		return get("translationFrom");
+	}
+	
+	public String getTranslationTo(){
+		return get("translationTo");
+	}
+	
+	public String getPrice(){
+		return get("priceNumber") + " " + get("priceCurrency");
+	}
+	
 	
 
 }
