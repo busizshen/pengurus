@@ -113,10 +113,10 @@ public class JobCRUDTest {
 
     @Test
     public void simpleCreateJob() {
-        /*Job job = new Job(Status.accepted, Calendar.getInstance().getTime(),
+        Job job = new Job(Status.accepted, Calendar.getInstance().getTime(),
                 translation, 1000, price, "job descriptio", tasks);
         jobDAO.create(job);
-        Assert.assertNotNull(job.getId());*/
+        Assert.assertNotNull(job.getId());
     }
 
     @Test
