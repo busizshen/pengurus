@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Set;
 
 import com.pengurus.crm.enums.Status;
+import com.pengurus.crm.shared.dto.JobDTO;
 
 public class Job {
 
@@ -95,6 +96,29 @@ public class Job {
 
     public void setTask(Set<Task> task) {
         this.task = task;
+    }
+    
+    public JobDTO toDTO(){
+    	JobDTO jobDTO = this.toDTOLazy();
+    	if(this.task != null)
+    		for(Task t : this.task)
+    			jobDTO.getTask().add(t.toDTO());
+    	return jobDTO;
+    }
+    
+    public JobDTO toDTOLazy(){
+    	JobDTO jobDTO = new JobDTO();
+    	jobDTO.setAmount(this.amount);
+    	jobDTO.setDeadline(this.deadline);
+    	jobDTO.setDescription(this.description);
+    	jobDTO.setId(this.id);
+    	if(this.price != null)
+    		jobDTO.setPrice(price.toDTO());
+    	if(this.status != null)
+    		jobDTO.setStatus(this.status.toDTO());
+    	if(this.translation != null)
+    		jobDTO.setTranslation(this.translation.toDTO());
+    	return jobDTO;
     }
     
 }

@@ -1,11 +1,12 @@
 package com.pengurus.crm.shared.dto;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class BusinessClientDTO extends ClientDTO {
 	
 	private String name;
-	private Set<PersonalDataDTO> agents;
+	private Set<PersonalDataDTO> agents = new HashSet<PersonalDataDTO>();
     
     public BusinessClientDTO() {
         super();

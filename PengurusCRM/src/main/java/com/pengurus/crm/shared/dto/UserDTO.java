@@ -1,5 +1,6 @@
 package com.pengurus.crm.shared.dto;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -7,7 +8,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class UserDTO implements IsSerializable {
 
     private Long id;
-    private Set<UserRoleDTO> authorities;
+    private Set<UserRoleDTO> authorities = new HashSet<UserRoleDTO>();
     private String username;
     private String password;
     private String description;

@@ -3,7 +3,7 @@ package com.pengurus.crm.shared.dto;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class CurrencyTypeDTO implements IsSerializable {
-//  private Long id;
+	private Long id;
     private String currency;
 
     public CurrencyTypeDTO() {
@@ -22,15 +22,16 @@ public class CurrencyTypeDTO implements IsSerializable {
     public void setCurrency(String currency) {
         this.currency = currency;
     }
+
     
-/*    public Long getId() {
+    public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
-  */  
+
 
 }
 

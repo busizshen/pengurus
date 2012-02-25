@@ -1,5 +1,6 @@
 package com.pengurus.crm.shared.dto;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.extjs.gxt.ui.client.event.DomEvent;
@@ -18,7 +19,7 @@ public class QuoteDTO implements IsSerializable {
 	private StatusDTO status;
 	private ClientDTO client;
 	private WorkerDTO supervisor;
-	private Set<JobDTO> jobs;
+	private Set<JobDTO> jobs = new HashSet<JobDTO>();
 	private String description;
 
 	public QuoteDTO() {

@@ -1,5 +1,7 @@
 package com.pengurus.crm.entities;
 
+import com.pengurus.crm.shared.dto.LanguageDTO;
+
 public class Language {
     
     private Long Id;
@@ -28,6 +30,13 @@ public class Language {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+    
+    public LanguageDTO toDTO(){
+    	LanguageDTO lDTO = new LanguageDTO();
+    	lDTO.setLanguage(this.language);
+    	lDTO.setId(this.Id);
+    	return lDTO;
     }
     
 }

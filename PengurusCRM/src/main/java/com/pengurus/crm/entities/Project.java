@@ -3,6 +3,7 @@ package com.pengurus.crm.entities;
 import java.util.Set;
 
 import com.pengurus.crm.enums.Status;
+import com.pengurus.crm.shared.dto.ProjectDTO;
 
 
 public class Project {
@@ -108,4 +109,29 @@ public class Project {
         this.description = description;
     }
 
+    public ProjectDTO toDTO(){
+    	ProjectDTO pDTO = this.toDTOLazy();
+    	for(Translator e : this.experts)
+    		pDTO.getExperts().add(e.toDTOLazy());
+    	for(Translator f : this.freelancers)
+    		pDTO.getFreelancers().add(f.toDTOLazy());
+    	for(Job j : this.jobs)
+    		pDTO.getJobs().add(j.toDTOLazy());
+    	for(Worker w : this.projectManagers)
+    		pDTO.getProjectManagers().add(w.toDTOLazy());
+    	return pDTO;
+    }
+
+    public ProjectDTO toDTOLazy(){
+    	ProjectDTO pDTO = new ProjectDTO();
+    	if(this.client != null)
+    		pDTO.setClient(this.client.toDTOLazy());
+    	pDTO.setDescription(this.description);
+    	pDTO.setId(this.id);
+    	if(this.status != null)
+    		pDTO.setStatus(this.status.toDTO());
+    	if(this.supervisor != null)
+    		pDTO.setSupervisor(this.supervisor.toDTOLazy());
+    	return pDTO;
+    }
 }

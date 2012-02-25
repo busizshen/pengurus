@@ -125,4 +125,26 @@ public class User {
 	                       getUsername(), "",
 	                       getDescription());
 	}
+	
+	public UserDTO toDTO(){
+		UserDTO uDTO = new UserDTO();
+	uDTO.setDescription(description);
+		uDTO.setId(id);
+		uDTO.setUsername(username);
+		for(UserRoleDTO a : this.getAuthorities()){
+			this.getAuthorities().add(a);
+		}
+		return uDTO;
+	}
+	
+	public UserDTO toDTOLazy(){
+		UserDTO uDTO = new UserDTO();
+		uDTO.setDescription(description);
+		uDTO.setId(id);
+		uDTO.setUsername(username);
+		for(UserRoleDTO a : this.getAuthorities()){
+			uDTO.getAuthorities().add(a);
+		}
+		return uDTO;
+	}
 }

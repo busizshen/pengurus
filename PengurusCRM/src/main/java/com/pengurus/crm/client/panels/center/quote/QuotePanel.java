@@ -41,7 +41,7 @@ public abstract class QuotePanel {
 			getStatusPanel(this);
 		    getClientPanel(this);
 		    getSupervisorPanel(this);
-		    getJobsPanel(this);
+	//	    getJobsPanel(this); - blad w panelu jobów
 		    getDescriptionPanel(this); 
 		}
 

@@ -1,9 +1,5 @@
 package com.pengurus.crm.hibernate;
 
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,18 +15,6 @@ import com.pengurus.crm.daos.TaskDAO;
 import com.pengurus.crm.daos.TranslationDAO;
 import com.pengurus.crm.daos.TranslationTypeDAO;
 import com.pengurus.crm.daos.TranslatorDAO;
-import com.pengurus.crm.entities.CurrencyType;
-import com.pengurus.crm.entities.Job;
-import com.pengurus.crm.entities.Language;
-import com.pengurus.crm.entities.PersonalData;
-import com.pengurus.crm.entities.Price;
-import com.pengurus.crm.entities.Task;
-import com.pengurus.crm.entities.Translation;
-import com.pengurus.crm.entities.TranslationType;
-import com.pengurus.crm.entities.Translator;
-import com.pengurus.crm.enums.Rating;
-import com.pengurus.crm.enums.Status;
-import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 @ContextConfiguration(locations = { "../server/testContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)

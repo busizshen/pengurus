@@ -1,34 +1,26 @@
 package com.pengurus.crm.shared.dto;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
-import com.pengurus.crm.enums.Status;
 
 public class ProjectDTO implements IsSerializable {
 	    private Long id;
-	    private Status status;
-	    public Long getId() {
-	        return id;
-	    }
-
-	    public void setId(Long id) {
-	        this.id = id;
-	    }
-
+	    private StatusDTO status;
 	    private ClientDTO client;
 	    private WorkerDTO supervisor;
-	    private Set<WorkerDTO> projectManagers;
-	    private Set<TranslatorDTO> experts;
-	    private Set<TranslatorDTO> freelancers;
-	    private Set<JobDTO> jobs;
+	    private Set<WorkerDTO> projectManagers = new HashSet<WorkerDTO>();
+	    private Set<TranslatorDTO> experts = new HashSet<TranslatorDTO>();
+	    private Set<TranslatorDTO> freelancers = new HashSet<TranslatorDTO>();
+	    private Set<JobDTO> jobs = new HashSet<JobDTO>();
 	    private String description;
 
 	    public ProjectDTO() {
 	        super();
 	    }
 
-	    public ProjectDTO(Status status, ClientDTO client, WorkerDTO supervisor,
+	    public ProjectDTO(StatusDTO status, ClientDTO client, WorkerDTO supervisor,
 	                   Set<WorkerDTO> projectManagers, Set<TranslatorDTO> experts,
 	                   Set<TranslatorDTO> freelancers, Set<JobDTO> jobs,
 	                   String description) {
@@ -42,12 +34,20 @@ public class ProjectDTO implements IsSerializable {
 	        this.jobs = jobs;
 	        this.description = description;
 	    }
+	    
+	    public Long getId() {
+	        return id;
+	    }
 
-	    public Status getStatus() {
+	    public void setId(Long id) {
+	        this.id = id;
+	    }
+
+	    public StatusDTO getStatus() {
 	        return status;
 	    }
 
-	    public void setStatus(Status status) {
+	    public void setStatus(StatusDTO status) {
 	        this.status = status;
 	    }
 

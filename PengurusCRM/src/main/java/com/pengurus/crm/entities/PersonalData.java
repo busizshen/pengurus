@@ -82,9 +82,18 @@ public class PersonalData {
 		this.email = email;
 	}
 
-	public PersonalDataDTO toPersonalDataDTO() {
-		// TODO Auto-generated method stub
-		return null;
+	public PersonalDataDTO toDTO() {
+		PersonalDataDTO pdDTO = new PersonalDataDTO();
+		pdDTO.setAddress(this.address);
+		for(String s : email)
+			pdDTO.getEmail().add(s);
+		pdDTO.setFirstName(this.firstName);
+		pdDTO.setId(this.id);
+		pdDTO.setLastName(this.lastName);
+		for(String s : phoneNumber)
+			pdDTO.getPhoneNumber().add(s);
+		return pdDTO;
+	
 	}
 
 }

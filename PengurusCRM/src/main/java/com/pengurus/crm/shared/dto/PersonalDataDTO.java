@@ -1,6 +1,6 @@
 package com.pengurus.crm.shared.dto;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -10,17 +10,17 @@ public class PersonalDataDTO implements IsSerializable {
 	private String firstName;
     private String lastName;
     private String address;
-    private List<String> phoneNumber;
-    private List<String> email;
+    private Set<String> phoneNumber = new HashSet<String>();
+    private Set<String> email = new HashSet<String>();
     
     public PersonalDataDTO(){
         super();
-        phoneNumber = new ArrayList<String>();
-        email = new ArrayList<String>();
+        phoneNumber = new HashSet<String>();
+        email = new HashSet<String>();
     }
     
     public PersonalDataDTO(Long id, String firstName, String lastName, String address,
-                        List<String> phoneNumber, List<String> email) {
+                        Set<String> phoneNumber, Set<String> email) {
         super();
         this.id = id;
         this.firstName = firstName;
@@ -62,20 +62,20 @@ public class PersonalDataDTO implements IsSerializable {
         this.address = address;
     }
     
-    public List<String> getPhoneNumber() {
+    public Set<String> getPhoneNumber() {
         return phoneNumber;
     }
     
-    public void setPhoneNumber(List<String> phoneNumber) {
+    public void setPhoneNumber(Set<String> phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<String> getEmail() {
+    public Set<String> getEmail() {
         return email;
     }
 
-    public void setEmail(List<String> email) {
-        this.email = email;
+    public void setEmail(Set<String> email2) {
+        this.email = email2;
     }
     
     

@@ -1,8 +1,6 @@
 package com.pengurus.crm.server;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import junit.framework.Assert;
 
@@ -16,7 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.pengurus.crm.daos.BusinessClientDAO;
 import com.pengurus.crm.daos.PersonalDataDAO;
 import com.pengurus.crm.daos.QuoteDAO;
-import com.pengurus.crm.entities.BusinessClient;
 import com.pengurus.crm.entities.PersonalData;
 import com.pengurus.crm.entities.Quote;
 

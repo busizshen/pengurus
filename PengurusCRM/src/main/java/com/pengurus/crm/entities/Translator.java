@@ -32,5 +32,26 @@ public class Translator extends Worker{
     public void setTranslations(Set<Translation> translations) {
         this.translations = translations;
     }
+
+    @Override
+    public TranslatorDTO toDTO(){
+    	TranslatorDTO tDTO = this.toDTOLazy();
+    	for(Translation t : this.getTranslations())
+    		tDTO.getTranslations().add(t.toDTO());
+    	return tDTO; 
+    }
     
+    @Override
+    public TranslatorDTO toDTOLazy(){
+    	TranslatorDTO tDTO = new TranslatorDTO();
+    	tDTO.setDescription(this.getDescription());
+    	tDTO.setId(this.getId());
+    	if(this.getPersonalData() != null)
+    		tDTO.setPersonalData(this.getPersonalData().toDTO());
+    	tDTO.setUsername(this.getUsername());
+    	for(UserRoleDTO a : this.getAuthorities()){
+			tDTO.getAuthorities().add(a);
+		}
+    	return tDTO; 
+    }
 }

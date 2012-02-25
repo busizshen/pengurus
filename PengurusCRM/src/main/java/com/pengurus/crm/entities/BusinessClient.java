@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.pengurus.crm.shared.dto.BusinessClientDTO;
-import com.pengurus.crm.shared.dto.ClientDTO;
 import com.pengurus.crm.shared.dto.PersonalDataDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
@@ -51,16 +50,21 @@ public class BusinessClient extends Client {
     }
 
 	@Override
-	public ClientDTO toDTO() {
+	public BusinessClientDTO toDTO() {
+		return this.toDTOLazy();
+	}
+	
+	@Override
+	public BusinessClientDTO toDTOLazy() {
 		BusinessClientDTO bcDTO = new BusinessClientDTO();
 		bcDTO.setId(this.getId());
 		bcDTO.setUsername(this.getUsername());
 		bcDTO.setDescription(this.getDescription());
 		for(PersonalData pd : agents){
-			bcDTO.addAgent(pd.toPersonalDataDTO());
+			bcDTO.addAgent(pd.toDTO());
 		}
 		for(UserRoleDTO a : this.getAuthorities()){
-			this.getAuthorities().add(a);
+			bcDTO.getAuthorities().add(a);
 		}
 		return bcDTO;
 	}

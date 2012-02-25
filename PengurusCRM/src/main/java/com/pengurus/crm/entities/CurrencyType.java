@@ -1,5 +1,7 @@
 package com.pengurus.crm.entities;
 
+import com.pengurus.crm.shared.dto.CurrencyTypeDTO;
+
 public class CurrencyType {
     
     private Long id;
@@ -28,6 +30,13 @@ public class CurrencyType {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public CurrencyTypeDTO toDTO(){
+    	CurrencyTypeDTO ctDTO = new CurrencyTypeDTO();
+    	ctDTO.setCurrency(this.currency);
+    	ctDTO.setId(this.id);
+		return ctDTO;
     }
     
 }

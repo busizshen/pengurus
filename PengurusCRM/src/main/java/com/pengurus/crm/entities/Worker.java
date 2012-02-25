@@ -32,4 +32,22 @@ public class Worker extends User {
     public void setPersonalData(PersonalData personalData) {
         this.personalData = personalData;
     }
+    
+    
+    public WorkerDTO toDTO(){
+    	return toDTOLazy();
+	}
+    
+    public WorkerDTO toDTOLazy(){
+    	WorkerDTO wDTO = new WorkerDTO();
+    	wDTO.setDescription(getDescription());
+    	wDTO.setId(getId());
+    	wDTO.setUsername(getUsername());
+    	if(personalData != null)
+    		wDTO.setPersonalData(personalData.toDTO());
+    	for(UserRoleDTO a : this.getAuthorities()){
+			wDTO.getAuthorities().add(a);
+		}
+    	return wDTO;
+	}
 }

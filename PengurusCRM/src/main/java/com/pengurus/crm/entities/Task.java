@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.pengurus.crm.enums.Rating;
 import com.pengurus.crm.enums.Status;
+import com.pengurus.crm.shared.dto.TaskDTO;
 
 public class Task {
     
@@ -125,6 +126,28 @@ public class Task {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+    
+    public TaskDTO toDTO(){
+    	TaskDTO tDTO = new TaskDTO();
+    	tDTO.setAmount(this.amount);
+    	tDTO.setComment(this.comment);
+    	tDTO.setDeadline(this.deadline);
+    	tDTO.setDescription(this.description);
+    	if(this.expert != null)
+    		tDTO.setExpert(this.expert.toDTOLazy());
+    	tDTO.setId(this.id);
+    	if(this.job != null)
+    		tDTO.setJob(this.job.toDTOLazy());
+    	if(price != null)
+    		tDTO.setPrice(price.toDTO());
+    	if(rating != null)
+    		tDTO.setRating(rating.toDTO());
+    	if(status != null)
+    		tDTO.setStatus(status.toDTO());
+    	if(translation != null)
+    		tDTO.setTranslation(translation.toDTO());
+    	return tDTO;
     }
     
 }

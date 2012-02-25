@@ -1,7 +1,9 @@
 package com.pengurus.crm.client.panels.center.user.create;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
@@ -141,15 +143,15 @@ public class StringSetPanel extends ContentPanel {
 	}
 	
 	
-	public void setData(List<String> dataList) {
-		if (dataList == null) return;
-		for (String data: dataList) {
+	public void setData(Set<String> set) {
+		if (set == null) return;
+		for (String data: set) {
 			store.add(new StringModel(data));
 		}
 	}
 	
-	public List<String> getData() {
-		List<String> data = new ArrayList<String>();
+	public Set<String> getData() {
+		Set<String> data = new HashSet<String>();
 		for (StringModel model: store.getModels()) {
 			data.add(model.getValue());
 		}

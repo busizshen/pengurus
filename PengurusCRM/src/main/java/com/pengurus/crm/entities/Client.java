@@ -18,15 +18,10 @@ public abstract class Client extends User implements IsSerializable {
         super(permission, login, password, description);
     }
     
-    public Client(ClientDTO clientDTO) {
-    	super();
-        String description;
-		String password;
-		String login;
-		Set<UserRoleDTO> permission;
-    }
 
 	public abstract ClientDTO toDTO();
+    
+	public abstract ClientDTO toDTOLazy();
 
  
     

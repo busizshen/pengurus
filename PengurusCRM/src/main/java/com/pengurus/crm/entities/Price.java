@@ -1,5 +1,7 @@
 package com.pengurus.crm.entities;
 
+import com.pengurus.crm.shared.dto.PriceDTO;
+
 public class Price {
 
     private Long id;
@@ -39,6 +41,15 @@ public class Price {
     public void setId(Long id) {
         this.id = id;
     }
+
+	public PriceDTO toDTO() {
+		PriceDTO pDTO = new PriceDTO();
+		if(this.currency != null)
+			pDTO.setCurrency(this.currency.toDTO());
+		pDTO.setId(this.id);
+		pDTO.setPrice(this.price);
+		return pDTO;
+	}
 
     
     

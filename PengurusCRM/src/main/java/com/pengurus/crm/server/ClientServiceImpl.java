@@ -25,7 +25,7 @@ public class ClientServiceImpl implements ClientService {
 		List<Client> list = clientDAO.loadAll();
 		Set<ClientDTO> set = new HashSet<ClientDTO>();
 		for(Client q : list){
-			set.add(q.toDTO());
+			set.add(q.toDTOLazy());
 		}
 		return set;
 	}

@@ -16,7 +16,6 @@ import com.google.gwt.dev.util.collect.HashSet;
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.exceptions.ServiceException;
 import com.pengurus.crm.entities.User;
-import com.pengurus.crm.enums.UserRole;
 import com.pengurus.crm.shared.dto.PersonalDataDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
@@ -68,7 +67,11 @@ public class UserServiceTest {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_USER);
 		userService.createUser(new WorkerDTO(null, roles, "userServiceTestUserCreating", "pass", "Decrtiption", new PersonalDataDTO()));
-		
+
+		roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_USER);
+		userService.createUser(new WorkerDTO(null, roles, "user", "pass", "Decrtiption", new PersonalDataDTO()));
+
 		// then
 		Assert.notNull(userService.getUser("userServiceTestUserCreating"));
 	}

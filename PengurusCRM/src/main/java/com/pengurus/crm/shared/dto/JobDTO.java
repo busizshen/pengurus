@@ -1,6 +1,7 @@
 package com.pengurus.crm.shared.dto;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -13,7 +14,7 @@ public class JobDTO implements IsSerializable {
 	    private Integer amount;
 	    private PriceDTO price;
 	    private String description;
-	    private Set<TaskDTO> task;
+	    private Set<TaskDTO> task = new HashSet<TaskDTO>();
 
 	    public JobDTO() {
 	        super();

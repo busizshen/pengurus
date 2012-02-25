@@ -20,7 +20,6 @@ public class UsersMenuPanel extends TabMenuPanel {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
 				MainWindow.addWidgetCenterPanel(new UserCreatePanel());
-				
 			}
 		});
 		add(button);

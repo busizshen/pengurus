@@ -18,7 +18,7 @@ public class QuoteServiceImpl implements QuoteService {
 
 	private QuoteDAO quoteDAO;
 	private ClientDAO clientDAO;
-	
+
 	public ClientDAO getClientDAO() {
 		return clientDAO;
 	}
@@ -28,21 +28,22 @@ public class QuoteServiceImpl implements QuoteService {
 	}
 
 	protected static final Logger log = LoggerFactory
-	.getLogger(UserDetailsServiceImpl.class);
-	
+			.getLogger(UserDetailsServiceImpl.class);
+
 	@Override
 	public Set<QuoteDTO> getQuotes() {
 		List<Quote> list = quoteDAO.loadAll();
 		Set<QuoteDTO> set = new HashSet<QuoteDTO>();
-		for(Quote q : list){
-			set.add(q.toQuoteDTO());
+		for (Quote q : list) {
+			set.add(q.toDTOLazy());
 		}
 		return set;
 	}
-	
+
 	public QuoteDAO getQuoteDAO() {
 		return quoteDAO;
 	}
+
 	public void setQuoteDAO(QuoteDAO quoteDAO) {
 		this.quoteDAO = quoteDAO;
 	}
@@ -53,12 +54,12 @@ public class QuoteServiceImpl implements QuoteService {
 		quote.setStatus(Status.toStatus(quoteDTO.getStatus()));
 		this.quoteDAO.update(quote);
 	}
-	
+
 	@Override
 	public void updateQuote(QuoteDTO quoteDTO) {
 		this.quoteDAO.update(new Quote(quoteDTO));
 	}
-	
+
 	@Override
 	public void deleteQuote(QuoteDTO quoteDTO) {
 		this.quoteDAO.delete(new Quote(quoteDTO));

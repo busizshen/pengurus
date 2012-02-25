@@ -1,5 +1,7 @@
 package com.pengurus.crm.entities;
 
+import com.pengurus.crm.shared.dto.TranslationTypeDTO;
+
 public class TranslationType {
     
     private Long id; 
@@ -39,5 +41,13 @@ public class TranslationType {
     public void setUnit(String unit) {
         this.unit = unit;
     }
+
+	public TranslationTypeDTO toDTO() {
+		TranslationTypeDTO ttDTO = new TranslationTypeDTO();
+		ttDTO.setDescription(description);
+		ttDTO.setId(id);
+		ttDTO.setUnit(unit);
+		return ttDTO;
+	}
     
 }
