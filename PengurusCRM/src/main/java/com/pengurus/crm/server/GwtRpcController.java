@@ -1,5 +1,8 @@
 package com.pengurus.crm.server;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -69,7 +72,11 @@ public class GwtRpcController extends RemoteServiceServlet implements
 	@Override
 	protected void doUnexpectedFailure(Throwable e) {
 		log.error("=====> ERROR ");
-		log.error(e.toString());
+		StringWriter traceWriter = new StringWriter();
+		PrintWriter printWriter = new PrintWriter(traceWriter, false);
+		e.printStackTrace(printWriter);
+		printWriter.close();
+		log.error(traceWriter.getBuffer().toString());
 		log.error("<===== ERROR ");
 		super.doUnexpectedFailure(e);
 	}
