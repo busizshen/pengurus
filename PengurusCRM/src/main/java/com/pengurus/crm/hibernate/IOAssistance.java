@@ -37,4 +37,9 @@ public class IOAssistance {
 		writer.write(content);
 		writer.close();
 	}
+	
+	public void copyFile(String from, String to) throws IOException{
+		String importContent = readFromFile(from);
+		writeToFile(to, importContent);
+	}
 }

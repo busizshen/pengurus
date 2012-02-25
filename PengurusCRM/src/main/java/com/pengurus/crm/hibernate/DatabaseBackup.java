@@ -23,16 +23,22 @@ public class DatabaseBackup {
 	/**
 	 * bunch of constant Strings containing file paths used inside of class
 	 */
-	private final static String CLASS_PATH = System.getProperty(
-			"java.class.path").split(":")[0];
-	private final static String IMPORT_PATH = CLASS_PATH.concat("/../www/WEB-INF/classes/import.sql");
-	private final static String IMPORT_BACKUP_PATH = CLASS_PATH
-			.concat("/../www/WEB-INF/classes/.import.sql");
+	//private final static String CLASS_PATH = System.getProperty(
+	//		"java.class.path").split(":")[0];
+	private final static String PROJECT_PATH = System.getProperty("user.dir");
+	private final static String IMPORT_PATH = PROJECT_PATH
+			.concat("/target/www/WEB-INF/classes/import.sql");
+	private final static String IMPORT_BACKUP_PATH = PROJECT_PATH
+			.concat("/target/www/WEB-INF/classes/.import.sql");
+	private final static String IMPORT_RESOURCES_PATH = PROJECT_PATH
+			.concat("/src/main/resources/import.sql");
+	private final static String IMPORT_RESOURCES_BACKUP_PATH = PROJECT_PATH
+			.concat("/src/main/resources/.import.sql");
 	/**
 	 * xml file with context which is read, default: dao-beans.xml
 	 */
-	private final static String XML_CONFIG_PATH = CLASS_PATH
-			.concat("/../www/WEB-INF/test-context.xml");
+	private final static String XML_CONFIG_PATH = PROJECT_PATH
+			.concat("/target/www/WEB-INF/test-context.xml");
 
 	private IOAssistance ioAssistance = IOAssistance.getInstance();
 
@@ -55,8 +61,7 @@ public class DatabaseBackup {
 	 */
 	public void refreshDatabase() {
 		try {
-			System.out.println("class path: " + CLASS_PATH);
-			System.out.println("refreshiing DB");
+			ioAssistance.copyFile(IMPORT_RESOURCES_PATH, IMPORT_PATH);
 			ourInstance.changeModeTo(DBMode.create);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -68,11 +73,10 @@ public class DatabaseBackup {
 	 */
 	public void generateScrypt() {
 		try {
-			System.out.println("generating scrypt");
-			System.out.println("backuping");
 			ourInstance.backupScrypt();
-			System.out.println("creating new one");
 			ourInstance.createNewScript();
+			ioAssistance.copyFile(IMPORT_PATH, IMPORT_RESOURCES_PATH);
+			ioAssistance.copyFile(IMPORT_BACKUP_PATH, IMPORT_RESOURCES_BACKUP_PATH);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -80,8 +84,9 @@ public class DatabaseBackup {
 	}
 
 	/**
-	 * changes mode of DB to that passed in argument.
-	 * Please make notice that it works with xml defined in XML_CONFIG_PATH
+	 * changes mode of DB to that passed in argument. Please make notice that it
+	 * works with xml defined in XML_CONFIG_PATH
+	 * 
 	 * @param mode
 	 * @throws IOException
 	 */
@@ -106,8 +111,7 @@ public class DatabaseBackup {
 	 * @throws IOException
 	 */
 	private void backupScrypt() throws IOException {
-		String importContent = ioAssistance.readFromFile(IMPORT_PATH);
-		ioAssistance.writeToFile(IMPORT_BACKUP_PATH, importContent);
+		ioAssistance.copyFile(IMPORT_PATH, IMPORT_BACKUP_PATH);
 	}
 
 	private void createNewScript() throws IOException {
