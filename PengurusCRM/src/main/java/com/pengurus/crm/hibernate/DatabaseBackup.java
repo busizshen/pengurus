@@ -36,6 +36,9 @@ public class DatabaseBackup {
 			.concat("/src/main/resources/import.sql");
 	private final static String IMPORT_RESOURCES_BACKUP_PATH = PROJECT_PATH
 			.concat("/src/main/resources/.import.sql");
+	
+	private final static String CREATE_RESOURCES_PATH = PROJECT_PATH
+			.concat("/src/main/resources/create.sql");
 	/**
 	 * xml file with context which is read, default: dao-beans.xml
 	 */
@@ -73,16 +76,25 @@ public class DatabaseBackup {
 	/**
 	 * function generates scrypt which can restore current content of database
 	 */
-	public void generateScrypt() {
+	public void generateOnlyDataScrypt() {
 		try {
 			ourInstance.backupScrypt();
-			ourInstance.createNewScript();
+			ourInstance.createNewScript("--only-data", IMPORT_PATH);
 			ioAssistance.copyFile(IMPORT_PATH, IMPORT_RESOURCES_PATH);
 			ioAssistance.copyFile(IMPORT_BACKUP_PATH, IMPORT_RESOURCES_BACKUP_PATH);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void generateDataAndSchemaScrypt(){
+		try {
+			ourInstance.createNewScript("", CREATE_RESOURCES_PATH);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -116,10 +128,10 @@ public class DatabaseBackup {
 		ioAssistance.copyFile(IMPORT_PATH, IMPORT_BACKUP_PATH);
 	}
 
-	private void createNewScript() throws IOException {
+	private void createNewScript(String options, String savePath) throws IOException {
 		try {
 			Process p = Runtime.getRuntime().exec(
-					"pg_dump --data-only --attribute-inserts -U postgres");
+					"pg_dump --attribute-inserts " + options + " --no-owner -U pengurus");
 
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(
 					p.getInputStream()));
@@ -130,7 +142,7 @@ public class DatabaseBackup {
 			}
 
 			p.waitFor();
-			ioAssistance.writeToFile(IMPORT_PATH, newScriptContent);
+			ioAssistance.writeToFile(savePath, newScriptContent);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} finally {

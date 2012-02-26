@@ -65,6 +65,7 @@ public class DatabaseBackupTest {
 
 	@Test
 	public void newEntityAdding() throws ServiceException {
+		//DatabaseBackup.getInstance().generateDataAndSchemaScrypt();
 		/**
 		 * here put code which is responsible for creating new object and saving
 		 * it in database. Before creating new scrypt make sure that you did
@@ -146,6 +147,6 @@ public class DatabaseBackupTest {
 
 	@After
 	public void createScrypt() {
-		DatabaseBackup.getInstance().generateScrypt();
+		DatabaseBackup.getInstance().generateOnlyDataScrypt();
 	}
 }
