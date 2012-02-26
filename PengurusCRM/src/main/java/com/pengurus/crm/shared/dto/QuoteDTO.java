@@ -117,6 +117,33 @@ public class QuoteDTO implements IsSerializable {
 		};
 	}
 
+	public Listener<DomEvent> backStatus(final QuoteDTO quoteDTO) {
+		return new Listener<DomEvent>() {
+			@Override
+			public void handleEvent(DomEvent be) {
+				if (quoteDTO.status != null)
+					quoteDTO.status = quoteDTO.status.decrease();
+				else
+					quoteDTO.status = StatusDTO.getFirstStatus();
+				AsyncCallback<Void> callback = new AsyncCallback<Void>() {
+
+					public void onFailure(Throwable t) {
+						Window.Location.assign("/spring_security_login");
+					}
+
+					@Override
+					public void onSuccess(Void arg0) {
+
+					}
+				};
+				QuoteServiceAsync service = (QuoteServiceAsync) GWT
+						.create(QuoteService.class);
+				service.updateQuoteStatus(quoteDTO, callback);
+
+			}
+		};
+	}
+
 	public void update() {
 
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
@@ -157,9 +184,9 @@ public class QuoteDTO implements IsSerializable {
 		if (this.client == null) {
 			return false;
 		}
-		/*if (this.supervisor == null) {
-			return false;
-		}*/
+		/*
+		 * if (this.supervisor == null) { return false; }
+		 */
 		return true;
 	}
 
@@ -173,7 +200,7 @@ public class QuoteDTO implements IsSerializable {
 
 			@Override
 			public void onSuccess(QuoteDTO quoteDTO) {
-				
+
 				QuotePanelView qp = new QuotePanelView(quoteDTO);
 				qp.getPanel();
 			}

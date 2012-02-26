@@ -12,8 +12,8 @@ import com.pengurus.crm.shared.dto.UserDTO;
 public class PengurusCRM implements EntryPoint {
 	
 	public MainWindow mainWindow;
-	public static UserDTO currentUser;
-	
+	public AuthorizationManager authManager;
+		
 	public void onModuleLoad() {
 		startWithCurrentUserLoaded();
 	}
@@ -26,7 +26,8 @@ public class PengurusCRM implements EntryPoint {
 			}
 
 			public void onSuccess(UserDTO result) {
-				currentUser = result;
+				authManager = new AuthorizationManager();
+				authManager.setCurrentUser(result);
 				loadMainWindow();
 			}
 		};
@@ -42,10 +43,6 @@ public class PengurusCRM implements EntryPoint {
 
 	public MainWindow getMainWindow() {
 		return mainWindow;
-	}
-	
-	public static UserDTO getCurrentUser(){
-		return PengurusCRM.currentUser;
 	}
 
 }

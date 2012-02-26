@@ -185,7 +185,7 @@ public class QuoteCRUDTest {
         quote.setClient(null);
         quoteDAO.update(quote);
         
-        Quote quote2 = quoteDAO.readQuoteWithJobs(quote.getId());   
+        Quote quote2 = quoteDAO.readQuote(quote.getId());   
         Assert.assertEquals(quote.getDescription(), quote2.getDescription());
         Assert.assertNull(quote2.getClient());
         Assert.assertEquals(quote.getStatus(), quote2.getStatus());

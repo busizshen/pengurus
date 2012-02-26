@@ -50,5 +50,21 @@ public enum StatusDTO implements IsSerializable {
 	public static StatusDTO getFirstStatus() {
 		return open;
 	}
+
+	public StatusDTO decrease() {
+		if(this == open)
+			return open;
+		else if (this == inProgress)
+			return open;
+		else if (this == resolved)
+			return inProgress;
+		else if (this == verificated)
+			return resolved;
+		else if (this == accepted)
+			return verificated;
+		else if (this == accounted)
+			return accepted;
+		return open;
+	}
     
 }

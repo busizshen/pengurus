@@ -17,7 +17,7 @@ public class MenuPanel extends ContentPanel {
 	private ProjectsMenuPanel projectsMenu = new ProjectsMenuPanel();
 	private TasksMenuPanel tasksMenu = new TasksMenuPanel();
 	private AdministrationMenuPanel administrationMenu = new AdministrationMenuPanel();
-	private ContactsMenuPanel contactsMenu = new ContactsMenuPanel();
+	private UsersMenuPanel usersMenu = new UsersMenuPanel();
 
 	public boolean add(TabMenuPanel tabMenuPanel) {
 		if (tabMenuPanel.isEmpty()){
@@ -33,9 +33,8 @@ public class MenuPanel extends ContentPanel {
 		add(quotesMenu);
 		add(projectsMenu);
 		add(tasksMenu);
+		add(usersMenu);
 		add(administrationMenu);
-		add(contactsMenu);
-		add(new UsersMenuPanel());
 		setSize(200, 325);
 	}
 

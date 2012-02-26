@@ -106,5 +106,5 @@ public class MainWindow extends LayoutContainer {
 		MainWindow.centerPanel.setAutoHeight(true);
 		MainWindow.centerPanel.layout();
 	}
-	
+
 }

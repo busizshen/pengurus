@@ -11,6 +11,7 @@ import com.pengurus.crm.client.MainWindow;
 import com.pengurus.crm.client.panels.center.DescriptionPanelEdit;
 import com.pengurus.crm.client.panels.center.user.client.ClientPanelEdit;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEdit;
+import com.pengurus.crm.shared.dto.StatusDTO;
 
 public class QuotePanelCreate extends QuotePanel {
 
@@ -71,6 +72,7 @@ public class QuotePanelCreate extends QuotePanel {
 		Listener<DomEvent> listener = new Listener<DomEvent>() {
 			@Override
 			public void handleEvent(DomEvent be) {
+				quoteDTO.setStatus(StatusDTO.open);
 				quoteDTO.setClient(clientPanel.getChosenClient());
 				getPanel();// do zmiany jak zrobić żeby tylko jeden element się
 							// zmieniał a nie trzeb było ładować całości na nowo
@@ -91,8 +93,6 @@ public class QuotePanelCreate extends QuotePanel {
 				if (quoteDTO.check()) {
 					quoteDTO.setDescription(descriptionPanel.getDescription());
 					quoteDTO.create();
-					/*QuotePanelView qp = new QuotePanelView(quoteDTO);
-					qp.getPanel();*/
 				} else {
 					MessageBox mb = new MessageBox();
 					mb.setMessage("Please choose Client and Supervisor");

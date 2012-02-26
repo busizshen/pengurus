@@ -34,6 +34,7 @@ public class Worker extends User {
     }
     
     
+    
     public WorkerDTO toDTO(){
     	return toDTOLazy();
 	}

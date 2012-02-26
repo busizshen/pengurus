@@ -7,6 +7,7 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.MainWindow;
 import com.pengurus.crm.client.panels.center.DescriptionPanelEdit;
 import com.pengurus.crm.client.panels.center.user.client.ClientPanelEdit;
@@ -20,8 +21,7 @@ public class QuotePanelEdit extends QuotePanel {
 
 	@Override
 	protected void getDescriptionPanel(QuoteView quoteView) {
-		descriptionPanel = new DescriptionPanelEdit(
-				quoteDTO.getDescription());
+		descriptionPanel = new DescriptionPanelEdit(quoteDTO.getDescription());
 		quoteView.add(descriptionPanel);
 	}
 
@@ -50,39 +50,42 @@ public class QuotePanelEdit extends QuotePanel {
 
 	@Override
 	protected void addEditionPanel(QuoteView quoteView) {
-		HorizontalPanel vp = new HorizontalPanel();
-		// vp.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
-		Button b = new Button("Update", new SelectionListener<ButtonEvent>() {
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				quoteDTO.setDescription(descriptionPanel.getDescription());
-				quoteDTO.update();
-				QuotePanelView qp = new QuotePanelView(quoteDTO);
-				qp.getPanel();
+		if (AuthorizationManager.hasExecutiveAccess()) {
+			HorizontalPanel vp = new HorizontalPanel();
+			Button b = new Button("Update",
+					new SelectionListener<ButtonEvent>() {
+						@Override
+						public void componentSelected(ButtonEvent ce) {
+							quoteDTO.setDescription(descriptionPanel
+									.getDescription());
+							quoteDTO.update();
+							QuotePanelView qp = new QuotePanelView(quoteDTO);
+							qp.getPanel();
 
-			}
-		});
-		vp.add(b);
-		b = new Button("Delete", new SelectionListener<ButtonEvent>() {
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				quoteDTO.delete();
-				MainWindow.addWidgetCenterPanel(new ContentPanel());
+						}
+					});
+			vp.add(b);
+			b = new Button("Delete", new SelectionListener<ButtonEvent>() {
+				@Override
+				public void componentSelected(ButtonEvent ce) {
+					quoteDTO.delete();
+					MainWindow.addWidgetCenterPanel(new ContentPanel());
 
-			}
-		});
-		vp.add(b);
-		b = new Button("Cancel", new SelectionListener<ButtonEvent>() {
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				// pobierz starą wersję
-				QuotePanelView qp = new QuotePanelView(quoteDTO);
-				qp.getPanel();
+				}
+			});
+			vp.add(b);
+			b = new Button("Cancel", new SelectionListener<ButtonEvent>() {
+				@Override
+				public void componentSelected(ButtonEvent ce) {
+					// pobierz starą wersję
+					QuotePanelView qp = new QuotePanelView(quoteDTO);
+					qp.getPanel();
 
-			}
-		});
-		vp.add(b);
-		quoteView.add(vp);
+				}
+			});
+			vp.add(b);
+			quoteView.add(vp);
+		}
 
 	}
 

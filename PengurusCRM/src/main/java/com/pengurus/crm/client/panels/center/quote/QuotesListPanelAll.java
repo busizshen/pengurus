@@ -6,7 +6,6 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.pengurus.crm.client.MainWindow;
 import com.pengurus.crm.client.models.QuoteModel;
 import com.pengurus.crm.client.service.QuoteService;
 import com.pengurus.crm.client.service.QuoteServiceAsync;
@@ -14,11 +13,8 @@ import com.pengurus.crm.shared.dto.QuoteDTO;
 
 public class QuotesListPanelAll extends QuotesListPanel {
 
-	public QuotesListPanelAll(){
-		ModelList ql = new ModelList();
-		MainWindow.addWidgetCenterPanel(ql);
-	}
 
+	
 	@Override
 	protected ListStore<QuoteModel> getList() {
 		final ListStore<QuoteModel> list = new ListStore<QuoteModel>();

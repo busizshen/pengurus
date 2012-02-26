@@ -11,4 +11,6 @@ public interface QuoteServiceAsync {
 	public void updateQuote(QuoteDTO quoteDTO, AsyncCallback<Void> callback);
 	public void deleteQuote(QuoteDTO quoteDTO, AsyncCallback<Void> callback);
 	public void createQuote(QuoteDTO quoteDTO, AsyncCallback<QuoteDTO> callback);
+	public void getQuote(Long id, AsyncCallback<QuoteDTO> callback);
+
 }

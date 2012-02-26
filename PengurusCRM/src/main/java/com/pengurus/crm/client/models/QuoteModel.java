@@ -1,6 +1,11 @@
 package com.pengurus.crm.client.models;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.pengurus.crm.client.service.QuoteService;
+import com.pengurus.crm.client.service.QuoteServiceAsync;
 import com.pengurus.crm.shared.dto.QuoteDTO;
 
 public class QuoteModel extends BaseModel {
@@ -50,8 +55,20 @@ public class QuoteModel extends BaseModel {
 	}
 
 	public QuoteDTO getQuoteDTONonLazy() {
-		
-		return this.quoteDTO;
+		AsyncCallback<QuoteDTO> callback = new AsyncCallback<QuoteDTO>() {
+
+			public void onFailure(Throwable t) {
+				Window.Location.assign("/spring_security_login");
+			}
+
+			public void onSuccess(QuoteDTO result) {
+				quoteDTO = result;
+			}
+		};
+		QuoteServiceAsync service = (QuoteServiceAsync) GWT
+				.create(QuoteService.class);
+		service.getQuote(quoteDTO.getId(),callback);
+		return quoteDTO;//jakie quote zwróci
 	}
 	
 }

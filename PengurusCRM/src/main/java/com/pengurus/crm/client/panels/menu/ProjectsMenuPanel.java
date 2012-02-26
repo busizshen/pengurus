@@ -1,45 +1,38 @@
 package com.pengurus.crm.client.panels.menu;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.pengurus.crm.client.PengurusCRM;
-import com.pengurus.crm.shared.dto.UserRoleDTO;
+import com.pengurus.crm.client.AuthorizationManager;
 
 public class ProjectsMenuPanel extends TabMenuPanel {
 
 	public ProjectsMenuPanel() {
 		super("Projects");
-		//ButtonLastEdited();
-	    ButtonAll();
-	    ButtonMine();
-	    ButtonCreate();
+	    addButtonAll();
+	    addButtonMine();
+	    addButtonCreate();
 	}
 	
 	public TabMenuPanel getPanel() {
 		return new ProjectsMenuPanel();
 	}
 	
-	private void ButtonCreate() {
-		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		if(PengurusCRM.getCurrentUser().haveAuthority(roles)){ 
+	private void addButtonCreate() {
+		if(AuthorizationManager.hasExecutiveAccess()){ 
 			Button b = new Button("Create New");
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					//new QuotesPanelCreate();
+					
 				}
 			});
 		    add(b);
 		}
 	}
 
-	private void ButtonMine() {
-		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		if(PengurusCRM.getCurrentUser().haveAuthority(roles)){ 
+	private void addButtonMine() {
+		if(AuthorizationManager.canViewProjects()){ 
 			Button b = new Button("Mine");
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
@@ -51,9 +44,8 @@ public class ProjectsMenuPanel extends TabMenuPanel {
 		}
 	}
 
-	private void ButtonAll() {
-		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		if(PengurusCRM.getCurrentUser().haveAuthority(roles)){ 
+	private void addButtonAll() {
+		if(AuthorizationManager.canViewAllProjects()){ 
 			Button b = new Button("All");
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
@@ -64,19 +56,5 @@ public class ProjectsMenuPanel extends TabMenuPanel {
 		    add(b);
 		}
 	}
-
-	/*private void ButtonLastEdited() {
-		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		if(PengurusCRM.getCurrentUser().haveAuthority(roles)){ 
-			Button b = new Button("Last Edited");
-			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
-				@Override
-				public void componentSelected(ButtonEvent ce) {
-					new QuotesListPanelLastEdited();
-				}
-			});
-		    add(b);
-		} 
-	}*/
 
 }
