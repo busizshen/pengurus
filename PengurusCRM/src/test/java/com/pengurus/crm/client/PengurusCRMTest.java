@@ -13,6 +13,11 @@ public class PengurusCRMTest extends GWTTestCase {
   public String getModuleName() {
     return "com.pengurus.crm.PengurusCRMJUnit";
   }
+  
+  public void StubTest() {
+	  // Stub test
+  }
+  
 //
 //  /**
 //   * Tests the FieldVerifier.
