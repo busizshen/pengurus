@@ -60,7 +60,7 @@ public class DatabaseBackupTest {
 
 	@Before
 	public void prepareDatabase() {
-		DatabaseBackup.getInstance().refreshDatabase();
+		//DatabaseBackup.getInstance().refreshDatabase();
 	}
 
 	@Test
@@ -147,6 +147,6 @@ public class DatabaseBackupTest {
 
 	@After
 	public void createScrypt() {
-		DatabaseBackup.getInstance().generateOnlyDataScrypt();
+		//DatabaseBackup.getInstance().generateOnlyDataScrypt();
 	}
 }
