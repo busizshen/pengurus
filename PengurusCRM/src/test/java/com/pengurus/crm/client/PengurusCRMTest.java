@@ -15,7 +15,7 @@ public class PengurusCRMTest extends GWTTestCase {
   }
   
   public void testStub() {
-	  // Stub test
+	  finishTest();
   }
   
 //
