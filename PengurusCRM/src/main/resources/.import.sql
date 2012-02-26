@@ -15,7 +15,7 @@ SET search_path = public, pg_catalog;
 -- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hibernate_sequence', 301, true);
+SELECT pg_catalog.setval('hibernate_sequence', 297, true);
 
 
 --
@@ -63,8 +63,6 @@ INSERT INTO "user" (user_id, username, password, description) VALUES (218, 'Tran
 INSERT INTO "user" (user_id, username, password, description) VALUES (226, 'TranslatorTest2', 'password', 'description');
 INSERT INTO "user" (user_id, username, password, description) VALUES (234, 'new name1', 'password', 'new description');
 INSERT INTO "user" (user_id, username, password, description) VALUES (250, 'TranslatorTest4', 'password', 'description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (298, 'worker', '2c54b2394df1ef67321a5ccb241ed57bdc6c511a', 'I''m just a user');
-INSERT INTO "user" (user_id, username, password, description) VALUES (300, 'admin', 'a40546cc4fd6a12572828bb803380888ad1bfdab', 'I''m admin');
 
 
 --
@@ -179,8 +177,6 @@ INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (251
 INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (294, 'first name', 'last name', 'address', NULL);
 INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (295, 'first name', 'last name', 'address', NULL);
 INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (296, 'new first name', 'new last name', 'new address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (299, 'Carol', 'Storker', '139 Dorothy Street, London F5 8JT, United Kingdom', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (301, 'John', 'Smith', '1 Reds Road, Manchester E5 00T, United Kingdom', NULL);
 
 
 --
@@ -260,9 +256,6 @@ INSERT INTO emails (id, email) VALUES (295, 'john2@yahoo.com');
 INSERT INTO emails (id, email) VALUES (296, 'john@yahoo.com');
 INSERT INTO emails (id, email) VALUES (296, 'john2@yahoo.com');
 INSERT INTO emails (id, email) VALUES (296, 'newemail@email.com');
-INSERT INTO emails (id, email) VALUES (299, 'jeremy_smith@yahoo.com');
-INSERT INTO emails (id, email) VALUES (299, 'jeremy_smith@gmail.com');
-INSERT INTO emails (id, email) VALUES (301, 'admin@hacks.com');
 
 
 --
@@ -397,8 +390,6 @@ INSERT INTO worker (user_id, data) VALUES (218, 219);
 INSERT INTO worker (user_id, data) VALUES (226, 227);
 INSERT INTO worker (user_id, data) VALUES (234, 235);
 INSERT INTO worker (user_id, data) VALUES (250, 251);
-INSERT INTO worker (user_id, data) VALUES (298, 299);
-INSERT INTO worker (user_id, data) VALUES (300, 301);
 
 
 --
@@ -599,9 +590,6 @@ INSERT INTO phonenumbers (id, phonenumber) VALUES (295, '00-001-001');
 INSERT INTO phonenumbers (id, phonenumber) VALUES (296, '00-000-000');
 INSERT INTO phonenumbers (id, phonenumber) VALUES (296, '00-001-001');
 INSERT INTO phonenumbers (id, phonenumber) VALUES (296, '000-111-111');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (299, '1-243-002‑2920');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (299, '9-286-513-0001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (301, '9-003-092‑1110');
 
 
 --
@@ -731,9 +719,6 @@ INSERT INTO user_userrole (user_id, user_role) VALUES (234, 'ROLE_USER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (234, 'ROLE_EXPERT');
 INSERT INTO user_userrole (user_id, user_role) VALUES (250, 'ROLE_USER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (250, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (298, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (300, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (300, 'ROLE_EXECUTIVE');
 
 
 --

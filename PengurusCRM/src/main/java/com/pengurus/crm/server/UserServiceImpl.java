@@ -77,16 +77,12 @@ public class UserServiceImpl implements UserService {
 		encodePassword(userDTO);
 		User user;
 		if (userDTO instanceof IndividualClientDTO) {
-			log.error("IndividualClientDTO");
 			user = new IndividualClient((IndividualClientDTO)userDTO);
 		} else if(userDTO instanceof BusinessClientDTO) {
-			log.error("BusinessClientDTO");
 			user = new BusinessClient((BusinessClientDTO)userDTO);
 		} else if(userDTO instanceof WorkerDTO) {
-			log.error("WorkerDTO");
 			user = new Worker((WorkerDTO)userDTO);
 		} else if(userDTO instanceof TranslatorDTO) {
-			log.error("TranslatorDTO");
 			user = new Translator((TranslatorDTO)userDTO);
 		} else {
 			throw new ServiceException();

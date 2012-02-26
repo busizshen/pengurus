@@ -1,5 +1,7 @@
 package com.pengurus.crm.hibernate;
 
+import java.util.Set;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,13 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.google.gwt.dev.util.collect.HashSet;
+import com.pengurus.crm.client.service.UserService;
+import com.pengurus.crm.client.service.exceptions.ServiceException;
 import com.pengurus.crm.daos.JobDAO;
 import com.pengurus.crm.daos.LanguageDAO;
+import com.pengurus.crm.daos.PersonalDataDAO;
 import com.pengurus.crm.daos.PriceDAO;
 import com.pengurus.crm.daos.TaskDAO;
 import com.pengurus.crm.daos.TranslationDAO;
 import com.pengurus.crm.daos.TranslationTypeDAO;
 import com.pengurus.crm.daos.TranslatorDAO;
+import com.pengurus.crm.entities.PersonalData;
+import com.pengurus.crm.shared.dto.PersonalDataDTO;
+import com.pengurus.crm.shared.dto.UserRoleDTO;
+import com.pengurus.crm.shared.dto.WorkerDTO;
 
 @ContextConfiguration(locations = { "../server/testContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,6 +44,19 @@ public class DatabaseBackupTest {
 	private JobDAO jobDAO;
 	@Autowired
 	private TaskDAO taskDAO;
+	@Autowired
+	private PersonalDataDAO personalDataDAO;
+	@Autowired
+	UserService userService;
+	
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
 
 	@Before
 	public void prepareDatabase() {
@@ -41,7 +64,7 @@ public class DatabaseBackupTest {
 	}
 
 	@Test
-	public void newEntityAdding() {
+	public void newEntityAdding() throws ServiceException {
 		/**
 		 * here put code which is responsible for creating new object and saving
 		 * it in database. Before creating new scrypt make sure that you did
