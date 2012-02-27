@@ -9,7 +9,7 @@ In Eclipse, go to the File menu and choose:
   
   Click Finish.
   
-You can now browse the project in Eclipse.
+YYou can now browse the project in Eclipse.
 
 If you have generated your project with the option '-maven', you have a 'pom.xml'
 file ready to use. Assuming you have 'maven2' installed in your system, 'mvn' is 
