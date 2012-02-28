@@ -28,8 +28,8 @@
 				hibernate.default_schema=public
 				hibernate.hbm2ddl.auto=update
 				hibernate.id.new_generator_mappings=true
-				hibernate.show_sql=true
-				hibernate.format_sql=true
+				hibernate.show_sql=false
+				hibernate.format_sql=false
 				hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 			</value>
 		</property>
