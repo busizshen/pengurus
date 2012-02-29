@@ -47,6 +47,7 @@ public class MainWindow extends LayoutContainer {
 	private void addCenterPanelt() {
 		BorderLayoutData centerData = new BorderLayoutData(LayoutRegion.CENTER);
 		centerData.setMargins(new Margins(0));
+		centerPanel.setHeaderVisible(false);		
 		add(centerPanel, centerData);
 	}
 

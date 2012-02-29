@@ -18,7 +18,6 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.MessageBox;
-import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
@@ -35,10 +34,12 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.pengurus.crm.client.models.PersonalDataModel;
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.UserServiceAsync;
@@ -51,7 +52,7 @@ import com.pengurus.crm.shared.dto.WorkerDTO;
 
 public class UserCreatePanel extends ContentPanel {
 
-	private VerticalPanel verticalPanel;
+	private HorizontalPanel horizontalPanel;
 	private FormPanel form;
 	private PersonalDataForm personalDataForm;
 	private ContentPanel agentsGrid;
@@ -89,11 +90,11 @@ public class UserCreatePanel extends ContentPanel {
 	}
 
 	private void addVerticalPanel() {
-		verticalPanel = new VerticalPanel();
-		verticalPanel.setSpacing(20);
-		verticalPanel.add(form);
-		verticalPanel.add(personalDataForm);
-		add(verticalPanel);
+		horizontalPanel = new HorizontalPanel();
+		horizontalPanel.setSpacing(20);
+		horizontalPanel.add(form);
+		horizontalPanel.add(personalDataForm);
+		add(horizontalPanel);
 	}
 
 	private void createForm() {
@@ -150,7 +151,45 @@ public class UserCreatePanel extends ContentPanel {
 
 			});
 		}
-
+		
+		private void disableAllRoles() {
+			for (Field<?> field : userRoles.getAll()) {
+				if (field instanceof UserRoleBox) {
+					UserRoleBox userRoleBox = (UserRoleBox) field;
+					userRoleBox.setEnabled(false);
+				}
+			}
+		}
+		
+		private void setRoleEnable(UserRoleDTO userRole, Boolean value) {
+			for (Field<?> field : userRoles.getAll()) {
+				if (field instanceof UserRoleBox) {
+					UserRoleBox userRoleBox = (UserRoleBox) field;
+					if (userRoleBox.getUserRole().equals(userRole)) {
+						userRoleBox.setEnabled(value);
+					}
+				}
+			}
+		}
+		
+		protected void enableRole(UserRoleDTO userRole) {
+			setRoleEnable(userRole, true);
+		}
+		
+		protected void disableRole(UserRoleDTO userRole) {
+			setRoleEnable(userRole, false);
+		}
+		
+		
+		protected void deselectAllRoles() {
+			for (Field<?> field: userRoles.getAll()) {
+				if (field instanceof UserRoleBox) {
+					UserRoleBox userRoleBox = (UserRoleBox) field;
+					userRoleBox.setValue(false);
+				}
+			}
+		}
+		
 		private void setRoleValue(UserRoleDTO userRole, Boolean value) {
 			for (Field<?> field : userRoles.getAll()) {
 				if (field instanceof UserRoleBox) {
@@ -170,8 +209,15 @@ public class UserCreatePanel extends ContentPanel {
 			setRoleValue(userRole, false);
 		}
 
-		protected abstract void onSelect();
-		protected abstract void onDeselect();
+		protected void onSelect() {
+			selectRole(UserRoleDTO.ROLE_USER);
+		}
+		
+		protected void onDeselect() {
+			deselectAllRoles();
+			disableAllRoles();
+		}
+		
 		protected abstract UserDTO createUser();
 		protected void fillBasicUser(UserDTO user) {
 			user.setUsername(username.getValue());
@@ -184,16 +230,27 @@ public class UserCreatePanel extends ContentPanel {
 			user.setAuthorities(authorities);
 		}
 	}
+	
+	private abstract class ClientTypeRadio extends UserTypeRadio {
+		public ClientTypeRadio(String label) {
+			super(label);
+		}
+		
+		@Override
+		protected void onSelect() {
+			super.onSelect();
+			selectRole(UserRoleDTO.ROLE_CLIENT);
+		}
+	}
 
-	private class IndividualClientRadio extends UserTypeRadio {
+	private class IndividualClientRadio extends ClientTypeRadio {
 		public IndividualClientRadio() {
 			super("Individual client");
 		}
 
 		@Override
 		protected void onSelect() {
-			selectRole(UserRoleDTO.ROLE_USER);
-			selectRole(UserRoleDTO.ROLE_CLIENT);
+			super.onSelect();
 			personalDataForm.show();
 			for (Field<?> field: personalDataForm.getFields()) {
 				binding.getFields().add(field);
@@ -202,8 +259,7 @@ public class UserCreatePanel extends ContentPanel {
 
 		@Override
 		protected void onDeselect() {
-			deselectRole(UserRoleDTO.ROLE_USER);
-			deselectRole(UserRoleDTO.ROLE_CLIENT);
+			super.onDeselect();
 			for (Field<?> field: personalDataForm.getFields()) {
 				binding.getFields().remove(field);
 			}
@@ -218,15 +274,14 @@ public class UserCreatePanel extends ContentPanel {
 		}
 	}
 
-	private class BusinessClientRadio extends UserTypeRadio {
+	private class BusinessClientRadio extends ClientTypeRadio {
 		public BusinessClientRadio() {
 			super("Business client");
 		}
 
 		@Override
 		protected void onSelect() {
-			selectRole(UserRoleDTO.ROLE_USER);
-			selectRole(UserRoleDTO.ROLE_CLIENT);
+			super.onSelect();
 			fullName.show();
 			binding.getFields().add(fullName);
 			agentsGrid.show();
@@ -234,8 +289,7 @@ public class UserCreatePanel extends ContentPanel {
 
 		@Override
 		protected void onDeselect() {
-			deselectRole(UserRoleDTO.ROLE_USER);
-			deselectRole(UserRoleDTO.ROLE_CLIENT);
+			super.onDeselect();
 			fullName.hide();
 			binding.getFields().remove(fullName);
 			agentsGrid.hide();
@@ -259,10 +313,17 @@ public class UserCreatePanel extends ContentPanel {
 		public WorkerRadio() {
 			super("Worker");
 		}
+		
+		public WorkerRadio(String label) {
+			super(label);
+		}
 
 		@Override
 		protected void onSelect() {
-			selectRole(UserRoleDTO.ROLE_USER);
+			super.onSelect();
+			enableRole(UserRoleDTO.ROLE_ACCOUNTANT);
+			enableRole(UserRoleDTO.ROLE_EXECUTIVE);
+			enableRole(UserRoleDTO.ROLE_PROJECTMNAGER);
 			personalDataForm.show();
 			for (Field<?> field: personalDataForm.getFields()) {
 				binding.getFields().add(field);
@@ -271,7 +332,7 @@ public class UserCreatePanel extends ContentPanel {
 
 		@Override
 		protected void onDeselect() {
-			deselectRole(UserRoleDTO.ROLE_USER);
+			super.onDeselect();
 			personalDataForm.hide();
 			for (Field<?> field: personalDataForm.getFields()) {
 				binding.getFields().remove(field);
@@ -288,22 +349,23 @@ public class UserCreatePanel extends ContentPanel {
 		}
 	}
 
-	private class TranslatorRadio extends UserTypeRadio {
+	private class TranslatorRadio extends WorkerRadio {
 		public TranslatorRadio() {
 			super("Translator");
 		}
 
 		@Override
 		protected void onSelect() {
-			selectRole(UserRoleDTO.ROLE_USER);
-			selectRole(UserRoleDTO.ROLE_EXPERT);
+			super.onSelect();
+			enableRole(UserRoleDTO.ROLE_EXPERT);
+			enableRole(UserRoleDTO.ROLE_VERIFICATOR);
+			enableRole(UserRoleDTO.ROLE_FREELANCER);
 			personalDataForm.show();
 		}
 
 		@Override
 		protected void onDeselect() {
-			deselectRole(UserRoleDTO.ROLE_USER);
-			deselectRole(UserRoleDTO.ROLE_EXPERT);
+			super.onDeselect();
 			personalDataForm.hide();
 		}
 
@@ -328,15 +390,11 @@ public class UserCreatePanel extends ContentPanel {
 	private class UserRoleBox extends CheckBox {
 		private UserRoleDTO userRole;
 
-		public UserRoleBox(String label, UserRoleDTO userRole, Boolean enabled) {
+		public UserRoleBox(String label, UserRoleDTO userRole) {
 			super();
 			setBoxLabel(label);
 			this.userRole = userRole;
-			this.setEnabled(enabled);
-		}
-
-		public UserRoleBox(String label, UserRoleDTO userRole) {
-			this(label, userRole, true);
+			this.setEnabled(false);
 		}
 
 		public UserRoleDTO getUserRole() {
@@ -349,11 +407,9 @@ public class UserCreatePanel extends ContentPanel {
 		userRoles.setFieldLabel("User roles");
 		userRoles.setOrientation(Orientation.VERTICAL);
 		userRoles
-				.add(new UserRoleBox("Role user", UserRoleDTO.ROLE_USER, false));
-		userRoles.add(new UserRoleBox("Role client", UserRoleDTO.ROLE_CLIENT,
-				false));
-		userRoles.add(new UserRoleBox("Role expert", UserRoleDTO.ROLE_EXPERT,
-				false));
+				.add(new UserRoleBox("Role user", UserRoleDTO.ROLE_USER));
+		userRoles.add(new UserRoleBox("Role client", UserRoleDTO.ROLE_CLIENT));
+		userRoles.add(new UserRoleBox("Role expert", UserRoleDTO.ROLE_EXPERT));
 		userRoles.add(new UserRoleBox("Role accountant",
 				UserRoleDTO.ROLE_ACCOUNTANT));
 		userRoles.add(new UserRoleBox("Role executive",
@@ -503,12 +559,12 @@ public class UserCreatePanel extends ContentPanel {
 								store.insert(new PersonalDataModel(
 										newPersonalData), store.getCount());
 								store.commitChanges();
+								window.hide();
 							}
 
 						});
 				List<Button> buttonList = new ArrayList<Button>();
 				buttonList.add(saveButton);
-				;
 				personalDataPopup(personalDataForm, buttonList);
 			}
 		});
@@ -553,7 +609,10 @@ public class UserCreatePanel extends ContentPanel {
 	private void createWindow() {
 		window.setPlain(true);
 		window.setHeading("Edit personal data");
-		window.setLayout(new FitLayout());
+		window.setLayout(new FlowLayout());
+		window.setAutoHeight(true);
+		window.setAutoWidth(true);
+		window.setAutoHide(true);
 	}
 
 	private void createButtons() {

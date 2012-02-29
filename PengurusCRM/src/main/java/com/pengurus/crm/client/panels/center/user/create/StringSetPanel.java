@@ -106,7 +106,7 @@ public class StringSetPanel extends ContentPanel {
 
 		});
 		toolBar.add(remove);
-		setBottomComponent(toolBar);
+		setTopComponent(toolBar);
 		setButtonAlign(HorizontalAlignment.CENTER);
 
 		grid.getStore().addStoreListener(new StoreListener<StringModel>() {
