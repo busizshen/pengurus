@@ -69,7 +69,7 @@ public class QuotePanelEdit extends QuotePanel {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
 					quoteDTO.delete();
-					MainWindow.addWidgetCenterPanel(new ContentPanel());
+					MainWindow.addCenterPanel(new ContentPanel());
 
 				}
 			});

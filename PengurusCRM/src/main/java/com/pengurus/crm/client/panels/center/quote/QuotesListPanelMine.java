@@ -8,7 +8,7 @@ public class QuotesListPanelMine extends QuotesListPanel {
 
 	public QuotesListPanelMine(){
 		ModelList ql = new ModelList();
-		MainWindow.addWidgetCenterPanel(ql);
+		MainWindow.addCenterPanel(ql);
 	}
 	
 	@Override

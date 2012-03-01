@@ -11,7 +11,7 @@ import com.extjs.gxt.ui.client.widget.grid.filters.GridFilters;
 import com.pengurus.crm.client.models.UserModel;
 import com.pengurus.crm.client.panels.center.ListPanel;
 
-public abstract class UsersListPanel<T extends UserModel> extends ListPanel<T> {
+public abstract class BaseUsersListPanel<T extends UserModel> extends ListPanel<T> {
 
 	ListStore<T> clients = new ListStore<T>();
 	public ModelList getPanel(){
@@ -62,6 +62,6 @@ public abstract class UsersListPanel<T extends UserModel> extends ListPanel<T> {
 	    return configs;
 	}
 
-	protected abstract GridCellRenderer getButtonRenderer();
+	protected abstract GridCellRenderer<T> getButtonRenderer();
 
 }

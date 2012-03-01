@@ -42,7 +42,7 @@ public class QuotesMenuPanel extends TabMenuPanel {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
 					QuotesListPanelMine qlp = new QuotesListPanelMine();
-					qlp.getPanel();
+					qlp.setAsMain();
 				}
 			});
 			add(b);
@@ -56,7 +56,7 @@ public class QuotesMenuPanel extends TabMenuPanel {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
 					QuotesListPanelAll qlp = new QuotesListPanelAll();
-					qlp.getPanel();
+					qlp.setAsMain();
 				}
 			});
 			add(b);

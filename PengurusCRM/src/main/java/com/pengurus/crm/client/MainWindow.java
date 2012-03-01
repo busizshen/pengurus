@@ -101,7 +101,7 @@ public class MainWindow extends LayoutContainer {
 		return centerPanel;
 	}
 
-	public static void addWidgetCenterPanel(Widget centerPanel) {
+	public static void addCenterPanel(Widget centerPanel) {
 		MainWindow.centerPanel.removeAll();
 		MainWindow.centerPanel.add(centerPanel);
 		MainWindow.centerPanel.setAutoHeight(true);

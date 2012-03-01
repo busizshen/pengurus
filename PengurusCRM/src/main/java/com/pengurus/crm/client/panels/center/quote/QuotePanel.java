@@ -29,7 +29,7 @@ public abstract class QuotePanel {
 
 	public void getPanel() {
 		QuoteView qv = new QuoteView();
-		MainWindow.addWidgetCenterPanel(qv);
+		MainWindow.addCenterPanel(qv);
 	}
 
 	class QuoteView extends ContentPanel {

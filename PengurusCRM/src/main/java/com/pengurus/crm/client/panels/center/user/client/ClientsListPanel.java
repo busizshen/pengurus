@@ -18,12 +18,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.ClientModel;
-import com.pengurus.crm.client.panels.center.user.UsersListPanel;
+import com.pengurus.crm.client.panels.center.user.BaseUsersListPanel;
 import com.pengurus.crm.client.service.ClientService;
 import com.pengurus.crm.client.service.ClientServiceAsync;
 import com.pengurus.crm.shared.dto.ClientDTO;
 
-public class ClientsListPanel extends UsersListPanel<ClientModel> {
+public class ClientsListPanel extends BaseUsersListPanel<ClientModel> {
 
 	ClientDTO chosen;
 	private Listener<DomEvent> listenerChangeClient;
@@ -36,7 +36,7 @@ public class ClientsListPanel extends UsersListPanel<ClientModel> {
 	}
 
 	@Override
-	protected GridCellRenderer getButtonRenderer() {
+	protected GridCellRenderer<ClientModel> getButtonRenderer() {
 		GridCellRenderer<ClientModel> buttonRenderer = new GridCellRenderer<ClientModel>() {
 
 			private boolean init;

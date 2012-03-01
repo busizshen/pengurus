@@ -10,7 +10,7 @@ public class QuotesListPanelLastEdited extends QuotesListPanel{
 
 	public QuotesListPanelLastEdited(){
 		ModelList ql = new ModelList();
-		MainWindow.addWidgetCenterPanel(ql);
+		MainWindow.addCenterPanel(ql);
 	}
 	
 	protected ListStore<QuoteModel> getList(){

@@ -18,7 +18,7 @@ public class QuotePanelView extends QuotePanel {
 
 	public void getPanel() {
 		QuoteView qv = new QuoteView();
-		MainWindow.addWidgetCenterPanel(qv);
+		MainWindow.addCenterPanel(qv);
 	}
 
 	@Override

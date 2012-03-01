@@ -105,7 +105,7 @@ public class QuotePanelCreate extends QuotePanel {
 		b = new Button("Cancel", new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				MainWindow.addWidgetCenterPanel(new HorizontalPanel());
+				MainWindow.addCenterPanel(new HorizontalPanel());
 			}
 		});
 		vp.add(b);

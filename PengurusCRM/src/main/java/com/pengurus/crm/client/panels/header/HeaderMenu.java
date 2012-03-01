@@ -61,7 +61,7 @@ public class HeaderMenu extends ToolBar {
  
 					@Override
 					public void componentSelected(MenuEvent ce) {
-						MainWindow.addWidgetCenterPanel(ChangePasswordPanel
+						MainWindow.addCenterPanel(ChangePasswordPanel
 								.getPanel());
 					}
 				});

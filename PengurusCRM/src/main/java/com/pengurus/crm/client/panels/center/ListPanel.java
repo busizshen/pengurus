@@ -9,16 +9,18 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.extjs.gxt.ui.client.widget.grid.filters.GridFilters;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.google.gwt.user.client.Element;
 
 
-public abstract class ListPanel<T extends ModelData>  {
-
-	public class ModelList extends LayoutContainer{
+public abstract class ListPanel<T extends ModelData> extends MainPanel {
+	private EditorGrid<T> grid;
+	private ListStore<T> store;
+	
+	public class ModelList extends LayoutContainer {
 		
 		protected ContentPanel cp = new ContentPanel();
 		public ModelList(){
@@ -31,8 +33,7 @@ public abstract class ListPanel<T extends ModelData>  {
 		    setLayout(new FlowLayout(10));  
 		    getAriaSupport().setPresentation(true);  
 		  
-		    ListStore<T> store = getList();
-		    
+		    store = getList();
 		    
 		    List<ColumnConfig> configs = getColumns();		  
 		    ColumnModel cm = new ColumnModel(configs);  
@@ -46,7 +47,7 @@ public abstract class ListPanel<T extends ModelData>  {
 		  
 		    GridFilters filters = getFilters();
 		  
-		    final Grid<T> grid = new Grid<T>(store, cm);  
+		    grid = new EditorGrid<T>(store, cm);  
 		    grid.getView().setForceFit(true);  
 		    grid.setAutoExpandColumn("id");  
 		    grid.setStripeRows(true);  
@@ -56,9 +57,6 @@ public abstract class ListPanel<T extends ModelData>  {
 	  
 		    add(cp);  
 		}
-
-
-		
 	}
 	
 	protected abstract List<ColumnConfig> getColumns();
@@ -70,6 +68,13 @@ public abstract class ListPanel<T extends ModelData>  {
 	protected abstract GridFilters getFilters();
 
 	protected abstract void setStyle(ContentPanel cp);
+	
+	public void setList(List<T> list) {
+		grid.stopEditing();
+		store.removeAll();
+		store.add(list);
+		grid.startEditing(0, 0);
+	}
 
 }
 

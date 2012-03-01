@@ -31,11 +31,7 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 
 	ModelList ql;
 	public QuotesListPanel() {
-		ql = new ModelList();
-	}
-
-	public void getPanel() {
-		MainWindow.addWidgetCenterPanel(ql);
+		add(new ModelList());
 	}
 
 	protected List<ColumnConfig> getColumns() {
