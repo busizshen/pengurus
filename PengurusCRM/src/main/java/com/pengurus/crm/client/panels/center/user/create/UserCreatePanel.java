@@ -601,7 +601,7 @@ public class UserCreatePanel extends ContentPanel {
 				});
 		buttonList.add(cancelButton);
 		for (Button button : buttonList) {
-			personalDataForm.add(button);
+			personalDataForm.addButton(button);
 		}
 		window.show();
 	}
@@ -649,6 +649,6 @@ public class UserCreatePanel extends ContentPanel {
 				});
 
 		binding.addButton(createButton);
-		form.add(createButton);
+		form.addButton(createButton);
 	}
 }
