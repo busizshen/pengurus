@@ -1,6 +1,7 @@
 package com.pengurus.crm.client.models;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
+import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -68,6 +69,9 @@ public class QuoteModel extends BaseModel {
 		QuoteServiceAsync service = (QuoteServiceAsync) GWT
 				.create(QuoteService.class);
 		service.getQuote(quoteDTO.getId(),callback);
+		MessageBox mb = new MessageBox();
+		mb.setMessage(quoteDTO.getId().toString());
+		mb.show();
 		return quoteDTO;//jakie quote zwróci
 	}
 	

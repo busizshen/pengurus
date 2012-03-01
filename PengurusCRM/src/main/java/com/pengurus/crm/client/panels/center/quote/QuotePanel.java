@@ -7,7 +7,7 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.pengurus.crm.client.MainWindow;
 import com.pengurus.crm.client.panels.center.DescriptionPanel;
 import com.pengurus.crm.client.panels.center.QuoteStatusPanel;
-import com.pengurus.crm.client.panels.center.job.JobsListPanelAttached;
+import com.pengurus.crm.client.panels.center.job.JobsListPanel;
 import com.pengurus.crm.client.panels.center.user.client.ClientPanel;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanel;
 import com.pengurus.crm.shared.dto.QuoteDTO;
@@ -15,7 +15,7 @@ import com.pengurus.crm.shared.dto.QuoteDTO;
 public abstract class QuotePanel {
 	protected QuoteDTO quoteDTO;// już jest w postaci pełnej
 	DescriptionPanel descriptionPanel;
-	JobsListPanelAttached jobsList;
+	JobsListPanel jobsList;
 	WorkerPanel workerPanel;
 	ClientPanel clientPanel;
 
@@ -41,7 +41,7 @@ public abstract class QuotePanel {
 			getStatusPanel(this);
 			getClientPanel(this);
 			getSupervisorPanel(this);
-			// getJobsPanel(this); - blad w panelu jobów
+			getJobsPanel(this);
 			getDescriptionPanel(this);
 		}
 

@@ -31,7 +31,7 @@ import com.pengurus.crm.client.models.StringModel;
 public class StringSetPanel extends ContentPanel {
 
 	private EditorGrid<StringModel> grid;
-	final ListStore<StringModel> store;
+	protected final ListStore<StringModel> store;
 
 	protected void doAutoHeight() {
 		if (grid.isViewReady()) {

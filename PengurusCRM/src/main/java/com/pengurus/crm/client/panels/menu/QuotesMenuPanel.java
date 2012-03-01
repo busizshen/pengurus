@@ -43,6 +43,7 @@ public class QuotesMenuPanel extends TabMenuPanel {
 				public void componentSelected(ButtonEvent ce) {
 					QuotesListPanelMine qlp = new QuotesListPanelMine();
 					qlp.setAsMain();
+					
 				}
 			});
 			add(b);

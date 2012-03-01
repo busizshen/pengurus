@@ -51,14 +51,7 @@ public class JobModel  extends BaseModel{
 		return get("translationFrom");
 	}
 	
-	public String getTranslationTo(){
-		return get("translationTo");
-	}
-	
-	public String getPrice(){
-		return get("priceNumber") + " " + get("priceCurrency");
-	}
-	
+
 	
 
 }

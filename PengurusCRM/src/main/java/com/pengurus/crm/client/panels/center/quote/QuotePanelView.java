@@ -6,7 +6,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.MainWindow;
 import com.pengurus.crm.client.panels.center.DescriptionPanel;
-import com.pengurus.crm.client.panels.center.job.JobsListPanelAttached;
+import com.pengurus.crm.client.panels.center.job.JobsListPanelView;
 import com.pengurus.crm.client.panels.center.user.client.ClientPanelView;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelView;
 import com.pengurus.crm.shared.dto.QuoteDTO;
@@ -30,7 +30,7 @@ public class QuotePanelView extends QuotePanel {
 	@Override
 	protected void getJobsPanel(QuoteView quoteView) {
 		if (quoteDTO.getJobs() != null) {
-			jobsList = new JobsListPanelAttached(quoteDTO.getJobs());
+			jobsList = new JobsListPanelView(quoteDTO);
 			quoteView.add(jobsList.getPanel());
 		}
 	}
@@ -53,7 +53,6 @@ public class QuotePanelView extends QuotePanel {
 
 	@Override
 	protected void addEditionPanel(QuoteView quoteView) {
-		// sprawdzenie ról
 		if (AuthorizationManager.hasExecutiveAccess()) {
 			Button b = new Button("Edit", new SelectionListener<ButtonEvent>() {
 				@Override

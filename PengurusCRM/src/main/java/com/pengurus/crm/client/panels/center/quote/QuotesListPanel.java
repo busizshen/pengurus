@@ -14,6 +14,7 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
@@ -23,13 +24,20 @@ import com.extjs.gxt.ui.client.widget.grid.filters.GridFilters;
 import com.extjs.gxt.ui.client.widget.grid.filters.ListFilter;
 import com.extjs.gxt.ui.client.widget.grid.filters.NumericFilter;
 import com.extjs.gxt.ui.client.widget.grid.filters.StringFilter;
-import com.pengurus.crm.client.MainWindow;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.QuoteModel;
 import com.pengurus.crm.client.panels.center.ListPanel;
+import com.pengurus.crm.client.service.QuoteService;
+import com.pengurus.crm.client.service.QuoteServiceAsync;
+import com.pengurus.crm.shared.dto.QuoteDTO;
 
 public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 
 	ModelList ql;
+
 	public QuotesListPanel() {
 		add(new ModelList());
 	}
@@ -67,6 +75,7 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 		column.setHeader("Preview");
 		column.setRenderer(getButtonRenderer());
 		configs.add(column);
+
 		/*
 		 * column = new ColumnConfig(); column.setId("dateFrom");
 		 * column.setHeader("Date From");
@@ -154,19 +163,62 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 								}
 							});
 				}
-
+				ButtonBar buttonBar = new ButtonBar();
 				Button b = new Button("PREVIEW",
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
-								QuotePanelView qp = new QuotePanelView(
-										model.getQuoteDTONonLazy());
-								qp.getPanel();
+								AsyncCallback<QuoteDTO> callback = new AsyncCallback<QuoteDTO>() {
+
+									public void onFailure(Throwable t) {
+										Window.Location
+												.assign("/spring_security_login");
+									}
+
+									public void onSuccess(QuoteDTO result) {
+										QuotePanelView qp = new QuotePanelView(
+												result);
+										qp.getPanel();
+									}
+								};
+								QuoteServiceAsync service = (QuoteServiceAsync) GWT
+										.create(QuoteService.class);
+								service.getQuote(model.getQuoteDTO().getId(),
+										callback);
+
 							}
 						});
 				b.setToolTip("Click to see");
+				buttonBar.add(b);
+				if (AuthorizationManager.hasExecutiveAccess()) {
+					b = new Button("EDIT",
+							new SelectionListener<ButtonEvent>() {
+								@Override
+								public void componentSelected(ButtonEvent ce) {
+									AsyncCallback<QuoteDTO> callback = new AsyncCallback<QuoteDTO>() {
 
-				return b;
+										public void onFailure(Throwable t) {
+											Window.Location
+													.assign("/spring_security_login");
+										}
+
+										public void onSuccess(QuoteDTO result) {
+											QuotePanelEdit qp = new QuotePanelEdit(
+													result);
+											qp.getPanel();
+										}
+									};
+									QuoteServiceAsync service = (QuoteServiceAsync) GWT
+											.create(QuoteService.class);
+									service.getQuote(model.getQuoteDTO()
+											.getId(), callback);
+
+								}
+							});
+					b.setToolTip("Click to see");
+					buttonBar.add(b);
+				}
+				return buttonBar;
 			}
 		};
 		return buttonRenderer;

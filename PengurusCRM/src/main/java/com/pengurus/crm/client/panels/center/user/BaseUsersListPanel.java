@@ -33,7 +33,7 @@ public abstract class BaseUsersListPanel<T extends UserModel> extends ListPanel<
 	protected List<ColumnConfig> getColumns() {
 		List<ColumnConfig> configs   = new ArrayList<ColumnConfig>();  
 		  
-	    ColumnConfig column = new ColumnConfig();  
+	    ColumnConfig column = new ColumnConfigMy();  
 	    column.setId("id");
 	    column.setHeader("Id");
 	    configs.add(column);  
@@ -43,22 +43,23 @@ public abstract class BaseUsersListPanel<T extends UserModel> extends ListPanel<
 	    column.setHeader("Type");  
 	    configs.add(column);  */
 	    
-	    column = new ColumnConfig();  
+	    column = new ColumnConfigMy();  
 	    column.setId("username");  
 	    column.setHeader("Username");
 	    configs.add(column);
 	      
 
-	    column = new ColumnConfig();  
+	    column = new ColumnConfigMy();  
 	    column.setId("description");  
 	    column.setHeader("Description");  
 	    configs.add(column);  
 
-	    column = new ColumnConfig(); 
+	    column = new ColumnConfigMy(); 
 	    column.setId("choose");  
 	    column.setHeader("Choose");  
 	    column.setRenderer(getButtonRenderer()); 
 	    configs.add(column);  
+	   
 	    return configs;
 	}
 

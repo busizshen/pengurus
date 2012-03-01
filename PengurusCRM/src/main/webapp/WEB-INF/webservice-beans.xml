@@ -36,5 +36,9 @@
 	<bean id="clientServiceBean" class="com.pengurus.crm.server.ClientServiceImpl">
 		<property name="clientDAO" ref="clientDao" />
 	</bean>
+	<bean id="administrationServiceBean" class="com.pengurus.crm.server.AdministrationServiceImpl">
+		<property name="currencyDAO" ref="currencyTypeDao" />
+		<property name="translationDAO" ref="translationDao" />
+	</bean>
 
 </beans>
