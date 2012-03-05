@@ -8,6 +8,7 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
@@ -15,9 +16,21 @@ import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.pengurus.crm.client.models.UserModel;
 
 public class UserListPanel extends BaseUsersListPanel<UserModel> {
-
+	
+	static UserListPanel instance;
+	
+	public static UserListPanel getIntance() {
+		if (instance == null) {
+			instance = new UserListPanel();
+		}
+		return instance;
+	}
+	
 	public UserListPanel() {
-		
+		VerticalPanel verticalPanel = new VerticalPanel();
+		verticalPanel.add(new ModelList());
+		verticalPanel.add(new Button());
+		add(verticalPanel);
 	}
 	
 	@Override

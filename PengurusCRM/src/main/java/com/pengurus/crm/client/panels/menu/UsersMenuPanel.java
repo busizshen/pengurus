@@ -5,6 +5,7 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.MainWindow;
+import com.pengurus.crm.client.panels.center.user.UserListPanel;
 import com.pengurus.crm.client.panels.center.user.create.UserCreatePanel;
 
 public class UsersMenuPanel extends TabMenuPanel {
@@ -22,11 +23,12 @@ public class UsersMenuPanel extends TabMenuPanel {
 
 	private void addAllButton() {
 		if (AuthorizationManager.hasExecutiveAccess()) {
-			Button button = new Button("Create user");
+			Button button = new Button("All users");
 			button.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
 				@Override
 				public void componentSelected(ButtonEvent ce) {
+					UserListPanel.getIntance().setAsMain();
 				}
 			});
 			add(button);

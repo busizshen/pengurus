@@ -13,7 +13,6 @@ import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.Window;
 import com.pengurus.crm.client.AuthorizationManager;
-import com.pengurus.crm.client.MainWindow;
 import com.pengurus.crm.client.panels.center.ChangePasswordPanel;
 
 public class HeaderMenu extends ToolBar {
@@ -61,8 +60,7 @@ public class HeaderMenu extends ToolBar {
  
 					@Override
 					public void componentSelected(MenuEvent ce) {
-						MainWindow.addCenterPanel(ChangePasswordPanel
-								.getPanel());
+						new ChangePasswordPanel().setAsMain();
 					}
 				});
 		settingsMenu.add(changePasswordItem);

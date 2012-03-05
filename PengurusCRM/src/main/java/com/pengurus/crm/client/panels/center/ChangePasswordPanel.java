@@ -20,14 +20,14 @@ import com.pengurus.crm.client.service.CurrentSessionService;
 import com.pengurus.crm.client.service.CurrentSessionServiceAsync;
 import com.pengurus.crm.client.service.exceptions.IncorrectPasswordException;
 
-public class ChangePasswordPanel extends LayoutContainer {
+public class ChangePasswordPanel extends MainPanel {
 
 	private VerticalPanel verticalPanel;
 	private FormData formData;
 	private FormPanel form;
 	private TextField<String> currentPassword, newPassword, confirmedPassword;
 
-	private ChangePasswordPanel() {
+	public ChangePasswordPanel() {
 		createForm();
 		addOldPasswordField();
 		addNewPasswordField();

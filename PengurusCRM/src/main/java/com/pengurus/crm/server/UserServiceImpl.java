@@ -106,6 +106,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Set<UserDTO> getUsersByRole(Set<UserRoleDTO> roles) {
+		// TODO [CRM-30]
+		return new HashSet<UserDTO>();
+	}
+
+	@Override
+	public Set<UserDTO> getAllUsers() {
+		// TODO [CRM-30]
 		return new HashSet<UserDTO>();
 	}
 }
