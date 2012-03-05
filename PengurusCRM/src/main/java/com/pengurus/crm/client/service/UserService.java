@@ -19,5 +19,5 @@ public interface UserService extends RemoteService {
 	public Void createUser(UserDTO user) throws ServiceException;
 	
 	public Set<UserDTO> getAllUsers();
-	public Set<UserDTO> getUsersByRole(Set<UserRoleDTO> roles);
+	public Set<UserDTO> getUsersByRoles(Set<UserRoleDTO> roles);
 }

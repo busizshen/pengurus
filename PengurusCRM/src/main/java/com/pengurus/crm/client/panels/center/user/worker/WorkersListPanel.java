@@ -117,7 +117,7 @@ public class WorkersListPanel extends BaseUsersListPanel<WorkerModel> {
 				.create(UserService.class);
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
-		service.getUsersByRole(roles, callback);
+		service.getUsersByRoles(roles, callback);
 
 		return list;
 	}

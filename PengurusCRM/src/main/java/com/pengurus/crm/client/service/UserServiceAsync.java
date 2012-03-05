@@ -15,5 +15,5 @@ public interface UserServiceAsync {
 	public void createUser(UserDTO user, AsyncCallback<Void> callback);
 	
 	public void getAllUsers(AsyncCallback<Set<UserDTO>> callback);
-	public void getUsersByRole(Set<UserRoleDTO> roles,AsyncCallback<Set<UserDTO>> callback);
+	public void getUsersByRoles(Set<UserRoleDTO> roles, AsyncCallback<Set<UserDTO>> callback);
 }
