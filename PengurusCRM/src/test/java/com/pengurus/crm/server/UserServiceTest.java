@@ -1,5 +1,6 @@
 package com.pengurus.crm.server;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import org.junit.Test;
@@ -16,7 +17,9 @@ import com.google.gwt.dev.util.collect.HashSet;
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.exceptions.ServiceException;
 import com.pengurus.crm.entities.User;
+import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.PersonalDataDTO;
+import com.pengurus.crm.shared.dto.TranslatorDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 import com.pengurus.crm.shared.dto.WorkerDTO;
@@ -57,49 +60,159 @@ public class UserServiceTest {
 	}
 
 	@Test(expected = ServiceException.class)
-	public void abstractUserCreating() throws ServiceException {
+	public void abstractUserCreating() throws ServiceException { 
 		// when
-		userService.createUser(new UserDTO(null, new HashSet<UserRoleDTO>(), "userServiceTestAbstractUserCreating", "pass", "Decrtiption"));
+		userService.createUser(new UserDTO(null, new HashSet<UserRoleDTO>(),
+				"userServiceTestAbstractUserCreating", "pass", "Decrtiption"));
 	}
-	
-	@Test public void userCreating() throws ServiceException {
-		// when
+
+	@Test
+	public void userCreating() throws ServiceException { // when
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_USER);
-		userService.createUser(new WorkerDTO(null, roles, "userServiceTestUserCreating", "pass", "Decrtiption", new PersonalDataDTO()));
+		userService.createUser(new WorkerDTO(null, roles,
+				"userServiceTestUserCreating", "pass", "Decrtiption",
+				new PersonalDataDTO()));
 
 		roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_USER);
-		userService.createUser(new WorkerDTO(null, roles, "user", "pass", "Decrtiption", new PersonalDataDTO()));
+		userService.createUser(new WorkerDTO(null, roles, "user", "pass",
+				"Decrtiption", new PersonalDataDTO()));
 
 		// then
 		Assert.notNull(userService.getUser("userServiceTestUserCreating"));
 	}
-	
-	@Test public void passwordEncodingWhileCreating() throws ServiceException {
+
+	@Test
+	public void passwordEncodingWhileCreating() throws ServiceException { 
 		// given
 		PasswordEncoder encoder = new ShaPasswordEncoder();
-		
 		// when
-		userService.createUser(new WorkerDTO(null, new HashSet<UserRoleDTO>(), "userServiceTestPasswordEncodingCreating", "pass", "Decrtiption", new PersonalDataDTO()));
-		
+		userService.createUser(new WorkerDTO(null, new HashSet<UserRoleDTO>(),
+				"userServiceTestPasswordEncodingCreating", "pass",
+				"Decrtiption", new PersonalDataDTO()));
+
 		// then
-		UserDTO userDTO = userService.getUser("userServiceTestPasswordEncodingCreating");
-		Assert.isTrue(encoder.encodePassword("pass", saltSource.getSalt(new User(userDTO).toUserDetails())).equals(userDTO.getPassword()));
+		UserDTO userDTO = userService
+				.getUser("userServiceTestPasswordEncodingCreating");
+		Assert.isTrue(encoder.encodePassword("pass",
+				saltSource.getSalt(new User(userDTO).toUserDetails())).equals(
+				userDTO.getPassword()));
 	}
-	
-	@Test public void passwordEncodingWhileUpdating() throws ServiceException {
-		// given
-		UserDTO userDTO = new WorkerDTO(null, new HashSet<UserRoleDTO>(), "userServiceTestPasswordEncodingUpdating", "pass", "Decrtiption", new PersonalDataDTO());
+
+	@Test
+	public void passwordEncodingWhileUpdating() throws ServiceException { // given
+		UserDTO userDTO = new WorkerDTO(null, new HashSet<UserRoleDTO>(),
+				"userServiceTestPasswordEncodingUpdating", "pass",
+				"Decrtiption", new PersonalDataDTO());
 		userService.createUser(userDTO);
 		userDTO.setPassword("updated");
-		
+
 		// when
 		userService.updateUserWithPassword(userDTO);
-		
+
 		// then
-		UserDTO newUserDTO = userService.getUser("userServiceTestPasswordEncodingUpdating");
-		Assert.isTrue(passwordEncoder.encodePassword("updated", saltSource.getSalt(new User(newUserDTO).toUserDetails())).equals(userDTO.getPassword()));
+		UserDTO newUserDTO = userService
+				.getUser("userServiceTestPasswordEncodingUpdating");
+		Assert.isTrue(passwordEncoder.encodePassword("updated",
+				saltSource.getSalt(new User(newUserDTO).toUserDetails()))
+				.equals(userDTO.getPassword()));
 	}
-	
+
+	@Test
+	public void getAll() throws ServiceException {
+		Set<UserDTO> list = userService.getAllUsers();
+		for (UserDTO u : list) {
+			Assert.notNull(u.getAuthorities());
+			verifyClients(list, null); // no roles to check so it's null
+			verifyWorkers(list, null); // no roles to check so it's null
+		}
+	}
+
+	@Test
+	public void getAllByRoleCLIENT() throws ServiceException {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_CLIENT);
+		Set<UserDTO> list = userService.getUsersByRoles(roles);
+		verifyClients(list, roles);
+	}
+
+	@Test
+	public void getAllByRolePROJECTMANAGER() throws ServiceException {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		Set<UserDTO> list = userService.getUsersByRoles(roles);
+		verifyWorkers(list, roles);
+	}
+
+	@Test
+	public void getAllByRoleEXPERT() throws ServiceException {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_EXPERT);
+		Set<UserDTO> list = userService.getUsersByRoles(roles);
+		verifyWorkers(list, roles);
+	}
+
+	@Test
+	public void getAllByRoleEXECUTIVE() throws ServiceException {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		Set<UserDTO> list = userService.getUsersByRoles(roles);
+		verifyWorkers(list, roles);
+	}
+
+	@Test
+	public void getAllByRoleFREELANCER() throws ServiceException {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_FREELANCER);
+		Set<UserDTO> list = userService.getUsersByRoles(roles);
+		verifyWorkers(list, roles);
+	}
+
+	@Test
+	public void getAllByRoles() throws ServiceException {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		Set<UserDTO> list = userService.getUsersByRoles(roles);
+		verifyWorkers(list, roles);
+	}
+
+	private void verifyWorkers(Set<UserDTO> list, Set<UserRoleDTO> roles) {
+		for (UserDTO u : list) {
+			if (roles != null) {
+				boolean contains = false;
+				for (UserRoleDTO role : roles) {
+					contains = contains || u.getAuthorities().contains(role);
+				}
+				Assert.isTrue(contains);
+			}
+			if (u instanceof TranslatorDTO)
+				Assert.notNull(((TranslatorDTO) u).getTranslations());
+		}
+	}
+
+	private void verifyClients(Set<UserDTO> list, Set<UserRoleDTO> roles) {
+		for (UserDTO u : list) {
+			if (roles != null) {
+				boolean contains = false;
+				for (UserRoleDTO role : roles) {
+					contains = contains || u.getAuthorities().contains(role);
+				}
+				Assert.isTrue(contains);
+			}
+			if (u instanceof BusinessClientDTO) {
+				BusinessClientDTO bc = ((BusinessClientDTO) u);
+				Assert.notNull(bc.getAgents());
+				Iterator<PersonalDataDTO> i = bc.getAgents().iterator();
+				while (i.hasNext()) {
+					PersonalDataDTO data = i.next();
+					Assert.notNull(data.getEmail());
+					Assert.notNull(data.getPhoneNumber());
+				}
+			}
+
+		}
+	}
+
 }

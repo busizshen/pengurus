@@ -1,6 +1,7 @@
 package com.pengurus.crm.server;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -106,13 +107,22 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Set<UserDTO> getUsersByRoles(Set<UserRoleDTO> roles) {
-		// TODO [CRM-30]
-		return new HashSet<UserDTO>();
+		List<User> list = userDAO.getAll();
+		Set<UserDTO> set = new HashSet<UserDTO>();
+		for (User u : list)
+			for (UserRoleDTO role : roles)
+				if (u.getAuthorities().contains(role))
+					set.add(u.toDTO());
+		return set;
 	}
 
 	@Override
 	public Set<UserDTO> getAllUsers() {
-		// TODO [CRM-30]
-		return new HashSet<UserDTO>();
+		List<User> list = userDAO.getAll();
+		Set<UserDTO> set = new HashSet<UserDTO>();
+		for(User user : list){
+			set.add(user.toDTO());
+		}
+		return set;
 	}
 }
