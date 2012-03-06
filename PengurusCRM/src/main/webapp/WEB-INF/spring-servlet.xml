@@ -14,6 +14,7 @@
 				/**/quote.rpc=quoteController
 				/**/client.rpc=clientController
 				/**/administration.rpc=administrationController
+				/**/currencyType.rpc=currencyTypeController
 			</value>
 		</property>
 	</bean>

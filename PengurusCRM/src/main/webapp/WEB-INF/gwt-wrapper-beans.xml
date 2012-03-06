@@ -12,6 +12,10 @@
 		<property name="remoteService" ref="userServiceBean" />
 	</bean>
 	
+	<bean id="currencyTypeController" class="com.pengurus.crm.server.GwtRpcController">
+		<property name="remoteService" ref="currencyTypeServiceBean" />
+	</bean>
+	
 	<bean id="currentSessionController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="currentSessionServiceBean" />
 	</bean>

@@ -15,6 +15,11 @@ public class CurrencyType {
         super();
         this.currency = currency;
     }
+    
+    public CurrencyType(CurrencyTypeDTO currencyTypeDTO){
+        this.id = currencyTypeDTO.getId();
+        this.currency = currencyTypeDTO.getCurrency();
+    }
 
     public String getCurrency() {
         return currency;
