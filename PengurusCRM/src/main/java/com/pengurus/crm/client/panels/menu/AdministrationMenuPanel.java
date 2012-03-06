@@ -6,7 +6,6 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.MainWindow;
 import com.pengurus.crm.client.panels.center.administration.currency.CurrencyTypeCreatePanel;
-import com.pengurus.crm.client.panels.center.administration.currency.LanguageCreatePanel;
 
 
 public class AdministrationMenuPanel extends TabMenuPanel {
@@ -38,8 +37,8 @@ public class AdministrationMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-				    MainWindow.addCenterPanel(new LanguageCreatePanel());
-				}
+				  // TODO
+        }
 			});
 			add(b);
 		}
