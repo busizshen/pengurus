@@ -109,10 +109,14 @@ public class UserServiceImpl implements UserService {
 	public Set<UserDTO> getUsersByRoles(Set<UserRoleDTO> roles) {
 		List<User> list = userDAO.getAll();
 		Set<UserDTO> set = new HashSet<UserDTO>();
-		for (User u : list)
-			for (UserRoleDTO role : roles)
-				if (u.getAuthorities().contains(role))
+		for (User u : list) {
+			for (UserRoleDTO role : roles) {
+				if (u.getAuthorities().contains(role)){
 					set.add(u.toDTO());
+					break;
+				}
+			}
+		}
 		return set;
 	}
 

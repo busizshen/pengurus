@@ -1,5 +1,6 @@
 package com.pengurus.crm.client.panels.center.user;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +28,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.UserModel;
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.UserServiceAsync;
-import com.pengurus.crm.client.service.exceptions.IncorrectPasswordException;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
@@ -52,6 +52,7 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 		horizontalPanel.add(new ModelList());
 		sideOptions = new LayoutContainer();
 		createRoleCheckBoxGroup();
+		createRefreshButton();
 		horizontalPanel.add(sideOptions);
 		add(horizontalPanel);
 	}
@@ -94,20 +95,51 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 		fieldSet.add(userRoles);
 		sideOptions.add(fieldSet);
 	}
+	
+	private void deselectAllRoles() {
+		for (Field<?> field: userRoles.getAll()) {
+			if (field instanceof CheckBox) {
+				CheckBox checkBox = (CheckBox) field;
+				checkBox.setValue(false);
+			}
+		}
+	}
+	
+	public void selectAll() {
+		deselectAllRoles();
+		allBox.setValue(true);
+	}
+	
+	public void selectRole(UserRoleDTO role) {
+		deselectAllRoles();
+		for (Field<?> field: userRoles.getAll()) {
+			if (field instanceof UserRoleBox) {
+				UserRoleBox userRoleBox = (UserRoleBox) field;
+				if (userRoleBox.getUserRole().equals(role)) {
+					userRoleBox.setValue(true);	
+				}
+			}
+		}
+	}
 
 	public void refreshList() {
 		AsyncCallback<Set<UserDTO>> callback = new AsyncCallback<Set<UserDTO>>() {
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				if (caught instanceof IncorrectPasswordException) {
 					MessageBox.info("Failure", "Server error.", null);
-				}
 			}
 
 			@Override
-			public void onSuccess(Set<UserDTO> arg0) {
-				// TODO [CRM-32]
+			public void onSuccess(Set<UserDTO> userSet) {
+				getGrid().stopEditing();
+				getStore().removeAll();
+				ArrayList<UserModel> userModelList = new ArrayList<UserModel>();
+				for (UserDTO user: userSet) {
+					userModelList.add(new UserModel(user));
+				}
+				getStore().add(userModelList);
+				getGrid().startEditing(0, 0);
 			}
 		};
 		if (allBox.getValue()) {
@@ -119,13 +151,26 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 			for (Field<?> field: userRoles.getAll()) {
 				if (field instanceof UserRoleBox) {
 					UserRoleBox roleBox = (UserRoleBox) field;
-					roles.add(roleBox.getUserRole());
+					if (roleBox.getValue()) {
+						roles.add(roleBox.getUserRole());
+					}
 				}
 			}
 			UserServiceAsync service = (UserServiceAsync) GWT
 					.create(UserService.class);
 			service.getUsersByRoles(roles, callback);
 		}
+	}
+	
+	private void createRefreshButton() {
+		Button refreshButton = new Button("Refresh", new SelectionListener<ButtonEvent>() {
+			
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				refreshList();
+			}
+		});
+		sideOptions.add(refreshButton);
 	}
 	
 	@Override

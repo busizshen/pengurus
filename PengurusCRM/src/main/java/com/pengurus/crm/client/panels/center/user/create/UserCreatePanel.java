@@ -41,6 +41,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.pengurus.crm.client.models.PersonalDataModel;
+import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.UserServiceAsync;
 import com.pengurus.crm.shared.dto.BusinessClientDTO;
@@ -50,7 +51,7 @@ import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 import com.pengurus.crm.shared.dto.WorkerDTO;
 
-public class UserCreatePanel extends ContentPanel {
+public class UserCreatePanel extends MainPanel {
 
 	private HorizontalPanel horizontalPanel;
 	private FormPanel form;

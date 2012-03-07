@@ -117,6 +117,8 @@ public class ChangePasswordPanel extends MainPanel {
 					public void onFailure(Throwable caught) {
 						if (caught instanceof IncorrectPasswordException) {
 							MessageBox.info("Failure", "The password you have entered does not match your current one.", null);
+						} else {
+							MessageBox.info("Failure", "Server error.", null);
 						}
 					}
 				};
