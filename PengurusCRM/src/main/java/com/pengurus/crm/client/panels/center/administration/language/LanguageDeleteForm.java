@@ -1,4 +1,4 @@
-package com.pengurus.crm.client.panels.center.administration.currency;
+package com.pengurus.crm.client.panels.center.administration.language;
 
 import java.util.Set;
 
@@ -15,48 +15,48 @@ import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.pengurus.crm.client.models.CurrencyModel;
+import com.pengurus.crm.client.models.LanguageModel;
 import com.pengurus.crm.client.service.AdministrationService;
 import com.pengurus.crm.client.service.AdministrationServiceAsync;
-import com.pengurus.crm.shared.dto.CurrencyTypeDTO;
+import com.pengurus.crm.shared.dto.LanguageDTO;
 
-public class CurrencyDeleteForm extends FormPanel {
+public class LanguageDeleteForm extends FormPanel {
 
-    private ComboBox<CurrencyModel> combo;
+    private ComboBox<LanguageModel> combo;
     private Button deleteButton;
 
-    public CurrencyDeleteForm() {
+    public LanguageDeleteForm() {
         createCombo();
         createButton();
     }
 
     private void createCombo() {
-        combo = new ComboBox<CurrencyModel>();
-        combo.setFieldLabel("Currency");
-        combo.setEmptyText("Select a currency");
+        combo = new ComboBox<LanguageModel>();
+        combo.setFieldLabel("Language");
+        combo.setEmptyText("Select a language");
 
-        final ListStore<CurrencyModel> list = new ListStore<CurrencyModel>();
-        AsyncCallback<Set<CurrencyTypeDTO>> callback = new AsyncCallback<Set<CurrencyTypeDTO>>() {
+        final ListStore<LanguageModel> list = new ListStore<LanguageModel>();
+        AsyncCallback<Set<LanguageDTO>> callback = new AsyncCallback<Set<LanguageDTO>>() {
 
             @Override
-            public void onSuccess(Set<CurrencyTypeDTO> result) {
-                for (CurrencyTypeDTO currency : result)
-                    list.add(new CurrencyModel(currency));
+            public void onSuccess(Set<LanguageDTO> result) {
+                for (LanguageDTO language : result)
+                    list.add(new LanguageModel(language));
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                MessageBox.info("Failure", "Uploading currencies has "
+                MessageBox.info("Failure", "Uploading languages has "
                         + "failed.", null);
             }
         };
 
         AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
                 .create(AdministrationService.class);
-        service.getCurrency(callback);
+        service.getLanguages(callback);
 
-        combo.setDisplayField("currency");
-        list.sort("currency", SortDir.ASC);
+        combo.setDisplayField("lang");
+        list.sort("lang", SortDir.ASC);
         combo.setStore(list);
         combo.setTypeAhead(true);
         combo.setTriggerAction(TriggerAction.ALL);
@@ -70,37 +70,38 @@ public class CurrencyDeleteForm extends FormPanel {
 
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        AsyncCallback<CurrencyTypeDTO> callback = new AsyncCallback<CurrencyTypeDTO>() {
+                        AsyncCallback<LanguageDTO> callback = new AsyncCallback<LanguageDTO>() {
 
                             @Override
-                            public void onSuccess(CurrencyTypeDTO result) {
-                                CurrencyModel mm = null;
-                                for (CurrencyModel model : combo.getStore()
-                                        .getModels())
-                                    if (model.getCurrency().equals(
-                                            result.getCurrency()))
-                                        mm = model;
-                                if (mm != null)
-                                    combo.getStore().remove(mm);
+                            public void onSuccess(LanguageDTO result) {
 
-                                MessageBox.info(
-                                        "Success",
+                                LanguageModel lang = null;
+                                for (LanguageModel language : combo.getStore()
+                                        .getModels())
+                                    if (language.getLang().equals(
+                                            result.getLanguage()))
+                                        lang = language;
+                                if (lang != null) {
+                                    combo.getStore().remove(lang);
+                                }
+
+                                MessageBox.info("Success",
                                         "You have succesfully deleted "
-                                                + mm.getCurrency()
-                                                + " currency.", null);
+                                                + result.getLanguage()
+                                                + " language.", null);
                             }
 
                             @Override
                             public void onFailure(Throwable caught) {
                                 MessageBox.info("Failure",
-                                        "Deleting currency has failed.", null);
+                                        "Deleting language has failed.", null);
                             }
                         };
 
                         AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
                                 .create(AdministrationService.class);
-                        service.deleteCurrency(combo.getValue()
-                                .getCurrencyDTO(), callback);
+                        service.deleteLanguage(combo.getValue()
+                                .getLanguageDTO(), callback);
                     }
                 });
 
@@ -111,7 +112,8 @@ public class CurrencyDeleteForm extends FormPanel {
 
     }
 
-    public void addComboField(CurrencyTypeDTO currency) {
-        combo.getStore().add(new CurrencyModel(currency));
+    public void addComboField(LanguageDTO language) {
+        combo.getStore().add(new LanguageModel(language));
     }
+
 }

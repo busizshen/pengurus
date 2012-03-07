@@ -21,10 +21,6 @@
 		
 	</bean>
 	
-	<bean id="currencyTypeServiceBean" class="com.pengurus.crm.server.CurrencyTypeServiceImpl">
-		<property name="currencyTypeDAO" ref="currencyTypeDao" />
-	</bean>
-
 	<bean id="currentSessionServiceBean" class="com.pengurus.crm.server.CurrentSessionServiceImpl">
 		<property name="userDAO" ref="userDao" />
 		<property name="userService" ref="userServiceBean" />
@@ -41,10 +37,12 @@
 		<property name="clientDAO" ref="clientDao" />
 	</bean>
 	<bean id="administrationServiceBean" class="com.pengurus.crm.server.AdministrationServiceImpl">
-		<property name="currencyDAO" ref="currencyTypeDao" />
+		<property name="currencyTypeDAO" ref="currencyTypeDao" />
 		<property name="translationDAO" ref="translationDao" />
+		<property name="languageDAO" ref="languageDao" />
 	</bean>
-		<bean id="jobServiceBean" class="com.pengurus.crm.server.JobServiceImpl">
+	
+	<bean id="jobServiceBean" class="com.pengurus.crm.server.JobServiceImpl">
 		<property name="jobDAO" ref="jobDao" />
 		<property name="translationDAO" ref="translationDao" />
 	</bean>
