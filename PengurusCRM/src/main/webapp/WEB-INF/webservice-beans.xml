@@ -44,5 +44,9 @@
 		<property name="currencyDAO" ref="currencyTypeDao" />
 		<property name="translationDAO" ref="translationDao" />
 	</bean>
+		<bean id="jobServiceBean" class="com.pengurus.crm.server.JobServiceImpl">
+		<property name="jobDAO" ref="jobDao" />
+		<property name="translationDAO" ref="translationDao" />
+	</bean>
 
 </beans>

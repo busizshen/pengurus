@@ -18,7 +18,15 @@ public class TranslationType {
         this.unit = unit;
     }
 
-    public Long getId() {
+    public TranslationType(TranslationTypeDTO type) {
+    	super();
+    	if(type != null){
+    		this.description = type.getDescription();
+    		this.unit = type.getUnit();
+    	}
+    }
+
+	public Long getId() {
         return id;
     }
 

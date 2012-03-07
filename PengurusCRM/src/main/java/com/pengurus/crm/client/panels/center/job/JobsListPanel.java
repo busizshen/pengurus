@@ -35,8 +35,10 @@ import com.pengurus.crm.shared.dto.QuoteDTO;
 public abstract class JobsListPanel extends ListPanel<JobModel> {
 
 	protected ListStore<JobModel> jobs = new ListStore<JobModel>();
+	protected QuoteDTO quoteDTO;
 
 	public JobsListPanel(QuoteDTO quoteDTO) {
+		this.quoteDTO = quoteDTO; 
 		for (JobDTO j : quoteDTO.getJobs()) {
 			this.jobs.add(new JobModel(j));
 		}

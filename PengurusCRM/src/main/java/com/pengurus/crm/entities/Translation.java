@@ -4,76 +4,92 @@ import com.pengurus.crm.shared.dto.TranslationDTO;
 
 public class Translation {
 
-    private Long id;
-    private TranslationType type;
-    private Language lfrom;
-    private Language lto;
-    private Price defaultPrice;
+	private Long id;
+	private TranslationType type;
+	private Language lfrom;
+	private Language lto;
+	private Price defaultPrice;
 
-    public Translation() {
-        super();
-    }
+	public Translation() {
+		super();
+	}
 
-    public Translation(TranslationType type, Language lfrom, Language lto,
-                       Price defaultPrice) {
-        super();
-        this.type = type;
-        this.lfrom = lfrom;
-        this.lto = lto;
-        this.defaultPrice = defaultPrice;
-    }
+	public Translation(TranslationType type, Language lfrom, Language lto,
+			Price defaultPrice) {
+		super();
+		this.type = type;
+		this.lfrom = lfrom;
+		this.lto = lto;
+		this.defaultPrice = defaultPrice;
+	}
 
-    public Price getDefaultPrice() {
-        return defaultPrice;
-    }
+	public Translation(TranslationDTO translation) {
+		super();
+		if (translation != null) {
+			this.id = translation.getId();
+			if(translation.getDefaultPrice() != null)
+				this.defaultPrice = new Price(translation.getDefaultPrice());
+			if(translation.getFrom() != null)
+				this.lfrom = new Language(translation.getFrom());
+			if(translation.getTo()!= null)
+				this.lto = new Language(translation.getTo());
+			if(translation.getType() != null)
+				this.type = new TranslationType(translation.getType());
+		}
+	}
 
-    public void setDefaultPrice(Price defaultPrice) {
-        this.defaultPrice = defaultPrice;
-    }
+	public Price getDefaultPrice() {
+		return defaultPrice;
+	}
 
-    public TranslationType getType() {
-        return type;
-    }
+	public void setDefaultPrice(Price defaultPrice) {
+		this.defaultPrice = defaultPrice;
+	}
 
-    public void setType(TranslationType type) {
-        this.type = type;
-    }
+	public TranslationType getType() {
+		return type;
+	}
 
-    public Language getLfrom() {
-        return lfrom;
-    }
+	public void setType(TranslationType type) {
+		this.type = type;
+	}
 
-    public void setLfrom(Language lfrom) {
-        this.lfrom = lfrom;
-    }
+	public Language getLfrom() {
+		return lfrom;
+	}
 
-    public Language getLto() {
-        return lto;
-    }
+	public void setLfrom(Language lfrom) {
+		this.lfrom = lfrom;
+	}
 
-    public void setLto(Language lto) {
-        this.lto = lto;
-    }
+	public Language getLto() {
+		return lto;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void setLto(Language lto) {
+		this.lto = lto;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public TranslationDTO toDTO() {
 		TranslationDTO tDTO = new TranslationDTO();
-		if(defaultPrice != null)
+		tDTO.setId(id);
+		if (defaultPrice != null)
 			tDTO.setDefaultPrice(defaultPrice.toDTO());
-		if(lfrom != null)
+		if (lfrom != null)
 			tDTO.setFrom(lfrom.toDTO());
-		if(lto != null)
+		if (lto != null)
 			tDTO.setTo(lto.toDTO());
-		if(type != null)
+		if (type != null)
 			tDTO.setType(type.toDTO());
 		return tDTO;
 	}
-    
+
 }

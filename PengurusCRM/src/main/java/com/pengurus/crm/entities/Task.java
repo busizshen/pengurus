@@ -39,8 +39,13 @@ public class Task {
         this.rating = rating;
         this.comment = comment;
     }
-    
-    public Long getId() {
+   
+    //do zaklepania
+    public Task(TaskDTO t) {
+    	super();
+   	}
+
+	public Long getId() {
         return id;
     }
 

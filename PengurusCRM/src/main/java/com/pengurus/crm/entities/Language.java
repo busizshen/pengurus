@@ -16,7 +16,14 @@ public class Language {
         this.language = language;
     }
     
-    public Long getId() {
+    public Language(LanguageDTO lang) {
+		super();
+		if(lang != null){
+			this.language = lang.getLanguage();
+		}
+	}
+
+	public Long getId() {
         return Id;
     }
 

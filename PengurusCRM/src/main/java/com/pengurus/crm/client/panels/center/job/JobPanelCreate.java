@@ -5,10 +5,12 @@ import java.util.Set;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.core.El;
 import com.extjs.gxt.ui.client.core.XDOM;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.DomEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.ComponentPlugin;
@@ -19,7 +21,7 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -28,11 +30,15 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.models.CurrencyModel;
 import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.DescriptionPanel;
-import com.pengurus.crm.client.panels.center.administration.translation.TranslationsListPanel;
+import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanel;
 import com.pengurus.crm.client.service.AdministrationService;
 import com.pengurus.crm.client.service.AdministrationServiceAsync;
+import com.pengurus.crm.client.service.JobService;
+import com.pengurus.crm.client.service.JobServiceAsync;
 import com.pengurus.crm.shared.dto.CurrencyTypeDTO;
 import com.pengurus.crm.shared.dto.JobDTO;
+import com.pengurus.crm.shared.dto.PriceDTO;
+import com.pengurus.crm.shared.dto.StatusDTO;
 import com.pengurus.crm.shared.dto.TranslationDTO;
 
 public class JobPanelCreate {
@@ -41,6 +47,7 @@ public class JobPanelCreate {
 	private Listener<DomEvent> listenerClose;
 	private ListStore<CurrencyModel> listCurrencyModel;
 	private ListStore<TranslationModel> listTranslationModel;
+
 
 	public JobPanelCreate() {
 		listCurrencyModel = new ListStore<CurrencyModel>();
@@ -98,6 +105,7 @@ public class JobPanelCreate {
 
 		private VerticalPanel vp;
 		private FormData formData;
+		private TranslationPanel translation;
 
 		public JobPanelInfo() {
 			formData = new FormData("-20");
@@ -133,7 +141,7 @@ public class JobPanelCreate {
 				}
 			};
 
-			DateField date = new DateField();
+			final DateField date = new DateField();
 			date.setFieldLabel("Deadline");
 			date.addPlugin(plugin);
 			date.setAllowBlank(false);
@@ -146,18 +154,18 @@ public class JobPanelCreate {
 			 * compare(Stock arg0, Stock arg1) { return
 			 * arg0.getName().compareTo(arg1.getName()); } });
 			 */
-			TranslationsListPanel translations = new TranslationsListPanel(listTranslationModel);
-			simple.add(translations);
+			translation = new TranslationPanel(listTranslationModel);
+			translation.setAllowBlank(false);
+			simple.add(translation);
 
-			// HorizontalPanel hp = new HorizontalPanel();
-			TextField<Long> amount = new TextField<Long>();
-			amount.setFieldLabel("Amount");
+			final NumberField amount = new NumberField();
+			amount.setFieldLabel("Price");
 			amount.setAllowBlank(false);
 			amount.addPlugin(plugin);
 			amount.setData("text", "Enter your amount and choose Currnecy");
 			simple.add(amount);
 
-			ComboBox<CurrencyModel> combo = new ComboBox<CurrencyModel>();
+			final ComboBox<CurrencyModel> combo = new ComboBox<CurrencyModel>();
 			combo.setFieldLabel("Currency");
 			combo.setDisplayField("currency");
 			combo.setTriggerAction(TriggerAction.ALL);
@@ -167,10 +175,39 @@ public class JobPanelCreate {
 			combo.setAllowBlank(false);
 			simple.add(combo, formData);
 
-			DescriptionPanel descr = new DescriptionPanel();
+			final DescriptionPanel descr = new DescriptionPanel();
 			simple.add(descr, formData);
 
-			Button b = new Button("Submit");
+			Button b = new Button("Submit", new SelectionListener<ButtonEvent>(){
+
+				@Override
+				public void componentSelected(ButtonEvent ce) {
+					jobDTO = new JobDTO();
+					jobDTO.setDeadline(date.getValue());
+					jobDTO.setDescription(descr.getDescription());
+					PriceDTO priceDTO = new PriceDTO();
+					priceDTO.setPrice( amount.getValue().intValue());
+					priceDTO.setCurrency(combo.getValue().getCurrencyDTO());
+					jobDTO.setPrice(priceDTO);
+					jobDTO.setTranslation(translation.getTranslation().getTranslationDTO());
+					jobDTO.setStatus(StatusDTO.open);
+					AsyncCallback<JobDTO> callback = new AsyncCallback<JobDTO>() {
+
+						public void onFailure(Throwable t) {
+							Window.Location.assign("/spring_security_login");
+						}
+
+						public void onSuccess(JobDTO result) {
+							jobDTO = result;
+						}
+					};
+					JobServiceAsync service = (JobServiceAsync) GWT
+							.create(JobService.class);
+					service.createJob(jobDTO, callback);
+				}
+				
+			});
+			b.addListener(Events.OnClick, listenerCreateJob);
 			simple.addButton(b);
 			Button c = new Button("Cancel");
 			c.addListener(Events.OnClick, listenerClose);

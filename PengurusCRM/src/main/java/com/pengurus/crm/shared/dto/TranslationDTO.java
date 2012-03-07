@@ -8,21 +8,31 @@ public class TranslationDTO implements IsSerializable {
     private LanguageDTO from;
     private LanguageDTO to;
     private PriceDTO defaultPrice;
+    private Long Id;
 
     public TranslationDTO() {
         super();
     }
 
-    public TranslationDTO(TranslationTypeDTO type, LanguageDTO from, LanguageDTO to,
+    public TranslationDTO(Long Id, TranslationTypeDTO type, LanguageDTO from, LanguageDTO to,
                        PriceDTO defaultPrice) {
         super();
+        this.Id = Id;
         this.type = type;
         this.from = from;
         this.to = to;
         this.defaultPrice = defaultPrice;
     }
 
-    public PriceDTO getDefaultPrice() {
+    public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+	public PriceDTO getDefaultPrice() {
         return defaultPrice;
     }
 

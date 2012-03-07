@@ -52,6 +52,14 @@ public abstract class ListPanel<T extends ModelData> extends MainPanel {
 
 			add(cp);
 		}
+
+		public EditorGrid<T> getGrid() {
+			return grid;
+		}
+
+		public ListStore<T>  getStore() {
+			return store;
+		}
 	}
 	protected void onRender(Element target, int index) {
 		super.onRender(target, index);

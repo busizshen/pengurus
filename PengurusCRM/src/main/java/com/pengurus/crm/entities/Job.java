@@ -1,10 +1,12 @@
 package com.pengurus.crm.entities;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.pengurus.crm.enums.Status;
 import com.pengurus.crm.shared.dto.JobDTO;
+import com.pengurus.crm.shared.dto.TaskDTO;
 
 public class Job {
 
@@ -34,7 +36,28 @@ public class Job {
         this.task = task;
     }
     
-    public Long getId() {
+    public Job(JobDTO jobDTO) {
+    	super();
+		if(jobDTO != null){
+			if(jobDTO.getStatus() != null)
+				this.status = Status.toStatus(jobDTO.getStatus());
+			if(jobDTO.getDeadline() != null)
+				this.deadline = jobDTO.getDeadline();
+			this.description = jobDTO.getDescription();
+			if(jobDTO.getPrice()!= null)
+				this.price = new Price(jobDTO.getPrice());
+			if(jobDTO.getTranslation() != null)
+				this.translation = new Translation(jobDTO.getTranslation());
+			if(jobDTO.getTask() != null){
+				this.task = new HashSet<Task>();
+				for(TaskDTO t : jobDTO.getTask())
+					this.task.add(new Task(t));
+			}
+			
+		}
+	}
+
+	public Long getId() {
         return id;
     }
 

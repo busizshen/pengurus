@@ -6,6 +6,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.pengurus.crm.client.models.JobModel;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.QuoteDTO;
 
@@ -33,9 +34,10 @@ public class JobsListPanelEdit extends JobsListPanel {
 					public void handleEvent(DomEvent be) {
 					    //dodanie nowego JOBA do bazy danych
 						if(jobPanel.getJobDTO() != null){
-/*							ml.getGrid().stopEditing();
+							ml.getGrid().stopEditing();
 							ml.getStore().add(new JobModel(jobPanel.getJobDTO()));
-							ml.getGrid().startEditing(0, 0);*/
+							ml.getGrid().startEditing(0, 0);
+							quoteDTO.getJobs().add(jobPanel.getJobDTO());
 							w.hide();
 						}
 					}

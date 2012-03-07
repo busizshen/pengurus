@@ -18,7 +18,16 @@ public class Price {
         this.currency = currency;
     }
 
-    public Integer getPrice() {
+    public Price(PriceDTO priceDTO) {
+		super();
+		if(priceDTO != null){
+			this.price = priceDTO.getPrice();
+			if(priceDTO.getCurrency() != null)
+				this.currency = new CurrencyType(priceDTO.getCurrency());
+		}
+	}
+
+	public Integer getPrice() {
         return price;
     }
 
