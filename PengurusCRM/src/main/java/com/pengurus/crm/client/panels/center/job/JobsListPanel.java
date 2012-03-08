@@ -18,7 +18,6 @@ import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.grid.filters.GridFilters;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
@@ -59,7 +58,7 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 		column.setHeader("Id");
 		configs.add(column);
 
-		column = new ColumnConfigMy();
+		/*column = new ColumnConfigMy();
 		column.setId("status");
 		column.setHeader("Status");
 		configs.add(column);
@@ -74,16 +73,16 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 		column.setId("translationFrom");
 		column.setHeader("Translation From");
 		configs.add(column);
-
-		column = new ColumnConfigMy();
+*/
+	/*	column = new ColumnConfigMy();
 		column.setId("translationTo");
 		column.setHeader("Translation To");
-		configs.add(column);
+		configs.add(column);*/
 
-		column = new ColumnConfigMy();
+/*		column = new ColumnConfigMy();
 		column.setId("priceNumber");
 		column.setHeader("Price");
-		configs.add(column);
+		configs.add(column);*/
 
 		/*
 		 * column = new ColumnConfig(); column.setId("preview");

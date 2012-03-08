@@ -1,11 +1,8 @@
 package com.pengurus.crm.client.panels.center.user;
 
-import com.extjs.gxt.ui.client.Style.Orientation;
-import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.Label;
-import com.extjs.gxt.ui.client.widget.layout.RowData;
-import com.extjs.gxt.ui.client.widget.layout.RowLayout;
+import com.extjs.gxt.ui.client.widget.HorizontalPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.pengurus.crm.client.panels.center.DescriptionPanel;
 import com.pengurus.crm.shared.dto.UserDTO;
 
@@ -27,24 +24,26 @@ public abstract class UserPanel {
 	
 	public class UserViewInfo extends ContentPanel {
 		
+		HorizontalPanel hp;
+
 		public UserViewInfo(){
+			hp = new HorizontalPanel();
+			hp.setSpacing(10);
 			this.setCollapsible(true);  
 		    this.setAnimCollapse(true);
 		    this.collapse();
 		    setHeading(getUserHeading());
-		    setLayout(new RowLayout(Orientation.VERTICAL));
-		    if(getUserDTO() != null){
-		    	Label login = new Label();
-		    	login.setText(getUserDTO().getUsername());
-		    	login.setBorders(true);
-		    	login.show();
-		    	add(login, new RowData(-1, -1, new Margins(4)));
+		    if(getUserDTO() != null){	    	
+		    	hp.add(getInfoForm());
 		    	DescriptionPanel descr = new DescriptionPanel(getUserDescription());
-		    	descr.setNonEditable();
-		    	add(descr, new RowData(-1, 1, new Margins(4)));
+		    	descr.setAutoWidth(true);
+		    	hp.add(descr);
 		    }
+		    add(hp);
 		   }
 
 	}
+
+	public abstract Widget getInfoForm();
 
 }

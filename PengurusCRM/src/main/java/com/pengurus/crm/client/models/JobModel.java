@@ -17,21 +17,21 @@ public class JobModel  extends BaseModel{
 	private void setJobDTO(JobDTO jobDTO) {
 		this.jobDTO = jobDTO;
 		if(jobDTO.getStatus() != null){
-			set("status", jobDTO.getStatus());
+			set("status", jobDTO.getStatus().toString());
 		}
 		if(jobDTO.getId() != null){
 			set("id", jobDTO.getId());
 		}
 		if(jobDTO.getDeadline() != null){
-			set("deadline", jobDTO.getDeadline());
+			set("deadline", jobDTO.getDeadline().toString());
 		}
 		if(jobDTO.getTranslation() != null){
 			set("translationFrom", jobDTO.getTranslation().getFrom().getLanguage());
 			set("translationTo", jobDTO.getTranslation().getTo().getLanguage());
 		}
 		if(jobDTO.getPrice() != null){
-			set("priceNumber",jobDTO.getPrice().getPrice());
-			set("priceCurrency",jobDTO.getPrice().getCurrency().getCurrency());
+			set("priceNumber",jobDTO.getPrice().getPrice().toString());
+			//set("priceCurrency",jobDTO.getPrice().getCurrency().getCurrency().toString());
 		}
 	}
 	
@@ -49,6 +49,14 @@ public class JobModel  extends BaseModel{
 	
 	public String getTranslationFrom(){
 		return get("translationFrom");
+	}
+	
+	public String getTranslationTo(){
+		return get("translationTo");
+	}
+	
+	public String getPriceNumber(){
+		return get("priceNumber");
 	}
 	
 

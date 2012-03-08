@@ -56,11 +56,7 @@ public class JobsListPanelEdit extends JobsListPanel {
 				w.setClosable(false);
 				w.setHeaderVisible(true);
 				w.setAutoHide(false);
-				
 				w.setHeading("Create Job");
-				/*Button b2 = new Button("Cancel");
-				b2.addListener(Events.OnClick, listenerCreateJob);
-				w.add(b2);*/
 				w.show();
 			}});
 		add(createButton);

@@ -30,10 +30,9 @@ public class IndividualClientDTO extends ClientDTO {
 	public String getType() {
 		return "Individual Client";
 	}
-	
 	@Override
 	public String getFullName() {
-		return getPersonalData().getFullName();
+		return personalData.getFullName();
 	}
     
 }
