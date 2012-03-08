@@ -8,7 +8,7 @@ import com.pengurus.crm.shared.dto.PersonalDataDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 public class BusinessClient extends Client {
-    
+	
 	private String name;
     private Set<PersonalData> agents;
     
@@ -60,6 +60,7 @@ public class BusinessClient extends Client {
 		bcDTO.setId(this.getId());
 		bcDTO.setUsername(this.getUsername());
 		bcDTO.setDescription(this.getDescription());
+		bcDTO.setName(this.getName());
 		for(PersonalData pd : agents){
 			bcDTO.addAgent(pd.toDTO());
 		}

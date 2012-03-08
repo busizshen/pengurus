@@ -45,5 +45,10 @@ public class BusinessClientDTO extends ClientDTO {
 	public String getType() {
 		return "Bussines Client";
 	}
+	
+	@Override
+	public String getFullName() {
+		return getName();
+	}
 
 }

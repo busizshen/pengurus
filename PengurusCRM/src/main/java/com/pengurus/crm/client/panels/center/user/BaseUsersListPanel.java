@@ -52,13 +52,18 @@ public abstract class BaseUsersListPanel<T extends UserModel> extends ListPanel<
 	    column = new ColumnConfigMy();  
 	    column.setId("description");  
 	    column.setHeader("Description");  
-	    configs.add(column);  
+	    configs.add(column); 
+	    
+	    column = new ColumnConfigMy();
+	    column.setId("fullName");
+	    column.setHeader("Full name");
+	    configs.add(column);
 
 	    column = new ColumnConfigMy(); 
 	    column.setId("choose");  
 	    column.setHeader("Choose");  
 	    column.setRenderer(getButtonRenderer()); 
-	    configs.add(column);  
+	    configs.add(column);
 	   
 	    return configs;
 	}

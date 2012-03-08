@@ -24,4 +24,9 @@ public class WorkerDTO extends UserDTO {
     public void setPersonalData(PersonalDataDTO personalData) {
         this.personalData = personalData;
     }
+    
+    @Override
+    public String getFullName() {
+    	return getPersonalData().getFullName();
+    }
 }

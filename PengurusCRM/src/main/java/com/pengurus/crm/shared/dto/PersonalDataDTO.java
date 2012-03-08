@@ -77,6 +77,10 @@ public class PersonalDataDTO implements IsSerializable {
     public void setEmail(Set<String> email2) {
         this.email = email2;
     }
+
+	public String getFullName() {
+		return firstName + " " + lastName; 
+	}
     
     
 }

@@ -80,4 +80,8 @@ public class UserDTO implements IsSerializable {
 		return false;
 	}
     
+	public String getFullName () {
+		return getUsername();
+	}
+	
 }
