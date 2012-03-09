@@ -18,7 +18,7 @@ import com.pengurus.crm.entities.User;
 import com.pengurus.crm.entities.Worker;
 
 public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO {
-
+	
 	protected static final Logger log = LoggerFactory
 			.getLogger(UserDAOImpl.class);
 
@@ -26,16 +26,28 @@ public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO {
 		this.type = User.class;
 	}
 
+	private User getUserByUsernameHelper(String username) {
+		String query = "select u from User u where u.username = '"
+				+ username + "'";
+		List<?> result = getHibernateTemplate().find(query);
+		if (result.isEmpty())
+			return null;
+		return (User) result.get(0);
+	}
+	
 	@Override
-	public User findByUsername(String username)
+	public User getUserByUsername(String username)
 			throws UsernameNotFoundException {
-		try {
-			String query = "select u from User u where u.username = '"
-					+ username + "'";
-			return (User) getHibernateTemplate().find(query).get(0);
-		} catch (IndexOutOfBoundsException e) {
+		User user = getUserByUsernameHelper(username);
+		if (user == null)
 			throw new UsernameNotFoundException(username);
-		}
+		return user;
+	}
+	
+	@Override
+	public boolean usernameExists(String username) {
+		User user = getUserByUsernameHelper(username);
+		return user != null;
 	}
 
 	@SuppressWarnings("unchecked")

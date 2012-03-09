@@ -39,7 +39,7 @@ public class CurrentSessionServiceImpl implements CurrentSessionService {
 	public UserDTO getCurrentUser() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (principal instanceof UserDetails) {
-			User user = userDAO.findByUsername(((UserDetails) principal).getUsername());
+			User user = userDAO.getUserByUsername(((UserDetails) principal).getUsername());
 			log.error(user.toString());
 			return user.toUserDTO();
 		}

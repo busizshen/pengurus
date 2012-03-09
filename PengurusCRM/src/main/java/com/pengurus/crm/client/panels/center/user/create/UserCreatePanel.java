@@ -44,6 +44,7 @@ import com.pengurus.crm.client.models.PersonalDataModel;
 import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.UserServiceAsync;
+import com.pengurus.crm.client.service.exceptions.UsernameExistsException;
 import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.IndividualClientDTO;
 import com.pengurus.crm.shared.dto.PersonalDataDTO;
@@ -638,7 +639,11 @@ public class UserCreatePanel extends MainPanel {
 							
 							@Override
 							public void onFailure(Throwable caught) {
-								MessageBox.info("Failure", "Creating new user has failed.", null);
+								if (caught instanceof UsernameExistsException) {
+									MessageBox.info("Failure", "Chosen username already exists.", null);
+								} else {
+									MessageBox.info("Failure", "Creating new user has failed.", null);
+								}
 							}
 						};
 						

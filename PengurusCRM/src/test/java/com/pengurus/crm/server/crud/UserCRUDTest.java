@@ -65,9 +65,9 @@ public class UserCRUDTest {
         userFromDB.setUsername("new name");
         userDAO.update(userFromDB);
         
-        User newUserFromDB = userDAO.findByUsername("new name");
+        User newUserFromDB = userDAO.getUserByUsername("new name");
         Assert.assertEquals("new description", newUserFromDB.getDescription());
-        userDAO.findByUsername("Test3");
+        userDAO.getUserByUsername("Test3");
     }
     
     @Test (expected=UsernameNotFoundException.class)
@@ -78,7 +78,7 @@ public class UserCRUDTest {
         
         //test
         userDAO.delete(user);
-        userDAO.findByUsername("Test4");
+        userDAO.getUserByUsername("Test4");
     }
     
     @Test (expected=DataAccessException.class)

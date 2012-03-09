@@ -16,6 +16,7 @@ import org.springframework.util.Assert;
 import com.google.gwt.dev.util.collect.HashSet;
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.exceptions.ServiceException;
+import com.pengurus.crm.client.service.exceptions.UsernameExistsException;
 import com.pengurus.crm.entities.User;
 import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.PersonalDataDTO;
@@ -60,14 +61,14 @@ public class UserServiceTest {
 	}
 
 	@Test(expected = ServiceException.class)
-	public void abstractUserCreating() throws ServiceException { 
+	public void abstractUserCreating() throws ServiceException, UsernameExistsException { 
 		// when
 		userService.createUser(new UserDTO(null, new HashSet<UserRoleDTO>(),
 				"userServiceTestAbstractUserCreating", "pass", "Decrtiption"));
 	}
 
 	@Test
-	public void userCreating() throws ServiceException { // when
+	public void userCreating() throws ServiceException, UsernameExistsException { // when
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_USER);
 		userService.createUser(new WorkerDTO(null, roles,
@@ -84,7 +85,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void passwordEncodingWhileCreating() throws ServiceException { 
+	public void passwordEncodingWhileCreating() throws ServiceException, UsernameExistsException { 
 		// given
 		PasswordEncoder encoder = new ShaPasswordEncoder();
 		// when
@@ -101,7 +102,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void passwordEncodingWhileUpdating() throws ServiceException { // given
+	public void passwordEncodingWhileUpdating() throws ServiceException, UsernameExistsException { // given
 		UserDTO userDTO = new WorkerDTO(null, new HashSet<UserRoleDTO>(),
 				"userServiceTestPasswordEncodingUpdating", "pass",
 				"Decrtiption", new PersonalDataDTO());

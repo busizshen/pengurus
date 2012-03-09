@@ -33,7 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException, DataAccessException {
 		
-		User user = userDAO.findByUsername(username);
+		User user = userDAO.getUserByUsername(username);
 		log.error(user.toString());
 		return user.toUserDetails();
 		

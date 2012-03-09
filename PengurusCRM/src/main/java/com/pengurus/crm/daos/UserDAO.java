@@ -6,8 +6,8 @@ import com.pengurus.crm.entities.User;
 
 public interface UserDAO extends GenericDAO<User>{
 	
-	public User findByUsername(String username);
-	
+	public User getUserByUsername(String username);
+	boolean usernameExists(String username);
 	public List<User> getAll();
 
 }

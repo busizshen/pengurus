@@ -11,6 +11,7 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.exceptions.ServiceException;
+import com.pengurus.crm.client.service.exceptions.UsernameExistsException;
 import com.pengurus.crm.daos.UserDAO;
 import com.pengurus.crm.entities.BusinessClient;
 import com.pengurus.crm.entities.IndividualClient;
@@ -59,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDTO getUser(String username) {
-		return userDAO.findByUsername(username).toUserDTO();
+		return userDAO.getUserByUsername(username).toUserDTO();
 	}
 
 	@Override
@@ -74,7 +75,10 @@ public class UserServiceImpl implements UserService {
 		return updateUser(userDTO);
 	}
 	@Override
-	public Void createUser(UserDTO userDTO) throws ServiceException {
+	public Void createUser(UserDTO userDTO) throws ServiceException, UsernameExistsException {
+		if (userDAO.usernameExists(userDTO.getUsername())) {
+			throw new UsernameExistsException();
+		}
 		encodePassword(userDTO);
 		User user;
 		if (userDTO instanceof IndividualClientDTO) {
