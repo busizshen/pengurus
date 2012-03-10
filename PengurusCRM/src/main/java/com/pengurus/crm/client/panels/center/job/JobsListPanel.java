@@ -3,30 +3,13 @@ package com.pengurus.crm.client.panels.center.job;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.GridEvent;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
-import com.extjs.gxt.ui.client.widget.grid.ColumnData;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.grid.filters.GridFilters;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.pengurus.crm.client.models.JobModel;
-import com.pengurus.crm.client.models.QuoteModel;
 import com.pengurus.crm.client.panels.center.ListPanel;
-import com.pengurus.crm.client.panels.center.quote.QuotePanelView;
-import com.pengurus.crm.client.service.QuoteService;
-import com.pengurus.crm.client.service.QuoteServiceAsync;
 import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.QuoteDTO;
@@ -35,7 +18,8 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 
 	protected ListStore<JobModel> jobs = new ListStore<JobModel>();
 	protected QuoteDTO quoteDTO;
-
+	protected ProjectDTO projectDTO;
+	
 	public JobsListPanel(QuoteDTO quoteDTO) {
 		this.quoteDTO = quoteDTO; 
 		for (JobDTO j : quoteDTO.getJobs()) {
@@ -44,6 +28,7 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 	}
 
 	public JobsListPanel(ProjectDTO projectDTO) {
+		this.projectDTO = projectDTO; 
 		for (JobDTO j : projectDTO.getJobs()) {
 			this.jobs.add(new JobModel(j));
 		}
@@ -92,7 +77,7 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 		return configs;
 	}
 
-	private GridCellRenderer<QuoteModel> getButtonRenderer() {
+/*	private GridCellRenderer<QuoteModel> getButtonRenderer() {
 
 		GridCellRenderer<QuoteModel> buttonRenderer = new GridCellRenderer<QuoteModel>() {
 
@@ -158,7 +143,7 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 			}
 		};
 		return buttonRenderer;
-	}
+	}*/
 
 	@Override
 	protected String getName() {
@@ -173,8 +158,11 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 
 	@Override
 	protected void setStyle(ContentPanel cp) {
-		cp.setCollapsible(true);
-		cp.setAnimCollapse(true);
+		cp.setCollapsible(false);
+		cp.setAnimCollapse(false);
+		cp.setHeaderVisible(false);
+		cp.setFrame(false);
+		cp.setBorders(true);
 	}
 
 	@Override

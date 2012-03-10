@@ -4,6 +4,6 @@ import com.pengurus.crm.entities.Quote;
 
 public interface QuoteDAO extends GenericDAO<Quote>{
     
-    Quote readQuote(long id);
+    Quote read(long id);
     
 }

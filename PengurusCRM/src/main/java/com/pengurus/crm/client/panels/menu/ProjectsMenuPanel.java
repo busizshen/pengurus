@@ -4,6 +4,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.AuthorizationManager;
+import com.pengurus.crm.client.panels.center.project.ProjectsListPanelAll;
 
 public class ProjectsMenuPanel extends TabMenuPanel {
 
@@ -37,7 +38,7 @@ public class ProjectsMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-				//	new QuotesListPanelMine();
+					//new QuotesListPanelMine();
 				}
 			});
 		    add(b);
@@ -50,7 +51,8 @@ public class ProjectsMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-				//	new QuotesListPanelAll();
+					ProjectsListPanelAll pp = new ProjectsListPanelAll();
+					pp.setAsMain();
 				}
 			});
 		    add(b);

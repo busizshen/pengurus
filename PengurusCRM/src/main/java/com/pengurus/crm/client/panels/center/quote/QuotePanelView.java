@@ -29,7 +29,7 @@ public class QuotePanelView extends QuotePanel {
 
 	@Override
 	protected void getJobsPanel(QuoteView quoteView) {
-		if (quoteDTO.getJobs() != null) {
+    	if (quoteDTO.getJobs() != null) {
 			jobsList = new JobsListPanelView(quoteDTO);
 			quoteView.add(jobsList.getPanel());
 		}

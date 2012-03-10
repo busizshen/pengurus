@@ -25,9 +25,9 @@ public class QuoteModel extends BaseModel {
 		if(quoteDTO.getStatus() != null)
 			set("status",quoteDTO.getStatus().toString());
 		if(quoteDTO.getClient() != null)
-			set("client",quoteDTO.getClient().getUsername());
+			set("client",quoteDTO.getClient().getFullName());
 		if(quoteDTO.getSupervisor() != null)
-			set("supervisor",quoteDTO.getSupervisor().getUsername());
+			set("supervisor",quoteDTO.getSupervisor().getFullName());
 		set("description",quoteDTO.getDescription());
 	}
 

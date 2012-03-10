@@ -9,6 +9,8 @@ import com.pengurus.crm.shared.dto.WorkerDTO;
 public abstract class WorkerPanel extends UserPanel {
 
 	WorkerDTO workerDTO;
+	TextField<String> login;
+	TextField<String> name;
 	public WorkerPanel(WorkerDTO workerDTO) {
 		super(workerDTO);
 		this.workerDTO = workerDTO; 
@@ -40,20 +42,26 @@ public abstract class WorkerPanel extends UserPanel {
 		simple.setHeaderVisible(false);
 		simple.setBorders(true);
 		
-		TextField<String> login = new TextField<String>();
+		login = new TextField<String>();
 		login.setFieldLabel("Login");
 		login.setReadOnly(true);
 		login.setValue(workerDTO.getUsername());
 		simple.add(login);
 		
-		if(workerDTO.getPersonalData() != null){
-			TextField<String> name = new TextField<String>();
-			name.setFieldLabel("Login");
-			name.setReadOnly(true);
+		name = new TextField<String>();
+		name.setFieldLabel("Login");
+		name.setReadOnly(true);
+		if(workerDTO.getPersonalData() != null)
 			name.setValue(workerDTO.getPersonalData().getFullName());
-			simple.add(name);
-		}
+		simple.add(name);
 		
 		return simple;
+	}
+	
+	public void refresh(WorkerDTO workerDTO) {
+		this.workerDTO = workerDTO;
+		login.setValue(this.workerDTO.getUsername());
+		if(workerDTO.getPersonalData() != null)
+			name.setValue(workerDTO.getPersonalData().getFullName());
 	}
 }

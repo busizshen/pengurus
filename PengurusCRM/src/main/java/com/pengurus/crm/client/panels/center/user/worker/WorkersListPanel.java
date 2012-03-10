@@ -38,7 +38,7 @@ public class WorkersListPanel extends BaseUsersListPanel<WorkerModel> {
 	}
 
 	@Override
-	protected GridCellRenderer getButtonRenderer() {
+	protected GridCellRenderer<WorkerModel> getButtonRenderer() {
 		GridCellRenderer<WorkerModel> buttonRenderer = new GridCellRenderer<WorkerModel>() {
 
 			private boolean init;

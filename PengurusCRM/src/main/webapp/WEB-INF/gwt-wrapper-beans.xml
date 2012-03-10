@@ -29,5 +29,8 @@
 	<bean id="jobController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="jobServiceBean" />
 	</bean>
+	<bean id="projectController" class="com.pengurus.crm.server.GwtRpcController">
+		<property name="remoteService" ref="projectServiceBean" />
+	</bean>
 	
 </beans>

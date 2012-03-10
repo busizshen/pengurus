@@ -47,8 +47,8 @@ public class Quote {
 				this.client = new BusinessClient();
 			} else if (quoteDTO.getClient() instanceof IndividualClientDTO) {
 				this.client = new IndividualClient();
-				this.client.setId(quoteDTO.getClient().getId());
 			}
+			this.client.setId(quoteDTO.getClient().getId());
 		}
 		this.description = quoteDTO.getDescription();
 		this.id = quoteDTO.getId();

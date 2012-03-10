@@ -10,7 +10,9 @@ import com.pengurus.crm.client.panels.center.QuoteStatusPanel;
 import com.pengurus.crm.client.panels.center.job.JobsListPanel;
 import com.pengurus.crm.client.panels.center.user.client.ClientPanel;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanel;
+import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.QuoteDTO;
+import com.pengurus.crm.shared.dto.StatusDTO;
 
 public abstract class QuotePanel {
 	protected QuoteDTO quoteDTO;// już jest w postaci pełnej
@@ -53,6 +55,13 @@ public abstract class QuotePanel {
 		Listener<DomEvent> listenerGenerateProject = new Listener<DomEvent>() {
 			@Override
 			public void handleEvent(DomEvent be) {
+				ProjectDTO projectDTO = new ProjectDTO();
+				projectDTO.setClient(quoteDTO.getClient());
+				projectDTO.setDescription(quoteDTO.getDescription());
+				projectDTO.setJobs(quoteDTO.getJobs());
+				projectDTO.setSupervisor(quoteDTO.getSupervisor());
+				projectDTO.setStatus(StatusDTO.open);
+				projectDTO.create(projectDTO);
 
 			}
 		};

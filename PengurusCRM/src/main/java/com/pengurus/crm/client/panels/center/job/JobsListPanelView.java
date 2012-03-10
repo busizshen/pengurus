@@ -17,12 +17,12 @@ public class JobsListPanelView extends JobsListPanel {
 	}
 
 	public ContentPanel getPanel() {
-		ml = new ModelList();
-		add(ml);
 		setHeading("Jobs");
 		setCollapsible(true);
 		setAnimCollapse(true);
 		collapse();
+		ml = new ModelList();
+		add(ml);
 		return this;
 	}
 

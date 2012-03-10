@@ -18,14 +18,15 @@ public class ProjectModel extends BaseModel {
 	
 	public void setProjectDTO(ProjectDTO projectDTO){
 		this.projectDTO = projectDTO;
+		set("id", projectDTO.getId());
 		if(projectDTO.getStatus() != null){
 			set("status", projectDTO.getStatus());
 		}
 		if(projectDTO.getSupervisor() != null){
-			set("supervisor",projectDTO.getSupervisor());
+			set("supervisor",projectDTO.getSupervisor().getFullName());
 		}
 		if(projectDTO.getClient() != null){
-			set("client", projectDTO.getClient());
+			set("client", projectDTO.getClient().getFullName());
 		}
 		if(projectDTO.getDescription() != null){
 			set("description", projectDTO.getDescription());
@@ -48,7 +49,7 @@ public class ProjectModel extends BaseModel {
 		return get("descritpion");
 	}
 
-	public ProjectDTO getQuoteDTO() {
+	public ProjectDTO getProjectDTO() {
 		return this.projectDTO;
 	}
 	

@@ -3,7 +3,14 @@ package com.pengurus.crm.shared.dto;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.pengurus.crm.client.panels.center.project.ProjectPanelView;
+import com.pengurus.crm.client.service.ProjectService;
+import com.pengurus.crm.client.service.ProjectServiceAsync;
 
 public class ProjectDTO implements IsSerializable {
 	    private Long id;
@@ -106,5 +113,25 @@ public class ProjectDTO implements IsSerializable {
 	    public void setDescription(String description) {
 	        this.description = description;
 	    }
+
+		public void create(ProjectDTO projectDTO) {
+			AsyncCallback<ProjectDTO > callback = new AsyncCallback<ProjectDTO >() {
+
+				public void onFailure(Throwable t) {
+					Window.Location.assign("/spring_security_login");
+					MessageBox mb = new MessageBox();
+					mb.setMessage("Error service.createProject()");
+					mb.show();
+				}
+
+				public void onSuccess(ProjectDTO result) {
+					ProjectPanelView projectPanel = new ProjectPanelView(result);
+					projectPanel.setAsMain();
+				}
+			};
+			ProjectServiceAsync service = (ProjectServiceAsync) GWT
+					.create(ProjectService.class);
+			service.createProject(projectDTO,callback);
+		}
 
 }

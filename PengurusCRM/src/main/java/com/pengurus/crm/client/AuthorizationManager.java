@@ -158,5 +158,19 @@ public class AuthorizationManager {
 		return currentUser.haveAuthority(roles);
 	}
 
+	public static boolean canChangeProject() {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		return currentUser.haveAuthority(roles);
+	}
+
+	public static boolean canViewWholeProject() {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
+		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		return currentUser.haveAuthority(roles);
+	}
 
 }

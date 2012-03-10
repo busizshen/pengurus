@@ -7,7 +7,8 @@ import com.pengurus.crm.client.panels.center.user.UserPanel;
 import com.pengurus.crm.shared.dto.ClientDTO;
 
 public abstract class ClientPanel extends UserPanel {
-
+	TextField<String> login;
+	TextField<String> name ;
 	protected ClientDTO clientDTO;
 	public ClientPanel(ClientDTO client) {
 		super(client);
@@ -42,13 +43,13 @@ public abstract class ClientPanel extends UserPanel {
 		simple.setHeaderVisible(false);
 		simple.setBorders(true);
 		
-		TextField<String> login = new TextField<String>();
+		login = new TextField<String>();
 		login.setFieldLabel("Login");
 		login.setReadOnly(true);
 		login.setValue(clientDTO.getUsername());
 		simple.add(login);
 		
-		TextField<String> name = new TextField<String>();
+		name = new TextField<String>();
 		name.setFieldLabel("Name");
 		name.setReadOnly(true);
 		name.setValue(clientDTO.getFullName());
@@ -57,6 +58,10 @@ public abstract class ClientPanel extends UserPanel {
 		return simple;
 	}
 
-
+	public void refresh(ClientDTO client) {
+		this.clientDTO = client;
+		login.setValue(this.clientDTO.getUsername());
+		login.setValue(this.clientDTO.getFullName());
+	}
 }
 

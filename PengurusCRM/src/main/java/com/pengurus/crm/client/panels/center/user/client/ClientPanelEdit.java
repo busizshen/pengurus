@@ -61,4 +61,5 @@ public class ClientPanelEdit extends ClientPanel {
 		return cl.getChosenClient();
 	}
 
+
 }

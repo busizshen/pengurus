@@ -4,6 +4,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.DomEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.models.JobModel;
@@ -23,6 +24,10 @@ public class JobsListPanelEdit extends JobsListPanel {
 	}
 	
 	public JobsListPanelEdit getPanel() {
+		setHeading("Jobs");
+		setCollapsible(true);
+		setAnimCollapse(true);
+		collapse();
 		ml = new ModelList();
 		Button createButton = new Button("Create New Job", new SelectionListener<ButtonEvent>(){
 			@Override
@@ -59,12 +64,10 @@ public class JobsListPanelEdit extends JobsListPanel {
 				w.setHeading("Create Job");
 				w.show();
 			}});
-		add(createButton);
-		add(ml);
-		setHeading("Jobs");
-		setCollapsible(true);
-		setAnimCollapse(true);
-		collapse();
+		HorizontalPanel hp = new HorizontalPanel();
+		hp.add(createButton);
+		hp.add(ml);
+		add(hp);
 		return this;
 	}
 

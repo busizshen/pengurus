@@ -56,4 +56,5 @@ public class WorkerPanelEdit extends WorkerPanel {
 		return cl.getChosenWorker();
 	}
 
+
 }
