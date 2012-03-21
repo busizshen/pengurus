@@ -73,7 +73,7 @@ public class QuoteServiceImpl implements QuoteService {
 
 	@Override
 	public QuoteDTO getQuote(Long id) {
-		return quoteDAO.read(id).toDTO();
+		return quoteDAO.getById(id).toDTO();
 	}
 
 }

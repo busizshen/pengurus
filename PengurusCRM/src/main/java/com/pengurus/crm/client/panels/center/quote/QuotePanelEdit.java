@@ -10,7 +10,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.MainWindow;
 import com.pengurus.crm.client.panels.center.DescriptionPanelEdit;
-import com.pengurus.crm.client.panels.center.job.JobsListPanelEdit;
+import com.pengurus.crm.client.panels.center.job.JobsListPanelQuoteEdit;
 import com.pengurus.crm.client.panels.center.user.client.ClientPanelEdit;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEdit;
 import com.pengurus.crm.shared.dto.QuoteDTO;
@@ -117,7 +117,7 @@ public class QuotePanelEdit extends QuotePanel {
 	@Override
 	protected void getJobsPanel(QuoteView quoteView) {
 		if (quoteDTO.getJobs() != null) {
-			jobsList = new JobsListPanelEdit(quoteDTO);
+			jobsList = new JobsListPanelQuoteEdit(quoteDTO);
 			quoteView.add(jobsList.getPanel());
 		}
 

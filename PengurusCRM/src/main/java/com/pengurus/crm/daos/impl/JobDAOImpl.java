@@ -1,5 +1,6 @@
 package com.pengurus.crm.daos.impl;
 
+import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,4 +14,17 @@ public class JobDAOImpl extends GenericDAOImpl<Job> implements JobDAO {
     public JobDAOImpl(){
         this.type = Job.class;
     }
+
+	@Override
+	public Job getById(Long id) {
+        try{
+            Session session = getHibernateTemplate().getSessionFactory().openSession();
+            Job job= (Job) session.get(type, id);
+            job.getTask().size();
+            session.close();
+            return job;
+        } catch(Exception e) {
+            return null;
+        }
+	}
 }

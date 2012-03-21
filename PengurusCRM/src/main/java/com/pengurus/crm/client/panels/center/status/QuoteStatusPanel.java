@@ -1,4 +1,4 @@
-package com.pengurus.crm.client.panels.center;
+package com.pengurus.crm.client.panels.center.status;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.VerticalAlignment;

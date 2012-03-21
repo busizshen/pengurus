@@ -28,5 +28,9 @@ public class JobServiceImpl implements JobService {
 	public void setTranslationDAO(TranslationDAO translationDAO) {
 		this.translationDAO = translationDAO;
 	}
+	@Override
+	public JobDTO getJob(Long id) {
+		return jobDAO.getById(id).toDTO();
+	}
 
 }

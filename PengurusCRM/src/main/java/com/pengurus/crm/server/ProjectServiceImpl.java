@@ -39,7 +39,7 @@ public class ProjectServiceImpl implements ProjectService{
 
 	@Override
 	public ProjectDTO getProject(Long id) {
-		return projectDAO.read(id).toDTO();
+		return projectDAO.getById(id).toDTO();
 	}
 
 }

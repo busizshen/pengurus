@@ -17,7 +17,7 @@ public class ProjectDAOImpl extends GenericDAOImpl<Project> implements
         this.type = Project.class;
     }
 
-    public Project read(long id){
+    public Project getById(long id){
         try{
             Session session = getHibernateTemplate().getSessionFactory().openSession();
             Project project = (Project) session.get(type, id);

@@ -9,20 +9,29 @@ import com.pengurus.crm.client.models.TranslationModel;
 
 public class TranslationPanel extends FormPanel {
 
-	TranslationModel translation ;
+	TranslationModel translation;
 	TextField<String> from;
 	TextField<String> to;
 	TextField<String> type;
 	TextField<Integer> price;
 	private TranslationsListPanel translations;
-	
-	public TranslationPanel(ListStore<TranslationModel> listTranslationModel){
+
+	public TranslationPanel() {
+		initTranslationPanel();
+	}
+
+	public TranslationPanel(TranslationModel translation) {
+		initTranslationPanel();
+		if (translation != null)
+			setTranslation(translation);
+	}
+
+	private void initTranslationPanel() {
 		this.setBorders(true);
 		setHeading("Translation");
 		from = new TextField<String>();
 		from.setFieldLabel("From");
 		from.setReadOnly(true);
-		add(from);
 		add(from);
 		to = new TextField<String>();
 		to.setFieldLabel("To");
@@ -36,26 +45,33 @@ public class TranslationPanel extends FormPanel {
 		price.setFieldLabel("DefaultPrice");
 		price.setReadOnly(true);
 		add(price);
-		Listener<DomEvent> listenerChosen = new Listener<DomEvent>(){
-			@Override
-			public void handleEvent(DomEvent be) {
-				setTranslation(translations.getTranslation());
-			}};
-		translations = new TranslationsListPanel(listTranslationModel, listenerChosen);
-		add(translations);
-		
+
 	}
-	
+
 	public void setTranslation(TranslationModel translation) {
 		this.translation = translation;
 		refresh();
 	}
-	
-	private void refresh(){
-		from.setValue(translation.getTranslationDTO().getFrom().getLanguage());
-		to.setValue(translation.getTranslationDTO().getTo().getLanguage());
-		type.setValue(translation.getTranslationDTO().getType().getDescription() + "  " + translation.getTranslationDTO().getType().getUnit());
-		price.setValue(translation.getTranslationDTO().getDefaultPrice().getPrice());
+
+	private void refresh() {
+		if (translation != null) {
+			if (translation.getTranslationDTO().getFrom() != null)
+				from.setValue(translation.getTranslationDTO().getFrom()
+						.getLanguage());
+
+			if (translation.getTranslationDTO().getTo() != null)
+				to.setValue(translation.getTranslationDTO().getTo()
+						.getLanguage());
+			if (translation.getTranslationDTO().getType() != null)
+				type.setValue(translation.getTranslationDTO().getType()
+						.getDescription()
+						+ "  "
+						+ translation.getTranslationDTO().getType().getUnit());
+
+			if (translation.getTranslationDTO().getDefaultPrice() != null)
+				price.setValue(translation.getTranslationDTO()
+						.getDefaultPrice().getPrice());
+		}
 	}
 
 	public void setAllowBlank(boolean b) {
@@ -65,6 +81,19 @@ public class TranslationPanel extends FormPanel {
 
 	public TranslationModel getTranslation() {
 		return translation;
+	}
+
+	public void addEditPanel(ListStore<TranslationModel> listTranslationModel) {
+		Listener<DomEvent> listenerChosen = new Listener<DomEvent>() {
+			@Override
+			public void handleEvent(DomEvent be) {
+				setTranslation(translations.getTranslation());
+			}
+		};
+		translations = new TranslationsListPanel(listTranslationModel,
+				listenerChosen);
+		add(translations);
+
 	}
 
 }

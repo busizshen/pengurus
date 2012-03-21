@@ -18,7 +18,7 @@ public class QuoteDAOImpl extends GenericDAOImpl<Quote> implements
     }
 
     @Override
-    public Quote read(long id) {
+    public Quote getById(long id) {
         try{
             Session session = getHibernateTemplate().getSessionFactory().openSession();
             Quote quote = (Quote) session.get(type, id);

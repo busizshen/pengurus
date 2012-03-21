@@ -4,4 +4,5 @@ import com.pengurus.crm.entities.Job;
 
 public interface JobDAO extends GenericDAO<Job>{
 
+	Job getById(Long id);
 }

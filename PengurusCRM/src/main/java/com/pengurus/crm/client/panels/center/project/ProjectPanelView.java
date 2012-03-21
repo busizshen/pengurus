@@ -28,12 +28,6 @@ public class ProjectPanelView extends ProjectPanel{
 	}
 
 	@Override
-	protected void addTasksPanel() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	protected void addProjectMangaersPanel() {
 		// TODO Auto-generated method stub
 		

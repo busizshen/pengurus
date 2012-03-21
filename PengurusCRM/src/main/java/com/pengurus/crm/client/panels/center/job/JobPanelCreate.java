@@ -31,6 +31,7 @@ import com.pengurus.crm.client.models.CurrencyModel;
 import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.DescriptionPanel;
 import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanel;
+import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanelCreate;
 import com.pengurus.crm.client.service.AdministrationService;
 import com.pengurus.crm.client.service.AdministrationServiceAsync;
 import com.pengurus.crm.client.service.JobService;
@@ -48,11 +49,10 @@ public class JobPanelCreate {
 	private ListStore<CurrencyModel> listCurrencyModel;
 	private ListStore<TranslationModel> listTranslationModel;
 
-
 	public JobPanelCreate() {
 		listCurrencyModel = new ListStore<CurrencyModel>();
 		listTranslationModel = new ListStore<TranslationModel>();
-		
+
 		AsyncCallback<Set<CurrencyTypeDTO>> callback = new AsyncCallback<Set<CurrencyTypeDTO>>() {
 
 			public void onFailure(Throwable t) {
@@ -78,7 +78,7 @@ public class JobPanelCreate {
 					listTranslationModel.add(new TranslationModel(c));
 			}
 		};
-	 service = (AdministrationServiceAsync) GWT
+		service = (AdministrationServiceAsync) GWT
 				.create(AdministrationService.class);
 		service.getTranslations(callback2);
 	}
@@ -148,13 +148,7 @@ public class JobPanelCreate {
 			date.setData("text", "Enter your birthday");
 			simple.add(date, formData);
 
-			/*
-			 * List<Stock> stocks = TestData.getStocks();
-			 * Collections.sort(stocks, new Comparator<Stock>() { public int
-			 * compare(Stock arg0, Stock arg1) { return
-			 * arg0.getName().compareTo(arg1.getName()); } });
-			 */
-			translation = new TranslationPanel(listTranslationModel);
+			translation = new TranslationPanelCreate(listTranslationModel);
 			translation.setAllowBlank(false);
 			simple.add(translation);
 
@@ -178,35 +172,39 @@ public class JobPanelCreate {
 			final DescriptionPanel descr = new DescriptionPanel();
 			simple.add(descr, formData);
 
-			Button b = new Button("Submit", new SelectionListener<ButtonEvent>(){
+			Button b = new Button("Submit",
+					new SelectionListener<ButtonEvent>() {
 
-				@Override
-				public void componentSelected(ButtonEvent ce) {
-					jobDTO = new JobDTO();
-					jobDTO.setDeadline(date.getValue());
-					jobDTO.setDescription(descr.getDescription());
-					PriceDTO priceDTO = new PriceDTO();
-					priceDTO.setPrice( amount.getValue().intValue());
-					priceDTO.setCurrency(combo.getValue().getCurrencyDTO());
-					jobDTO.setPrice(priceDTO);
-					jobDTO.setTranslation(translation.getTranslation().getTranslationDTO());
-					jobDTO.setStatus(StatusDTO.open);
-					AsyncCallback<JobDTO> callback = new AsyncCallback<JobDTO>() {
+						@Override
+						public void componentSelected(ButtonEvent ce) {
+							jobDTO = new JobDTO();
+							jobDTO.setDeadline(date.getValue());
+							jobDTO.setDescription(descr.getDescription());
+							PriceDTO priceDTO = new PriceDTO();
+							priceDTO.setPrice(amount.getValue().intValue());
+							priceDTO.setCurrency(combo.getValue()
+									.getCurrencyDTO());
+							jobDTO.setPrice(priceDTO);
+							jobDTO.setTranslation(translation.getTranslation()
+									.getTranslationDTO());
+							jobDTO.setStatus(StatusDTO.open);
+							AsyncCallback<JobDTO> callback = new AsyncCallback<JobDTO>() {
 
-						public void onFailure(Throwable t) {
-							Window.Location.assign("/spring_security_login");
+								public void onFailure(Throwable t) {
+									Window.Location
+											.assign("/spring_security_login");
+								}
+
+								public void onSuccess(JobDTO result) {
+									jobDTO = result;
+								}
+							};
+							JobServiceAsync service = (JobServiceAsync) GWT
+									.create(JobService.class);
+							service.createJob(jobDTO, callback);
 						}
 
-						public void onSuccess(JobDTO result) {
-							jobDTO = result;
-						}
-					};
-					JobServiceAsync service = (JobServiceAsync) GWT
-							.create(JobService.class);
-					service.createJob(jobDTO, callback);
-				}
-				
-			});
+					});
 			b.addListener(Events.OnClick, listenerCreateJob);
 			simple.addButton(b);
 			Button c = new Button("Cancel");
@@ -220,13 +218,5 @@ public class JobPanelCreate {
 
 			vp.add(simple);
 		}
-
-		/*
-		 * private ListStore<TranslationModel> getTranslations() {
-		 * 
-		 * ListStore<TranslationModel> list = new
-		 * ListStore<TranslationTypeModel>(); return list; }
-		 */
-
 	}
 }

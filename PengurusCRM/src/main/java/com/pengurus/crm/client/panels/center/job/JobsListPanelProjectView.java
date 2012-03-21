@@ -2,17 +2,12 @@ package com.pengurus.crm.client.panels.center.job;
 
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.pengurus.crm.shared.dto.ProjectDTO;
-import com.pengurus.crm.shared.dto.QuoteDTO;
 
-public class JobsListPanelView extends JobsListPanel {
+public class JobsListPanelProjectView extends JobsListPanelProject{
 
 	ModelList ml;
 
-	public JobsListPanelView(QuoteDTO quoteDTO) {
-		super(quoteDTO);
-	}
-
-	public JobsListPanelView(ProjectDTO projectDTO) {
+	public JobsListPanelProjectView(ProjectDTO projectDTO) {
 		super(projectDTO);
 	}
 
@@ -25,6 +20,4 @@ public class JobsListPanelView extends JobsListPanel {
 		add(ml);
 		return this;
 	}
-
-
 }

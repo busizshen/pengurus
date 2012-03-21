@@ -8,22 +8,17 @@ import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.models.JobModel;
-import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.QuoteDTO;
 
-public class JobsListPanelEdit extends JobsListPanel {
+public class JobsListPanelQuoteEdit extends JobsListPanelQuote {
 
 	ModelList ml;
 	
-	public JobsListPanelEdit(QuoteDTO quoteDTO){
+	public JobsListPanelQuoteEdit(QuoteDTO quoteDTO){
 		super(quoteDTO);
 	}
 	
-	public JobsListPanelEdit(ProjectDTO projectDTO){
-		super(projectDTO);
-	}
-	
-	public JobsListPanelEdit getPanel() {
+	public JobsListPanelQuoteEdit getPanel() {
 		setHeading("Jobs");
 		setCollapsible(true);
 		setAnimCollapse(true);
@@ -70,5 +65,7 @@ public class JobsListPanelEdit extends JobsListPanel {
 		add(hp);
 		return this;
 	}
+	
+	
 
 }

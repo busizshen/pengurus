@@ -3,6 +3,7 @@ package com.pengurus.crm.client;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
@@ -172,5 +173,37 @@ public class AuthorizationManager {
 		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
 		return currentUser.haveAuthority(roles);
 	}
+
+	public static boolean canChangeTask() {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
+		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		return currentUser.haveAuthority(roles);
+	}
+
+	public static boolean canEditJobProject() {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
+		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		return currentUser.haveAuthority(roles);
+	}
+	
+	public static boolean canEditJob() {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
+		return currentUser.haveAuthority(roles);
+	}
+
+	public static boolean canEditProject(ProjectDTO projectDTO) {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		Set<UserRoleDTO> roles2 = new HashSet<UserRoleDTO>();
+		roles2.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		return currentUser.haveAuthority(roles) || (currentUser.haveAuthority(roles) && projectDTO.isProjectManager(currentUser)) ;
+	}
+
 
 }

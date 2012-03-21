@@ -1,7 +1,7 @@
 package com.pengurus.crm.client.panels.center.project;
 
 import com.pengurus.crm.client.panels.center.MainPanel;
-import com.pengurus.crm.client.panels.center.job.JobsListPanelView;
+import com.pengurus.crm.client.panels.center.job.JobsListPanelProjectView;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 
 public abstract class ProjectPanel extends MainPanel {
@@ -14,17 +14,14 @@ public abstract class ProjectPanel extends MainPanel {
 		addInfoPanel();
 		addProjectMangaersPanel();
 		addJobsPanel();
-		addTasksPanel();
 		addTranslatorsPanel();
 		
 	}
 
 	protected abstract void addTranslatorsPanel();
 
-	protected abstract void addTasksPanel();
-
 	protected void addJobsPanel() {
-		JobsListPanelView jobsPanel = new JobsListPanelView(projectDTO);
+		JobsListPanelProjectView jobsPanel = new JobsListPanelProjectView(projectDTO);
 		add(jobsPanel.getPanel());	
 	}
 
