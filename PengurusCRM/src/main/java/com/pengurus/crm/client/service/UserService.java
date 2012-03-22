@@ -13,8 +13,8 @@ import com.pengurus.crm.shared.dto.UserRoleDTO;
 public interface UserService extends RemoteService {
 	
 	public UserDTO getUser(String username);
-	public Void updateUser(UserDTO user);
-	public Void updateUserWithPassword(UserDTO user);
+	public Void updateUser(UserDTO user) throws ServiceException;
+	public Void updateUserWithPassword(UserDTO user) throws ServiceException;
 	public Boolean checkPassword(String currentPassword, UserDTO user);
 	
 	public Void createUser(UserDTO user) throws ServiceException, UsernameExistsException;

@@ -63,16 +63,32 @@ public class UserServiceImpl implements UserService {
 		return userDAO.getUserByUsername(username).toUserDTO();
 	}
 
-	@Override
-	public Void updateUser(UserDTO userDTO) {
-		userDAO.update(new User(userDTO));
+	private Void updateUserHelper(UserDTO userDTO) throws ServiceException {
+		if (userDTO instanceof IndividualClientDTO) {
+			userDAO.update(new IndividualClient((IndividualClientDTO) userDTO));
+		} else if (userDTO instanceof BusinessClientDTO) {
+			userDAO.update(new BusinessClient((BusinessClientDTO) userDTO));
+		} else if (userDTO instanceof WorkerDTO) {
+			userDAO.update(new Worker((WorkerDTO) userDTO));
+		} else if (userDTO instanceof TranslatorDTO) {
+			userDAO.update(new Translator((TranslatorDTO) userDTO));
+		} else {
+			throw new ServiceException();
+		}
 		return null;
+	}
+	
+	@Override
+	public Void updateUser(UserDTO userDTO) throws ServiceException {
+		User oldUser = userDAO.read(userDTO.getId());
+		userDTO.setPassword(oldUser.getPassword());
+		return updateUserHelper(userDTO);
 	}
 
 	@Override
-	public Void updateUserWithPassword(UserDTO userDTO) {
+	public Void updateUserWithPassword(UserDTO userDTO) throws ServiceException {
 		encodePassword(userDTO);
-		return updateUser(userDTO);
+		return updateUserHelper(userDTO);
 	}
 	@Override
 	public Void createUser(UserDTO userDTO) throws ServiceException, UsernameExistsException {
@@ -128,7 +144,7 @@ public class UserServiceImpl implements UserService {
 	public Set<UserDTO> getAllUsers() {
 		List<User> list = userDAO.getAll();
 		Set<UserDTO> set = new HashSet<UserDTO>();
-		for(User user : list){
+		for(User user: list){
 			set.add(user.toDTO());
 		}
 		return set;

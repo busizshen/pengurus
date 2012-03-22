@@ -26,6 +26,7 @@ import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.UserModel;
+import com.pengurus.crm.client.panels.center.user.create.UserEditPanel;
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.UserServiceAsync;
 import com.pengurus.crm.shared.dto.UserDTO;
@@ -213,8 +214,7 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
-								MessageBox.info("a", model.getUserDTO()
-										.getUsername(), null);
+								new UserEditPanel(model.getUserDTO()).setAsMain();
 							}
 						});
 

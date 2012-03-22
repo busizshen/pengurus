@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.pengurus.crm.client.service.CurrentSessionService;
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.exceptions.IncorrectPasswordException;
+import com.pengurus.crm.client.service.exceptions.ServiceException;
 import com.pengurus.crm.daos.UserDAO;
 import com.pengurus.crm.entities.User;
 import com.pengurus.crm.shared.dto.UserDTO;
@@ -47,7 +48,7 @@ public class CurrentSessionServiceImpl implements CurrentSessionService {
 	}
 
 	@Override
-	public Void setPassword(String currentPassword, String password) throws IncorrectPasswordException {
+	public Void setPassword(String currentPassword, String password) throws IncorrectPasswordException, ServiceException {
 		UserDTO user = getCurrentUser();
 		if (!userService.checkPassword(currentPassword, user)) {
 			throw new IncorrectPasswordException();
