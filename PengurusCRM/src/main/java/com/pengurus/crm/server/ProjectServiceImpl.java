@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.service.ProjectService;
 import com.pengurus.crm.daos.ProjectDAO;
 import com.pengurus.crm.entities.Project;
@@ -41,5 +42,27 @@ public class ProjectServiceImpl implements ProjectService{
 	public ProjectDTO getProject(Long id) {
 		return projectDAO.getById(id).toDTO();
 	}
+
+	@Override
+	public Set<ProjectDTO> getProjectByExpertId(Long id) {
+		List<Project> list = projectDAO.loadAllByExpertId(id);
+		Set<ProjectDTO> set = new HashSet<ProjectDTO>();
+		for (Project q : list) {
+			set.add(q.toDTOLazy());
+		}
+		return set;
+	}
+
+	@Override
+	public Set<ProjectDTO> getProjectByProjectManagerId(Long id){
+		List<Project> list = projectDAO.loadAllByProjectManagerId(id);
+		Set<ProjectDTO> set = new HashSet<ProjectDTO>();
+		for (Project q : list) {
+			set.add(q.toDTOLazy());
+		}
+		return set;
+	}
+	
+	
 
 }

@@ -1,5 +1,9 @@
 package com.pengurus.crm.daos.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,4 +39,32 @@ public class ProjectDAOImpl extends GenericDAOImpl<Project> implements
             return null;
         }
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Project> loadAllByExpertId(Long id) {
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Long[] ids = {id};
+		String hql = "select distinct p from Project p " +
+		                "join p.experts e " +
+		                "where e.id in (:ids)";
+		Query query = session.createQuery(hql);
+		query.setParameterList("ids", ids);
+		List<Project> projects = query.list();
+		return projects;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Project> loadAllByProjectManagerId(Long id) {
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Long[] ids = {id};
+		String hql = "select distinct p from Project p " +
+		                "join p.projectManagers pm " +
+		                "where pm.id in (:ids)";
+		Query query = session.createQuery(hql);
+		query.setParameterList("ids", ids);
+		List<Project> projects = query.list();
+		return projects;
+	}
 }

@@ -115,6 +115,7 @@ public class UserServiceImpl implements UserService {
 	private void encodePassword(UserDTO user) {
 		String encodedPassword = passwordEncoder.encodePassword(user.getPassword(), saltSource.getSalt(new User(user).toUserDetails()));
 		user.setPassword(encodedPassword);
+		
 	}
 
 	@Override

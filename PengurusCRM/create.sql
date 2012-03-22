@@ -70,7 +70,7 @@ CREATE SEQUENCE hibernate_sequence
 -- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('hibernate_sequence', 303, true);
+SELECT pg_catalog.setval('hibernate_sequence', 323, true);
 
 
 --
@@ -312,6 +312,7 @@ INSERT INTO client (user_id) VALUES (107);
 INSERT INTO client (user_id) VALUES (109);
 INSERT INTO client (user_id) VALUES (111);
 INSERT INTO client (user_id) VALUES (115);
+INSERT INTO client (user_id) VALUES (321);
 
 
 --
@@ -350,6 +351,7 @@ INSERT INTO currencytype (id, currency) VALUES (272, 'RSD (Serbian dinar)');
 INSERT INTO currencytype (id, currency) VALUES (278, 'CHF (Swiss franc)');
 INSERT INTO currencytype (id, currency) VALUES (284, 'SEK (Swedish krona)');
 INSERT INTO currencytype (id, currency) VALUES (292, 'TRY (Turkish lira)');
+INSERT INTO currencytype (id, currency) VALUES (308, '$$Project0');
 
 
 --
@@ -433,6 +435,8 @@ INSERT INTO emails (id, email) VALUES (299, 'jeremy_smith@yahoo.com');
 INSERT INTO emails (id, email) VALUES (299, 'jeremy_smith@gmail.com');
 INSERT INTO emails (id, email) VALUES (301, 'admin@hacks.com');
 INSERT INTO emails (id, email) VALUES (303, 'm.angelo@yahoo.fr');
+INSERT INTO emails (id, email) VALUES (311, 'john@yahoo.com');
+INSERT INTO emails (id, email) VALUES (311, 'john2@yahoo.com');
 
 
 --
@@ -447,6 +451,7 @@ INSERT INTO individualclient (user_id, data) VALUES (107, 108);
 INSERT INTO individualclient (user_id, data) VALUES (109, 110);
 INSERT INTO individualclient (user_id, data) VALUES (111, 112);
 INSERT INTO individualclient (user_id, data) VALUES (115, 116);
+INSERT INTO individualclient (user_id, data) VALUES (321, 311);
 
 
 --
@@ -454,14 +459,14 @@ INSERT INTO individualclient (user_id, data) VALUES (115, 116);
 --
 
 INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (51, 'open', '2012-04-16 15:00:00.00', 46, 21000, 44, 'Job description2', 55, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (49, 'closed', '2012-01-01 00:00:00.00', 46, 1000, 44, 'Job description', 55, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (64, 'closed', '2011-10-25 12:15:00.00', 61, 1000, 59, 'Job description', 70, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (66, 'open', '2012-05-15 10:00:00.00', 61, 21000, 59, 'Job description2', 70, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (81, 'open', '2012-04-01 13:45:00.00', 76, 21000, 74, 'Job description2', 85, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (79, 'closed', '2012-02-10 15:00:00.00', 76, 1000, 74, 'Job description', 85, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (94, 'closed', '2012-02-10 13:00:00.00', 91, 1000, 89, 'Job description', NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (96, 'open', '2012-03-15 13:45:00.00', 91, 21000, 89, 'Job description2', NULL, NULL);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (51, 'open', '2012-04-16 15:00:00', 46, 21000, 44, 'Job description2', 55, NULL);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (49, 'closed', '2012-01-01 00:00:00', 46, 1000, 44, 'Job description', 55, NULL);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (64, 'closed', '2011-10-25 12:15:00', 61, 1000, 59, 'Job description', 70, NULL);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (66, 'open', '2012-05-15 10:00:00', 61, 21000, 59, 'Job description2', 70, NULL);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (81, 'open', '2012-04-01 13:45:00', 76, 21000, 74, 'Job description2', 85, NULL);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (79, 'closed', '2012-02-10 15:00:00', 76, 1000, 74, 'Job description', 85, NULL);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (94, 'closed', '2012-02-10 13:00:00', 91, 1000, 89, 'Job description', NULL, NULL);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (96, 'open', '2012-03-15 13:45:00', 91, 21000, 89, 'Job description2', NULL, NULL);
 INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (126, 'closed', '2012-02-26 13:36:37.501', NULL, 10000, NULL, 'description', NULL, NULL);
 INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (136, 'closed', '2012-02-26 13:36:37.68', NULL, 10000, NULL, 'description', NULL, NULL);
 INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (146, 'closed', '2012-02-26 13:36:37.835', NULL, 10000, NULL, 'description', NULL, NULL);
@@ -473,6 +478,8 @@ INSERT INTO job (job_id, status, deadline, translation, amount, price, descripti
 INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (194, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (197, 'resolved', '2012-02-26 13:36:38.792', 191, 123123, 198, 'new awesome description', NULL, NULL);
 INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (208, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (319, 'open', '2012-03-22 20:36:51.304', 309, 21000, 307, 'Job description2', NULL, 323);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (317, 'closed', '2012-03-22 20:36:51.304', 309, 1000, 307, 'Job description', NULL, 323);
 
 
 --
@@ -575,6 +582,7 @@ INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (296
 INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (299, 'Carol', 'Storker', '139 Dorothy Street, London F5 8JT, United Kingdom', NULL);
 INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (301, 'John', 'Smith', '1 Reds Road, Manchester E5 00T, United Kingdom', NULL);
 INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (303, 'Michael', 'Angelo', '59 Rue de Rivoli 75001 Paris, France', NULL);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (311, 'Jacob', 'Harper', '44 Church Road Wimbledon London SW19 5AE, England', NULL);
 
 
 --
@@ -657,6 +665,8 @@ INSERT INTO phonenumbers (id, phonenumber) VALUES (296, '000-111-111');
 INSERT INTO phonenumbers (id, phonenumber) VALUES (299, '1-243-002‑2920');
 INSERT INTO phonenumbers (id, phonenumber) VALUES (299, '9-286-513-0001');
 INSERT INTO phonenumbers (id, phonenumber) VALUES (301, '9-003-092‑1110');
+INSERT INTO phonenumbers (id, phonenumber) VALUES (311, '00-000-000');
+INSERT INTO phonenumbers (id, phonenumber) VALUES (311, '00-001-001');
 
 
 --
@@ -689,30 +699,38 @@ INSERT INTO price (id, price, currency) VALUES (271, 200, 272);
 INSERT INTO price (id, price, currency) VALUES (277, 201, 278);
 INSERT INTO price (id, price, currency) VALUES (283, 202, 284);
 INSERT INTO price (id, price, currency) VALUES (291, 203, 292);
+INSERT INTO price (id, price, currency) VALUES (307, 200, 308);
 
 
 --
 -- Data for Name: project; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO project (project_id, status, client, supervisor, description) VALUES (323, 'inProgress', 321, 322, 'the very first project created');
 
 
 --
 -- Data for Name: project_experts; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO project_experts (project_id, user_id) VALUES (323, 312);
+INSERT INTO project_experts (project_id, user_id) VALUES (323, 310);
 
 
 --
 -- Data for Name: project_freelancers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO project_freelancers (project_id, user_id) VALUES (323, 315);
+INSERT INTO project_freelancers (project_id, user_id) VALUES (323, 316);
 
 
 --
 -- Data for Name: project_worker; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO project_worker (project_id, user_id) VALUES (323, 314);
+INSERT INTO project_worker (project_id, user_id) VALUES (323, 313);
 
 
 --
@@ -749,6 +767,8 @@ INSERT INTO task (task_id, status, expert, deadline, translation, amount, price,
 INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (183, 'accepted', 180, '2012-02-26 13:36:38.507', 179, 100, 177, 'desc', 182, 'bad', 'comm', 185);
 INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (196, 'accepted', 192, '2012-02-26 13:36:38.741', 191, 100, 189, 'desc2', 194, 'bad', 'comm2', 197);
 INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (195, 'accepted', 192, '2012-02-26 13:36:38.741', 191, 100, 189, 'desc', 194, 'bad', 'comm', 197);
+INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (318, 'accepted', 310, '2012-03-22 20:36:51.303', 309, 100, 307, 'desc', 317, 'bad', 'comm', 317);
+INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (320, 'accepted', 310, '2012-03-22 20:36:51.303', 309, 100, 307, 'desc2', 319, 'bad', 'comm2', 319);
 
 
 --
@@ -776,6 +796,7 @@ INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id
 INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (273, 270, 268, 269, 271, NULL);
 INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (279, 276, 274, 275, 277, NULL);
 INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (285, 282, 287, 286, 283, NULL);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (309, 306, 42, 268, 307, NULL);
 
 
 --
@@ -806,6 +827,7 @@ INSERT INTO translationtype (id, description, unit) VALUES (244, 'description', 
 INSERT INTO translationtype (id, description, unit) VALUES (270, 'description', 'unit');
 INSERT INTO translationtype (id, description, unit) VALUES (276, 'description', 'unit');
 INSERT INTO translationtype (id, description, unit) VALUES (282, 'translation descritpion', 'unit');
+INSERT INTO translationtype (id, description, unit) VALUES (306, 'description', 'unit');
 
 
 --
@@ -829,6 +851,10 @@ INSERT INTO translator (user_id) VALUES (218);
 INSERT INTO translator (user_id) VALUES (226);
 INSERT INTO translator (user_id) VALUES (234);
 INSERT INTO translator (user_id) VALUES (250);
+INSERT INTO translator (user_id) VALUES (310);
+INSERT INTO translator (user_id) VALUES (312);
+INSERT INTO translator (user_id) VALUES (315);
+INSERT INTO translator (user_id) VALUES (316);
 
 
 --
@@ -879,6 +905,14 @@ INSERT INTO "user" (user_id, username, password, description) VALUES (250, 'Babe
 INSERT INTO "user" (user_id, username, password, description) VALUES (298, 'worker', '2c54b2394df1ef67321a5ccb241ed57bdc6c511a', 'I''m just a user');
 INSERT INTO "user" (user_id, username, password, description) VALUES (300, 'admin', 'a40546cc4fd6a12572828bb803380888ad1bfdab', 'I''m admin');
 INSERT INTO "user" (user_id, username, password, description) VALUES (302, 'user', 'b6b1f4781776979c0775c71ebdd8bdc084aac5fe', 'Brand new user');
+INSERT INTO "user" (user_id, username, password, description) VALUES (310, 'projectTranslator0', 'pass', 'desc');
+INSERT INTO "user" (user_id, username, password, description) VALUES (312, '2projectTranslator0', 'pass', 'desc');
+INSERT INTO "user" (user_id, username, password, description) VALUES (313, 'ProjectManager0', 'pass', 'supervisor description');
+INSERT INTO "user" (user_id, username, password, description) VALUES (314, '1ProjectManager0', 'pass', 'supervisor description');
+INSERT INTO "user" (user_id, username, password, description) VALUES (315, 'projectFreelancer0', 'pass', 'desc');
+INSERT INTO "user" (user_id, username, password, description) VALUES (316, '2projectFreelancer0', 'pass', 'desc');
+INSERT INTO "user" (user_id, username, password, description) VALUES (321, 'IndividualClientProject0', 'pass', 'individual client');
+INSERT INTO "user" (user_id, username, password, description) VALUES (322, 'ProjectSupervisor0', 'pass', 'supervisor description');
 
 
 --
@@ -967,6 +1001,17 @@ INSERT INTO user_userrole (user_id, user_role) VALUES (298, 'ROLE_USER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (300, 'ROLE_USER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (300, 'ROLE_EXECUTIVE');
 INSERT INTO user_userrole (user_id, user_role) VALUES (302, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (310, 'ROLE_EXPERT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (310, 'ROLE_VERIFICATOR');
+INSERT INTO user_userrole (user_id, user_role) VALUES (312, 'ROLE_EXPERT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (312, 'ROLE_VERIFICATOR');
+INSERT INTO user_userrole (user_id, user_role) VALUES (315, 'ROLE_EXPERT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (315, 'ROLE_VERIFICATOR');
+INSERT INTO user_userrole (user_id, user_role) VALUES (316, 'ROLE_EXPERT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (316, 'ROLE_VERIFICATOR');
+INSERT INTO user_userrole (user_id, user_role) VALUES (321, 'ROLE_CLIENT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (322, 'ROLE_PROJECTMNAGER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (322, 'ROLE_EXECUTIVE');
 
 
 --
@@ -1001,6 +1046,13 @@ INSERT INTO worker (user_id, data) VALUES (250, 251);
 INSERT INTO worker (user_id, data) VALUES (298, 299);
 INSERT INTO worker (user_id, data) VALUES (300, 301);
 INSERT INTO worker (user_id, data) VALUES (302, 303);
+INSERT INTO worker (user_id, data) VALUES (310, 311);
+INSERT INTO worker (user_id, data) VALUES (312, 311);
+INSERT INTO worker (user_id, data) VALUES (313, 311);
+INSERT INTO worker (user_id, data) VALUES (314, 311);
+INSERT INTO worker (user_id, data) VALUES (315, 311);
+INSERT INTO worker (user_id, data) VALUES (316, 311);
+INSERT INTO worker (user_id, data) VALUES (322, 311);
 
 
 --

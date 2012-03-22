@@ -18,6 +18,7 @@ public interface AdministrationServiceAsync {
     public void deleteCurrency(CurrencyTypeDTO currencyTypeDTO,
             AsyncCallback<CurrencyTypeDTO> callback);
 
+    
     public void getLanguages(AsyncCallback<Set<LanguageDTO>> callback);
 
     public void createLanguage(LanguageDTO languageDTO,
