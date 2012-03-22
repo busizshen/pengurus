@@ -1,4 +1,4 @@
-package com.pengurus.crm.client.panels.center.administration.language;
+package com.pengurus.crm.client.panels.center.administration.translationtype;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,88 +25,99 @@ import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.pengurus.crm.client.models.LanguageModel;
+import com.pengurus.crm.client.models.TranslationTypeModel;
 import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.client.service.AdministrationService;
 import com.pengurus.crm.client.service.AdministrationServiceAsync;
-import com.pengurus.crm.shared.dto.LanguageDTO;
+import com.pengurus.crm.shared.dto.TranslationTypeDTO;
 
-public class LanguageCreatePanel extends MainPanel {
+public class TranslationTypePanel extends MainPanel {
 
     private HorizontalPanel horizontalPanel;
     private FormPanel mainForm;
     private FormPanel createForm;
-    private TextField<String> languageField;
+    private TextField<String> unitField;
+    private TextField<String> descriptionField;
     private FormData formData;
     private Button createButton;
     private Button removeButton;
-    private Grid<LanguageModel> grid;
+    private Grid<TranslationTypeModel> grid;
 
-    public LanguageCreatePanel() {
+    public TranslationTypePanel() {
         createForm();
-        createLanguageField();
+        createUnitField();
+        createDescriptionField();
         createButton();
         createLanguageGrid();
         addVerticalPanel();
     }
 
     private void createLanguageGrid() {
-        final ListStore<LanguageModel> list = new ListStore<LanguageModel>();
-        AsyncCallback<Set<LanguageDTO>> callback = new AsyncCallback<Set<LanguageDTO>>() {
+        final ListStore<TranslationTypeModel> list = new ListStore<TranslationTypeModel>();
+        AsyncCallback<Set<TranslationTypeDTO>> callback = new AsyncCallback<Set<TranslationTypeDTO>>() {
 
             @Override
-            public void onSuccess(Set<LanguageDTO> result) {
-                for (LanguageDTO language : result)
-                    list.add(new LanguageModel(language));
+            public void onSuccess(Set<TranslationTypeDTO> result) {
+                for (TranslationTypeDTO translationType : result)
+                    list.add(new TranslationTypeModel(translationType));
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                MessageBox.info("Failure", "Uploading languages has "
+                MessageBox.info("Failure", "Uploading translation types has "
                         + "failed.", null);
             }
         };
 
         AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
                 .create(AdministrationService.class);
-        service.getLanguages(callback);
-        list.sort("lang", SortDir.ASC);
+        service.getTranslationTypes(callback);
+
+        list.sort("unit", SortDir.ASC);
 
         RowNumberer r = new RowNumberer();
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
         configs.add(r);
 
         ColumnConfig column = new ColumnConfig();
-        column.setId("lang");
-        column.setHeader("Language");
-        column.setWidth(200);
+
+        column.setId("unit");
+        column.setHeader("Unit");
+        column.setWidth(100);
+        configs.add(column);
+
+        column = new ColumnConfig();
+        column.setId("type");
+        column.setHeader("Description");
+        column.setWidth(300);
         configs.add(column);
 
         ColumnModel cm = new ColumnModel(configs);
 
-        grid = new Grid<LanguageModel>(list, cm);
-
+        grid = new Grid<TranslationTypeModel>(list, cm);
         grid.addPlugin(r);
         grid.getView().setForceFit(true);
 
-        removeButton = new Button("Remove selected language",
+        removeButton = new Button("Remove selected translationType",
                 new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         if (grid.getSelectionModel().getSelectedItem() != null) {
 
-                            AsyncCallback<LanguageDTO> callback = new AsyncCallback<LanguageDTO>() {
+                            AsyncCallback<TranslationTypeDTO> callback = new AsyncCallback<TranslationTypeDTO>() {
 
                                 @Override
-                                public void onSuccess(LanguageDTO result) {
+                                public void onSuccess(TranslationTypeDTO result) {
                                     grid.getStore().remove(
                                             grid.getSelectionModel()
                                                     .getSelectedItem());
 
                                     MessageBox.info("Success",
                                             "You have succesfully deleted "
-                                                    + result.getLanguage()
-                                                    + " language.", null);
+                                                    + result.getUnit() + " "
+                                                    + result.getDescription()
+                                                    + " translation type.",
+                                            null);
                                 }
 
                                 @Override
@@ -118,9 +129,9 @@ public class LanguageCreatePanel extends MainPanel {
                             };
                             AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
                                     .create(AdministrationService.class);
-                            service.deleteLanguage(grid.getSelectionModel()
-                                    .getSelectedItem().getLanguageDTO(),
-                                    callback);
+                            service.deleteTranslationType(grid
+                                    .getSelectionModel().getSelectedItem()
+                                    .getTranslationTypeDTO(), callback);
                         }
 
                         if (grid.getStore().getCount() == 0) {
@@ -129,11 +140,10 @@ public class LanguageCreatePanel extends MainPanel {
                     }
 
                 });
-
         // btn.setIcon(Resources.ICONS.delete());
         ContentPanel cp = new ContentPanel();
         cp.setButtonAlign(HorizontalAlignment.CENTER);
-        cp.setHeading("List of languages");
+        cp.setHeading("List of translation types");
         cp.setLayout(new FitLayout());
         cp.setSize(450, 300);
         cp.add(grid);
@@ -142,26 +152,32 @@ public class LanguageCreatePanel extends MainPanel {
 
         mainForm.add(createForm);
         mainForm.add(cp);
-
     }
 
     private void createForm() {
         mainForm = new FormPanel();
-        mainForm.setHeading("Language panel");
+        mainForm.setHeading("Translation type panel");
         mainForm.setFrame(true);
         mainForm.setPadding(50);
 
         createForm = new FormPanel();
-        createForm.setHeading("Create new language");
+        createForm.setHeading("Create new translation type");
         createForm.setPadding(20);
         createForm.setLabelAlign(LabelAlign.TOP);
     }
 
-    private void createLanguageField() {
-        languageField = new TextField<String>();
-        languageField.setFieldLabel("Language");
-        languageField.setAllowBlank(false);
-        createForm.add(languageField, formData);
+    private void createUnitField() {
+        unitField = new TextField<String>();
+        unitField.setFieldLabel("Unit");
+        unitField.setAllowBlank(false);
+        createForm.add(unitField, formData);
+    }
+
+    private void createDescriptionField() {
+        descriptionField = new TextField<String>();
+        descriptionField.setFieldLabel("Description");
+        descriptionField.setAllowBlank(false);
+        createForm.add(descriptionField, formData);
     }
 
     private void addVerticalPanel() {
@@ -177,35 +193,34 @@ public class LanguageCreatePanel extends MainPanel {
 
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        AsyncCallback<LanguageDTO> callback = new AsyncCallback<LanguageDTO>() {
+                        AsyncCallback<TranslationTypeDTO> callback = new AsyncCallback<TranslationTypeDTO>() {
 
                             @Override
-                            public void onSuccess(LanguageDTO result) {
+                            public void onSuccess(TranslationTypeDTO result) {
                                 if (!removeButton.isEnabled())
                                     removeButton.enable();
-                                grid.getStore().add(new LanguageModel(result));
+                                grid.getStore().add(
+                                        new TranslationTypeModel(result));
                                 MessageBox.info("Success",
-                                        "You have succesfully created new language: "
-                                                + result.getLanguage() + ".",
-                                        null);
+                                        "You have succesfully created new translation type: "
+                                        + result.getUnit() + "-"
+                                        + result.getDescription()
+                                        + ".", null);
                             }
 
                             @Override
                             public void onFailure(Throwable caught) {
-                                MessageBox
-                                        .info("Failure",
-                                                "Creating new currency has "
-                                                        + "failed. The language is"
-                                                        + " already on the list.",
-                                                null);
+                                MessageBox.info("Failure",
+                                        "Creating new translation type has "
+                                                + "failed.", null);
                             }
                         };
-
-                        LanguageDTO language = new LanguageDTO(languageField
-                                .getValue());
+                        TranslationTypeDTO translationType = new TranslationTypeDTO(
+                                descriptionField.getValue(), unitField
+                                        .getValue());
                         AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
                                 .create(AdministrationService.class);
-                        service.createLanguage(language, callback);
+                        service.createTranslationType(translationType, callback);
                     }
                 });
 

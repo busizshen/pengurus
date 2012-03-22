@@ -8,19 +8,31 @@ import com.pengurus.crm.client.service.AdministrationService;
 import com.pengurus.crm.daos.CurrencyTypeDAO;
 import com.pengurus.crm.daos.LanguageDAO;
 import com.pengurus.crm.daos.TranslationDAO;
+import com.pengurus.crm.daos.TranslationTypeDAO;
 import com.pengurus.crm.entities.CurrencyType;
 import com.pengurus.crm.entities.Language;
 import com.pengurus.crm.entities.Translation;
+import com.pengurus.crm.entities.TranslationType;
 import com.pengurus.crm.shared.dto.CurrencyTypeDTO;
 import com.pengurus.crm.shared.dto.LanguageDTO;
 import com.pengurus.crm.shared.dto.TranslationDTO;
+import com.pengurus.crm.shared.dto.TranslationTypeDTO;
 
-public class AdministrationServiceImpl implements AdministrationService{
+public class AdministrationServiceImpl implements AdministrationService {
 
     private CurrencyTypeDAO currencyTypeDAO;
     private TranslationDAO translationDAO;
     private LanguageDAO languageDAO;
-    
+    private TranslationTypeDAO translationTypeDAO;
+
+    public TranslationTypeDAO getTranslationTypeDAO() {
+        return translationTypeDAO;
+    }
+
+    public void setTranslationTypeDAO(TranslationTypeDAO translationTypeDAO) {
+        this.translationTypeDAO = translationTypeDAO;
+    }
+
     public CurrencyTypeDAO getCurrencyTypeDAO() {
         return currencyTypeDAO;
     }
@@ -49,11 +61,11 @@ public class AdministrationServiceImpl implements AdministrationService{
     public Set<CurrencyTypeDTO> getCurrency() {
         Set<CurrencyTypeDTO> currencyTypes = new HashSet<CurrencyTypeDTO>();
         List<CurrencyType> list = currencyTypeDAO.loadAll();
-        for(CurrencyType c : list)
+        for (CurrencyType c : list)
             currencyTypes.add(c.toDTO());
         return currencyTypes;
     }
-    
+
     @Override
     public CurrencyTypeDTO createCurrency(CurrencyTypeDTO currencyTypeDTO) {
         currencyTypeDAO.create(new CurrencyType(currencyTypeDTO.getCurrency()));
@@ -67,19 +79,10 @@ public class AdministrationServiceImpl implements AdministrationService{
     }
 
     @Override
-    public Set<TranslationDTO> getTranslations() {
-        Set<TranslationDTO> trnaslations = new HashSet<TranslationDTO>();
-        List<Translation> list = translationDAO.loadAll();
-        for(Translation c : list)
-            trnaslations.add(c.toDTO());
-        return trnaslations;
-    }
-    
-    @Override
     public Set<LanguageDTO> getLanguages() {
         List<Language> list = languageDAO.loadAll();
         Set<LanguageDTO> languagesDTO = new HashSet<LanguageDTO>();
-        for(Language language : list)
+        for (Language language : list)
             languagesDTO.add(language.toDTO());
         return languagesDTO;
     }
@@ -96,5 +99,48 @@ public class AdministrationServiceImpl implements AdministrationService{
         return languageDTO;
     }
 
+    @Override
+    public Set<TranslationDTO> getTranslations() {
+        Set<TranslationDTO> translations = new HashSet<TranslationDTO>();
+        List<Translation> list = translationDAO.loadAll();
+        for (Translation c : list)
+            translations.add(c.toDTO());
+        return translations;
+    }
+
+    @Override
+    public TranslationDTO createTranslation(TranslationDTO translationDTO) {
+        translationDAO.create(new Translation(translationDTO));
+        return translationDTO;
+    }
+
+    @Override
+    public TranslationDTO deleteTranslation(TranslationDTO translationDTO) {
+        translationDAO.delete(new Translation(translationDTO));
+        return translationDTO;
+    }
+
+    @Override
+    public Set<TranslationTypeDTO> getTranslationTypes() {
+        Set<TranslationTypeDTO> translationTypes = new HashSet<TranslationTypeDTO>();
+        List<TranslationType> list = translationTypeDAO.loadAll();
+        for (TranslationType c : list)
+            translationTypes.add(c.toDTO());
+        return translationTypes;
+    }
+
+    @Override
+    public TranslationTypeDTO createTranslationType(
+            TranslationTypeDTO translationTypeDTO) {
+        translationTypeDAO.create(new TranslationType(translationTypeDTO));
+        return translationTypeDTO;
+    }
+
+    @Override
+    public TranslationTypeDTO deleteTranslationType(
+            TranslationTypeDTO translationTypeDTO) {
+        translationTypeDAO.delete(new TranslationType(translationTypeDTO));
+        return translationTypeDTO;
+    }
 
 }

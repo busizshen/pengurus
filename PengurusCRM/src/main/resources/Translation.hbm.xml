@@ -17,7 +17,7 @@
         <many-to-one name="lto" class="com.pengurus.crm.entities.Language" fetch="join">
             <column name="LTO" />
         </many-to-one>
-        <many-to-one name="defaultPrice" class="com.pengurus.crm.entities.Price" fetch="join">
+        <many-to-one name="defaultPrice" class="com.pengurus.crm.entities.Price" fetch="join" cascade="all">
             <column name="DEFAULTPRICE" />
         </many-to-one>
     </class>

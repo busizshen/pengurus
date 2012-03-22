@@ -39,6 +39,7 @@
 	<bean id="administrationServiceBean" class="com.pengurus.crm.server.AdministrationServiceImpl">
 		<property name="currencyTypeDAO" ref="currencyTypeDao" />
 		<property name="translationDAO" ref="translationDao" />
+		<property name="translationTypeDAO" ref="translationTypeDao" />
 		<property name="languageDAO" ref="languageDao" />
 	</bean>
 	

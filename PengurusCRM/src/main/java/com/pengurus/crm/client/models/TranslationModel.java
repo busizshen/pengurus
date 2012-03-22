@@ -19,7 +19,8 @@ public class TranslationModel extends BaseModel {
 		if(translationDTO != null){
 			if(translationDTO.getDefaultPrice() != null){
 				set("defaultPrice", translationDTO.getDefaultPrice().getPrice());
-				set("defaultPriceCurrency", translationDTO.getDefaultPrice().getCurrency().getCurrency());
+				if(translationDTO.getDefaultPrice().getCurrency() != null)
+				    set("defaultPriceCurrency", translationDTO.getDefaultPrice().getCurrency().getCurrency());
 			}
 			if(translationDTO.getFrom() != null){
 				set("from",translationDTO.getFrom().getLanguage());

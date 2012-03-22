@@ -21,6 +21,7 @@ public class TranslationType {
     public TranslationType(TranslationTypeDTO type) {
     	super();
     	if(type != null){
+    	    this.id = type.getId();
     		this.description = type.getDescription();
     		this.unit = type.getUnit();
     	}

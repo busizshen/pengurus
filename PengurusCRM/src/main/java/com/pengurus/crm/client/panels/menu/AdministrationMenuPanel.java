@@ -4,8 +4,10 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.AuthorizationManager;
-import com.pengurus.crm.client.panels.center.administration.currency.CurrencyTypeCreatePanel;
-import com.pengurus.crm.client.panels.center.administration.language.LanguageCreatePanel;
+import com.pengurus.crm.client.panels.center.administration.currency.CurrencyTypePanel;
+import com.pengurus.crm.client.panels.center.administration.language.LanguagePanel;
+import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanelAdmin;
+import com.pengurus.crm.client.panels.center.administration.translationtype.TranslationTypePanel;
 
 
 public class AdministrationMenuPanel extends TabMenuPanel {
@@ -24,7 +26,7 @@ public class AdministrationMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					//
+				    new TranslationPanelAdmin().setAsMain();
 				}
 			});
 			add(b);
@@ -37,7 +39,7 @@ public class AdministrationMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-				    new LanguageCreatePanel().setAsMain();
+				    new LanguagePanel().setAsMain();
 				}
 			});
 			add(b);
@@ -50,7 +52,7 @@ public class AdministrationMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-				    //
+				    new TranslationTypePanel().setAsMain();
 				}
 			});
 			add(b);
@@ -63,7 +65,7 @@ public class AdministrationMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-				    new CurrencyTypeCreatePanel().setAsMain();
+				    new CurrencyTypePanel().setAsMain();
 				}
 			});
 			add(b);

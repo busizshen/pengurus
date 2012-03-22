@@ -1,4 +1,4 @@
-package com.pengurus.crm.client.panels.center.administration.currency;
+package com.pengurus.crm.client.panels.center.administration.language;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,101 +25,101 @@ import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.pengurus.crm.client.models.CurrencyModel;
+import com.pengurus.crm.client.models.LanguageModel;
 import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.client.service.AdministrationService;
 import com.pengurus.crm.client.service.AdministrationServiceAsync;
-import com.pengurus.crm.shared.dto.CurrencyTypeDTO;
+import com.pengurus.crm.shared.dto.LanguageDTO;
 
-public class CurrencyTypeCreatePanel extends MainPanel {
+public class LanguagePanel extends MainPanel {
 
     private HorizontalPanel horizontalPanel;
-    private TextField<String> currencyType;
-    private FormData formData;
-    private Button createButton;
     private FormPanel mainForm;
     private FormPanel createForm;
+    private TextField<String> languageField;
+    private FormData formData;
+    private Button createButton;
     private Button removeButton;
-    private Grid<CurrencyModel> grid;
+    private Grid<LanguageModel> grid;
 
-    public CurrencyTypeCreatePanel() {
+    public LanguagePanel() {
         createForm();
-        createCurrencyField();
+        createLanguageField();
         createButton();
-        createCurrencyGrid();
+        createLanguageGrid();
         addVerticalPanel();
     }
 
-    private void createCurrencyGrid() {
-        final ListStore<CurrencyModel> list = new ListStore<CurrencyModel>();
-        AsyncCallback<Set<CurrencyTypeDTO>> callback = new AsyncCallback<Set<CurrencyTypeDTO>>() {
+    private void createLanguageGrid() {
+        final ListStore<LanguageModel> list = new ListStore<LanguageModel>();
+        AsyncCallback<Set<LanguageDTO>> callback = new AsyncCallback<Set<LanguageDTO>>() {
 
             @Override
-            public void onSuccess(Set<CurrencyTypeDTO> result) {
-                for (CurrencyTypeDTO language : result)
-                    list.add(new CurrencyModel(language));
+            public void onSuccess(Set<LanguageDTO> result) {
+                for (LanguageDTO language : result)
+                    list.add(new LanguageModel(language));
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                MessageBox.info("Failure", "Uploading currencies has "
+                MessageBox.info("Failure", "Uploading languages has "
                         + "failed.", null);
             }
         };
 
         AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
                 .create(AdministrationService.class);
-        service.getCurrency(callback);
-        list.sort("currency", SortDir.ASC);
+        service.getLanguages(callback);
+        list.sort("lang", SortDir.ASC);
 
         RowNumberer r = new RowNumberer();
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
         configs.add(r);
 
         ColumnConfig column = new ColumnConfig();
-        column.setId("currency");
-        column.setHeader("Currency");
+        column.setId("lang");
+        column.setHeader("Language");
         column.setWidth(200);
         configs.add(column);
 
         ColumnModel cm = new ColumnModel(configs);
 
-        grid = new Grid<CurrencyModel>(list, cm);
+        grid = new Grid<LanguageModel>(list, cm);
 
         grid.addPlugin(r);
         grid.getView().setForceFit(true);
 
-        removeButton = new Button("Remove selected currency",
+        removeButton = new Button("Remove selected language",
                 new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         if (grid.getSelectionModel().getSelectedItem() != null) {
 
-                            AsyncCallback<CurrencyTypeDTO> callback = new AsyncCallback<CurrencyTypeDTO>() {
+                            AsyncCallback<LanguageDTO> callback = new AsyncCallback<LanguageDTO>() {
 
                                 @Override
-                                public void onSuccess(CurrencyTypeDTO result) {
+                                public void onSuccess(LanguageDTO result) {
                                     grid.getStore().remove(
                                             grid.getSelectionModel()
                                                     .getSelectedItem());
 
                                     MessageBox.info("Success",
                                             "You have succesfully deleted "
-                                                    + result.getCurrency()
-                                                    + " currency.", null);
+                                                    + result.getLanguage()
+                                                    + " language.", null);
                                 }
 
                                 @Override
                                 public void onFailure(Throwable caught) {
                                     MessageBox.info("Failure",
-                                            "Deleting currency has failed.",
+                                            "Deleting language has failed.",
                                             null);
                                 }
                             };
                             AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
                                     .create(AdministrationService.class);
-                            service.deleteCurrency(grid.getSelectionModel()
-                                    .getSelectedItem().getCurrencyDTO(),
+                            service.deleteLanguage(grid.getSelectionModel()
+                                    .getSelectedItem().getLanguageDTO(),
                                     callback);
                         }
 
@@ -133,7 +133,7 @@ public class CurrencyTypeCreatePanel extends MainPanel {
         // btn.setIcon(Resources.ICONS.delete());
         ContentPanel cp = new ContentPanel();
         cp.setButtonAlign(HorizontalAlignment.CENTER);
-        cp.setHeading("List of currencies");
+        cp.setHeading("List of languages");
         cp.setLayout(new FitLayout());
         cp.setSize(450, 300);
         cp.add(grid);
@@ -147,28 +147,27 @@ public class CurrencyTypeCreatePanel extends MainPanel {
 
     private void createForm() {
         mainForm = new FormPanel();
-        mainForm.setHeading("Currency panel");
+        mainForm.setHeading("Language panel");
         mainForm.setFrame(true);
         mainForm.setPadding(50);
 
         createForm = new FormPanel();
-        createForm.setHeading("Create new currency");
+        createForm.setHeading("Create new language");
         createForm.setPadding(20);
         createForm.setLabelAlign(LabelAlign.TOP);
     }
 
-    private void createCurrencyField() {
-        currencyType = new TextField<String>();
-        currencyType.setFieldLabel("Currency");
-        currencyType.setAllowBlank(false);
-        createForm.add(currencyType, formData);
+    private void createLanguageField() {
+        languageField = new TextField<String>();
+        languageField.setFieldLabel("Language");
+        languageField.setAllowBlank(false);
+        createForm.add(languageField, formData);
     }
 
     private void addVerticalPanel() {
         horizontalPanel = new HorizontalPanel();
         horizontalPanel.setSpacing(20);
         horizontalPanel.add(mainForm);
-        // horizontalPanel.add(deleteForm);
         add(horizontalPanel);
     }
 
@@ -178,17 +177,17 @@ public class CurrencyTypeCreatePanel extends MainPanel {
 
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        AsyncCallback<CurrencyTypeDTO> callback = new AsyncCallback<CurrencyTypeDTO>() {
+                        AsyncCallback<LanguageDTO> callback = new AsyncCallback<LanguageDTO>() {
 
                             @Override
-                            public void onSuccess(CurrencyTypeDTO result) {
+                            public void onSuccess(LanguageDTO result) {
                                 if (!removeButton.isEnabled())
                                     removeButton.enable();
-                                grid.getStore().add(new CurrencyModel(result));
+                                grid.getStore().add(new LanguageModel(result));
                                 MessageBox.info("Success",
-                                        "You have succesfully created new "
-                                                + result.getCurrency()
-                                                + " currency.", null);
+                                        "You have succesfully created new language: "
+                                                + result.getLanguage() + ".",
+                                        null);
                             }
 
                             @Override
@@ -196,17 +195,17 @@ public class CurrencyTypeCreatePanel extends MainPanel {
                                 MessageBox
                                         .info("Failure",
                                                 "Creating new currency has "
-                                                        + "failed. The currency is"
+                                                        + "failed. The language is"
                                                         + " already on the list.",
                                                 null);
                             }
                         };
 
-                        CurrencyTypeDTO currency = new CurrencyTypeDTO(
-                                currencyType.getValue());
+                        LanguageDTO language = new LanguageDTO(languageField
+                                .getValue());
                         AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
                                 .create(AdministrationService.class);
-                        service.createCurrency(currency, callback);
+                        service.createLanguage(language, callback);
                     }
                 });
 
@@ -215,4 +214,5 @@ public class CurrencyTypeCreatePanel extends MainPanel {
         FormButtonBinding binding = new FormButtonBinding(createForm);
         binding.addButton(createButton);
     }
+
 }

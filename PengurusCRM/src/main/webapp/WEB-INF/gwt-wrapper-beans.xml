@@ -11,7 +11,7 @@
 	<bean id="userController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="userServiceBean" />
 	</bean>
-		
+			
 	<bean id="currentSessionController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="currentSessionServiceBean" />
 	</bean>
@@ -23,12 +23,15 @@
 	<bean id="clientController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="clientServiceBean" />
 	</bean>
+	
 	<bean id="administrationController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="administrationServiceBean" />
 	</bean>
+	
 	<bean id="jobController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="jobServiceBean" />
 	</bean>
+	
 	<bean id="projectController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="projectServiceBean" />
 	</bean>
