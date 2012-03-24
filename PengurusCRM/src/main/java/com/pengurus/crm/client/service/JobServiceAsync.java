@@ -8,6 +8,5 @@ public interface JobServiceAsync {
 	public void getJob(Long id,AsyncCallback<JobDTO> callback);
 	public void createJob(JobDTO jobDTO, AsyncCallback<JobDTO> callback);
 	public void getJobByExpertId(Long id, AsyncCallback<JobDTO> callback);
-	public void getJobByProjectManagerId(Long id, AsyncCallback<JobDTO> callback);
 
 }
