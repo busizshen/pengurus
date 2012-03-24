@@ -11,5 +11,6 @@ public interface ProjectServiceAsync {
 	public void createProject(ProjectDTO projectDTO, AsyncCallback<ProjectDTO> callback);
 	public void getProject(Long id, AsyncCallback<ProjectDTO> callback);
 	public void getProjectByExpertId(Long id, AsyncCallback<ProjectDTO> callback);
+	public void getProjectByProjectManagerId(Long id, AsyncCallback<ProjectDTO> callback);
 
 }
