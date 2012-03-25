@@ -20,9 +20,13 @@ public class Worker extends User {
         this.personalData = personalData;
     }
 
-    public Worker(WorkerDTO userDTO) {
-    	init(userDTO);
-    	this.personalData = new PersonalData(userDTO.getPersonalData());
+    protected void init(WorkerDTO workerDTO) {
+    	super.init(workerDTO);
+    	this.personalData = new PersonalData(workerDTO.getPersonalData());
+    }
+    
+    public Worker(WorkerDTO workerDTO) {
+    	init(workerDTO);
 	}
 
 	public PersonalData getPersonalData() {

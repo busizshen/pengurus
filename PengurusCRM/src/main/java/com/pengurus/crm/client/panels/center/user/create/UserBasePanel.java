@@ -17,31 +17,44 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.CheckBoxGroup;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 import com.extjs.gxt.ui.client.widget.form.RadioGroup;
 import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.pengurus.crm.client.models.PersonalDataModel;
+import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.MainPanel;
+import com.pengurus.crm.client.service.AdministrationService;
+import com.pengurus.crm.client.service.AdministrationServiceAsync;
+import com.pengurus.crm.client.service.exceptions.UsernameExistsException;
 import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.IndividualClientDTO;
 import com.pengurus.crm.shared.dto.PersonalDataDTO;
+import com.pengurus.crm.shared.dto.TranslationDTO;
+import com.pengurus.crm.shared.dto.TranslatorDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 import com.pengurus.crm.shared.dto.WorkerDTO;
@@ -49,16 +62,19 @@ import com.pengurus.crm.shared.dto.WorkerDTO;
 public abstract class UserBasePanel extends MainPanel {
 
 	private HorizontalPanel horizontalPanel;
-	protected FormPanel form;
+	protected FormPanel form, additionalDataForm;
 	protected PersonalDataForm personalDataForm;
-	private ContentPanel agentsGrid;
-	private Grid<PersonalDataModel> grid;
-	private FormData formData;
+	private ContentPanel agentsGridPanel, translationsGridPanel;
+	private Grid<PersonalDataModel> agentsGrid;
+	private EditorGrid<TranslationModel> translationsGrid;
+	private FormData formData, addFormData;
 	protected TextField<String> username, password, description, fullName;
 	protected RadioGroup userType;
 	protected CheckBoxGroup userRoles;
 	protected UserFormButtonBinding binding;
-	public ListStore<PersonalDataModel> store = new ListStore<PersonalDataModel>();
+	public ListStore<PersonalDataModel> personalDataStore = new ListStore<PersonalDataModel>();
+	private ComboBox<TranslationModel> translationComboBox;
+	public ListStore<TranslationModel> translationStore = new ListStore<TranslationModel>();
 	final Window window = new Window();
 
 	public UserBasePanel() {
@@ -68,28 +84,25 @@ public abstract class UserBasePanel extends MainPanel {
 		createDescriptionField();
 		createUserTypeRatioGroup();
 		createRoleCheckbox();
-		createIndividualClientFullNameField();
 		createPersonalDataForm();
+		createAdditionalDataForm();
+		createIndividualClientFullNameField();
 		createAgentGrid();
 		createWindow();
+		createTranslationList();
 		createButtons();
 		addVerticalPanel();
 	}
+
+	protected abstract void createForm();
 
 	private void addVerticalPanel() {
 		horizontalPanel = new HorizontalPanel();
 		horizontalPanel.setSpacing(20);
 		horizontalPanel.add(form);
 		horizontalPanel.add(personalDataForm);
+		horizontalPanel.add(additionalDataForm);
 		add(horizontalPanel);
-	}
-
-	private void createForm() {
-		form = new FormPanel();
-		form.setHeading("Create user");
-		form.setFrame(true);
-		form.setPadding(25);
-		form.setLabelAlign(LabelAlign.TOP);
 	}
 
 	private void createPersonalDataForm() {
@@ -302,17 +315,19 @@ public abstract class UserBasePanel extends MainPanel {
 		@Override
 		protected void onSelect() {
 			super.onSelect();
+			additionalDataForm.show();
 			fullName.show();
 			binding.getFields().add(fullName);
-			agentsGrid.show();
+			agentsGridPanel.show();
 		}
 
 		@Override
 		protected void onDeselect() {
 			super.onDeselect();
+			additionalDataForm.hide();
 			fullName.hide();
 			binding.getFields().remove(fullName);
-			agentsGrid.hide();
+			agentsGridPanel.hide();
 		}
 
 		@Override
@@ -321,7 +336,7 @@ public abstract class UserBasePanel extends MainPanel {
 			fillBasicUser(businessClientDTO);
 			businessClientDTO.setName(fullName.getValue());
 			Set<PersonalDataDTO> agents = new HashSet<PersonalDataDTO>();
-			for (BaseModel model :store.getModels()) {
+			for (BaseModel model :personalDataStore.getModels()) {
 				agents.add(((PersonalDataModel)model).getPersonalDataDTO());
 			}
 			businessClientDTO.setAgents(agents);
@@ -391,17 +406,31 @@ public abstract class UserBasePanel extends MainPanel {
 			enableRole(UserRoleDTO.ROLE_VERIFICATOR);
 			enableRole(UserRoleDTO.ROLE_FREELANCER);
 			personalDataForm.show();
+			additionalDataForm.show();
+			translationComboBox.show();
+			translationsGridPanel.show();
 		}
 
 		@Override
 		protected void onDeselect() {
 			super.onDeselect();
+			translationsGridPanel.hide();
+			translationComboBox.hide();
+			additionalDataForm.hide();
 			personalDataForm.hide();
 		}
 
 		@Override
 		protected UserDTO createUser() {
-			return null;
+			TranslatorDTO translatorDTO = new TranslatorDTO();
+			fillBasicUser(translatorDTO);
+			translatorDTO.setPersonalData(personalDataForm.toPersonalData());
+			Set<TranslationDTO> translations = new HashSet<TranslationDTO>();
+			for (TranslationModel translationModel: translationStore.getModels()) {
+				translations.add(translationModel.getTranslationDTO());
+			}
+			translatorDTO.setTranslations(translations);
+			return translatorDTO;
 		}
 
 	}
@@ -458,7 +487,7 @@ public abstract class UserBasePanel extends MainPanel {
 		fullName.setFieldLabel("Full name");
 		fullName.hide();
 		fullName.setAllowBlank(false);
-		form.add(fullName, formData);
+		additionalDataForm.add(fullName, addFormData);
 	}
 
 	private void createAgentGrid() {
@@ -569,7 +598,7 @@ public abstract class UserBasePanel extends MainPanel {
 		column.setRenderer(buttonRenderer);
 		configs.add(column);
 
-		store = new ListStore<PersonalDataModel>();
+		personalDataStore = new ListStore<PersonalDataModel>();
 
 		ColumnModel cm = new ColumnModel(configs);
 
@@ -585,9 +614,9 @@ public abstract class UserBasePanel extends MainPanel {
 							public void componentSelected(ButtonEvent ce) {
 								PersonalDataDTO newPersonalData = personalDataForm
 										.toPersonalData();
-								store.insert(new PersonalDataModel(
-										newPersonalData), store.getCount());
-								store.commitChanges();
+								personalDataStore.insert(new PersonalDataModel(
+										newPersonalData), personalDataStore.getCount());
+								personalDataStore.commitChanges();
 								window.hide();
 							}
 
@@ -599,22 +628,22 @@ public abstract class UserBasePanel extends MainPanel {
 		});
 		toolBar.add(add);
 
-		agentsGrid = new ContentPanel();
-		agentsGrid.setBodyBorder(false);
-		agentsGrid.setHeading("Agents");
-		agentsGrid.setButtonAlign(HorizontalAlignment.CENTER);
-		agentsGrid.setLayout(new FitLayout());
-		agentsGrid.setSize(280, 200);
-		agentsGrid.setTopComponent(toolBar);
+		agentsGridPanel = new ContentPanel();
+		agentsGridPanel.setBodyBorder(false);
+		agentsGridPanel.setHeading("Agents");
+		agentsGridPanel.setButtonAlign(HorizontalAlignment.CENTER);
+		agentsGridPanel.setLayout(new FitLayout());
+		agentsGridPanel.setSize(280, 200);
+		agentsGridPanel.setTopComponent(toolBar);
 
-		grid = new Grid<PersonalDataModel>(store, cm);
-		grid.setStyleAttribute("borderTop", "none");
-		grid.setAutoExpandColumn("firstName");
-		grid.setBorders(true);
-		agentsGrid.add(grid);
-		agentsGrid.hide();
+		agentsGrid = new Grid<PersonalDataModel>(personalDataStore, cm);
+		agentsGrid.setStyleAttribute("borderTop", "none");
+		agentsGrid.setAutoExpandColumn("firstName");
+		agentsGrid.setBorders(true);
+		agentsGridPanel.add(agentsGrid);
+		agentsGridPanel.hide();
 
-		form.add(agentsGrid);
+		additionalDataForm.add(agentsGridPanel, addFormData);
 	}
 
 	private void personalDataPopup(PersonalDataForm personalDataForm,
@@ -635,6 +664,14 @@ public abstract class UserBasePanel extends MainPanel {
 		window.show();
 	}
 
+	private void createAdditionalDataForm() {
+		additionalDataForm = new FormPanel();
+		additionalDataForm.setHeading("Additional data");
+		additionalDataForm.setFrame(true);
+		additionalDataForm.setLabelAlign(LabelAlign.TOP);
+		additionalDataForm.hide();
+	}
+	
 	private void createWindow() {
 		window.setPlain(true);
 		window.setHeading("Edit personal data");
@@ -642,6 +679,127 @@ public abstract class UserBasePanel extends MainPanel {
 		window.setAutoHeight(true);
 		window.setAutoWidth(true);
 		window.setAutoHide(true);
+	}
+
+	private void createTranslationList() {
+
+		translationComboBox = new ComboBox<TranslationModel>();
+		translationComboBox.setFieldLabel("Translation to add");
+		final ListStore<TranslationModel> translationComboStore = new ListStore<TranslationModel>();
+		translationComboBox.setStore(translationComboStore);
+		translationComboBox.setForceSelection(true);
+		translationComboBox.setWidth(400);
+		translationComboBox.setDisplayField("name");
+		translationComboBox.setEmptyText("Select translation");
+		translationComboBox.setTriggerAction(TriggerAction.ALL);
+		
+		AsyncCallback<Set<TranslationDTO>> callback = new AsyncCallback<Set<TranslationDTO>>() {
+			
+			@Override
+			public void onSuccess(Set<TranslationDTO> result) {
+				for (TranslationDTO translationDTO: result) {
+					translationComboStore.add(new TranslationModel(translationDTO));
+				}
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				if (caught instanceof UsernameExistsException) {
+					MessageBox.info("Failure", "Chosen username already exists.", null);
+				} else {
+					MessageBox.info("Failure", "Creating new user has failed.", null);
+				}
+			}
+		};
+		
+		AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
+				.create(AdministrationService.class);
+		service.getTranslations(callback);
+		
+		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+		
+		final CheckBoxSelectionModel<TranslationModel> checkBoxSelection = new CheckBoxSelectionModel<TranslationModel>();
+		configs.add(checkBoxSelection.getColumn());
+		
+		ColumnConfig column = new ColumnConfig();
+		
+        column.setId("from");
+        column.setHeader("From");
+        column.setWidth(80);
+        configs.add(column);
+
+        column = new ColumnConfig();
+        column.setId("to");
+        column.setHeader("To");
+        column.setWidth(80);
+        configs.add(column);
+
+        column = new ColumnConfig();
+        column.setId("type");
+        column.setHeader("Translation type");
+        column.setWidth(80);
+        configs.add(column);
+
+        column = new ColumnConfig();
+        column.setId("defaultPrice");
+        column.setHeader("Price");
+        column.setWidth(50);
+        column.setAlignment(HorizontalAlignment.CENTER);
+        configs.add(column);
+
+        column = new ColumnConfig();
+        column.setId("defaultPriceCurrency");
+        column.setHeader("Currency");
+        column.setWidth(70);
+        configs.add(column);
+
+        ColumnModel cm = new ColumnModel(configs);
+
+		translationStore = new ListStore<TranslationModel>();
+
+		ToolBar toolBar = new ToolBar();
+		Button add = new Button("Add translation type", new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				translationsGrid.stopEditing();
+		        translationStore.insert(translationComboBox.getValue(), translationStore.getCount());  
+		        translationsGrid.startEditing(translationStore.getCount() - 1, 0);
+			}
+		});
+		toolBar.add(add);
+		Button remove = new Button("Remove");
+		remove.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				translationsGrid.stopEditing();
+				for (TranslationModel translationModel : checkBoxSelection
+						.getSelectedItems()) {
+					translationStore.remove(translationModel);
+				}
+				translationsGrid.startEditing(0, 0);
+			}
+
+		});
+		toolBar.add(remove);
+		
+		translationsGridPanel = new ContentPanel();
+		translationsGridPanel.setBodyBorder(false);
+		translationsGridPanel.setHeading("Translations");
+		translationsGridPanel.setButtonAlign(HorizontalAlignment.CENTER);
+		translationsGridPanel.setLayout(new FitLayout());
+		translationsGridPanel.setSize(400, 200);
+		translationsGridPanel.setTopComponent(toolBar);
+
+		translationsGrid = new EditorGrid<TranslationModel>(translationStore, cm);
+		translationsGrid.setStyleAttribute("borderTop", "none");
+		translationsGrid.setBorders(true);
+		translationsGrid.setSelectionModel(checkBoxSelection);
+		translationsGrid.addPlugin(checkBoxSelection);
+		translationsGridPanel.add(translationsGrid);
+		translationsGridPanel.hide();
+		
+		additionalDataForm.add(translationComboBox, addFormData);
+		additionalDataForm.add(translationsGridPanel, addFormData);
 	}
 
 	protected abstract void createButtons();

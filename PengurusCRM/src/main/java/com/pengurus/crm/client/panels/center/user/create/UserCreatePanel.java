@@ -4,6 +4,8 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.service.UserService;
@@ -50,6 +52,14 @@ public class UserCreatePanel extends UserBasePanel {
 	
 		binding.addButton(createButton);
 		form.addButton(createButton);
+	}
+
+	protected void createForm() {
+		form = new FormPanel();
+		form.setHeading("Create user");
+		form.setFrame(true);
+		form.setPadding(25);
+		form.setLabelAlign(LabelAlign.TOP);
 	}
 
 }

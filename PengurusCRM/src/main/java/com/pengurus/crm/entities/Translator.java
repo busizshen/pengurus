@@ -1,7 +1,9 @@
 package com.pengurus.crm.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import com.pengurus.crm.shared.dto.TranslationDTO;
 import com.pengurus.crm.shared.dto.TranslatorDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
@@ -21,8 +23,16 @@ public class Translator extends Worker{
         this.translations = translations;
     }
 
-    public Translator(TranslatorDTO userDTO) {
-    	init(userDTO);
+    protected void init(TranslatorDTO translatorDTO) {
+    	super.init(translatorDTO);
+    	this.translations = new HashSet<Translation>();
+    	for (TranslationDTO translationDTO: translatorDTO.getTranslations()) {
+    		this.translations.add(new Translation(translationDTO));
+    	}
+    }
+    
+    public Translator(TranslatorDTO translatorDTO) {
+    	init(translatorDTO);
 	}
 
 	public Set<Translation> getTranslations() {

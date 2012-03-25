@@ -53,43 +53,38 @@ public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getAll() {
-		try {
-			Session session = getHibernateTemplate().getSessionFactory()
-					.openSession();
-			Query query = session.createQuery("from User");
-			List<User> list = query.list();
-			for (User u : list) {
-				u.getAuthorities().size();
-				if (u instanceof Worker) {
-					Worker worker = (Worker) u;
-					worker.getPersonalData().getEmail();
-					worker.getPersonalData().getPhoneNumber();
-					if (u instanceof Translator) {
-						Translator translator = (Translator) u;
-						translator.getTranslations().size();
-					}
-				} else if (u instanceof Client) {
-					if (u instanceof BusinessClient) {
-						BusinessClient businessClient = (BusinessClient) u;
-						businessClient.getAgents().size();
-						for (PersonalData pd : businessClient.getAgents()) {
-							pd.getPhoneNumber().size();
-							pd.getEmail().size();
-						}
-					}
-					if (u instanceof IndividualClient) {
-						IndividualClient individualClient = (IndividualClient) u;
-						individualClient.getPersonalData().getEmail().size();
-						individualClient.getPersonalData().getPhoneNumber()
-								.size();
+		Session session = getHibernateTemplate().getSessionFactory()
+				.openSession();
+		Query query = session.createQuery("from User");
+		List<User> list = query.list();
+		for (User u : list) {
+			u.getAuthorities().size();
+			if (u instanceof Worker) {
+				Worker worker = (Worker) u;
+				worker.getPersonalData().getEmail();
+				worker.getPersonalData().getPhoneNumber();
+				if (u instanceof Translator) {
+					Translator translator = (Translator) u;
+					translator.getTranslations().size();
+				}
+			} else if (u instanceof Client) {
+				if (u instanceof BusinessClient) {
+					BusinessClient businessClient = (BusinessClient) u;
+					businessClient.getAgents().size();
+					for (PersonalData pd : businessClient.getAgents()) {
+						pd.getPhoneNumber().size();
+						pd.getEmail().size();
 					}
 				}
+				if (u instanceof IndividualClient) {
+					IndividualClient individualClient = (IndividualClient) u;
+					individualClient.getPersonalData().getEmail().size();
+					individualClient.getPersonalData().getPhoneNumber().size();
+				}
 			}
-			session.close();
-			return list;
-		} catch (Exception e) {
-			return null;
 		}
+		session.close();
+		return list;
 	}
 
 }

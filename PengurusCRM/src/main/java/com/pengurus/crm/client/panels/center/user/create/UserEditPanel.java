@@ -8,9 +8,12 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.Field;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.PersonalDataModel;
+import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.UserServiceAsync;
 import com.pengurus.crm.client.service.exceptions.UsernameExistsException;
@@ -18,6 +21,7 @@ import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.ClientDTO;
 import com.pengurus.crm.shared.dto.IndividualClientDTO;
 import com.pengurus.crm.shared.dto.PersonalDataDTO;
+import com.pengurus.crm.shared.dto.TranslationDTO;
 import com.pengurus.crm.shared.dto.TranslatorDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
@@ -62,6 +66,9 @@ public class UserEditPanel extends UserBasePanel {
 
 	private void initTranslator(TranslatorDTO translator) {
 		selectUserType(UserType.Translator);
+		for (TranslationDTO translationDTO: translator.getTranslations()) {
+			translationStore.insert(new TranslationModel(translationDTO), translationStore.getCount());
+		}
 	}
 
 	private void initClient(ClientDTO client) {
@@ -79,8 +86,8 @@ public class UserEditPanel extends UserBasePanel {
 
 	private void initBusinessClient(BusinessClientDTO client) {
 		selectUserType(UserType.BusinessClient);
-		for (PersonalDataDTO personalData : client.getAgents()) {
-			store.insert(new PersonalDataModel(personalData), store.getCount());
+		for (PersonalDataDTO personalDataDTO : client.getAgents()) {
+			personalDataStore.insert(new PersonalDataModel(personalDataDTO), personalDataStore.getCount());
 		}
 	}
 
@@ -138,5 +145,13 @@ public class UserEditPanel extends UserBasePanel {
 		fields.add(userType);
 		fields.add(username);
 		return fields;
+	}
+
+	protected void createForm() {
+		form = new FormPanel();
+		form.setHeading("Edit user");
+		form.setFrame(true);
+		form.setPadding(25);
+		form.setLabelAlign(LabelAlign.TOP);
 	}
 }

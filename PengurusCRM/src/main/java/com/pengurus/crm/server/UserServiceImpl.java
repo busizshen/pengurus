@@ -101,10 +101,10 @@ public class UserServiceImpl implements UserService {
 			user = new IndividualClient((IndividualClientDTO)userDTO);
 		} else if(userDTO instanceof BusinessClientDTO) {
 			user = new BusinessClient((BusinessClientDTO)userDTO);
-		} else if(userDTO instanceof WorkerDTO) {
-			user = new Worker((WorkerDTO)userDTO);
 		} else if(userDTO instanceof TranslatorDTO) {
 			user = new Translator((TranslatorDTO)userDTO);
+		} else if(userDTO instanceof WorkerDTO) {
+			user = new Worker((WorkerDTO)userDTO);
 		} else {
 			throw new ServiceException();
 		}
