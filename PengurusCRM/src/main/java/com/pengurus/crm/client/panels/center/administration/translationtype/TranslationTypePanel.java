@@ -98,7 +98,7 @@ public class TranslationTypePanel extends MainPanel {
         grid.addPlugin(r);
         grid.getView().setForceFit(true);
 
-        removeButton = new Button("Remove selected translationType",
+        removeButton = new Button("Remove selected translation type",
                 new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {

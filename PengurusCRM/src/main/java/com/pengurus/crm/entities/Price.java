@@ -21,6 +21,7 @@ public class Price {
     public Price(PriceDTO priceDTO) {
 		super();
 		if(priceDTO != null){
+		    this.id = priceDTO.getId();
 			this.price = priceDTO.getPrice();
 			if(priceDTO.getCurrency() != null)
 				this.currency = new CurrencyType(priceDTO.getCurrency());

@@ -8,7 +8,7 @@
             <column name="TRANSLATION_ID" />
             <generator class="native" />
         </id>
-        <many-to-one name="type" class="com.pengurus.crm.entities.TranslationType" fetch="join" cascade="all">
+        <many-to-one name="type" class="com.pengurus.crm.entities.TranslationType" fetch="join" cascade="save-update">
             <column name="TYPE" />
         </many-to-one>
         <many-to-one name="lfrom" class="com.pengurus.crm.entities.Language" fetch="join">
@@ -17,7 +17,7 @@
         <many-to-one name="lto" class="com.pengurus.crm.entities.Language" fetch="join">
             <column name="LTO" />
         </many-to-one>
-        <many-to-one name="defaultPrice" class="com.pengurus.crm.entities.Price" fetch="join" cascade="all">
+        <many-to-one name="defaultPrice" class="com.pengurus.crm.entities.Price" fetch="join" cascade="save-update">
             <column name="DEFAULTPRICE" />
         </many-to-one>
     </class>

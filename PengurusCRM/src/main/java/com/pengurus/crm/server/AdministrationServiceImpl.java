@@ -68,7 +68,8 @@ public class AdministrationServiceImpl implements AdministrationService {
 
     @Override
     public CurrencyTypeDTO createCurrency(CurrencyTypeDTO currencyTypeDTO) {
-        currencyTypeDAO.create(new CurrencyType(currencyTypeDTO.getCurrency()));
+        currencyTypeDTO.setId(currencyTypeDAO.create(new CurrencyType(
+                currencyTypeDTO.getCurrency())));
         return currencyTypeDTO;
     }
 
@@ -89,7 +90,8 @@ public class AdministrationServiceImpl implements AdministrationService {
 
     @Override
     public LanguageDTO createLanguage(LanguageDTO languageDTO) {
-        languageDAO.create(new Language(languageDTO.getLanguage()));
+        languageDTO.setId(languageDAO.create(new Language(languageDTO
+                .getLanguage())));
         return languageDTO;
     }
 
@@ -110,7 +112,10 @@ public class AdministrationServiceImpl implements AdministrationService {
 
     @Override
     public TranslationDTO createTranslation(TranslationDTO translationDTO) {
-        translationDAO.create(new Translation(translationDTO));
+        Translation translation = new Translation(translationDTO);
+        translationDTO.setId(translationDAO.create(translation));
+        translationDTO.getDefaultPrice().setId(
+                translation.getDefaultPrice().getId());
         return translationDTO;
     }
 
@@ -132,7 +137,8 @@ public class AdministrationServiceImpl implements AdministrationService {
     @Override
     public TranslationTypeDTO createTranslationType(
             TranslationTypeDTO translationTypeDTO) {
-        translationTypeDAO.create(new TranslationType(translationTypeDTO));
+        translationTypeDTO.setId(translationTypeDAO.create(new TranslationType(
+                translationTypeDTO)));
         return translationTypeDTO;
     }
 

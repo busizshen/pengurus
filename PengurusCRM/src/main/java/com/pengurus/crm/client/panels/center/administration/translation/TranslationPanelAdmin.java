@@ -128,43 +128,55 @@ public class TranslationPanelAdmin extends MainPanel {
         grid.addPlugin(r);
         grid.getView().setForceFit(true);
 
-        /*
-         * removeButton = new Button("Remove selected translationType", new
-         * SelectionListener<ButtonEvent>() {
-         * 
-         * @Override public void componentSelected(ButtonEvent ce) { if
-         * (grid.getSelectionModel().getSelectedItem() != null) {
-         * 
-         * AsyncCallback<TranslationTypeDTO> callback = new
-         * AsyncCallback<TranslationTypeDTO>() {
-         * 
-         * @Override public void onSuccess(TranslationTypeDTO result) {
-         * grid.getStore().remove( grid.getSelectionModel() .getSelectedItem());
-         * 
-         * MessageBox.info("Success", "You have succesfully deleted " +
-         * result.getUnit() + " " + result.getDescription() +
-         * " translation type.", null); }
-         * 
-         * @Override public void onFailure(Throwable caught) {
-         * MessageBox.info("Failure", "Deleting language has failed.", null); }
-         * }; AdministrationServiceAsync service = (AdministrationServiceAsync)
-         * GWT .create(AdministrationService.class);
-         * service.deleteTranslationType(grid
-         * .getSelectionModel().getSelectedItem() .getTranslationTypeDTO(),
-         * callback); }
-         * 
-         * if (grid.getStore().getCount() == 0) { ce.getComponent().disable(); }
-         * }
-         * 
-         * });
-         */// btn.setIcon(Resources.ICONS.delete());
+        removeButton = new Button("Remove selected translation",
+                new SelectionListener<ButtonEvent>() {
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        if (grid.getSelectionModel().getSelectedItem() != null) {
+
+                            AsyncCallback<TranslationDTO> callback = new AsyncCallback<TranslationDTO>() {
+
+                                @Override
+                                public void onSuccess(TranslationDTO result) {
+                                    grid.getStore().remove(
+                                            grid.getSelectionModel()
+                                                    .getSelectedItem());
+
+                                    MessageBox
+                                            .info("Success",
+                                                    "You have succesfully deleted translation.",
+                                                    null);
+                                }
+
+                                @Override
+                                public void onFailure(Throwable caught) {
+                                    MessageBox.info("Failure",
+                                            "Deleting language has failed.",
+                                            null);
+                                }
+                            };
+                            AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
+                                    .create(AdministrationService.class);
+                            service.deleteTranslation(grid.getSelectionModel()
+                                    .getSelectedItem().getTranslationDTO(),
+                                    callback);
+                        }
+
+                        if (grid.getStore().getCount() == 0) {
+                            ce.getComponent().disable();
+                        }
+                    }
+
+                });
+        // btn.setIcon(Resources.ICONS.delete());
         ContentPanel cp = new ContentPanel();
         cp.setButtonAlign(HorizontalAlignment.CENTER);
         cp.setHeading("List of translation types");
         cp.setLayout(new FitLayout());
         cp.setSize(700, 300);
         cp.add(grid);
-        // cp.addButton(removeButton);
+        cp.addButton(removeButton);
         grid.getAriaSupport().setLabelledBy(cp.getHeader().getId() + "-label");
 
         mainForm.add(createForm);
@@ -181,8 +193,10 @@ public class TranslationPanelAdmin extends MainPanel {
 
                             @Override
                             public void onSuccess(TranslationDTO result) {
-                               /* if (!removeButton.isEnabled())
-                                    removeButton.enable();*/
+
+                                if (!removeButton.isEnabled())
+                                    removeButton.enable();
+
                                 grid.getStore().add(
                                         new TranslationModel(result));
 
