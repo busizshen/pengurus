@@ -32,7 +32,6 @@ public class JobsListPanelQuoteEdit extends JobsListPanelQuote {
 				Listener<DomEvent> listenerCreateJob = new Listener<DomEvent>() { 
 					@Override
 					public void handleEvent(DomEvent be) {
-					    //dodanie nowego JOBA do bazy danych
 						if(jobPanel.getJobDTO() != null){
 							ml.getGrid().stopEditing();
 							ml.getStore().add(new JobModel(jobPanel.getJobDTO()));

@@ -47,13 +47,21 @@ public class TasksListPanel extends ListPanel<TaskModel> {
 		ml = new ModelList();
 		HorizontalPanel hp = new HorizontalPanel();
 		hp.setSpacing(20);
+		
 		hp.add(addButtonPanel());
 		hp.add(ml);
 		add(hp);
 	}
 
+	protected void refreshList(TaskDTO taskDTO){
+		ml.getGrid().stopEditing();
+		ml.getStore().add(
+				new TaskModel(taskDTO));
+		ml.getGrid().startEditing(0, 0);
+	}
 	private FormPanel addButtonPanel() {
 		FormPanel formPanel = new FormPanel();
+		final TasksListPanel taskListPanel = this;
 		formPanel.setHeaderVisible(false);
 		formPanel.setFrame(false);
 		formPanel.setBorders(true);
@@ -66,18 +74,18 @@ public class TasksListPanel extends ListPanel<TaskModel> {
 						w.setAutoWidth(true);
 						w.setClosable(false);
 						final TaskPanelCreate taskPanel = new TaskPanelCreate(
-								jobDTO,projectDTO);
+								jobDTO,projectDTO,taskListPanel);
 						Listener<DomEvent> listenerCreateJob = new Listener<DomEvent>() {
 							@Override
 							public void handleEvent(DomEvent be) {
 								if (taskPanel.getTaskDTO() != null) {
-									ml.getGrid().stopEditing();
+							/*		ml.getGrid().stopEditing();
 									ml.getStore().add(
 											new TaskModel(taskPanel
 													.getTaskDTO()));
-									ml.getGrid().startEditing(0, 0);
-									jobDTO.getTask()
-											.add(taskPanel.getTaskDTO());
+									ml.getGrid().startEditing(0, 0);*/
+/*									jobDTO.getTask()
+											.add(taskPanel.getTaskDTO());*/
 									w.hide();
 								}
 							}
@@ -117,12 +125,12 @@ public class TasksListPanel extends ListPanel<TaskModel> {
 		configs.add(column);
 
 		column = new ColumnConfigMy();
-		column.setId("languageFrom");
+		column.setId("translationFrom");
 		column.setHeader("From");
 		configs.add(column);
 
 		column = new ColumnConfigMy();
-		column.setId("languageTo");
+		column.setId("translationTo");
 		column.setHeader("To");
 		configs.add(column);
 

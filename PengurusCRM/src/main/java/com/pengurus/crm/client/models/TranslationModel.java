@@ -14,6 +14,7 @@ public class TranslationModel extends BaseModel {
 
 	public void setTranslationDTO(TranslationDTO translationDTO) {
 		this.translationDTO = translationDTO;
+
 		set("id", translationDTO.getId());
 		if (translationDTO.getDefaultPrice() != null) {
 			set("defaultPrice", translationDTO.getDefaultPrice().getPrice());
@@ -29,6 +30,7 @@ public class TranslationModel extends BaseModel {
 		}
 		if (translationDTO.getType() != null) {
 			set("type", translationDTO.getType().getDescription());
+
 		}
 		set("name", toString());
 	}

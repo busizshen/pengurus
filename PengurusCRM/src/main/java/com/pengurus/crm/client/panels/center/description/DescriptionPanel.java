@@ -1,4 +1,4 @@
-package com.pengurus.crm.client.panels.center;
+package com.pengurus.crm.client.panels.center.description;
 
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
@@ -40,6 +40,10 @@ public class DescriptionPanel extends ContentPanel {
 
 	public String getDescription() {
 		return a.getValue();
+	}
+	
+	public void setAllowBlank(boolean allow){
+		a.setAllowBlank(allow);
 	}
 
 	

@@ -9,12 +9,13 @@ import com.pengurus.crm.client.models.TranslationModel;
 
 public class TranslationPanel extends FormPanel {
 
+	TranslationsListPanel translations;
 	TranslationModel translation;
 	TextField<String> from;
 	TextField<String> to;
 	TextField<String> type;
 	TextField<Integer> price;
-	private TranslationsListPanel translations;
+	
 
 	public TranslationPanel() {
 		initTranslationPanel();
@@ -95,5 +96,6 @@ public class TranslationPanel extends FormPanel {
 		add(translations);
 
 	}
+
 
 }

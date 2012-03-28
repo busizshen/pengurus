@@ -1,4 +1,4 @@
-package com.pengurus.crm.client.panels.center;
+package com.pengurus.crm.client.panels.center.description;
 
 public class DescriptionPanelEdit extends DescriptionPanel {
 

@@ -54,10 +54,10 @@ public class Price {
 
 	public PriceDTO toDTO() {
 		PriceDTO pDTO = new PriceDTO();
-		if(this.currency != null)
-			pDTO.setCurrency(this.currency.toDTO());
 		pDTO.setId(this.id);
 		pDTO.setPrice(this.price);
+/*		if(this.currency != null)
+			pDTO.setCurrency(this.currency.toDTO());*/
 		return pDTO;
 	}
 

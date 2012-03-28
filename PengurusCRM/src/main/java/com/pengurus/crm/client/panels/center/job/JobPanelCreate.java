@@ -3,17 +3,12 @@ package com.pengurus.crm.client.panels.center.job;
 import java.util.Set;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
-import com.extjs.gxt.ui.client.core.El;
-import com.extjs.gxt.ui.client.core.XDOM;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.DomEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.Component;
-import com.extjs.gxt.ui.client.widget.ComponentPlugin;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
@@ -29,9 +24,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.models.CurrencyModel;
 import com.pengurus.crm.client.models.TranslationModel;
-import com.pengurus.crm.client.panels.center.DescriptionPanel;
 import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanel;
-import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanelCreate;
+import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanelChange;
+import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
 import com.pengurus.crm.client.service.AdministrationService;
 import com.pengurus.crm.client.service.AdministrationServiceAsync;
 import com.pengurus.crm.client.service.JobService;
@@ -122,7 +117,7 @@ public class JobPanelCreate {
 			simple.setAutoHeight(true);
 			simple.setAutoWidth(true);
 
-			ComponentPlugin plugin = new ComponentPlugin() {
+			/*ComponentPlugin plugin = new ComponentPlugin() {
 				public void init(Component component) {
 					component.addListener(Events.Render,
 							new Listener<ComponentEvent>() {
@@ -139,32 +134,39 @@ public class JobPanelCreate {
 								}
 							});
 				}
-			};
+			};*/
 
 			final DateField date = new DateField();
 			date.setFieldLabel("Deadline");
-			date.addPlugin(plugin);
+			//date.addPlugin(plugin);
 			date.setAllowBlank(false);
-			date.setData("text", "Enter your birthday");
+			date.setData("text", "Enter deadline");
 			simple.add(date, formData);
 
-			translation = new TranslationPanelCreate(listTranslationModel);
+			translation = new TranslationPanelChange(listTranslationModel);
 			translation.setAllowBlank(false);
 			simple.add(translation);
 
 			final NumberField amount = new NumberField();
 			amount.setFieldLabel("Price");
 			amount.setAllowBlank(false);
-			amount.addPlugin(plugin);
+		//	amount.addPlugin(plugin);
 			amount.setData("text", "Enter your amount and choose Currnecy");
 			simple.add(amount);
+			
+			final NumberField price = new NumberField();
+			price.setFieldLabel("Price");
+			price.setAllowBlank(false);
+		//	amount.addPlugin(plugin);
+			price.setData("text", "Enter your price and choose Currnecy");
+			simple.add(price);
 
 			final ComboBox<CurrencyModel> combo = new ComboBox<CurrencyModel>();
 			combo.setFieldLabel("Currency");
 			combo.setDisplayField("currency");
 			combo.setTriggerAction(TriggerAction.ALL);
 			combo.setStore(listCurrencyModel);
-			combo.addPlugin(plugin);
+		//	combo.addPlugin(plugin);
 			combo.setData("text", "Choose Language");
 			combo.setAllowBlank(false);
 			simple.add(combo, formData);
@@ -172,7 +174,7 @@ public class JobPanelCreate {
 			final DescriptionPanel descr = new DescriptionPanel();
 			simple.add(descr, formData);
 
-			Button b = new Button("Submit",
+			Button buttonSubmit = new Button("Submit",
 					new SelectionListener<ButtonEvent>() {
 
 						@Override
@@ -180,8 +182,9 @@ public class JobPanelCreate {
 							jobDTO = new JobDTO();
 							jobDTO.setDeadline(date.getValue());
 							jobDTO.setDescription(descr.getDescription());
+							jobDTO.setAmount(amount.getValue().intValue());
 							PriceDTO priceDTO = new PriceDTO();
-							priceDTO.setPrice(amount.getValue().intValue());
+							priceDTO.setPrice(price.getValue().intValue());
 							priceDTO.setCurrency(combo.getValue()
 									.getCurrencyDTO());
 							jobDTO.setPrice(priceDTO);
@@ -205,16 +208,16 @@ public class JobPanelCreate {
 						}
 
 					});
-			b.addListener(Events.OnClick, listenerCreateJob);
-			simple.addButton(b);
-			Button c = new Button("Cancel");
-			c.addListener(Events.OnClick, listenerClose);
-			simple.addButton(c);
+			buttonSubmit.addListener(Events.OnClick, listenerCreateJob);
+			simple.addButton(buttonSubmit);
+			Button buttonCancel = new Button("Cancel");
+			buttonCancel.addListener(Events.OnClick, listenerClose);
+			simple.addButton(buttonCancel);
 
 			simple.setButtonAlign(HorizontalAlignment.CENTER);
 
 			FormButtonBinding binding = new FormButtonBinding(simple);
-			binding.addButton(b);
+			binding.addButton(buttonSubmit);
 
 			vp.add(simple);
 		}

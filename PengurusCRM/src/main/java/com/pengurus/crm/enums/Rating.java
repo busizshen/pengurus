@@ -23,4 +23,18 @@ public enum Rating {
 			return RatingDTO.veryGood;
 		return null;
 	}    
+	
+	public static Rating toRating(RatingDTO r){
+		if(r == RatingDTO.veryBad)
+			return Rating.veryBad;
+		if(r == RatingDTO.bad)
+			return Rating.bad;
+		if(r == RatingDTO.ok)
+			return Rating.ok;
+		if(r == RatingDTO.good)
+			return Rating.good;
+		if(r == RatingDTO.veryGood)
+			return Rating.veryGood;
+		return null;
+	}
 }

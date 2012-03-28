@@ -3,7 +3,7 @@ package com.pengurus.crm.client.panels.center.user;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.pengurus.crm.client.panels.center.DescriptionPanel;
+import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
 import com.pengurus.crm.shared.dto.UserDTO;
 
 public abstract class UserPanel {

@@ -16,6 +16,7 @@
 				/**/administration.rpc=administrationController
 				/**/job.rpc=jobController
 				/**/project.rpc=projectController
+				/**/task.rpc=taskController
 			</value>
 		</property>
 	</bean>

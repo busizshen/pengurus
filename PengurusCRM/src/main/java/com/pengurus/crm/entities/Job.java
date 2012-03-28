@@ -39,6 +39,8 @@ public class Job {
     public Job(JobDTO jobDTO) {
     	super();
 		if(jobDTO != null){
+			if(jobDTO.getId() != null)
+				this.id = jobDTO.getId();
 			if(jobDTO.getStatus() != null)
 				this.status = Status.toStatus(jobDTO.getStatus());
 			if(jobDTO.getDeadline() != null)
@@ -55,6 +57,10 @@ public class Job {
 			}
 			
 		}
+	}
+
+	public Job(Long id) {
+		this.id = id;
 	}
 
 	public Long getId() {

@@ -32,7 +32,7 @@
         </property>
         <set name="task" table="TASK" inverse="false" lazy="true" cascade="save-update">
             <key>
-                <column name="JOB_ID" />
+                <column name="JOB" />
             </key>
             <one-to-many class="com.pengurus.crm.entities.Task" />
         </set>

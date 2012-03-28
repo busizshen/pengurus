@@ -8,7 +8,7 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.AuthorizationManager;
-import com.pengurus.crm.client.panels.center.DescriptionPanelView;
+import com.pengurus.crm.client.panels.center.description.DescriptionPanelView;
 import com.pengurus.crm.client.panels.center.user.UserPanel.UserViewInfo;
 import com.pengurus.crm.client.panels.center.user.client.ClientPanelView;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelView;

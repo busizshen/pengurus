@@ -2,7 +2,13 @@ package com.pengurus.crm.shared.dto;
 
 import java.util.Date;
 
+import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.pengurus.crm.client.service.TaskService;
+import com.pengurus.crm.client.service.TaskServiceAsync;
 
 
 public class TaskDTO implements IsSerializable {
@@ -126,6 +132,26 @@ public class TaskDTO implements IsSerializable {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+	public void create(TaskDTO taskDTO) {
+			AsyncCallback<TaskDTO> callback = new AsyncCallback<TaskDTO>() {
+
+				public void onFailure(Throwable t) {
+					Window.Location.assign("/spring_security_login");
+
+				}
+
+				@Override
+				public void onSuccess(TaskDTO taskDTO) {
+					MessageBox mb = new MessageBox();
+					mb.setMessage(taskDTO.getId().toString());
+					mb.show();
+				}
+			};
+			TaskServiceAsync service = (TaskServiceAsync) GWT
+					.create(TaskService.class);
+			service.createTask(this, callback);
+	}
     
 
 }

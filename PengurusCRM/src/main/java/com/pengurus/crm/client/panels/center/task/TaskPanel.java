@@ -17,11 +17,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.CurrencyModel;
 import com.pengurus.crm.client.models.TranslationModel;
-import com.pengurus.crm.client.panels.center.DescriptionPanel;
-import com.pengurus.crm.client.panels.center.DescriptionPanelEdit;
 import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.client.panels.center.RatingPanel;
 import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanel;
+import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
+import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
 import com.pengurus.crm.client.panels.center.status.TaskStatusPanel;
 import com.pengurus.crm.client.service.AdministrationService;
 import com.pengurus.crm.client.service.AdministrationServiceAsync;
@@ -34,11 +34,15 @@ public class TaskPanel extends MainPanel {
 	protected TaskDTO taskDTO;
 	protected ProjectDTO projectDTO;
 	protected NumberField amount;
+	protected NumberField price;
+	protected ComboBox<CurrencyModel> combo;
 	protected DescriptionPanel description;
 	protected TranslationPanel translation;
+	protected FormPanel mainPanel;
+	protected DateField deadline;
 	TaskStatusPanel statusBar;
 	RatingPanel rating;
-	
+
 	public TaskPanel(TaskDTO task, ProjectDTO jobDTO) {
 		this.taskDTO = task;
 		this.projectDTO = jobDTO;
@@ -46,7 +50,9 @@ public class TaskPanel extends MainPanel {
 		vp.setSpacing(5);
 		HorizontalPanel hp = new HorizontalPanel();
 		setStyle(hp);
-		hp.setBorders(true);
+		mainPanel = new FormPanel();
+		mainPanel.setFrame(false);
+		mainPanel.setHeaderVisible(false);
 		VerticalPanel vp1 = new VerticalPanel();
 		vp1.setSpacing(5);
 		addButtonPanel(vp1);
@@ -58,10 +64,10 @@ public class TaskPanel extends MainPanel {
 		addRatingPanel(vp2);
 		addDescriptionPanel(vp2);
 		hp.add(vp2);
-		vp.add(hp);
-		addTranslatorPanel(vp);
-		add(vp);
-		
+		mainPanel.add(hp);
+		addTranslatorPanel(mainPanel);
+		add(mainPanel);
+
 	}
 
 	protected void setStyle(HorizontalPanel hp) {
@@ -72,13 +78,13 @@ public class TaskPanel extends MainPanel {
 		
 	}
 
-	private void addTranslatorPanel(VerticalPanel vp) {
+	private void addTranslatorPanel(FormPanel vp) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	protected void addStatusBar(VerticalPanel vp1) {
-		statusBar= new TaskStatusPanel();
+		statusBar = new TaskStatusPanel();
 		vp1.add(statusBar);
 	}
 
@@ -99,28 +105,36 @@ public class TaskPanel extends MainPanel {
 		simple.setAutoHeight(true);
 		simple.setAutoWidth(true);
 		simple.setHeaderVisible(false);
-		if(AuthorizationManager.canEditProject(projectDTO)){
+		if (AuthorizationManager.canEditProject(projectDTO)) {
 
-			final ListStore<CurrencyModel> listCurrencyModel =new  ListStore<CurrencyModel>();
-			final NumberField amount = new NumberField();
-			amount.setFieldLabel("Price");
-			amount.setData("text", "Enter your amount and choose Currnecy");
+			final ListStore<CurrencyModel> listCurrencyModel = new ListStore<CurrencyModel>();
+			amount = new NumberField();
+			amount.setFieldLabel("Amount");
+			amount.setName("amount");
+			amount.setData("text", "Enter your amount");
 
-			final ComboBox<CurrencyModel> combo = new ComboBox<CurrencyModel>();
+			price = new NumberField();
+			price.setFieldLabel("Price");
+			price.setName("amount");
+			price.setData("text", "Enter your price and choose Currnecy");
+
+			combo = new ComboBox<CurrencyModel>();
 			combo.setFieldLabel("Currency");
 			combo.setDisplayField("currency");
 			combo.setTriggerAction(TriggerAction.ALL);
 			combo.setData("text", "Choose Language");
 			combo.setStore(listCurrencyModel);
-			
-			if(taskDTO.getPrice() != null){
+
+			if ( taskDTO != null && taskDTO.getPrice() != null) {
 				amount.setValue(taskDTO.getPrice().getPrice());
-				combo.setValue(new CurrencyModel(taskDTO.getPrice().getCurrency()));
+				combo.setValue(new CurrencyModel(taskDTO.getPrice()
+						.getCurrency()));
 			}
-			
+
 			simple.add(amount);
+			simple.add(price);
 			simple.add(combo);
-			
+
 			AsyncCallback<Set<CurrencyTypeDTO>> callback = new AsyncCallback<Set<CurrencyTypeDTO>>() {
 
 				public void onFailure(Throwable t) {
@@ -130,8 +144,9 @@ public class TaskPanel extends MainPanel {
 				public void onSuccess(Set<CurrencyTypeDTO> result) {
 					for (CurrencyTypeDTO c : result)
 						listCurrencyModel.add(new CurrencyModel(c));
-					if(taskDTO.getPrice() != null){
-						combo.setValue(new CurrencyModel(taskDTO.getPrice().getCurrency()));
+					if (taskDTO != null && taskDTO.getPrice() != null) {
+						combo.setValue(new CurrencyModel(taskDTO.getPrice()
+								.getCurrency()));
 					}
 				}
 			};
@@ -139,15 +154,17 @@ public class TaskPanel extends MainPanel {
 					.create(AdministrationService.class);
 			service.getCurrency(callback);
 		}
-		addTranslationPanel(simple);
 		simple.add(addDeadlinePanel());
+		addTranslationPanel(simple);
 		vp1.add(simple);
 	}
 
 	protected void addTranslationPanel(FormPanel simple) {
-		if(taskDTO.getTranslation() != null)
-			translation = new TranslationPanel(new TranslationModel(taskDTO.getTranslation()));
-		else translation = new TranslationPanel();
+		if (taskDTO != null && taskDTO.getTranslation() != null)
+			translation = new TranslationPanel(new TranslationModel(
+					taskDTO.getTranslation()));
+		else
+			translation = new TranslationPanel();
 		simple.add(translation);
 	}
 
@@ -158,30 +175,28 @@ public class TaskPanel extends MainPanel {
 		hp.add(b);
 		Button b2 = new Button("Cancel");
 		hp.add(b2);
-		if(AuthorizationManager.canEditProject(projectDTO)){
-			Button  b3 = new Button("Delete");
+		if (AuthorizationManager.canEditProject(projectDTO)) {
+			Button b3 = new Button("Delete");
 			hp.add(b3);
 		}
 		vp1.add(hp);
 	}
-	
-	private FormPanel addDeadlinePanel() {
 
-		FormPanel hpDeadline = new FormPanel();
-		hpDeadline.setHeaderVisible(false);
-		hpDeadline.setBorders(true);
-		final DateField deadline = new DateField();
+	private DateField addDeadlinePanel() {
+
+
+		deadline = new DateField();
 		deadline.setFieldLabel("Deadline");
 		deadline.setData("text", "Enter your birthday");
-		deadline.setValue(taskDTO.getDeadline());
+		if(taskDTO != null)
+			deadline.setValue(taskDTO.getDeadline());
 		deadline.setReadOnly(true);
 
 		if (!AuthorizationManager.canChangeTask()) {
 			deadline.setReadOnly(true);
 		}
-		hpDeadline.add(deadline);
 
-		return hpDeadline;
+		return deadline;
 	}
 
 }

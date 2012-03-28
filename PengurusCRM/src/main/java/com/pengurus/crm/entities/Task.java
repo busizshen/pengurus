@@ -40,10 +40,24 @@ public class Task {
         this.comment = comment;
     }
    
-    //do zaklepania
     public Task(TaskDTO t) {
     	super();
-   	}
+    	this.id = t.getId();
+    	if(t.getExpert() != null)
+    		this.expert = new Translator(t.getExpert());
+    	this.deadline = t.getDeadline();
+    	if(t.getTranslation() != null)
+    		this.translation = new Translation(t.getTranslation());
+    	if(t.getPrice() != null)
+    		this.price = new Price(t.getPrice());
+    	this.amount = t.getAmount();
+    	this.description = t.getDescription();
+    	if(t.getJob() != null)
+    		this.job = new Job(t.getJob().getId());
+    	if(t.getRating() != null)
+    		this.rating = Rating.toRating(t.getRating());
+    	this.comment = t.getComment();
+    }
 
 	public Long getId() {
         return id;
@@ -139,9 +153,9 @@ public class Task {
     	tDTO.setComment(this.comment);
     	tDTO.setDeadline(this.deadline);
     	tDTO.setDescription(this.description);
+    	tDTO.setId(this.id);
     	if(this.expert != null)
     		tDTO.setExpert(this.expert.toDTOLazy());
-    	tDTO.setId(this.id);
     	if(this.job != null)
     		tDTO.setJob(this.job.toDTOLazy());
     	if(price != null)

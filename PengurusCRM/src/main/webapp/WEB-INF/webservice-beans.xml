@@ -50,5 +50,8 @@
 	<bean id="projectServiceBean" class="com.pengurus.crm.server.ProjectServiceImpl">
 		<property name="projectDAO" ref="projectDao" />
 	</bean>
+	<bean id="taskServiceBean" class="com.pengurus.crm.server.TaskServiceImpl">
+		<property name="taskDAO" ref="taskDao" />
+	</bean>
 
 </beans>

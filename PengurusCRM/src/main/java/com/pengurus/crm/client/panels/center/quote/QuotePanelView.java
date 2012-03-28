@@ -5,7 +5,7 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.MainWindow;
-import com.pengurus.crm.client.panels.center.DescriptionPanel;
+import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
 import com.pengurus.crm.client.panels.center.job.JobsListPanelQuoteView;
 import com.pengurus.crm.client.panels.center.user.client.ClientPanelView;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelView;

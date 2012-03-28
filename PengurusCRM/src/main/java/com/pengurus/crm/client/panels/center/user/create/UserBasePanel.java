@@ -17,6 +17,7 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -43,7 +44,6 @@ import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.pengurus.crm.client.models.PersonalDataModel;
 import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.MainPanel;
@@ -61,13 +61,14 @@ import com.pengurus.crm.shared.dto.WorkerDTO;
 
 public abstract class UserBasePanel extends MainPanel {
 
-	private HorizontalPanel horizontalPanel;
+	protected HorizontalPanel horizontalPanel;
 	protected FormPanel form, additionalDataForm;
 	protected PersonalDataForm personalDataForm;
 	private ContentPanel agentsGridPanel, translationsGridPanel;
-	private Grid<PersonalDataModel> agentsGrid;
+	Grid<PersonalDataModel> agentsGrid;
 	private EditorGrid<TranslationModel> translationsGrid;
-	private FormData formData, addFormData;
+	protected FormData formData;
+	private FormData addFormData;
 	protected TextField<String> username, password, description, fullName;
 	protected RadioGroup userType;
 	protected CheckBoxGroup userRoles;
@@ -94,7 +95,9 @@ public abstract class UserBasePanel extends MainPanel {
 		addVerticalPanel();
 	}
 
+
 	protected abstract void createForm();
+
 
 	private void addVerticalPanel() {
 		horizontalPanel = new HorizontalPanel();
@@ -435,7 +438,7 @@ public abstract class UserBasePanel extends MainPanel {
 
 	}
 
-	private void createUserTypeRatioGroup() {
+	protected void createUserTypeRatioGroup() {
 		userType = new RadioGroup("Usertype");
 		userType.setFieldLabel("User type");
 		userType.setOrientation(Orientation.VERTICAL);
@@ -446,7 +449,7 @@ public abstract class UserBasePanel extends MainPanel {
 		form.add(userType, formData);
 	}
 
-	private class UserRoleBox extends CheckBox {
+	class UserRoleBox extends CheckBox {
 		private UserRoleDTO userRole;
 
 		public UserRoleBox(String label, UserRoleDTO userRole) {
@@ -461,7 +464,7 @@ public abstract class UserBasePanel extends MainPanel {
 		}
 	}
 
-	private void createRoleCheckbox() {
+	protected void createRoleCheckbox() {
 		userRoles = new CheckBoxGroup();
 		userRoles.setFieldLabel("User roles");
 		userRoles.setOrientation(Orientation.VERTICAL);
@@ -482,7 +485,7 @@ public abstract class UserBasePanel extends MainPanel {
 		form.add(userRoles);
 	}
 
-	private void createIndividualClientFullNameField() {
+	protected void createIndividualClientFullNameField() {
 		fullName = new TextField<String>();
 		fullName.setFieldLabel("Full name");
 		fullName.hide();
@@ -490,7 +493,7 @@ public abstract class UserBasePanel extends MainPanel {
 		additionalDataForm.add(fullName, addFormData);
 	}
 
-	private void createAgentGrid() {
+	protected void createAgentGrid() {
 		GridCellRenderer<PersonalDataModel> buttonRenderer = new GridCellRenderer<PersonalDataModel>() {
 
 			private boolean init;
@@ -672,7 +675,7 @@ public abstract class UserBasePanel extends MainPanel {
 		additionalDataForm.hide();
 	}
 	
-	private void createWindow() {
+	protected void createWindow() {
 		window.setPlain(true);
 		window.setHeading("Edit personal data");
 		window.setLayout(new FlowLayout());

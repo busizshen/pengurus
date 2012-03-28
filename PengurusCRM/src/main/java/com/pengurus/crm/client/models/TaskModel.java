@@ -23,17 +23,14 @@ public class TaskModel extends BaseModel {
 
 	public void setTaskDTO(TaskDTO taskDTO) {
 		this.taskDTO = taskDTO;
-		set("id", this.taskDTO.getId().toString());
+		set("id", this.taskDTO.getId());
 		set("description", this.taskDTO.getDescription());
 		if (this.taskDTO.getStatus() != null)
 			set("status", this.taskDTO.getStatus().toString());
 		if (this.taskDTO.getDeadline() != null)
-			set("dealine", this.taskDTO.getDeadline().toString());
+			set("deadline", this.taskDTO.getDeadline().toString());
 		if (this.taskDTO.getExpert() != null)
 			set("expert", this.taskDTO.getExpert().getFullName());
-		// weryfikator
-		// if(this.taskDTO.get != null)
-		// set("expert", this.taskDTO.getExpert().getFullName());
 		if (this.taskDTO.getTranslation() != null) {
 			set("translationFrom", this.taskDTO.getTranslation().getFrom()
 					.getLanguage());

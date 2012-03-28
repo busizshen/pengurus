@@ -8,7 +8,7 @@ import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.MainWindow;
-import com.pengurus.crm.client.panels.center.DescriptionPanelEdit;
+import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
 import com.pengurus.crm.client.panels.center.user.client.ClientPanelEdit;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEdit;
 import com.pengurus.crm.shared.dto.StatusDTO;

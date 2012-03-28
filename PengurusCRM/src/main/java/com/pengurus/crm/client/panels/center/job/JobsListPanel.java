@@ -40,7 +40,7 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 		column.setDateTimeFormat(DateTimeFormat.getFormat("MM/dd/yyyy"));
 		configs.add(column);
 */
-/*		column = new ColumnConfigMy();
+		column = new ColumnConfigMy();
 		column.setId("translationFrom");
 		column.setHeader("Translation From");
 		configs.add(column);
@@ -48,7 +48,7 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 		column = new ColumnConfigMy();
 		column.setId("translationTo");
 		column.setHeader("Translation To");
-		configs.add(column);*/
+		configs.add(column);
 
 /*		column = new ColumnConfigMy();
 		column.setId("priceNumber");

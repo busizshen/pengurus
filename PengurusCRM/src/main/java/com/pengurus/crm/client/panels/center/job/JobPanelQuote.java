@@ -8,4 +8,10 @@ public class JobPanelQuote extends JobPanel {
 		super(jobDTO);
 	}
 
+	@Override
+	protected void setTranslation() {
+		if(translation.getTranslation().getTranslationDTO() != jobDTO.getTranslation()){
+			jobDTO.setTranslation(translation.getTranslation().getTranslationDTO());
+		}
+	}
 }

@@ -41,6 +41,12 @@ public class JobServiceImpl implements JobService {
 	public JobDTO getJob(Long id) {
 		return jobDAO.getById(id).toDTO();
 	}
+	@Override
+	public JobDTO updateJob(JobDTO jobDTO) {
+		Job j = new Job(jobDTO);
+		jobDAO.update(j);
+		return j.toDTO();
+	}
 
 	@Override
 	public Set<JobDTO> getJobByExpertId(Long id) {

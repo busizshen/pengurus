@@ -31,7 +31,8 @@ public class JobModel  extends BaseModel{
 		}
 		if(jobDTO.getPrice() != null){
 			set("priceNumber",jobDTO.getPrice().getPrice().toString());
-			//set("priceCurrency",jobDTO.getPrice().getCurrency().getCurrency().toString());
+			if(jobDTO.getPrice().getCurrency() != null)
+				set("priceCurrency",jobDTO.getPrice().getCurrency().getCurrency().toString());
 		}
 	}
 	
