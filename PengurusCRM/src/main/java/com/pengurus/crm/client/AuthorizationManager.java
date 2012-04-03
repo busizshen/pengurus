@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.pengurus.crm.shared.dto.ProjectDTO;
+import com.pengurus.crm.shared.dto.TaskDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
@@ -203,6 +204,26 @@ public class AuthorizationManager {
 		Set<UserRoleDTO> roles2 = new HashSet<UserRoleDTO>();
 		roles2.add(UserRoleDTO.ROLE_PROJECTMNAGER);
 		return currentUser.haveAuthority(roles) || (currentUser.haveAuthority(roles) && projectDTO.isProjectManager(currentUser)) ;
+	}
+
+	public static boolean hasTranslatorAccess(TaskDTO taskDTO) {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_EXPERT);
+		roles.add(UserRoleDTO.ROLE_FREELANCER);
+		return currentUser.haveAuthority(roles) && (taskDTO.getExpert() == currentUser);
+	}
+
+	public static boolean hasVerifivatorAccess(TaskDTO taskDTO) {
+//nie rozumiem dalej tego verificatora
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_EXPERT);
+		roles.add(UserRoleDTO.ROLE_FREELANCER);
+		return currentUser.haveAuthority(roles) && (taskDTO.getExpert() == currentUser);
+	}
+
+	public static boolean hasProjectManagerAccess(TaskDTO taskDTO) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

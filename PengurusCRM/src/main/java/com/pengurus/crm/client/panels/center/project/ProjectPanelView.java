@@ -4,8 +4,6 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelView;
@@ -24,30 +22,46 @@ public class ProjectPanelView extends ProjectPanel{
 
 	@Override
 	protected void addTranslatorsPanel() {
-		
+		// there will be nothing 
 	}
 
 	@Override
 	protected void addProjectMangaersPanel() {
-		// TODO Auto-generated method stub
+		// there will be nothing 
 		
 	}
 
 	@Override
-	protected void addInfoPanel() {
-		FormPanel simple = new FormPanel(); 
-		simple.setFrame(false);
-		simple.setHeaderVisible(false);
-		simple.setBorders(true);
-		simple.setAutoHeight(true);
-		simple.setAutoWidth(true);
-		HorizontalPanel hp = new HorizontalPanel();
-		hp.setSpacing(20);
-		VerticalPanel vp = new VerticalPanel();
-		vp.setSpacing(5);
-		
-		HorizontalPanel hp2 = new HorizontalPanel();
-		hp2.setSpacing(5);
+	protected void addSupervisorPanel(VerticalPanel vp) {
+		supervisor = new WorkerPanelView(projectDTO.getSupervisor());
+		UserViewInfo supervisorPanel = supervisor.getInfoPanel();
+		supervisorPanel.setHeading("Supervisor");
+		supervisorPanel.expand();
+		supervisorPanel.setCollapsible(false);
+		vp.add(supervisorPanel);
+	}
+
+	@Override
+	protected void addClientPanel(VerticalPanel vp) {
+		if(AuthorizationManager.canViewWholeProject()){
+			client = new ClientPanelView(projectDTO.getClient());
+			UserViewInfo clientPanel = client.getInfoPanel();
+			clientPanel.setHeading("Client");
+			clientPanel.expand();
+			clientPanel.setCollapsible(false);
+			vp.add(clientPanel);
+		}
+	}
+
+	@Override
+	protected void addDescriptionPanel(HorizontalPanel hp) {
+		descriptionPanel = new DescriptionPanelView(projectDTO.getDescription());
+		descriptionPanel.setWidth(300);
+		hp.add(descriptionPanel);
+	}
+
+	@Override
+	protected void addButtonPanel(HorizontalPanel hp2) {
 		Button b = new Button("Edit", new SelectionListener<ButtonEvent>(){
 			@Override
 			public void componentSelected(ButtonEvent ce) {
@@ -57,34 +71,8 @@ public class ProjectPanelView extends ProjectPanel{
 			
 		});
 		hp2.add(b);
-
-		vp.add(hp2);
-		
-		NumberField id = new NumberField();
-		id.setValue(projectDTO.getId());
-		id.setReadOnly(true);
-		vp.add(id);
-		
-		supervisor = new WorkerPanelView(projectDTO.getSupervisor());
-		UserViewInfo supervisorPanel = supervisor.getInfoPanel();
-		supervisorPanel.setHeading("Supervisor");
-		supervisorPanel.expand();
-		vp.add(supervisorPanel);
-		
-		if(AuthorizationManager.canViewWholeProject()){
-			client = new ClientPanelView(projectDTO.getClient());
-			UserViewInfo clientPanel = client.getInfoPanel();
-			clientPanel.setHeading("Client");
-			clientPanel.expand();
-			vp.add(clientPanel);
-		}
-		
-		hp.add(vp);
-		DescriptionPanelView descr = new DescriptionPanelView(projectDTO.getDescription());
-		descr.setAutoWidth(true);
-		hp.add(descr);
-		simple.add(hp);
-		add(simple);
 	}
+
+	
 
 }

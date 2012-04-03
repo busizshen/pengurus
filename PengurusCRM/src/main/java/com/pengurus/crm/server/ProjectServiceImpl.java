@@ -9,7 +9,7 @@ import com.pengurus.crm.daos.ProjectDAO;
 import com.pengurus.crm.entities.Project;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 
-public class ProjectServiceImpl implements ProjectService{
+public class ProjectServiceImpl implements ProjectService {
 
 	private ProjectDAO projectDAO;
 
@@ -53,7 +53,7 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public Set<ProjectDTO> getProjectByProjectManagerId(Long id){
+	public Set<ProjectDTO> getProjectByProjectManagerId(Long id) {
 		List<Project> list = projectDAO.loadAllByProjectManagerId(id);
 		Set<ProjectDTO> set = new HashSet<ProjectDTO>();
 		for (Project q : list) {
@@ -61,7 +61,17 @@ public class ProjectServiceImpl implements ProjectService{
 		}
 		return set;
 	}
-	
-	
+
+	@Override
+	public void updateProject(ProjectDTO projectDTO) {
+		projectDAO.update(new Project(projectDTO));
+
+	}
+
+	@Override
+	public void deleteProject(ProjectDTO projectDTO) {
+		projectDAO.delete(new Project(projectDTO));
+
+	}
 
 }

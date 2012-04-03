@@ -14,6 +14,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.models.TranslationModel;
+import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
 import com.pengurus.crm.client.service.TaskService;
 import com.pengurus.crm.client.service.TaskServiceAsync;
 import com.pengurus.crm.shared.dto.JobDTO;
@@ -135,6 +136,12 @@ public class TaskPanelCreate extends TaskPanel {
 	}
 
 	protected void addRatingPanel(VerticalPanel vp2) {
+	}
+	
+	protected void addDescriptionPanel(VerticalPanel vp2) {
+		description = new DescriptionPanelEdit("");
+		description.setWidth(300);
+		vp2.add(description);
 	}
 
 }

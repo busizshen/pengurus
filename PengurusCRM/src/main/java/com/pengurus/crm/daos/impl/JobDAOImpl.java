@@ -1,6 +1,7 @@
 package com.pengurus.crm.daos.impl;
 
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.slf4j.Logger;

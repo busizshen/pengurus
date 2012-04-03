@@ -17,7 +17,6 @@ public class DescriptionPanel extends ContentPanel {
 		this.setAnimCollapse(true);
 		this.collapse();
 		add(a);
-		this.setAutoWidth(true);
 		this.setAutoHeight(true);
 	}
 
@@ -30,7 +29,6 @@ public class DescriptionPanel extends ContentPanel {
 		this.setAnimCollapse(true);
 		this.collapse();
 		add(a);
-		this.setAutoWidth(true);
 		this.setAutoHeight(true);
 	}
 

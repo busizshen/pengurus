@@ -2,7 +2,6 @@ package com.pengurus.crm.shared.dto;
 
 import java.util.Date;
 
-import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -10,148 +9,161 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import com.pengurus.crm.client.service.TaskService;
 import com.pengurus.crm.client.service.TaskServiceAsync;
 
-
 public class TaskDTO implements IsSerializable {
-    
-    private Long id;
-    private StatusDTO status;
-    private TranslatorDTO expert;
-    private Date deadline;
-    private TranslationDTO translation;
-    private Integer amount;
-    private PriceDTO price;
-    private String description;
-    private JobDTO job;
-    private RatingDTO rating;
-    private String comment;
 
-    public TaskDTO() {
-        super();
-    }
+	private Long id;
+	private StatusDTO status;
+	private TranslatorDTO expert;
+	private Date deadline;
+	private TranslationDTO translation;
+	private Integer amount;
+	private PriceDTO price;
+	private String description;
+	private JobDTO job;
+	private RatingDTO rating;
+	private String comment;
 
-    public TaskDTO(StatusDTO status, TranslatorDTO expert, Date deadline,
-                TranslationDTO translation, Integer amount, PriceDTO price,
-                String description, JobDTO job, RatingDTO rating, String comment) {
-        super();
-        this.status = status;
-        this.expert = expert;
-        this.deadline = deadline;
-        this.translation = translation;
-        this.amount = amount;
-        this.price = price;
-        this.description = description;
-        this.job = job;
-        this.rating = rating;
-        this.comment = comment;
-    }
-    
-    public Long getId() {
-        return id;
-    }
+	public TaskDTO() {
+		super();
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public TaskDTO(StatusDTO status, TranslatorDTO expert, Date deadline,
+			TranslationDTO translation, Integer amount, PriceDTO price,
+			String description, JobDTO job, RatingDTO rating, String comment) {
+		super();
+		this.status = status;
+		this.expert = expert;
+		this.deadline = deadline;
+		this.translation = translation;
+		this.amount = amount;
+		this.price = price;
+		this.description = description;
+		this.job = job;
+		this.rating = rating;
+		this.comment = comment;
+	}
 
-    public StatusDTO getStatus() {
-        return status;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setStatus(StatusDTO status) {
-        this.status = status;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public TranslatorDTO getExpert() {
-        return expert;
-    }
+	public StatusDTO getStatus() {
+		return status;
+	}
 
-    public void setExpert(TranslatorDTO expert) {
-        this.expert = expert;
-    }
+	public void setStatus(StatusDTO status) {
+		this.status = status;
+	}
 
-    public Date getDeadline() {
-        return deadline;
-    }
+	public TranslatorDTO getExpert() {
+		return expert;
+	}
 
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
+	public void setExpert(TranslatorDTO expert) {
+		this.expert = expert;
+	}
 
-    public TranslationDTO getTranslation() {
-        return translation;
-    }
+	public Date getDeadline() {
+		return deadline;
+	}
 
-    public void setTranslation(TranslationDTO translation) {
-        this.translation = translation;
-    }
+	public void setDeadline(Date deadline) {
+		this.deadline = deadline;
+	}
 
-    public Integer getAmount() {
-        return amount;
-    }
+	public TranslationDTO getTranslation() {
+		return translation;
+	}
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
+	public void setTranslation(TranslationDTO translation) {
+		this.translation = translation;
+	}
 
-    public PriceDTO getPrice() {
-        return price;
-    }
+	public Integer getAmount() {
+		return amount;
+	}
 
-    public void setPrice(PriceDTO price) {
-        this.price = price;
-    }
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public PriceDTO getPrice() {
+		return price;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setPrice(PriceDTO price) {
+		this.price = price;
+	}
 
-    public JobDTO getJob() {
-        return job;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setJob(JobDTO job) {
-        this.job = job;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public RatingDTO getRating() {
-        return rating;
-    }
+	public JobDTO getJob() {
+		return job;
+	}
 
-    public void setRating(RatingDTO rating) {
-        this.rating = rating;
-    }
+	public void setJob(JobDTO job) {
+		this.job = job;
+	}
 
-    public String getComment() {
-        return comment;
-    }
+	public RatingDTO getRating() {
+		return rating;
+	}
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+	public void setRating(RatingDTO rating) {
+		this.rating = rating;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 
 	public void create(TaskDTO taskDTO) {
-			AsyncCallback<TaskDTO> callback = new AsyncCallback<TaskDTO>() {
+		AsyncCallback<TaskDTO> callback = new AsyncCallback<TaskDTO>() {
 
-				public void onFailure(Throwable t) {
-					Window.Location.assign("/spring_security_login");
+			public void onFailure(Throwable t) {
+				Window.Location.assign("/spring_security_login");
 
-				}
+			}
 
-				@Override
-				public void onSuccess(TaskDTO taskDTO) {
-					MessageBox mb = new MessageBox();
-					mb.setMessage(taskDTO.getId().toString());
-					mb.show();
-				}
-			};
-			TaskServiceAsync service = (TaskServiceAsync) GWT
-					.create(TaskService.class);
-			service.createTask(this, callback);
+			@Override
+			public void onSuccess(TaskDTO taskDTO) {
+			}
+		};
+		TaskServiceAsync service = (TaskServiceAsync) GWT
+				.create(TaskService.class);
+		service.createTask(this, callback);
 	}
-    
+
+	public void updateStatus() {
+		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
+
+			public void onFailure(Throwable t) {
+				Window.Location.assign("/spring_security_login");
+
+			}
+
+			@Override
+			public void onSuccess(Void result) {
+				// TODO Auto-generated method stub
+			}
+		};
+		TaskServiceAsync service = (TaskServiceAsync) GWT
+				.create(TaskService.class);
+		service.updateStatus(this, callback);
+	}
 
 }

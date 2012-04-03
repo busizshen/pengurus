@@ -37,32 +37,32 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 	@Override
 	protected List<ColumnConfig> getColumns() {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
-		ColumnConfig column = new ColumnConfig();
+		ColumnConfig column = new ColumnConfigMy();
 		column.setId("id");
 		column.setHeader("Id");
 		configs.add(column);
 
-		column = new ColumnConfig();
+		column = new ColumnConfigMy();
 		column.setId("status");
 		column.setHeader("Status");
 		configs.add(column);
 
-		column = new ColumnConfig();
+		column = new ColumnConfigMy();
 		column.setId("supervisor");
 		column.setHeader("Supervisor");
 		configs.add(column);
 
-		column = new ColumnConfig();
+		column = new ColumnConfigMy();
 		column.setId("client");
 		column.setHeader("Client");
 		configs.add(column);
 
-		column = new ColumnConfig();
+		column = new ColumnConfigMy();
 		column.setId("description");
 		column.setHeader("Description");
 		configs.add(column);
 
-		column = new ColumnConfig();
+		column = new ColumnConfigMy();
 		column.setId("preview");
 		column.setHeader("Preview");
 		column.setRenderer(getButtonRenderer());

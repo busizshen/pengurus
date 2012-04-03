@@ -56,6 +56,8 @@ public class Task {
     		this.job = new Job(t.getJob().getId());
     	if(t.getRating() != null)
     		this.rating = Rating.toRating(t.getRating());
+    	if(t.getStatus() != null)
+    		this.status = Status.toStatus(t.getStatus());
     	this.comment = t.getComment();
     }
 

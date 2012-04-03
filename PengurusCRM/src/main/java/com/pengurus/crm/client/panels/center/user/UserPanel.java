@@ -32,12 +32,14 @@ public abstract class UserPanel {
 			this.setCollapsible(true);  
 		    this.setAnimCollapse(true);
 		    this.collapse();
+		    hp.setAutoWidth(true);
+		    hp.setAutoHeight(true);
 		    setHeading(getUserHeading());
 		    if(getUserDTO() != null){	    	
 		    	hp.add(getInfoForm());
 		    	DescriptionPanel descr = new DescriptionPanel(getUserDescription());
-		    	descr.setAutoWidth(true);
 		    	hp.add(descr);
+		    	descr.setWidth(300);
 		    }
 		    add(hp);
 		   }

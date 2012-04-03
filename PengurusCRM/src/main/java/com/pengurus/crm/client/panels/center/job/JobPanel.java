@@ -96,6 +96,7 @@ public abstract class JobPanel extends MainPanel {
 
 		hp.add(vp);
 		description = new DescriptionPanel(jobDTO.getDescription());
+		description.setWidth(300);
 		hp.add(description);
 
 		add(hp);
@@ -166,7 +167,6 @@ public abstract class JobPanel extends MainPanel {
 		deadline.setFieldLabel("Deadline");
 		deadline.setData("text", "Enter your birthday");
 		deadline.setValue(jobDTO.getDeadline());
-		deadline.setReadOnly(true);
 
 		if (!AuthorizationManager.canEditJob()) {
 			deadline.setReadOnly(false);

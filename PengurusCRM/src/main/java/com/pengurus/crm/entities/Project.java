@@ -7,6 +7,7 @@ import com.pengurus.crm.enums.Status;
 import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.ProjectDTO;
+import com.pengurus.crm.shared.dto.TranslatorDTO;
 
 public class Project {
 
@@ -71,6 +72,12 @@ public class Project {
 				Job job = new Job();
 				job.setId(j.getId());
 				this.jobs.add(job);
+			}
+		}
+		if(projectDTO.getExperts()!= null){
+			this.experts = new HashSet<Translator>();
+			for(TranslatorDTO translatorDTO : projectDTO.getExperts()){
+				this.experts.add(new Translator(translatorDTO));
 			}
 		}
 	}

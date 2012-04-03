@@ -28,7 +28,9 @@ public class UserModel extends BaseModel {
 		if(userDTO.getDescription() != null){
 			set("description",userDTO.getDescription());
 		}
-		set("fullName", userDTO.getFullName());
+		if(userDTO.getFullName() != null){
+			set("fullName", userDTO.getFullName());
+		}
 	}
 
 	public String getId(){
@@ -45,5 +47,9 @@ public class UserModel extends BaseModel {
 	
 	public String getFullName() {
 		return get("fullName");
+	}
+	
+	public Boolean compare(UserModel user){
+		return this.userDTO.getId() == user.getUserDTO().getId();
 	}
 }

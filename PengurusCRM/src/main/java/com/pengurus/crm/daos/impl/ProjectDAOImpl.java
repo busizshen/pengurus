@@ -1,6 +1,5 @@
 package com.pengurus.crm.daos.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;

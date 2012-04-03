@@ -64,7 +64,6 @@ public class TasksListPanel extends ListPanel<TaskModel> {
 		final TasksListPanel taskListPanel = this;
 		formPanel.setHeaderVisible(false);
 		formPanel.setFrame(false);
-		formPanel.setBorders(true);
 		Button b = new Button("Create new",
 				new SelectionListener<ButtonEvent>() {
 					@Override
