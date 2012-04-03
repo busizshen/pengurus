@@ -18,6 +18,7 @@ import com.extjs.gxt.ui.client.widget.form.ListField;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.pengurus.crm.client.models.UserModel;
 import com.pengurus.crm.client.panels.center.user.UserPanel.UserViewInfo;
+import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.WorkerDTO;
 
 public class WorkerPanelChoose extends FormPanel {
@@ -39,22 +40,15 @@ public class WorkerPanelChoose extends FormPanel {
 	    lists.getToList().getListView().getSelectionModel().addListener(Events.SelectionChange, new Listener<SelectionChangedEvent<UserModel> >() {
 	        @Override
 	         public void handleEvent(SelectionChangedEvent<UserModel> be) {
-	        	final Window w = new Window();
-	        	w.setAutoHeight(true);
-	        	w.setAutoWidth(true);
-	        	WorkerPanelView workerPanel = new WorkerPanelView((WorkerDTO) be.getSelectedItem().getUserDTO());
-	        	UserViewInfo panel = workerPanel.getInfoPanel();
-	        	panel.setCollapsible(false);
-	        	panel.expand();
-	        	w.add(panel);
-	        	w.addButton(new Button("OK", new SelectionListener<ButtonEvent>(){
-					@Override
-					public void componentSelected(ButtonEvent ce) {
-						w.hide();
-					}}));
-	        	w.show();
-	          }
+	        	showUser(be.getSelectedItem().getUserDTO());
+	        }
 	    });
+/*	    lists.getFromList().getListView().getSelectionModel().addListener(Events.SelectionChange, new Listener<SelectionChangedEvent<UserModel> >() {
+	        @Override
+	         public void handleEvent(SelectionChangedEvent<UserModel> be) {
+	        	showUser(be.getSelectedItem().getUserDTO());
+	        }
+	    });*/
 
 
 	    store = new ListStore<UserModel>(); 
@@ -69,6 +63,24 @@ public class WorkerPanelChoose extends FormPanel {
 	    add(lists, new FormData("98%")); 
 
 	}
+
+	protected void showUser(UserDTO userDTO) {
+		final Window w = new Window();
+    	w.setAutoHeight(true);
+    	w.setAutoWidth(true);
+    	WorkerPanelView workerPanel = new WorkerPanelView((WorkerDTO) userDTO);
+    	UserViewInfo panel = workerPanel.getInfoPanel();
+    	panel.setCollapsible(false);
+    	panel.expand();
+    	w.add(panel);
+    	w.addButton(new Button("OK", new SelectionListener<ButtonEvent>(){
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				w.hide();
+			}}));
+    	w.show();
+      }
+	
 
 	public void init(List<UserModel> models,List<UserModel> modelsTo){
 		List<UserModel> removeModels = new ArrayList<UserModel>();

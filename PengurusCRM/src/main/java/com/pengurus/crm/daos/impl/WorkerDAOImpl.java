@@ -25,4 +25,5 @@ public class WorkerDAOImpl extends GenericDAOImpl<Worker> implements WorkerDAO {
 			throw new UsernameNotFoundException(username);
 		}
 	}
+
 }

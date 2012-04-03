@@ -20,8 +20,8 @@ public abstract class ProjectPanel extends MainPanel {
 		this.projectDTO = projectDTO;
 		setHeading("Project Panel View");
 		addInfoPanel();
-		addProjectMangaersPanel();
 		addJobsPanel();
+		addProjectMangaersPanel();
 		addTranslatorsPanel();
 		
 	}

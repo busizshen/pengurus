@@ -53,5 +53,10 @@
 	<bean id="taskServiceBean" class="com.pengurus.crm.server.TaskServiceImpl">
 		<property name="taskDAO" ref="taskDao" />
 	</bean>
-
+	<bean id="workerServiceBean" class="com.pengurus.crm.server.WorkerServiceImpl">
+		<property name="workerDAO" ref="workerDao" />
+	</bean>
+		<bean id="translatorServiceBean" class="com.pengurus.crm.server.TranslatorServiceImpl">
+		<property name="translatorDAO" ref="translatorDao" />
+	</bean>
 </beans>

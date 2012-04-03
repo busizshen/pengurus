@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" 
+<beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
@@ -7,36 +7,44 @@
 	<bean id="numberController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="numberServiceBean" />
 	</bean>
-	
+
 	<bean id="userController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="userServiceBean" />
 	</bean>
-			
+
 	<bean id="currentSessionController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="currentSessionServiceBean" />
 	</bean>
-	
+
 	<bean id="quoteController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="quoteServiceBean" />
 	</bean>
-	
+
 	<bean id="clientController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="clientServiceBean" />
 	</bean>
-	
+
 	<bean id="administrationController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="administrationServiceBean" />
 	</bean>
-	
+
 	<bean id="jobController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="jobServiceBean" />
 	</bean>
-	
+
 	<bean id="projectController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="projectServiceBean" />
 	</bean>
+
 	<bean id="taskController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="taskServiceBean" />
 	</bean>
-	
+
+	<bean id="workerController" class="com.pengurus.crm.server.GwtRpcController">
+		<property name="remoteService" ref="workerServiceBean" />
+	</bean>
+
+	<bean id="translatorController" class="com.pengurus.crm.server.GwtRpcController">
+		<property name="remoteService" ref="translatorServiceBean" />
+	</bean>
 </beans>

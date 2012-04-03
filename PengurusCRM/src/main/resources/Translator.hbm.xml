@@ -7,7 +7,7 @@
         <key>
             <column name="USER_ID" />
         </key>
-        <set name="translations" table="TRANSLATION" inverse="false" lazy="true">
+        <set name="translations" table="TRANSLATION" inverse="false" lazy="false">
             <key>
             	<column name="USER_ID"></column>
             </key>

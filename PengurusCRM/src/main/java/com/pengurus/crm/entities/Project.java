@@ -8,6 +8,7 @@ import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.TranslatorDTO;
+import com.pengurus.crm.shared.dto.WorkerDTO;
 
 public class Project {
 
@@ -78,6 +79,12 @@ public class Project {
 			this.experts = new HashSet<Translator>();
 			for(TranslatorDTO translatorDTO : projectDTO.getExperts()){
 				this.experts.add(new Translator(translatorDTO));
+			}
+		}
+		if(projectDTO.getProjectManagers()!= null){
+			this.projectManagers = new HashSet<Worker>();
+			for(WorkerDTO workerDTO : projectDTO.getProjectManagers()){
+				this.projectManagers.add(new Worker(workerDTO));
 			}
 		}
 	}

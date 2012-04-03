@@ -22,17 +22,21 @@ import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelChoose;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelView;
 import com.pengurus.crm.client.service.ProjectService;
 import com.pengurus.crm.client.service.ProjectServiceAsync;
-import com.pengurus.crm.client.service.UserService;
-import com.pengurus.crm.client.service.UserServiceAsync;
+import com.pengurus.crm.client.service.TranslatorService;
+import com.pengurus.crm.client.service.TranslatorServiceAsync;
+import com.pengurus.crm.client.service.WorkerService;
+import com.pengurus.crm.client.service.WorkerServiceAsync;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.TranslatorDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
+import com.pengurus.crm.shared.dto.WorkerDTO;
 
 public class ProjectPanelEdit extends ProjectPanel {
 
 	ClientPanelView client;
 	WorkerPanelChoose workersPanel;
+	WorkerPanelChoose projectManagersPanel;
 
 	public ProjectPanelEdit(ProjectDTO projectDTO) {
 		super(projectDTO);
@@ -40,13 +44,13 @@ public class ProjectPanelEdit extends ProjectPanel {
 
 	@Override
 	protected void addTranslatorsPanel() {
-		AsyncCallback<Set<UserDTO>> callback = new AsyncCallback<Set<UserDTO>>() {
+		AsyncCallback<Set<TranslatorDTO>> callback = new AsyncCallback<Set<TranslatorDTO>>() {
 
 			public void onFailure(Throwable t) {
 				Window.Location.assign("/spring_security_login");
 			}
 
-			public void onSuccess(Set<UserDTO> result) {
+			public void onSuccess(Set<TranslatorDTO> result) {
 				List<UserModel> models = new ArrayList<UserModel>();
 				for (UserDTO user : result) {
 					models.add(new UserModel(user));
@@ -60,30 +64,56 @@ public class ProjectPanelEdit extends ProjectPanel {
 			}
 		};
 
-		UserServiceAsync service = (UserServiceAsync) GWT
-				.create(UserService.class);
+		TranslatorServiceAsync service = (TranslatorServiceAsync) GWT
+				.create(TranslatorService.class);
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXPERT);
-		service.getUsersByRoles(roles, callback);
+		service.getTranslatorsByRoles(roles, callback);
 
 		workersPanel = new WorkerPanelChoose("Experts");
 		add(workersPanel);
 
 	}
 
+	
 	@Override
 	protected void addProjectMangaersPanel() {
-		// TODO Auto-generated method stub
+		AsyncCallback<Set<WorkerDTO>> callback = new AsyncCallback<Set<WorkerDTO>>() {
 
+			public void onFailure(Throwable t) {
+				Window.Location.assign("/spring_security_login");
+			}
+
+			public void onSuccess(Set<WorkerDTO> result) {
+				List<UserModel> models = new ArrayList<UserModel>();
+				for (UserDTO user : result) {
+					models.add(new UserModel(user));
+				}
+				List<UserModel> modelsTo = new ArrayList<UserModel>();
+				for (UserDTO user : projectDTO.getProjectManagers()) {
+					modelsTo.add(new UserModel(user));
+				}
+				projectManagersPanel.init(models, modelsTo);
+
+			}
+		};
+
+		WorkerServiceAsync service = (WorkerServiceAsync) GWT
+				.create(WorkerService.class);
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		service.getWorkersByRoles(roles, callback);
+
+		projectManagersPanel = new WorkerPanelChoose("Project Managers");
+		add(projectManagersPanel);
 	}
-	
+
 	@Override
 	protected void addDescriptionPanel(HorizontalPanel hp) {
 		descriptionPanel = new DescriptionPanelEdit(projectDTO.getDescription());
 		descriptionPanel.setWidth(300);
 		hp.add(descriptionPanel);
 	}
-
 
 	@Override
 	protected void addButtonPanel(HorizontalPanel hp2) {
@@ -94,22 +124,17 @@ public class ProjectPanelEdit extends ProjectPanel {
 			public void componentSelected(ButtonEvent ce) {
 				projectDTO.setDescription(descriptionPanel.getDescription());
 				Set<TranslatorDTO> experts = new HashSet<TranslatorDTO>();
-				
+
 				for (UserModel user : workersPanel.getResult()) {
 					experts.add((TranslatorDTO) user.getUserDTO());
 				}
 				projectDTO.setExperts(experts);
-				/*
-				 * Set<WorkerDTO> projectManagers = new HashSet<WorkerDTO>();
-				 * for(UserModel user : workersPanel.getResult()){
-				 * projectManagers .add((TranslatorDTO) user.getUserDTO()); }
-				 * projectDTO.setProjectManagers(projectManagers);
-				 */
-				/*
-				 * Set<TranslatorDTO> freelancers = new
-				 * HashSet<TranslatorDTO>();
-				 * projectDTO.setFreelancers(freelancers);
-				 */
+
+				Set<WorkerDTO> projectManagers = new HashSet<WorkerDTO>();
+				for (UserModel user : projectManagersPanel.getResult()) {
+					projectManagers.add((WorkerDTO) user.getUserDTO());
+				}
+				projectDTO.setProjectManagers(projectManagers);
 
 				AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 
@@ -136,11 +161,12 @@ public class ProjectPanelEdit extends ProjectPanel {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
 				ProjectsListPanelAll projectsList = new ProjectsListPanelAll();
-				projectsList.setAsMain();//zmienić na project List Panel Main
-				
-			}});
+				projectsList.setAsMain();// zmienić na project List Panel Main
+
+			}
+		});
 		hp2.add(b1);
-		Button b2 = new Button("Delete",new SelectionListener<ButtonEvent>() {
+		Button b2 = new Button("Delete", new SelectionListener<ButtonEvent>() {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
@@ -154,18 +180,18 @@ public class ProjectPanelEdit extends ProjectPanel {
 					@Override
 					public void onSuccess(Void result) {
 						ProjectsListPanelAll projectsList = new ProjectsListPanelAll();
-						projectsList.setAsMain();//zmienić na project List Panel Main
-						
+						projectsList.setAsMain();// zmienić na project List
+													// Panel Main
+
 					}
 				};
 				ProjectServiceAsync service = (ProjectServiceAsync) GWT
 						.create(ProjectService.class);
-				service.deleteProject(projectDTO, callback);	
-			}});
+				service.deleteProject(projectDTO, callback);
+			}
+		});
 		hp2.add(b2);
 	}
-
-
 
 	@Override
 	protected void addClientPanel(VerticalPanel vp) {
@@ -187,7 +213,7 @@ public class ProjectPanelEdit extends ProjectPanel {
 		clientPanel.expand();
 		clientPanel.setCollapsible(false);
 		vp.add(clientPanel);
-		
+
 	}
 
 	@Override
