@@ -119,6 +119,20 @@ public class JobDTO implements IsSerializable {
 					.create(JobService.class);
 			service.updateJob(this, callback);
 		}
+
+		public boolean checked() {
+			if(price == null)
+				return false;
+			if(amount == null)
+				return false;
+			if(translation == null)
+				return false;
+			if(deadline == null)
+				return false;
+			if(description == null)
+				return false;
+			return true;
+		}
 	    
 	    
 

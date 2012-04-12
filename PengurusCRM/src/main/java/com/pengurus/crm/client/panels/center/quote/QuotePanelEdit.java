@@ -1,12 +1,11 @@
 package com.pengurus.crm.client.panels.center.quote;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.DomEvent;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.MainWindow;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
@@ -21,6 +20,67 @@ public class QuotePanelEdit extends QuotePanel {
 	}
 
 	@Override
+	protected void addButtonPanel(HorizontalPanel hpPanel) {
+		if (AuthorizationManager.hasExecutiveAccess()) {
+			HorizontalPanel hp = new HorizontalPanel();
+			Button b = new Button("Update",
+					new SelectionListener<ButtonEvent>() {
+						@Override
+						public void componentSelected(ButtonEvent ce) {
+							quoteDTO.setDescription(descriptionPanel
+									.getDescription());
+							quoteDTO.setSupervisor(quoteDTO.getSupervisor());
+							quoteDTO.update();
+							QuotePanelView qp = new QuotePanelView(quoteDTO);
+							qp.setAsMain();
+
+						}
+					});
+			hp.add(b);
+			b = new Button("Delete", new SelectionListener<ButtonEvent>() {
+				@Override
+				public void componentSelected(ButtonEvent ce) {
+					quoteDTO.delete();
+					MainWindow.addCenterPanel(new ContentPanel());
+
+				}
+			});
+			hp.add(b);
+			b = new Button("Cancel", new SelectionListener<ButtonEvent>() {
+				@Override
+				public void componentSelected(ButtonEvent ce) {
+					// pobierz starą wersję
+					QuotePanelView qp = new QuotePanelView(quoteDTO);
+					qp.setAsMain();
+				}
+			});
+			hp.add(b);
+			hpPanel.add(hp);
+		}
+	}
+
+	@Override
+	protected void addSupervisorPanel(VerticalPanel vpPanel) {
+		workerPanel = new WorkerPanelEdit(quoteDTO.getSupervisor());
+		workerPanel.setHeading("Supervisor");
+		vpPanel.add(workerPanel);
+	}
+
+	@Override
+	protected void addClientPanel(VerticalPanel vpPanel) {
+		clientPanel = new ClientPanelEdit(quoteDTO.getClient());
+		clientPanel.setHeading("Client");
+		vpPanel.add(clientPanel);
+	}
+
+	@Override
+	protected void addDescriptionPanel(VerticalPanel vpPanel) {
+		descriptionPanel = new DescriptionPanelEdit(quoteDTO.getDescription());
+		descriptionPanel.setWidth(300);
+		vpPanel.add(descriptionPanel);
+	}
+
+/*	@Override
 	protected void getDescriptionPanel(QuoteView quoteView) {
 		descriptionPanel = new DescriptionPanelEdit(quoteDTO.getDescription());
 		quoteView.add(descriptionPanel);
@@ -113,12 +173,12 @@ public class QuotePanelEdit extends QuotePanel {
 		} else
 			workerPanel = new WorkerPanelEdit(listener);
 	}
-
+*/
 	@Override
-	protected void getJobsPanel(QuoteView quoteView) {
+	protected void getJobsPanel() {
 		if (quoteDTO.getJobs() != null) {
 			jobsList = new JobsListPanelQuoteEdit(quoteDTO);
-			quoteView.add(jobsList.getPanel());
+			add(jobsList.getPanel());
 		}
 
 	}

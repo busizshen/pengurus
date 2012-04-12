@@ -68,10 +68,10 @@ public class TasksListPanel extends ListPanel<TaskModel> {
 				new SelectionListener<ButtonEvent>() {
 					@Override
 					public void componentSelected(ButtonEvent ce) {
-						final Window w = new Window();
-						w.setAutoHeight(true);
-						w.setAutoWidth(true);
-						w.setClosable(false);
+						final Window window = new Window();
+						window.setAutoHeight(true);
+						window.setAutoWidth(true);
+						window.setClosable(false);
 						final TaskPanelCreate taskPanel = new TaskPanelCreate(
 								jobDTO,projectDTO,taskListPanel);
 						Listener<DomEvent> listenerCreateJob = new Listener<DomEvent>() {
@@ -85,20 +85,20 @@ public class TasksListPanel extends ListPanel<TaskModel> {
 									ml.getGrid().startEditing(0, 0);*/
 /*									jobDTO.getTask()
 											.add(taskPanel.getTaskDTO());*/
-									w.hide();
+									window.hide();
 								}
 							}
 						};
 						Listener<DomEvent> listenerClose = new Listener<DomEvent>() {
 							@Override
 							public void handleEvent(DomEvent be) {
-								w.hide();
+								window.hide();
 							}
 						};
 						taskPanel
 								.setListeners(listenerClose, listenerCreateJob);
-						w.add(taskPanel);
-						w.show();
+						window.add(taskPanel);
+						window.show();
 					}
 				});
 		formPanel.add(b);

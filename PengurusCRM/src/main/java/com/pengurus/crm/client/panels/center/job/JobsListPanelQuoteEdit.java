@@ -27,7 +27,7 @@ public class JobsListPanelQuoteEdit extends JobsListPanelQuote {
 		Button createButton = new Button("Create New Job", new SelectionListener<ButtonEvent>(){
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				final Window w = new Window();
+				final Window window = new Window();
 				final JobPanelCreate jobPanel = new JobPanelCreate();
 				Listener<DomEvent> listenerCreateJob = new Listener<DomEvent>() { 
 					@Override
@@ -37,26 +37,26 @@ public class JobsListPanelQuoteEdit extends JobsListPanelQuote {
 							ml.getStore().add(new JobModel(jobPanel.getJobDTO()));
 							ml.getGrid().startEditing(0, 0);
 							quoteDTO.getJobs().add(jobPanel.getJobDTO());
-							w.hide();
+							window.hide();
 						}
 					}
 				};
 				Listener<DomEvent> listenerClose = new Listener<DomEvent>() { 
 					@Override
 					public void handleEvent(DomEvent be) {
-						w.hide();
+						window.hide();
 					}
 				};
-				w.setActive(true);
-				w.add(jobPanel.getPanel(listenerClose,listenerCreateJob));
-				w.setAutoWidth(true);
-				w.setAutoHide(true);
-				w.setEnabled(true);
-				w.setClosable(false);
-				w.setHeaderVisible(true);
-				w.setAutoHide(false);
-				w.setHeading("Create Job");
-				w.show();
+				window.setActive(true);
+				window.add(jobPanel.getPanel(listenerClose,listenerCreateJob));
+				window.setAutoWidth(true);
+				window.setAutoHide(true);
+				window.setEnabled(true);
+				window.setClosable(false);
+				window.setHeaderVisible(true);
+				window.setAutoHide(false);
+				window.setHeading("Create Job");
+				window.show();
 			}});
 		HorizontalPanel hp = new HorizontalPanel();
 		hp.add(createButton);

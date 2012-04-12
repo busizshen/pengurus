@@ -9,7 +9,9 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
@@ -17,7 +19,6 @@ import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
-import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -51,7 +52,6 @@ public class JobPanelCreate {
 		AsyncCallback<Set<CurrencyTypeDTO>> callback = new AsyncCallback<Set<CurrencyTypeDTO>>() {
 
 			public void onFailure(Throwable t) {
-				Window.Location.assign("/spring_security_login");
 			}
 
 			public void onSuccess(Set<CurrencyTypeDTO> result) {
@@ -90,24 +90,21 @@ public class JobPanelCreate {
 		return jobPanel;
 	}
 
-	public JobPanelInfo getPanel(/* Listener<DomEvent> listenerCreateJob */) {
-		// this.listenerCreateJob = listenerCreateJob;
+	public JobPanelInfo getPanel() {
 		JobPanelInfo jobPanel = new JobPanelInfo();
 		return jobPanel;
 	}
 
 	public class JobPanelInfo extends LayoutContainer {
 
-		private VerticalPanel vp;
-		private FormData formData;
+		private VerticalPanel panel;
 		private TranslationPanel translation;
 
 		public JobPanelInfo() {
-			formData = new FormData("-20");
-			vp = new VerticalPanel();
-			vp.setSpacing(10);
+			panel = new VerticalPanel();
+			panel.setSpacing(10);
 			createForm1();
-			add(vp);
+			add(panel);
 		}
 
 		private void createForm1() {
@@ -117,62 +114,49 @@ public class JobPanelCreate {
 			simple.setAutoHeight(true);
 			simple.setAutoWidth(true);
 
-			/*ComponentPlugin plugin = new ComponentPlugin() {
-				public void init(Component component) {
-					component.addListener(Events.Render,
-							new Listener<ComponentEvent>() {
-								public void handleEvent(ComponentEvent be) {
-									El elem = be.getComponent().el()
-											.findParent(".x-form-element", 3);
-									// should style in external CSS rather than
-									// directly
-									elem.appendChild(XDOM
-											.create("<div style='color: #615f5f;padding: 1 0 2 0px;'>"
-													+ be.getComponent()
-															.getData("text")
-													+ "</div>"));
-								}
-							});
-				}
-			};*/
+			HorizontalPanel hp = new HorizontalPanel();
+			hp.setSpacing(20);
+			FormPanel simple2 = new FormPanel();
+			simple2.setHeaderVisible(false);
+			simple2.setFrame(true);
+			simple2.setAutoHeight(true);
+			simple2.setAutoWidth(true);
 
 			final DateField date = new DateField();
 			date.setFieldLabel("Deadline");
-			//date.addPlugin(plugin);
 			date.setAllowBlank(false);
 			date.setData("text", "Enter deadline");
-			simple.add(date, formData);
-
-			translation = new TranslationPanelChange(listTranslationModel);
-			translation.setAllowBlank(false);
-			simple.add(translation);
+			simple2.add(date);
 
 			final NumberField amount = new NumberField();
-			amount.setFieldLabel("Price");
+			amount.setFieldLabel("Amount");
 			amount.setAllowBlank(false);
-		//	amount.addPlugin(plugin);
-			amount.setData("text", "Enter your amount and choose Currnecy");
-			simple.add(amount);
-			
+			amount.setData("text", "Enter amount and choose Currnecy");
+			simple2.add(amount);
+
 			final NumberField price = new NumberField();
 			price.setFieldLabel("Price");
 			price.setAllowBlank(false);
-		//	amount.addPlugin(plugin);
-			price.setData("text", "Enter your price and choose Currnecy");
-			simple.add(price);
+			price.setData("text", "Enter price and choose Currnecy");
+			simple2.add(price);
 
 			final ComboBox<CurrencyModel> combo = new ComboBox<CurrencyModel>();
 			combo.setFieldLabel("Currency");
 			combo.setDisplayField("currency");
 			combo.setTriggerAction(TriggerAction.ALL);
 			combo.setStore(listCurrencyModel);
-		//	combo.addPlugin(plugin);
 			combo.setData("text", "Choose Language");
 			combo.setAllowBlank(false);
-			simple.add(combo, formData);
-
+			simple2.add(combo);
+			hp.add(simple2);
 			final DescriptionPanel descr = new DescriptionPanel();
-			simple.add(descr, formData);
+			hp.add(descr);
+
+			simple.add(hp);
+
+			translation = new TranslationPanelChange(listTranslationModel);
+			translation.setAllowBlank(false);
+			simple.add(translation);
 
 			Button buttonSubmit = new Button("Submit",
 					new SelectionListener<ButtonEvent>() {
@@ -182,29 +166,42 @@ public class JobPanelCreate {
 							jobDTO = new JobDTO();
 							jobDTO.setDeadline(date.getValue());
 							jobDTO.setDescription(descr.getDescription());
-							jobDTO.setAmount(amount.getValue().intValue());
-							PriceDTO priceDTO = new PriceDTO();
-							priceDTO.setPrice(price.getValue().intValue());
-							priceDTO.setCurrency(combo.getValue()
-									.getCurrencyDTO());
-							jobDTO.setPrice(priceDTO);
-							jobDTO.setTranslation(translation.getTranslation()
-									.getTranslationDTO());
+							if (amount.getValue() != null)
+								jobDTO.setAmount(amount.getValue().intValue());
+							if (price.getValue() != null
+									&& combo.getValue() != null) {
+								PriceDTO priceDTO = new PriceDTO();
+								priceDTO.setPrice(price.getValue().intValue());
+								priceDTO.setCurrency(combo.getValue()
+										.getCurrencyDTO());
+								jobDTO.setPrice(priceDTO);
+							}
+							if (translation.getTranslation() != null)
+								jobDTO.setTranslation(translation
+										.getTranslation().getTranslationDTO());
 							jobDTO.setStatus(StatusDTO.open);
-							AsyncCallback<JobDTO> callback = new AsyncCallback<JobDTO>() {
+							if (jobDTO.checked()) {
+								AsyncCallback<JobDTO> callback = new AsyncCallback<JobDTO>() {
 
-								public void onFailure(Throwable t) {
-									Window.Location
-											.assign("/spring_security_login");
-								}
+									public void onFailure(Throwable t) {
+										MessageBox mb = new MessageBox();
+										mb.setMessage("Server Error");
+										mb.show();
+									}
 
-								public void onSuccess(JobDTO result) {
-									jobDTO = result;
-								}
-							};
-							JobServiceAsync service = (JobServiceAsync) GWT
-									.create(JobService.class);
-							service.createJob(jobDTO, callback);
+									public void onSuccess(JobDTO result) {
+										jobDTO = result;
+									}
+								};
+								JobServiceAsync service = (JobServiceAsync) GWT
+										.create(JobService.class);
+								service.createJob(jobDTO, callback);
+							} else {
+								jobDTO = null;
+								MessageBox mb = new MessageBox();
+								mb.setMessage("Please fill all forms");
+								mb.show();
+							}
 						}
 
 					});
@@ -218,8 +215,11 @@ public class JobPanelCreate {
 
 			FormButtonBinding binding = new FormButtonBinding(simple);
 			binding.addButton(buttonSubmit);
+			
+			FormButtonBinding binding2 = new FormButtonBinding(simple2);
+			binding2.addButton(buttonSubmit);
 
-			vp.add(simple);
+			panel.add(simple);
 		}
 	}
 }

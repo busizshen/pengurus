@@ -12,13 +12,11 @@ public abstract class ClientPanel extends UserPanel {
 	protected ClientDTO clientDTO;
 	public ClientPanel(ClientDTO client) {
 		super(client);
-		this.clientDTO = client;
-		userInfoPanel = new UserViewInfo();
+		refresh(client);
 	}	
 
 	public ClientPanel() {
 		super(null);
-		userInfoPanel = new UserViewInfo();
 	}
 
 	@Override
@@ -26,13 +24,6 @@ public abstract class ClientPanel extends UserPanel {
 		return "Client";
 	}
 
-	@Override
-	protected String getUserDescription() {
-		if(clientDTO != null)
-			return clientDTO.getDescription();
-		else 
-			return null;
-	}
 
 	public abstract ClientDTO getChosenClient();
 	
@@ -46,22 +37,28 @@ public abstract class ClientPanel extends UserPanel {
 		login = new TextField<String>();
 		login.setFieldLabel("Login");
 		login.setReadOnly(true);
-		login.setValue(clientDTO.getUsername());
+		if(clientDTO != null)
+			login.setValue(clientDTO.getUsername());
 		simple.add(login);
 		
 		name = new TextField<String>();
 		name.setFieldLabel("Name");
 		name.setReadOnly(true);
-		name.setValue(clientDTO.getFullName());
+		if(clientDTO != null)
+			name.setValue(clientDTO.getFullName());
 		simple.add(name);
 		
 		return simple;
 	}
 
 	public void refresh(ClientDTO client) {
-		this.clientDTO = client;
-		login.setValue(this.clientDTO.getUsername());
-		login.setValue(this.clientDTO.getFullName());
+		clientDTO = client;
+		userDTO = client;
+		if(client != null){
+			login.setValue(clientDTO.getUsername());
+			name.setValue(clientDTO.getFullName());
+			descriptionPanel.setDescription(clientDTO.getDescription());
+		}
 	}
 }
 

@@ -11,49 +11,52 @@ import com.pengurus.crm.shared.dto.ClientDTO;
 
 public class ClientPanelEdit extends ClientPanel {
 
-	private Listener<DomEvent> listenerChangeClient;
 	ClientsListPanel cl;
 
-	public ClientPanelEdit(ClientDTO client, Listener<DomEvent> listener) {
+	public ClientPanelEdit(ClientDTO client) {
 		super(client);
-		this.listenerChangeClient = listener;
-		userInfoPanel = new UserViewInfo();
-		addEditionPanel(userInfoPanel);
+		addEditionPanel();
 	}
 
-	public ClientPanelEdit(Listener<DomEvent> listener) {
+	public ClientPanelEdit() {
 		super();
-		this.listenerChangeClient = listener;
-		addEditionPanel(userInfoPanel);
+		addEditionPanel();
 	}
 
-	protected void addEditionPanel(UserViewInfo userViewInfo) {
-		final Window w = new Window();
+	protected void addEditionPanel() {
+		final Window window = new Window();
 		Listener<DomEvent> listenerCloseTab = new Listener<DomEvent>() {
 			@Override
 			public void handleEvent(DomEvent be) {
-				w.hide();
+				window.hide();
 			}
 		};
-		cl = new ClientsListPanel(this.listenerChangeClient, listenerCloseTab);
-		w.add(cl.getPanel());
-		w.setAutoWidth(true);
-		w.setAutoHide(true);
-		w.setEnabled(true);
-		w.setHeading("ChangeClient");
-		w.setClosable(false);
+		Listener<DomEvent> listenerChangeClient = new Listener<DomEvent>() {
+			@Override
+			public void handleEvent(DomEvent be) {
+				clientDTO = getChosenClient();
+				refresh(clientDTO);
+			}
+		};
+		cl = new ClientsListPanel(listenerChangeClient, listenerCloseTab);
+		window.add(cl.getPanel());
+		window.setAutoWidth(true);
+		window.setAutoHide(true);
+		window.setEnabled(true);
+		window.setHeading("ChangeClient");
+		window.setClosable(false);
 		Button b2 = new Button("Cancel");
 		b2.addListener(Events.OnClick, listenerCloseTab);
-		w.add(b2);
+		window.add(b2);
 		Button b = new Button("Change Client",
 				new SelectionListener<ButtonEvent>() {
 					@Override
 					public void componentSelected(ButtonEvent ce) {
-						w.show();
+						window.show();
 
 					}
 				});
-		userViewInfo.add(b);
+		add(b);
 	}
 
 	@Override

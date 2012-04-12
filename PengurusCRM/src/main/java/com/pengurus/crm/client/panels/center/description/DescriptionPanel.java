@@ -5,43 +5,39 @@ import com.extjs.gxt.ui.client.widget.form.TextArea;
 
 public class DescriptionPanel extends ContentPanel {
 
-	protected TextArea a;
+	protected TextArea description;
 
-	public DescriptionPanel(String description) {
+	public DescriptionPanel(String descr) {
 		setHeading("Description");
-		a = new TextArea();
-		a.setHeight(100);
-		a.setWidth(300);
-		a.setValue(description);
-		this.setCollapsible(true);
-		this.setAnimCollapse(true);
-		this.collapse();
-		add(a);
+		description = new TextArea();
+		description.setHeight(100);
+		description.setWidth(300);
+		description.setValue(descr);
+
+		add(description);
 		this.setAutoHeight(true);
 	}
 
 	public DescriptionPanel() {
 		setHeading("Description");
-		a = new TextArea();
-		a.setHeight(100);
-		a.setWidth(300);
-		this.setCollapsible(true);
-		this.setAnimCollapse(true);
-		this.collapse();
-		add(a);
+		description = new TextArea();
+		description.setHeight(100);
+		description.setWidth(300);
+		add(description);
 		this.setAutoHeight(true);
 	}
 
-	public void setNonEditable() {
-		// a.setEnabled(disabled);
-	}
 
 	public String getDescription() {
-		return a.getValue();
+		return description.getValue();
+	}
+	
+	public void setDescription(String descr) {
+		description.setValue(descr);
 	}
 	
 	public void setAllowBlank(boolean allow){
-		a.setAllowBlank(allow);
+		description.setAllowBlank(allow);
 	}
 
 	

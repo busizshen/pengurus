@@ -2,19 +2,21 @@ package com.pengurus.crm.client.panels.center.project;
 
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
 import com.pengurus.crm.client.panels.center.job.JobsListPanelProjectView;
+import com.pengurus.crm.client.panels.center.user.client.ClientPanelView;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelView;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 
 public abstract class ProjectPanel extends MainPanel {
 
-	protected WorkerPanelView supervisor;
+	protected WorkerPanelView supervisorPanel;
 	protected ProjectDTO projectDTO;
 	protected DescriptionPanel descriptionPanel;
+	private ClientPanelView clientPanel;
 	
 	public ProjectPanel(ProjectDTO projectDTO){
 		this.projectDTO = projectDTO;
@@ -43,7 +45,7 @@ public abstract class ProjectPanel extends MainPanel {
 		simple.setAutoHeight(true);
 		simple.setAutoWidth(true);
 		HorizontalPanel hp = new HorizontalPanel();
-		hp.setSpacing(20);
+		hp.setSpacing(10);
 		VerticalPanel vp = new VerticalPanel();
 		vp.setSpacing(5);
 		
@@ -53,11 +55,6 @@ public abstract class ProjectPanel extends MainPanel {
 		addButtonPanel(hp2);
 
 		vp.add(hp2);
-		
-		NumberField id = new NumberField();
-		id.setValue(projectDTO.getId());
-		id.setReadOnly(true);
-		vp.add(id);
 		
 		addSupervisorPanel(vp);
 		
@@ -75,7 +72,18 @@ public abstract class ProjectPanel extends MainPanel {
 
 	protected abstract void addDescriptionPanel(HorizontalPanel hp);
 
-	protected abstract void addClientPanel(VerticalPanel vp);
+	protected void addSupervisorPanel(VerticalPanel vp) {
+		supervisorPanel = new WorkerPanelView(projectDTO.getSupervisor());
+		supervisorPanel.setHeading("Supervisor");
+		vp.add(supervisorPanel);
+	}
 
-	protected abstract void addSupervisorPanel(VerticalPanel vp);
+
+	protected void addClientPanel(VerticalPanel vp) {
+		if(AuthorizationManager.canViewWholeProject()){
+			clientPanel = new ClientPanelView(projectDTO.getClient());
+			clientPanel.setHeading("Client");
+			vp.add(clientPanel);
+		}
+	}
 }

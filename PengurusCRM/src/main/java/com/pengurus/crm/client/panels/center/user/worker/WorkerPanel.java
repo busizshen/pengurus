@@ -11,27 +11,19 @@ public abstract class WorkerPanel extends UserPanel {
 	WorkerDTO workerDTO;
 	TextField<String> login;
 	TextField<String> name;
+
 	public WorkerPanel(WorkerDTO workerDTO) {
 		super(workerDTO);
-		this.workerDTO = workerDTO; 
-		userInfoPanel = new UserViewInfo();
+		refresh(workerDTO);
 	}
 
 	public WorkerPanel() {
 		super(null);
-		userInfoPanel = new UserViewInfo();
 	}
 
 	@Override
 	protected String getUserHeading() {
 		return "Worker";
-	}
-
-	@Override
-	protected String getUserDescription() {
-		if(workerDTO != null)
-			return workerDTO.getDescription();
-		return null;
 	}
 
 	public abstract WorkerDTO getChosenWorker();
@@ -41,27 +33,28 @@ public abstract class WorkerPanel extends UserPanel {
 		simple.setFrame(false);
 		simple.setHeaderVisible(false);
 		simple.setBorders(true);
-		
+
 		login = new TextField<String>();
 		login.setFieldLabel("Login");
 		login.setReadOnly(true);
-		login.setValue(workerDTO.getUsername());
 		simple.add(login);
-		
+
 		name = new TextField<String>();
-		name.setFieldLabel("Login");
+		name.setFieldLabel("Full Name");
 		name.setReadOnly(true);
-		if(workerDTO.getPersonalData() != null)
-			name.setValue(workerDTO.getPersonalData().getFullName());
 		simple.add(name);
-		
+
 		return simple;
 	}
-	
+
 	public void refresh(WorkerDTO workerDTO) {
 		this.workerDTO = workerDTO;
-		login.setValue(this.workerDTO.getUsername());
-		if(workerDTO.getPersonalData() != null)
-			name.setValue(workerDTO.getPersonalData().getFullName());
+		super.userDTO = workerDTO;
+		if (workerDTO != null) {
+			login.setValue(workerDTO.getUsername());
+			name.setValue(workerDTO.getFullName());
+			descriptionPanel.setDescription(workerDTO.getDescription());
+		}
+
 	}
 }

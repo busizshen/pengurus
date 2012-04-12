@@ -28,7 +28,7 @@ public class QuotesMenuPanel extends TabMenuPanel {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
 					QuotePanelCreate qp = new QuotePanelCreate();
-					qp.getPanel();
+					qp.setAsMain();
 				}
 			});
 			add(b);

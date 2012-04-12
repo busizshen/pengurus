@@ -6,7 +6,6 @@ public class ClientPanelView extends ClientPanel {
 
 	public ClientPanelView(ClientDTO client) {
 		super(client);
-		userInfoPanel = new UserViewInfo();
 	}
 
 	@Override

@@ -4,18 +4,11 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelView;
-import com.pengurus.crm.client.panels.center.user.UserPanel.UserViewInfo;
-import com.pengurus.crm.client.panels.center.user.client.ClientPanelView;
-import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelView;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 
 public class ProjectPanelView extends ProjectPanel{
 
-	WorkerPanelView supervisor;
-	ClientPanelView client;
 	public ProjectPanelView(ProjectDTO projectDTO) {
 		super(projectDTO);
 	}
@@ -31,27 +24,6 @@ public class ProjectPanelView extends ProjectPanel{
 		
 	}
 
-	@Override
-	protected void addSupervisorPanel(VerticalPanel vp) {
-		supervisor = new WorkerPanelView(projectDTO.getSupervisor());
-		UserViewInfo supervisorPanel = supervisor.getInfoPanel();
-		supervisorPanel.setHeading("Supervisor");
-		supervisorPanel.expand();
-		supervisorPanel.setCollapsible(false);
-		vp.add(supervisorPanel);
-	}
-
-	@Override
-	protected void addClientPanel(VerticalPanel vp) {
-		if(AuthorizationManager.canViewWholeProject()){
-			client = new ClientPanelView(projectDTO.getClient());
-			UserViewInfo clientPanel = client.getInfoPanel();
-			clientPanel.setHeading("Client");
-			clientPanel.expand();
-			clientPanel.setCollapsible(false);
-			vp.add(clientPanel);
-		}
-	}
 
 	@Override
 	protected void addDescriptionPanel(HorizontalPanel hp) {

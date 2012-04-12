@@ -35,6 +35,7 @@ public class TranslationsListPanel extends ListPanel<TranslationModel> {
 		setHeaderVisible(false);
 		ml = new ModelList();
 		add(ml);
+		expand();
 	}
 
 	@Override
@@ -67,7 +68,7 @@ public class TranslationsListPanel extends ListPanel<TranslationModel> {
 
 	@Override
 	protected String getName() {
-		return "Translations";
+		return "Choose Translation";
 	}
 
 	@Override

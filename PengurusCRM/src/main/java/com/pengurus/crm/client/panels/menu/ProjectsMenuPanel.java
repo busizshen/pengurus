@@ -12,26 +12,12 @@ public class ProjectsMenuPanel extends TabMenuPanel {
 		super("Projects");
 	    addButtonAll();
 	    addButtonMine();
-	    addButtonCreate();
 	}
 	
 	public TabMenuPanel getPanel() {
 		return new ProjectsMenuPanel();
 	}
 	
-	private void addButtonCreate() {
-		if(AuthorizationManager.hasExecutiveAccess()){ 
-			Button b = new Button("Create New");
-			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
-				@Override
-				public void componentSelected(ButtonEvent ce) {
-					
-				}
-			});
-		    add(b);
-		}
-	}
-
 	private void addButtonMine() {
 		if(AuthorizationManager.canViewProjects()){ 
 			Button b = new Button("Mine");

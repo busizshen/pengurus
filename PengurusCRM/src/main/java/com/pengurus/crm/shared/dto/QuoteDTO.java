@@ -9,7 +9,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.IsSerializable;
-import com.pengurus.crm.client.panels.center.quote.QuotePanelView;
 import com.pengurus.crm.client.service.QuoteService;
 import com.pengurus.crm.client.service.QuoteServiceAsync;
 
@@ -188,26 +187,6 @@ public class QuoteDTO implements IsSerializable {
 		 * if (this.supervisor == null) { return false; }
 		 */
 		return true;
-	}
-
-	public void create() {
-		AsyncCallback<QuoteDTO> callback = new AsyncCallback<QuoteDTO>() {
-
-			public void onFailure(Throwable t) {
-				Window.Location.assign("/spring_security_login");
-
-			}
-
-			@Override
-			public void onSuccess(QuoteDTO quoteDTO) {
-
-				QuotePanelView qp = new QuotePanelView(quoteDTO);
-				qp.getPanel();
-			}
-		};
-		QuoteServiceAsync service = (QuoteServiceAsync) GWT
-				.create(QuoteService.class);
-		service.createQuote(this, callback);
 	}
 
 }

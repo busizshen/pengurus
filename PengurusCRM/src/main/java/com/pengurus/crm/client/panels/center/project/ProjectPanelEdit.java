@@ -13,13 +13,9 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.models.UserModel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
-import com.pengurus.crm.client.panels.center.user.UserPanel.UserViewInfo;
-import com.pengurus.crm.client.panels.center.user.client.ClientPanelView;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelChoose;
-import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelView;
 import com.pengurus.crm.client.service.ProjectService;
 import com.pengurus.crm.client.service.ProjectServiceAsync;
 import com.pengurus.crm.client.service.TranslatorService;
@@ -34,7 +30,6 @@ import com.pengurus.crm.shared.dto.WorkerDTO;
 
 public class ProjectPanelEdit extends ProjectPanel {
 
-	ClientPanelView client;
 	WorkerPanelChoose workersPanel;
 	WorkerPanelChoose projectManagersPanel;
 
@@ -193,48 +188,5 @@ public class ProjectPanelEdit extends ProjectPanel {
 		hp2.add(b2);
 	}
 
-	@Override
-	protected void addClientPanel(VerticalPanel vp) {
-		/*
-		 * if(AuthorizationManager.canViewWholeProject()){ Listener<DomEvent>
-		 * listener2 = new Listener<DomEvent>() {
-		 * 
-		 * @Override public void handleEvent(DomEvent be) {
-		 * projectDTO.setClient(client.getChosenClient());
-		 * client.refresh(projectDTO.getClient()); } }; client = new
-		 * ClientPanelEdit(projectDTO.getClient(),listener2); UserViewInfo
-		 * clientPanel = client.getInfoPanel();
-		 * clientPanel.setHeading("Client"); clientPanel.expand();
-		 * vp.add(clientPanel); }
-		 */
-		client = new ClientPanelView(projectDTO.getClient());
-		UserViewInfo clientPanel = client.getInfoPanel();
-		clientPanel.setHeading("Client");
-		clientPanel.expand();
-		clientPanel.setCollapsible(false);
-		vp.add(clientPanel);
-
-	}
-
-	@Override
-	protected void addSupervisorPanel(VerticalPanel vp) {
-		/*
-		 * Listener<DomEvent> listener = new Listener<DomEvent>() {
-		 * 
-		 * @Override public void handleEvent(DomEvent be) {
-		 * projectDTO.setSupervisor(supervisor.getChosenWorker());
-		 * supervisor.refresh(projectDTO.getSupervisor()); } }; supervisor = new
-		 * WorkerPanelEdit(projectDTO.getSupervisor(), listener); UserViewInfo
-		 * supervisorPanel = supervisor.getInfoPanel();
-		 * supervisorPanel.setHeading("Supervisor"); supervisorPanel.expand();
-		 * vp.add(supervisorPanel);
-		 */
-		supervisor = new WorkerPanelView(projectDTO.getSupervisor());
-		UserViewInfo supervisorPanel = supervisor.getInfoPanel();
-		supervisorPanel.setHeading("Supervisor");
-		supervisorPanel.expand();
-		supervisorPanel.setCollapsible(false);
-		vp.add(supervisorPanel);
-	}
 
 }
