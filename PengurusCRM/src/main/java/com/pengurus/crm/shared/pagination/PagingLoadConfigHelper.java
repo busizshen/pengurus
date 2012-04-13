@@ -22,16 +22,31 @@ public class PagingLoadConfigHelper implements IsSerializable {
 		return sortField;
 	}
 
-	public String getSortDir() {
-		return sortDir;
+	public void setSortField(String sortField) {
+		this.sortField = sortField;
 	}
 
 	public int getOffset() {
 		return offset;
 	}
 
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
+
 	public int getLimit() {
 		return limit;
 	}
-	
+
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+
+	public String getSortDir() {
+		return sortDir;
+	}
+
+	public void setSortDir(String sortDir) {
+		this.sortDir = sortDir;
+	}	
 }

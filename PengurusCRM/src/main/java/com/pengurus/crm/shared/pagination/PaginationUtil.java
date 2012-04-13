@@ -11,7 +11,7 @@ import com.extjs.gxt.ui.client.data.Model;
 public class PaginationUtil {
 	
 	public static <T extends Model> PagingLoadResultHelper<T> paginate(PagingLoadConfigHelper loadConfig,
-			ArrayList<T> fullList) {
+			List<T> fullList) {
 		
 		final String sortField;
 		if (loadConfig.getSortField() != null) {
@@ -21,7 +21,7 @@ public class PaginationUtil {
 		}
 		
 		final SortDir sortDir;
-		if (loadConfig.getSortField() != null) {
+		if (loadConfig.getSortDir() != null) {
 			sortDir = SortDir.findDir(loadConfig.getSortDir());
 		} else {
 			sortDir = SortDir.ASC;
