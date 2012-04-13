@@ -1,10 +1,19 @@
 package com.pengurus.crm.client.panels.center.user;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import com.extjs.gxt.ui.client.Style.Orientation;
+import com.extjs.gxt.ui.client.Style.SortDir;
+import com.extjs.gxt.ui.client.data.BaseFilterPagingLoadConfig;
+import com.extjs.gxt.ui.client.data.BasePagingLoadConfig;
+import com.extjs.gxt.ui.client.data.BasePagingLoader;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoader;
+import com.extjs.gxt.ui.client.data.RpcProxy;
+import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.GridEvent;
@@ -12,25 +21,28 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.BoxComponent;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
-import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.CheckBoxGroup;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
+import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
+import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.UserModel;
 import com.pengurus.crm.client.panels.center.user.create.UserEditPanel;
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.UserServiceAsync;
-import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
+import com.pengurus.crm.shared.pagination.PagingCallbackWrapper;
+import com.pengurus.crm.shared.pagination.PagingLoadConfigHelper;
 
 public class UserListPanel extends BaseUsersListPanel<UserModel> {
 
@@ -40,22 +52,70 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 	private CheckBoxGroup userRoles;
 	private CheckBox allBox;
 
+	private PagingToolBar toolBar;
+	private ListStore<UserModel> store;
+	private PagingLoader<PagingLoadResult<UserModel>> loader;
+	
 	public static UserListPanel getIntance() {
 		if (instance == null) {
 			instance = new UserListPanel();
 		}
 		return instance;
 	}
-
+	
 	public UserListPanel() {
+		initPaging();
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
 		horizontalPanel.setSpacing(10);
 		horizontalPanel.add(new ModelList());
 		sideOptions = new LayoutContainer();
 		createRoleCheckBoxGroup();
-		createRefreshButton();
 		horizontalPanel.add(sideOptions);
 		add(horizontalPanel);
+	}
+
+	private void initPaging() {
+		RpcProxy<PagingLoadResult<UserModel>> proxy = new RpcProxy<PagingLoadResult<UserModel>>() {
+			@Override
+			protected void load(Object loadConfig,
+					AsyncCallback<PagingLoadResult<UserModel>> callback) {
+				PagingLoadConfig config = (PagingLoadConfig) loadConfig;
+				PagingLoadConfigHelper configHelper = new PagingLoadConfigHelper(config.getSortField(), config.getSortDir().toString(), config.getOffset(), config.getLimit());
+				if (allBox.getValue()) {
+					
+					UserServiceAsync service = (UserServiceAsync) GWT
+							.create(UserService.class);
+					service.getPaginatedAllUsers(configHelper, new PagingCallbackWrapper<UserModel>(callback));
+					
+				} else {
+					
+					Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+					for (Field<?> field: userRoles.getAll()) {
+						if (field instanceof UserRoleBox) {
+							UserRoleBox roleBox = (UserRoleBox) field;
+							if (roleBox.getValue()) {
+								roles.add(roleBox.getUserRole());
+							}
+						}
+					}
+					UserServiceAsync service = (UserServiceAsync) GWT
+							.create(UserService.class);
+					service.getPaginatedUsersByRoles(configHelper, roles, new PagingCallbackWrapper<UserModel>(callback));
+					
+				}
+			}
+		};
+		loader = new BasePagingLoader<PagingLoadResult<UserModel>>(proxy) {
+			@Override
+			protected Object newLoadConfig() {
+				BasePagingLoadConfig config = new BaseFilterPagingLoadConfig();
+				return config;
+			}
+		};
+		loader.setRemoteSort(true);
+		store = new ListStore<UserModel>(loader);  
+		toolBar = new PagingToolBar(20);
+		toolBar.bind(loader);
 	}
 
 	private class UserRoleBox extends CheckBox {
@@ -64,6 +124,12 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 		public UserRoleBox(String label, UserRoleDTO userRole) {
 			super();
 			setBoxLabel(label);
+			addListener(Events.OnClick, new Listener<BaseEvent>() {
+				@Override
+				public void handleEvent(BaseEvent be) {
+					refreshList();
+				}
+			});
 			this.userRole = userRole;
 		}
 
@@ -123,55 +189,38 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 		}
 	}
 
-	public void refreshList() {
-		AsyncCallback<Set<UserDTO>> callback = new AsyncCallback<Set<UserDTO>>() {
-			
-			@Override
-			public void onFailure(Throwable caught) {
-					MessageBox.info("Failure", "Server error.", null);
-			}
+	@Override
+	protected void addGridPaging(ContentPanel cp, final EditorGrid<UserModel> grid) {
+		grid.addListener(Events.Attach, new Listener<GridEvent<UserModel>>() {
+			public void handleEvent(GridEvent<UserModel> be) {
+				PagingLoadConfig config = new BaseFilterPagingLoadConfig();
+				config.setOffset(0);
+				config.setLimit(20);
 
-			@Override
-			public void onSuccess(Set<UserDTO> userSet) {
-				getGrid().stopEditing();
-				getStore().removeAll();
-				ArrayList<UserModel> userModelList = new ArrayList<UserModel>();
-				for (UserDTO user: userSet) {
-					userModelList.add(new UserModel(user));
+				Map<String, Object> state = grid.getState();
+				if (state.containsKey("offset")) {
+					int offset = (Integer) state.get("offset");
+					int limit = (Integer) state.get("limit");
+					config.setOffset(offset);
+					config.setLimit(limit);
 				}
-				getStore().add(userModelList);
-				getGrid().startEditing(0, 0);
-			}
-		};
-		if (allBox.getValue()) {
-			UserServiceAsync service = (UserServiceAsync) GWT
-					.create(UserService.class);
-			service.getAllUsers(callback);
-		} else {
-			Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-			for (Field<?> field: userRoles.getAll()) {
-				if (field instanceof UserRoleBox) {
-					UserRoleBox roleBox = (UserRoleBox) field;
-					if (roleBox.getValue()) {
-						roles.add(roleBox.getUserRole());
-					}
+				if (state.containsKey("sortField")) {
+					config.setSortField((String) state.get("sortField"));
+					config.setSortDir(SortDir.valueOf((String) state.get("sortDir")));
 				}
-			}
-			UserServiceAsync service = (UserServiceAsync) GWT
-					.create(UserService.class);
-			service.getUsersByRoles(roles, callback);
-		}
-	}
-	
-	private void createRefreshButton() {
-		Button refreshButton = new Button("Refresh", new SelectionListener<ButtonEvent>() {
-			
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				refreshList();
+				loader.load(config);
 			}
 		});
-		sideOptions.add(refreshButton);
+		cp.setBottomComponent(toolBar);
+	}
+	
+	@Override
+	public ListStore<UserModel> getStore() {
+		return store;
+	}
+	
+	public void refreshList() {
+		toolBar.refresh();
 	}
 	
 	@Override
@@ -234,7 +283,7 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 
 	@Override
 	protected ListStore<UserModel> getList() {
-		return new ListStore<UserModel>();
+		return store;
 	}
 
 }

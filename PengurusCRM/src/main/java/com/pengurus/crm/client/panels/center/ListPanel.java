@@ -48,6 +48,7 @@ public abstract class ListPanel<T extends ModelData> extends MainPanel {
 			grid.setStripeRows(true);
 			grid.setColumnLines(true);
 			grid.addPlugin(filters);
+			addGridPaging(cp, grid);
 			cp.add(grid);
 
 			add(cp);
@@ -98,6 +99,10 @@ public abstract class ListPanel<T extends ModelData> extends MainPanel {
 	protected abstract GridFilters getFilters();
 
 	protected abstract void setStyle(ContentPanel cp);
+	
+	protected void addGridPaging(ContentPanel cp, final EditorGrid<T> grid) {
+		return;
+	}
 
 	public void setList(List<T> list) {
 		setHeaderVisible(false);

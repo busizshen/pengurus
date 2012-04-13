@@ -1,9 +1,10 @@
 package com.pengurus.crm.client.models;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.pengurus.crm.shared.dto.UserDTO;
 
-public class UserModel extends BaseModel {
+public class UserModel extends BaseModel implements IsSerializable {
 	private static final long serialVersionUID = 8134206653269091514L;
 	
 	private UserDTO userDTO;
