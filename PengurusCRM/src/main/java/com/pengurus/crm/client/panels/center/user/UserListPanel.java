@@ -141,8 +141,16 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 	private void createRoleCheckBoxGroup() {
 		userRoles = new CheckBoxGroup();
 		userRoles.setOrientation(Orientation.VERTICAL);
+		
 		allBox = new CheckBox();
 		allBox.setBoxLabel("All users");
+		allBox.addListener(Events.OnClick, new Listener<BaseEvent>() {
+			@Override
+			public void handleEvent(BaseEvent be) {
+				refreshList();
+			}
+		});
+		
 		userRoles.add(allBox);
 		userRoles.add(new UserRoleBox("Role user", UserRoleDTO.ROLE_USER));
 		userRoles.add(new UserRoleBox("Role client", UserRoleDTO.ROLE_CLIENT));
@@ -157,6 +165,7 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 				UserRoleDTO.ROLE_PROJECTMNAGER));
 		userRoles.add(new UserRoleBox("Role verificator",
 				UserRoleDTO.ROLE_VERIFICATOR));
+		
 		FieldSet fieldSet = new FieldSet();
 		fieldSet.setHeading("User roles");
 		fieldSet.add(userRoles);
