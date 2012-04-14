@@ -10,5 +10,6 @@ public interface ProjectDAO extends GenericDAO<Project>{
     Project read(long id);
 	List<Project> loadAllByExpertId(Long id);
 	List<Project> loadAllByProjectManagerId(Long id);
+	List<Project> loadAllByTaskId(Long id);
 	
 }

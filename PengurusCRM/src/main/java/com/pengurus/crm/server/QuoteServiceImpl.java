@@ -76,4 +76,24 @@ public class QuoteServiceImpl implements QuoteService {
 		return quoteDAO.getById(id).toDTO();
 	}
 
+	@Override
+	public Set<QuoteDTO> getQuoteBySupervisorId(Long id) {
+		List<Quote> list = quoteDAO.loadAllBySupervisorId(id);
+		Set<QuoteDTO> set = new HashSet<QuoteDTO>();
+		for (Quote q : list) {
+			set.add(q.toDTOLazy());
+		}
+		return set;
+	}
+
+	@Override
+	public Set<QuoteDTO> getQuoteByClientId(Long id) {
+		List<Quote> list = quoteDAO.loadAllByClientId(id);
+		Set<QuoteDTO> set = new HashSet<QuoteDTO>();
+		for (Quote q : list) {
+			set.add(q.toDTOLazy());
+		}
+		return set;
+	}
+
 }

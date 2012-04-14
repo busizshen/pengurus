@@ -1,5 +1,7 @@
 package com.pengurus.crm.client.service;
 
+import java.util.Set;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.pengurus.crm.shared.dto.TaskDTO;
@@ -10,4 +12,5 @@ public interface TaskService extends RemoteService {
 	public void updateStatus(TaskDTO taskDTO);
 	public void update(TaskDTO taskDTO);
 	public void delete(TaskDTO taskDTO);
+	public Set<TaskDTO> getTaskByExpertId(Long id);
 }

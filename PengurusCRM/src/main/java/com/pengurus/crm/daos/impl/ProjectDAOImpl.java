@@ -66,4 +66,19 @@ public class ProjectDAOImpl extends GenericDAOImpl<Project> implements
 		List<Project> projects = query.list();
 		return projects;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Project> loadAllByTaskId(Long id) {
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Long[] ids = {id};
+		String hql = "select distinct p from Project p " +
+		                "join p.jobs j join j.task t " +
+		                "where t.id in (:ids)";
+		Query query = session.createQuery(hql);
+		query.setParameterList("ids", ids);
+		List<Project> projects = query.list();
+		return projects;
+	}
+	
 }

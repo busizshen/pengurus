@@ -25,8 +25,8 @@ public class ProjectServiceImpl implements ProjectService {
 	public Set<ProjectDTO> getProjects() {
 		List<Project> list = projectDAO.loadAll();
 		Set<ProjectDTO> set = new HashSet<ProjectDTO>();
-		for (Project q : list) {
-			set.add(q.toDTOLazy());
+		for (Project p : list) {
+			set.add(p.toDTOLazy());
 		}
 		return set;
 	}
@@ -46,8 +46,8 @@ public class ProjectServiceImpl implements ProjectService {
 	public Set<ProjectDTO> getProjectByExpertId(Long id) {
 		List<Project> list = projectDAO.loadAllByExpertId(id);
 		Set<ProjectDTO> set = new HashSet<ProjectDTO>();
-		for (Project q : list) {
-			set.add(q.toDTOLazy());
+		for (Project p : list) {
+			set.add(p.toDTOLazy());
 		}
 		return set;
 	}
@@ -56,8 +56,8 @@ public class ProjectServiceImpl implements ProjectService {
 	public Set<ProjectDTO> getProjectByProjectManagerId(Long id) {
 		List<Project> list = projectDAO.loadAllByProjectManagerId(id);
 		Set<ProjectDTO> set = new HashSet<ProjectDTO>();
-		for (Project q : list) {
-			set.add(q.toDTOLazy());
+		for (Project p : list) {
+			set.add(p.toDTOLazy());
 		}
 		return set;
 	}
@@ -72,6 +72,16 @@ public class ProjectServiceImpl implements ProjectService {
 	public void deleteProject(ProjectDTO projectDTO) {
 		projectDAO.delete(new Project(projectDTO));
 
+	}
+
+	@Override
+	public Set<ProjectDTO> getProjectByTaskId(Long id) {
+		List<Project> list = projectDAO.loadAllByTaskId(id);
+		Set<ProjectDTO> set = new HashSet<ProjectDTO>();
+		for (Project p : list) {
+			set.add(p.toDTOLazy());
+		}
+		return set;
 	}
 
 }

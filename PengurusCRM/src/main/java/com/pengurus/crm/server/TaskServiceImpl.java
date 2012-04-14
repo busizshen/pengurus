@@ -1,5 +1,9 @@
 package com.pengurus.crm.server;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.pengurus.crm.client.service.TaskService;
 import com.pengurus.crm.daos.TaskDAO;
 import com.pengurus.crm.entities.Task;
@@ -38,5 +42,15 @@ public class TaskServiceImpl implements TaskService {
 	public void delete(TaskDTO taskDTO) {
 		Task task = new Task(taskDTO);
 		taskDAO.delete(task);
+	}
+	
+	@Override
+	public Set<TaskDTO> getTaskByExpertId(Long id) {
+		List<Task> list = taskDAO.loadAllByExpertId(id);
+		Set<TaskDTO> set = new HashSet<TaskDTO>();
+		for (Task q : list) {
+			set.add(q.toDTO());
+		}
+		return set;
 	}
 }

@@ -1,5 +1,8 @@
 package com.pengurus.crm.daos.impl;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,5 +32,27 @@ public class QuoteDAOImpl extends GenericDAOImpl<Quote> implements
             return null;
         }
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Quote> loadAllBySupervisorId(Long id) {
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		String hql = "select q from Quote q " +
+				"where q.supervisor = " + id;
+		Query query = session.createQuery(hql);
+		List<Quote> quotes = query.list();
+		return quotes;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Quote> loadAllByClientId(Long id) {
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		String hql = "select q from Quote q " +
+				"where q.client = " + id;
+		Query query = session.createQuery(hql);
+		List<Quote> quotes = query.list();
+		return quotes;
+	}
 
 }

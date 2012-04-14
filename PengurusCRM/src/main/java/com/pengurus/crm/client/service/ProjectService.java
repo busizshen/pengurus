@@ -16,5 +16,6 @@ public interface ProjectService extends RemoteService {
 	public ProjectDTO getProject(Long id);
 	public Set<ProjectDTO> getProjectByExpertId(Long id);
 	public Set<ProjectDTO> getProjectByProjectManagerId(Long id);
+	public Set<ProjectDTO> getProjectByTaskId(Long id);
 	
 }
