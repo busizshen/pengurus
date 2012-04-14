@@ -69,7 +69,7 @@ public class PaginationUtilTest {
 	@Test
 	public void testDefaultSortDirection() {
 		// given
-		config.setSortDir(null);
+		config.setSortDir("NONE");
 		config.setOffset(0);
 
 		// when

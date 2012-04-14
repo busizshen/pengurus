@@ -20,10 +20,8 @@ public class PaginationUtil {
 			sortField = "id";
 		}
 		
-		final SortDir sortDir;
-		if (loadConfig.getSortDir() != null) {
-			sortDir = SortDir.findDir(loadConfig.getSortDir());
-		} else {
+		SortDir sortDir = SortDir.findDir(loadConfig.getSortDir());
+		if (sortDir == null) {
 			sortDir = SortDir.ASC;
 		}
 		Collections.sort(fullList, sortDir.comparator(new Comparator<T>() {
