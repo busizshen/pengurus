@@ -11,20 +11,15 @@ public abstract class WorkerPanel extends UserPanel {
 	WorkerDTO workerDTO;
 	TextField<String> login;
 	TextField<String> name;
-
-	public WorkerPanel(WorkerDTO workerDTO) {
-		super(workerDTO);
+	public WorkerPanel(WorkerDTO workerDTO, String heading) {
+		super(workerDTO, heading);
 		refresh(workerDTO);
 	}
 
 	public WorkerPanel() {
-		super(null);
+		super(null, "");
 	}
 
-	@Override
-	protected String getUserHeading() {
-		return "Worker";
-	}
 
 	public abstract WorkerDTO getChosenWorker();
 

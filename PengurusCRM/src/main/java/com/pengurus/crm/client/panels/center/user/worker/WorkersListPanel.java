@@ -1,8 +1,5 @@
 package com.pengurus.crm.client.panels.center.user.worker;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.DomEvent;
 import com.extjs.gxt.ui.client.event.Events;
@@ -15,28 +12,26 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.WorkerModel;
 import com.pengurus.crm.client.panels.center.user.BaseUsersListPanel;
-import com.pengurus.crm.client.service.UserService;
-import com.pengurus.crm.client.service.UserServiceAsync;
-import com.pengurus.crm.shared.dto.UserDTO;
-import com.pengurus.crm.shared.dto.UserRoleDTO;
 import com.pengurus.crm.shared.dto.WorkerDTO;
 
-public class WorkersListPanel extends BaseUsersListPanel<WorkerModel> {
+public abstract class WorkersListPanel extends BaseUsersListPanel<WorkerModel>{
 
-	WorkerDTO chosen;
-	private Listener<DomEvent> listenerChangeWorker;
-	private Listener<DomEvent> listenerCloseTab;
-	public WorkersListPanel(Listener<DomEvent> listenerChangeWorker,
-			Listener<DomEvent> listenerCloseTab) {
-		this.listenerChangeWorker = listenerChangeWorker;
-		this.listenerCloseTab = listenerCloseTab;
+	protected WorkerDTO chosen;
+	protected Listener<DomEvent> listenerChangeWorker;
+	protected Listener<DomEvent> listenerCloseTab;
+
+	public WorkerDTO getChosenWorker() {
+		return chosen;
 	}
-
+	
+	@Override
+	protected String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	protected GridCellRenderer<WorkerModel> getButtonRenderer() {
 		GridCellRenderer<WorkerModel> buttonRenderer = new GridCellRenderer<WorkerModel>() {
@@ -91,39 +86,4 @@ public class WorkersListPanel extends BaseUsersListPanel<WorkerModel> {
 		};
 		return buttonRenderer;
 	}
-
-	@Override
-	protected String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected ListStore<WorkerModel> getList() {
-		final ListStore<WorkerModel> list = new ListStore<WorkerModel>();
-		AsyncCallback<Set<UserDTO>> callback = new AsyncCallback<Set<UserDTO>>() {
-
-			public void onFailure(Throwable t) {
-				Window.Location.assign("/spring_security_login");
-			}
-
-			public void onSuccess(Set<UserDTO> result) {
-				for (UserDTO q : result) {
-					list.add(new WorkerModel((WorkerDTO)q));
-				}
-			}
-		};
-		UserServiceAsync service = (UserServiceAsync) GWT
-				.create(UserService.class);
-		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
-		service.getUsersByRoles(roles, callback);
-
-		return list;
-	}
-
-	public WorkerDTO getChosenWorker() {
-		return chosen;
-	}
-
 }

@@ -73,7 +73,7 @@ public abstract class ProjectPanel extends MainPanel {
 	protected abstract void addDescriptionPanel(HorizontalPanel hp);
 
 	protected void addSupervisorPanel(VerticalPanel vp) {
-		supervisorPanel = new WorkerPanelView(projectDTO.getSupervisor());
+		supervisorPanel = new WorkerPanelView(projectDTO.getSupervisor(),"Supervisor");
 		supervisorPanel.setHeading("Supervisor");
 		vp.add(supervisorPanel);
 	}
@@ -81,7 +81,7 @@ public abstract class ProjectPanel extends MainPanel {
 
 	protected void addClientPanel(VerticalPanel vp) {
 		if(AuthorizationManager.canViewWholeProject()){
-			clientPanel = new ClientPanelView(projectDTO.getClient());
+			clientPanel = new ClientPanelView(projectDTO.getClient(),"Client");
 			clientPanel.setHeading("Client");
 			vp.add(clientPanel);
 		}

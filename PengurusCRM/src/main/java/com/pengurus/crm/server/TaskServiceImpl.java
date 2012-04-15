@@ -53,4 +53,14 @@ public class TaskServiceImpl implements TaskService {
 		}
 		return set;
 	}
+	
+  @Override
+	public Set<TaskDTO> getTasks() {
+		List<Task> list = taskDAO.loadAll();
+		Set<TaskDTO> set = new HashSet<TaskDTO>();
+		for (Task task : list) {
+			set.add(task.toDTO());
+		}
+		return set;
+	}
 }

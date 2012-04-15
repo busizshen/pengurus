@@ -13,8 +13,8 @@ public class ClientPanelEdit extends ClientPanel {
 
 	ClientsListPanel cl;
 
-	public ClientPanelEdit(ClientDTO client) {
-		super(client);
+	public ClientPanelEdit(ClientDTO client,String heading) {
+		super(client,heading);
 		addEditionPanel();
 	}
 
@@ -43,7 +43,7 @@ public class ClientPanelEdit extends ClientPanel {
 		window.setAutoWidth(true);
 		window.setAutoHide(true);
 		window.setEnabled(true);
-		window.setHeading("ChangeClient");
+		window.setHeading("Change Client");
 		window.setClosable(false);
 		Button b2 = new Button("Cancel");
 		b2.addListener(Events.OnClick, listenerCloseTab);

@@ -30,9 +30,9 @@ public class TaskPanelCreate extends TaskPanel {
 	private JobDTO jobDTO;
 	Button buttonCancel;
 	Button buttonCreate;
-	TasksListPanel taskList;
+	TasksListPanelEdit taskList;
 
-	public TaskPanelCreate(JobDTO jobDTO, ProjectDTO projectDTO, TasksListPanel taskListPanel) {
+	public TaskPanelCreate(JobDTO jobDTO, ProjectDTO projectDTO, TasksListPanelEdit taskListPanel) {
 		super(null, projectDTO);
 		setFrame(false);
 		setHeaderVisible(false);
@@ -125,10 +125,7 @@ public class TaskPanelCreate extends TaskPanel {
 			return false;
 		if (description.getDescription() == null)
 			return false;
-		/*
-		 * if(deadline.getValue() == null) return false;
-		 */
-		// translator
+		if(deadline.getValue() == null) return false;
 		return true;
 	}
 

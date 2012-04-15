@@ -72,7 +72,7 @@ public class WorkerPanelChoose extends FormPanel {
 		final Window window = new Window();
 		window.setAutoHeight(true);
 		window.setAutoWidth(true);
-		WorkerPanelView workerPanel = new WorkerPanelView((WorkerDTO) userDTO);
+		WorkerPanelView workerPanel = new WorkerPanelView((WorkerDTO) userDTO, "Chosen worker");
 		window.add(workerPanel);
 		window.addButton(new Button("OK", new SelectionListener<ButtonEvent>() {
 			@Override

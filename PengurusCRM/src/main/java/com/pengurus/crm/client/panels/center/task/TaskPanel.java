@@ -1,5 +1,6 @@
 package com.pengurus.crm.client.panels.center.task;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
@@ -27,6 +28,9 @@ import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
 import com.pengurus.crm.client.panels.center.job.JobPanelProject;
 import com.pengurus.crm.client.panels.center.status.TaskStatusPanel;
+import com.pengurus.crm.client.panels.center.user.worker.WorkerPanel;
+import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEditByList;
+import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelView;
 import com.pengurus.crm.client.service.AdministrationService;
 import com.pengurus.crm.client.service.AdministrationServiceAsync;
 import com.pengurus.crm.client.service.JobService;
@@ -38,6 +42,8 @@ import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.PriceDTO;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.TaskDTO;
+import com.pengurus.crm.shared.dto.TranslatorDTO;
+import com.pengurus.crm.shared.dto.WorkerDTO;
 
 public class TaskPanel extends MainPanel {
 
@@ -50,6 +56,7 @@ public class TaskPanel extends MainPanel {
 	protected TranslationPanel translation;
 	protected FormPanel mainPanel;
 	protected DateField deadline;
+	protected WorkerPanel workerPanel;
 	TaskStatusPanel statusBar;
 	RatingPanel rating;
 
@@ -87,7 +94,14 @@ public class TaskPanel extends MainPanel {
 	}
 
 	private void addTranslatorPanel(FormPanel vp) {
-		// TODO Auto-generated method stub
+		if (AuthorizationManager.canEditProject(projectDTO)) {
+			Set<WorkerDTO> translators = new HashSet<WorkerDTO>();
+			translators.addAll(projectDTO.getExperts());
+			workerPanel = new WorkerPanelEditByList(taskDTO.getExpert(),"Translator",translators);
+		} else {
+			workerPanel = new WorkerPanelView(taskDTO.getExpert(),"Translator");
+		}
+		vp.add(workerPanel);
 
 	}
 
@@ -213,7 +227,7 @@ public class TaskPanel extends MainPanel {
 				// taskDTO.setComment(comment.getValue());
 				// taskDTO.setRating();
 				taskDTO.setDescription(description.getDescription());
-				// taskDTO.setExpert(expert)
+				taskDTO.setExpert((TranslatorDTO) workerPanel.getChosenWorker());
 				taskDTO.setStatus(statusBar.getStatus());
 				AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 

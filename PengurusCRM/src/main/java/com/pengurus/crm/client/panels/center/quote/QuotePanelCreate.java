@@ -1,5 +1,8 @@
 package com.pengurus.crm.client.panels.center.quote;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
@@ -11,10 +14,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.MainWindow;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
 import com.pengurus.crm.client.panels.center.user.client.ClientPanelEdit;
-import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEdit;
+import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEditByRoles;
 import com.pengurus.crm.client.service.QuoteService;
 import com.pengurus.crm.client.service.QuoteServiceAsync;
 import com.pengurus.crm.shared.dto.QuoteDTO;
+import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 public class QuotePanelCreate extends QuotePanel {
 
@@ -102,14 +106,16 @@ public class QuotePanelCreate extends QuotePanel {
 
 	@Override
 	protected void addSupervisorPanel(VerticalPanel vpPanel) {
-		workerPanel = new WorkerPanelEdit(quoteDTO.getSupervisor());
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		workerPanel = new WorkerPanelEditByRoles(quoteDTO.getSupervisor(),"Supervisor",roles);
 		workerPanel.setHeading("Supervisor");
 		vpPanel.add(workerPanel);
 	}
 
 	@Override
 	protected void addClientPanel(VerticalPanel vpPanel) {
-		clientPanel = new ClientPanelEdit(quoteDTO.getClient());
+		clientPanel = new ClientPanelEdit(quoteDTO.getClient(),"Client");
 		clientPanel.setHeading("Client");
 		vpPanel.add(clientPanel);
 	}

@@ -18,9 +18,9 @@
 		<property name="userDAO" ref="userDao" />
 		<property name="passwordEncoder" ref="passwordEncoder" />
 		<property name="saltSource" ref="saltSource" />
-		
+
 	</bean>
-	
+
 	<bean id="currentSessionServiceBean" class="com.pengurus.crm.server.CurrentSessionServiceImpl">
 		<property name="userDAO" ref="userDao" />
 		<property name="userService" ref="userServiceBean" />
@@ -42,7 +42,7 @@
 		<property name="translationTypeDAO" ref="translationTypeDao" />
 		<property name="languageDAO" ref="languageDao" />
 	</bean>
-	
+
 	<bean id="jobServiceBean" class="com.pengurus.crm.server.JobServiceImpl">
 		<property name="jobDAO" ref="jobDao" />
 		<property name="translationDAO" ref="translationDao" />
@@ -53,10 +53,12 @@
 	<bean id="taskServiceBean" class="com.pengurus.crm.server.TaskServiceImpl">
 		<property name="taskDAO" ref="taskDao" />
 	</bean>
+
 	<bean id="workerServiceBean" class="com.pengurus.crm.server.WorkerServiceImpl">
 		<property name="workerDAO" ref="workerDao" />
 	</bean>
-		<bean id="translatorServiceBean" class="com.pengurus.crm.server.TranslatorServiceImpl">
+
+	<bean id="translatorServiceBean" class="com.pengurus.crm.server.TranslatorServiceImpl">
 		<property name="translatorDAO" ref="translatorDao" />
 	</bean>
 </beans>

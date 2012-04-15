@@ -10,20 +10,14 @@ public abstract class ClientPanel extends UserPanel {
 	TextField<String> login;
 	TextField<String> name ;
 	protected ClientDTO clientDTO;
-	public ClientPanel(ClientDTO client) {
-		super(client);
+	public ClientPanel(ClientDTO client,String heading) {
+		super(client,heading);
 		refresh(client);
 	}	
 
 	public ClientPanel() {
-		super(null);
+		super(null,"");
 	}
-
-	@Override
-	protected String getUserHeading() {
-		return "Client";
-	}
-
 
 	public abstract ClientDTO getChosenClient();
 	

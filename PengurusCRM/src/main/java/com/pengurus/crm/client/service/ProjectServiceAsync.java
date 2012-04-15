@@ -1,10 +1,8 @@
 package com.pengurus.crm.client.service;
 
-import java.util.List;
 import java.util.Set;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.pengurus.crm.entities.Project;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 
 public interface ProjectServiceAsync {

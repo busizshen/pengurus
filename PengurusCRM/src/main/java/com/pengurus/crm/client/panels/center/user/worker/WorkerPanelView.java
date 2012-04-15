@@ -4,10 +4,10 @@ import com.pengurus.crm.shared.dto.WorkerDTO;
 
 public class WorkerPanelView extends WorkerPanel{
 
-	public WorkerPanelView(WorkerDTO workerDTO) {
-		super(workerDTO);
+	public WorkerPanelView(WorkerDTO workerDTO,String heading) {
+		super(workerDTO, heading);
 	}
 	public WorkerDTO getChosenWorker() {
-		return null;
+		return workerDTO;
 	}
 }

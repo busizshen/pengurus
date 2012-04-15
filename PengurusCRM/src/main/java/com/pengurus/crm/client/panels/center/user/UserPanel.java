@@ -9,7 +9,6 @@ import com.pengurus.crm.shared.dto.UserDTO;
 
 public abstract class UserPanel extends FormPanel {
 
-	protected abstract String getUserHeading();
 
 	private String getUserDescription(){
 		if(userDTO != null){
@@ -19,15 +18,14 @@ public abstract class UserPanel extends FormPanel {
 	}
 	protected UserDTO userDTO;
 	protected DescriptionPanel descriptionPanel;
-
-
-	public UserPanel(UserDTO userDTO) {
+	
+	public UserPanel(UserDTO userDTO, String heading) {
 		this.userDTO = userDTO;
 		HorizontalPanel hp = new HorizontalPanel();
 		hp.setSpacing(10);
 		hp.setAutoWidth(true);
 		hp.setAutoHeight(true);
-		setHeading(getUserHeading());
+		setHeading(heading);
 		hp.add(getInfoForm());
 		descriptionPanel = new DescriptionPanelView(getUserDescription());
 		hp.add(descriptionPanel);

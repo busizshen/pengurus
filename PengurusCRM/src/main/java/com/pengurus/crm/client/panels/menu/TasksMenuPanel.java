@@ -2,8 +2,10 @@ package com.pengurus.crm.client.panels.menu;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.AuthorizationManager;
+import com.pengurus.crm.client.panels.center.task.TasksListPanelAll;
 
 
 public class TasksMenuPanel extends TabMenuPanel {
@@ -24,7 +26,9 @@ public class TasksMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-				//	new QuotesListPanelMine();
+					MessageBox mb = new MessageBox();
+					mb.setMessage("Nie ma getByUserId w bazie danych");
+					mb.show();
 				}
 			});
 		    add(b);
@@ -37,7 +41,8 @@ public class TasksMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-				//	new QuotesListPanelAll();
+					TasksListPanelAll taskListPanel = new TasksListPanelAll();
+					taskListPanel.setAsMain();
 				}
 			});
 		    add(b);

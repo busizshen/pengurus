@@ -34,7 +34,7 @@ public class QuotePanelView extends QuotePanel {
 
 	@Override
 	protected void addSupervisorPanel(VerticalPanel vpPanel) {
-		workerPanel = new WorkerPanelView(quoteDTO.getSupervisor());
+		workerPanel = new WorkerPanelView(quoteDTO.getSupervisor(),"Supervisor");
 		workerPanel.setHeading("Supervisor");
 		vpPanel.add(workerPanel);
 		
@@ -42,7 +42,7 @@ public class QuotePanelView extends QuotePanel {
 
 	@Override
 	protected void addClientPanel(VerticalPanel vpPanel) {
-		clientPanel = new ClientPanelView(quoteDTO.getClient());
+		clientPanel = new ClientPanelView(quoteDTO.getClient(),"Client");
 		clientPanel.setHeading("Client");
 		vpPanel.add(clientPanel);
 	}

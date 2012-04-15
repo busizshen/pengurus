@@ -1,6 +1,6 @@
 package com.pengurus.crm.client.panels.center.job;
 
-import com.pengurus.crm.client.panels.center.task.TasksListPanel;
+import com.pengurus.crm.client.panels.center.task.TasksListPanelEdit;
 import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.TaskDTO;
@@ -14,7 +14,7 @@ public class JobPanelProject extends JobPanel {
 	}
 
 	private void addTasksList() {
-		TasksListPanel tasks = new TasksListPanel(jobDTO.getTask(), jobDTO, projectDTO);
+		TasksListPanelEdit tasks = new TasksListPanelEdit(jobDTO.getTask(), jobDTO, projectDTO);
 		add(tasks);
 	}
 
