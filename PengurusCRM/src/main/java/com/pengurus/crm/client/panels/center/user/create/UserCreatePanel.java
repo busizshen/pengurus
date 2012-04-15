@@ -68,7 +68,7 @@ public class UserCreatePanel extends UserBasePanel {
 		horizontalPanel = new HorizontalPanel();
 		horizontalPanel.setSpacing(20);
 		horizontalPanel.add(form);
-		horizontalPanel.add(personalDataForm);
+		horizontalPanel.add(personalDataEdit);
 		add(horizontalPanel);
 	}
 
@@ -81,10 +81,10 @@ public class UserCreatePanel extends UserBasePanel {
 	}
 
 	private void createPersonalDataForm() {
-		personalDataForm = new PersonalDataForm();
-		personalDataForm.setHeading("Personal data");
-		personalDataForm.setFrame(true);
-		personalDataForm.setLabelAlign(LabelAlign.TOP);
+		personalDataEdit = new PersonalDataEdit();
+		personalDataEdit.setHeading("Personal data");
+		personalDataEdit.setFrame(true);
+		personalDataEdit.setLabelAlign(LabelAlign.TOP);
 	}
 
 	private void createUsernameField() {
@@ -227,8 +227,8 @@ public class UserCreatePanel extends UserBasePanel {
 		@Override
 		protected void onSelect() {
 			super.onSelect();
-			personalDataForm.show();
-			for (Field<?> field: personalDataForm.getFields()) {
+			personalDataEdit.show();
+			for (Field<?> field: personalDataEdit.getFields()) {
 				binding.getFields().add(field);
 			}
 		}
@@ -236,7 +236,7 @@ public class UserCreatePanel extends UserBasePanel {
 		@Override
 		protected void onDeselect() {
 			super.onDeselect();
-			for (Field<?> field: personalDataForm.getFields()) {
+			for (Field<?> field: personalDataEdit.getFields()) {
 				binding.getFields().remove(field);
 			}
 		}
@@ -245,7 +245,7 @@ public class UserCreatePanel extends UserBasePanel {
 		protected UserDTO createUser() {
 			IndividualClientDTO user = new IndividualClientDTO();
 			fillBasicUser(user);
-			user.setPersonalData(personalDataForm.toPersonalData());
+			user.setPersonalData(personalDataEdit.toPersonalData());
 			return user;
 		}
 	}
@@ -300,8 +300,8 @@ public class UserCreatePanel extends UserBasePanel {
 			enableRole(UserRoleDTO.ROLE_ACCOUNTANT);
 			enableRole(UserRoleDTO.ROLE_EXECUTIVE);
 			enableRole(UserRoleDTO.ROLE_PROJECTMNAGER);
-			personalDataForm.show();
-			for (Field<?> field: personalDataForm.getFields()) {
+			personalDataEdit.show();
+			for (Field<?> field: personalDataEdit.getFields()) {
 				binding.getFields().add(field);
 			}
 		}
@@ -309,8 +309,8 @@ public class UserCreatePanel extends UserBasePanel {
 		@Override
 		protected void onDeselect() {
 			super.onDeselect();
-			personalDataForm.hide();
-			for (Field<?> field: personalDataForm.getFields()) {
+			personalDataEdit.hide();
+			for (Field<?> field: personalDataEdit.getFields()) {
 				binding.getFields().remove(field);
 			}
 
@@ -320,7 +320,7 @@ public class UserCreatePanel extends UserBasePanel {
 		protected UserDTO createUser() {
 			WorkerDTO workerDTO = new WorkerDTO();
 			fillBasicUser(workerDTO);
-			workerDTO.setPersonalData(personalDataForm.toPersonalData());
+			workerDTO.setPersonalData(personalDataEdit.toPersonalData());
 			return workerDTO;
 		}
 	}
@@ -336,13 +336,13 @@ public class UserCreatePanel extends UserBasePanel {
 			enableRole(UserRoleDTO.ROLE_EXPERT);
 			enableRole(UserRoleDTO.ROLE_VERIFICATOR);
 			enableRole(UserRoleDTO.ROLE_FREELANCER);
-			personalDataForm.show();
+			personalDataEdit.show();
 		}
 
 		@Override
 		protected void onDeselect() {
 			super.onDeselect();
-			personalDataForm.hide();
+			personalDataEdit.hide();
 		}
 
 		@Override

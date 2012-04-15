@@ -61,7 +61,7 @@ public class UserEditPanel extends UserBasePanel {
 		} else {
 			selectUserType(UserType.Worker);
 		}
-		personalDataForm.fromPersonalData(worker.getPersonalData());
+		personalDataEdit.fromPersonalData(worker.getPersonalData());
 	}
 
 	private void initTranslator(TranslatorDTO translator) {
@@ -81,7 +81,7 @@ public class UserEditPanel extends UserBasePanel {
 
 	private void initIndividualClient(IndividualClientDTO client) {
 		selectUserType(UserType.IndividualClient);
-		personalDataForm.fromPersonalData(client.getPersonalData());
+		personalDataEdit.fromPersonalData(client.getPersonalData());
 	}
 
 	private void initBusinessClient(BusinessClientDTO client) {

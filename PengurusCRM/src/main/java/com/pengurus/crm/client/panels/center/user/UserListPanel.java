@@ -25,6 +25,7 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.CheckBoxGroup;
 import com.extjs.gxt.ui.client.widget.form.Field;
@@ -38,6 +39,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.UserModel;
 import com.pengurus.crm.client.panels.center.user.create.UserEditPanel;
+import com.pengurus.crm.client.panels.center.user.create.UserPreviewPanel;
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.UserServiceAsync;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
@@ -268,6 +270,7 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 							});
 				}
 
+				ButtonBar buttonBar = new ButtonBar();
 				Button editButton = new Button("Edit",
 						new SelectionListener<ButtonEvent>() {
 							@Override
@@ -276,10 +279,25 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 							}
 						});
 
-				editButton.setWidth(grid.getColumnModel().getColumnWidth(
-						colIndex) - 10);
+				editButton.setWidth((grid.getColumnModel().getColumnWidth(
+						colIndex) - 20) / 2);
 				editButton.setToolTip("Click to edit");
-				return editButton;
+				buttonBar.add(editButton);
+				
+                Button previewButton = new Button("Preview",
+                        new SelectionListener<ButtonEvent>() {
+                            @Override
+                            public void componentSelected(ButtonEvent ce) {
+                                new UserPreviewPanel(model.getUserDTO()).setAsMain();
+                            }
+                        });
+
+                previewButton.setWidth((grid.getColumnModel().getColumnWidth(
+                        colIndex) - 20) / 2);
+                previewButton.setToolTip("Click to see details");
+				buttonBar.add(previewButton);
+                
+				return buttonBar;
 			}
 		};
 		return buttonRenderer;

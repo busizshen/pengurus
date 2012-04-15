@@ -37,22 +37,18 @@ public class Worker extends User {
         this.personalData = personalData;
     }
     
-    
+    protected void rewrite(WorkerDTO workerDTO) {
+    	super.rewrite(workerDTO);
+    	workerDTO.setPersonalData(getPersonalData().toDTO());
+    }
     
     public WorkerDTO toDTO(){
-    	return toDTOLazy();
+    	WorkerDTO workerDTO = new WorkerDTO();
+    	rewrite(workerDTO);
+    	return workerDTO;
 	}
     
     public WorkerDTO toDTOLazy(){
-    	WorkerDTO wDTO = new WorkerDTO();
-    	wDTO.setDescription(getDescription());
-    	wDTO.setId(getId());
-    	wDTO.setUsername(getUsername());
-    	if(personalData != null)
-    		wDTO.setPersonalData(personalData.toDTO());
-    	for(UserRoleDTO a : this.getAuthorities()){
-			wDTO.getAuthorities().add(a);
-		}
-    	return wDTO;
+    	return toDTO();
 	}
 }

@@ -27,12 +27,17 @@ public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO {
 	}
 
 	private User getUserByUsernameHelper(String username) {
+	    Session session = getHibernateTemplate().getSessionFactory()
+	                .openSession();
 		String query = "select u from User u where u.username = '"
 				+ username + "'";
-		List<?> result = getHibernateTemplate().find(query);
+		List<?> result = session.createQuery(query).list();
 		if (result.isEmpty())
 			return null;
-		return (User) result.get(0);
+		User user = (User) result.get(0);
+		fillUser(user);
+		session.close();
+		return user ;
 	}
 	
 	@Override
@@ -58,33 +63,37 @@ public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO {
 		Query query = session.createQuery("from User");
 		List<User> list = query.list();
 		for (User u : list) {
-			u.getAuthorities().size();
-			if (u instanceof Worker) {
-				Worker worker = (Worker) u;
-				worker.getPersonalData().getEmail();
-				worker.getPersonalData().getPhoneNumber();
-				if (u instanceof Translator) {
-					Translator translator = (Translator) u;
-					translator.getTranslations().size();
-				}
-			} else if (u instanceof Client) {
-				if (u instanceof BusinessClient) {
-					BusinessClient businessClient = (BusinessClient) u;
-					businessClient.getAgents().size();
-					for (PersonalData pd : businessClient.getAgents()) {
-						pd.getPhoneNumber().size();
-						pd.getEmail().size();
-					}
-				}
-				if (u instanceof IndividualClient) {
-					IndividualClient individualClient = (IndividualClient) u;
-					individualClient.getPersonalData().getEmail().size();
-					individualClient.getPersonalData().getPhoneNumber().size();
-				}
-			}
+			fillUser(u);
 		}
 		session.close();
 		return list;
 	}
+
+    private void fillUser(User u) {
+        u.getAuthorities().size();
+        if (u instanceof Worker) {
+        	Worker worker = (Worker) u;
+        	worker.getPersonalData().getEmail();
+        	worker.getPersonalData().getPhoneNumber();
+        	if (u instanceof Translator) {
+        		Translator translator = (Translator) u;
+        		translator.getTranslations().size();
+        	}
+        } else if (u instanceof Client) {
+        	if (u instanceof BusinessClient) {
+        		BusinessClient businessClient = (BusinessClient) u;
+        		businessClient.getAgents().size();
+        		for (PersonalData pd : businessClient.getAgents()) {
+        			pd.getPhoneNumber().size();
+        			pd.getEmail().size();
+        		}
+        	}
+        	if (u instanceof IndividualClient) {
+        		IndividualClient individualClient = (IndividualClient) u;
+        		individualClient.getPersonalData().getEmail().size();
+        		individualClient.getPersonalData().getPhoneNumber().size();
+        	}
+        }
+    }
 
 }

@@ -174,7 +174,7 @@ public class GettingObjectsById {
 			jobDTOIsNotNull(jobDTO);
 	}
 	
-	@Test
+	/*@Test
 	public void loadProjectByTaskId() {
 		// assuming db contains Task with Id 318
 		// I know that such assumption is not good in tests.
@@ -200,8 +200,8 @@ public class GettingObjectsById {
 				+ "does not contain requiered task");
 
 	}
-
-	@Test
+*/
+/*	@Test
 	public void getProjectByTaskId(){
 		// assuming db contains Task with Id 318
 		// I know that such assumption is not good in tests.
@@ -211,7 +211,7 @@ public class GettingObjectsById {
 		for(ProjectDTO project : projects){
 			projectDTOIsNotNull(project);
 		}
-	}
+	}*/
 	
 	public void jobIsNotNull(Job job) {
 		Assert.notNull(job.getId(), "null Id in Job");

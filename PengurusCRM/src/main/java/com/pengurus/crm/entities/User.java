@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
-public class User {
+public abstract class User {
 
 	private Long id;
 	private Set<UserRoleDTO> authorities;
@@ -113,27 +113,35 @@ public class User {
 		return userDetails;
 	}
 
-	public UserDTO toDTO() {
-	    HashSet<UserRoleDTO> authoritiesDTOs = new HashSet<UserRoleDTO>(getAuthorities());
-	    return new UserDTO(getId(), authoritiesDTOs,
-	                       getUsername(), getPassword(),
-	                       getDescription());
+	protected void rewrite(UserDTO userDTO) {
+		userDTO.setId(getId());
+		userDTO.setAuthorities(new HashSet<UserRoleDTO>(getAuthorities()));
+		userDTO.setUsername(getUsername());
+		userDTO.setPassword(getPassword());
+		userDTO.setDescription(getDescription());
 	}
+	
+	protected void rewriteWithoutPassword(UserDTO userDTO) {
+		userDTO.setId(getId());
+		userDTO.setAuthorities(new HashSet<UserRoleDTO>(getAuthorities()));
+		userDTO.setUsername(getUsername());
+		userDTO.setPassword("");
+		userDTO.setDescription(getDescription());
+	}
+	
+	public UserDTO toDTO() {
+		UserDTO userDTO = new UserDTO();
+		rewrite(userDTO);
+		return userDTO;
+	}
+	
 	public UserDTO toUserDTOWithoutPassword() {
-	   HashSet<UserRoleDTO> authoritiesDTOs = new HashSet<UserRoleDTO>(getAuthorities());
-	   return new UserDTO(getId(), authoritiesDTOs,
-	                       getUsername(), "",
-	                       getDescription());
+		UserDTO userDTO = new UserDTO();
+		rewriteWithoutPassword(userDTO);
+		return userDTO;
 	}
 	
 	public UserDTO toDTOLazy(){
 		return toDTO();
-	}
-
-	public UserDTO toUserDTO() {
-		HashSet<UserRoleDTO> authoritiesDTOs = new HashSet<UserRoleDTO>(getAuthorities());
-	    return new UserDTO(getId(), authoritiesDTOs,
-	                       getUsername(), getPassword(),
-	                       getDescription());
 	}
 }

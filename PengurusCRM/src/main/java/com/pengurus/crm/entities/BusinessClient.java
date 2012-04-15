@@ -49,25 +49,26 @@ public class BusinessClient extends Client {
         this.agents = agents;
     }
 
+    protected void rewrite(BusinessClientDTO businessClientDTO) {
+    	super.rewrite(businessClientDTO);
+		for(PersonalData pd : agents){
+			businessClientDTO.addAgent(pd.toDTO());
+		}
+		for(UserRoleDTO a : this.getAuthorities()){
+			businessClientDTO.getAuthorities().add(a);
+		}
+    }
+    
 	@Override
 	public BusinessClientDTO toDTO() {
-		return this.toDTOLazy();
+		BusinessClientDTO businessClientDTO = new BusinessClientDTO();
+		rewrite(businessClientDTO);
+		return businessClientDTO;
 	}
 	
 	@Override
 	public BusinessClientDTO toDTOLazy() {
-		BusinessClientDTO bcDTO = new BusinessClientDTO();
-		bcDTO.setId(this.getId());
-		bcDTO.setUsername(this.getUsername());
-		bcDTO.setDescription(this.getDescription());
-		bcDTO.setName(this.getName());
-		for(PersonalData pd : agents){
-			bcDTO.addAgent(pd.toDTO());
-		}
-		for(UserRoleDTO a : this.getAuthorities()){
-			bcDTO.getAuthorities().add(a);
-		}
-		return bcDTO;
+		return toDTO();
 	}
 
 }

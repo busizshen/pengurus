@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDTO getUser(String username) {
-		return userDAO.getUserByUsername(username).toUserDTO();
+		return userDAO.getUserByUsername(username).toDTO();
 	}
 
 	private Void updateUserHelper(UserDTO userDTO) throws ServiceException {

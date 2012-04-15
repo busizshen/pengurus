@@ -43,25 +43,23 @@ public class Translator extends Worker{
         this.translations = translations;
     }
 
+    protected void rewriteLazy(TranslatorDTO translatorDTO) {
+    	super.rewrite(translatorDTO);
+    	translatorDTO.setPersonalData(getPersonalData().toDTO());
+    }
+    
     @Override
     public TranslatorDTO toDTO(){
-    	TranslatorDTO tDTO = this.toDTOLazy();
-    	for(Translation t : this.getTranslations())
-    		tDTO.getTranslations().add(t.toDTO());
-    	return tDTO; 
+    	TranslatorDTO translatorDTO = toDTOLazy();
+    	for(Translation t : getTranslations())
+    		translatorDTO.getTranslations().add(t.toDTO());
+    	return translatorDTO; 
     }
     
     @Override
     public TranslatorDTO toDTOLazy(){
-    	TranslatorDTO tDTO = new TranslatorDTO();
-    	tDTO.setDescription(this.getDescription());
-    	tDTO.setId(this.getId());
-    	if(this.getPersonalData() != null)
-    		tDTO.setPersonalData(this.getPersonalData().toDTO());
-    	tDTO.setUsername(this.getUsername());
-    	for(UserRoleDTO a : this.getAuthorities()){
-			tDTO.getAuthorities().add(a);
-		}
-    	return tDTO; 
+    	TranslatorDTO translatorDTO = new TranslatorDTO();
+    	rewriteLazy(translatorDTO);
+    	return translatorDTO; 
     }
 }

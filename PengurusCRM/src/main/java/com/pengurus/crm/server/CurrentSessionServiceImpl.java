@@ -42,7 +42,7 @@ public class CurrentSessionServiceImpl implements CurrentSessionService {
 		if (principal instanceof UserDetails) {
 			User user = userDAO.getUserByUsername(((UserDetails) principal).getUsername());
 			log.error(user.toString());
-			return user.toUserDTO();
+			return user.toDTO();
 		}
 		return null;
 	}

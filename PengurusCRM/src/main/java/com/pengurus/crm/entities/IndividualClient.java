@@ -34,23 +34,21 @@ public class IndividualClient extends Client {
         this.personalData = personalData;
     }
 
+    protected void rewrite(IndividualClientDTO individualClientDTO) {
+    	super.rewrite(individualClientDTO);
+    	individualClientDTO.setPersonalData(personalData.toDTO());
+    }
+    
     @Override
 	public IndividualClientDTO toDTO() {
-    	return this.toDTOLazy();
+    	IndividualClientDTO individualClientDTO = new IndividualClientDTO();
+    	rewrite(individualClientDTO);
+    	return individualClientDTO;
     }
     
     @Override
 	public IndividualClientDTO toDTOLazy() {
-		IndividualClientDTO bcDTO = new IndividualClientDTO();
-		bcDTO.setId(this.getId());
-		bcDTO.setUsername(this.getUsername());
-		bcDTO.setDescription(this.getDescription());
-		if(this.personalData != null)
-			bcDTO.setPersonalData(this.personalData.toDTO());
-		for(UserRoleDTO a : this.getAuthorities()){
-			bcDTO.getAuthorities().add(a);
-		}
-		return bcDTO;
+		return toDTO();
 	}
 	
 	

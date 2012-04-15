@@ -63,7 +63,7 @@ public abstract class UserBasePanel extends MainPanel {
 
 	protected HorizontalPanel horizontalPanel;
 	protected FormPanel form, additionalDataForm;
-	protected PersonalDataForm personalDataForm;
+    protected PersonalDataEdit personalDataEdit;
 	private ContentPanel agentsGridPanel, translationsGridPanel;
 	Grid<PersonalDataModel> agentsGrid;
 	private EditorGrid<TranslationModel> translationsGrid;
@@ -85,7 +85,7 @@ public abstract class UserBasePanel extends MainPanel {
 		createDescriptionField();
 		createUserTypeRatioGroup();
 		createRoleCheckbox();
-		createPersonalDataForm();
+		createPersonalDataEdit();
 		createAdditionalDataForm();
 		createIndividualClientFullNameField();
 		createAgentGrid();
@@ -103,16 +103,16 @@ public abstract class UserBasePanel extends MainPanel {
 		horizontalPanel = new HorizontalPanel();
 		horizontalPanel.setSpacing(20);
 		horizontalPanel.add(form);
-		horizontalPanel.add(personalDataForm);
+		horizontalPanel.add(personalDataEdit);
 		horizontalPanel.add(additionalDataForm);
 		add(horizontalPanel);
 	}
 
-	private void createPersonalDataForm() {
-		personalDataForm = new PersonalDataForm();
-		personalDataForm.setHeading("Personal data");
-		personalDataForm.setFrame(true);
-		personalDataForm.setLabelAlign(LabelAlign.TOP);
+	private void createPersonalDataEdit() {
+		personalDataEdit = new PersonalDataEdit();
+		personalDataEdit.setHeading("Personal data");
+		personalDataEdit.setFrame(true);
+		personalDataEdit.setLabelAlign(LabelAlign.TOP);
 	}
 
 	private void createUsernameField() {
@@ -282,8 +282,8 @@ public abstract class UserBasePanel extends MainPanel {
 		@Override
 		protected void onSelect() {
 			super.onSelect();
-			personalDataForm.show();
-			for (Field<?> field: personalDataForm.getFields()) {
+			personalDataEdit.show();
+			for (Field<?> field: personalDataEdit.getFields()) {
 				binding.getFields().add(field);
 			}
 		}
@@ -291,7 +291,7 @@ public abstract class UserBasePanel extends MainPanel {
 		@Override
 		protected void onDeselect() {
 			super.onDeselect();
-			for (Field<?> field: personalDataForm.getFields()) {
+			for (Field<?> field: personalDataEdit.getFields()) {
 				binding.getFields().remove(field);
 			}
 		}
@@ -300,7 +300,7 @@ public abstract class UserBasePanel extends MainPanel {
 		protected UserDTO createUser() {
 			IndividualClientDTO user = new IndividualClientDTO();
 			fillBasicUser(user);
-			user.setPersonalData(personalDataForm.toPersonalData());
+			user.setPersonalData(personalDataEdit.toPersonalData());
 			return user;
 		}
 	}
@@ -367,8 +367,8 @@ public abstract class UserBasePanel extends MainPanel {
 			enableRole(UserRoleDTO.ROLE_ACCOUNTANT);
 			enableRole(UserRoleDTO.ROLE_EXECUTIVE);
 			enableRole(UserRoleDTO.ROLE_PROJECTMNAGER);
-			personalDataForm.show();
-			for (Field<?> field: personalDataForm.getFields()) {
+			personalDataEdit.show();
+			for (Field<?> field: personalDataEdit.getFields()) {
 				binding.getFields().add(field);
 			}
 		}
@@ -376,8 +376,8 @@ public abstract class UserBasePanel extends MainPanel {
 		@Override
 		protected void onDeselect() {
 			super.onDeselect();
-			personalDataForm.hide();
-			for (Field<?> field: personalDataForm.getFields()) {
+			personalDataEdit.hide();
+			for (Field<?> field: personalDataEdit.getFields()) {
 				binding.getFields().remove(field);
 			}
 
@@ -387,7 +387,7 @@ public abstract class UserBasePanel extends MainPanel {
 		protected UserDTO createUser() {
 			WorkerDTO workerDTO = new WorkerDTO();
 			fillBasicUser(workerDTO);
-			workerDTO.setPersonalData(personalDataForm.toPersonalData());
+			workerDTO.setPersonalData(personalDataEdit.toPersonalData());
 			return workerDTO;
 		}
 	}
@@ -408,7 +408,7 @@ public abstract class UserBasePanel extends MainPanel {
 			enableRole(UserRoleDTO.ROLE_EXPERT);
 			enableRole(UserRoleDTO.ROLE_VERIFICATOR);
 			enableRole(UserRoleDTO.ROLE_FREELANCER);
-			personalDataForm.show();
+			personalDataEdit.show();
 			additionalDataForm.show();
 			translationComboBox.show();
 			translationsGridPanel.show();
@@ -420,14 +420,14 @@ public abstract class UserBasePanel extends MainPanel {
 			translationsGridPanel.hide();
 			translationComboBox.hide();
 			additionalDataForm.hide();
-			personalDataForm.hide();
+			personalDataEdit.hide();
 		}
 
 		@Override
 		protected UserDTO createUser() {
 			TranslatorDTO translatorDTO = new TranslatorDTO();
 			fillBasicUser(translatorDTO);
-			translatorDTO.setPersonalData(personalDataForm.toPersonalData());
+			translatorDTO.setPersonalData(personalDataEdit.toPersonalData());
 			Set<TranslationDTO> translations = new HashSet<TranslationDTO>();
 			for (TranslationModel translationModel: translationStore.getModels()) {
 				translations.add(translationModel.getTranslationDTO());
@@ -535,8 +535,8 @@ public abstract class UserBasePanel extends MainPanel {
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
-								final PersonalDataForm personalDataForm = new PersonalDataForm();
-								personalDataForm.fromPersonalData(model
+								final PersonalDataEdit personalDataEdit = new PersonalDataEdit();
+								personalDataEdit.fromPersonalData(model
 										.getPersonalDataDTO());
 								Button saveButton = new Button("Save",
 										new SelectionListener<ButtonEvent>() {
@@ -544,7 +544,7 @@ public abstract class UserBasePanel extends MainPanel {
 											@Override
 											public void componentSelected(
 													ButtonEvent ce) {
-												PersonalDataDTO newPersonalData = personalDataForm
+												PersonalDataDTO newPersonalData = personalDataEdit
 														.toPersonalData();
 												store.remove(rowIndex);
 												store.insert(
@@ -569,7 +569,7 @@ public abstract class UserBasePanel extends MainPanel {
 								List<Button> buttonList = new ArrayList<Button>();
 								buttonList.add(saveButton);
 								buttonList.add(removeButton);
-								personalDataPopup(personalDataForm, buttonList);
+								personalDataPopup(personalDataEdit, buttonList);
 							}
 						});
 				editButton.setWidth(grid.getColumnModel().getColumnWidth(
@@ -609,13 +609,13 @@ public abstract class UserBasePanel extends MainPanel {
 		Button add = new Button("Add", new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				final PersonalDataForm personalDataForm = new PersonalDataForm();
-				personalDataForm.fromPersonalData(new PersonalDataDTO());
+				final PersonalDataEdit personalDataEdit = new PersonalDataEdit();
+				personalDataEdit.fromPersonalData(new PersonalDataDTO());
 				Button saveButton = new Button("Save",
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
-								PersonalDataDTO newPersonalData = personalDataForm
+								PersonalDataDTO newPersonalData = personalDataEdit
 										.toPersonalData();
 								personalDataStore.insert(new PersonalDataModel(
 										newPersonalData), personalDataStore.getCount());
@@ -626,7 +626,7 @@ public abstract class UserBasePanel extends MainPanel {
 						});
 				List<Button> buttonList = new ArrayList<Button>();
 				buttonList.add(saveButton);
-				personalDataPopup(personalDataForm, buttonList);
+				personalDataPopup(personalDataEdit, buttonList);
 			}
 		});
 		toolBar.add(add);
@@ -649,10 +649,10 @@ public abstract class UserBasePanel extends MainPanel {
 		additionalDataForm.add(agentsGridPanel, addFormData);
 	}
 
-	private void personalDataPopup(PersonalDataForm personalDataForm,
+    private void personalDataPopup(PersonalDataEdit personalDataEdit,
 			List<Button> buttonList) {
 		window.removeAll();
-		window.add(personalDataForm);
+		window.add(personalDataEdit);
 		Button cancelButton = new Button("Cancel",
 				new SelectionListener<ButtonEvent>() {
 					@Override
@@ -662,7 +662,7 @@ public abstract class UserBasePanel extends MainPanel {
 				});
 		buttonList.add(cancelButton);
 		for (Button button : buttonList) {
-			personalDataForm.addButton(button);
+			personalDataEdit.addButton(button);
 		}
 		window.show();
 	}
