@@ -33,7 +33,6 @@ public abstract class ListPanel<T extends ModelData> extends MainPanel {
 			List<ColumnConfig> configs = getColumns();
 			ColumnModel cm = new ColumnModel(configs);
 			setStyle(cp);
-			cp.setBodyBorder(true);
 			cp.setHeading(getName());
 			cp.setButtonAlign(HorizontalAlignment.CENTER);
 			cp.setLayout(new FillLayout());

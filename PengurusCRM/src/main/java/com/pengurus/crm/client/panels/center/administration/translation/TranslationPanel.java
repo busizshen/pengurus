@@ -28,7 +28,6 @@ public class TranslationPanel extends FormPanel {
 	}
 
 	private void initTranslationPanel() {
-		this.setBorders(true);
 		setHeading("Translation");
 		from = new TextField<String>();
 		from.setFieldLabel("From");

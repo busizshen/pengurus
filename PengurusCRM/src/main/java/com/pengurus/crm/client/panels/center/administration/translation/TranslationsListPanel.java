@@ -32,10 +32,8 @@ public class TranslationsListPanel extends ListPanel<TranslationModel> {
 			ListStore<TranslationModel> listTranslationModel, Listener<DomEvent> listener) {
 		list = listTranslationModel;
 		listenerChosen = listener;
-		setHeaderVisible(false);
 		ml = new ModelList();
 		add(ml);
-		expand();
 	}
 
 	@Override
@@ -83,6 +81,9 @@ public class TranslationsListPanel extends ListPanel<TranslationModel> {
 
 	@Override
 	protected void setStyle(ContentPanel cp) {
+		setHeaderVisible(false);
+		setAutoHeight(false);
+		setAutoWidth(false);
 		cp.setCollapsible(true);
 		cp.setAnimCollapse(true);
 		cp.collapse();

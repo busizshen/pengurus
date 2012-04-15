@@ -380,7 +380,6 @@ public class TranslationPanelAdmin extends MainPanel {
     private void createForm() {
         mainForm = new FormPanel();
         mainForm.setHeading("Translation panel");
-        mainForm.setFrame(true);
         mainForm.setPadding(50);
 
     }

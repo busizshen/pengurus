@@ -78,7 +78,7 @@ public abstract class JobsListPanelQuote extends JobsListPanel {
 
 									public void onSuccess(JobDTO result) {
 										JobPanelQuote jobPanel = new JobPanelQuote(
-												result);
+												result,quoteDTO);
 										jobPanel.setAsMain();
 									}
 								};
