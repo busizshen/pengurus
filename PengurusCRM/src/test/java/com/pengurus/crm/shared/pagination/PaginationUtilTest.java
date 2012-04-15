@@ -37,7 +37,7 @@ public class PaginationUtilTest {
 	@Test
 	public void testPagination() {
 		// when
-		PagingLoadResultHelper<BaseModel> result = PaginationUtil.paginate(config, testData);
+		PagingLoadResultHelper<BaseModel> result = PaginationUtils.paginate(config, testData);
 		
 		// then
 		Assert.assertEquals(1, result.getData().size());
@@ -48,7 +48,7 @@ public class PaginationUtilTest {
 	@Test
 	public void testSort() {
 		// when
-		PagingLoadResultHelper<BaseModel> result = PaginationUtil.paginate(config, testData);
+		PagingLoadResultHelper<BaseModel> result = PaginationUtils.paginate(config, testData);
 		
 		// then
 		Assert.assertEquals(c, result.getData().get(0));				
@@ -60,7 +60,7 @@ public class PaginationUtilTest {
 		config.setSortField(null);
 
 		// when
-		PagingLoadResultHelper<BaseModel> result = PaginationUtil.paginate(config, testData);
+		PagingLoadResultHelper<BaseModel> result = PaginationUtils.paginate(config, testData);
 		
 		// then
 		Assert.assertEquals(b, result.getData().get(0));
@@ -73,7 +73,7 @@ public class PaginationUtilTest {
 		config.setOffset(0);
 
 		// when
-		PagingLoadResultHelper<BaseModel> result = PaginationUtil.paginate(config, testData);
+		PagingLoadResultHelper<BaseModel> result = PaginationUtils.paginate(config, testData);
 		
 		// then
 		Assert.assertEquals(b, result.getData().get(0));
@@ -86,7 +86,7 @@ public class PaginationUtilTest {
 		config.setOffset(0);
 
 		// when
-		PagingLoadResultHelper<BaseModel> result = PaginationUtil.paginate(config, testData);
+		PagingLoadResultHelper<BaseModel> result = PaginationUtils.paginate(config, testData);
 		
 		// then
 		Assert.assertEquals(a, result.getData().get(0));

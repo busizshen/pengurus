@@ -60,7 +60,7 @@ public class UserServiceTest {
 		this.saltSource = saltSource;
 	}
 
-	@Test(expected = ServiceException.class)
+	@Test(expected = NullPointerException.class)
 	public void abstractUserCreating() throws ServiceException, UsernameExistsException { 
 		// when
 		userService.createUser(new UserDTO(null, new HashSet<UserRoleDTO>(),

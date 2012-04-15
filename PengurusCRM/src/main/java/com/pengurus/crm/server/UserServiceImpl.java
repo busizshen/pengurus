@@ -19,6 +19,7 @@ import com.pengurus.crm.entities.BusinessClient;
 import com.pengurus.crm.entities.IndividualClient;
 import com.pengurus.crm.entities.Translator;
 import com.pengurus.crm.entities.User;
+import com.pengurus.crm.entities.UserUtils;
 import com.pengurus.crm.entities.Worker;
 import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.IndividualClientDTO;
@@ -26,7 +27,7 @@ import com.pengurus.crm.shared.dto.TranslatorDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 import com.pengurus.crm.shared.dto.WorkerDTO;
-import com.pengurus.crm.shared.pagination.PaginationUtil;
+import com.pengurus.crm.shared.pagination.PaginationUtils;
 import com.pengurus.crm.shared.pagination.PagingLoadConfigHelper;
 import com.pengurus.crm.shared.pagination.PagingLoadResultHelper;
 
@@ -101,26 +102,13 @@ public class UserServiceImpl implements UserService {
 			throw new UsernameExistsException();
 		}
 		encodePassword(userDTO);
-		User user;
-		if (userDTO instanceof IndividualClientDTO) {
-			user = new IndividualClient((IndividualClientDTO)userDTO);
-		} else if(userDTO instanceof BusinessClientDTO) {
-			user = new BusinessClient((BusinessClientDTO)userDTO);
-		} else if(userDTO instanceof TranslatorDTO) {
-			user = new Translator((TranslatorDTO)userDTO);
-		} else if(userDTO instanceof WorkerDTO) {
-			user = new Worker((WorkerDTO)userDTO);
-		} else {
-			throw new ServiceException();
-		}
-		userDAO.create(user);
+		userDAO.create(UserUtils.toUser(userDTO));
 		return null;
 	}
 
-	private void encodePassword(UserDTO user) {
-		String encodedPassword = passwordEncoder.encodePassword(user.getPassword(), saltSource.getSalt(new User(user).toUserDetails()));
-		user.setPassword(encodedPassword);
-		
+	private void encodePassword(UserDTO userDTO) {
+		String encodedPassword = passwordEncoder.encodePassword(userDTO.getPassword(), saltSource.getSalt(UserUtils.toUser(userDTO).toUserDetails()));
+		userDTO.setPassword(encodedPassword);
 	}
 
 	@Override
@@ -164,7 +152,7 @@ public class UserServiceImpl implements UserService {
 		for (UserDTO user:getAllUsers()) {
 			userModelList.add(new UserModel(user));
 		}
-		return PaginationUtil.paginate(loadConfig, userModelList);
+		return PaginationUtils.paginate(loadConfig, userModelList);
 	}
 
 	@Override
@@ -174,6 +162,6 @@ public class UserServiceImpl implements UserService {
 		for (UserDTO user:getUsersByRoles(roles)) {
 			userModelList.add(new UserModel(user));
 		}
-		return PaginationUtil.paginate(loadConfig, userModelList);
+		return PaginationUtils.paginate(loadConfig, userModelList);
 	}
 }

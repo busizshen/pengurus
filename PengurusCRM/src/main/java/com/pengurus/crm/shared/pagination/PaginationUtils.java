@@ -8,7 +8,7 @@ import java.util.List;
 import com.extjs.gxt.ui.client.Style.SortDir;
 import com.extjs.gxt.ui.client.data.Model;
 
-public class PaginationUtil {
+public class PaginationUtils {
 	
 	public static <T extends Model> PagingLoadResultHelper<T> paginate(PagingLoadConfigHelper loadConfig,
 			List<T> fullList) {
