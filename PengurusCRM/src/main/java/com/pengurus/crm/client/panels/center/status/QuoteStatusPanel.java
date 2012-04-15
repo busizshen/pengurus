@@ -18,66 +18,73 @@ import com.pengurus.crm.shared.dto.StatusDTO;
 
 public class QuoteStatusPanel extends LayoutContainer {
 
+	private static final String COLOUR_OK = "#BBD5F7";
+	private static final String COLOUR_NOT = "#ECECEC";
+	private static final String NEXT_STATUS = "next status";
+	private static final String REOPEN = "reopen";
+
 	protected final Listener<DomEvent> listenerGenerateProject;
 	private Listener<DomEvent> listenerChangeStatus;
 	public Listener<DomEvent> listenerBackStatus;
 
-	public QuoteStatusPanel(StatusDTO status, Listener<DomEvent> listener1,
-			Listener<DomEvent> listener2,Listener<DomEvent> listener3) {
-		this.listenerGenerateProject = listener2;
-		this.listenerChangeStatus = listener1;
-		this.listenerBackStatus = listener3;
+	public QuoteStatusPanel(StatusDTO status,
+			Listener<DomEvent> listenerChangeStatus,
+			Listener<DomEvent> listenerGenerateProject,
+			Listener<DomEvent> listenerBackStatus) {
+
+		this.listenerChangeStatus = listenerChangeStatus;
+		this.listenerGenerateProject = listenerGenerateProject;
+		this.listenerBackStatus = listenerBackStatus;
+
 		setLayout(new FlowLayout(10));
-		VerticalPanel vp = new VerticalPanel();
-		vp.setHeight("Status panel");
-		QuoteStatusBar ss;
-		if (status != null)
-			ss = new QuoteStatusBar(status.toInt());
-		else
-			ss = new QuoteStatusBar(0);
-		ss.setBorders(true);
-		ss.setAutoHeight(true);
-		ss.setHorizontalAlign(HorizontalAlignment.CENTER);
-		ss.setVerticalAlign(VerticalAlignment.MIDDLE);
-		vp.add(ss);
-		add(vp);
+
+		VerticalPanel verticalPanel = new VerticalPanel();
+		verticalPanel.setHeight("Status panel");
+
+		QuoteStatusBar quoteStatusBar;
+
+		quoteStatusBar = (status != null) ? new QuoteStatusBar(status.toInt())
+				: new QuoteStatusBar(0);
+		quoteStatusBar.setBorders(true);
+		quoteStatusBar.setAutoHeight(true);
+		quoteStatusBar.setHorizontalAlign(HorizontalAlignment.CENTER);
+		quoteStatusBar.setVerticalAlign(VerticalAlignment.MIDDLE);
+		quoteStatusBar.setSpacing(2);
+
+		verticalPanel.add(quoteStatusBar);
+		add(verticalPanel);
 	}
 
 	private class QuoteStatusBar extends HorizontalPanel {
-		Label[] list = new Label[7];
+		Label[] labelsList = new Label[7];
 		Button generateProject;
 		Button nextStatus;
 		Button reOpen;
-		int st = 0;
+		int status = 0;
 
-		public QuoteStatusBar(int status) {
-			this.st = status;
-			getLabel(0, "open", (status >= 1));
-			getLabel(1, "in progress", (status >= 2));
-			getLabel(2, "resolved", (status >= 3));
-			getLabel(3, "verificated", (status >= 4));
-			getLabel(4, "accepted", (status >= 5));
-			getLabel(5, "accounted", (status >= 6));
-			getLabel(6, "closed", (status == 7));
-			for (Label l : list) {
-				add(l);
+		public QuoteStatusBar(int statusNo) {
+			this.status = statusNo;
+
+			for (int i = 0; i < StatusDTO.values().length; i++) {
+				labelsList[i] = prepareLabel(i);
+				add(labelsList[i]);
 			}
+
 			if (AuthorizationManager.hasExecutiveAccess()) {
 				generateProject = new Button("Generate Project");
 				generateProject.addListener(Events.OnClick,
 						listenerGenerateProject);
 				add(generateProject);
-
 			}
+
 			if (AuthorizationManager.canChangeQuoteStatus()) {
-				nextStatus = new Button("Next Status", null,
+				nextStatus = new Button(NEXT_STATUS, null,
 						new SelectionListener<ButtonEvent>() {
 
 							@Override
 							public void componentSelected(ButtonEvent ce) {
-								list[st].setStyleAttribute("background",
-										"green");
-								st++;
+								labelsList[++status].setStyleAttribute(
+										"background", COLOUR_OK);
 								setVisibility();
 							}
 						});
@@ -85,15 +92,15 @@ public class QuoteStatusPanel extends LayoutContainer {
 				nextStatus.addListener(Events.OnClick, listenerChangeStatus);
 				add(nextStatus);
 			}
+
 			if (AuthorizationManager.canReOpenQuote()) {
-				reOpen = new Button("ReOpen", null,
+				reOpen = new Button(REOPEN, null,
 						new SelectionListener<ButtonEvent>() {
 
 							@Override
 							public void componentSelected(ButtonEvent ce) {
-								st--;
-								list[st].setStyleAttribute("background",
-										"red");
+								labelsList[status--].setStyleAttribute(
+										"background", COLOUR_NOT);
 								setVisibility();
 							}
 						});
@@ -105,40 +112,39 @@ public class QuoteStatusPanel extends LayoutContainer {
 			setVisibility();
 		}
 
-		private void getLabel(int num, String descr, boolean status) {
-			list[num] = new Label();
-			Label l = list[num];
-			l.setBorders(true);
-			if (status)
-				l.setStyleAttribute("background", "green");
-			else
-				l.setStyleAttribute("background", "red");
-			l.setWidth(100);
-			l.setSize(100, 60);
-			l.setText(descr);
-			l.setShadowOffset(windowResizeDelay);
+		private Label prepareLabel(int statusNo) {
+			Label label = new Label();
+			label.setBorders(true);
+			label.setStyleAttribute("background",
+					(status >= statusNo) ? COLOUR_OK : COLOUR_NOT);
+			label.setWidth(150);
+			label.setHeight(100);
+			label.setText(StatusDTO.fromInt(statusNo));
+			label.setShadowOffset(windowResizeDelay);
+			return label;
 		}
 
 		private void setVisibility() {
-			if (((st <= 3 || st == 6) && AuthorizationManager
+			if (((status <= 3 || status == 6) && AuthorizationManager
 					.hasExecutiveAccess())
-					|| (st == 4 && AuthorizationManager.hasClientAccess())
-					|| (st == 5 && AuthorizationManager
+					|| (status == 4 && AuthorizationManager.hasClientAccess())
+					|| (status == 5 && AuthorizationManager
 							.hasAccountantAccess())) {
 				nextStatus.setVisible(true);
 			} else
 				nextStatus.setVisible(false);
 			if (AuthorizationManager.hasExecutiveAccess()) {
-				if (st == 5) {
+				if (status == 5) {
 					generateProject.setVisible(true);
 				} else
 					generateProject.setVisible(false);
 			}
-			if (AuthorizationManager.hasExecutiveAccess() && st == 3)
-					reOpen.setVisible(true);
-			else if(AuthorizationManager.hasClientAccess() && st == 4)
-					reOpen.setVisible(true);
-			else reOpen.setVisible(false);
+			if (AuthorizationManager.hasExecutiveAccess() && status == 3)
+				reOpen.setVisible(true);
+			else if (AuthorizationManager.hasClientAccess() && status == 4)
+				reOpen.setVisible(true);
+			else
+				reOpen.setVisible(false);
 			this.layout();
 		}
 

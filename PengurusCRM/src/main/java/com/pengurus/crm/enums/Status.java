@@ -4,15 +4,31 @@ import com.pengurus.crm.shared.dto.StatusDTO;
 
 public enum Status {
 
-	open, closed, inProgress, resolved, verificated, accepted, accounted;
+	open (0),
+	closed (1), 
+	in_progress (2), 
+	resolved (3), 
+	verificated (4), 
+	accepted (5), 
+	accounted (6);
 
+	private final int stage;
+	
+	Status (int stage){
+		this.stage = stage;
+	}
+	
+	public int stage(){
+		return stage;
+	}
+	
 	public StatusDTO toDTO() {
 		if (this == open)
 			return StatusDTO.open;
 		else if (this == closed)
 			return StatusDTO.closed;
-		else if (this == inProgress)
-			return StatusDTO.inProgress;
+		else if (this == in_progress)
+			return StatusDTO.in_progress;
 		else if (this == resolved)
 			return StatusDTO.resolved;
 		else if (this == verificated)
@@ -29,8 +45,8 @@ public enum Status {
 			return open;
 		else if (status == StatusDTO.closed)
 			return closed;
-		else if (status == StatusDTO.inProgress)
-			return inProgress;
+		else if (status == StatusDTO.in_progress)
+			return in_progress;
 		else if (status == StatusDTO.resolved)
 			return resolved;
 		else if (status == StatusDTO.verificated)

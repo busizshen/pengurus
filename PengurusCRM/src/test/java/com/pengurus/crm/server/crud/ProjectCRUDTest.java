@@ -197,7 +197,7 @@ public class ProjectCRUDTest {
 
     @Test
     public void simpleProjectCreate() {
-        Project project = new Project(Status.inProgress, individualClient,
+        Project project = new Project(Status.in_progress, individualClient,
                 supervisor, projectManagers, experts, freelancers, jobs,
                 "Project description");
         projectDAO.create(project);
@@ -207,7 +207,7 @@ public class ProjectCRUDTest {
     @Test
     public void simpleProjectGet() {
         // prepare data
-        Project project = new Project(Status.inProgress, individualClient,
+        Project project = new Project(Status.in_progress, individualClient,
                 supervisor, projectManagers, experts, freelancers, jobs,
                 "Project description");
         projectDAO.create(project);
@@ -227,7 +227,7 @@ public class ProjectCRUDTest {
     @Test
     public void simpleProjectUpdate() {
         // prepare data
-        Project project = new Project(Status.inProgress, individualClient,
+        Project project = new Project(Status.in_progress, individualClient,
                 supervisor, projectManagers, experts, freelancers, jobs,
                 "Project description");
         projectDAO.create(project);
@@ -260,7 +260,7 @@ public class ProjectCRUDTest {
     @Test
     public void simpleProjectDelete(){
      // prepare data
-        Project project = new Project(Status.inProgress, individualClient,
+        Project project = new Project(Status.in_progress, individualClient,
                 supervisor, projectManagers, experts, freelancers, jobs,
                 "Project description");
         projectDAO.create(project);

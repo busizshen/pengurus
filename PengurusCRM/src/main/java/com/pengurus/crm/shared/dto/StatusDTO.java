@@ -4,47 +4,30 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public enum StatusDTO implements IsSerializable {
 
-    open,
-    closed,
-    inProgress,
-    resolved,
-    verificated,
-    accepted,
-    accounted;
+	open(0), 
+	closed(1), 
+	in_progress(2), 
+	resolved(3), 
+	verificated(4), 
+	accepted(5), 
+	accounted(6);
+
+	private final int stage;
+
+	StatusDTO(int stage) {
+		this.stage = stage;
+	}
 
 	public int toInt() {
-		if(this == open)
-			return 1;
-		else if (this == inProgress)
-			return 2;
-		else if (this == resolved)
-			return 3;
-		else if (this == verificated)
-			return 4;
-		else if (this == accepted)
-			return 5;
-		else if (this == accounted)
-			return 6;
-		else if (this == closed)
-			return 7;
-		return 0;
+		return stage;
+	}
+
+	public static String fromInt(int stage) {
+		return StatusDTO.values()[stage].toString().replace('_', ' ');
 	}
 
 	public StatusDTO increase() {
-		if(this == open)
-			return inProgress;
-		else if (this == inProgress)
-			return resolved;
-		else if (this == resolved)
-			return verificated;
-		else if (this == verificated)
-			return accepted;
-		else if (this == accepted)
-			return accounted;
-		else if (this == accounted)
-			return closed;
-		return closed;
-		
+		return StatusDTO.values()[this.toInt() + 1 >= 6 ? 6 : this.toInt()];
 	}
 
 	public static StatusDTO getFirstStatus() {
@@ -52,19 +35,6 @@ public enum StatusDTO implements IsSerializable {
 	}
 
 	public StatusDTO decrease() {
-		if(this == open)
-			return open;
-		else if (this == inProgress)
-			return open;
-		else if (this == resolved)
-			return inProgress;
-		else if (this == verificated)
-			return resolved;
-		else if (this == accepted)
-			return verificated;
-		else if (this == accounted)
-			return accepted;
-		return open;
+		return StatusDTO.values()[this.toInt() - 1 <= 0 ? 0 : this.toInt()];
 	}
-    
 }

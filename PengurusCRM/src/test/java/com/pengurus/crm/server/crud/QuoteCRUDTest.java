@@ -148,7 +148,7 @@ public class QuoteCRUDTest {
 
     @Test
     public void simpleCreateQuote() {
-        Quote quote = new Quote(Status.inProgress, individualClient,
+        Quote quote = new Quote(Status.in_progress, individualClient,
                 supervisor, jobs, "Quote description");
         quoteDAO.create(quote);
         Assert.assertNotNull(quote.getId());
@@ -158,7 +158,7 @@ public class QuoteCRUDTest {
     @Test
     public void simpleGetQuote() {
         // prepare data
-        Quote quote = new Quote(Status.inProgress, individualClient,
+        Quote quote = new Quote(Status.in_progress, individualClient,
                 supervisor, jobs, "Quote description");
         quoteDAO.create(quote);
 
@@ -175,7 +175,7 @@ public class QuoteCRUDTest {
     @Test
     public void simpleUpdateQuote() {
         // prepare data
-        Quote quote = new Quote(Status.inProgress, individualClient,
+        Quote quote = new Quote(Status.in_progress, individualClient,
                 supervisor, jobs, "Quote description");
         quoteDAO.create(quote);
         
@@ -196,7 +196,7 @@ public class QuoteCRUDTest {
     @Test
     public void simpleDeleteQuote(){
         // prepare data
-        Quote quote = new Quote(Status.inProgress, individualClient,
+        Quote quote = new Quote(Status.in_progress, individualClient,
                 supervisor, jobs, "Quote description");
         quoteDAO.create(quote);
         
