@@ -61,14 +61,13 @@ import com.pengurus.crm.shared.dto.WorkerDTO;
 
 public abstract class UserBasePanel extends MainPanel {
 
-	protected HorizontalPanel horizontalPanel;
+	private HorizontalPanel horizontalPanel;
 	protected FormPanel form, additionalDataForm;
-    protected PersonalDataEdit personalDataEdit;
+	protected PersonalDataEdit personalDataEdit;
 	private ContentPanel agentsGridPanel, translationsGridPanel;
-	Grid<PersonalDataModel> agentsGrid;
+	private Grid<PersonalDataModel> agentsGrid;
 	private EditorGrid<TranslationModel> translationsGrid;
-	protected FormData formData;
-	private FormData addFormData;
+	private FormData formData, addFormData;
 	protected TextField<String> username, password, description, fullName;
 	protected RadioGroup userType;
 	protected CheckBoxGroup userRoles;
@@ -438,7 +437,7 @@ public abstract class UserBasePanel extends MainPanel {
 
 	}
 
-	protected void createUserTypeRatioGroup() {
+	private void createUserTypeRatioGroup() {
 		userType = new RadioGroup("Usertype");
 		userType.setFieldLabel("User type");
 		userType.setOrientation(Orientation.VERTICAL);
@@ -449,7 +448,7 @@ public abstract class UserBasePanel extends MainPanel {
 		form.add(userType, formData);
 	}
 
-	class UserRoleBox extends CheckBox {
+	private class UserRoleBox extends CheckBox {
 		private UserRoleDTO userRole;
 
 		public UserRoleBox(String label, UserRoleDTO userRole) {
@@ -464,7 +463,7 @@ public abstract class UserBasePanel extends MainPanel {
 		}
 	}
 
-	protected void createRoleCheckbox() {
+	private void createRoleCheckbox() {
 		userRoles = new CheckBoxGroup();
 		userRoles.setFieldLabel("User roles");
 		userRoles.setOrientation(Orientation.VERTICAL);
@@ -485,7 +484,7 @@ public abstract class UserBasePanel extends MainPanel {
 		form.add(userRoles);
 	}
 
-	protected void createIndividualClientFullNameField() {
+	private void createIndividualClientFullNameField() {
 		fullName = new TextField<String>();
 		fullName.setFieldLabel("Full name");
 		fullName.hide();
@@ -493,7 +492,7 @@ public abstract class UserBasePanel extends MainPanel {
 		additionalDataForm.add(fullName, addFormData);
 	}
 
-	protected void createAgentGrid() {
+	private void createAgentGrid() {
 		GridCellRenderer<PersonalDataModel> buttonRenderer = new GridCellRenderer<PersonalDataModel>() {
 
 			private boolean init;
@@ -649,7 +648,7 @@ public abstract class UserBasePanel extends MainPanel {
 		additionalDataForm.add(agentsGridPanel, addFormData);
 	}
 
-    private void personalDataPopup(PersonalDataEdit personalDataEdit,
+	private void personalDataPopup(PersonalDataEdit personalDataEdit,
 			List<Button> buttonList) {
 		window.removeAll();
 		window.add(personalDataEdit);
@@ -675,7 +674,7 @@ public abstract class UserBasePanel extends MainPanel {
 		additionalDataForm.hide();
 	}
 	
-	protected void createWindow() {
+	private void createWindow() {
 		window.setPlain(true);
 		window.setHeading("Edit personal data");
 		window.setLayout(new FlowLayout());
