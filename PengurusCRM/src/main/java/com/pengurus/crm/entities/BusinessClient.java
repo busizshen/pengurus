@@ -51,6 +51,7 @@ public class BusinessClient extends Client {
 
     protected void rewrite(BusinessClientDTO businessClientDTO) {
     	super.rewrite(businessClientDTO);
+    	businessClientDTO.setName(name);
 		for(PersonalData pd : agents){
 			businessClientDTO.addAgent(pd.toDTO());
 		}

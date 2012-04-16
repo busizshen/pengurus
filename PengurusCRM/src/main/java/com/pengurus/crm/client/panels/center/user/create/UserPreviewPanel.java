@@ -107,7 +107,7 @@ public class UserPreviewPanel extends MainPanel {
 
     protected void createWindow() {
         window.setPlain(true);
-        window.setHeading("Edit personal data");
+        window.setHeading("Agent personal data");
         window.setLayout(new FlowLayout());
         window.setAutoHeight(true);
         window.setAutoWidth(true);
