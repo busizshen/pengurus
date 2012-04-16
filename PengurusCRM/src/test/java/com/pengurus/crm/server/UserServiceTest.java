@@ -146,7 +146,7 @@ public class UserServiceTest {
     @Test
     public void getAllByRolePROJECTMANAGER() throws ServiceException {
         Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-        roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+        roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
         Set<UserDTO> list = userService.getUsersByRoles(roles);
         verifyWorkers(list, roles);
     }
@@ -178,7 +178,7 @@ public class UserServiceTest {
     @Test
     public void getAllByRoles() throws ServiceException {
         Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-        roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+        roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
         roles.add(UserRoleDTO.ROLE_EXECUTIVE);
         Set<UserDTO> list = userService.getUsersByRoles(roles);
         verifyWorkers(list, roles);

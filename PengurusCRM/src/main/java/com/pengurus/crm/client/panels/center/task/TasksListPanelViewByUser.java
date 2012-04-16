@@ -15,9 +15,15 @@ import com.pengurus.crm.shared.dto.UserDTO;
 public class TasksListPanelViewByUser extends TasksListPanelView {
 
 	UserDTO user;
+	
 	public TasksListPanelViewByUser(UserDTO user) {
 		this.user = user;
 		initPanel();
+	}
+	
+	public TasksListPanelViewByUser(UserDTO user, int height, int width) {
+		this.user = user;
+		initPanel(height, width);
 	}
 
 	@Override
@@ -44,4 +50,9 @@ public class TasksListPanelViewByUser extends TasksListPanelView {
 		return list;
 	}
 
+	@Override
+	protected String getName() {
+		return user.getFullName() + " tasks list";
+	}
+	
 }

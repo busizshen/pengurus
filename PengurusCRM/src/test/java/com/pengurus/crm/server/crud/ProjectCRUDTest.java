@@ -97,7 +97,7 @@ public class ProjectCRUDTest {
         userRoles2.add(UserRoleDTO.ROLE_VERIFICATOR);
 
         Set<UserRoleDTO> userRolesPM = new HashSet<UserRoleDTO>();
-        userRoles2.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+        userRoles2.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 
         // create personal data
         Set<String> phoneNumbers = new HashSet<String>();
@@ -184,7 +184,7 @@ public class ProjectCRUDTest {
 
         // create supervisor
         Set<UserRoleDTO> supervisorRoles = new HashSet<UserRoleDTO>();
-        supervisorRoles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+        supervisorRoles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
         supervisorRoles.add(UserRoleDTO.ROLE_EXECUTIVE);
         supervisor = new Worker(supervisorRoles, "ProjectSupervisor"
                 + Integer.toString(change), "pass", "supervisor description",

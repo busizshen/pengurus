@@ -164,7 +164,7 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 		userRoles.add(new UserRoleBox("Role freelancer",
 				UserRoleDTO.ROLE_FREELANCER));
 		userRoles.add(new UserRoleBox("Role project manager",
-				UserRoleDTO.ROLE_PROJECTMNAGER));
+				UserRoleDTO.ROLE_PROJECTMANAGER));
 		userRoles.add(new UserRoleBox("Role verificator",
 				UserRoleDTO.ROLE_VERIFICATOR));
 		

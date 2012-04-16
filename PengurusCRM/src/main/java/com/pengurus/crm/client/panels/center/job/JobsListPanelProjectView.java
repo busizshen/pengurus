@@ -20,4 +20,5 @@ public class JobsListPanelProjectView extends JobsListPanelProject{
 		add(ml);
 		return this;
 	}
+
 }

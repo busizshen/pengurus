@@ -143,4 +143,10 @@ public class TranslationsListPanel extends ListPanel<TranslationModel> {
 		return translation;
 	}
 
+	public ModelList getModelList() {
+		return ml;
+	}
+	
+	
+
 }

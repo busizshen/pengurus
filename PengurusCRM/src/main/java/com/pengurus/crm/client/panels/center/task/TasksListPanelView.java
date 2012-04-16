@@ -26,6 +26,11 @@ public abstract class TasksListPanelView extends TasksListPanel {
 		tasksList = new ModelList();
 		add(tasksList);
 	}
+	
+	protected void initPanel(int height, int width) {
+		tasksList = new ModelList(height, width);
+		add(tasksList);
+	}
 
 	@Override
 	protected GridCellRenderer<TaskModel> getButtonRenderer() {

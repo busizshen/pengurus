@@ -6,7 +6,9 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.panels.center.quote.QuotePanelCreate;
 import com.pengurus.crm.client.panels.center.quote.QuotesListPanelAll;
+import com.pengurus.crm.client.panels.center.quote.QuotesListPanelByClient;
 import com.pengurus.crm.client.panels.center.quote.QuotesListPanelByUser;
+import com.pengurus.crm.client.panels.center.quote.QuotesListPanelByWorker;
 
 public class QuotesMenuPanel extends TabMenuPanel {
 
@@ -41,9 +43,15 @@ public class QuotesMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					QuotesListPanelByUser qlp = new QuotesListPanelByUser(AuthorizationManager.getCurrentUser());
+					QuotesListPanelByUser qlp;
+					if (AuthorizationManager.isClient())
+						qlp = new QuotesListPanelByClient(AuthorizationManager
+								.getCurrentUser());
+					else
+						qlp = new QuotesListPanelByWorker(AuthorizationManager
+								.getCurrentUser());
 					qlp.setAsMain();
-					
+
 				}
 			});
 			add(b);

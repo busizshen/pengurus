@@ -96,7 +96,7 @@ public class ProjectPanelEdit extends ProjectPanel {
 		WorkerServiceAsync service = (WorkerServiceAsync) GWT
 				.create(WorkerService.class);
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		service.getWorkersByRoles(roles, callback);
 
 		projectManagersPanel = new WorkerPanelChoose("Project Managers");

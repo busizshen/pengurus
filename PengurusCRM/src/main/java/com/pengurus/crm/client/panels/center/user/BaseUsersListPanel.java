@@ -14,6 +14,7 @@ import com.pengurus.crm.client.panels.center.ListPanel;
 public abstract class BaseUsersListPanel<T extends UserModel> extends ListPanel<T> {
 
 	ListStore<T> clients = new ListStore<T>();
+	
 	public ModelList getPanel(){
 		ModelList ql = new ModelList();
 		return ql;

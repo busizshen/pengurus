@@ -17,6 +17,7 @@ public abstract class TasksListPanel extends ListPanel<TaskModel> {
 	
 	protected ModelList tasksList;
 	protected ListStore<TaskModel> tasks = new ListStore<TaskModel>();
+	
 	@Override
 	protected List<ColumnConfig> getColumns() {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
@@ -97,4 +98,7 @@ public abstract class TasksListPanel extends ListPanel<TaskModel> {
 		tasksList.getGrid().startEditing(0, 0);
 	}
 
+	public ModelList getModelList(){
+		return tasksList;
+	}
 }

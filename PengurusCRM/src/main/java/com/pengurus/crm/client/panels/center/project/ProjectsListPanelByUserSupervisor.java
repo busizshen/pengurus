@@ -15,6 +15,10 @@ public class ProjectsListPanelByUserSupervisor extends ProjectsListPanelByUser {
 		super(user);
 	}
 
+	public ProjectsListPanelByUserSupervisor(UserDTO user, int height, int width) {
+		super(user, height, width);
+	}
+
 	@Override
 	protected void changeService(AsyncCallback<Set<ProjectDTO>> callback) {
 
@@ -22,6 +26,11 @@ public class ProjectsListPanelByUserSupervisor extends ProjectsListPanelByUser {
 				.create(ProjectService.class);
 		service.getProjectBySupervisorId(user.getId(), callback);
 
+	}
+	
+	@Override
+	protected String getName() {
+		return user.getFullName() + " projects list as supervisor";
 	}
 
 }

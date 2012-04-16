@@ -365,7 +365,7 @@ public abstract class UserBasePanel extends MainPanel {
 			super.onSelect();
 			enableRole(UserRoleDTO.ROLE_ACCOUNTANT);
 			enableRole(UserRoleDTO.ROLE_EXECUTIVE);
-			enableRole(UserRoleDTO.ROLE_PROJECTMNAGER);
+			enableRole(UserRoleDTO.ROLE_PROJECTMANAGER);
 			personalDataEdit.show();
 			for (Field<?> field: personalDataEdit.getFields()) {
 				binding.getFields().add(field);
@@ -478,7 +478,7 @@ public abstract class UserBasePanel extends MainPanel {
 		userRoles.add(new UserRoleBox("Role freelancer",
 				UserRoleDTO.ROLE_FREELANCER));
 		userRoles.add(new UserRoleBox("Role project manager",
-				UserRoleDTO.ROLE_PROJECTMNAGER));
+				UserRoleDTO.ROLE_PROJECTMANAGER));
 		userRoles.add(new UserRoleBox("Role verificator",
 				UserRoleDTO.ROLE_VERIFICATOR));
 		form.add(userRoles);

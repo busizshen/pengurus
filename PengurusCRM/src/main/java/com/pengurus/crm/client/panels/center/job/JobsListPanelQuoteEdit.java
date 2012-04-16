@@ -64,7 +64,5 @@ public class JobsListPanelQuoteEdit extends JobsListPanelQuote {
 		add(hp);
 		return this;
 	}
-	
-	
 
 }

@@ -20,6 +20,5 @@ public class JobsListPanelQuoteView extends JobsListPanelQuote {
 		add(ml);
 		return this;
 	}
-
-
+	
 }

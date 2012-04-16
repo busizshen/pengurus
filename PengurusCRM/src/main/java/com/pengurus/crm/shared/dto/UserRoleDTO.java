@@ -11,7 +11,7 @@ public enum UserRoleDTO implements IsSerializable {
 	ROLE_USER ("user"),
 	ROLE_CLIENT ("client"),
 	ROLE_VERIFICATOR ("verificator"),
-	ROLE_PROJECTMNAGER ("project manager");
+	ROLE_PROJECTMANAGER ("project manager");
 	
 	private final String name;
 	

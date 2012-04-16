@@ -135,7 +135,7 @@ public class QuoteCRUDTest {
         individualClientDAO.create(individualClient);
 
         Set<UserRoleDTO> supervisorRoles = new HashSet<UserRoleDTO>();
-        supervisorRoles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+        supervisorRoles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
         supervisorRoles.add(UserRoleDTO.ROLE_EXECUTIVE);
         supervisor = new Worker(supervisorRoles, "QuoteSupervisor"
                 + Integer.toString(change), "pass", "supervisor description",

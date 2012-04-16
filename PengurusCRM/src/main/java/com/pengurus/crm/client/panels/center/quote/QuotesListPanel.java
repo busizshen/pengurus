@@ -44,6 +44,7 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 		ColumnConfig column = new ColumnConfigMy();
 		column.setId("id");
 		column.setHeader("Id");
+		column.setWidth(10);
 		configs.add(column);
 
 		column = new ColumnConfigMy();
@@ -225,6 +226,10 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 	@Override
 	protected void setStyle(ContentPanel cp) {
 
+	}
+	
+	public ModelList getModelList(){
+		return quotesList;
 	}
 
 }

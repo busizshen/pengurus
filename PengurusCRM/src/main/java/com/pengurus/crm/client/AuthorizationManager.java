@@ -36,7 +36,7 @@ public class AuthorizationManager {
 	public static boolean hasPublicManagerAccess() {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
-		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		return currentUser.haveAuthority(roles);
 	}
 
@@ -102,7 +102,7 @@ public class AuthorizationManager {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_CLIENT);
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
-		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		return currentUser.haveAuthority(roles);
 	}
 
@@ -117,7 +117,7 @@ public class AuthorizationManager {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
 		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
-		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		roles.add(UserRoleDTO.ROLE_FREELANCER);
 		roles.add(UserRoleDTO.ROLE_EXPERT);
 		roles.add(UserRoleDTO.ROLE_VERIFICATOR);
@@ -128,7 +128,7 @@ public class AuthorizationManager {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
 		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
-		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		return currentUser.haveAuthority(roles);
 	}
 
@@ -136,7 +136,7 @@ public class AuthorizationManager {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
 		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
-		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		return currentUser.haveAuthority(roles);
 	}
 
@@ -145,7 +145,7 @@ public class AuthorizationManager {
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
 		roles.add(UserRoleDTO.ROLE_CLIENT);
 		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
-		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		roles.add(UserRoleDTO.ROLE_EXPERT);
 		roles.add(UserRoleDTO.ROLE_FREELANCER);
 		roles.add(UserRoleDTO.ROLE_VERIFICATOR);
@@ -156,14 +156,14 @@ public class AuthorizationManager {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
 		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
-		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		return currentUser.haveAuthority(roles);
 	}
 
 	public static boolean canChangeProject() {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
-		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		return currentUser.haveAuthority(roles);
 	}
 
@@ -171,7 +171,7 @@ public class AuthorizationManager {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
 		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
-		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		return currentUser.haveAuthority(roles);
 	}
 
@@ -179,7 +179,7 @@ public class AuthorizationManager {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
 		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
-		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		return currentUser.haveAuthority(roles);
 	}
 
@@ -187,7 +187,7 @@ public class AuthorizationManager {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
 		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
-		roles.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		return currentUser.haveAuthority(roles);
 	}
 	
@@ -202,7 +202,7 @@ public class AuthorizationManager {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
 		Set<UserRoleDTO> roles2 = new HashSet<UserRoleDTO>();
-		roles2.add(UserRoleDTO.ROLE_PROJECTMNAGER);
+		roles2.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		return currentUser.haveAuthority(roles) || (currentUser.haveAuthority(roles) && projectDTO.isProjectManager(currentUser)) ;
 	}
 

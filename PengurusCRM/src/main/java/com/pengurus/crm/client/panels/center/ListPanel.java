@@ -22,8 +22,21 @@ public abstract class ListPanel<T extends ModelData> extends MainPanel {
 	public class ModelList extends LayoutContainer {
 
 		protected ContentPanel cp = new ContentPanel();
-
+		private int widthVal;
+		private int heightVal;
+		
 		public ModelList() {
+			this.widthVal = 800;
+			this.heightVal = 300;
+			initPanel();
+		}
+		public ModelList(int height, int width) {
+			this.widthVal = width;
+			this.heightVal = height;
+			initPanel();
+		}
+
+		private void initPanel() {
 			setStyle(cp);
 			setLayout(new FlowLayout(10));
 			getAriaSupport().setPresentation(true);
@@ -36,8 +49,8 @@ public abstract class ListPanel<T extends ModelData> extends MainPanel {
 			cp.setHeading(getName());
 			cp.setButtonAlign(HorizontalAlignment.CENTER);
 			cp.setLayout(new FillLayout());
-			cp.setWidth(800);
-			cp.setHeight(300);
+			cp.setWidth(widthVal);
+			cp.setHeight(heightVal);
 
 			GridFilters filters = getFilters();
 
@@ -52,7 +65,6 @@ public abstract class ListPanel<T extends ModelData> extends MainPanel {
 
 			add(cp);
 		}
-
 		public EditorGrid<T> getGrid() {
 			return grid;
 		}
@@ -61,6 +73,7 @@ public abstract class ListPanel<T extends ModelData> extends MainPanel {
 			return store;
 		}
 	}
+	
 	protected void onRender(Element target, int index) {
 		super.onRender(target, index);
 	}
@@ -110,5 +123,5 @@ public abstract class ListPanel<T extends ModelData> extends MainPanel {
 		store.add(list);
 		grid.startEditing(0, 0);
 	}
-
+	
 }

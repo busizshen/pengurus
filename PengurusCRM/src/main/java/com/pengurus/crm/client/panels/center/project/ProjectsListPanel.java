@@ -175,5 +175,9 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 	protected void setStyle(ContentPanel cp) {
 
 	}
+	
+	public ModelList getModelList() {
+		return projectsList;
+	}
 
 }
