@@ -5,12 +5,12 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public enum StatusDTO implements IsSerializable {
 
 	open(0), 
-	closed(1), 
-	in_progress(2), 
-	resolved(3), 
-	verificated(4), 
-	accepted(5), 
-	accounted(6);
+	in_progress(1), 
+	resolved(2), 
+	verificated(3), 
+	accepted(4), 
+	accounted(5),
+	closed(6); 
 
 	private final int stage;
 
@@ -27,7 +27,7 @@ public enum StatusDTO implements IsSerializable {
 	}
 
 	public StatusDTO increase() {
-		return StatusDTO.values()[this.toInt() + 1 >= 6 ? 6 : this.toInt()];
+		return StatusDTO.values()[this.toInt() + 1 >= 6 ? 6 : this.toInt() + 1];
 	}
 
 	public static StatusDTO getFirstStatus() {
@@ -35,6 +35,6 @@ public enum StatusDTO implements IsSerializable {
 	}
 
 	public StatusDTO decrease() {
-		return StatusDTO.values()[this.toInt() - 1 <= 0 ? 0 : this.toInt()];
+		return StatusDTO.values()[this.toInt() - 1 <= 0 ? 0 : this.toInt() - 1];
 	}
 }

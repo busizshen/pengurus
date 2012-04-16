@@ -16,135 +16,123 @@ import com.pengurus.crm.shared.dto.TaskDTO;
 
 public class TaskStatusPanel extends LayoutContainer {
 
+	private static final String COLOUR_OK = "#BBD5F7";
+	private static final String COLOUR_NOT = "#ECECEC";
+	private static final String NEXT_STATUS = "next status";
+	private static final String REOPEN = "reopen";
+
 	TaskDTO taskDTO;
-	
 
 	public TaskStatusPanel(TaskDTO taskDTO) {
+
 		this.taskDTO = taskDTO;
+
 		setLayout(new FlowLayout(10));
-		VerticalPanel vp = new VerticalPanel();
-		vp.setHeight("Status panel");
 
-		if (taskDTO.getStatus() == null)
-			taskDTO.setStatus(StatusDTO.open);
+		VerticalPanel verticalPanel = new VerticalPanel();
+		verticalPanel.setHeight("Status panel");
 
-		TaskStatusBar ss;
-		ss = new TaskStatusBar(taskDTO.getStatus().toInt());
-		ss.setBorders(true);
-		ss.setAutoHeight(true);
-		ss.setHorizontalAlign(HorizontalAlignment.CENTER);
-		ss.setVerticalAlign(VerticalAlignment.MIDDLE);
-		vp.add(ss);
-		add(vp);
+		TaskStatusBar taskStatusBar = new TaskStatusBar(
+				taskDTO.getStatus() == null ? StatusDTO.open.toInt() : taskDTO
+						.getStatus().toInt());
+		taskStatusBar.setBorders(true);
+		taskStatusBar.setAutoHeight(true);
+		taskStatusBar.setHorizontalAlign(HorizontalAlignment.CENTER);
+		taskStatusBar.setVerticalAlign(VerticalAlignment.MIDDLE);
+
+		verticalPanel.add(taskStatusBar);
+		add(verticalPanel);
 	}
-	
-	public StatusDTO getStatus(){
+
+	public StatusDTO getStatus() {
 		return taskDTO.getStatus();
 	}
 
 	private class TaskStatusBar extends HorizontalPanel {
-		Label[] list = new Label[7];
+		Label[] labelsList = new Label[7];
 		Button nextStatus;
 		Button reOpen;
-		HorizontalPanel hp1;
-		HorizontalPanel hp2;
-		int st = 0;
+		HorizontalPanel horizontalPanelA;
+		HorizontalPanel horizontalPanelB;
+		int status = 0;
 
-		public TaskStatusBar(int status) {
-			this.st = status;
-			hp1 = new HorizontalPanel();
-			hp2 = new HorizontalPanel();
-			getLabels();
+		public TaskStatusBar(int statusNo) {
+			this.status = statusNo;
+			horizontalPanelA = new HorizontalPanel();
+			horizontalPanelB = new HorizontalPanel();
+
+			for (int i = 0; i < StatusDTO.values().length; i++) {
+				labelsList[i] = prepareLabel(i);
+				add(labelsList[i]);
+			}
 
 			if (AuthorizationManager.canChangeQuoteStatus()) {
-				nextStatus = new Button("Next Status", null,
+				nextStatus = new Button(NEXT_STATUS, null,
 						new SelectionListener<ButtonEvent>() {
 
 							@Override
 							public void componentSelected(ButtonEvent ce) {
-								list[st].setStyleAttribute("background",
-										"green");
-								st++;
+								labelsList[++status].setStyleAttribute(
+										"background", COLOUR_OK);
 								setVisibility();
 								taskDTO.setStatus(taskDTO.getStatus()
 										.increase());
 								taskDTO.updateStatus();
-								refresh();
 							}
 						});
 
-				hp2.add(nextStatus);
+				horizontalPanelB.add(nextStatus);
 			}
 			if (AuthorizationManager.canReOpenQuote()) {
-				reOpen = new Button("ReOpen", null,
+				reOpen = new Button(REOPEN, null,
 						new SelectionListener<ButtonEvent>() {
 
 							@Override
 							public void componentSelected(ButtonEvent ce) {
-								st--;
-								list[st].setStyleAttribute("background", "red");
+								labelsList[status--].setStyleAttribute(
+										"background", COLOUR_NOT);
 								setVisibility();
 								taskDTO.setStatus(taskDTO.getStatus()
 										.decrease());
 								taskDTO.updateStatus();
-								refresh();
 							}
 						});
-				hp2.add(reOpen);
+				horizontalPanelB.add(reOpen);
 			}
-			add(hp1);
-			add(hp2);
+			add(horizontalPanelA);
+			add(horizontalPanelB);
 			setVisibility();
 		}
 
-		private void refresh() {
-
-		}
-
-		private void getLabels() {
-			getLabel(0, "open", (st >= 1));
-			getLabel(1, "in progress", (st >= 2));
-			getLabel(2, "resolved", (st >= 3));
-			getLabel(3, "verificated", (st >= 4));
-			getLabel(4, "accepted", (st >= 5));
-			getLabel(5, "accounted", (st >= 6));
-			getLabel(6, "closed", (st == 7));
-			for (Label l : list) {
-				hp1.add(l);
-			}
-		}
-
-		private void getLabel(int num, String descr, boolean status) {
-			list[num] = new Label();
-			Label l = list[num];
-			l.setBorders(true);
-			if (status)
-				l.setStyleAttribute("background", "green");
-			else
-				l.setStyleAttribute("background", "red");
-			l.setWidth(100);
-			l.setSize(100, 60);
-			l.setText(descr);
-			l.setShadowOffset(windowResizeDelay);
+		private Label prepareLabel(int statusNo) {
+			Label label = new Label();
+			label.setBorders(true);
+			label.setStyleAttribute("background",
+					status >= statusNo ? COLOUR_OK : COLOUR_NOT);
+			label.setWidth(150);
+			label.setHeight(100);
+			label.setText(StatusDTO.fromInt(statusNo));
+			label.setShadowOffset(windowResizeDelay);
+			return label;
 		}
 
 		private void setVisibility() {
-			if ((AuthorizationManager.hasExecutiveAccess())
-					|| (st == 5 && AuthorizationManager.hasAccountantAccess())
-					|| (st <= 3 && AuthorizationManager
-							.hasTranslatorAccess(taskDTO))
-					|| (st == 4 && AuthorizationManager
-							.hasVerifivatorAccess(taskDTO))
-					|| AuthorizationManager.hasProjectManagerAccess(taskDTO)) {
-				nextStatus.setVisible(true);
-			} else
-				nextStatus.setVisible(false);
-			if (AuthorizationManager.hasExecutiveAccess() && st == 3)
-				reOpen.setVisible(true);
-			else if (AuthorizationManager.hasClientAccess() && st == 4)
-				reOpen.setVisible(true);
-			else
-				reOpen.setVisible(false);
+			nextStatus
+					.setVisible(status == 6 ? false
+							: ((AuthorizationManager.hasExecutiveAccess())
+									|| (status == 4 && AuthorizationManager
+											.hasAccountantAccess())
+									|| (status <= 2 && AuthorizationManager
+											.hasTranslatorAccess(taskDTO))
+									|| (status == 3 && AuthorizationManager
+											.hasVerificatorAccess(taskDTO)) || AuthorizationManager
+									.hasProjectManagerAccess(taskDTO)) ? true
+									: false);
+
+			reOpen.setVisible((AuthorizationManager.hasVerificatorAccess() && status == 2)
+					|| (AuthorizationManager.hasProjectManagerAccess(taskDTO) && status == 3) ? true
+					: false);
+
 			this.layout();
 		}
 

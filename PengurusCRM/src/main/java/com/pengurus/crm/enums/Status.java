@@ -4,13 +4,13 @@ import com.pengurus.crm.shared.dto.StatusDTO;
 
 public enum Status {
 
-	open (0),
-	closed (1), 
-	in_progress (2), 
-	resolved (3), 
-	verificated (4), 
-	accepted (5), 
-	accounted (6);
+	open (0), 
+	in_progress (1), 
+	resolved (2), 
+	verificated (3), 
+	accepted (4), 
+	accounted (5),
+	closed(6);
 
 	private final int stage;
 	

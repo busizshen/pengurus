@@ -9,7 +9,10 @@ import com.pengurus.crm.client.service.exceptions.DeleteException;
 import com.pengurus.crm.daos.JobDAO;
 import com.pengurus.crm.daos.TranslationDAO;
 import com.pengurus.crm.entities.Job;
+import com.pengurus.crm.entities.Task;
+import com.pengurus.crm.enums.Status;
 import com.pengurus.crm.shared.dto.JobDTO;
+import com.pengurus.crm.shared.dto.TaskDTO;
 
 public class JobServiceImpl implements JobService {
 
@@ -68,5 +71,12 @@ public class JobServiceImpl implements JobService {
 			throw new DeleteException();
 		}
 
+	}
+
+	@Override
+	public void updateStatus(JobDTO jobDTO) {
+			Job job = jobDAO.read(jobDTO.getId());
+			job.setStatus(Status.toStatus(jobDTO.getStatus()));
+			jobDAO.update(job);		
 	}
 }

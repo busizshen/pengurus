@@ -4,10 +4,13 @@ import java.util.Set;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.shared.dto.JobDTO;
+import com.pengurus.crm.shared.dto.TaskDTO;
 
 public interface JobServiceAsync {
 
 	public void updateJob(JobDTO jobDTO, AsyncCallback<JobDTO> callback);
+	
+	public void updateStatus(JobDTO jobDTO,AsyncCallback<Void> callback);
 
 	public void getJob(Long id, AsyncCallback<JobDTO> callback);
 

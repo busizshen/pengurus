@@ -4,12 +4,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.pengurus.crm.client.service.JobService;
 import com.pengurus.crm.client.service.JobServiceAsync;
+import com.pengurus.crm.client.service.TaskService;
+import com.pengurus.crm.client.service.TaskServiceAsync;
 
 public class JobDTO implements IsSerializable {
 	  private Long id;
@@ -107,17 +110,36 @@ public class JobDTO implements IsSerializable {
 
 				public void onFailure(Throwable t) {
 					Window.Location.assign("/spring_security_login");
-
+					MessageBox.info("Internal error", "Cannot update status", null);
 				}
 
 				@Override
 				public void onSuccess(JobDTO result) {
+					//reload 
 				}
 			
 			};
 			JobServiceAsync service = (JobServiceAsync) GWT
 					.create(JobService.class);
 			service.updateJob(this, callback);
+		}
+		
+		public void updateStatus() {
+			AsyncCallback<Void> callback = new AsyncCallback<Void>() {
+
+				public void onFailure(Throwable t) {
+					Window.Location.assign("/spring_security_login");
+
+				}
+
+				@Override
+				public void onSuccess(Void result) {
+					// TODO Auto-generated method stub
+				}
+			};
+			JobServiceAsync service = (JobServiceAsync) GWT
+					.create(JobService.class);
+			service.updateStatus(this, callback);
 		}
 
 		public boolean checked() {

@@ -17,6 +17,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.CurrencyModel;
 import com.pengurus.crm.client.models.TranslationModel;
@@ -92,8 +93,7 @@ public abstract class JobPanel extends MainPanel {
 		if (AuthorizationManager.canEditJobProject())
 			vp.add(buttonPanel());
 
-		status = new JobStatusPanel();
-		vp.add(status);
+		vp.add(getStatusPanel());
 		vp.add(addInfoForm());
 
 		hp.add(vp);
@@ -103,6 +103,8 @@ public abstract class JobPanel extends MainPanel {
 
 		add(hp);
 	}
+
+	protected abstract JobStatusPanel getStatusPanel();
 
 	protected abstract void cancelButton();
 

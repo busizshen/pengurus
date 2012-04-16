@@ -203,7 +203,7 @@ public class AuthorizationManager {
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
 		Set<UserRoleDTO> roles2 = new HashSet<UserRoleDTO>();
 		roles2.add(UserRoleDTO.ROLE_PROJECTMANAGER);
-		return currentUser.haveAuthority(roles) || (currentUser.haveAuthority(roles) && projectDTO.isProjectManager(currentUser)) ;
+		return currentUser.haveAuthority(roles) || (currentUser.haveAuthority(roles2) && projectDTO.isProjectManager(currentUser)) ;
 	}
 
 	public static boolean hasTranslatorAccess(TaskDTO taskDTO) {
@@ -213,7 +213,7 @@ public class AuthorizationManager {
 		return currentUser.haveAuthority(roles) && (taskDTO.getExpert() == currentUser);
 	}
 
-	public static boolean hasVerifivatorAccess(TaskDTO taskDTO) {
+	public static boolean hasVerificatorAccess(TaskDTO taskDTO) {
 //nie rozumiem dalej tego verificatora
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXPERT);
@@ -231,6 +231,10 @@ public class AuthorizationManager {
 		roles.add(UserRoleDTO.ROLE_CLIENT);
 		return currentUser.haveAuthority(roles);
 	}
+	
+	
+	
+	
 
 
 }

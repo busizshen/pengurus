@@ -5,6 +5,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.panels.center.quote.QuotePanel;
 import com.pengurus.crm.client.panels.center.quote.QuotePanelView;
+import com.pengurus.crm.client.panels.center.status.JobStatusPanel;
 import com.pengurus.crm.client.service.QuoteService;
 import com.pengurus.crm.client.service.QuoteServiceAsync;
 import com.pengurus.crm.shared.dto.JobDTO;
@@ -46,5 +47,10 @@ public class JobPanelQuote extends JobPanel {
 				.create(QuoteService.class);
 		service.getQuote(quoteDTO.getId(), callback);
 		
+	}
+
+	@Override
+	protected JobStatusPanel getStatusPanel() {
+		return null;
 	}
 }

@@ -93,7 +93,7 @@ public class TaskPanel extends MainPanel {
 		hp.setAutoWidth(true);
 	}
 
-	private void addTranslatorPanel(FormPanel vp) {
+	protected void addTranslatorPanel(FormPanel vp) {
 		if (AuthorizationManager.canEditProject(projectDTO)) {
 			Set<WorkerDTO> translators = new HashSet<WorkerDTO>();
 			translators.addAll(projectDTO.getExperts());

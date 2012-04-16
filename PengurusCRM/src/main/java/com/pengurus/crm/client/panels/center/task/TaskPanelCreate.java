@@ -1,5 +1,8 @@
 package com.pengurus.crm.client.panels.center.task;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.DomEvent;
@@ -9,11 +12,15 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
+import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEditByList;
+import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelView;
 import com.pengurus.crm.client.service.TaskService;
 import com.pengurus.crm.client.service.TaskServiceAsync;
 import com.pengurus.crm.shared.dto.JobDTO;
@@ -21,6 +28,7 @@ import com.pengurus.crm.shared.dto.PriceDTO;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.StatusDTO;
 import com.pengurus.crm.shared.dto.TaskDTO;
+import com.pengurus.crm.shared.dto.WorkerDTO;
 
 public class TaskPanelCreate extends TaskPanel {
 
@@ -31,7 +39,8 @@ public class TaskPanelCreate extends TaskPanel {
 	Button buttonCreate;
 	TasksListPanelEdit taskList;
 
-	public TaskPanelCreate(JobDTO jobDTO, ProjectDTO projectDTO, TasksListPanelEdit taskListPanel) {
+	public TaskPanelCreate(JobDTO jobDTO, ProjectDTO projectDTO,
+			TasksListPanelEdit taskListPanel) {
 		super(null, projectDTO);
 		setFrame(false);
 		setHeaderVisible(false);
@@ -123,8 +132,18 @@ public class TaskPanelCreate extends TaskPanel {
 			return false;
 		if (description.getDescription() == null)
 			return false;
-		if(deadline.getValue() == null) return false;
+		if (deadline.getValue() == null)
+			return false;
 		return true;
+	}
+
+	@Override
+	protected void addTranslatorPanel(FormPanel vp) {
+		Set<WorkerDTO> translators = new HashSet<WorkerDTO>();
+		translators.addAll(projectDTO.getExperts());
+		workerPanel = new WorkerPanelEditByList(null, "Translator", translators);
+		vp.add(workerPanel);
+
 	}
 
 	protected void addStatusBar(VerticalPanel vp1) {
@@ -132,7 +151,7 @@ public class TaskPanelCreate extends TaskPanel {
 
 	protected void addRatingPanel(VerticalPanel vp2) {
 	}
-	
+
 	protected void addDescriptionPanel(VerticalPanel vp2) {
 		description = new DescriptionPanelEdit("");
 		description.setWidth(300);

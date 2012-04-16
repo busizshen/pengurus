@@ -125,26 +125,21 @@ public class QuoteStatusPanel extends LayoutContainer {
 		}
 
 		private void setVisibility() {
-			if (((status <= 3 || status == 6) && AuthorizationManager
-					.hasExecutiveAccess())
-					|| (status == 4 && AuthorizationManager.hasClientAccess())
-					|| (status == 5 && AuthorizationManager
-							.hasAccountantAccess())) {
-				nextStatus.setVisible(true);
-			} else
-				nextStatus.setVisible(false);
-			if (AuthorizationManager.hasExecutiveAccess()) {
-				if (status == 5) {
-					generateProject.setVisible(true);
-				} else
-					generateProject.setVisible(false);
-			}
-			if (AuthorizationManager.hasExecutiveAccess() && status == 3)
-				reOpen.setVisible(true);
-			else if (AuthorizationManager.hasClientAccess() && status == 4)
-				reOpen.setVisible(true);
-			else
-				reOpen.setVisible(false);
+			nextStatus
+					.setVisible(status == 6 ? false
+							: (((status <= 2 || status == 5) && AuthorizationManager
+									.hasExecutiveAccess())
+									|| (status == 3 && AuthorizationManager
+											.hasClientAccess()) || (status == 4 && AuthorizationManager
+									.hasAccountantAccess())) ? true : false);
+
+			generateProject.setVisible(AuthorizationManager
+					.hasExecutiveAccess() && status == 4 ? true : false);
+
+			reOpen.setVisible((AuthorizationManager.hasExecutiveAccess() && status == 2)
+					|| (AuthorizationManager.hasClientAccess() && status == 3) ? true
+					: false);
+			
 			this.layout();
 		}
 
