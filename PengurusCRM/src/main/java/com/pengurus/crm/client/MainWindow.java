@@ -12,13 +12,15 @@ import com.pengurus.crm.client.panels.header.HeaderPanel;
 import com.pengurus.crm.client.panels.menu.MenuPanel;
 
 public class MainWindow extends LayoutContainer {
-	private static ContentPanel menuPanel = MenuPanel.getPanel();
-	private static ContentPanel northPanel = HeaderPanel.getPanel();
-	private static ContentPanel centerPanel = new ContentPanel();
+	private static ContentPanel menuPanel;
+	private static ContentPanel northPanel;
+	private static ContentPanel centerPanel;
 
 	protected void onRender(Element target, int index) {
 		super.onRender(target, index);
-
+		menuPanel = MenuPanel.getPanel();
+		northPanel = HeaderPanel.getPanel();
+		centerPanel = new ContentPanel();
 		setLayoutSettings();
 		addHeaderPanel();
 		addMenuPanel();
@@ -47,7 +49,7 @@ public class MainWindow extends LayoutContainer {
 	private void addCenterPanelt() {
 		BorderLayoutData centerData = new BorderLayoutData(LayoutRegion.CENTER);
 		centerData.setMargins(new Margins(0));
-		centerPanel.setHeaderVisible(false);		
+		centerPanel.setHeaderVisible(false);
 		add(centerPanel, centerData);
 	}
 

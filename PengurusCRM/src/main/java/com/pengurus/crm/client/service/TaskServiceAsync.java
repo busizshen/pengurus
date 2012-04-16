@@ -10,6 +10,6 @@ public interface TaskServiceAsync {
 	public void updateStatus(TaskDTO taskDTO,AsyncCallback<Void> callback);
 	public void update(TaskDTO taskDTO,AsyncCallback<Void> callback);
 	public void delete(TaskDTO taskDTO,AsyncCallback<Void> callback);
-	public void getTaskByExpertId(Long id,AsyncCallback<Void> callback);
+	public void getTaskByExpertId(Long id,AsyncCallback<Set<TaskDTO>> callback);
 	public void getTasks(AsyncCallback<Set<TaskDTO>> callback);
 }

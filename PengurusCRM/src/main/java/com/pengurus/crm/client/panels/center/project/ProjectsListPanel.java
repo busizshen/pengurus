@@ -29,11 +29,8 @@ import com.pengurus.crm.shared.dto.ProjectDTO;
 
 public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 
-	ModelList ql;
+	ModelList projectsList;
 
-	public ProjectsListPanel() {
-		add(new ModelList());
-	}
 	@Override
 	protected List<ColumnConfig> getColumns() {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();

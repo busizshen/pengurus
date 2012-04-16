@@ -36,11 +36,7 @@ import com.pengurus.crm.shared.dto.QuoteDTO;
 
 public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 
-	ModelList ql;
-
-	public QuotesListPanel() {
-		add(new ModelList());
-	}
+	ModelList quotesList;
 
 	protected List<ColumnConfig> getColumns() {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
@@ -102,7 +98,7 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 		ListStore<ModelData> statusStore = new ListStore<ModelData>();
 		statusStore.add(status("open"));
 		statusStore.add(status("canceled"));
-		statusStore.add(status("inProgress"));
+		statusStore.add(status("in_progress"));
 		statusStore.add(status("resolved"));
 		statusStore.add(status("verificated"));
 		statusStore.add(status("accepted"));

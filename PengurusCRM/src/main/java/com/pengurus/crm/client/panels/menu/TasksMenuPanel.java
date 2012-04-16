@@ -2,10 +2,10 @@ package com.pengurus.crm.client.panels.menu;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.AuthorizationManager;
-import com.pengurus.crm.client.panels.center.task.TasksListPanelAll;
+import com.pengurus.crm.client.panels.center.task.TasksListPanelViewAll;
+import com.pengurus.crm.client.panels.center.task.TasksListPanelViewByUser;
 
 
 public class TasksMenuPanel extends TabMenuPanel {
@@ -26,9 +26,8 @@ public class TasksMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					MessageBox mb = new MessageBox();
-					mb.setMessage("Nie ma getByUserId w bazie danych");
-					mb.show();
+					TasksListPanelViewByUser taskListPanel = new TasksListPanelViewByUser(AuthorizationManager.getCurrentUser());
+					taskListPanel.setAsMain();
 				}
 			});
 		    add(b);
@@ -41,7 +40,7 @@ public class TasksMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					TasksListPanelAll taskListPanel = new TasksListPanelAll();
+					TasksListPanelViewAll taskListPanel = new TasksListPanelViewAll();
 					taskListPanel.setAsMain();
 				}
 			});

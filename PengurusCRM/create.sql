@@ -706,7 +706,7 @@ INSERT INTO price (id, price, currency) VALUES (307, 200, 308);
 -- Data for Name: project; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO project (project_id, status, client, supervisor, description) VALUES (323, 'inProgress', 321, 322, 'the very first project created');
+INSERT INTO project (project_id, status, client, supervisor, description) VALUES (323, 'in_progress', 321, 322, 'the very first project created');
 
 
 --
@@ -740,7 +740,6 @@ INSERT INTO project_worker (project_id, user_id) VALUES (323, 313);
 INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (55, 'in_progress', 53, 54, 'Quote description');
 INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (70, 'in_progress', 68, 69, 'Quote description');
 INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (85, 'open', NULL, 84, 'new quote description');
-
 
 --
 -- Data for Name: task; Type: TABLE DATA; Schema: public; Owner: -

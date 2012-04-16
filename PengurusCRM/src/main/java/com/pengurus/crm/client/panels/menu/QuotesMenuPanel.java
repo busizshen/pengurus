@@ -2,11 +2,11 @@ package com.pengurus.crm.client.panels.menu;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.AuthorizationManager;
+import com.pengurus.crm.client.panels.center.quote.QuotePanelCreate;
 import com.pengurus.crm.client.panels.center.quote.QuotesListPanelAll;
-import com.pengurus.crm.client.panels.center.quote.QuotesListPanelMine;
+import com.pengurus.crm.client.panels.center.quote.QuotesListPanelByUser;
 
 public class QuotesMenuPanel extends TabMenuPanel {
 
@@ -27,11 +27,8 @@ public class QuotesMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					/*QuotePanelCreate qp = new QuotePanelCreate();
-					qp.setAsMain();*/
-					MessageBox mb = new MessageBox();
-					mb.setMessage("Nie ma getByUserId w bazie danych");
-					mb.show();
+					QuotePanelCreate qp = new QuotePanelCreate();
+					qp.setAsMain();
 				}
 			});
 			add(b);
@@ -44,7 +41,7 @@ public class QuotesMenuPanel extends TabMenuPanel {
 			b.addSelectionListener(new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					QuotesListPanelMine qlp = new QuotesListPanelMine();
+					QuotesListPanelByUser qlp = new QuotesListPanelByUser(AuthorizationManager.getCurrentUser());
 					qlp.setAsMain();
 					
 				}

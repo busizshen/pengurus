@@ -4,6 +4,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.pengurus.crm.client.service.ProjectService;
 import com.pengurus.crm.daos.ProjectDAO;
 import com.pengurus.crm.entities.Project;
@@ -13,6 +16,8 @@ public class ProjectServiceImpl implements ProjectService {
 
 	private ProjectDAO projectDAO;
 
+	protected static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+	
 	public ProjectDAO getProjectDAO() {
 		return projectDAO;
 	}
@@ -75,8 +80,16 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public Set<ProjectDTO> getProjectByTaskId(Long id) {
-		List<Project> list = projectDAO.loadAllByTaskId(id);
+	public ProjectDTO getProjectByTaskId(Long id) {
+		Project p = projectDAO.loadAllByTaskId(id);
+		if(p == null)
+			return null;
+		return p.toDTO();
+	}
+
+	@Override
+	public Set<ProjectDTO> getProjectBySupervisorId(Long id) {
+		List<Project> list = projectDAO.loadAllBySupervisorId(id);
 		Set<ProjectDTO> set = new HashSet<ProjectDTO>();
 		for (Project p : list) {
 			set.add(p.toDTOLazy());

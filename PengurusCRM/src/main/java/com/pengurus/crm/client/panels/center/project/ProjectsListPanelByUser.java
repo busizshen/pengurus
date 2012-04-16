@@ -4,20 +4,20 @@ import java.util.Set;
 
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.MessageBox;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.ProjectModel;
-import com.pengurus.crm.client.service.ProjectService;
-import com.pengurus.crm.client.service.ProjectServiceAsync;
 import com.pengurus.crm.shared.dto.ProjectDTO;
+import com.pengurus.crm.shared.dto.UserDTO;
 
-public class ProjectsListPanelAll extends ProjectsListPanel{
+public abstract class ProjectsListPanelByUser extends ProjectsListPanel{
 
-	public ProjectsListPanelAll() {
+	UserDTO user;
+	public ProjectsListPanelByUser(UserDTO user) {
+		this.user = user;
 		projectsList = new ModelList();
 		add(projectsList);
 	}
-	
+
 	@Override
 	protected ListStore<ProjectModel> getList() {
 		final ListStore<ProjectModel> list = new ListStore<ProjectModel>();
@@ -35,11 +35,12 @@ public class ProjectsListPanelAll extends ProjectsListPanel{
 				}
 			}
 		};
-		ProjectServiceAsync service = (ProjectServiceAsync) GWT
-				.create(ProjectService.class);
-		service.getProjects(callback);
+
+		changeService(callback);
 
 		return list;
 	}
+
+	protected abstract void changeService(AsyncCallback<Set<ProjectDTO>> callback);
 
 }

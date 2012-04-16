@@ -176,7 +176,7 @@ public class GettingObjectsById {
 	
 	/*@Test
 	public void loadProjectByTaskId() {
-		// assuming db contains Task with Id 318
+	/*	// assuming db contains Task with Id 318
 		// I know that such assumption is not good in tests.
 		long taskId = 318L;
 		boolean taskSelected = false;
@@ -203,13 +203,15 @@ public class GettingObjectsById {
 */
 /*	@Test
 	public void getProjectByTaskId(){
-		// assuming db contains Task with Id 318
+		//jeszcze raz napisać
+/*		// assuming db contains Task with Id 318
 		// I know that such assumption is not good in tests.
 		long taskId = 318L;
 		Set<ProjectDTO> projects = projectService.getProjectByTaskId(taskId);
 		Assert.isTrue(projects.size() == 1);
 		for(ProjectDTO project : projects){
 			projectDTOIsNotNull(project);
+<<<<<<< Updated upstream
 		}
 	}*/
 	

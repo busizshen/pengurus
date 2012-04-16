@@ -1,7 +1,5 @@
 package com.pengurus.crm.client.panels.center.task;
 
-import java.util.Set;
-
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.GridEvent;
@@ -16,52 +14,18 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.TaskModel;
-import com.pengurus.crm.client.service.TaskService;
-import com.pengurus.crm.client.service.TaskServiceAsync;
-import com.pengurus.crm.shared.dto.TaskDTO;
+import com.pengurus.crm.client.service.ProjectService;
+import com.pengurus.crm.client.service.ProjectServiceAsync;
+import com.pengurus.crm.shared.dto.ProjectDTO;
 
+public abstract class TasksListPanelView extends TasksListPanel {
 
-public class TasksListPanelAll extends TasksListPanel {
-
-	public TasksListPanelAll() {
-		super();
-		initPanel();
-	}
-
-	
 	protected void initPanel() {
-		ml = new ModelList();
-		add(ml);
+		tasksList = new ModelList();
+		add(tasksList);
 	}
-
-	@Override
-	protected ListStore<TaskModel> getList() {
-		final ListStore<TaskModel> list = new ListStore<TaskModel>();
-		AsyncCallback<Set<TaskDTO> > callback = new AsyncCallback<Set<TaskDTO> >() {
-
-			public void onFailure(Throwable t) {
-				Window.Location.assign("/spring_security_login");
-				MessageBox mb = new MessageBox();
-				mb.setMessage("Server Error");
-				mb.show();
-			}
-
-			public void onSuccess(Set<TaskDTO> result) {
-				for(TaskDTO q: result){
-					list.add(new TaskModel(q));
-				}
-			}
-		};
-		TaskServiceAsync service = (TaskServiceAsync) GWT
-				.create(TaskService.class);
-		service.getTasks(callback);
-
-		return list;
-	}
-
 
 	@Override
 	protected GridCellRenderer<TaskModel> getButtonRenderer() {
@@ -103,13 +67,25 @@ public class TasksListPanelAll extends TasksListPanel {
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
-						/*		get Project by task id
-								TaskPanel taskPanel = new TaskPanel(
-										model.getTaskDTO(), projectDTO);
-								taskPanel.setAsMain();*/
-								MessageBox mb = new MessageBox();
-								mb.setMessage("Potrzebna funkcja get project by task");
-								mb.show();
+								AsyncCallback<ProjectDTO> callback = new AsyncCallback<ProjectDTO>() {
+
+									public void onFailure(Throwable t) {
+										MessageBox mb = new MessageBox();
+										mb.setMessage("Server Error");
+										mb.show();
+									}
+
+									@Override
+									public void onSuccess(ProjectDTO projectDTO) {
+										TaskPanel taskPanel = new TaskPanel(
+												model.getTaskDTO(), projectDTO);
+										taskPanel.setAsMain();
+									}
+								};
+								ProjectServiceAsync service = (ProjectServiceAsync) GWT
+										.create(ProjectService.class);
+								service.getProjectByTaskId(model.getTaskDTO()
+										.getId(), callback);
 							}
 						});
 				b.setToolTip("Click to see");
@@ -119,6 +95,4 @@ public class TasksListPanelAll extends TasksListPanel {
 		};
 		return buttonRenderer;
 	}
-
-
 }

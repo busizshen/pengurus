@@ -69,7 +69,7 @@ public class ProjectDAOImpl extends GenericDAOImpl<Project> implements
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Project> loadAllByTaskId(Long id) {
+	public Project loadAllByTaskId(Long id) {
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Long[] ids = {id};
 		String hql = "select distinct p from Project p " +
@@ -78,7 +78,17 @@ public class ProjectDAOImpl extends GenericDAOImpl<Project> implements
 		Query query = session.createQuery(hql);
 		query.setParameterList("ids", ids);
 		List<Project> projects = query.list();
-		return projects;
+		return projects.iterator().next();
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Project> loadAllBySupervisorId(Long id) {
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		String hql = "select p from Project p " +
+				"where p.supervisor = " + id;
+		Query query = session.createQuery(hql);
+		List<Project> projects = query.list();
+		return projects;
+	}
 }

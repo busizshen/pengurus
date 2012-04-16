@@ -17,7 +17,6 @@ import com.google.gwt.dev.util.collect.HashSet;
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.exceptions.ServiceException;
 import com.pengurus.crm.client.service.exceptions.UsernameExistsException;
-import com.pengurus.crm.entities.User;
 import com.pengurus.crm.entities.UserUtils;
 import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.PersonalDataDTO;

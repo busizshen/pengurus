@@ -226,5 +226,11 @@ public class AuthorizationManager {
 		return false;
 	}
 
+	public static boolean isClient() {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_CLIENT);
+		return currentUser.haveAuthority(roles);
+	}
+
 
 }
