@@ -23,13 +23,13 @@ import com.pengurus.crm.shared.dto.ProjectDTO;
 public abstract class TasksListPanelView extends TasksListPanel {
 
 	protected void initPanel() {
-		tasksList = new ModelList();
-		add(tasksList);
+		modelList = new ModelList();
+		add(modelList);
 	}
 	
 	protected void initPanel(int height, int width) {
-		tasksList = new ModelList(height, width);
-		add(tasksList);
+		modelList = new ModelList(height, width);
+		add(modelList);
 	}
 
 	@Override

@@ -39,12 +39,12 @@ public class TasksListPanelEdit extends TasksListPanel {
 	}
 	
 	protected void initPanel(){
-		tasksList = new ModelList();
+		modelList = new ModelList();
 		HorizontalPanel hp = new HorizontalPanel();
 		hp.setSpacing(20);
 		
 		hp.add(addButtonPanel());
-		hp.add(tasksList);
+		hp.add(modelList);
 		add(hp);
 	}
 

@@ -17,7 +17,7 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 	protected ListStore<JobModel> jobs = new ListStore<JobModel>();
 
 	public JobsListPanel(){
-		
+		super();
 	}
 
 	@Override

@@ -9,8 +9,8 @@ import com.pengurus.crm.shared.dto.StatusDTO;
 public class QuotesListPanelLastEdited extends QuotesListPanel{
 
 	public QuotesListPanelLastEdited(){
-		ModelList ql = new ModelList();
-		MainWindow.addCenterPanel(ql);
+		modelList = new ModelList();
+		MainWindow.addCenterPanel(modelList);
 	}
 	
 	protected ListStore<QuoteModel> getList(){

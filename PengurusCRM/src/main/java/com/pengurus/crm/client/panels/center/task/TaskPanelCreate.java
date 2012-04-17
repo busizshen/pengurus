@@ -10,7 +10,6 @@ import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.models.TranslationModel;
@@ -85,8 +84,7 @@ public class TaskPanelCreate extends TaskPanel {
 							AsyncCallback<TaskDTO> callback = new AsyncCallback<TaskDTO>() {
 
 								public void onFailure(Throwable t) {
-									Window.Location
-											.assign("/spring_security_login");
+									
 
 								}
 

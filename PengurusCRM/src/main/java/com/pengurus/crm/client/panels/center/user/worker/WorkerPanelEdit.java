@@ -37,7 +37,7 @@ public abstract class WorkerPanelEdit extends WorkerPanel {
 				}
 		};
 		getWorkersPanel();
-		window.add(workersListPanel.getPanel());
+		window.add(workersListPanel.getModelList());
 		window.setAutoWidth(true);
 		window.setAutoHide(true);
 		window.setHeading("Change");

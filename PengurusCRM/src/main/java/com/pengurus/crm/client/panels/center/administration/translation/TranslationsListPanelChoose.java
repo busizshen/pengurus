@@ -1,4 +1,6 @@
-package com.pengurus.crm.client.panels.center.user.worker;
+package com.pengurus.crm.client.panels.center.administration.translation;
+
+import java.util.List;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.DomEvent;
@@ -9,49 +11,55 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
-import com.pengurus.crm.client.models.WorkerModel;
-import com.pengurus.crm.client.panels.center.user.BaseUsersListPanel;
-import com.pengurus.crm.shared.dto.WorkerDTO;
+import com.pengurus.crm.client.models.TranslationModel;
 
-public abstract class WorkersListPanel extends BaseUsersListPanel<WorkerModel>{
+public class TranslationsListPanelChoose extends TranslationsListPanel {
 
-	protected WorkerDTO chosen;
-	protected Listener<DomEvent> listenerChangeWorker;
-	protected Listener<DomEvent> listenerCloseTab;
-	
-	public WorkersListPanel(){
+	TranslationModel translation;
+	private Listener<DomEvent> listenerChosen;
+
+	public TranslationsListPanelChoose(
+			ListStore<TranslationModel> listTranslationModel, Listener<DomEvent> listener) {
 		super();
+		list = listTranslationModel;
+		listenerChosen = listener;
+		modelList = new ModelList();
+		add(modelList);
 	}
 
-	public WorkerDTO getChosenWorker() {
-		return chosen;
+
+	protected void addButton(List<ColumnConfig> configs) {
+		ColumnConfig column = new ColumnConfigMy();
+		column.setId("choose");
+		column.setHeader("Choose");
+		column.setRenderer(getButtonRenderer());
+		configs.add(column);	
 	}
-	
+
 	@Override
 	protected String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Choose Translation";
 	}
-	
-	@Override
-	protected GridCellRenderer<WorkerModel> getButtonRenderer() {
-		GridCellRenderer<WorkerModel> buttonRenderer = new GridCellRenderer<WorkerModel>() {
+
+	private GridCellRenderer<TranslationModel> getButtonRenderer() {
+
+		GridCellRenderer<TranslationModel> buttonRenderer = new GridCellRenderer<TranslationModel>() {
 
 			private boolean init;
 
-			public Object render(final WorkerModel model, String property,
+			public Object render(final TranslationModel model, String property,
 					ColumnData config, final int rowIndex, final int colIndex,
-					ListStore<WorkerModel> store, Grid<WorkerModel> grid) {
+					ListStore<TranslationModel> store, Grid<TranslationModel> grid) {
 				if (!init) {
 					init = true;
 					grid.addListener(Events.OnClick,
-							new Listener<GridEvent<WorkerModel>>() {
+							new Listener<GridEvent<TranslationModel>>() {
 
-								public void handleEvent(
-										GridEvent<WorkerModel> be) {
+								public void handleEvent(GridEvent<TranslationModel> be) {
 									for (int i = 0; i < be.getGrid().getStore()
 											.getCount(); i++) {
 										if (be.getGrid().getView()
@@ -72,22 +80,25 @@ public abstract class WorkersListPanel extends BaseUsersListPanel<WorkerModel>{
 								}
 							});
 				}
-
-				Button b = new Button("Choose",
+				Button b = new Button("CHOOSE",
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
-								chosen = model.getWorkerDTO();
+								translation = model;
 							}
 						});
-
-				b.addListener(Events.OnClick, listenerCloseTab);
-				b.addListener(Events.OnClick, listenerChangeWorker);
 				b.setToolTip("Click to see");
-
+				b.addListener(Events.OnClick, listenerChosen);
 				return b;
 			}
 		};
 		return buttonRenderer;
 	}
+
+	public TranslationModel getTranslation() {
+		return translation;
+	}
+	
+	
+
 }

@@ -9,7 +9,7 @@ import com.pengurus.crm.client.models.TranslationModel;
 
 public class TranslationPanel extends FormPanel {
 
-	TranslationsListPanel translations;
+	TranslationsListPanelChoose translations;
 	TranslationModel translation;
 	TextField<String> from;
 	TextField<String> to;
@@ -90,7 +90,7 @@ public class TranslationPanel extends FormPanel {
 				setTranslation(translations.getTranslation());
 			}
 		};
-		translations = new TranslationsListPanel(listTranslationModel,
+		translations = new TranslationsListPanelChoose(listTranslationModel,
 				listenerChosen);
 		add(translations);
 

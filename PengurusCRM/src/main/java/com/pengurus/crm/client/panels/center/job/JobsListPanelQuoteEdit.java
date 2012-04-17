@@ -12,8 +12,6 @@ import com.pengurus.crm.shared.dto.QuoteDTO;
 
 public class JobsListPanelQuoteEdit extends JobsListPanelQuote {
 
-	ModelList ml;
-	
 	public JobsListPanelQuoteEdit(QuoteDTO quoteDTO){
 		super(quoteDTO);
 	}
@@ -23,7 +21,7 @@ public class JobsListPanelQuoteEdit extends JobsListPanelQuote {
 		setCollapsible(true);
 		setAnimCollapse(true);
 		collapse();
-		ml = new ModelList();
+		modelList = new ModelList();
 		Button createButton = new Button("Create New Job", new SelectionListener<ButtonEvent>(){
 			@Override
 			public void componentSelected(ButtonEvent ce) {
@@ -33,9 +31,9 @@ public class JobsListPanelQuoteEdit extends JobsListPanelQuote {
 					@Override
 					public void handleEvent(DomEvent be) {
 						if(jobPanel.getJobDTO() != null){
-							ml.getGrid().stopEditing();
-							ml.getStore().add(new JobModel(jobPanel.getJobDTO()));
-							ml.getGrid().startEditing(0, 0);
+							modelList.getGrid().stopEditing();
+							modelList.getStore().add(new JobModel(jobPanel.getJobDTO()));
+							modelList.getGrid().startEditing(0, 0);
 							quoteDTO.getJobs().add(jobPanel.getJobDTO());
 							window.hide();
 						}
@@ -60,7 +58,7 @@ public class JobsListPanelQuoteEdit extends JobsListPanelQuote {
 			}});
 		HorizontalPanel hp = new HorizontalPanel();
 		hp.add(createButton);
-		hp.add(ml);
+		hp.add(modelList);
 		add(hp);
 		return this;
 	}

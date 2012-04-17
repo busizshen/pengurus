@@ -14,9 +14,11 @@ public class WorkersListPanelByList extends WorkersListPanel {
 
 	public WorkersListPanelByList(Listener<DomEvent> listenerChangeWorker,
 			Listener<DomEvent> listenerCloseTab,Set<WorkerDTO> workers) {
+		super();
 		this.listenerChangeWorker = listenerChangeWorker;
 		this.listenerCloseTab = listenerCloseTab;
 		this.workers = workers;
+		modelList = new ModelList();
 	}
 	
 	@Override

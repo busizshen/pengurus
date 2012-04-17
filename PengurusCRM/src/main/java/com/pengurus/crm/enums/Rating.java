@@ -12,7 +12,7 @@ public enum Rating {
 
 	public RatingDTO toDTO() {
 		if(this == veryBad)
-			return RatingDTO.veryBad;
+			return RatingDTO.very_bad;
 		if(this == bad)
 			return RatingDTO.bad;
 		if(this == ok)
@@ -20,12 +20,12 @@ public enum Rating {
 		if(this == good)
 			return RatingDTO.good;
 		if(this == veryGood)
-			return RatingDTO.veryGood;
+			return RatingDTO.very_good;
 		return null;
 	}    
 	
 	public static Rating toRating(RatingDTO r){
-		if(r == RatingDTO.veryBad)
+		if(r == RatingDTO.very_bad)
 			return Rating.veryBad;
 		if(r == RatingDTO.bad)
 			return Rating.bad;
@@ -33,7 +33,7 @@ public enum Rating {
 			return Rating.ok;
 		if(r == RatingDTO.good)
 			return Rating.good;
-		if(r == RatingDTO.veryGood)
+		if(r == RatingDTO.very_good)
 			return Rating.veryGood;
 		return null;
 	}

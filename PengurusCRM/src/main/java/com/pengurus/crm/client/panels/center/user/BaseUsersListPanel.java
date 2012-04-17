@@ -15,11 +15,6 @@ public abstract class BaseUsersListPanel<T extends UserModel> extends ListPanel<
 
 	ListStore<T> clients = new ListStore<T>();
 	
-	public ModelList getPanel(){
-		ModelList ql = new ModelList();
-		return ql;
-	}
-	
 	@Override
 	protected void setStyle(ContentPanel cp) {
 	}

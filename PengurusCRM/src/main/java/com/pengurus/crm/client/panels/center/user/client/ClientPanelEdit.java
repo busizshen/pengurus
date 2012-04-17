@@ -39,7 +39,7 @@ public class ClientPanelEdit extends ClientPanel {
 			}
 		};
 		cl = new ClientsListPanel(listenerChangeClient, listenerCloseTab);
-		window.add(cl.getPanel());
+		window.add(cl.getModelList());
 		window.setAutoWidth(true);
 		window.setAutoHide(true);
 		window.setEnabled(true);

@@ -33,6 +33,7 @@ public class ClientsListPanel extends BaseUsersListPanel<ClientModel> {
 			Listener<DomEvent> listenerCloseTab3) {
 		this.listenerChangeClient = listenerChangeClient2;
 		this.listenerCloseTab = listenerCloseTab3;
+		modelList = new ModelList();
 	}
 
 	@Override

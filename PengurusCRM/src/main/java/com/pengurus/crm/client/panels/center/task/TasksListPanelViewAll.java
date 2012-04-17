@@ -5,7 +5,6 @@ import java.util.Set;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.TaskModel;
 import com.pengurus.crm.client.service.TaskService;
@@ -26,7 +25,6 @@ public class TasksListPanelViewAll extends TasksListPanelView {
 		AsyncCallback<Set<TaskDTO> > callback = new AsyncCallback<Set<TaskDTO> >() {
 
 			public void onFailure(Throwable t) {
-				Window.Location.assign("/spring_security_login");
 				MessageBox mb = new MessageBox();
 				mb.setMessage("Server Error");
 				mb.show();

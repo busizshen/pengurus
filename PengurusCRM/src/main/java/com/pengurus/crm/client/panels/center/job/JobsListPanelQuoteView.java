@@ -5,8 +5,6 @@ import com.pengurus.crm.shared.dto.QuoteDTO;
 
 public class JobsListPanelQuoteView extends JobsListPanelQuote {
 
-	ModelList ml;
-
 	public JobsListPanelQuoteView(QuoteDTO quoteDTO) {
 		super(quoteDTO);
 	}
@@ -16,8 +14,8 @@ public class JobsListPanelQuoteView extends JobsListPanelQuote {
 		setCollapsible(true);
 		setAnimCollapse(true);
 		collapse();
-		ml = new ModelList();
-		add(ml);
+		modelList = new ModelList();
+		add(modelList);
 		return this;
 	}
 	

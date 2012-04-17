@@ -15,14 +15,14 @@ public abstract class QuotesListPanelByUser extends QuotesListPanel {
 
 	public QuotesListPanelByUser(UserDTO userDTO) {
 		this.userDTO = userDTO;
-		quotesList = new ModelList();
-		add(quotesList);
+		modelList = new ModelList();
+		add(modelList);
 	}
 
 	public QuotesListPanelByUser(UserDTO userDTO, int height, int width) {
 		this.userDTO = userDTO;
-		quotesList = new ModelList(height, width);
-		add(quotesList);
+		modelList = new ModelList(height, width);
+		add(modelList);
 	}
 
 	@Override

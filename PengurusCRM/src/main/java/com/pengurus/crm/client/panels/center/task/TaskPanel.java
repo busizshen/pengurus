@@ -22,11 +22,11 @@ import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.CurrencyModel;
 import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.MainPanel;
-import com.pengurus.crm.client.panels.center.RatingPanel;
 import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
 import com.pengurus.crm.client.panels.center.job.JobPanelProject;
+import com.pengurus.crm.client.panels.center.rating.RatingPanel;
 import com.pengurus.crm.client.panels.center.status.TaskStatusPanel;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanel;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEditByList;
@@ -97,9 +97,10 @@ public class TaskPanel extends MainPanel {
 		if (AuthorizationManager.canEditProject(projectDTO)) {
 			Set<WorkerDTO> translators = new HashSet<WorkerDTO>();
 			translators.addAll(projectDTO.getExperts());
-			workerPanel = new WorkerPanelEditByList(taskDTO.getExpert(),"Translator",translators);
+			workerPanel = new WorkerPanelEditByList(taskDTO.getExpert(),
+					"Translator", translators);
 		} else {
-			workerPanel = new WorkerPanelView(taskDTO.getExpert(),"Translator");
+			workerPanel = new WorkerPanelView(taskDTO.getExpert(), "Translator");
 		}
 		vp.add(workerPanel);
 
@@ -117,7 +118,7 @@ public class TaskPanel extends MainPanel {
 	}
 
 	protected void addRatingPanel(VerticalPanel vp2) {
-		rating = new RatingPanel();
+		rating = new RatingPanel(taskDTO, projectDTO);
 		vp2.add(rating);
 	}
 

@@ -15,14 +15,14 @@ public abstract class ProjectsListPanelByUser extends ProjectsListPanel {
 
 	public ProjectsListPanelByUser(UserDTO user) {
 		this.user = user;
-		projectsList = new ModelList();
-		add(projectsList);
+		modelList = new ModelList();
+		add(modelList);
 	}
 
 	public ProjectsListPanelByUser(UserDTO user, int height, int width) {
 		this.user = user;
-		projectsList = new ModelList(height, width);
-		add(projectsList);
+		modelList = new ModelList(height, width);
+		add(modelList);
 	}
 
 	@Override

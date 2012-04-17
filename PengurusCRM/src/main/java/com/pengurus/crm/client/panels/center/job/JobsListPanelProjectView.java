@@ -5,8 +5,6 @@ import com.pengurus.crm.shared.dto.ProjectDTO;
 
 public class JobsListPanelProjectView extends JobsListPanelProject{
 
-	ModelList ml;
-
 	public JobsListPanelProjectView(ProjectDTO projectDTO) {
 		super(projectDTO);
 	}
@@ -16,8 +14,8 @@ public class JobsListPanelProjectView extends JobsListPanelProject{
 		setCollapsible(true);
 		setAnimCollapse(true);
 		collapse();
-		ml = new ModelList();
-		add(ml);
+		modelList = new ModelList();
+		add(modelList);
 		return this;
 	}
 

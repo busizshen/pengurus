@@ -14,8 +14,8 @@ import com.pengurus.crm.shared.dto.ProjectDTO;
 public class ProjectsListPanelAll extends ProjectsListPanel{
 
 	public ProjectsListPanelAll() {
-		projectsList = new ModelList();
-		add(projectsList);
+		modelList = new ModelList();
+		add(modelList);
 	}
 	
 	@Override

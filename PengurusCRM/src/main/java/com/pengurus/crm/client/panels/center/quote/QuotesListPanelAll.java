@@ -14,8 +14,9 @@ import com.pengurus.crm.shared.dto.QuoteDTO;
 public class QuotesListPanelAll extends QuotesListPanel {
 
 	public QuotesListPanelAll() {
-		quotesList = new ModelList();
-		add(quotesList);
+		modelList = new ModelList();
+		add(modelList);
+		setStyleName("background-panel");
 	}
 	
 	@Override

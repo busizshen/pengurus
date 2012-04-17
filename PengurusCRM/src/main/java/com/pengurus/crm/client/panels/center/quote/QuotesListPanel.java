@@ -36,8 +36,6 @@ import com.pengurus.crm.shared.dto.QuoteDTO;
 
 public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 
-	ModelList quotesList;
-
 	protected List<ColumnConfig> getColumns() {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
@@ -227,9 +225,6 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 	protected void setStyle(ContentPanel cp) {
 
 	}
-	
-	public ModelList getModelList(){
-		return quotesList;
-	}
+
 
 }

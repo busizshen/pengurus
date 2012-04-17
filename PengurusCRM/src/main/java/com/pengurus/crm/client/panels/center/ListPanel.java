@@ -18,6 +18,7 @@ import com.google.gwt.user.client.Element;
 public abstract class ListPanel<T extends ModelData> extends MainPanel {
 	private EditorGrid<T> grid;
 	private ListStore<T> store;
+	protected ModelList modelList;
 
 	public class ModelList extends LayoutContainer {
 
@@ -112,6 +113,7 @@ public abstract class ListPanel<T extends ModelData> extends MainPanel {
 
 	protected abstract void setStyle(ContentPanel cp);
 	
+	
 	protected void addGridPaging(ContentPanel cp, final EditorGrid<T> grid) {
 		return;
 	}
@@ -124,4 +126,8 @@ public abstract class ListPanel<T extends ModelData> extends MainPanel {
 		grid.startEditing(0, 0);
 	}
 	
+	public ModelList getModelList(){
+		return modelList;
+	}
+
 }

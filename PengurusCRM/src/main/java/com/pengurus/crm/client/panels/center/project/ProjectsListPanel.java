@@ -29,7 +29,6 @@ import com.pengurus.crm.shared.dto.ProjectDTO;
 
 public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 
-	ModelList projectsList;
 
 	@Override
 	protected List<ColumnConfig> getColumns() {
@@ -176,8 +175,4 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 
 	}
 	
-	public ModelList getModelList() {
-		return projectsList;
-	}
-
 }

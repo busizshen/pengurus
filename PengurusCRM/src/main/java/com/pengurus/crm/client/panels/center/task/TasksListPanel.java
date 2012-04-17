@@ -15,7 +15,6 @@ import com.pengurus.crm.shared.dto.TaskDTO;
 public abstract class TasksListPanel extends ListPanel<TaskModel> {
 
 	
-	protected ModelList tasksList;
 	protected ListStore<TaskModel> tasks = new ListStore<TaskModel>();
 	
 	@Override
@@ -92,13 +91,10 @@ public abstract class TasksListPanel extends ListPanel<TaskModel> {
 	}
 	
 	protected void refreshList(TaskDTO taskDTO){
-		tasksList.getGrid().stopEditing();
-		tasksList.getStore().add(
+		modelList.getGrid().stopEditing();
+		modelList.getStore().add(
 				new TaskModel(taskDTO));
-		tasksList.getGrid().startEditing(0, 0);
+		modelList.getGrid().startEditing(0, 0);
 	}
 
-	public ModelList getModelList(){
-		return tasksList;
-	}
 }

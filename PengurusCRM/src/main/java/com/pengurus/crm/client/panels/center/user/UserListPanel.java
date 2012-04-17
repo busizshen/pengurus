@@ -57,10 +57,12 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 	}
 	
 	public UserListPanel() {
+		super();
+		modelList = new ModelList();
 		initPaging();
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
 		horizontalPanel.setSpacing(10);
-		horizontalPanel.add(new ModelList());
+		horizontalPanel.add(modelList);
 		sideOptions = new LayoutContainer();
 		createRoleCheckBoxGroup();
 		horizontalPanel.add(sideOptions);

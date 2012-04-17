@@ -22,9 +22,11 @@ public class WorkersListPanelByRoles extends WorkersListPanel {
 
 	public WorkersListPanelByRoles(Listener<DomEvent> listenerChangeWorker,
 			Listener<DomEvent> listenerCloseTab,Set<UserRoleDTO> roles) {
+		super();
 		this.listenerChangeWorker = listenerChangeWorker;
 		this.listenerCloseTab = listenerCloseTab;
 		this.roles = roles;
+		modelList = new ModelList();
 	}
 
 	@Override
