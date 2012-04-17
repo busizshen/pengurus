@@ -1,18 +1,10 @@
 package com.pengurus.crm.client.panels.center.user;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import com.extjs.gxt.ui.client.Style.Orientation;
-import com.extjs.gxt.ui.client.Style.SortDir;
-import com.extjs.gxt.ui.client.data.BaseFilterPagingLoadConfig;
-import com.extjs.gxt.ui.client.data.BasePagingLoadConfig;
-import com.extjs.gxt.ui.client.data.BasePagingLoader;
-import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.extjs.gxt.ui.client.data.PagingLoader;
-import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
@@ -34,10 +26,11 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
-import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.UserModel;
+import com.pengurus.crm.client.panels.ListPagination;
+import com.pengurus.crm.client.panels.PaginationRpcProxy;
 import com.pengurus.crm.client.panels.center.user.create.UserEditPanel;
 import com.pengurus.crm.client.panels.center.user.create.UserPreviewPanel;
 import com.pengurus.crm.client.service.UserService;
@@ -54,9 +47,7 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 	private CheckBoxGroup userRoles;
 	private CheckBox allBox;
 
-	private PagingToolBar toolBar;
-	private ListStore<UserModel> store;
-	private PagingLoader<PagingLoadResult<UserModel>> loader;
+	private ListPagination<UserModel> listPagination;
 	
 	public static UserListPanel getIntance() {
 		if (instance == null) {
@@ -77,17 +68,15 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 	}
 
 	private void initPaging() {
-		RpcProxy<PagingLoadResult<UserModel>> proxy = new RpcProxy<PagingLoadResult<UserModel>>() {
+		listPagination = new ListPagination<UserModel>(new PaginationRpcProxy<UserModel>() {
 			@Override
-			protected void load(Object loadConfig,
+			protected void load(PagingLoadConfigHelper loadConfig,
 					AsyncCallback<PagingLoadResult<UserModel>> callback) {
-				PagingLoadConfig config = (PagingLoadConfig) loadConfig;
-				PagingLoadConfigHelper configHelper = new PagingLoadConfigHelper(config.getSortField(), config.getSortDir().toString(), config.getOffset(), config.getLimit());
 				if (allBox.getValue()) {
 					
 					UserServiceAsync service = (UserServiceAsync) GWT
 							.create(UserService.class);
-					service.getPaginatedAllUsers(configHelper, new PagingCallbackWrapper<UserModel>(callback));
+					service.getPaginatedAllUsers(loadConfig, new PagingCallbackWrapper<UserModel>(callback));
 					
 				} else {
 					
@@ -102,22 +91,11 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 					}
 					UserServiceAsync service = (UserServiceAsync) GWT
 							.create(UserService.class);
-					service.getPaginatedUsersByRoles(configHelper, roles, new PagingCallbackWrapper<UserModel>(callback));
+					service.getPaginatedUsersByRoles(loadConfig, roles, new PagingCallbackWrapper<UserModel>(callback));
 					
 				}
 			}
-		};
-		loader = new BasePagingLoader<PagingLoadResult<UserModel>>(proxy) {
-			@Override
-			protected Object newLoadConfig() {
-				BasePagingLoadConfig config = new BaseFilterPagingLoadConfig();
-				return config;
-			}
-		};
-		loader.setRemoteSort(true);
-		store = new ListStore<UserModel>(loader);  
-		toolBar = new PagingToolBar(20);
-		toolBar.bind(loader);
+		});
 	}
 
 	private class UserRoleBox extends CheckBox {
@@ -202,36 +180,12 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 
 	@Override
 	protected void addGridPaging(ContentPanel cp, final EditorGrid<UserModel> grid) {
-		grid.addListener(Events.Attach, new Listener<GridEvent<UserModel>>() {
-			public void handleEvent(GridEvent<UserModel> be) {
-				PagingLoadConfig config = new BaseFilterPagingLoadConfig();
-				config.setOffset(0);
-				config.setLimit(20);
-
-				Map<String, Object> state = grid.getState();
-				if (state.containsKey("offset")) {
-					int offset = (Integer) state.get("offset");
-					int limit = (Integer) state.get("limit");
-					config.setOffset(offset);
-					config.setLimit(limit);
-				}
-				if (state.containsKey("sortField")) {
-					config.setSortField((String) state.get("sortField"));
-					config.setSortDir(SortDir.valueOf((String) state.get("sortDir")));
-				}
-				loader.load(config);
-			}
-		});
-		cp.setBottomComponent(toolBar);
-	}
-	
-	@Override
-	public ListStore<UserModel> getStore() {
-		return store;
+		grid.addListener(Events.Attach, listPagination.getAttachListener(grid)); 
+		cp.setBottomComponent(listPagination.getToolBar());
 	}
 	
 	public void refreshList() {
-		toolBar.refresh();
+		listPagination.getToolBar().refresh();
 	}
 	
 	@Override
@@ -310,7 +264,7 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 
 	@Override
 	protected ListStore<UserModel> getList() {
-		return store;
+		return listPagination.getStore();
 	}
 
 }
