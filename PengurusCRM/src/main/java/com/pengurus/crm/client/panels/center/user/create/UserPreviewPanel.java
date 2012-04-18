@@ -29,7 +29,9 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.pengurus.crm.client.models.PersonalDataModel;
+import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.MainPanel;
+import com.pengurus.crm.client.panels.center.administration.translation.TranslationsListPanelView;
 import com.pengurus.crm.client.panels.center.project.ProjectsListPanelByUserProjectManager;
 import com.pengurus.crm.client.panels.center.project.ProjectsListPanelByUserSupervisor;
 import com.pengurus.crm.client.panels.center.quote.QuotesListPanelByClient;
@@ -39,6 +41,7 @@ import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.ClientDTO;
 import com.pengurus.crm.shared.dto.IndividualClientDTO;
 import com.pengurus.crm.shared.dto.PersonalDataDTO;
+import com.pengurus.crm.shared.dto.TranslationDTO;
 import com.pengurus.crm.shared.dto.TranslatorDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
@@ -112,6 +115,12 @@ public class UserPreviewPanel extends MainPanel {
 	}
 
 	private void initTranslator(TranslatorDTO translator) {
+		ListStore<TranslationModel> list = new ListStore<TranslationModel>();
+		for(TranslationDTO translation : translator.getTranslations()){
+			list.add(new TranslationModel(translation));
+		}
+		verticalPanel.add((new TranslationsListPanelView(list, 150, 630))
+				.getModelList());
 		verticalPanel.add((new TasksListPanelViewByUser(translator, 150, 630))
 				.getModelList());
 	}

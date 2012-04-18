@@ -26,6 +26,7 @@ public class TaskDAOImpl extends GenericDAOImpl<Task> implements TaskDAO{
 				"where t.expert = " + id;
 		Query query = session.createQuery(hql);
 		List<Task> tasks = query.list();
+		session.close();
 		return tasks;
 	}
 }

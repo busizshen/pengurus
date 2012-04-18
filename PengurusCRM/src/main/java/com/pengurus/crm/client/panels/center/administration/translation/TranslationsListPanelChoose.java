@@ -10,6 +10,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.BoxComponent;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
@@ -99,6 +100,14 @@ public class TranslationsListPanelChoose extends TranslationsListPanel {
 		return translation;
 	}
 	
-	
+	@Override
+	protected void setStyle(ContentPanel cp) {
+		setHeaderVisible(false);
+		setAutoHeight(false);
+		setAutoWidth(false);
+		cp.setCollapsible(true);
+		cp.setAnimCollapse(true);
+		cp.collapse();
+	}
 
 }

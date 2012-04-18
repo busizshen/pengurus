@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.filters.GridFilters;
 import com.pengurus.crm.client.models.TranslationModel;
@@ -13,7 +12,6 @@ import com.pengurus.crm.client.panels.center.ListPanel;
 public abstract class TranslationsListPanel extends ListPanel<TranslationModel> {
 
 	ListStore<TranslationModel> list;
-	ModelList modelList;
 
 	public TranslationsListPanel() {
 		super();
@@ -53,17 +51,6 @@ public abstract class TranslationsListPanel extends ListPanel<TranslationModel> 
 	@Override
 	protected GridFilters getFilters() {
 		return new GridFilters();
-	}
-
-	@Override
-	protected void setStyle(ContentPanel cp) {
-		setHeaderVisible(false);
-		setAutoHeight(false);
-		setAutoWidth(false);
-		cp.setCollapsible(true);
-		cp.setAnimCollapse(true);
-		cp.collapse();
-
 	}
 
 }
