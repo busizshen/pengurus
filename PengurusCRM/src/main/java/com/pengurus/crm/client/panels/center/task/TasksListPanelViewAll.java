@@ -1,15 +1,16 @@
 package com.pengurus.crm.client.panels.center.task;
 
-import java.util.Set;
-
-import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.TaskModel;
+import com.pengurus.crm.client.panels.ListPagination;
+import com.pengurus.crm.client.panels.PaginationRpcProxy;
 import com.pengurus.crm.client.service.TaskService;
 import com.pengurus.crm.client.service.TaskServiceAsync;
-import com.pengurus.crm.shared.dto.TaskDTO;
+import com.pengurus.crm.shared.pagination.PagingCallbackWrapper;
+import com.pengurus.crm.shared.pagination.PagingLoadConfigHelper;
+
 
 
 public class TasksListPanelViewAll extends TasksListPanelView {
@@ -18,30 +19,18 @@ public class TasksListPanelViewAll extends TasksListPanelView {
 		initPanel();
 	}
 
-
 	@Override
-	protected ListStore<TaskModel> getList() {
-		final ListStore<TaskModel> list = new ListStore<TaskModel>();
-		AsyncCallback<Set<TaskDTO> > callback = new AsyncCallback<Set<TaskDTO> >() {
+	protected void initPaging() {
+		listPagination = new ListPagination<TaskModel>(new PaginationRpcProxy<TaskModel>() {
 
-			public void onFailure(Throwable t) {
-				MessageBox mb = new MessageBox();
-				mb.setMessage("Server Error");
-				mb.show();
+			@Override
+			protected void load(PagingLoadConfigHelper loadConfig,
+					AsyncCallback<PagingLoadResult<TaskModel>> callback) {
+				TaskServiceAsync service = (TaskServiceAsync) GWT
+						.create(TaskService.class);
+				service.getPaginatedAllTasks(loadConfig, new PagingCallbackWrapper<TaskModel>(callback));
 			}
-
-			public void onSuccess(Set<TaskDTO> result) {
-				for(TaskDTO q: result){
-					list.add(new TaskModel(q));
-				}
-			}
-		};
-		TaskServiceAsync service = (TaskServiceAsync) GWT
-				.create(TaskService.class);
-		service.getTasks(callback);
-
-		return list;
+		});
 	}
-
 
 }

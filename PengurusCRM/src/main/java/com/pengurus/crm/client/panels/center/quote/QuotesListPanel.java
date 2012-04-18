@@ -17,6 +17,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
+import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.grid.filters.DateFilter;
@@ -29,6 +30,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.QuoteModel;
+import com.pengurus.crm.client.panels.ListPagination;
 import com.pengurus.crm.client.panels.center.ListPanel;
 import com.pengurus.crm.client.service.QuoteService;
 import com.pengurus.crm.client.service.QuoteServiceAsync;
@@ -36,6 +38,20 @@ import com.pengurus.crm.shared.dto.QuoteDTO;
 
 public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 
+	ListPagination<QuoteModel> listPagination;
+
+	protected abstract void initPagination();
+
+	@Override
+	protected ListStore<QuoteModel> getList() {
+		return listPagination.getStore();
+	}
+
+	@Override
+	protected void addGridPaging(ContentPanel cp, EditorGrid<QuoteModel> grid) {
+		listPagination.addToGrid(cp, grid);
+	}
+	
 	protected List<ColumnConfig> getColumns() {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
@@ -218,8 +234,6 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 		};
 		return buttonRenderer;
 	}
-
-	protected abstract ListStore<QuoteModel> getList();
 
 	@Override
 	protected void setStyle(ContentPanel cp) {

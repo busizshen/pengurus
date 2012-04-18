@@ -181,8 +181,7 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 
 	@Override
 	protected void addGridPaging(ContentPanel cp, final EditorGrid<UserModel> grid) {
-		grid.addListener(Events.Attach, listPagination.getAttachListener(grid)); 
-		cp.setBottomComponent(listPagination.getToolBar());
+		listPagination.addToGrid(cp, grid);
 	}
 	
 	public void refreshList() {

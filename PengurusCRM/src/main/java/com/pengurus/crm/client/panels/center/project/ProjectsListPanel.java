@@ -15,6 +15,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
+import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.grid.filters.GridFilters;
@@ -22,6 +23,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.ProjectModel;
+import com.pengurus.crm.client.panels.ListPagination;
 import com.pengurus.crm.client.panels.center.ListPanel;
 import com.pengurus.crm.client.service.ProjectService;
 import com.pengurus.crm.client.service.ProjectServiceAsync;
@@ -29,7 +31,21 @@ import com.pengurus.crm.shared.dto.ProjectDTO;
 
 public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 
+	ListPagination<ProjectModel> listPagination;
+	
+	protected abstract void initPagination();
+	
+	@Override
+	protected ListStore<ProjectModel> getList() {
+		return listPagination.getStore();
+	}
 
+	@Override
+	protected void addGridPaging(ContentPanel cp, EditorGrid<ProjectModel> grid) {
+		listPagination.addToGrid(cp, grid);
+	}
+	
+	
 	@Override
 	protected List<ColumnConfig> getColumns() {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
@@ -160,9 +176,6 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 	protected String getName() {
 		return "Projects List Panel";
 	}
-
-	@Override
-	protected abstract ListStore<ProjectModel> getList();
 
 	@Override
 	protected GridFilters getFilters() {

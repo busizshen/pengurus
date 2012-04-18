@@ -7,30 +7,39 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.BoxComponent;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
+import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.TaskModel;
+import com.pengurus.crm.client.panels.ListPagination;
 import com.pengurus.crm.client.service.ProjectService;
 import com.pengurus.crm.client.service.ProjectServiceAsync;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 
 public abstract class TasksListPanelView extends TasksListPanel {
 
+	protected ListPagination<TaskModel> listPagination;
+	
 	protected void initPanel() {
+		initPaging();
 		modelList = new ModelList();
 		add(modelList);
 	}
-	
+
 	protected void initPanel(int height, int width) {
+		initPaging();
 		modelList = new ModelList(height, width);
 		add(modelList);
 	}
+
+	protected abstract void initPaging();
 
 	@Override
 	protected GridCellRenderer<TaskModel> getButtonRenderer() {
@@ -99,5 +108,14 @@ public abstract class TasksListPanelView extends TasksListPanel {
 			}
 		};
 		return buttonRenderer;
+	}
+
+	protected ListStore<TaskModel> getList() {
+		return listPagination.getStore();
+	}
+	
+	@Override
+	protected void addGridPaging(ContentPanel cp, EditorGrid<TaskModel> grid) {
+		listPagination.addToGrid(cp, grid);
 	}
 }

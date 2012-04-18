@@ -74,9 +74,6 @@ public abstract class TasksListPanel extends ListPanel<TaskModel> {
 	}
 
 	@Override
-	protected abstract ListStore<TaskModel> getList();
-
-	@Override
 	protected GridFilters getFilters() {
 		GridFilters filters = new GridFilters();
 		return filters;

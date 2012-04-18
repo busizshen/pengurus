@@ -5,15 +5,18 @@ import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.pengurus.crm.client.service.QuoteService;
 import com.pengurus.crm.client.service.QuoteServiceAsync;
 import com.pengurus.crm.shared.dto.QuoteDTO;
 
-public class QuoteModel extends BaseModel {
-	
+public class QuoteModel extends BaseModel implements IsSerializable {
 	private static final long serialVersionUID = -274993927725641112L;
 
 	private QuoteDTO quoteDTO;
+	
+	public QuoteModel() {}
+	
 	public QuoteModel(QuoteDTO quoteDTO){
 		setQuoteDTO(quoteDTO);
 	}

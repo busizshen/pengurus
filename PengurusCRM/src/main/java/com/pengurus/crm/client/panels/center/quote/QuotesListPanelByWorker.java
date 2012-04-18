@@ -1,13 +1,16 @@
 package com.pengurus.crm.client.panels.center.quote;
 
-import java.util.Set;
-
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.pengurus.crm.client.models.QuoteModel;
+import com.pengurus.crm.client.panels.ListPagination;
+import com.pengurus.crm.client.panels.PaginationRpcProxy;
 import com.pengurus.crm.client.service.QuoteService;
 import com.pengurus.crm.client.service.QuoteServiceAsync;
-import com.pengurus.crm.shared.dto.QuoteDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
+import com.pengurus.crm.shared.pagination.PagingCallbackWrapper;
+import com.pengurus.crm.shared.pagination.PagingLoadConfigHelper;
 
 public class QuotesListPanelByWorker extends QuotesListPanelByUser{
 	
@@ -20,10 +23,17 @@ public class QuotesListPanelByWorker extends QuotesListPanelByUser{
 	}
 	
 	@Override
-	protected void changeService(AsyncCallback<Set<QuoteDTO>> callback) {
-		QuoteServiceAsync quoteService = (QuoteServiceAsync) GWT
-				.create(QuoteService.class);
-		quoteService.getQuoteBySupervisorId(userDTO.getId(), callback);
+	protected void initPagination() {
+		listPagination = new ListPagination<QuoteModel>(new PaginationRpcProxy<QuoteModel>() {
+
+			@Override
+			protected void load(PagingLoadConfigHelper loadConfig,
+					AsyncCallback<PagingLoadResult<QuoteModel>> callback) {
+				QuoteServiceAsync service = (QuoteServiceAsync) GWT
+						.create(QuoteService.class);
+				service.getPaginatedQuotesBySupervisorId(loadConfig, userDTO.getId(), new PagingCallbackWrapper<QuoteModel>(callback));
+			}
+		});
 	}
 
 }

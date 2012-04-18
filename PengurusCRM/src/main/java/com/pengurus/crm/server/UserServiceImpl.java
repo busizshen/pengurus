@@ -148,7 +148,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public PagingLoadResultHelper<UserModel> getPaginatedAllUsers(PagingLoadConfigHelper loadConfig) {
-		ArrayList<UserModel> userModelList = new ArrayList<UserModel>();
+		List<UserModel> userModelList = new ArrayList<UserModel>();
 		for (UserDTO user:getAllUsers()) {
 			userModelList.add(new UserModel(user));
 		}
@@ -158,7 +158,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public PagingLoadResultHelper<UserModel> getPaginatedUsersByRoles(
 			PagingLoadConfigHelper loadConfig, Set<UserRoleDTO> roles) {
-		ArrayList<UserModel> userModelList = new ArrayList<UserModel>();
+		List<UserModel> userModelList = new ArrayList<UserModel>();
 		for (UserDTO user:getUsersByRoles(roles)) {
 			userModelList.add(new UserModel(user));
 		}

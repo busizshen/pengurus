@@ -1,5 +1,6 @@
 package com.pengurus.crm.server;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -7,12 +8,16 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.pengurus.crm.client.models.QuoteModel;
 import com.pengurus.crm.client.service.QuoteService;
 import com.pengurus.crm.daos.ClientDAO;
 import com.pengurus.crm.daos.QuoteDAO;
 import com.pengurus.crm.entities.Quote;
 import com.pengurus.crm.enums.Status;
 import com.pengurus.crm.shared.dto.QuoteDTO;
+import com.pengurus.crm.shared.pagination.PaginationUtils;
+import com.pengurus.crm.shared.pagination.PagingLoadConfigHelper;
+import com.pengurus.crm.shared.pagination.PagingLoadResultHelper;
 
 public class QuoteServiceImpl implements QuoteService {
 
@@ -31,7 +36,7 @@ public class QuoteServiceImpl implements QuoteService {
 			.getLogger(UserDetailsServiceImpl.class);
 
 	@Override
-	public Set<QuoteDTO> getQuotes() {
+	public Set<QuoteDTO> getAllQuotes() {
 		List<Quote> list = quoteDAO.loadAll();
 		Set<QuoteDTO> set = new HashSet<QuoteDTO>();
 		for (Quote q : list) {
@@ -77,7 +82,7 @@ public class QuoteServiceImpl implements QuoteService {
 	}
 
 	@Override
-	public Set<QuoteDTO> getQuoteBySupervisorId(Long id) {
+	public Set<QuoteDTO> getQuotesBySupervisorId(Long id) {
 		List<Quote> list = quoteDAO.loadAllBySupervisorId(id);
 		Set<QuoteDTO> set = new HashSet<QuoteDTO>();
 		for (Quote q : list) {
@@ -87,13 +92,43 @@ public class QuoteServiceImpl implements QuoteService {
 	}
 
 	@Override
-	public Set<QuoteDTO> getQuoteByClientId(Long id) {
+	public Set<QuoteDTO> getQuotesByClientId(Long id) {
 		List<Quote> list = quoteDAO.loadAllByClientId(id);
 		Set<QuoteDTO> set = new HashSet<QuoteDTO>();
 		for (Quote q : list) {
 			set.add(q.toDTOLazy());
 		}
 		return set;
+	}
+
+	@Override
+	public PagingLoadResultHelper<QuoteModel> getPaginatedAllQuotes(
+			PagingLoadConfigHelper loadConfig) {
+		List<QuoteModel> quoteModelList = new ArrayList<QuoteModel>();
+		for (QuoteDTO quoteDTO : getAllQuotes()) {
+			quoteModelList.add(new QuoteModel(quoteDTO));
+		}
+		return PaginationUtils.paginate(loadConfig, quoteModelList);
+	}
+
+	@Override
+	public PagingLoadResultHelper<QuoteModel> getPaginatedQuotesBySupervisorId(
+			PagingLoadConfigHelper loadConfig, Long id) {
+		List<QuoteModel> quoteModelList = new ArrayList<QuoteModel>();
+		for (QuoteDTO quoteDTO : getQuotesBySupervisorId(id)) {
+			quoteModelList.add(new QuoteModel(quoteDTO));
+		}
+		return PaginationUtils.paginate(loadConfig, quoteModelList);
+	}
+
+	@Override
+	public PagingLoadResultHelper<QuoteModel> getPaginatedQuotesByClientId(
+			PagingLoadConfigHelper loadConfig, Long id) {
+		List<QuoteModel> quoteModelList = new ArrayList<QuoteModel>();
+		for (QuoteDTO quoteDTO : getQuotesByClientId(id)) {
+			quoteModelList.add(new QuoteModel(quoteDTO));
+		}
+		return PaginationUtils.paginate(loadConfig, quoteModelList);
 	}
 
 }

@@ -11,17 +11,18 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoader;
 import com.extjs.gxt.ui.client.data.RpcProxy;
+import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.GridEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
-import com.pengurus.crm.client.models.UserModel;
 
 public class ListPagination<T extends Model> {
 
 	private PagingToolBar toolBar;
-	private ListStore<UserModel> store;
+	private ListStore<T> store;
 	private PagingLoader<PagingLoadResult<T>> loader;
 	private int pageSize;
 	
@@ -36,7 +37,7 @@ public class ListPagination<T extends Model> {
 			}
 		};
 		loader.setRemoteSort(true);
-		store = new ListStore<UserModel>(loader);  
+		store = new ListStore<T>(loader);  
 		toolBar = new PagingToolBar(pageSize);
 		toolBar.bind(loader);
 	}
@@ -68,12 +69,17 @@ public class ListPagination<T extends Model> {
 		};
 	}
 	
-	public ListStore<UserModel> getStore() {
+	public ListStore<T> getStore() {
 		return store;
 	}
 
 	public PagingToolBar getToolBar() {
 		return toolBar;
+	}
+
+	public void addToGrid(ContentPanel cp, EditorGrid<T> grid) {
+		grid.addListener(Events.Attach, getAttachListener(grid)); 
+		cp.setBottomComponent(getToolBar());
 	}
 
 }

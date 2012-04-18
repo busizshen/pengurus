@@ -95,7 +95,7 @@ public class GettingObjectsById {
 		// only if fields aren't null
 		long ExpertId = 310L;
 		Set<ProjectDTO> projects = projectService
-				.getProjectByExpertId(ExpertId);
+				.getProjectsByExpertId(ExpertId);
 		for (ProjectDTO project : projects) {
 			projectDTOIsNotNull(project);
 		}
@@ -135,7 +135,7 @@ public class GettingObjectsById {
 		// I know that such assumption is not good in tests.
 		long PMId = 313L;
 		Set<ProjectDTO> projects = projectService
-				.getProjectByProjectManagerId(PMId);
+				.getProjectsByProjectManagerId(PMId);
 		for (ProjectDTO project : projects) {
 			projectDTOIsNotNull(project);
 		}
