@@ -57,9 +57,8 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 	}
 	
 	public UserListPanel() {
-		super();
-		modelList = new ModelList();
 		initPaging();
+		modelList = new ModelList();
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
 		horizontalPanel.setSpacing(10);
 		horizontalPanel.add(modelList);
