@@ -11,7 +11,7 @@ public class WorkerPanelEditByList extends WorkerPanelEdit{
 	public WorkerPanelEditByList(WorkerDTO workerDTO, String heading,Set<WorkerDTO> workers) {
 		super(workerDTO, heading);
 		this.workers = workers;
-		addEditionPanel();
+		initPanel();
 	}
 
 	@Override

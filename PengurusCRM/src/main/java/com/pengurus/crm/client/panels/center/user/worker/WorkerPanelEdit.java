@@ -5,6 +5,7 @@ import com.extjs.gxt.ui.client.event.DomEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.shared.dto.WorkerDTO;
@@ -22,7 +23,7 @@ public abstract class WorkerPanelEdit extends WorkerPanel {
 		super();
 	}
 
-	protected void addEditionPanel() {
+	protected void addEditionPanel(HorizontalPanel hp) {
 		final Window window = new Window();
 		listenerCloseTab = new Listener<DomEvent>(){
 			@Override
@@ -32,15 +33,15 @@ public abstract class WorkerPanelEdit extends WorkerPanel {
 		listenerChangeWorker = new Listener<DomEvent>() {
 				@Override
 				public void handleEvent(DomEvent be) {
-					workerDTO = getChosenWorker();
-					refresh(workerDTO);
+					userDTO = getChosenWorker();
+					refresh(userDTO);
 				}
 		};
 		getWorkersPanel();
 		window.add(workersListPanel.getModelList());
 		window.setAutoWidth(true);
 		window.setAutoHide(true);
-		window.setHeading("Change");
+		window.setHeading("Select");
 		window.setClosable(false);
 		Button b2 = new Button("Cancel");
 		b2.addListener(Events.OnClick, listenerCloseTab);
@@ -51,7 +52,7 @@ public abstract class WorkerPanelEdit extends WorkerPanel {
 				window.show();
 				
 			}  });
-		add(b);
+		hp.add(b);
 		
 	}
 	protected abstract void getWorkersPanel();

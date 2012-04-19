@@ -4,7 +4,9 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelView;
+import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelChoose;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 
 public class ProjectPanelView extends ProjectPanel{
@@ -13,23 +15,12 @@ public class ProjectPanelView extends ProjectPanel{
 		super(projectDTO);
 	}
 
-	@Override
-	protected void addTranslatorsPanel() {
-		// there will be nothing 
-	}
 
 	@Override
-	protected void addProjectMangaersPanel() {
-		// there will be nothing 
-		
-	}
-
-
-	@Override
-	protected void addDescriptionPanel(HorizontalPanel hp) {
+	protected void addDescriptionPanel(VerticalPanel vp) {
 		descriptionPanel = new DescriptionPanelView(projectDTO.getDescription());
 		descriptionPanel.setWidth(300);
-		hp.add(descriptionPanel);
+		vp.add(descriptionPanel);
 	}
 
 	@Override
@@ -43,6 +34,20 @@ public class ProjectPanelView extends ProjectPanel{
 			
 		});
 		hp2.add(b);
+	}
+
+
+	@Override
+	protected WorkerPanelChoose getTranslatorsPanel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	protected WorkerPanelChoose getProjectMangaersPanel() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

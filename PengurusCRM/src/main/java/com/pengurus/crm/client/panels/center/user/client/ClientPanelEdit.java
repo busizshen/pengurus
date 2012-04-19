@@ -5,6 +5,7 @@ import com.extjs.gxt.ui.client.event.DomEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.shared.dto.ClientDTO;
@@ -15,15 +16,13 @@ public class ClientPanelEdit extends ClientPanel {
 
 	public ClientPanelEdit(ClientDTO client,String heading) {
 		super(client,heading);
-		addEditionPanel();
 	}
 
 	public ClientPanelEdit() {
 		super();
-		addEditionPanel();
 	}
 
-	protected void addEditionPanel() {
+	protected void addEditionPanel(HorizontalPanel hp) {
 		final Window window = new Window();
 		Listener<DomEvent> listenerCloseTab = new Listener<DomEvent>() {
 			@Override
@@ -34,8 +33,8 @@ public class ClientPanelEdit extends ClientPanel {
 		Listener<DomEvent> listenerChangeClient = new Listener<DomEvent>() {
 			@Override
 			public void handleEvent(DomEvent be) {
-				clientDTO = getChosenClient();
-				refresh(clientDTO);
+				userDTO = getChosenClient();
+				refresh(userDTO);
 			}
 		};
 		cl = new ClientsListPanel(listenerChangeClient, listenerCloseTab);
@@ -43,7 +42,7 @@ public class ClientPanelEdit extends ClientPanel {
 		window.setAutoWidth(true);
 		window.setAutoHide(true);
 		window.setEnabled(true);
-		window.setHeading("Change Client");
+		window.setHeading("Select Client");
 		window.setClosable(false);
 		Button b2 = new Button("Cancel");
 		b2.addListener(Events.OnClick, listenerCloseTab);
@@ -56,7 +55,7 @@ public class ClientPanelEdit extends ClientPanel {
 
 					}
 				});
-		add(b);
+		hp.add(b);
 	}
 
 	@Override

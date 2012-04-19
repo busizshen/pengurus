@@ -13,6 +13,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.models.UserModel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelChoose;
@@ -38,7 +39,7 @@ public class ProjectPanelEdit extends ProjectPanel {
 	}
 
 	@Override
-	protected void addTranslatorsPanel() {
+	protected WorkerPanelChoose getTranslatorsPanel() {
 		AsyncCallback<Set<TranslatorDTO>> callback = new AsyncCallback<Set<TranslatorDTO>>() {
 
 			public void onFailure(Throwable t) {
@@ -66,13 +67,15 @@ public class ProjectPanelEdit extends ProjectPanel {
 		service.getTranslatorsByRoles(roles, callback);
 
 		workersPanel = new WorkerPanelChoose("Experts");
-		add(workersPanel);
+
+		workersPanel.setWidth(470);
+		return workersPanel;
 
 	}
 
 	
 	@Override
-	protected void addProjectMangaersPanel() {
+	protected WorkerPanelChoose getProjectMangaersPanel() {
 		AsyncCallback<Set<WorkerDTO>> callback = new AsyncCallback<Set<WorkerDTO>>() {
 
 			public void onFailure(Throwable t) {
@@ -100,14 +103,16 @@ public class ProjectPanelEdit extends ProjectPanel {
 		service.getWorkersByRoles(roles, callback);
 
 		projectManagersPanel = new WorkerPanelChoose("Project Managers");
-		add(projectManagersPanel);
+		
+		projectManagersPanel.setWidth(470);
+		return projectManagersPanel;
 	}
 
 	@Override
-	protected void addDescriptionPanel(HorizontalPanel hp) {
+	protected void addDescriptionPanel(VerticalPanel vp) {
 		descriptionPanel = new DescriptionPanelEdit(projectDTO.getDescription());
 		descriptionPanel.setWidth(300);
-		hp.add(descriptionPanel);
+		vp.add(descriptionPanel);
 	}
 
 	@Override

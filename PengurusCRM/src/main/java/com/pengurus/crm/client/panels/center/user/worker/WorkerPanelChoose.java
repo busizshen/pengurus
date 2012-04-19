@@ -17,8 +17,8 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.ListField;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.pengurus.crm.client.models.UserModel;
+import com.pengurus.crm.client.panels.center.user.create.UserPreviewPanel;
 import com.pengurus.crm.shared.dto.UserDTO;
-import com.pengurus.crm.shared.dto.WorkerDTO;
 
 public class WorkerPanelChoose extends FormPanel {
 	/* to trzeba zmienić dla translatora zeby sie jego jezyki wyswietlaly */
@@ -26,14 +26,12 @@ public class WorkerPanelChoose extends FormPanel {
 	private ListStore<UserModel> storeTo;
 
 	public WorkerPanelChoose(String name) {
-		this.setCollapsible(true);
-		this.setAnimCollapse(true);
 		this.setHeading(name);
 		final DualListField<UserModel> lists = new DualListField<UserModel>();
 
 		lists.setMode(Mode.INSERT);
 		lists.setFieldLabel(name);
-
+		
 		ListField<UserModel> from = lists.getFromList();
 		from.setDisplayField("fullName");
 		lists.getToList()
@@ -73,9 +71,8 @@ public class WorkerPanelChoose extends FormPanel {
 		final Window window = new Window();
 		window.setAutoHeight(true);
 		window.setAutoWidth(true);
-		WorkerPanelView workerPanel = new WorkerPanelView((WorkerDTO) userDTO,
-				"Chosen worker");
-		window.add(workerPanel);
+		UserPreviewPanel userPanel = new UserPreviewPanel(userDTO);
+		window.add(userPanel);
 		window.addButton(new Button("OK", new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {

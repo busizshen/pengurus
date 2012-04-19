@@ -18,9 +18,6 @@ public class JobsListPanelQuoteEdit extends JobsListPanelQuote {
 	
 	public JobsListPanelQuoteEdit getPanel() {
 		setHeading("Jobs");
-		setCollapsible(true);
-		setAnimCollapse(true);
-		collapse();
 		modelList = new ModelList();
 		Button createButton = new Button("Create New Job", new SelectionListener<ButtonEvent>(){
 			@Override

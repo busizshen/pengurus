@@ -12,11 +12,12 @@ public class WorkerPanelEditByRoles extends WorkerPanelEdit {
 	public WorkerPanelEditByRoles(WorkerDTO workerDTO, String heading, Set<UserRoleDTO> roles) {
 		super(workerDTO, heading);
 		this.roles =roles;
-		addEditionPanel();
+		initPanel();
 	}
 
 	public WorkerPanelEditByRoles() {
 		super();
+		initPanel();
 	}
 
 	@Override

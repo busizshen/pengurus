@@ -11,9 +11,6 @@ public class JobsListPanelProjectView extends JobsListPanelProject{
 
 	public ContentPanel getPanel() {
 		setHeading("Jobs");
-		setCollapsible(true);
-		setAnimCollapse(true);
-		collapse();
 		modelList = new ModelList();
 		add(modelList);
 		return this;
