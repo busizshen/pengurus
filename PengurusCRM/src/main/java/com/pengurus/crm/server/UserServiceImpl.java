@@ -15,18 +15,10 @@ import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.exceptions.ServiceException;
 import com.pengurus.crm.client.service.exceptions.UsernameExistsException;
 import com.pengurus.crm.daos.UserDAO;
-import com.pengurus.crm.entities.BusinessClient;
-import com.pengurus.crm.entities.IndividualClient;
-import com.pengurus.crm.entities.Translator;
 import com.pengurus.crm.entities.User;
 import com.pengurus.crm.entities.UserUtils;
-import com.pengurus.crm.entities.Worker;
-import com.pengurus.crm.shared.dto.BusinessClientDTO;
-import com.pengurus.crm.shared.dto.IndividualClientDTO;
-import com.pengurus.crm.shared.dto.TranslatorDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
-import com.pengurus.crm.shared.dto.WorkerDTO;
 import com.pengurus.crm.shared.pagination.PaginationUtils;
 import com.pengurus.crm.shared.pagination.PagingLoadConfigHelper;
 import com.pengurus.crm.shared.pagination.PagingLoadResultHelper;
@@ -70,17 +62,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	private Void updateUserHelper(UserDTO userDTO) throws ServiceException {
-		if (userDTO instanceof IndividualClientDTO) {
-			userDAO.update(new IndividualClient((IndividualClientDTO) userDTO));
-		} else if (userDTO instanceof BusinessClientDTO) {
-			userDAO.update(new BusinessClient((BusinessClientDTO) userDTO));
-		} else if (userDTO instanceof WorkerDTO) {
-			userDAO.update(new Worker((WorkerDTO) userDTO));
-		} else if (userDTO instanceof TranslatorDTO) {
-			userDAO.update(new Translator((TranslatorDTO) userDTO));
-		} else {
-			throw new ServiceException();
-		}
+		userDAO.update(UserUtils.toUser(userDTO));
 		return null;
 	}
 	

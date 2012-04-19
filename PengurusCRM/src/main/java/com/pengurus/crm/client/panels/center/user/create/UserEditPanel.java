@@ -120,16 +120,13 @@ public class UserEditPanel extends UserBasePanel {
 					}
 				};
 
-				UserDTO user = ((UserTypeRadio) userType.getValue())
-						.createUser();
+				UserDTO user = ((UserTypeRadio) userType.getValue()).createUser();
 				user.setId(id);
+				UserServiceAsync service = (UserServiceAsync) GWT
+						.create(UserService.class);
 				if ((password.getValue() == null) || (password.getValue().isEmpty())) {
-					UserServiceAsync service = (UserServiceAsync) GWT
-							.create(UserService.class);
 					service.updateUser(user, callback);
 				} else {
-					UserServiceAsync service = (UserServiceAsync) GWT
-							.create(UserService.class);
 					service.updateUserWithPassword(user, callback);
 				}
 			}

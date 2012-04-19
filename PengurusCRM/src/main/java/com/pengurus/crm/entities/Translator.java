@@ -25,9 +25,9 @@ public class Translator extends Worker{
 
     protected void init(TranslatorDTO translatorDTO) {
     	super.init(translatorDTO);
-    	this.translations = new HashSet<Translation>();
+    	translations = new HashSet<Translation>();
     	for (TranslationDTO translationDTO: translatorDTO.getTranslations()) {
-    		this.translations.add(new Translation(translationDTO));
+    		translations.add(new Translation(translationDTO));
     	}
     }
     
