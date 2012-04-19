@@ -404,7 +404,7 @@ public abstract class UserBasePanel extends MainPanel {
 		@Override
 		protected void onSelect() {
 			super.onSelect();
-			enableRole(UserRoleDTO.ROLE_EXPERT);
+			selectRole(UserRoleDTO.ROLE_CLIENT);
 			enableRole(UserRoleDTO.ROLE_VERIFICATOR);
 			enableRole(UserRoleDTO.ROLE_FREELANCER);
 			personalDataEdit.show();
