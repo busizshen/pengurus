@@ -70,7 +70,7 @@ CREATE SEQUENCE hibernate_sequence
 -- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('hibernate_sequence', 323, true);
+SELECT pg_catalog.setval('hibernate_sequence', 365, true);
 
 
 --
@@ -229,8 +229,7 @@ CREATE TABLE translation (
     type bigint,
     lfrom bigint,
     lto bigint,
-    defaultprice bigint,
-    user_id bigint
+    defaultprice bigint
 );
 
 
@@ -251,6 +250,16 @@ CREATE TABLE translationtype (
 
 CREATE TABLE translator (
     user_id bigint NOT NULL
+);
+
+
+--
+-- Name: translator_translation; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE translator_translation (
+    user_id bigint NOT NULL,
+    translation_id bigint NOT NULL
 );
 
 
@@ -352,6 +361,7 @@ INSERT INTO currencytype (id, currency) VALUES (278, 'CHF (Swiss franc)');
 INSERT INTO currencytype (id, currency) VALUES (284, 'SEK (Swedish krona)');
 INSERT INTO currencytype (id, currency) VALUES (292, 'TRY (Turkish lira)');
 INSERT INTO currencytype (id, currency) VALUES (308, '$$Project0');
+INSERT INTO currencytype (id, currency) VALUES (355, 'PLN0');
 
 
 --
@@ -537,6 +547,8 @@ INSERT INTO language (id, language) VALUES (286, 'Esperanto');
 INSERT INTO language (id, language) VALUES (287, 'Lithuanian');
 INSERT INTO language (id, language) VALUES (288, 'Jamaican Creole');
 INSERT INTO language (id, language) VALUES (289, 'Southern Thai');
+INSERT INTO language (id, language) VALUES (353, 'Polish0');
+INSERT INTO language (id, language) VALUES (354, 'English0');
 
 
 --
@@ -583,6 +595,7 @@ INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (299
 INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (301, 'John', 'Smith', '1 Reds Road, Manchester E5 00T, United Kingdom', NULL);
 INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (303, 'Michael', 'Angelo', '59 Rue de Rivoli 75001 Paris, France', NULL);
 INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (311, 'Jacob', 'Harper', '44 Church Road Wimbledon London SW19 5AE, England', NULL);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (351, 'dasd', 'dasdsad', 'dasdasd', NULL);
 
 
 --
@@ -700,6 +713,7 @@ INSERT INTO price (id, price, currency) VALUES (277, 201, 278);
 INSERT INTO price (id, price, currency) VALUES (283, 202, 284);
 INSERT INTO price (id, price, currency) VALUES (291, 203, 292);
 INSERT INTO price (id, price, currency) VALUES (307, 200, 308);
+INSERT INTO price (id, price, currency) VALUES (356, 100, 355);
 
 
 --
@@ -741,6 +755,7 @@ INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (55
 INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (70, 'in_progress', 68, 69, 'Quote description');
 INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (85, 'open', NULL, 84, 'new quote description');
 
+
 --
 -- Data for Name: task; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -774,28 +789,29 @@ INSERT INTO task (task_id, status, expert, deadline, translation, amount, price,
 -- Data for Name: translation; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (6, 3, 1, 2, 4, 7);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (46, 43, 41, 42, 44, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (61, 58, 56, 57, 59, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (76, 73, 71, 72, 74, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (91, 88, 86, 87, 89, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (123, 120, 118, 119, 121, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (133, 130, 128, 129, 131, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (143, 140, 138, 139, 141, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (153, 150, 148, 149, 151, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (167, 164, 162, 163, 165, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (179, 176, 174, 175, 177, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (191, 188, 186, 187, 189, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (205, 202, 200, 201, 203, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (217, 212, 213, 214, 216, 218);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (225, 220, 221, 222, 224, 226);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (233, 228, 229, 230, 232, 234);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (241, 236, 237, 238, 240, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (249, 244, 245, 246, 248, 250);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (273, 270, 268, 269, 271, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (279, 276, 274, 275, 277, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (285, 282, 287, 286, 283, NULL);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice, user_id) VALUES (309, 306, 42, 268, 307, NULL);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (6, 3, 1, 2, 4);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (46, 43, 41, 42, 44);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (61, 58, 56, 57, 59);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (76, 73, 71, 72, 74);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (91, 88, 86, 87, 89);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (123, 120, 118, 119, 121);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (133, 130, 128, 129, 131);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (143, 140, 138, 139, 141);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (153, 150, 148, 149, 151);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (167, 164, 162, 163, 165);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (179, 176, 174, 175, 177);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (191, 188, 186, 187, 189);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (205, 202, 200, 201, 203);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (217, 212, 213, 214, 216);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (225, 220, 221, 222, 224);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (233, 228, 229, 230, 232);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (241, 236, 237, 238, 240);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (249, 244, 245, 246, 248);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (273, 270, 268, 269, 271);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (279, 276, 274, 275, 277);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (285, 282, 287, 286, 283);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (309, 306, 42, 268, 307);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (357, 352, 353, 354, 356);
 
 
 --
@@ -827,6 +843,11 @@ INSERT INTO translationtype (id, description, unit) VALUES (270, 'description', 
 INSERT INTO translationtype (id, description, unit) VALUES (276, 'description', 'unit');
 INSERT INTO translationtype (id, description, unit) VALUES (282, 'translation descritpion', 'unit');
 INSERT INTO translationtype (id, description, unit) VALUES (306, 'description', 'unit');
+INSERT INTO translationtype (id, description, unit) VALUES (352, 'description', 'word');
+INSERT INTO translationtype (id, description, unit) VALUES (358, 'description', 'word');
+INSERT INTO translationtype (id, description, unit) VALUES (360, 'description', 'word');
+INSERT INTO translationtype (id, description, unit) VALUES (362, 'description', 'word');
+INSERT INTO translationtype (id, description, unit) VALUES (364, 'description', 'word');
 
 
 --
@@ -854,6 +875,19 @@ INSERT INTO translator (user_id) VALUES (310);
 INSERT INTO translator (user_id) VALUES (312);
 INSERT INTO translator (user_id) VALUES (315);
 INSERT INTO translator (user_id) VALUES (316);
+INSERT INTO translator (user_id) VALUES (350);
+
+
+--
+-- Data for Name: translator_translation; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO translator_translation (user_id, translation_id) VALUES (7, 6);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (218, 217);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (226, 225);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (234, 233);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (250, 249);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (350, 285);
 
 
 --
@@ -908,6 +942,7 @@ INSERT INTO "user" (user_id, username, password, description) VALUES (315, 'proj
 INSERT INTO "user" (user_id, username, password, description) VALUES (316, '2projectFreelancer0', 'pass', 'desc');
 INSERT INTO "user" (user_id, username, password, description) VALUES (321, 'IndividualClientProject0', 'pass', 'individual client');
 INSERT INTO "user" (user_id, username, password, description) VALUES (322, 'ProjectSupervisor0', 'pass', 'supervisor description');
+INSERT INTO "user" (user_id, username, password, description) VALUES (350, 'DASDASD', '5529d44253bb0274cf71b9978cda091a8b0d7c54', 'dasdasdas');
 
 
 --
@@ -999,6 +1034,8 @@ INSERT INTO user_userrole (user_id, user_role) VALUES (316, 'ROLE_VERIFICATOR');
 INSERT INTO user_userrole (user_id, user_role) VALUES (321, 'ROLE_CLIENT');
 INSERT INTO user_userrole (user_id, user_role) VALUES (322, 'ROLE_PROJECTMANAGER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (322, 'ROLE_EXECUTIVE');
+INSERT INTO user_userrole (user_id, user_role) VALUES (350, 'ROLE_VERIFICATOR');
+INSERT INTO user_userrole (user_id, user_role) VALUES (350, 'ROLE_USER');
 
 
 --
@@ -1040,6 +1077,7 @@ INSERT INTO worker (user_id, data) VALUES (314, 311);
 INSERT INTO worker (user_id, data) VALUES (315, 311);
 INSERT INTO worker (user_id, data) VALUES (316, 311);
 INSERT INTO worker (user_id, data) VALUES (322, 311);
+INSERT INTO worker (user_id, data) VALUES (350, 351);
 
 
 --
@@ -1195,6 +1233,14 @@ ALTER TABLE ONLY translator
 
 
 --
+-- Name: translator_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY translator_translation
+    ADD CONSTRAINT translator_translation_pkey PRIMARY KEY (user_id, translation_id);
+
+
+--
 -- Name: user_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1283,14 +1329,6 @@ ALTER TABLE ONLY translation
 
 
 --
--- Name: fk129d8691f9fa85ce; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY translation
-    ADD CONSTRAINT fk129d8691f9fa85ce FOREIGN KEY (user_id) REFERENCES translator(user_id);
-
-
---
 -- Name: fk185bd6f988badfbb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1304,6 +1342,22 @@ ALTER TABLE ONLY project
 
 ALTER TABLE ONLY project
     ADD CONSTRAINT fk185bd6f996cd9f0b FOREIGN KEY (supervisor) REFERENCES worker(user_id);
+
+
+--
+-- Name: fk1d96b3ec209dff15; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY translator_translation
+    ADD CONSTRAINT fk1d96b3ec209dff15 FOREIGN KEY (translation_id) REFERENCES translation(translation_id);
+
+
+--
+-- Name: fk1d96b3ecf9fa85ce; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY translator_translation
+    ADD CONSTRAINT fk1d96b3ecf9fa85ce FOREIGN KEY (user_id) REFERENCES translator(user_id);
 
 
 --
@@ -1519,3 +1573,4 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
+

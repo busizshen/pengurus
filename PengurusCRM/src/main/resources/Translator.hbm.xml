@@ -7,11 +7,11 @@
         <key>
             <column name="USER_ID" />
         </key>
-        <set name="translations" table="TRANSLATION" inverse="false" lazy="false">
+        <set name="translations" table="TRANSLATOR_TRANSLATION" inverse="false" lazy="false">
             <key>
             	<column name="USER_ID"></column>
             </key>
-            <one-to-many class="com.pengurus.crm.entities.Translation" />
+            <many-to-many class="com.pengurus.crm.entities.Translation" column="TRANSLATION_ID" />
         </set>
     </joined-subclass>
 </hibernate-mapping>

@@ -118,7 +118,7 @@ public class UserServiceImpl implements UserService {
 		for (User u : list) {
 			for (UserRoleDTO role : roles) {
 				if (u.getAuthorities().contains(role)){
-					set.add(u.toDTOLazy());
+					set.add(u.toDTO());
 					break;
 				}
 			}
