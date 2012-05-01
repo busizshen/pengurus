@@ -2,6 +2,8 @@ package com.pengurus.crm.client.service;
 
 import java.util.Set;
 
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.pengurus.crm.client.models.ProjectModel;
 import com.pengurus.crm.client.models.QuoteModel;
 import com.pengurus.crm.client.models.TaskModel;
@@ -10,7 +12,8 @@ import com.pengurus.crm.shared.dto.UserRoleDTO;
 import com.pengurus.crm.shared.pagination.PagingLoadConfigHelper;
 import com.pengurus.crm.shared.pagination.PagingLoadResultHelper;
 
-public interface PaginationService {
+@RemoteServiceRelativePath("pagination.rpc")
+public interface PaginationService extends RemoteService {
 
 	public PagingLoadResultHelper<ProjectModel> getPaginatedAllProjects(PagingLoadConfigHelper loadConfig);
 	public PagingLoadResultHelper<ProjectModel> getPaginatedProjectsByExpertId(PagingLoadConfigHelper loadConfig, Long id);
