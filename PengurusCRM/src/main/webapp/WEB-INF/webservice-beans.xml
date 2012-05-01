@@ -4,8 +4,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="numberServiceBean" class="com.pengurus.crm.server.NumberServiceImpl" />
-
 	<bean id="passwordEncoder"
 		class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" />
 
@@ -14,51 +12,57 @@
 		<property name="userPropertyToUse" value="username" />
 	</bean>
 
-	<bean id="userServiceBean" class="com.pengurus.crm.server.UserServiceImpl">
+	<bean id="userServiceBean" class="com.pengurus.crm.server.services.UserServiceImpl">
 		<property name="userDAO" ref="userDao" />
 		<property name="passwordEncoder" ref="passwordEncoder" />
 		<property name="saltSource" ref="saltSource" />
-
 	</bean>
 
-	<bean id="currentSessionServiceBean" class="com.pengurus.crm.server.CurrentSessionServiceImpl">
+	<bean id="currentSessionServiceBean" class="com.pengurus.crm.server.services.CurrentSessionServiceImpl">
 		<property name="userDAO" ref="userDao" />
 		<property name="userService" ref="userServiceBean" />
 	</bean>
 
-	<bean id="userDetailsService" class="com.pengurus.crm.server.UserDetailsServiceImpl">
+	<bean id="userDetailsService" class="com.pengurus.crm.server.services.UserDetailsServiceImpl">
 		<property name="userDAO" ref="userDao" />
 	</bean>
-	<bean id="quoteServiceBean" class="com.pengurus.crm.server.QuoteServiceImpl">
+	<bean id="quoteServiceBean" class="com.pengurus.crm.server.services.QuoteServiceImpl">
 		<property name="quoteDAO" ref="quoteDao" />
 		<property name="clientDAO" ref="clientDao" />
 	</bean>
-	<bean id="clientServiceBean" class="com.pengurus.crm.server.ClientServiceImpl">
+	<bean id="clientServiceBean" class="com.pengurus.crm.server.services.ClientServiceImpl">
 		<property name="clientDAO" ref="clientDao" />
 	</bean>
-	<bean id="administrationServiceBean" class="com.pengurus.crm.server.AdministrationServiceImpl">
+	<bean id="administrationServiceBean" class="com.pengurus.crm.server.services.AdministrationServiceImpl">
 		<property name="currencyTypeDAO" ref="currencyTypeDao" />
 		<property name="translationDAO" ref="translationDao" />
 		<property name="translationTypeDAO" ref="translationTypeDao" />
 		<property name="languageDAO" ref="languageDao" />
 	</bean>
 
-	<bean id="jobServiceBean" class="com.pengurus.crm.server.JobServiceImpl">
+	<bean id="jobServiceBean" class="com.pengurus.crm.server.services.JobServiceImpl">
 		<property name="jobDAO" ref="jobDao" />
 		<property name="translationDAO" ref="translationDao" />
 	</bean>
-	<bean id="projectServiceBean" class="com.pengurus.crm.server.ProjectServiceImpl">
+	<bean id="projectServiceBean" class="com.pengurus.crm.server.services.ProjectServiceImpl">
 		<property name="projectDAO" ref="projectDao" />
 	</bean>
-	<bean id="taskServiceBean" class="com.pengurus.crm.server.TaskServiceImpl">
+	<bean id="taskServiceBean" class="com.pengurus.crm.server.services.TaskServiceImpl">
 		<property name="taskDAO" ref="taskDao" />
 	</bean>
 
-	<bean id="workerServiceBean" class="com.pengurus.crm.server.WorkerServiceImpl">
+	<bean id="workerServiceBean" class="com.pengurus.crm.server.services.WorkerServiceImpl">
 		<property name="workerDAO" ref="workerDao" />
 	</bean>
 
-	<bean id="translatorServiceBean" class="com.pengurus.crm.server.TranslatorServiceImpl">
+	<bean id="translatorServiceBean" class="com.pengurus.crm.server.services.TranslatorServiceImpl">
 		<property name="translatorDAO" ref="translatorDao" />
+	</bean>
+
+	<bean id="paginationServiceBean" class="com.pengurus.crm.server.services.PaginationServiceImpl">
+		<property name="quoteService" ref="quoteServiceBean" />
+		<property name="projectService" ref="projectServiceBean" />
+		<property name="taskService" ref="taskServiceBean" />
+		<property name="userService" ref="userServiceBean" />
 	</bean>
 </beans>

@@ -1,4 +1,4 @@
-package com.pengurus.crm.server;
+package com.pengurus.crm.server.services;
 
 import java.util.HashSet;
 import java.util.List;

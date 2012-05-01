@@ -6,8 +6,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.ProjectModel;
 import com.pengurus.crm.client.panels.ListPagination;
 import com.pengurus.crm.client.panels.PaginationRpcProxy;
-import com.pengurus.crm.client.service.ProjectService;
-import com.pengurus.crm.client.service.ProjectServiceAsync;
+import com.pengurus.crm.client.service.PaginationService;
+import com.pengurus.crm.client.service.PaginationServiceAsync;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.pagination.PagingCallbackWrapper;
 import com.pengurus.crm.shared.pagination.PagingLoadConfigHelper;
@@ -37,8 +37,8 @@ public class ProjectsListPanelByUserProjectManager extends
 			protected void load(PagingLoadConfigHelper loadConfig,
 					AsyncCallback<PagingLoadResult<ProjectModel>> callback) {
 
-				ProjectServiceAsync service = (ProjectServiceAsync) GWT
-						.create(ProjectService.class);
+				PaginationServiceAsync service = (PaginationServiceAsync) GWT
+						.create(PaginationService.class);
 				service.getPaginatedProjectsByProjectManagerId(loadConfig, user.getId(), new PagingCallbackWrapper<ProjectModel>(callback));
 				
 			}

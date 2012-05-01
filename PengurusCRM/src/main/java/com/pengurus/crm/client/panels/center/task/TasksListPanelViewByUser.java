@@ -6,8 +6,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.TaskModel;
 import com.pengurus.crm.client.panels.ListPagination;
 import com.pengurus.crm.client.panels.PaginationRpcProxy;
-import com.pengurus.crm.client.service.TaskService;
-import com.pengurus.crm.client.service.TaskServiceAsync;
+import com.pengurus.crm.client.service.PaginationService;
+import com.pengurus.crm.client.service.PaginationServiceAsync;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.pagination.PagingCallbackWrapper;
 import com.pengurus.crm.shared.pagination.PagingLoadConfigHelper;
@@ -38,8 +38,8 @@ public class TasksListPanelViewByUser extends TasksListPanelView {
 			@Override
 			protected void load(PagingLoadConfigHelper loadConfig,
 					AsyncCallback<PagingLoadResult<TaskModel>> callback) {
-				TaskServiceAsync service = (TaskServiceAsync) GWT
-						.create(TaskService.class);
+				PaginationServiceAsync service = (PaginationServiceAsync) GWT
+						.create(PaginationService.class);
 				service.getPaginatedTasksByExpertId(loadConfig, user.getId(), new PagingCallbackWrapper<TaskModel>(callback));
 			}
 		});

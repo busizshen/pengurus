@@ -1,6 +1,5 @@
-package com.pengurus.crm.server;
+package com.pengurus.crm.server.services;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,16 +7,12 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.pengurus.crm.client.models.QuoteModel;
 import com.pengurus.crm.client.service.QuoteService;
 import com.pengurus.crm.daos.ClientDAO;
 import com.pengurus.crm.daos.QuoteDAO;
 import com.pengurus.crm.entities.Quote;
 import com.pengurus.crm.enums.Status;
 import com.pengurus.crm.shared.dto.QuoteDTO;
-import com.pengurus.crm.shared.pagination.PaginationUtils;
-import com.pengurus.crm.shared.pagination.PagingLoadConfigHelper;
-import com.pengurus.crm.shared.pagination.PagingLoadResultHelper;
 
 public class QuoteServiceImpl implements QuoteService {
 
@@ -100,35 +95,4 @@ public class QuoteServiceImpl implements QuoteService {
 		}
 		return set;
 	}
-
-	@Override
-	public PagingLoadResultHelper<QuoteModel> getPaginatedAllQuotes(
-			PagingLoadConfigHelper loadConfig) {
-		List<QuoteModel> quoteModelList = new ArrayList<QuoteModel>();
-		for (QuoteDTO quoteDTO : getAllQuotes()) {
-			quoteModelList.add(new QuoteModel(quoteDTO));
-		}
-		return PaginationUtils.paginate(loadConfig, quoteModelList);
-	}
-
-	@Override
-	public PagingLoadResultHelper<QuoteModel> getPaginatedQuotesBySupervisorId(
-			PagingLoadConfigHelper loadConfig, Long id) {
-		List<QuoteModel> quoteModelList = new ArrayList<QuoteModel>();
-		for (QuoteDTO quoteDTO : getQuotesBySupervisorId(id)) {
-			quoteModelList.add(new QuoteModel(quoteDTO));
-		}
-		return PaginationUtils.paginate(loadConfig, quoteModelList);
-	}
-
-	@Override
-	public PagingLoadResultHelper<QuoteModel> getPaginatedQuotesByClientId(
-			PagingLoadConfigHelper loadConfig, Long id) {
-		List<QuoteModel> quoteModelList = new ArrayList<QuoteModel>();
-		for (QuoteDTO quoteDTO : getQuotesByClientId(id)) {
-			quoteModelList.add(new QuoteModel(quoteDTO));
-		}
-		return PaginationUtils.paginate(loadConfig, quoteModelList);
-	}
-
 }

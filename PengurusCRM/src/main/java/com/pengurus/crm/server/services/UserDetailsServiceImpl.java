@@ -1,4 +1,4 @@
-package com.pengurus.crm.server;
+package com.pengurus.crm.server.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

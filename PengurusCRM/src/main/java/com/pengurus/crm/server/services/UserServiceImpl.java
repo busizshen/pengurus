@@ -1,16 +1,15 @@
-package com.pengurus.crm.server;
+package com.pengurus.crm.server.services;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
-import com.pengurus.crm.client.models.UserModel;
 import com.pengurus.crm.client.service.UserService;
 import com.pengurus.crm.client.service.exceptions.ServiceException;
 import com.pengurus.crm.client.service.exceptions.UsernameExistsException;
@@ -19,9 +18,6 @@ import com.pengurus.crm.entities.User;
 import com.pengurus.crm.entities.UserUtils;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
-import com.pengurus.crm.shared.pagination.PaginationUtils;
-import com.pengurus.crm.shared.pagination.PagingLoadConfigHelper;
-import com.pengurus.crm.shared.pagination.PagingLoadResultHelper;
 
 public class UserServiceImpl implements UserService {
 
@@ -102,6 +98,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_CLIENT')")
 	public Set<UserDTO> getAllUsers() {
 		List<User> list = userDAO.getAll();
 		Set<UserDTO> set = new HashSet<UserDTO>();
@@ -115,35 +112,14 @@ public class UserServiceImpl implements UserService {
 	public Set<UserDTO> getUsersByRoles(Set<UserRoleDTO> roles) {
 		List<User> list = userDAO.getAll();
 		Set<UserDTO> set = new HashSet<UserDTO>();
-		for (User u : list) {
+		for (User user : list) {
 			for (UserRoleDTO role : roles) {
-				if (u.getAuthorities().contains(role)){
-					set.add(u.toDTO());
+				if (user.getAuthorities().contains(role)){
+					set.add(user.toDTO());
 					break;
 				}
 			}
 		}
 		return set;
-	}
-	
-	
-	
-	@Override
-	public PagingLoadResultHelper<UserModel> getPaginatedAllUsers(PagingLoadConfigHelper loadConfig) {
-		List<UserModel> userModelList = new ArrayList<UserModel>();
-		for (UserDTO user:getAllUsers()) {
-			userModelList.add(new UserModel(user));
-		}
-		return PaginationUtils.paginate(loadConfig, userModelList);
-	}
-
-	@Override
-	public PagingLoadResultHelper<UserModel> getPaginatedUsersByRoles(
-			PagingLoadConfigHelper loadConfig, Set<UserRoleDTO> roles) {
-		List<UserModel> userModelList = new ArrayList<UserModel>();
-		for (UserDTO user:getUsersByRoles(roles)) {
-			userModelList.add(new UserModel(user));
-		}
-		return PaginationUtils.paginate(loadConfig, userModelList);
 	}
 }

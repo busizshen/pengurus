@@ -33,8 +33,8 @@ import com.pengurus.crm.client.panels.ListPagination;
 import com.pengurus.crm.client.panels.PaginationRpcProxy;
 import com.pengurus.crm.client.panels.center.user.create.UserEditPanel;
 import com.pengurus.crm.client.panels.center.user.create.UserPreviewPanel;
-import com.pengurus.crm.client.service.UserService;
-import com.pengurus.crm.client.service.UserServiceAsync;
+import com.pengurus.crm.client.service.PaginationService;
+import com.pengurus.crm.client.service.PaginationServiceAsync;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 import com.pengurus.crm.shared.pagination.PagingCallbackWrapper;
 import com.pengurus.crm.shared.pagination.PagingLoadConfigHelper;
@@ -75,8 +75,8 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 					AsyncCallback<PagingLoadResult<UserModel>> callback) {
 				if (allBox.getValue()) {
 					
-					UserServiceAsync service = (UserServiceAsync) GWT
-							.create(UserService.class);
+					PaginationServiceAsync service = (PaginationServiceAsync) GWT
+							.create(PaginationService.class);
 					service.getPaginatedAllUsers(loadConfig, new PagingCallbackWrapper<UserModel>(callback));
 					
 				} else {
@@ -90,8 +90,8 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 							}
 						}
 					}
-					UserServiceAsync service = (UserServiceAsync) GWT
-							.create(UserService.class);
+					PaginationServiceAsync service = (PaginationServiceAsync) GWT
+							.create(PaginationService.class);
 					service.getPaginatedUsersByRoles(loadConfig, roles, new PagingCallbackWrapper<UserModel>(callback));
 					
 				}

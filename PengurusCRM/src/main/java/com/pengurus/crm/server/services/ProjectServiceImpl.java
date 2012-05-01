@@ -1,21 +1,17 @@
-package com.pengurus.crm.server;
+package com.pengurus.crm.server.services;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 
-import com.pengurus.crm.client.models.ProjectModel;
 import com.pengurus.crm.client.service.ProjectService;
 import com.pengurus.crm.daos.ProjectDAO;
 import com.pengurus.crm.entities.Project;
 import com.pengurus.crm.shared.dto.ProjectDTO;
-import com.pengurus.crm.shared.pagination.PaginationUtils;
-import com.pengurus.crm.shared.pagination.PagingLoadConfigHelper;
-import com.pengurus.crm.shared.pagination.PagingLoadResultHelper;
 
 public class ProjectServiceImpl implements ProjectService {
 
@@ -32,6 +28,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_CLIENT')")
 	public Set<ProjectDTO> getAllProjects() {
 		List<Project> list = projectDAO.loadAll();
 		Set<ProjectDTO> set = new HashSet<ProjectDTO>();
@@ -101,45 +98,4 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		return set;
 	}
-
-	@Override
-	public PagingLoadResultHelper<ProjectModel> getPaginatedAllProjects(
-			PagingLoadConfigHelper loadConfig) {
-	List<ProjectModel> projectModelList = new ArrayList<ProjectModel>();
-	for (ProjectDTO projectDTO : getAllProjects()) {
-		projectModelList.add(new ProjectModel(projectDTO));
-	}
-	return PaginationUtils.paginate(loadConfig, projectModelList);
-	}
-
-	@Override
-	public PagingLoadResultHelper<ProjectModel> getPaginatedProjectsByExpertId(
-			PagingLoadConfigHelper loadConfig, Long id) {
-		List<ProjectModel> projectModelList = new ArrayList<ProjectModel>();
-		for (ProjectDTO projectDTO : getProjectsByExpertId(id)) {
-			projectModelList.add(new ProjectModel(projectDTO));
-		}
-		return PaginationUtils.paginate(loadConfig, projectModelList);
-	}
-
-	@Override
-	public PagingLoadResultHelper<ProjectModel> getPaginatedProjectsByProjectManagerId(
-			PagingLoadConfigHelper loadConfig, Long id) {
-		List<ProjectModel> projectModelList = new ArrayList<ProjectModel>();
-		for (ProjectDTO projectDTO : getProjectsByProjectManagerId(id)) {
-			projectModelList.add(new ProjectModel(projectDTO));
-		}
-		return PaginationUtils.paginate(loadConfig, projectModelList);
-	}
-
-	@Override
-	public PagingLoadResultHelper<ProjectModel> getPaginatedProjectsBySupervisorId(
-			PagingLoadConfigHelper loadConfig, Long id) {
-		List<ProjectModel> projectModelList = new ArrayList<ProjectModel>();
-		for (ProjectDTO projectDTO : getProjectsBySupervisorId(id)) {
-			projectModelList.add(new ProjectModel(projectDTO));
-		}
-		return PaginationUtils.paginate(loadConfig, projectModelList);
-	}
-
 }

@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.pengurus.crm.enums.Status;
-import com.pengurus.crm.server.UserServiceImpl;
+import com.pengurus.crm.server.services.UserServiceImpl;
 import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.IndividualClientDTO;
 import com.pengurus.crm.shared.dto.JobDTO;

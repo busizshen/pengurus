@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.pengurus.crm.enums.Rating;
 import com.pengurus.crm.enums.Status;
-import com.pengurus.crm.server.UserServiceImpl;
+import com.pengurus.crm.server.services.UserServiceImpl;
 import com.pengurus.crm.shared.dto.TaskDTO;
 
 public class Task {

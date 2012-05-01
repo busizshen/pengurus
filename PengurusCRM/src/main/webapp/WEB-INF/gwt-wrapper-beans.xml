@@ -4,10 +4,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="numberController" class="com.pengurus.crm.server.GwtRpcController">
-		<property name="remoteService" ref="numberServiceBean" />
-	</bean>
-
 	<bean id="userController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="userServiceBean" />
 	</bean>
@@ -45,5 +41,9 @@
 
 	<bean id="translatorController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="translatorServiceBean" />
+	</bean>
+	
+	<bean id="paginationController" class="com.pengurus.crm.server.GwtRpcController">
+		<property name="remoteService" ref="paginationServiceBean" />
 	</bean>
 </beans>
