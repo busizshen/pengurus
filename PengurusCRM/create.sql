@@ -70,7 +70,7 @@ CREATE SEQUENCE hibernate_sequence
 -- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('hibernate_sequence', 365, true);
+SELECT pg_catalog.setval('hibernate_sequence', 507, true);
 
 
 --
@@ -300,29 +300,16 @@ CREATE TABLE worker (
 -- Data for Name: businessclient; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO businessclient (user_id, name) VALUES (24, 'Nightmare Company');
-INSERT INTO businessclient (user_id, name) VALUES (26, 'Johnson & sons CO');
-INSERT INTO businessclient (user_id, name) VALUES (28, 'Morden Storm');
-INSERT INTO businessclient (user_id, name) VALUES (32, 'Herolds');
+INSERT INTO businessclient (user_id, name) VALUES (450, 'Nightmare Company');
 
 
 --
 -- Data for Name: client; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO client (user_id) VALUES (24);
-INSERT INTO client (user_id) VALUES (26);
-INSERT INTO client (user_id) VALUES (28);
-INSERT INTO client (user_id) VALUES (32);
-INSERT INTO client (user_id) VALUES (53);
-INSERT INTO client (user_id) VALUES (68);
-INSERT INTO client (user_id) VALUES (83);
-INSERT INTO client (user_id) VALUES (98);
-INSERT INTO client (user_id) VALUES (107);
-INSERT INTO client (user_id) VALUES (109);
-INSERT INTO client (user_id) VALUES (111);
-INSERT INTO client (user_id) VALUES (115);
-INSERT INTO client (user_id) VALUES (321);
+INSERT INTO client (user_id) VALUES (381);
+INSERT INTO client (user_id) VALUES (383);
+INSERT INTO client (user_id) VALUES (450);
 
 
 --
@@ -333,7 +320,6 @@ INSERT INTO currencytype (id, currency) VALUES (5, 'RUB (Russian ruble)');
 INSERT INTO currencytype (id, currency) VALUES (45, 'AFN (Afghan afghani)');
 INSERT INTO currencytype (id, currency) VALUES (60, 'EUR (Euro)');
 INSERT INTO currencytype (id, currency) VALUES (75, 'ALL (Albanian lek)');
-INSERT INTO currencytype (id, currency) VALUES (90, 'GBP (British pound)');
 INSERT INTO currencytype (id, currency) VALUES (122, 'DZD (Algerian dinar)');
 INSERT INTO currencytype (id, currency) VALUES (132, 'AOA (Angolan kwanza)');
 INSERT INTO currencytype (id, currency) VALUES (142, 'XCD (East Caribbean dollar)');
@@ -348,7 +334,6 @@ INSERT INTO currencytype (id, currency) VALUES (223, 'LTL (Lithuanian litas)');
 INSERT INTO currencytype (id, currency) VALUES (231, 'KWD (Kuwaiti dinar)');
 INSERT INTO currencytype (id, currency) VALUES (239, 'IQD (Iraqi dinar)');
 INSERT INTO currencytype (id, currency) VALUES (247, 'EGP (Egyptian pound)');
-INSERT INTO currencytype (id, currency) VALUES (253, 'USD (United States dollar)');
 INSERT INTO currencytype (id, currency) VALUES (254, 'DOP (Dominican peso)');
 INSERT INTO currencytype (id, currency) VALUES (255, 'CZK (Czech koruna)');
 INSERT INTO currencytype (id, currency) VALUES (257, 'DKK (Danish krone)');
@@ -361,136 +346,51 @@ INSERT INTO currencytype (id, currency) VALUES (272, 'RSD (Serbian dinar)');
 INSERT INTO currencytype (id, currency) VALUES (278, 'CHF (Swiss franc)');
 INSERT INTO currencytype (id, currency) VALUES (284, 'SEK (Swedish krona)');
 INSERT INTO currencytype (id, currency) VALUES (292, 'TRY (Turkish lira)');
-INSERT INTO currencytype (id, currency) VALUES (308, '$$Project0');
-INSERT INTO currencytype (id, currency) VALUES (355, 'PLN0');
+INSERT INTO currencytype (id, currency) VALUES (253, 'USD (United States dollar)');
+INSERT INTO currencytype (id, currency) VALUES (90, 'GBP (British pound)');
 
 
 --
 -- Data for Name: emails; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO emails (id, email) VALUES (8, 'jeremy_smith@yahoo.com');
-INSERT INTO emails (id, email) VALUES (8, 'jeremy_smith@gmail.com');
-INSERT INTO emails (id, email) VALUES (14, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (14, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (16, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (16, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (18, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (18, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (20, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (20, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (22, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (22, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (25, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (25, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (27, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (27, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (29, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (29, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (31, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (31, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (33, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (33, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (48, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (48, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (63, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (63, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (78, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (78, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (93, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (93, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (108, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (108, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (110, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (110, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (112, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (112, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (114, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (114, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (116, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (116, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (125, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (125, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (135, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (135, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (145, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (145, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (155, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (155, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (169, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (169, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (181, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (181, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (193, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (193, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (207, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (207, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (219, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (219, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (227, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (227, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (235, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (235, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (243, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (243, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (251, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (251, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (294, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (294, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (295, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (295, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (296, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (296, 'john2@yahoo.com');
-INSERT INTO emails (id, email) VALUES (296, 'newemail@email.com');
-INSERT INTO emails (id, email) VALUES (299, 'jeremy_smith@yahoo.com');
-INSERT INTO emails (id, email) VALUES (299, 'jeremy_smith@gmail.com');
-INSERT INTO emails (id, email) VALUES (301, 'admin@hacks.com');
-INSERT INTO emails (id, email) VALUES (303, 'm.angelo@yahoo.fr');
-INSERT INTO emails (id, email) VALUES (311, 'john@yahoo.com');
-INSERT INTO emails (id, email) VALUES (311, 'john2@yahoo.com');
+INSERT INTO emails (id, email) VALUES (301, 'admin@pengurus.com');
+INSERT INTO emails (id, email) VALUES (382, 'jsmith@yahoo.com');
+INSERT INTO emails (id, email) VALUES (384, 'bb@yahoo.com');
+INSERT INTO emails (id, email) VALUES (394, 'stork@pengurus.com');
+INSERT INTO emails (id, email) VALUES (398, 'nina@pengurus.com');
+INSERT INTO emails (id, email) VALUES (398, 'juanita.hernandez@gmail.com');
+INSERT INTO emails (id, email) VALUES (422, 'novak@pengurus.com');
+INSERT INTO emails (id, email) VALUES (423, 'novak@pengurus.com');
+INSERT INTO emails (id, email) VALUES (427, 'george.tigre@pengurus.com');
+INSERT INTO emails (id, email) VALUES (447, 'vache@pengurus.com');
+INSERT INTO emails (id, email) VALUES (447, 'vache.michael@gmail.com');
+INSERT INTO emails (id, email) VALUES (449, 'hp.lindstrom@nrc.no');
+INSERT INTO emails (id, email) VALUES (451, 'scary@nightmare.uk');
+INSERT INTO emails (id, email) VALUES (452, 'toddie@nightmare.uk');
+INSERT INTO emails (id, email) VALUES (453, 'mary@nightmare.uk');
+INSERT INTO emails (id, email) VALUES (467, 'stork@pengurus.com');
+INSERT INTO emails (id, email) VALUES (469, 'annie@pengurus.com');
 
 
 --
 -- Data for Name: individualclient; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO individualclient (user_id, data) VALUES (53, 48);
-INSERT INTO individualclient (user_id, data) VALUES (68, 63);
-INSERT INTO individualclient (user_id, data) VALUES (83, 78);
-INSERT INTO individualclient (user_id, data) VALUES (98, 93);
-INSERT INTO individualclient (user_id, data) VALUES (107, 108);
-INSERT INTO individualclient (user_id, data) VALUES (109, 110);
-INSERT INTO individualclient (user_id, data) VALUES (111, 112);
-INSERT INTO individualclient (user_id, data) VALUES (115, 116);
-INSERT INTO individualclient (user_id, data) VALUES (321, 311);
+INSERT INTO individualclient (user_id, data) VALUES (381, 382);
+INSERT INTO individualclient (user_id, data) VALUES (383, 384);
 
 
 --
 -- Data for Name: job; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (51, 'open', '2012-04-16 15:00:00', 46, 21000, 44, 'Job description2', 55, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (49, 'closed', '2012-01-01 00:00:00', 46, 1000, 44, 'Job description', 55, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (64, 'closed', '2011-10-25 12:15:00', 61, 1000, 59, 'Job description', 70, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (66, 'open', '2012-05-15 10:00:00', 61, 21000, 59, 'Job description2', 70, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (81, 'open', '2012-04-01 13:45:00', 76, 21000, 74, 'Job description2', 85, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (79, 'closed', '2012-02-10 15:00:00', 76, 1000, 74, 'Job description', 85, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (94, 'closed', '2012-02-10 13:00:00', 91, 1000, 89, 'Job description', NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (96, 'open', '2012-03-15 13:45:00', 91, 21000, 89, 'Job description2', NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (126, 'closed', '2012-02-26 13:36:37.501', NULL, 10000, NULL, 'description', NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (136, 'closed', '2012-02-26 13:36:37.68', NULL, 10000, NULL, 'description', NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (146, 'closed', '2012-02-26 13:36:37.835', NULL, 10000, NULL, 'description', NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (156, 'closed', '2012-02-26 13:36:38.012', NULL, 10000, NULL, 'description', NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (170, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (173, 'accepted', '2012-02-26 13:36:38.325', 167, 1000, 165, 'job descriptio', NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (182, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (185, 'accepted', '2012-02-26 13:36:38.538', 179, 1000, 177, 'job descriptio', NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (194, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (197, 'resolved', '2012-02-26 13:36:38.792', 191, 123123, 198, 'new awesome description', NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (208, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (319, 'open', '2012-03-22 20:36:51.304', 309, 21000, 307, 'Job description2', NULL, 323);
-INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (317, 'closed', '2012-03-22 20:36:51.304', 309, 1000, 307, 'Job description', NULL, 323);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (470, 'open', '2012-05-19 00:00:00', 391, 12, 471, 'Personal interpreter for 12 hours.', 428, 472);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (480, 'open', '2012-05-25 00:00:00', 463, 32, 481, 'translation of the second chapter of the masucript.', 477, 484);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (482, 'open', '2012-06-01 00:00:00', 389, 25, 483, 'translation of the spanish errate.', 477, 484);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (478, 'open', '2012-05-18 00:00:00', 463, 24, 479, 'Translation of the first chapter of the manuscript.', 477, 484);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (504, 'open', '2012-05-05 00:00:00', 502, 25, 505, 'Translation of the tech-documentation', 501, NULL);
+INSERT INTO job (job_id, status, deadline, translation, amount, price, description, quote_id, project_id) VALUES (506, 'open', '2012-05-10 00:00:00', 459, 125, 507, 'sworn paper', 501, NULL);
 
 
 --
@@ -548,537 +448,306 @@ INSERT INTO language (id, language) VALUES (286, 'Esperanto');
 INSERT INTO language (id, language) VALUES (287, 'Lithuanian');
 INSERT INTO language (id, language) VALUES (288, 'Jamaican Creole');
 INSERT INTO language (id, language) VALUES (289, 'Southern Thai');
-INSERT INTO language (id, language) VALUES (353, 'Polish0');
-INSERT INTO language (id, language) VALUES (354, 'English0');
 
 
 --
 -- Data for Name: personaldata; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (8, 'Jeremy', 'Smith', '139 Gunnersbury Avenue, London W3 8LG, United Kingdom', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (14, 'Tom', 'Keane', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (16, 'Jane', 'Hugues', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (18, 'Theodor', 'Smith', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (20, 'Michael', 'Deluga', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (22, 'Bernadete', 'Breeze', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (25, 'Sue', 'Morning', 'Address', 24);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (27, 'Fred', 'Green', 'Address', 26);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (29, 'Charlie', 'Wanne', 'Address', 28);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (31, 'Jake', 'Stamper', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (33, 'Calle', 'Longington', 'Address', 32);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (48, 'Marge', 'Moore', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (63, 'Vernon', 'Moore', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (78, 'Patricia', 'Salvatore', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (93, 'Helen', 'Stranger', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (108, 'Mike', 'Lasocky', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (110, 'Juan', 'Hernandez', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (112, 'Sharon', 'Cave', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (114, 'Widerton', 'Salander', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (116, 'Lisabeth', 'Tayler', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (125, 'Karen', 'McLuscy', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (135, 'Britt', 'Wellington', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (145, 'Danny', 'Glitter', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (155, 'Beth', 'Doe', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (169, 'Narcise', 'Stamp', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (181, 'Joseph', 'Mitchell', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (193, 'Martha', 'Ostern', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (207, 'Steven', 'Gardern', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (219, 'Helga', 'Fruck', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (227, 'Martin', 'Ferth', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (235, 'Jake', 'Hoperstam', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (243, 'Augustin', 'Gumbber', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (251, 'Mark', 'Glamer', 'Address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (294, 'Judith', 'Tobber', 'address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (295, 'Eve', 'Gleener', 'address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (296, 'Eva', 'Jordin', 'new address', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (299, 'Carol', 'Storker', '139 Dorothy Street, London F5 8JT, United Kingdom', NULL);
 INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (301, 'John', 'Smith', '1 Reds Road, Manchester E5 00T, United Kingdom', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (303, 'Michael', 'Angelo', '59 Rue de Rivoli 75001 Paris, France', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (311, 'Jacob', 'Harper', '44 Church Road Wimbledon London SW19 5AE, England', NULL);
-INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (351, 'dasd', 'dasdsad', 'dasdasd', NULL);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (382, 'Jeremy', 'Smith', '139 Gunnersbury Avenue, London W3 8LG, England', NULL);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (384, 'Bernadette', 'Breeze', 'Avenida João Jorge, 112, ap. 31 Vila Industrial Campinas - SP 13035-680', NULL);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (394, 'James', 'Storker', '132, My Street, Kingston, New York 12401 United States', NULL);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (398, 'Juanita', 'Hernandez', 'Av. Bellavista N° 185 Dep. 609 8420507 Recoleta Santiago', NULL);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (422, 'Joseph', 'Novák', 'Brněnská 56, 123 07 Jitrnice', NULL);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (423, 'Joseph', 'Novák', 'Brněnská 56, 123 07 Jitrnice', NULL);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (425, 'José Carlos Araújo', 'Rodriquez', 'Piedras 623, Piso 2, depto 4 C1070AAM, Capital Federa', NULL);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (427, 'George', 'Tigre', 'Nelson N° 10, Dep. 415 Cerro Barón Valparaíso', NULL);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (447, 'Michael', 'Vache', '59 Rue de Rivoli 75001 Paris, France', NULL);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (449, 'Hans Peter ', 'Lindstrøm', 'Bjørnstjerne Bjørnsons plass 1, 0340 Oslo, Norway', NULL);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (451, 'Joe', 'Scary', '13 St. Leonadrd''s Rd, H440 021 Exeter, England', 450);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (452, 'Todd', 'Sweeney', '2 Commin''s Rd, H408 R22 Exeter, England', 450);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (453, 'Mary', 'Night', '5 Greyfriars Rd., H404 T21 Exeter, England', 450);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (467, 'James', 'Storker', '132, My Street, Kingston, New York 12401 United States', NULL);
+INSERT INTO personaldata (id, firstname, lastname, address, user_id) VALUES (469, 'Anne', 'Halloway', '12 Greenhouse St, 9JE 8D01 London, England', NULL);
 
 
 --
 -- Data for Name: phonenumbers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO phonenumbers (id, phonenumber) VALUES (8, '3-210-552-2311');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (8, '1-888-242‑2100');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (14, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (14, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (16, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (16, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (18, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (18, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (20, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (20, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (22, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (22, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (25, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (25, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (27, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (27, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (29, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (29, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (31, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (31, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (33, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (33, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (48, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (48, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (63, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (63, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (78, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (78, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (93, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (93, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (108, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (108, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (110, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (110, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (112, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (112, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (114, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (114, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (116, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (116, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (125, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (125, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (135, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (135, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (145, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (145, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (155, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (155, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (169, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (169, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (181, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (181, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (193, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (193, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (207, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (207, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (219, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (219, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (227, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (227, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (235, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (235, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (243, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (243, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (251, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (251, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (294, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (294, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (295, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (295, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (296, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (296, '00-001-001');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (296, '000-111-111');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (299, '1-243-002‑2920');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (299, '9-286-513-0001');
 INSERT INTO phonenumbers (id, phonenumber) VALUES (301, '9-003-092‑1110');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (311, '00-000-000');
-INSERT INTO phonenumbers (id, phonenumber) VALUES (311, '00-001-001');
+INSERT INTO phonenumbers (id, phonenumber) VALUES (382, '(022) 7287-4172');
+INSERT INTO phonenumbers (id, phonenumber) VALUES (384, '(042) 7325 - 8872');
+INSERT INTO phonenumbers (id, phonenumber) VALUES (394, '(0011) 6735 331 003');
+INSERT INTO phonenumbers (id, phonenumber) VALUES (422, '(013) 827 93 83');
+INSERT INTO phonenumbers (id, phonenumber) VALUES (423, '(013) 827 93 83');
+INSERT INTO phonenumbers (id, phonenumber) VALUES (447, '(031) 6573 8281');
+INSERT INTO phonenumbers (id, phonenumber) VALUES (451, '(048) 8237 4231');
+INSERT INTO phonenumbers (id, phonenumber) VALUES (467, '(0011) 6735 331 003');
 
 
 --
 -- Data for Name: price; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO price (id, price, currency) VALUES (4, 12, 5);
-INSERT INTO price (id, price, currency) VALUES (44, 200, 45);
-INSERT INTO price (id, price, currency) VALUES (59, 201, 60);
-INSERT INTO price (id, price, currency) VALUES (74, 202, 75);
-INSERT INTO price (id, price, currency) VALUES (89, 203, 90);
-INSERT INTO price (id, price, currency) VALUES (121, 200, 122);
-INSERT INTO price (id, price, currency) VALUES (131, 201, 132);
-INSERT INTO price (id, price, currency) VALUES (141, 202, 142);
-INSERT INTO price (id, price, currency) VALUES (151, 203, 152);
-INSERT INTO price (id, price, currency) VALUES (165, 200, 166);
-INSERT INTO price (id, price, currency) VALUES (177, 201, 178);
-INSERT INTO price (id, price, currency) VALUES (198, 100, 199);
-INSERT INTO price (id, price, currency) VALUES (189, 202, 190);
-INSERT INTO price (id, price, currency) VALUES (203, 203, 204);
-INSERT INTO price (id, price, currency) VALUES (216, 100, 215);
-INSERT INTO price (id, price, currency) VALUES (224, 100, 223);
-INSERT INTO price (id, price, currency) VALUES (232, 100, 231);
-INSERT INTO price (id, price, currency) VALUES (240, 100, 239);
-INSERT INTO price (id, price, currency) VALUES (248, 100, 247);
-INSERT INTO price (id, price, currency) VALUES (260, 200, 259);
-INSERT INTO price (id, price, currency) VALUES (262, 200, 261);
-INSERT INTO price (id, price, currency) VALUES (264, 1000, 265);
-INSERT INTO price (id, price, currency) VALUES (271, 200, 272);
-INSERT INTO price (id, price, currency) VALUES (277, 201, 278);
-INSERT INTO price (id, price, currency) VALUES (283, 202, 284);
-INSERT INTO price (id, price, currency) VALUES (291, 203, 292);
-INSERT INTO price (id, price, currency) VALUES (307, 200, 308);
-INSERT INTO price (id, price, currency) VALUES (356, 100, 355);
+INSERT INTO price (id, price, currency) VALUES (378, 15, 90);
+INSERT INTO price (id, price, currency) VALUES (380, 15, 90);
+INSERT INTO price (id, price, currency) VALUES (386, 15, 90);
+INSERT INTO price (id, price, currency) VALUES (388, 15, 90);
+INSERT INTO price (id, price, currency) VALUES (390, 12, 90);
+INSERT INTO price (id, price, currency) VALUES (392, 12, 90);
+INSERT INTO price (id, price, currency) VALUES (396, 15, 90);
+INSERT INTO price (id, price, currency) VALUES (400, 17, 90);
+INSERT INTO price (id, price, currency) VALUES (402, 17, 90);
+INSERT INTO price (id, price, currency) VALUES (404, 17, 90);
+INSERT INTO price (id, price, currency) VALUES (406, 17, 90);
+INSERT INTO price (id, price, currency) VALUES (408, 17, 90);
+INSERT INTO price (id, price, currency) VALUES (410, 17, 90);
+INSERT INTO price (id, price, currency) VALUES (412, 17, 90);
+INSERT INTO price (id, price, currency) VALUES (414, 17, 90);
+INSERT INTO price (id, price, currency) VALUES (416, 17, 90);
+INSERT INTO price (id, price, currency) VALUES (418, 7, 90);
+INSERT INTO price (id, price, currency) VALUES (420, 7, 90);
+INSERT INTO price (id, price, currency) VALUES (430, 144, 90);
+INSERT INTO price (id, price, currency) VALUES (432, 144, 90);
+INSERT INTO price (id, price, currency) VALUES (435, 144, 90);
+INSERT INTO price (id, price, currency) VALUES (439, 15, 90);
+INSERT INTO price (id, price, currency) VALUES (441, 15, 90);
+INSERT INTO price (id, price, currency) VALUES (443, 13, 90);
+INSERT INTO price (id, price, currency) VALUES (445, 13, 90);
+INSERT INTO price (id, price, currency) VALUES (455, 12, 90);
+INSERT INTO price (id, price, currency) VALUES (458, 0, 90);
+INSERT INTO price (id, price, currency) VALUES (460, 2, 90);
+INSERT INTO price (id, price, currency) VALUES (462, 2, 90);
+INSERT INTO price (id, price, currency) VALUES (464, 6, 90);
+INSERT INTO price (id, price, currency) VALUES (466, 6, 90);
+INSERT INTO price (id, price, currency) VALUES (471, 144, 90);
+INSERT INTO price (id, price, currency) VALUES (474, 144, 90);
+INSERT INTO price (id, price, currency) VALUES (479, 144, 90);
+INSERT INTO price (id, price, currency) VALUES (481, 192, 90);
+INSERT INTO price (id, price, currency) VALUES (483, 300, 90);
+INSERT INTO price (id, price, currency) VALUES (486, 300, 90);
+INSERT INTO price (id, price, currency) VALUES (490, 96, 90);
+INSERT INTO price (id, price, currency) VALUES (492, 96, 90);
+INSERT INTO price (id, price, currency) VALUES (496, 72, 90);
+INSERT INTO price (id, price, currency) VALUES (498, 72, 90);
+INSERT INTO price (id, price, currency) VALUES (503, 6, 253);
+INSERT INTO price (id, price, currency) VALUES (505, 150, 90);
+INSERT INTO price (id, price, currency) VALUES (507, 250, 90);
 
 
 --
 -- Data for Name: project; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO project (project_id, status, client, supervisor, description) VALUES (323, 'in_progress', 321, 322, 'the very first project created');
+INSERT INTO project (project_id, status, client, supervisor, description) VALUES (472, 'open', 383, 424, 'Intérprete de personal para la conferencia en Nueva York.
+Personal interpreter for the conference in New York.');
+INSERT INTO project (project_id, status, client, supervisor, description) VALUES (484, 'open', 450, 426, 'Translation of latin manuscript, which is going to be part of a horror scenario.');
 
 
 --
 -- Data for Name: project_experts; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO project_experts (project_id, user_id) VALUES (323, 312);
-INSERT INTO project_experts (project_id, user_id) VALUES (323, 310);
+INSERT INTO project_experts (project_id, user_id) VALUES (472, 397);
+INSERT INTO project_experts (project_id, user_id) VALUES (484, 393);
+INSERT INTO project_experts (project_id, user_id) VALUES (484, 446);
+INSERT INTO project_experts (project_id, user_id) VALUES (484, 468);
 
 
 --
 -- Data for Name: project_freelancers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO project_freelancers (project_id, user_id) VALUES (323, 315);
-INSERT INTO project_freelancers (project_id, user_id) VALUES (323, 316);
 
 
 --
 -- Data for Name: project_worker; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO project_worker (project_id, user_id) VALUES (323, 314);
-INSERT INTO project_worker (project_id, user_id) VALUES (323, 313);
+INSERT INTO project_worker (project_id, user_id) VALUES (472, 424);
+INSERT INTO project_worker (project_id, user_id) VALUES (484, 446);
 
 
 --
 -- Data for Name: quote; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (55, 'in_progress', 53, 54, 'Quote description');
-INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (70, 'in_progress', 68, 69, 'Quote description');
-INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (85, 'open', NULL, 84, 'new quote description');
+INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (428, 'accepted', 383, 424, 'Intérprete de personal para la conferencia en Nueva York.
+Personal interpreter for the conference in New York.');
+INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (477, 'verificated', 450, 426, 'Translation of latin manuscript, which is going to be part of a horror scenario.');
+INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (501, 'in_progress', 381, 446, 'english -> french, some tech-documentation + one sworn paper.');
 
 
 --
 -- Data for Name: task; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (10, 'accepted', 7,7, '2012-02-25 15:05:01.601', 6, 100, 4, 'chapters from 1 to 3', 9, 'ok', 'Ok.', 9);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (11, 'accepted', 7,7, '2012-02-25 15:05:01.601', 6, 100, 4, 'chapters 4 and 5', 9, 'good', '5th chapter was was magnificent work!', 9);
-INSERT INTO task (task_id, status, expert,reviewer , deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (52, 'accepted', 47,47, '2012-02-26 13:36:35.63', 46, 100, 44, 'desc2', 51, 'bad', 'comm2', 51);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (50, 'accepted', 47,47, '2012-02-26 13:36:35.63', 46, 100, 44, 'desc', 49, 'bad', 'comm', 49);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (209, 'accepted', 206,206, '2012-02-26 13:36:38.992', 205, 100, 203, 'desc', 208, 'bad', 'comm', NULL);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (65, 'accepted', 62,62, '2012-02-26 13:36:35.887', 61, 100, 59, 'desc', 64, 'bad', 'comm', 64);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (67, 'accepted', 62,62, '2012-02-26 13:36:35.887', 61, 100, 59, 'desc2', 66, 'bad', 'comm2', 66);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (210, 'accepted', 206,206, '2012-02-26 13:36:38.992', 205, 100, 203, 'desc2', 208, 'bad', 'comm2', NULL);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (82, 'accepted', 77,77, '2012-02-26 13:36:36.179', 76, 100, 74, 'desc2', 81, 'bad', 'comm2', 81);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (80, 'accepted', 77,77, '2012-02-26 13:36:36.179', 76, 100, 74, 'desc', 79, 'bad', 'comm', 79);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (95, 'accepted', 92,92, '2012-02-26 13:36:36.58', 91, 100, 89, 'desc', 94, 'bad', 'comm', 94);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (97, 'accepted', 92,92, '2012-02-26 13:36:36.58', 91, 100, 89, 'desc2', 96, 'bad', 'comm2', 96);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (127, 'accepted', 124,124, '2012-02-26 13:36:37.512', 123, 100, 121, 'desc', 126, 'bad', 'comm', NULL);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (137, 'accepted', 134,134, '2012-02-26 13:36:37.69', 133, 100, 131, 'desc2', 136, 'bad', 'comm', NULL);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (147, 'resolved', 144,144, '2012-02-26 13:36:37.844', 143, 20000, 141, 'new description', 146, 'good', 'new comment', NULL);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (171, 'accepted', 168,168, '2012-02-26 13:36:38.279', 167, 100, 165, 'desc', 170, 'bad', 'comm', 173);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (172, 'accepted', 168,168, '2012-02-26 13:36:38.279', 167, 100, 165, 'desc2', 170, 'bad', 'comm2', 173);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (184, 'accepted', 180,180, '2012-02-26 13:36:38.507', 179, 100, 177, 'desc2', 182, 'bad', 'comm2', 185);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (183, 'accepted', 180,180, '2012-02-26 13:36:38.507', 179, 100, 177, 'desc', 182, 'bad', 'comm', 185);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (196, 'accepted', 192,192, '2012-02-26 13:36:38.741', 191, 100, 189, 'desc2', 194, 'bad', 'comm2', 197);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (195, 'accepted', 192,192m '2012-02-26 13:36:38.741', 191, 100, 189, 'desc', 194, 'bad', 'comm', 197);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (318, 'accepted', 310,310, '2012-03-22 20:36:51.303', 309, 100, 307, 'desc', 317, 'bad', 'comm', 317);
-INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (320, 'accepted', 310,310, '2012-03-22 20:36:51.303', 309, 100, 307, 'desc2', 319, 'bad', 'comm2', 319);
+INSERT INTO task (task_id, status, expert, reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (473, 'open', 397, 393, '2012-05-19 00:00:00', 391, 12, 474, 'Personal interpreter in New York', 470, NULL, NULL, NULL);
+INSERT INTO task (task_id, status, expert, reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (485, 'open', 446, 426, '2012-06-01 00:00:00', 389, 25, 486, 'We need to record translation of the spanish errate.', 482, NULL, NULL, NULL);
+INSERT INTO task (task_id, status, expert, reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (489, 'open', 468, 426, '2012-05-25 00:00:00', 463, 16, 490, 'translation of the first half', 480, NULL, NULL, NULL);
+INSERT INTO task (task_id, status, expert, reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (491, 'open', 393, 426, '2012-05-25 00:00:00', 463, 16, 492, 'translation of the second part', 480, NULL, NULL, NULL);
+INSERT INTO task (task_id, status, expert, reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (495, 'open', 393, 426, '2012-05-18 00:00:00', 463, 12, 496, 'translation of the first part', 478, NULL, NULL, NULL);
+INSERT INTO task (task_id, status, expert, reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (497, 'open', 468, 426, '2012-05-18 00:00:00', 463, 12, 498, 'translation of the second part', 478, NULL, NULL, NULL);
 
 
 --
 -- Data for Name: translation; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (6, 3, 1, 2, 4);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (46, 43, 41, 42, 44);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (61, 58, 56, 57, 59);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (76, 73, 71, 72, 74);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (91, 88, 86, 87, 89);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (123, 120, 118, 119, 121);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (133, 130, 128, 129, 131);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (143, 140, 138, 139, 141);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (153, 150, 148, 149, 151);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (167, 164, 162, 163, 165);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (179, 176, 174, 175, 177);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (191, 188, 186, 187, 189);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (205, 202, 200, 201, 203);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (217, 212, 213, 214, 216);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (225, 220, 221, 222, 224);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (233, 228, 229, 230, 232);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (241, 236, 237, 238, 240);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (249, 244, 245, 246, 248);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (273, 270, 268, 269, 271);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (279, 276, 274, 275, 277);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (285, 282, 287, 286, 283);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (309, 306, 42, 268, 307);
-INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (357, 352, 353, 354, 356);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (377, 368, 36, 37, 378);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (379, 368, 37, 36, 380);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (385, 368, 72, 36, 386);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (389, 368, 42, 36, 390);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (391, 368, 36, 42, 392);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (395, 368, 36, 72, 396);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (411, 368, 200, 36, 412);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (415, 368, 36, 200, 416);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (417, 368, 237, 200, 418);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (419, 368, 200, 237, 420);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (438, 368, 36, 119, 439);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (440, 368, 119, 36, 441);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (442, 368, 119, 42, 443);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (444, 368, 42, 119, 445);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (459, 370, 36, 37, 460);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (461, 370, 37, 36, 462);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (463, 367, 1, 36, 464);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (465, 367, 36, 1, 466);
+INSERT INTO translation (translation_id, type, lfrom, lto, defaultprice) VALUES (502, 371, 119, 36, 503);
 
 
 --
 -- Data for Name: translationtype; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO translationtype (id, description, unit) VALUES (3, '5 chapters of Greek Mythology by Edith Hamilton', 'pages');
-INSERT INTO translationtype (id, description, unit) VALUES (43, 'J. Williams biography pages 100-250', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (58, 'description', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (73, 'description', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (88, 'description', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (120, 'description', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (130, 'description', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (140, 'description', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (150, 'description', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (158, 'description', 'word');
-INSERT INTO translationtype (id, description, unit) VALUES (159, 'description', 'word');
-INSERT INTO translationtype (id, description, unit) VALUES (160, 'new description', 'new unit');
-INSERT INTO translationtype (id, description, unit) VALUES (164, 'description', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (176, 'description', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (188, 'description', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (202, 'description', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (212, 'description', 'word');
-INSERT INTO translationtype (id, description, unit) VALUES (220, 'description', 'word');
-INSERT INTO translationtype (id, description, unit) VALUES (228, 'description', 'word');
-INSERT INTO translationtype (id, description, unit) VALUES (236, 'description', 'word');
-INSERT INTO translationtype (id, description, unit) VALUES (244, 'description', 'word');
-INSERT INTO translationtype (id, description, unit) VALUES (270, 'description', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (276, 'description', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (282, 'translation descritpion', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (306, 'description', 'unit');
-INSERT INTO translationtype (id, description, unit) VALUES (352, 'description', 'word');
-INSERT INTO translationtype (id, description, unit) VALUES (358, 'description', 'word');
-INSERT INTO translationtype (id, description, unit) VALUES (360, 'description', 'word');
-INSERT INTO translationtype (id, description, unit) VALUES (362, 'description', 'word');
-INSERT INTO translationtype (id, description, unit) VALUES (364, 'description', 'word');
+INSERT INTO translationtype (id, description, unit) VALUES (366, 'written', 'line');
+INSERT INTO translationtype (id, description, unit) VALUES (369, 'sworn', 'page');
+INSERT INTO translationtype (id, description, unit) VALUES (372, 'express', 'line');
+INSERT INTO translationtype (id, description, unit) VALUES (373, 'technical', 'line');
+INSERT INTO translationtype (id, description, unit) VALUES (374, 'technical', 'page');
+INSERT INTO translationtype (id, description, unit) VALUES (375, 'specialized', 'page');
+INSERT INTO translationtype (id, description, unit) VALUES (376, 'specialized', 'line');
+INSERT INTO translationtype (id, description, unit) VALUES (368, 'oral', 'hour');
+INSERT INTO translationtype (id, description, unit) VALUES (370, 'sworn', 'line');
+INSERT INTO translationtype (id, description, unit) VALUES (367, 'written', 'page');
+INSERT INTO translationtype (id, description, unit) VALUES (371, 'express', 'page');
 
 
 --
 -- Data for Name: translator; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO translator (user_id) VALUES (7);
-INSERT INTO translator (user_id) VALUES (47);
-INSERT INTO translator (user_id) VALUES (62);
-INSERT INTO translator (user_id) VALUES (77);
-INSERT INTO translator (user_id) VALUES (92);
-INSERT INTO translator (user_id) VALUES (124);
-INSERT INTO translator (user_id) VALUES (134);
-INSERT INTO translator (user_id) VALUES (144);
-INSERT INTO translator (user_id) VALUES (154);
-INSERT INTO translator (user_id) VALUES (168);
-INSERT INTO translator (user_id) VALUES (180);
-INSERT INTO translator (user_id) VALUES (192);
-INSERT INTO translator (user_id) VALUES (206);
-INSERT INTO translator (user_id) VALUES (218);
-INSERT INTO translator (user_id) VALUES (226);
-INSERT INTO translator (user_id) VALUES (234);
-INSERT INTO translator (user_id) VALUES (250);
-INSERT INTO translator (user_id) VALUES (310);
-INSERT INTO translator (user_id) VALUES (312);
-INSERT INTO translator (user_id) VALUES (315);
-INSERT INTO translator (user_id) VALUES (316);
-INSERT INTO translator (user_id) VALUES (350);
+INSERT INTO translator (user_id) VALUES (393);
+INSERT INTO translator (user_id) VALUES (397);
+INSERT INTO translator (user_id) VALUES (421);
+INSERT INTO translator (user_id) VALUES (426);
+INSERT INTO translator (user_id) VALUES (446);
+INSERT INTO translator (user_id) VALUES (448);
+INSERT INTO translator (user_id) VALUES (468);
 
 
 --
 -- Data for Name: translator_translation; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO translator_translation (user_id, translation_id) VALUES (7, 6);
-INSERT INTO translator_translation (user_id, translation_id) VALUES (218, 217);
-INSERT INTO translator_translation (user_id, translation_id) VALUES (226, 225);
-INSERT INTO translator_translation (user_id, translation_id) VALUES (234, 233);
-INSERT INTO translator_translation (user_id, translation_id) VALUES (250, 249);
-INSERT INTO translator_translation (user_id, translation_id) VALUES (350, 285);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (397, 389);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (397, 391);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (421, 419);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (421, 411);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (421, 417);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (421, 415);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (426, 391);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (426, 389);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (446, 438);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (446, 442);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (446, 391);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (446, 444);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (446, 440);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (446, 389);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (448, 395);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (448, 385);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (448, 377);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (448, 379);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (393, 463);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (393, 465);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (393, 385);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (468, 465);
+INSERT INTO translator_translation (user_id, translation_id) VALUES (468, 463);
 
 
 --
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO "user" (user_id, username, password, description) VALUES (7, 'jSmith', 'unknownPass', 'I''m specialist in Italic and Romance languages.');
-INSERT INTO "user" (user_id, username, password, description) VALUES (13, 'meggieSue', 'password', 'description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (15, 'blueWork', 'password', 'description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (17, 'navyBlue', 'password', 'new description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (21, 'Storm2', 'password', 'description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (24, 'JTCollar', 'password', 'description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (26, 'Dennish_co', 'password', 'description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (28, 'orion', 'password', 'new description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (32, 'BankOfAmerica', 'password', 'description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (47, 'Stopper', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (53, 'MarkerTodd', 'pass', 'individual client');
-INSERT INTO "user" (user_id, username, password, description) VALUES (54, 'BaseMan', 'pass', 'supervisor description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (62, 'SpaceMan', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (68, 'MaryJane', 'pass', 'individual client');
-INSERT INTO "user" (user_id, username, password, description) VALUES (69, 'Harry', 'pass', 'supervisor description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (77, 'netJohn', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (83, 'Barbie12', 'pass', 'individual client');
-INSERT INTO "user" (user_id, username, password, description) VALUES (84, 'StewBrew', 'pass', 'supervisor description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (92, 'Akinator', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (98, 'StacyChan', 'pass', 'individual client');
-INSERT INTO "user" (user_id, username, password, description) VALUES (99, 'GoForIt', 'pass', 'supervisor description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (107, 'BornThorn', 'password', 'description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (109, 'Agnes', 'password', 'description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (111, 'WenndyT', 'password', 'description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (115, 'Volley5', 'password', 'description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (124, 'Aggie_ao', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (134, 'TommyLee', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (144, 'Naruto9', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (154, 'CindyOnly', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (168, 'BoyToy', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (180, 'GirlThrill', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (192, 'KateMcTell', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (206, 'MaryTheNight', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (218, 'Tododd', 'password', 'description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (226, 'ZengaVille', 'password', 'description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (234, 'Louise', 'password', 'new description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (250, 'Babez', 'password', 'description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (298, 'worker', '2c54b2394df1ef67321a5ccb241ed57bdc6c511a', 'I''m just a user');
 INSERT INTO "user" (user_id, username, password, description) VALUES (300, 'admin', 'a40546cc4fd6a12572828bb803380888ad1bfdab', 'I''m admin');
-INSERT INTO "user" (user_id, username, password, description) VALUES (302, 'user', 'b6b1f4781776979c0775c71ebdd8bdc084aac5fe', 'Brand new user');
-INSERT INTO "user" (user_id, username, password, description) VALUES (310, 'projectTranslator0', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (312, '2projectTranslator0', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (313, 'ProjectManager0', 'pass', 'supervisor description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (314, '1ProjectManager0', 'pass', 'supervisor description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (315, 'projectFreelancer0', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (316, '2projectFreelancer0', 'pass', 'desc');
-INSERT INTO "user" (user_id, username, password, description) VALUES (321, 'IndividualClientProject0', 'pass', 'individual client');
-INSERT INTO "user" (user_id, username, password, description) VALUES (322, 'ProjectSupervisor0', 'pass', 'supervisor description');
-INSERT INTO "user" (user_id, username, password, description) VALUES (350, 'DASDASD', '5529d44253bb0274cf71b9978cda091a8b0d7c54', 'dasdasdas');
+INSERT INTO "user" (user_id, username, password, description) VALUES (381, 'jerry.s', 'cc342d992e1014c56474df8a00d1495e774d2982', 'from DC&K company');
+INSERT INTO "user" (user_id, username, password, description) VALUES (383, 'bern', '6eb0e544f61216c8cec70ce3d0d2b27aeb744b68', '-');
+INSERT INTO "user" (user_id, username, password, description) VALUES (397, 'nina', 'f89e3c4d06e7dc7b675244513d76ccdcda06dfec', 'Adicto al trabajo');
+INSERT INTO "user" (user_id, username, password, description) VALUES (421, 'novak', '771b57f6f7c3e8afa0232601f0b45c50233b2ff1', 'Praha - město Kafky, pojď, miláčku!');
+INSERT INTO "user" (user_id, username, password, description) VALUES (424, 'jose', 'ffaa6ff3396b774265fbda9bc9d88abdcc05021f', 'Viva Madrid, España ¡Salud!');
+INSERT INTO "user" (user_id, username, password, description) VALUES (426, 'tiger', '1ba4e55f2b0fa0fee15fe045f0bf4f2f1059ec8d', 'Not today, seriously?');
+INSERT INTO "user" (user_id, username, password, description) VALUES (446, 'vache', '939567e561817fc2b39465a60aae94b23e601199', 'Parlez-vous français? Non, juste expliquer.');
+INSERT INTO "user" (user_id, username, password, description) VALUES (448, 'haper', 'd9c59d85a1a66357b9789818b2e52051a2a2664c', 'Norge, kongedømmet den hvite ulven.');
+INSERT INTO "user" (user_id, username, password, description) VALUES (450, 'nightmare', 'b89c5f897a3e0f838c92672d5001f8cf3e3bc944', 'production of horror films');
+INSERT INTO "user" (user_id, username, password, description) VALUES (393, 'stork', '7ab44f0344ad619e7feeb9d2d44e0633ac151e02', 'Wicked sick');
+INSERT INTO "user" (user_id, username, password, description) VALUES (468, 'annie', '6d71b874f8359d59b645d7e52b18523061cb3460', 'Each myth is mistic in its truth.');
 
 
 --
 -- Data for Name: user_userrole; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO user_userrole (user_id, user_role) VALUES (7, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (7, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (13, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (13, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (15, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (15, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (17, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (17, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (21, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (21, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (24, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (24, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (26, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (26, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (28, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (28, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (32, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (32, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (47, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (47, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (53, 'ROLE_CLIENT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (54, 'ROLE_PROJECTMANAGER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (54, 'ROLE_EXECUTIVE');
-INSERT INTO user_userrole (user_id, user_role) VALUES (62, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (62, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (68, 'ROLE_CLIENT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (69, 'ROLE_PROJECTMANAGER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (69, 'ROLE_EXECUTIVE');
-INSERT INTO user_userrole (user_id, user_role) VALUES (77, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (77, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (83, 'ROLE_CLIENT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (84, 'ROLE_PROJECTMANAGER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (84, 'ROLE_EXECUTIVE');
-INSERT INTO user_userrole (user_id, user_role) VALUES (92, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (92, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (98, 'ROLE_CLIENT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (99, 'ROLE_PROJECTMANAGER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (99, 'ROLE_EXECUTIVE');
-INSERT INTO user_userrole (user_id, user_role) VALUES (107, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (107, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (109, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (109, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (111, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (111, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (115, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (115, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (124, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (124, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (134, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (134, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (144, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (144, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (154, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (154, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (168, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (168, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (180, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (180, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (192, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (192, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (206, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (206, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (218, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (218, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (226, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (226, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (234, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (234, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (250, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (250, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (298, 'ROLE_USER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (300, 'ROLE_USER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (300, 'ROLE_EXECUTIVE');
-INSERT INTO user_userrole (user_id, user_role) VALUES (302, 'ROLE_USER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (310, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (310, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (312, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (312, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (315, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (315, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (316, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (316, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (321, 'ROLE_CLIENT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (322, 'ROLE_PROJECTMANAGER');
-INSERT INTO user_userrole (user_id, user_role) VALUES (322, 'ROLE_EXECUTIVE');
-INSERT INTO user_userrole (user_id, user_role) VALUES (350, 'ROLE_VERIFICATOR');
-INSERT INTO user_userrole (user_id, user_role) VALUES (350, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (381, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (381, 'ROLE_CLIENT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (383, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (383, 'ROLE_CLIENT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (397, 'ROLE_VERIFICATOR');
+INSERT INTO user_userrole (user_id, user_role) VALUES (397, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (397, 'ROLE_EXPERT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (421, 'ROLE_VERIFICATOR');
+INSERT INTO user_userrole (user_id, user_role) VALUES (421, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (421, 'ROLE_EXPERT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (421, 'ROLE_PROJECTMANAGER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (424, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (424, 'ROLE_EXECUTIVE');
+INSERT INTO user_userrole (user_id, user_role) VALUES (424, 'ROLE_PROJECTMANAGER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (426, 'ROLE_VERIFICATOR');
+INSERT INTO user_userrole (user_id, user_role) VALUES (426, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (426, 'ROLE_EXPERT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (426, 'ROLE_PROJECTMANAGER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (446, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (446, 'ROLE_EXPERT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (446, 'ROLE_PROJECTMANAGER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (448, 'ROLE_FREELANCER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (448, 'ROLE_EXPERT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (448, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (450, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (450, 'ROLE_CLIENT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (393, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (393, 'ROLE_EXPERT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (393, 'ROLE_CLIENT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (393, 'ROLE_VERIFICATOR');
+INSERT INTO user_userrole (user_id, user_role) VALUES (468, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (468, 'ROLE_EXPERT');
+INSERT INTO user_userrole (user_id, user_role) VALUES (468, 'ROLE_FREELANCER');
 
 
 --
 -- Data for Name: worker; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO worker (user_id, data) VALUES (7, 8);
-INSERT INTO worker (user_id, data) VALUES (13, 14);
-INSERT INTO worker (user_id, data) VALUES (15, 16);
-INSERT INTO worker (user_id, data) VALUES (17, 18);
-INSERT INTO worker (user_id, data) VALUES (21, 22);
-INSERT INTO worker (user_id, data) VALUES (47, 48);
-INSERT INTO worker (user_id, data) VALUES (54, 48);
-INSERT INTO worker (user_id, data) VALUES (62, 63);
-INSERT INTO worker (user_id, data) VALUES (69, 63);
-INSERT INTO worker (user_id, data) VALUES (77, 78);
-INSERT INTO worker (user_id, data) VALUES (84, 78);
-INSERT INTO worker (user_id, data) VALUES (92, 93);
-INSERT INTO worker (user_id, data) VALUES (99, 93);
-INSERT INTO worker (user_id, data) VALUES (124, 125);
-INSERT INTO worker (user_id, data) VALUES (134, 135);
-INSERT INTO worker (user_id, data) VALUES (144, 145);
-INSERT INTO worker (user_id, data) VALUES (154, 155);
-INSERT INTO worker (user_id, data) VALUES (168, 169);
-INSERT INTO worker (user_id, data) VALUES (180, 181);
-INSERT INTO worker (user_id, data) VALUES (192, 193);
-INSERT INTO worker (user_id, data) VALUES (206, 207);
-INSERT INTO worker (user_id, data) VALUES (218, 219);
-INSERT INTO worker (user_id, data) VALUES (226, 227);
-INSERT INTO worker (user_id, data) VALUES (234, 235);
-INSERT INTO worker (user_id, data) VALUES (250, 251);
-INSERT INTO worker (user_id, data) VALUES (298, 299);
 INSERT INTO worker (user_id, data) VALUES (300, 301);
-INSERT INTO worker (user_id, data) VALUES (302, 303);
-INSERT INTO worker (user_id, data) VALUES (310, 311);
-INSERT INTO worker (user_id, data) VALUES (312, 311);
-INSERT INTO worker (user_id, data) VALUES (313, 311);
-INSERT INTO worker (user_id, data) VALUES (314, 311);
-INSERT INTO worker (user_id, data) VALUES (315, 311);
-INSERT INTO worker (user_id, data) VALUES (316, 311);
-INSERT INTO worker (user_id, data) VALUES (322, 311);
-INSERT INTO worker (user_id, data) VALUES (350, 351);
+INSERT INTO worker (user_id, data) VALUES (397, 398);
+INSERT INTO worker (user_id, data) VALUES (421, 423);
+INSERT INTO worker (user_id, data) VALUES (424, 425);
+INSERT INTO worker (user_id, data) VALUES (426, 427);
+INSERT INTO worker (user_id, data) VALUES (446, 447);
+INSERT INTO worker (user_id, data) VALUES (448, 449);
+INSERT INTO worker (user_id, data) VALUES (393, 467);
+INSERT INTO worker (user_id, data) VALUES (468, 469);
 
 
 --
@@ -1407,6 +1076,14 @@ ALTER TABLE ONLY task
 
 ALTER TABLE ONLY task
     ADD CONSTRAINT fk272d85e77d3c5d FOREIGN KEY (translation) REFERENCES translation(translation_id);
+
+
+--
+-- Name: fk272d85f32e25c4; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY task
+    ADD CONSTRAINT fk272d85f32e25c4 FOREIGN KEY (reviewer) REFERENCES translator(user_id);
 
 
 --
