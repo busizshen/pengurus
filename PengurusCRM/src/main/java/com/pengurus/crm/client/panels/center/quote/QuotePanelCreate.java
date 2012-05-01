@@ -97,13 +97,6 @@ public class QuotePanelCreate extends QuotePanel {
 
 	}
 
-	/*
-	 * @Override protected void getJobsPanel(QuoteView quoteView) { // TODO
-	 * Auto-generated method stub
-	 * 
-	 * }
-	 */
-
 	@Override
 	protected void addSupervisorPanel(VerticalPanel vpPanel) {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();

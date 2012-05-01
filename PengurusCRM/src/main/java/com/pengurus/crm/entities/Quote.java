@@ -64,8 +64,7 @@ public class Quote {
 		this.jobs = new HashSet<Job>();
 		if (quoteDTO.getJobs() != null) {
 			for (JobDTO j : quoteDTO.getJobs()) {
-				Job job = new Job();
-				job.setId(j.getId());
+				Job job = new Job(j);
 				this.jobs.add(job);
 			}
 		}

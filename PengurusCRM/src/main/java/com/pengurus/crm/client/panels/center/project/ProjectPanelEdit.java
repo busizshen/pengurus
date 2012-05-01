@@ -43,13 +43,16 @@ public class ProjectPanelEdit extends ProjectPanel {
 		AsyncCallback<Set<TranslatorDTO>> callback = new AsyncCallback<Set<TranslatorDTO>>() {
 
 			public void onFailure(Throwable t) {
-				Window.Location.assign("/spring_security_login");
+				MessageBox mb = new MessageBox();
+				mb.setMessage(t.getMessage());
+				mb.show();
 			}
 
 			public void onSuccess(Set<TranslatorDTO> result) {
 				List<UserModel> models = new ArrayList<UserModel>();
 				for (UserDTO user : result) {
-					models.add(new UserModel(user));
+					if (!projectDTO.getExperts().contains(user))
+						models.add(new UserModel(user));
 				}
 				List<UserModel> modelsTo = new ArrayList<UserModel>();
 				for (UserDTO user : projectDTO.getExperts()) {
@@ -73,19 +76,21 @@ public class ProjectPanelEdit extends ProjectPanel {
 
 	}
 
-	
 	@Override
 	protected void getProjectMangaersPanel(HorizontalPanel hp3) {
 		AsyncCallback<Set<WorkerDTO>> callback = new AsyncCallback<Set<WorkerDTO>>() {
 
 			public void onFailure(Throwable t) {
-				Window.Location.assign("/spring_security_login");
+				MessageBox mb = new MessageBox();
+				mb.setMessage(t.getMessage());
+				mb.show();
 			}
 
 			public void onSuccess(Set<WorkerDTO> result) {
 				List<UserModel> models = new ArrayList<UserModel>();
 				for (UserDTO user : result) {
-					models.add(new UserModel(user));
+					if (!projectDTO.getProjectManagers().contains(user))
+						models.add(new UserModel(user));
 				}
 				List<UserModel> modelsTo = new ArrayList<UserModel>();
 				for (UserDTO user : projectDTO.getProjectManagers()) {
@@ -103,14 +108,15 @@ public class ProjectPanelEdit extends ProjectPanel {
 		service.getWorkersByRoles(roles, callback);
 
 		projectManagersPanel = new WorkerPanelChoose("Project Managers");
-		
+
 		projectManagersPanel.setWidth(470);
 		hp3.add(projectManagersPanel);
 	}
 
 	@Override
 	protected void addDescriptionPanel(VerticalPanel vp) {
-		descriptionPanel = new DescriptionPanelEdit(projectDTO.getDescription(),100,300);
+		descriptionPanel = new DescriptionPanelEdit(
+				projectDTO.getDescription(), 100, 300);
 		vp.add(descriptionPanel);
 	}
 
@@ -191,6 +197,5 @@ public class ProjectPanelEdit extends ProjectPanel {
 		});
 		hp2.add(b2);
 	}
-
 
 }

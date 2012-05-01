@@ -21,7 +21,7 @@
         <many-to-one name="supervisor" class="com.pengurus.crm.entities.Worker" fetch="join">
             <column name="SUPERVISOR" />
         </many-to-one>
-        <set name="jobs" table="JOB" inverse="false" lazy="true" cascade="save-update">
+        <set name="jobs" table="JOB" inverse="false" lazy="true">
             <key>
                 <column name="QUOTE_ID" />
             </key>
