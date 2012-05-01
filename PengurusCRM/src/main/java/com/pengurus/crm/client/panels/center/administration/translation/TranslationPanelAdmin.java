@@ -238,7 +238,8 @@ public class TranslationPanelAdmin extends MainPanel {
         createForm = new FormPanel();
         createForm.setHeading("Create new translation");
         createForm.setPadding(20);
-        createForm.setLabelAlign(LabelAlign.TOP);
+        createForm.setLabelAlign(LabelAlign.LEFT);
+        createForm.setLabelWidth(100);
         createLanguageCombos();
         createTranslationTypeCombo();
         createCurrencyCombo();
@@ -313,7 +314,7 @@ public class TranslationPanelAdmin extends MainPanel {
                 .create(AdministrationService.class);
         service.getTranslationTypes(callback);
 
-        translationTypeCombo.setDisplayField("unit");
+        translationTypeCombo.setDisplayField("name");
         list.sort("unit", SortDir.ASC);
 
         translationTypeCombo.setStore(list);
@@ -380,6 +381,7 @@ public class TranslationPanelAdmin extends MainPanel {
     private void createForm() {
         mainForm = new FormPanel();
         mainForm.setHeading("Translation panel");
+        mainForm.setFrame(true);
         mainForm.setPadding(50);
 
     }

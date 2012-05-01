@@ -163,7 +163,7 @@ public class TranslationTypePanel extends MainPanel {
         createForm = new FormPanel();
         createForm.setHeading("Create new translation type");
         createForm.setPadding(20);
-        createForm.setLabelAlign(LabelAlign.TOP);
+        createForm.setLabelAlign(LabelAlign.LEFT);
     }
 
     private void createUnitField() {

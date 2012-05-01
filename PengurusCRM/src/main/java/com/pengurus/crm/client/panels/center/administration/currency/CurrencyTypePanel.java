@@ -154,7 +154,7 @@ public class CurrencyTypePanel extends MainPanel {
         createForm = new FormPanel();
         createForm.setHeading("Create new currency");
         createForm.setPadding(20);
-        createForm.setLabelAlign(LabelAlign.TOP);
+        createForm.setLabelAlign(LabelAlign.LEFT);
     }
 
     private void createCurrencyField() {

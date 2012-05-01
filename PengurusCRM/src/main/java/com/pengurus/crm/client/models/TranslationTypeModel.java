@@ -29,9 +29,16 @@ public class TranslationTypeModel extends BaseModel {
 			set("type", translationTypeDTO.getDescription());
 			set("unit", translationTypeDTO.getUnit());
 		}
+		set("name", toString());
 	}
 
 	public TranslationTypeDTO getTranslationTypeDTO() {
 		return this.translationTypeDTO;
 	}
+	
+	@Override
+	public String toString() {
+		return getUnit() + " - " + getType();
+	}
+	
 }

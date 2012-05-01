@@ -154,7 +154,7 @@ public class LanguagePanel extends MainPanel {
         createForm = new FormPanel();
         createForm.setHeading("Create new language");
         createForm.setPadding(20);
-        createForm.setLabelAlign(LabelAlign.TOP);
+        createForm.setLabelAlign(LabelAlign.LEFT);
     }
 
     private void createLanguageField() {
