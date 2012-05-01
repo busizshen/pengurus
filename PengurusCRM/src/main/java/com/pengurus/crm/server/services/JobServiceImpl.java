@@ -27,7 +27,6 @@ public class JobServiceImpl implements JobService {
 
 	@Override
 	public JobDTO createJob(JobDTO jobDTO) {
-		// translationDAO.create(new Translation(jobDTO.getTranslation()));
 		jobDTO.setId(jobDAO.create(new Job(jobDTO)));
 		return jobDTO;
 	}

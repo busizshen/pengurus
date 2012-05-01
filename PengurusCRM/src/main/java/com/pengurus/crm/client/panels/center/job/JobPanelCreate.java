@@ -20,7 +20,6 @@ import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.models.CurrencyModel;
@@ -36,12 +35,13 @@ import com.pengurus.crm.client.service.JobServiceAsync;
 import com.pengurus.crm.shared.dto.CurrencyTypeDTO;
 import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.PriceDTO;
+import com.pengurus.crm.shared.dto.QuoteDTO;
 import com.pengurus.crm.shared.dto.StatusDTO;
 import com.pengurus.crm.shared.dto.TranslationDTO;
 
 public class JobPanelCreate {
-	private JobDTO jobDTO;
-	protected Listener<DomEvent> listenerCreateJob;
+	private QuoteDTO quoteDTO;
+	private JobsListPanelQuoteEdit jobsList;
 	private Listener<DomEvent> listenerClose;
 	private ListStore<CurrencyModel> listCurrencyModel;
 	private ListStore<TranslationModel> listTranslationModel;
@@ -66,7 +66,9 @@ public class JobPanelCreate {
 		AsyncCallback<Set<TranslationDTO>> callback2 = new AsyncCallback<Set<TranslationDTO>>() {
 
 			public void onFailure(Throwable t) {
-				Window.Location.assign("/spring_security_login");
+				MessageBox mb = new MessageBox();
+				mb.setMessage(t.getMessage());
+				mb.show();
 			}
 
 			public void onSuccess(Set<TranslationDTO> result) {
@@ -79,13 +81,11 @@ public class JobPanelCreate {
 		service.getTranslations(callback2);
 	}
 
-	public JobDTO getJobDTO() {
-		return jobDTO;
-	}
 
 	public JobPanelInfo getPanel(Listener<DomEvent> listenerClose,
-			Listener<DomEvent> listenerCreateJob) {
-		this.listenerCreateJob = listenerCreateJob;
+			QuoteDTO quoteDTO, JobsListPanelQuoteEdit jobsList) {
+		this.quoteDTO = quoteDTO;
+		this.jobsList = jobsList;
 		this.listenerClose = listenerClose;
 		JobPanelInfo jobPanel = new JobPanelInfo();
 		return jobPanel;
@@ -164,7 +164,7 @@ public class JobPanelCreate {
 
 						@Override
 						public void componentSelected(ButtonEvent ce) {
-							jobDTO = new JobDTO();
+							JobDTO jobDTO = new JobDTO();
 							jobDTO.setDeadline(date.getValue());
 							jobDTO.setDescription(descr.getDescription());
 							if (amount.getValue() != null)
@@ -191,14 +191,14 @@ public class JobPanelCreate {
 									}
 
 									public void onSuccess(JobDTO result) {
-										jobDTO = result;
+										quoteDTO.getJobs().add(result);
+										jobsList.refreshList(result);
 									}
 								};
 								JobServiceAsync service = (JobServiceAsync) GWT
 										.create(JobService.class);
 								service.createJob(jobDTO, callback);
 							} else {
-								jobDTO = null;
 								MessageBox mb = new MessageBox();
 								mb.setMessage("Please fill all forms");
 								mb.show();
@@ -206,7 +206,7 @@ public class JobPanelCreate {
 						}
 
 					});
-			buttonSubmit.addListener(Events.OnClick, listenerCreateJob);
+			buttonSubmit.addListener(Events.OnClick, listenerClose);
 			simple.addButton(buttonSubmit);
 			Button buttonCancel = new Button("Cancel");
 			buttonCancel.addListener(Events.OnClick, listenerClose);

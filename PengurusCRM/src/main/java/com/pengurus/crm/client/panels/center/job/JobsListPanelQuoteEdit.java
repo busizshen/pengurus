@@ -8,12 +8,33 @@ import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.models.JobModel;
+import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.QuoteDTO;
 
 public class JobsListPanelQuoteEdit extends JobsListPanelQuote {
 
 	public JobsListPanelQuoteEdit(QuoteDTO quoteDTO){
 		super(quoteDTO);
+	}
+	private void showCreateJobPanel(){
+		final Window window = new Window();
+		final JobPanelCreate jobPanel = new JobPanelCreate();
+		Listener<DomEvent> listenerClose = new Listener<DomEvent>() { 
+			@Override
+			public void handleEvent(DomEvent be) {
+				window.hide();
+			}
+		};
+		window.setActive(true);
+		window.add(jobPanel.getPanel(listenerClose,quoteDTO,this));
+		window.setAutoWidth(true);
+		window.setAutoHide(true);
+		window.setEnabled(true);
+		window.setClosable(false);
+		window.setHeaderVisible(true);
+		window.setAutoHide(false);
+		window.setHeading("Create Job");
+		window.show();
 	}
 	
 	public JobsListPanelQuoteEdit getPanel() {
@@ -22,42 +43,19 @@ public class JobsListPanelQuoteEdit extends JobsListPanelQuote {
 		Button createButton = new Button("Create New Job", new SelectionListener<ButtonEvent>(){
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				final Window window = new Window();
-				final JobPanelCreate jobPanel = new JobPanelCreate();
-				Listener<DomEvent> listenerCreateJob = new Listener<DomEvent>() { 
-					@Override
-					public void handleEvent(DomEvent be) {
-						if(jobPanel.getJobDTO() != null){
-							modelList.getGrid().stopEditing();
-							modelList.getStore().add(new JobModel(jobPanel.getJobDTO()));
-							modelList.getGrid().startEditing(0, 0);
-							quoteDTO.getJobs().add(jobPanel.getJobDTO());
-							window.hide();
-						}
-					}
-				};
-				Listener<DomEvent> listenerClose = new Listener<DomEvent>() { 
-					@Override
-					public void handleEvent(DomEvent be) {
-						window.hide();
-					}
-				};
-				window.setActive(true);
-				window.add(jobPanel.getPanel(listenerClose,listenerCreateJob));
-				window.setAutoWidth(true);
-				window.setAutoHide(true);
-				window.setEnabled(true);
-				window.setClosable(false);
-				window.setHeaderVisible(true);
-				window.setAutoHide(false);
-				window.setHeading("Create Job");
-				window.show();
+				showCreateJobPanel();
 			}});
 		HorizontalPanel hp = new HorizontalPanel();
 		hp.add(createButton);
 		hp.add(modelList);
 		add(hp);
 		return this;
+	}
+
+	public void refreshList(JobDTO result) {
+		modelList.getGrid().stopEditing();
+		modelList.getStore().add(new JobModel(result));
+		modelList.getGrid().startEditing(0, 0);
 	}
 
 }
