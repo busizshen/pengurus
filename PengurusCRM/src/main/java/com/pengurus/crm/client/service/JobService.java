@@ -6,7 +6,6 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.pengurus.crm.client.service.exceptions.DeleteException;
 import com.pengurus.crm.shared.dto.JobDTO;
-import com.pengurus.crm.shared.dto.TaskDTO;
 
 @RemoteServiceRelativePath("job.rpc")
 public interface JobService extends RemoteService{

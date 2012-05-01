@@ -18,6 +18,9 @@
         <many-to-one name="expert" class="com.pengurus.crm.entities.Translator" fetch="join">
             <column name="EXPERT" />
         </many-to-one>
+        <many-to-one name="reviewer" class="com.pengurus.crm.entities.Translator" fetch="join">
+            <column name="REVIEWER" />
+        </many-to-one>
         <property name="deadline" type="java.util.Date">
             <column name="DEADLINE" />
         </property>

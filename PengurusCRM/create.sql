@@ -208,6 +208,7 @@ CREATE TABLE task (
     task_id bigint NOT NULL,
     status character varying(255),
     expert bigint,
+    reviewer bigint,
     deadline timestamp without time zone,
     translation bigint,
     amount integer,
@@ -760,29 +761,29 @@ INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (85
 -- Data for Name: task; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (10, 'accepted', 7, '2012-02-25 15:05:01.601', 6, 100, 4, 'chapters from 1 to 3', 9, 'ok', 'Ok.', 9);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (11, 'accepted', 7, '2012-02-25 15:05:01.601', 6, 100, 4, 'chapters 4 and 5', 9, 'good', '5th chapter was was magnificent work!', 9);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (52, 'accepted', 47, '2012-02-26 13:36:35.63', 46, 100, 44, 'desc2', 51, 'bad', 'comm2', 51);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (50, 'accepted', 47, '2012-02-26 13:36:35.63', 46, 100, 44, 'desc', 49, 'bad', 'comm', 49);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (209, 'accepted', 206, '2012-02-26 13:36:38.992', 205, 100, 203, 'desc', 208, 'bad', 'comm', NULL);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (65, 'accepted', 62, '2012-02-26 13:36:35.887', 61, 100, 59, 'desc', 64, 'bad', 'comm', 64);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (67, 'accepted', 62, '2012-02-26 13:36:35.887', 61, 100, 59, 'desc2', 66, 'bad', 'comm2', 66);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (210, 'accepted', 206, '2012-02-26 13:36:38.992', 205, 100, 203, 'desc2', 208, 'bad', 'comm2', NULL);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (82, 'accepted', 77, '2012-02-26 13:36:36.179', 76, 100, 74, 'desc2', 81, 'bad', 'comm2', 81);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (80, 'accepted', 77, '2012-02-26 13:36:36.179', 76, 100, 74, 'desc', 79, 'bad', 'comm', 79);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (95, 'accepted', 92, '2012-02-26 13:36:36.58', 91, 100, 89, 'desc', 94, 'bad', 'comm', 94);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (97, 'accepted', 92, '2012-02-26 13:36:36.58', 91, 100, 89, 'desc2', 96, 'bad', 'comm2', 96);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (127, 'accepted', 124, '2012-02-26 13:36:37.512', 123, 100, 121, 'desc', 126, 'bad', 'comm', NULL);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (137, 'accepted', 134, '2012-02-26 13:36:37.69', 133, 100, 131, 'desc2', 136, 'bad', 'comm', NULL);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (147, 'resolved', 144, '2012-02-26 13:36:37.844', 143, 20000, 141, 'new description', 146, 'good', 'new comment', NULL);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (171, 'accepted', 168, '2012-02-26 13:36:38.279', 167, 100, 165, 'desc', 170, 'bad', 'comm', 173);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (172, 'accepted', 168, '2012-02-26 13:36:38.279', 167, 100, 165, 'desc2', 170, 'bad', 'comm2', 173);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (184, 'accepted', 180, '2012-02-26 13:36:38.507', 179, 100, 177, 'desc2', 182, 'bad', 'comm2', 185);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (183, 'accepted', 180, '2012-02-26 13:36:38.507', 179, 100, 177, 'desc', 182, 'bad', 'comm', 185);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (196, 'accepted', 192, '2012-02-26 13:36:38.741', 191, 100, 189, 'desc2', 194, 'bad', 'comm2', 197);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (195, 'accepted', 192, '2012-02-26 13:36:38.741', 191, 100, 189, 'desc', 194, 'bad', 'comm', 197);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (318, 'accepted', 310, '2012-03-22 20:36:51.303', 309, 100, 307, 'desc', 317, 'bad', 'comm', 317);
-INSERT INTO task (task_id, status, expert, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (320, 'accepted', 310, '2012-03-22 20:36:51.303', 309, 100, 307, 'desc2', 319, 'bad', 'comm2', 319);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (10, 'accepted', 7,7, '2012-02-25 15:05:01.601', 6, 100, 4, 'chapters from 1 to 3', 9, 'ok', 'Ok.', 9);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (11, 'accepted', 7,7, '2012-02-25 15:05:01.601', 6, 100, 4, 'chapters 4 and 5', 9, 'good', '5th chapter was was magnificent work!', 9);
+INSERT INTO task (task_id, status, expert,reviewer , deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (52, 'accepted', 47,47, '2012-02-26 13:36:35.63', 46, 100, 44, 'desc2', 51, 'bad', 'comm2', 51);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (50, 'accepted', 47,47, '2012-02-26 13:36:35.63', 46, 100, 44, 'desc', 49, 'bad', 'comm', 49);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (209, 'accepted', 206,206, '2012-02-26 13:36:38.992', 205, 100, 203, 'desc', 208, 'bad', 'comm', NULL);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (65, 'accepted', 62,62, '2012-02-26 13:36:35.887', 61, 100, 59, 'desc', 64, 'bad', 'comm', 64);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (67, 'accepted', 62,62, '2012-02-26 13:36:35.887', 61, 100, 59, 'desc2', 66, 'bad', 'comm2', 66);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (210, 'accepted', 206,206, '2012-02-26 13:36:38.992', 205, 100, 203, 'desc2', 208, 'bad', 'comm2', NULL);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (82, 'accepted', 77,77, '2012-02-26 13:36:36.179', 76, 100, 74, 'desc2', 81, 'bad', 'comm2', 81);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (80, 'accepted', 77,77, '2012-02-26 13:36:36.179', 76, 100, 74, 'desc', 79, 'bad', 'comm', 79);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (95, 'accepted', 92,92, '2012-02-26 13:36:36.58', 91, 100, 89, 'desc', 94, 'bad', 'comm', 94);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (97, 'accepted', 92,92, '2012-02-26 13:36:36.58', 91, 100, 89, 'desc2', 96, 'bad', 'comm2', 96);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (127, 'accepted', 124,124, '2012-02-26 13:36:37.512', 123, 100, 121, 'desc', 126, 'bad', 'comm', NULL);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (137, 'accepted', 134,134, '2012-02-26 13:36:37.69', 133, 100, 131, 'desc2', 136, 'bad', 'comm', NULL);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (147, 'resolved', 144,144, '2012-02-26 13:36:37.844', 143, 20000, 141, 'new description', 146, 'good', 'new comment', NULL);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (171, 'accepted', 168,168, '2012-02-26 13:36:38.279', 167, 100, 165, 'desc', 170, 'bad', 'comm', 173);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (172, 'accepted', 168,168, '2012-02-26 13:36:38.279', 167, 100, 165, 'desc2', 170, 'bad', 'comm2', 173);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (184, 'accepted', 180,180, '2012-02-26 13:36:38.507', 179, 100, 177, 'desc2', 182, 'bad', 'comm2', 185);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (183, 'accepted', 180,180, '2012-02-26 13:36:38.507', 179, 100, 177, 'desc', 182, 'bad', 'comm', 185);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (196, 'accepted', 192,192, '2012-02-26 13:36:38.741', 191, 100, 189, 'desc2', 194, 'bad', 'comm2', 197);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (195, 'accepted', 192,192m '2012-02-26 13:36:38.741', 191, 100, 189, 'desc', 194, 'bad', 'comm', 197);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (318, 'accepted', 310,310, '2012-03-22 20:36:51.303', 309, 100, 307, 'desc', 317, 'bad', 'comm', 317);
+INSERT INTO task (task_id, status, expert,reviewer, deadline, translation, amount, price, description, job, rating, comment, job_id) VALUES (320, 'accepted', 310,310, '2012-03-22 20:36:51.303', 309, 100, 307, 'desc2', 319, 'bad', 'comm2', 319);
 
 
 --

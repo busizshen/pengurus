@@ -32,9 +32,9 @@ import com.pengurus.crm.shared.dto.ProjectDTO;
 public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 
 	ListPagination<ProjectModel> listPagination;
-	
+
 	protected abstract void initPagination();
-	
+
 	@Override
 	protected ListStore<ProjectModel> getList() {
 		return listPagination.getStore();
@@ -44,8 +44,7 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 	protected void addGridPaging(ContentPanel cp, EditorGrid<ProjectModel> grid) {
 		listPagination.addToGrid(cp, grid);
 	}
-	
-	
+
 	@Override
 	protected List<ColumnConfig> getColumns() {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
@@ -79,7 +78,7 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 		column.setHeader("Preview");
 		column.setRenderer(getButtonRenderer());
 		configs.add(column);
-		
+
 		return configs;
 
 	}
@@ -97,7 +96,8 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 					grid.addListener(Events.OnClick,
 							new Listener<GridEvent<ProjectModel>>() {
 
-								public void handleEvent(GridEvent<ProjectModel> be) {
+								public void handleEvent(
+										GridEvent<ProjectModel> be) {
 									for (int i = 0; i < be.getGrid().getStore()
 											.getCount(); i++) {
 										if (be.getGrid().getView()
@@ -119,7 +119,7 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 							});
 				}
 				ButtonBar buttonBar = new ButtonBar();
-				Button b = new Button("PREVIEW",
+				Button buttomPreview = new Button("PREVIEW",
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
@@ -129,42 +129,44 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 									}
 
 									public void onSuccess(ProjectDTO result) {
-										ProjectPanelView projectPanel = new ProjectPanelView(result);
+										ProjectPanelView projectPanel = new ProjectPanelView(
+												result);
 										projectPanel.setAsMain();
 									}
 								};
 								ProjectServiceAsync service = (ProjectServiceAsync) GWT
 										.create(ProjectService.class);
-								service.getProject(model.getProjectDTO().getId(),
-										callback);
+								service.getProject(model.getProjectDTO()
+										.getId(), callback);
 							}
 						});
-				b.setToolTip("Click to see");
-				buttonBar.add(b);
+				buttomPreview.setToolTip("Click to see");
+				buttonBar.add(buttomPreview);
 				if (AuthorizationManager.canChangeProject()) {
-					b = new Button("EDIT",
+					Button buttonEdit = new Button("EDIT",
 
-							new SelectionListener<ButtonEvent>() {
-							@Override
-							public void componentSelected(ButtonEvent ce) {
-								AsyncCallback<ProjectDTO> callback = new AsyncCallback<ProjectDTO>() {
+					new SelectionListener<ButtonEvent>() {
+						@Override
+						public void componentSelected(ButtonEvent ce) {
+							AsyncCallback<ProjectDTO> callback = new AsyncCallback<ProjectDTO>() {
 
-									public void onFailure(Throwable t) {
-									}
+								public void onFailure(Throwable t) {
+								}
 
-									public void onSuccess(ProjectDTO result) {
-										ProjectPanelEdit projectPanel = new ProjectPanelEdit(result);
-										projectPanel.setAsMain();
-									}
-								};
-								ProjectServiceAsync service = (ProjectServiceAsync) GWT
-										.create(ProjectService.class);
-								service.getProject(model.getProjectDTO().getId(),
-										callback);
-							}
-						});
-					b.setToolTip("Click to see");
-					buttonBar.add(b);
+								public void onSuccess(ProjectDTO result) {
+									ProjectPanelEdit projectPanel = new ProjectPanelEdit(
+											result);
+									projectPanel.setAsMain();
+								}
+							};
+							ProjectServiceAsync service = (ProjectServiceAsync) GWT
+									.create(ProjectService.class);
+							service.getProject(model.getProjectDTO().getId(),
+									callback);
+						}
+					});
+					buttonEdit.setToolTip("Click to edit");
+					buttonBar.add(buttonEdit);
 				}
 				return buttonBar;
 			}
@@ -187,5 +189,5 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 	protected void setStyle(ContentPanel cp) {
 
 	}
-	
+
 }

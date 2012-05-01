@@ -7,6 +7,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
+import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
@@ -30,6 +31,7 @@ import com.pengurus.crm.client.panels.center.rating.RatingPanel;
 import com.pengurus.crm.client.panels.center.status.TaskStatusPanel;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanel;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEditByList;
+import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEditByRoles;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelView;
 import com.pengurus.crm.client.service.AdministrationService;
 import com.pengurus.crm.client.service.AdministrationServiceAsync;
@@ -43,6 +45,7 @@ import com.pengurus.crm.shared.dto.PriceDTO;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.TaskDTO;
 import com.pengurus.crm.shared.dto.TranslatorDTO;
+import com.pengurus.crm.shared.dto.UserRoleDTO;
 import com.pengurus.crm.shared.dto.WorkerDTO;
 
 public class TaskPanel extends MainPanel {
@@ -57,6 +60,7 @@ public class TaskPanel extends MainPanel {
 	protected FormPanel mainPanel;
 	protected DateField deadline;
 	protected WorkerPanel workerPanel;
+	protected WorkerPanel reviewerPanel;
 	TaskStatusPanel statusBar;
 	RatingPanel rating;
 
@@ -78,13 +82,26 @@ public class TaskPanel extends MainPanel {
 		hp.add(vp1);
 		VerticalPanel vp2 = new VerticalPanel();
 		vp2.setSpacing(10);
-		addRatingPanel(vp2);
+		/*addRatingPanel(vp2);*/
 		addDescriptionPanel(vp2);
 		hp.add(vp2);
 		mainPanel.add(hp);
 		addTranslatorPanel(mainPanel);
+		addReviewerPanel(mainPanel);
 		add(mainPanel);
 
+	}
+
+	private void addReviewerPanel(FormPanel vp) {
+		if (AuthorizationManager.canEditProject(projectDTO)) {
+			Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+			roles.add(UserRoleDTO.ROLE_VERIFICATOR);
+			reviewerPanel = new WorkerPanelEditByRoles(taskDTO.getReviewer(),
+					"Reviewer", roles);
+		} else {
+			reviewerPanel = new WorkerPanelView(taskDTO.getReviewer(), "Reviewer");
+		}
+		vp.add(reviewerPanel);
 	}
 
 	protected void setStyle(HorizontalPanel hp) {
@@ -198,8 +215,9 @@ public class TaskPanel extends MainPanel {
 		AsyncCallback<JobDTO> callback = new AsyncCallback<JobDTO>() {
 
 			public void onFailure(Throwable t) {
-				Window.Location.assign("/spring_security_login");
-
+				MessageBox mb = new MessageBox();
+				mb.setMessage(t.getMessage());
+				mb.show();
 			}
 
 			@Override
@@ -228,18 +246,22 @@ public class TaskPanel extends MainPanel {
 				// taskDTO.setComment(comment.getValue());
 				// taskDTO.setRating();
 				taskDTO.setDescription(description.getDescription());
-				taskDTO.setExpert((TranslatorDTO) workerPanel.getChosenWorker());
+				if(workerPanel.getChosenWorker() != null)
+					taskDTO.setExpert((TranslatorDTO) workerPanel.getChosenWorker());
+				if(reviewerPanel.getChosenWorker() != null)
+					taskDTO.setReviewer((TranslatorDTO) reviewerPanel.getChosenWorker());
 				taskDTO.setStatus(statusBar.getStatus());
 				AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 
 					public void onFailure(Throwable t) {
-						Window.Location.assign("/spring_security_login");
-
+						MessageBox mb = new MessageBox();
+						mb.setMessage("Server error - Task cannot be updated");
+						mb.show();
 					}
 
 					@Override
 					public void onSuccess(Void result) {
-						getJobPanel();
+			//			getJobPanel();
 					}
 				};
 				TaskServiceAsync service = (TaskServiceAsync) GWT
@@ -266,8 +288,9 @@ public class TaskPanel extends MainPanel {
 							AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 
 								public void onFailure(Throwable t) {
-									Window.Location
-											.assign("/spring_security_login");
+									MessageBox mb = new MessageBox();
+									mb.setMessage("Server Error - cannot delete");
+									mb.show();
 								}
 
 								@Override

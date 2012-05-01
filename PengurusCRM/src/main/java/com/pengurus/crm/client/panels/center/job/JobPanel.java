@@ -17,7 +17,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.CurrencyModel;
 import com.pengurus.crm.client.models.TranslationModel;

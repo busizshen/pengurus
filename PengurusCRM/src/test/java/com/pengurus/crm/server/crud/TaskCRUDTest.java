@@ -105,7 +105,7 @@ public class TaskCRUDTest {
 
     @Test
     public void simpleCreateTask() {
-        Task task = new Task(Status.accepted, translator, Calendar
+        Task task = new Task(Status.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc", job,
                 Rating.bad, "comm");
         taskDAO.create(task);
@@ -115,7 +115,7 @@ public class TaskCRUDTest {
     @Test
     public void simpleGetTask() {
         // prepare data
-        Task task = new Task(Status.accepted, translator, Calendar
+        Task task = new Task(Status.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc"
                 + Integer.toString(change), job, Rating.bad, "comm");
         taskDAO.create(task);
@@ -139,7 +139,7 @@ public class TaskCRUDTest {
     @Test
     public void simpleUpdateTask(){
         // prepare data
-        Task task = new Task(Status.accepted, translator, Calendar
+        Task task = new Task(Status.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc"
                 + Integer.toString(change), job, Rating.bad, "comm");
         taskDAO.create(task);
@@ -169,7 +169,7 @@ public class TaskCRUDTest {
     @Test
     public void simpleDeleteTask(){
         // prepare data
-        Task task = new Task(Status.accepted, translator, Calendar
+        Task task = new Task(Status.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc"
                 + Integer.toString(change), job, Rating.bad, "comm");
         taskDAO.create(task);

@@ -11,8 +11,10 @@ public class DescriptionPanel extends ContentPanel {
 		setHeading("Description");
 		description = new TextArea();
 		description.setHeight(100);
-		description.setWidth(300);
+	//	description.setWidth(300);
 		description.setValue(descr);
+		setWidth(300);
+		description.setStyleName("boxsizingBorder");
 
 		add(description);
 		this.setAutoHeight(true);
@@ -21,8 +23,10 @@ public class DescriptionPanel extends ContentPanel {
 	public DescriptionPanel() {
 		setHeading("Description");
 		description = new TextArea();
-		description.setHeight(100);
-		description.setWidth(300);
+/*		description.setHeight(100);
+		description.setWidth(300);*/
+		setWidth(300);
+		description.setStyleName("boxsizingBorder");
 		add(description);
 		this.setAutoHeight(true);
 	}

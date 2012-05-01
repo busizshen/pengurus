@@ -11,7 +11,6 @@ import com.pengurus.crm.shared.dto.UserRoleDTO;
 public class Translator extends Worker{
 
 	private Set<Translation> translations;
-
     public Translator() {
         super();
     }
@@ -45,8 +44,7 @@ public class Translator extends Worker{
 
     protected void rewriteLazy(TranslatorDTO translatorDTO) {
     	super.rewrite(translatorDTO);
-    	translatorDTO.setPersonalData(getPersonalData().toDTO());
-    }
+   }
     
     @Override
     public TranslatorDTO toDTO(){
@@ -62,4 +60,5 @@ public class Translator extends Worker{
     	rewriteLazy(translatorDTO);
     	return translatorDTO; 
     }
+   
 }

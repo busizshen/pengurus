@@ -96,10 +96,10 @@ public class JobCRUDTest {
         Job job = new Job();
         jobDAO.create(job);
 
-        Task task = new Task(Status.accepted, translator, Calendar
+        Task task = new Task(Status.accepted, translator, translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc", job,
                 Rating.bad, "comm");
-        Task task2 = new Task(Status.accepted, translator, Calendar
+        Task task2 = new Task(Status.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc2",
                 job, Rating.bad, "comm2");
         taskDAO.create(task);

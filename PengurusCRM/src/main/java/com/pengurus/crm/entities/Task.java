@@ -2,34 +2,51 @@ package com.pengurus.crm.entities;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.pengurus.crm.enums.Rating;
 import com.pengurus.crm.enums.Status;
+import com.pengurus.crm.server.UserServiceImpl;
 import com.pengurus.crm.shared.dto.TaskDTO;
 
 public class Task {
-    
+   
+	protected static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+	   
+	
     private Long id;
     private Status status;
     private Translator expert;
+    private Translator reviewer;
     private Date deadline;
     private Translation translation;
     private Integer amount;
     private Price price;
     private String description;
     private Job job;
-    private Rating rating;
+    public Translator getReviewer() {
+		return reviewer;
+	}
+
+	public void setReviewer(Translator reviewer) {
+		this.reviewer = reviewer;
+	}
+
+	private Rating rating;
     private String comment;
 
     public Task() {
         super();
     }
 
-    public Task(Status status, Translator expert, Date deadline,
+    public Task(Status status, Translator expert, Translator reviewer, Date deadline,
                 Translation translation, Integer amount, Price price,
                 String description, Job job, Rating rating, String comment) {
         super();
         this.status = status;
         this.expert = expert;
+        this.reviewer = reviewer;
         this.deadline = deadline;
         this.translation = translation;
         this.amount = amount;
@@ -40,25 +57,28 @@ public class Task {
         this.comment = comment;
     }
    
-    public Task(TaskDTO t) {
+    public Task(TaskDTO taskDTO) {
     	super();
-    	this.id = t.getId();
-    	if(t.getExpert() != null)
-    		this.expert = new Translator(t.getExpert());
-    	this.deadline = t.getDeadline();
-    	if(t.getTranslation() != null)
-    		this.translation = new Translation(t.getTranslation());
-    	if(t.getPrice() != null)
-    		this.price = new Price(t.getPrice());
-    	this.amount = t.getAmount();
-    	this.description = t.getDescription();
-    	if(t.getJob() != null)
-    		this.job = new Job(t.getJob().getId());
-    	if(t.getRating() != null)
-    		this.rating = Rating.toRating(t.getRating());
-    	if(t.getStatus() != null)
-    		this.status = Status.toStatus(t.getStatus());
-    	this.comment = t.getComment();
+    	this.id = taskDTO.getId();
+    	if(taskDTO.getExpert() != null)
+    		this.expert = new Translator(taskDTO.getExpert());
+    	if(taskDTO.getReviewer() != null){
+    		this.reviewer = new Translator(taskDTO.getReviewer());
+    	}
+    	this.deadline = taskDTO.getDeadline();
+    	if(taskDTO.getTranslation() != null)
+    		this.translation = new Translation(taskDTO.getTranslation());
+    	if(taskDTO.getPrice() != null)
+    		this.price = new Price(taskDTO.getPrice());
+    	this.amount = taskDTO.getAmount();
+    	this.description = taskDTO.getDescription();
+    	if(taskDTO.getJob() != null)
+    		this.job = new Job(taskDTO.getJob().getId());
+    	if(taskDTO.getRating() != null)
+    		this.rating = Rating.toRating(taskDTO.getRating());
+    	if(taskDTO.getStatus() != null)
+    		this.status = Status.toStatus(taskDTO.getStatus());
+    	this.comment = taskDTO.getComment();
     }
 
 	public Long getId() {
@@ -157,7 +177,9 @@ public class Task {
     	tDTO.setDescription(this.description);
     	tDTO.setId(this.id);
     	if(this.expert != null)
-    		tDTO.setExpert(this.expert.toDTOLazy());
+    		tDTO.setExpert(this.expert.toDTO());
+    	if(this.reviewer != null)
+    		tDTO.setReviewer(this.reviewer.toDTO());
     	if(this.job != null)
     		tDTO.setJob(this.job.toDTOLazy());
     	if(price != null)

@@ -11,8 +11,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.pengurus.crm.client.service.JobService;
 import com.pengurus.crm.client.service.JobServiceAsync;
-import com.pengurus.crm.client.service.TaskService;
-import com.pengurus.crm.client.service.TaskServiceAsync;
 
 public class JobDTO implements IsSerializable {
 	  private Long id;

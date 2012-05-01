@@ -14,6 +14,7 @@ public class TaskDTO implements IsSerializable {
 	private Long id;
 	private StatusDTO status;
 	private TranslatorDTO expert;
+	private TranslatorDTO reviewer;
 	private Date deadline;
 	private TranslationDTO translation;
 	private Integer amount;
@@ -21,18 +22,19 @@ public class TaskDTO implements IsSerializable {
 	private String description;
 	private JobDTO job;
 	private RatingDTO rating;
-	private String comment;
+	private String comment;//ma być zamienione na listę CommentDTO
 
 	public TaskDTO() {
 		super();
 	}
 
-	public TaskDTO(StatusDTO status, TranslatorDTO expert, Date deadline,
+	public TaskDTO(StatusDTO status, TranslatorDTO expert, TranslatorDTO reviewer, Date deadline,
 			TranslationDTO translation, Integer amount, PriceDTO price,
 			String description, JobDTO job, RatingDTO rating, String comment) {
 		super();
 		this.status = status;
 		this.expert = expert;
+		this.reviewer = reviewer;
 		this.deadline = deadline;
 		this.translation = translation;
 		this.amount = amount;
@@ -164,6 +166,14 @@ public class TaskDTO implements IsSerializable {
 		TaskServiceAsync service = (TaskServiceAsync) GWT
 				.create(TaskService.class);
 		service.updateStatus(this, callback);
+	}
+
+	public TranslatorDTO getReviewer() {
+		return this.reviewer;
+	}
+
+	public void setReviewer(TranslatorDTO reviewer) {
+		this.reviewer = reviewer;
 	}
 
 }

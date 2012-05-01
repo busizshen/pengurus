@@ -156,9 +156,9 @@ public class Project {
 	public ProjectDTO toDTO() {
 		ProjectDTO pDTO = this.toDTOLazy();
 		for (Translator e : this.experts)
-			pDTO.getExperts().add(e.toDTOLazy());
+			pDTO.getExperts().add(e.toDTO());
 		for (Translator f : this.freelancers)
-			pDTO.getFreelancers().add(f.toDTOLazy());
+			pDTO.getFreelancers().add(f.toDTO());
 		for (Job j : this.jobs)
 			pDTO.getJobs().add(j.toDTOLazy());
 		for (Worker w : this.projectManagers)

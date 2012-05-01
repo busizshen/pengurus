@@ -16,11 +16,9 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEditByList;
-import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelView;
 import com.pengurus.crm.client.service.TaskService;
 import com.pengurus.crm.client.service.TaskServiceAsync;
 import com.pengurus.crm.shared.dto.JobDTO;
@@ -28,8 +26,8 @@ import com.pengurus.crm.shared.dto.PriceDTO;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.StatusDTO;
 import com.pengurus.crm.shared.dto.TaskDTO;
+import com.pengurus.crm.shared.dto.TranslatorDTO;
 import com.pengurus.crm.shared.dto.WorkerDTO;
-
 public class TaskPanelCreate extends TaskPanel {
 
 	private Listener<DomEvent> listenerCreateTask;
@@ -39,9 +37,8 @@ public class TaskPanelCreate extends TaskPanel {
 	Button buttonCreate;
 	TasksListPanelEdit taskList;
 
-	public TaskPanelCreate(JobDTO jobDTO, ProjectDTO projectDTO,
-			TasksListPanelEdit taskListPanel) {
-		super(null, projectDTO);
+	public TaskPanelCreate(JobDTO jobDTO, ProjectDTO projectDTO, TasksListPanelEdit taskListPanel) {
+		super(new TaskDTO(), projectDTO);
 		setFrame(false);
 		setHeaderVisible(false);
 		this.jobDTO = jobDTO;
@@ -80,7 +77,6 @@ public class TaskPanelCreate extends TaskPanel {
 					@Override
 					public void componentSelected(ButtonEvent ce) {
 						if (checked()) {
-							taskDTO = new TaskDTO();
 							taskDTO.setTranslation(jobDTO.getTranslation());
 							taskDTO.setJob(jobDTO);
 							taskDTO.setStatus(StatusDTO.open);
@@ -90,6 +86,8 @@ public class TaskPanelCreate extends TaskPanel {
 									.getCurrencyDTO()));
 							taskDTO.setDeadline(deadline.getValue());
 							taskDTO.setDescription(description.getDescription());
+							taskDTO.setExpert((TranslatorDTO) workerPanel.getChosenWorker());
+							taskDTO.setReviewer((TranslatorDTO) reviewerPanel.getChosenWorker());
 							AsyncCallback<TaskDTO> callback = new AsyncCallback<TaskDTO>() {
 
 								public void onFailure(Throwable t) {

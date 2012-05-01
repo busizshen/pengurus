@@ -103,10 +103,10 @@ public class QuoteCRUDTest {
                 new HashSet<Translation>());
         translatorDAO.create(translator);
 
-        Task task = new Task(Status.accepted, translator, Calendar
+        Task task = new Task(Status.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc",
                 null, Rating.bad, "comm");
-        Task task2 = new Task(Status.accepted, translator, Calendar
+        Task task2 = new Task(Status.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc2",
                 null, Rating.bad, "comm2");
         Set<Task> tasks = new HashSet<Task>();

@@ -9,7 +9,7 @@ import com.pengurus.crm.shared.dto.WorkerDTO;
 public class Worker extends User {
     
 	private PersonalData personalData;
-        
+	  
     public Worker() {
         super();
     }
@@ -39,7 +39,7 @@ public class Worker extends User {
     
     protected void rewrite(WorkerDTO workerDTO) {
     	super.rewrite(workerDTO);
-    	workerDTO.setPersonalData(getPersonalData().toDTO());
+    	workerDTO.setPersonalData(personalData.toDTO());
     }
     
     public WorkerDTO toDTO(){

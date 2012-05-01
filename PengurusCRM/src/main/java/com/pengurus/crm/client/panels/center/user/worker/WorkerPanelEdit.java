@@ -46,7 +46,7 @@ public abstract class WorkerPanelEdit extends WorkerPanel {
 		Button b2 = new Button("Cancel");
 		b2.addListener(Events.OnClick, listenerCloseTab);
 		window.add(b2);
-		Button b = new Button("Change", new SelectionListener<ButtonEvent>() {
+		Button b = new Button("Select", new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {		
 				window.show();
