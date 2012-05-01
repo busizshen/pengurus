@@ -122,8 +122,7 @@ public class QuotePanelCreate extends QuotePanel {
 
 	@Override
 	protected void addDescriptionPanel(VerticalPanel vpPanel) {
-		descriptionPanel = new DescriptionPanelEdit();
-		descriptionPanel.setWidth(300);
+		descriptionPanel = new DescriptionPanelEdit(100,300);
 		vpPanel.add(descriptionPanel);
 	}
 	

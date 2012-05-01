@@ -91,7 +91,7 @@ public abstract class TasksListPanelView extends TasksListPanel {
 
 									@Override
 									public void onSuccess(ProjectDTO projectDTO) {
-										TaskPanel taskPanel = new TaskPanel(
+										TaskPanelView taskPanel = new TaskPanelView(
 												model.getTaskDTO(), projectDTO);
 										taskPanel.setAsMain();
 									}

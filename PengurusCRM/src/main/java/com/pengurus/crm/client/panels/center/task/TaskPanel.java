@@ -3,12 +3,8 @@ package com.pengurus.crm.client.panels.center.task;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
-import com.extjs.gxt.ui.client.widget.MessageBox;
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.DateField;
@@ -25,30 +21,19 @@ import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
-import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
-import com.pengurus.crm.client.panels.center.job.JobPanelProject;
-import com.pengurus.crm.client.panels.center.rating.RatingPanel;
-import com.pengurus.crm.client.panels.center.status.TaskStatusPanel;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanel;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEditByList;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEditByRoles;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelView;
 import com.pengurus.crm.client.service.AdministrationService;
 import com.pengurus.crm.client.service.AdministrationServiceAsync;
-import com.pengurus.crm.client.service.JobService;
-import com.pengurus.crm.client.service.JobServiceAsync;
-import com.pengurus.crm.client.service.TaskService;
-import com.pengurus.crm.client.service.TaskServiceAsync;
 import com.pengurus.crm.shared.dto.CurrencyTypeDTO;
-import com.pengurus.crm.shared.dto.JobDTO;
-import com.pengurus.crm.shared.dto.PriceDTO;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.TaskDTO;
-import com.pengurus.crm.shared.dto.TranslatorDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 import com.pengurus.crm.shared.dto.WorkerDTO;
 
-public class TaskPanel extends MainPanel {
+public abstract class TaskPanel extends MainPanel {
 
 	protected TaskDTO taskDTO;
 	protected ProjectDTO projectDTO;
@@ -57,42 +42,16 @@ public class TaskPanel extends MainPanel {
 	protected ComboBox<CurrencyModel> combo;
 	protected DescriptionPanel description;
 	protected TranslationPanel translation;
-	protected FormPanel mainPanel;
 	protected DateField deadline;
 	protected WorkerPanel workerPanel;
 	protected WorkerPanel reviewerPanel;
-	TaskStatusPanel statusBar;
-	RatingPanel rating;
-
-	public TaskPanel(TaskDTO task, ProjectDTO jobDTO) {
-		this.taskDTO = task;
-		this.projectDTO = jobDTO;
-		VerticalPanel vp = new VerticalPanel();
-		vp.setSpacing(5);
-		HorizontalPanel hp = new HorizontalPanel();
-		setStyle(hp);
-		mainPanel = new FormPanel();
-		mainPanel.setFrame(false);
-		mainPanel.setHeaderVisible(false);
-		VerticalPanel vp1 = new VerticalPanel();
-		vp1.setSpacing(10);
-		addButtonPanel(vp1);
-		addStatusBar(vp1);
-		addInfoPanel(vp1);
-		hp.add(vp1);
-		VerticalPanel vp2 = new VerticalPanel();
-		vp2.setSpacing(10);
-		/*addRatingPanel(vp2);*/
-		addDescriptionPanel(vp2);
-		hp.add(vp2);
-		mainPanel.add(hp);
-		addTranslatorPanel(mainPanel);
-		addReviewerPanel(mainPanel);
-		add(mainPanel);
-
+	
+	protected TaskPanel(TaskDTO taskDTO, ProjectDTO projectDTO){
+		super();
+		this.taskDTO = taskDTO;
+		this.projectDTO = projectDTO;
 	}
-
-	private void addReviewerPanel(FormPanel vp) {
+	protected WorkerPanel getReviewerPanel() {
 		if (AuthorizationManager.canEditProject(projectDTO)) {
 			Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 			roles.add(UserRoleDTO.ROLE_VERIFICATOR);
@@ -101,16 +60,10 @@ public class TaskPanel extends MainPanel {
 		} else {
 			reviewerPanel = new WorkerPanelView(taskDTO.getReviewer(), "Reviewer");
 		}
-		vp.add(reviewerPanel);
+		return reviewerPanel;
 	}
-
-	protected void setStyle(HorizontalPanel hp) {
-		hp.setSpacing(5);
-		hp.setAutoHeight(true);
-		hp.setAutoWidth(true);
-	}
-
-	protected void addTranslatorPanel(FormPanel vp) {
+	
+	protected WorkerPanel getTranslatorPanel() {
 		if (AuthorizationManager.canEditProject(projectDTO)) {
 			Set<WorkerDTO> translators = new HashSet<WorkerDTO>();
 			translators.addAll(projectDTO.getExperts());
@@ -119,27 +72,11 @@ public class TaskPanel extends MainPanel {
 		} else {
 			workerPanel = new WorkerPanelView(taskDTO.getExpert(), "Translator");
 		}
-		vp.add(workerPanel);
+		return workerPanel;
 
 	}
-
-	protected void addStatusBar(VerticalPanel vp1) {
-		statusBar = new TaskStatusPanel(taskDTO);
-		vp1.add(statusBar);
-	}
-
-	protected void addDescriptionPanel(VerticalPanel vp2) {
-		description = new DescriptionPanelEdit(taskDTO.getDescription());
-		description.setWidth(300);
-		vp2.add(description);
-	}
-
-	protected void addRatingPanel(VerticalPanel vp2) {
-		rating = new RatingPanel(taskDTO, projectDTO);
-		vp2.add(rating);
-	}
-
-	private void addInfoPanel(VerticalPanel vp1) {
+	
+	protected void addInfoPanel(VerticalPanel vp1) {
 		FormPanel simple = new FormPanel();
 		simple.setFrame(false);
 		simple.setAutoHeight(true);
@@ -201,113 +138,7 @@ public class TaskPanel extends MainPanel {
 		addTranslationPanel(simple);
 		vp1.add(simple);
 	}
-
-	protected void addTranslationPanel(FormPanel simple) {
-		if (taskDTO != null && taskDTO.getTranslation() != null)
-			translation = new TranslationPanel(new TranslationModel(
-					taskDTO.getTranslation()));
-		else
-			translation = new TranslationPanel();
-		simple.add(translation, new FormData(-10, 10));
-	}
-
-	private void getJobPanel() {
-		AsyncCallback<JobDTO> callback = new AsyncCallback<JobDTO>() {
-
-			public void onFailure(Throwable t) {
-				MessageBox mb = new MessageBox();
-				mb.setMessage(t.getMessage());
-				mb.show();
-			}
-
-			@Override
-			public void onSuccess(JobDTO result) {
-				JobPanelProject jobPanel = new JobPanelProject(result,
-						projectDTO);
-				jobPanel.setAsMain();
-			}
-		};
-		JobServiceAsync service = (JobServiceAsync) GWT
-				.create(JobService.class);
-		service.getJob(taskDTO.getJob().getId(), callback);
-	}
-
-	protected void addButtonPanel(VerticalPanel vp1) {
-		HorizontalPanel hp = new HorizontalPanel();
-		setStyle(hp);
-		Button b = new Button("Update", new SelectionListener<ButtonEvent>() {
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				if (amount.getValue() != null)
-					taskDTO.setAmount(amount.getValue().intValue());
-				if (price.getValue() != null && combo.getValue() != null)
-					taskDTO.setPrice(new PriceDTO(price.getValue().intValue(),
-							combo.getValue().getCurrencyDTO()));
-				// taskDTO.setComment(comment.getValue());
-				// taskDTO.setRating();
-				taskDTO.setDescription(description.getDescription());
-				if(workerPanel.getChosenWorker() != null)
-					taskDTO.setExpert((TranslatorDTO) workerPanel.getChosenWorker());
-				if(reviewerPanel.getChosenWorker() != null)
-					taskDTO.setReviewer((TranslatorDTO) reviewerPanel.getChosenWorker());
-				taskDTO.setStatus(statusBar.getStatus());
-				AsyncCallback<Void> callback = new AsyncCallback<Void>() {
-
-					public void onFailure(Throwable t) {
-						MessageBox mb = new MessageBox();
-						mb.setMessage("Server error - Task cannot be updated");
-						mb.show();
-					}
-
-					@Override
-					public void onSuccess(Void result) {
-			//			getJobPanel();
-					}
-				};
-				TaskServiceAsync service = (TaskServiceAsync) GWT
-						.create(TaskService.class);
-				service.update(taskDTO, callback);
-
-			}
-		});
-		hp.add(b);
-		Button b2 = new Button("Cancel", new SelectionListener<ButtonEvent>() {
-
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				getJobPanel();
-			}
-		});
-		hp.add(b2);
-		if (AuthorizationManager.canEditProject(projectDTO)) {
-			Button b3 = new Button("Delete",
-					new SelectionListener<ButtonEvent>() {
-
-						@Override
-						public void componentSelected(ButtonEvent ce) {
-							AsyncCallback<Void> callback = new AsyncCallback<Void>() {
-
-								public void onFailure(Throwable t) {
-									MessageBox mb = new MessageBox();
-									mb.setMessage("Server Error - cannot delete");
-									mb.show();
-								}
-
-								@Override
-								public void onSuccess(Void result) {
-									getJobPanel();
-								}
-							};
-							TaskServiceAsync service = (TaskServiceAsync) GWT
-									.create(TaskService.class);
-							service.delete(taskDTO, callback);
-						}
-					});
-			hp.add(b3);
-		}
-		vp1.add(hp);
-	}
-
+	
 	private DateField addDeadlinePanel() {
 
 		deadline = new DateField();
@@ -320,5 +151,19 @@ public class TaskPanel extends MainPanel {
 		}
 		return deadline;
 	}
+	
+	private void addTranslationPanel(FormPanel simple) {
+		if (taskDTO != null && taskDTO.getTranslation() != null)
+			translation = new TranslationPanel(new TranslationModel(
+					taskDTO.getTranslation()));
+		else
+			translation = new TranslationPanel();
+		simple.add(translation, new FormData(-10, 10));
+	}
 
+	protected void setStyle(HorizontalPanel hp) {
+		hp.setAutoHeight(true);
+		hp.setAutoWidth(true);
+	}
+	
 }

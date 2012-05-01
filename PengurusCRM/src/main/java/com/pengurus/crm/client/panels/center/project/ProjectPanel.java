@@ -8,7 +8,6 @@ import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
 import com.pengurus.crm.client.panels.center.job.JobsListPanelProjectView;
 import com.pengurus.crm.client.panels.center.user.client.ClientPanelView;
-import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelChoose;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelView;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 
@@ -27,14 +26,14 @@ public abstract class ProjectPanel extends MainPanel {
 		
 	}
 
-	protected abstract WorkerPanelChoose getTranslatorsPanel();
+	protected abstract void getTranslatorsPanel(HorizontalPanel hp3);
 
 	protected void addJobsPanel() {
 		JobsListPanelProjectView jobsPanel = new JobsListPanelProjectView(projectDTO);
 		add(jobsPanel.getPanel());	
 	}
 
-	protected abstract WorkerPanelChoose getProjectMangaersPanel();
+	protected abstract void getProjectMangaersPanel(HorizontalPanel hp3);
 	
 	protected void addInfoPanel() {
 		FormPanel simple = new FormPanel(); 
@@ -68,8 +67,8 @@ public abstract class ProjectPanel extends MainPanel {
 		simple.add(hp);
 		HorizontalPanel hp3 = new HorizontalPanel();
 		hp3.setSpacing(20);
-		hp3.add(getProjectMangaersPanel());
-		hp3.add(getTranslatorsPanel());
+		getProjectMangaersPanel(hp3);
+		getTranslatorsPanel(hp3);
 		simple.add(hp3);
 		add(simple);
 	}

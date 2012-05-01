@@ -28,6 +28,7 @@ import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanel;
 import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanelChange;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
+import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
 import com.pengurus.crm.client.service.AdministrationService;
 import com.pengurus.crm.client.service.AdministrationServiceAsync;
 import com.pengurus.crm.client.service.JobService;
@@ -149,7 +150,7 @@ public class JobPanelCreate {
 			combo.setAllowBlank(false);
 			simple2.add(combo);
 			hp.add(simple2);
-			final DescriptionPanel descr = new DescriptionPanel();
+			final DescriptionPanel descr = new DescriptionPanelEdit(100,300);
 			hp.add(descr);
 
 			simple.add(hp);

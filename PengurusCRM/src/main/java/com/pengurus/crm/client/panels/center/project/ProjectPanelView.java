@@ -2,12 +2,15 @@ package com.pengurus.crm.client.panels.center.project;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.pengurus.crm.client.models.UserModel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelView;
-import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelChoose;
+import com.pengurus.crm.client.panels.center.user.UserListPanelView;
 import com.pengurus.crm.shared.dto.ProjectDTO;
+import com.pengurus.crm.shared.dto.UserDTO;
 
 public class ProjectPanelView extends ProjectPanel{
 
@@ -18,8 +21,7 @@ public class ProjectPanelView extends ProjectPanel{
 
 	@Override
 	protected void addDescriptionPanel(VerticalPanel vp) {
-		descriptionPanel = new DescriptionPanelView(projectDTO.getDescription());
-		descriptionPanel.setWidth(300);
+		descriptionPanel = new DescriptionPanelView(projectDTO.getDescription(),100,300);
 		vp.add(descriptionPanel);
 	}
 
@@ -38,16 +40,22 @@ public class ProjectPanelView extends ProjectPanel{
 
 
 	@Override
-	protected WorkerPanelChoose getTranslatorsPanel() {
-		// TODO Auto-generated method stub
-		return null;
+	protected void getTranslatorsPanel(HorizontalPanel hp3) {
+		ListStore<UserModel> list= new ListStore<UserModel>();
+		for(UserDTO u : projectDTO.getExperts())
+			list.add(new UserModel(u));	
+		UserListPanelView translatorsPanel = new UserListPanelView(list, "Experts");
+		hp3.add(translatorsPanel.getModelList());
 	}
 
 
 	@Override
-	protected WorkerPanelChoose getProjectMangaersPanel() {
-		// TODO Auto-generated method stub
-		return null;
+	protected void getProjectMangaersPanel(HorizontalPanel hp3) {
+		ListStore<UserModel> list= new ListStore<UserModel>();
+		for(UserDTO u : projectDTO.getProjectManagers())
+			list.add(new UserModel(u));	
+		UserListPanelView projectManagers = new UserListPanelView(list,"Project Managers");
+		hp3.add(projectManagers.getModelList());
 	}
 
 	

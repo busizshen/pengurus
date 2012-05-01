@@ -3,6 +3,7 @@ package com.pengurus.crm.client.panels.center.job;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.panels.center.project.ProjectPanel;
 import com.pengurus.crm.client.panels.center.project.ProjectPanelView;
 import com.pengurus.crm.client.panels.center.status.JobStatusPanel;
@@ -20,7 +21,6 @@ public class JobPanelProject extends JobPanel {
 	public JobPanelProject(JobDTO jobDTO, ProjectDTO projectDTO) {
 		super(jobDTO);
 		this.projectDTO = projectDTO;
-		this.jobStatusPanel = new JobStatusPanel(jobDTO, projectDTO);
 		addTasksList();
 	}
 
@@ -64,7 +64,8 @@ public class JobPanelProject extends JobPanel {
 	}
 
 	@Override
-	protected JobStatusPanel getStatusPanel() {
-		return jobStatusPanel;
+	protected void addStatusPanel(VerticalPanel vp) {
+		this.jobStatusPanel = new JobStatusPanel(jobDTO, projectDTO);
+		vp.add(jobStatusPanel);
 	}
 }

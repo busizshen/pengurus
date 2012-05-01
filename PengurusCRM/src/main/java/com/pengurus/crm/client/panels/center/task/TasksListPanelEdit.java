@@ -133,7 +133,7 @@ public class TasksListPanelEdit extends TasksListPanel {
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
-								TaskPanel taskPanel = new TaskPanel(
+								TaskPanelView taskPanel = new TaskPanelView(
 										model.getTaskDTO(), projectDTO);
 								taskPanel.setAsMain();
 							}

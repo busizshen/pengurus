@@ -23,6 +23,7 @@ import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
+import com.pengurus.crm.client.panels.center.description.DescriptionPanelView;
 import com.pengurus.crm.client.panels.center.status.JobStatusPanel;
 import com.pengurus.crm.client.service.AdministrationService;
 import com.pengurus.crm.client.service.AdministrationServiceAsync;
@@ -92,18 +93,18 @@ public abstract class JobPanel extends MainPanel {
 		if (AuthorizationManager.canEditJobProject())
 			vp.add(buttonPanel());
 
-		vp.add(getStatusPanel());
+		addStatusPanel(vp);
 		vp.add(addInfoForm());
 
 		hp.add(vp);
-		description = new DescriptionPanel(jobDTO.getDescription());
-		description.setWidth(300);
+		description = new DescriptionPanelView(jobDTO.getDescription(),100,300);
+
 		hp.add(description);
 
 		add(hp);
 	}
 
-	protected abstract JobStatusPanel getStatusPanel();
+	protected abstract void addStatusPanel(VerticalPanel vp);
 
 	protected abstract void cancelButton();
 

@@ -3,6 +3,7 @@ package com.pengurus.crm.client.panels.center.job;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.panels.center.quote.QuotePanel;
 import com.pengurus.crm.client.panels.center.quote.QuotePanelView;
 import com.pengurus.crm.client.panels.center.status.JobStatusPanel;
@@ -50,7 +51,6 @@ public class JobPanelQuote extends JobPanel {
 	}
 
 	@Override
-	protected JobStatusPanel getStatusPanel() {
-		return null;
+	protected void addStatusPanel(VerticalPanel vp) {
 	}
 }

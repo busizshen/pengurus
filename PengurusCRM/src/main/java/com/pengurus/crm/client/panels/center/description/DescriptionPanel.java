@@ -1,33 +1,32 @@
 package com.pengurus.crm.client.panels.center.description;
 
-import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 
-public class DescriptionPanel extends ContentPanel {
+public abstract class DescriptionPanel extends FieldSet {
 
 	protected TextArea description;
 
-	public DescriptionPanel(String descr) {
+	public DescriptionPanel(String descr, Integer height ,Integer width) {
 		setHeading("Description");
 		description = new TextArea();
-		description.setHeight(100);
-	//	description.setWidth(300);
+		description.setHeight(height - 5);
+		description.setWidth(width - 25);
 		description.setValue(descr);
-		setWidth(300);
 		description.setStyleName("boxsizingBorder");
-
 		add(description);
+		setWidth(width);
 		this.setAutoHeight(true);
 	}
 
-	public DescriptionPanel() {
+	public DescriptionPanel( Integer height ,Integer width) {
 		setHeading("Description");
 		description = new TextArea();
-/*		description.setHeight(100);
-		description.setWidth(300);*/
-		setWidth(300);
+		description.setHeight(height - 5);
+		description.setWidth(width - 25);
 		description.setStyleName("boxsizingBorder");
 		add(description);
+		setWidth(width);
 		this.setAutoHeight(true);
 	}
 

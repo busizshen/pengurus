@@ -214,11 +214,9 @@ public class AuthorizationManager {
 	}
 
 	public static boolean hasVerificatorAccess(TaskDTO taskDTO) {
-//nie rozumiem dalej tego verificatora
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		roles.add(UserRoleDTO.ROLE_EXPERT);
-		roles.add(UserRoleDTO.ROLE_FREELANCER);
-		return currentUser.haveAuthority(roles) && (taskDTO.getExpert() == currentUser);
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		return (taskDTO.getReviewer().getId() == currentUser.getId()) || currentUser.haveAuthority(roles);
 	}
 
 	public static boolean hasProjectManagerAccess(TaskDTO taskDTO) {

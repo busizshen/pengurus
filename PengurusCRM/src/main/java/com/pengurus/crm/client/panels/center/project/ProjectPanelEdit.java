@@ -39,7 +39,7 @@ public class ProjectPanelEdit extends ProjectPanel {
 	}
 
 	@Override
-	protected WorkerPanelChoose getTranslatorsPanel() {
+	protected void getTranslatorsPanel(HorizontalPanel hp3) {
 		AsyncCallback<Set<TranslatorDTO>> callback = new AsyncCallback<Set<TranslatorDTO>>() {
 
 			public void onFailure(Throwable t) {
@@ -69,13 +69,13 @@ public class ProjectPanelEdit extends ProjectPanel {
 		workersPanel = new WorkerPanelChoose("Experts");
 
 		workersPanel.setWidth(470);
-		return workersPanel;
+		hp3.add(workersPanel);
 
 	}
 
 	
 	@Override
-	protected WorkerPanelChoose getProjectMangaersPanel() {
+	protected void getProjectMangaersPanel(HorizontalPanel hp3) {
 		AsyncCallback<Set<WorkerDTO>> callback = new AsyncCallback<Set<WorkerDTO>>() {
 
 			public void onFailure(Throwable t) {
@@ -105,13 +105,12 @@ public class ProjectPanelEdit extends ProjectPanel {
 		projectManagersPanel = new WorkerPanelChoose("Project Managers");
 		
 		projectManagersPanel.setWidth(470);
-		return projectManagersPanel;
+		hp3.add(projectManagersPanel);
 	}
 
 	@Override
 	protected void addDescriptionPanel(VerticalPanel vp) {
-		descriptionPanel = new DescriptionPanelEdit(projectDTO.getDescription());
-		descriptionPanel.setWidth(300);
+		descriptionPanel = new DescriptionPanelEdit(projectDTO.getDescription(),100,300);
 		vp.add(descriptionPanel);
 	}
 
