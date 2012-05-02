@@ -468,10 +468,14 @@ public abstract class UserBasePanel extends MainPanel {
 		userRoles = new CheckBoxGroup();
 		userRoles.setFieldLabel("User roles");
 		userRoles.setOrientation(Orientation.VERTICAL);
-		userRoles
-				.add(new UserRoleBox("Role user", UserRoleDTO.ROLE_USER));
-		userRoles.add(new UserRoleBox("Role client", UserRoleDTO.ROLE_CLIENT));
-		userRoles.add(new UserRoleBox("Role expert", UserRoleDTO.ROLE_EXPERT));
+		userRoles.add(new UserRoleBox("Role user",
+				UserRoleDTO.ROLE_USER));
+		userRoles.add(new UserRoleBox("Role client",
+				UserRoleDTO.ROLE_CLIENT));
+		userRoles.add(new UserRoleBox("Role worker",
+				UserRoleDTO.ROLE_WORKER));
+		userRoles.add(new UserRoleBox("Role expert",
+				UserRoleDTO.ROLE_EXPERT));
 		userRoles.add(new UserRoleBox("Role accountant",
 				UserRoleDTO.ROLE_ACCOUNTANT));
 		userRoles.add(new UserRoleBox("Role executive",
