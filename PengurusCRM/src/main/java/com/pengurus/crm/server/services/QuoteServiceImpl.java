@@ -96,7 +96,7 @@ public class QuoteServiceImpl implements QuoteService {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_ACCOUNTANT') or hasRole('ROLE_CLIENT')")
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_ACCOUNTANT', 'ROLE_CLIENT')")
 	public Set<QuoteDTO> getQuotesByClientId(Long id) {
 		List<Quote> list = quoteDAO.loadAllByClientId(id);
 		Set<QuoteDTO> set = new HashSet<QuoteDTO>();
