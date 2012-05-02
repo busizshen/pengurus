@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import com.pengurus.crm.client.service.ClientService;
 import com.pengurus.crm.daos.ClientDAO;
 import com.pengurus.crm.entities.Client;
@@ -21,6 +23,7 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_ACCOUNTANT')")
 	public Set<ClientDTO> getClients() {
 		List<Client> list = clientDAO.loadAll();
 		Set<ClientDTO> set = new HashSet<ClientDTO>();

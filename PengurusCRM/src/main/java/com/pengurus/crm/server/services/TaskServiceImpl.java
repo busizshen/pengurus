@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import com.pengurus.crm.client.service.TaskService;
 import com.pengurus.crm.daos.TaskDAO;
 import com.pengurus.crm.entities.Task;
@@ -23,12 +25,14 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_EXPERT')")
 	public TaskDTO createTask(TaskDTO taskDTO) {
 		taskDTO.setId(taskDAO.create(new Task(taskDTO)));
 		return taskDTO;
 	}
 
 	@Override
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_EXPERT')")
 	public void updateStatus(TaskDTO taskDTO) {
 		Task task = taskDAO.read(taskDTO.getId());
 		task.setStatus(Status.toStatus(taskDTO.getStatus()));
@@ -36,18 +40,21 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_EXPERT')")
 	public void update(TaskDTO taskDTO) {
 		Task task = new Task(taskDTO);
 		taskDAO.update(task);
 	}
 
 	@Override
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_EXPERT')")
 	public void delete(TaskDTO taskDTO) {
 		Task task = new Task(taskDTO);
 		taskDAO.delete(task);
 	}
 
 	@Override
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_EXPERT', 'ROLE_ACCOUNTANT')")
 	public Set<TaskDTO> getTasksByExpertId(Long id) {
 		List<Task> list = taskDAO.loadAllByExpertId(id);
 		Set<TaskDTO> set = new HashSet<TaskDTO>();
@@ -58,6 +65,7 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_EXPERT', 'ROLE_ACCOUNTANT')")
 	public Set<TaskDTO> getAllTasks() {
 		List<Task> list = taskDAO.loadAll();
 		Set<TaskDTO> set = new HashSet<TaskDTO>();

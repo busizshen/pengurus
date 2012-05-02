@@ -16,7 +16,7 @@ public interface UserService extends RemoteService {
 	public Void updateUser(UserDTO user) throws ServiceException;
 	public Void updateUserWithPassword(UserDTO user) throws ServiceException;
 	public Boolean checkPassword(String currentPassword, UserDTO user);
-	
+
 	public Void createUser(UserDTO user) throws ServiceException, UsernameExistsException;
 	
 	public Set<UserDTO> getAllUsers();

@@ -13,147 +13,145 @@ import com.pengurus.crm.client.service.JobService;
 import com.pengurus.crm.client.service.JobServiceAsync;
 
 public class JobDTO implements IsSerializable {
-	  private Long id;
-	    private StatusDTO status;
-	    private Date deadline;
-	    private TranslationDTO translation;
-	    private Integer amount;
-	    private PriceDTO price;
-	    private String description;
-	    private Set<TaskDTO> task = new HashSet<TaskDTO>();
+	private Long id;
+	private StatusDTO status;
+	private Date deadline;
+	private TranslationDTO translation;
+	private Integer amount;
+	private PriceDTO price;
+	private String description;
+	private Set<TaskDTO> task = new HashSet<TaskDTO>();
 
-	    public JobDTO() {
-	        super();
-	    }
+	public JobDTO() {
+		super();
+	}
 
-	    public JobDTO(StatusDTO status, Date deadline, TranslationDTO translation,
-	               Integer amount, PriceDTO price, String description,
-	               Set<TaskDTO> task){
-	        super();
-	        this.status = status;
-	        this.deadline = deadline;
-	        this.translation = translation;
-	        this.amount = amount;
-	        this.price = price;
-	        this.description = description;
-	        this.task = task;
-	    }
-	    
-	    public Long getId() {
-	        return id;
-	    }
+	public JobDTO(StatusDTO status, Date deadline, TranslationDTO translation,
+			Integer amount, PriceDTO price, String description,
+			Set<TaskDTO> task) {
+		super();
+		this.status = status;
+		this.deadline = deadline;
+		this.translation = translation;
+		this.amount = amount;
+		this.price = price;
+		this.description = description;
+		this.task = task;
+	}
 
-	    public void setId(Long id) {
-	        this.id = id;
-	    }
+	public Long getId() {
+		return id;
+	}
 
-	    public StatusDTO getStatus() {
-	        return status;
-	    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-	    public void setStatus(StatusDTO status) {
-	        this.status = status;
-	    }
+	public StatusDTO getStatus() {
+		return status;
+	}
 
-	    public Date getDeadline() {
-	        return deadline;
-	    }
+	public void setStatus(StatusDTO status) {
+		this.status = status;
+	}
 
-	    public void setDeadline(Date deadline) {
-	        this.deadline = deadline;
-	    }
+	public Date getDeadline() {
+		return deadline;
+	}
 
-	    public TranslationDTO getTranslation() {
-	        return translation;
-	    }
+	public void setDeadline(Date deadline) {
+		this.deadline = deadline;
+	}
 
-	    public void setTranslation(TranslationDTO translation) {
-	        this.translation = translation;
-	    }
+	public TranslationDTO getTranslation() {
+		return translation;
+	}
 
-	    public Integer getAmount() {
-	        return amount;
-	    }
+	public void setTranslation(TranslationDTO translation) {
+		this.translation = translation;
+	}
 
-	    public void setAmount(Integer amount) {
-	        this.amount = amount;
-	    }
+	public Integer getAmount() {
+		return amount;
+	}
 
-	    public PriceDTO getPrice() {
-	        return price;
-	    }
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
 
-	    public void setPrice(PriceDTO price) {
-	        this.price = price;
-	    }
+	public PriceDTO getPrice() {
+		return price;
+	}
 
-	    public String getDescription() {
-	        return description;
-	    }
+	public void setPrice(PriceDTO price) {
+		this.price = price;
+	}
 
-	    public void setDescription(String description) {
-	        this.description = description;
-	    }
+	public String getDescription() {
+		return description;
+	}
 
-	    public Set<TaskDTO> getTask() {
-	        return task;
-	    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-	    public void setTask(Set<TaskDTO> task) {
-	        this.task = task;
-	    }
+	public Set<TaskDTO> getTask() {
+		return task;
+	}
 
-		public void update() {
-			AsyncCallback<JobDTO> callback = new AsyncCallback<JobDTO>() {
+	public void setTask(Set<TaskDTO> task) {
+		this.task = task;
+	}
 
-				public void onFailure(Throwable t) {
-					Window.Location.assign("/spring_security_login");
-					MessageBox.info("Internal error", "Cannot update status", null);
-				}
+	public void update() {
+		AsyncCallback<JobDTO> callback = new AsyncCallback<JobDTO>() {
 
-				@Override
-				public void onSuccess(JobDTO result) {
-					//reload 
-				}
-			
-			};
-			JobServiceAsync service = (JobServiceAsync) GWT
-					.create(JobService.class);
-			service.updateJob(this, callback);
-		}
-		
-		public void updateStatus() {
-			AsyncCallback<Void> callback = new AsyncCallback<Void>() {
+			public void onFailure(Throwable t) {
+				Window.Location.assign("/spring_security_login");
+				MessageBox.info("Internal error", "Cannot update status", null);
+			}
 
-				public void onFailure(Throwable t) {
-					Window.Location.assign("/spring_security_login");
+			@Override
+			public void onSuccess(JobDTO result) {
+				// reload
+			}
 
-				}
+		};
+		JobServiceAsync service = (JobServiceAsync) GWT
+				.create(JobService.class);
+		service.updateJob(this, callback);
+	}
 
-				@Override
-				public void onSuccess(Void result) {
-					// TODO Auto-generated method stub
-				}
-			};
-			JobServiceAsync service = (JobServiceAsync) GWT
-					.create(JobService.class);
-			service.updateStatus(this, callback);
-		}
+	public void updateStatus() {
+		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 
-		public boolean checked() {
-			if(price == null)
-				return false;
-			if(amount == null)
-				return false;
-			if(translation == null)
-				return false;
-			if(deadline == null)
-				return false;
-			if(description == null)
-				return false;
-			return true;
-		}
-	    
-	    
+			public void onFailure(Throwable t) {
+				Window.Location.assign("/spring_security_login");
+
+			}
+
+			@Override
+			public void onSuccess(Void result) {
+				// TODO Auto-generated method stub
+			}
+		};
+		JobServiceAsync service = (JobServiceAsync) GWT
+				.create(JobService.class);
+		service.updateStatus(this, callback);
+	}
+
+	public boolean checked() {
+		if (price == null)
+			return false;
+		if (amount == null)
+			return false;
+		if (translation == null)
+			return false;
+		if (deadline == null)
+			return false;
+		if (description == null)
+			return false;
+		return true;
+	}
 
 }

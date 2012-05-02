@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import com.pengurus.crm.client.service.AdministrationService;
 import com.pengurus.crm.client.service.exceptions.DependencyException;
 import com.pengurus.crm.daos.CurrencyTypeDAO;
@@ -68,6 +70,7 @@ public class AdministrationServiceImpl implements AdministrationService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	public CurrencyTypeDTO createCurrency(CurrencyTypeDTO currencyTypeDTO) {
 		currencyTypeDTO.setId(currencyTypeDAO.create(new CurrencyType(
 				currencyTypeDTO.getCurrency())));
@@ -75,6 +78,7 @@ public class AdministrationServiceImpl implements AdministrationService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	public CurrencyTypeDTO deleteCurrency(CurrencyTypeDTO currencyTypeDTO)
 			throws DependencyException {
 		boolean result = currencyTypeDAO.delete(new CurrencyType(
@@ -101,6 +105,7 @@ public class AdministrationServiceImpl implements AdministrationService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	public LanguageDTO deleteLanguage(LanguageDTO languageDTO)
 			throws DependencyException {
 		boolean result = languageDAO.delete(new Language(languageDTO));
@@ -119,6 +124,7 @@ public class AdministrationServiceImpl implements AdministrationService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	public TranslationDTO createTranslation(TranslationDTO translationDTO) {
 		Translation translation = new Translation(translationDTO);
 		translationDTO.setId(translationDAO.create(translation));
@@ -128,6 +134,7 @@ public class AdministrationServiceImpl implements AdministrationService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	public TranslationDTO deleteTranslation(TranslationDTO translationDTO)
 			throws DependencyException {
 		boolean result = translationDAO.delete(new Translation(translationDTO));
@@ -146,6 +153,7 @@ public class AdministrationServiceImpl implements AdministrationService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	public TranslationTypeDTO createTranslationType(
 			TranslationTypeDTO translationTypeDTO) {
 		translationTypeDTO.setId(translationTypeDAO.create(new TranslationType(
@@ -154,6 +162,7 @@ public class AdministrationServiceImpl implements AdministrationService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	public TranslationTypeDTO deleteTranslationType(
 			TranslationTypeDTO translationTypeDTO) throws DependencyException {
 		boolean result = translationTypeDAO.delete(new TranslationType(

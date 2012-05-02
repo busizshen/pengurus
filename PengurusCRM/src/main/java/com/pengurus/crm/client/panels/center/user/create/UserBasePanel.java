@@ -363,6 +363,7 @@ public abstract class UserBasePanel extends MainPanel {
 		@Override
 		protected void onSelect() {
 			super.onSelect();
+			enableRole(UserRoleDTO.ROLE_WORKER);
 			enableRole(UserRoleDTO.ROLE_ACCOUNTANT);
 			enableRole(UserRoleDTO.ROLE_EXECUTIVE);
 			enableRole(UserRoleDTO.ROLE_PROJECTMANAGER);

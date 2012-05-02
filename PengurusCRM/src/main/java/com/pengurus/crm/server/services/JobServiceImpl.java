@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import com.pengurus.crm.client.service.JobService;
 import com.pengurus.crm.client.service.exceptions.DeleteException;
 import com.pengurus.crm.daos.JobDAO;
@@ -25,12 +27,6 @@ public class JobServiceImpl implements JobService {
 		this.jobDAO = jobDAO;
 	}
 
-	@Override
-	public JobDTO createJob(JobDTO jobDTO) {
-		jobDTO.setId(jobDAO.create(new Job(jobDTO)));
-		return jobDTO;
-	}
-
 	public TranslationDAO getTranslationDAO() {
 		return translationDAO;
 	}
@@ -40,11 +36,20 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_EXECUTIVE')")
+	public JobDTO createJob(JobDTO jobDTO) {
+		jobDTO.setId(jobDAO.create(new Job(jobDTO)));
+		return jobDTO;
+	}
+
+	@Override
+	@PreAuthorize("hasRole('ROLE_EXECUTIVE', 'ROLE_PROJECTMANAGER')")
 	public JobDTO getJob(Long id) {
 		return jobDAO.getById(id).toDTO();
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_EXECUTIVE')")
 	public JobDTO updateJob(JobDTO jobDTO) {
 		Job j = new Job(jobDTO);
 		jobDAO.update(j);
@@ -62,8 +67,8 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_EXECUTIVE')")
 	public void deleteJob(JobDTO jobDTO) throws DeleteException {
-
 		if (!jobDAO.delete(new Job(jobDTO))) {
 			throw new DeleteException();
 		}
@@ -71,6 +76,7 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_EXECUTIVE', 'ROLE_PROJECTMANAGER')")
 	public void updateStatus(JobDTO jobDTO) {
 			Job job = jobDAO.read(jobDTO.getId());
 			job.setStatus(Status.toStatus(jobDTO.getStatus()));

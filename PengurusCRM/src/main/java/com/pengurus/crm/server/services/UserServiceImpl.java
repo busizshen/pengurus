@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	public UserDTO getUser(String username) {
 		return userDAO.getUserByUsername(username).toDTO();
 	}
@@ -63,6 +64,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	@PreAuthorize("hasRole('ROLE_EXECUTIVE') or hasPermission(#userDTO, 'write')")
 	public Void updateUser(UserDTO userDTO) throws ServiceException {
 		User oldUser = userDAO.read(userDTO.getId());
 		userDTO.setPassword(oldUser.getPassword());
@@ -70,11 +72,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_EXECUTIVE') or hasPermission(#userDTO, 'write')")
 	public Void updateUserWithPassword(UserDTO userDTO) throws ServiceException {
 		encodePassword(userDTO);
 		return updateUserHelper(userDTO);
 	}
+	
 	@Override
+	@PreAuthorize("hasRole('ROLE_EXECUTIVE')")
 	public Void createUser(UserDTO userDTO) throws ServiceException, UsernameExistsException {
 		if (userDAO.usernameExists(userDTO.getUsername())) {
 			throw new UsernameExistsException();
@@ -98,7 +103,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@PreAuthorize("hasRole('ROLE_CLIENT')")
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	public Set<UserDTO> getAllUsers() {
 		List<User> list = userDAO.getAll();
 		Set<UserDTO> set = new HashSet<UserDTO>();
@@ -109,6 +114,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	public Set<UserDTO> getUsersByRoles(Set<UserRoleDTO> roles) {
 		List<User> list = userDAO.getAll();
 		Set<UserDTO> set = new HashSet<UserDTO>();

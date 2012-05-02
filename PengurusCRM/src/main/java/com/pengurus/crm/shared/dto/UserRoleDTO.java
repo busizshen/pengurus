@@ -6,6 +6,7 @@ public enum UserRoleDTO implements IsSerializable {
     
 	ROLE_ACCOUNTANT ("accountant"),
 	ROLE_EXECUTIVE ("executive"),
+	ROLE_WORKER ("worker"),
 	ROLE_EXPERT ("expert"),
 	ROLE_FREELANCER ("freelancer"),
 	ROLE_USER ("user"),
