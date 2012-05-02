@@ -10,6 +10,9 @@
 	<http pattern="/favicon.ico" security="none" />
 	<http auto-config='true'>
 		<intercept-url pattern="/**" access="ROLE_USER" />
+		<form-login login-page="/spring_security_login" 
+            default-target-url="" 
+            always-use-default-target="true" />
 	</http>
 
 	<beans:import resource="dao-beans.xml" />
