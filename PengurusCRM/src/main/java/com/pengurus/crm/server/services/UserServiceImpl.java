@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	@PreAuthorize("hasRole('ROLE_EXECUTIVE')")
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	public UserDTO getUser(String username) {
 		return userDAO.getUserByUsername(username).toDTO();
 	}
@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@PreAuthorize("hasRole('ROLE_EXECUTIVE')")
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	public Set<UserDTO> getAllUsers() {
 		List<User> list = userDAO.getAll();
 		Set<UserDTO> set = new HashSet<UserDTO>();
@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@PreAuthorize("hasRole('ROLE_EXECUTIVE')")
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	public Set<UserDTO> getUsersByRoles(Set<UserRoleDTO> roles) {
 		List<User> list = userDAO.getAll();
 		Set<UserDTO> set = new HashSet<UserDTO>();

@@ -32,6 +32,14 @@ public class QuoteServiceImpl implements QuoteService {
 	protected static final Logger log = LoggerFactory
 			.getLogger(UserDetailsServiceImpl.class);
 
+	public QuoteDAO getQuoteDAO() {
+		return quoteDAO;
+	}
+
+	public void setQuoteDAO(QuoteDAO quoteDAO) {
+		this.quoteDAO = quoteDAO;
+	}
+
 	@Override
 	@PreAuthorize("hasRole('ROLE_EXECUTIVE')")
 	public Set<QuoteDTO> getAllQuotes() {
@@ -41,14 +49,6 @@ public class QuoteServiceImpl implements QuoteService {
 			set.add(q.toDTOLazy());
 		}
 		return set;
-	}
-
-	public QuoteDAO getQuoteDAO() {
-		return quoteDAO;
-	}
-
-	public void setQuoteDAO(QuoteDAO quoteDAO) {
-		this.quoteDAO = quoteDAO;
 	}
 
 	@Override

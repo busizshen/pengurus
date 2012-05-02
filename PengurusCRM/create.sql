@@ -699,6 +699,7 @@ INSERT INTO "user" (user_id, username, password, description) VALUES (468, 'anni
 --
 
 INSERT INTO user_userrole (user_id, user_role) VALUES (300, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (300, 'ROLE_WORKER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (300, 'ROLE_EXECUTIVE');
 INSERT INTO user_userrole (user_id, user_role) VALUES (381, 'ROLE_USER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (381, 'ROLE_CLIENT');
@@ -706,31 +707,39 @@ INSERT INTO user_userrole (user_id, user_role) VALUES (383, 'ROLE_USER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (383, 'ROLE_CLIENT');
 INSERT INTO user_userrole (user_id, user_role) VALUES (397, 'ROLE_VERIFICATOR');
 INSERT INTO user_userrole (user_id, user_role) VALUES (397, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (397, 'ROLE_WORKER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (397, 'ROLE_EXPERT');
 INSERT INTO user_userrole (user_id, user_role) VALUES (421, 'ROLE_VERIFICATOR');
 INSERT INTO user_userrole (user_id, user_role) VALUES (421, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (421, 'ROLE_WORKER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (421, 'ROLE_EXPERT');
 INSERT INTO user_userrole (user_id, user_role) VALUES (421, 'ROLE_PROJECTMANAGER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (424, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (424, 'ROLE_WORKER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (424, 'ROLE_EXECUTIVE');
 INSERT INTO user_userrole (user_id, user_role) VALUES (424, 'ROLE_PROJECTMANAGER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (426, 'ROLE_VERIFICATOR');
 INSERT INTO user_userrole (user_id, user_role) VALUES (426, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (426, 'ROLE_WORKER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (426, 'ROLE_EXPERT');
 INSERT INTO user_userrole (user_id, user_role) VALUES (426, 'ROLE_PROJECTMANAGER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (446, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (446, 'ROLE_WORKER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (446, 'ROLE_EXPERT');
 INSERT INTO user_userrole (user_id, user_role) VALUES (446, 'ROLE_PROJECTMANAGER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (448, 'ROLE_FREELANCER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (448, 'ROLE_EXPERT');
 INSERT INTO user_userrole (user_id, user_role) VALUES (448, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (448, 'ROLE_WORKER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (450, 'ROLE_USER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (450, 'ROLE_CLIENT');
 INSERT INTO user_userrole (user_id, user_role) VALUES (393, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (393, 'ROLE_WORKER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (393, 'ROLE_EXPERT');
 INSERT INTO user_userrole (user_id, user_role) VALUES (393, 'ROLE_CLIENT');
 INSERT INTO user_userrole (user_id, user_role) VALUES (393, 'ROLE_VERIFICATOR');
 INSERT INTO user_userrole (user_id, user_role) VALUES (468, 'ROLE_USER');
+INSERT INTO user_userrole (user_id, user_role) VALUES (468, 'ROLE_WORKER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (468, 'ROLE_EXPERT');
 INSERT INTO user_userrole (user_id, user_role) VALUES (468, 'ROLE_FREELANCER');
 

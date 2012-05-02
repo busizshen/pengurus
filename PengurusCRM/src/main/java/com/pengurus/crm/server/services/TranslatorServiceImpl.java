@@ -13,6 +13,15 @@ import com.pengurus.crm.shared.dto.UserRoleDTO;
 public class TranslatorServiceImpl implements TranslatorService {
 
 	private TranslatorDAO translatorDAO;
+	
+	public TranslatorDAO getTranslatorDAO() {
+		return translatorDAO;
+	}
+	
+	public void setTranslatorDAO(TranslatorDAO translatorDAO) {
+		this.translatorDAO = translatorDAO;
+	}
+	
 	@Override
 	public Set<TranslatorDTO> getTranslatorsByRoles(Set<UserRoleDTO> roles) {
 		List<Translator> list = translatorDAO.loadAll();
@@ -26,12 +35,6 @@ public class TranslatorServiceImpl implements TranslatorService {
 			}
 		}
 		return set;
-	}
-	public TranslatorDAO getTranslatorDAO() {
-		return translatorDAO;
-	}
-	public void setTranslatorDAO(TranslatorDAO translatorDAO) {
-		this.translatorDAO = translatorDAO;
 	}
 
 }
