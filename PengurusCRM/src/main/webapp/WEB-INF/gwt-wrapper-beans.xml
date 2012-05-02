@@ -47,4 +47,8 @@
 	<bean id="paginationController" class="com.pengurus.crm.server.GwtRpcController">
 		<property name="remoteService" ref="paginationServiceBean" />
 	</bean>
+	
+	<bean id="fileController" class="com.pengurus.crm.server.GwtRpcController">
+		<property name="remoteService" ref="fileServiceBean" />
+	</bean>
 </beans>

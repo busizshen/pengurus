@@ -66,4 +66,8 @@
 		<property name="taskService" ref="taskServiceBean" />
 		<property name="userService" ref="userServiceBean" />
 	</bean>
+	
+	<bean id="fileServiceBean" class="com.pengurus.crm.server.services.FileServiceImpl" />
+	
+	<bean id="fileStreamController" class="com.pengurus.crm.server.servlets.FileStreamController" />
 </beans>
