@@ -29,8 +29,8 @@ public class TranslationModel extends BaseModel {
 			set("to", translationDTO.getTo().getLanguage());
 		}
 		if (translationDTO.getType() != null) {
-			set("type", translationDTO.getType().getDescription());
-
+			set("type", translationDTO.getType().getDescription() + " - " +
+						translationDTO.getType().getUnit());
 		}
 		set("name", toString());
 	}

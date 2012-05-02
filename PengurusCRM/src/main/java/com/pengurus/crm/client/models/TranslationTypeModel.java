@@ -38,7 +38,7 @@ public class TranslationTypeModel extends BaseModel {
 	
 	@Override
 	public String toString() {
-		return getUnit() + " - " + getType();
+		return getType() + " - " + getUnit();
 	}
 	
 }
