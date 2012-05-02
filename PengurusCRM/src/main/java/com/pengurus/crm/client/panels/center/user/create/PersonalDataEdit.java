@@ -2,7 +2,7 @@ package com.pengurus.crm.client.panels.center.user.create;
 
 import com.pengurus.crm.shared.dto.PersonalDataDTO;
 
-public class PersonalDataEdit extends PersonalDataBase{
+public class PersonalDataEdit extends PersonalDataBase {
 
     private StringSetPanel phoneNumber, email;
     

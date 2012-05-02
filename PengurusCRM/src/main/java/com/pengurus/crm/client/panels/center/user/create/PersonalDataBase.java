@@ -4,7 +4,7 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.pengurus.crm.shared.dto.PersonalDataDTO;
 
-public abstract class PersonalDataBase extends FormPanel{
+public abstract class PersonalDataBase extends FormPanel {
 
     protected Long id;
     protected TextField<String> firstName, lastName, address;

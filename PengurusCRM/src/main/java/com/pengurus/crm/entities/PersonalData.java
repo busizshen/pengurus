@@ -19,19 +19,25 @@ public class PersonalData {
 	}
 
 	public PersonalData(PersonalDataDTO personalDataDTO) {
-		this(personalDataDTO.getFirstName(), personalDataDTO.getLastName(),
-				personalDataDTO.getAddress(), new HashSet<String>(personalDataDTO.getPhoneNumber()),
+		this(personalDataDTO.getId(), personalDataDTO.getFirstName(),
+				personalDataDTO.getLastName(), personalDataDTO.getAddress(),
+				new HashSet<String>(personalDataDTO.getPhoneNumber()),
 				new HashSet<String>(personalDataDTO.getEmail()));
 	}
 
-	public PersonalData(String firstName, String lastName, String address,
+	public PersonalData(Long id, String firstName, String lastName, String address,
 			Set<String> phoneNumber, Set<String> email) {
 		super();
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
+	}
+	public PersonalData(String firstName, String lastName, String address,
+			Set<String> phoneNumber, Set<String> email) {
+		this(null, firstName, lastName, address, phoneNumber, email);
 	}
 
 	public Long getId() {
@@ -83,17 +89,9 @@ public class PersonalData {
 	}
 
 	public PersonalDataDTO toDTO() {
-		PersonalDataDTO pdDTO = new PersonalDataDTO();
-		pdDTO.setAddress(this.address);
-		for(String s : email)
-			pdDTO.getEmail().add(s);
-		pdDTO.setFirstName(this.firstName);
-		pdDTO.setId(this.id);
-		pdDTO.setLastName(this.lastName);
-		for(String s : phoneNumber)
-			pdDTO.getPhoneNumber().add(s);
-		return pdDTO;
-	
+		return new PersonalDataDTO(getId(), getFirstName(), getLastName(),
+				getAddress(), new HashSet<String>(getPhoneNumber()),
+				new HashSet<String>(getEmail()));
 	}
 
 }
