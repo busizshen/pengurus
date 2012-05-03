@@ -1,6 +1,7 @@
 package com.pengurus.crm.server.servlets;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -19,9 +20,11 @@ import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.pengurus.crm.server.FileUtils;
 import com.pengurus.crm.server.services.UserServiceImpl;
 
 @Controller
@@ -32,12 +35,17 @@ public class FileStreamController {
 			.getLogger(UserServiceImpl.class);
 
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	protected void upload(HttpServletRequest req, HttpServletResponse resp)
+	@RequestMapping(value = "/upload/{quoteId}/{jobId}/{taskId}/{stateId}", method = RequestMethod.POST)
+	protected void upload(
+			@PathVariable int quoteId, @PathVariable int jobId,
+			@PathVariable int taskId, @PathVariable int stateId,
+			HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		log.error("JESTEMJESTEM!");
+		log.error("Upload!");
 
+		File folder = new FileUtils().navigateInto(req.getSession().getServletContext(), quoteId, jobId, taskId, stateId);
+		
 		if (ServletFileUpload.isMultipartContent(req)) {
 
 			FileItemFactory factory = new DiskFileItemFactory();
@@ -54,12 +62,7 @@ public class FileStreamController {
 						fileName = FilenameUtils.getName(fileName);
 					}
 
-					File uploadedFile = new File(req
-							.getSession()
-							.getServletContext()
-							.getRealPath(
-									req.getSession().getServletContext()
-											.getContextPath()), fileName);
+					File uploadedFile = new File(folder, fileName);
 					if (uploadedFile.createNewFile()) {
 						item.write(uploadedFile);
 						resp.setStatus(HttpServletResponse.SC_CREATED);
@@ -86,14 +89,20 @@ public class FileStreamController {
 
 	private static final int BYTES_DOWNLOAD = 1024;
 	
-	@RequestMapping(value = "/download", method = RequestMethod.GET)
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping(value = "/download/{quoteId}/{jobId}/{taskId}/{stateId}/{fileName}", method = RequestMethod.GET)
+	public void download(
+			@PathVariable int quoteId, @PathVariable int jobId,
+			@PathVariable int taskId, @PathVariable int stateId,
+			@PathVariable String fileName,
+			HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
-		response.setContentType("text/plain");
+		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition",
-				"attachment;filename=downloadname.txt");
-		ServletContext ctx = request.getSession().getServletContext();
-		InputStream is = ctx.getResourceAsStream("/testing.txt");
+				"attachment;filename=" + fileName);
+		
+		ServletContext context = request.getSession().getServletContext();
+		File folder = new FileUtils().navigateInto(context, quoteId, jobId, taskId, stateId);
+		InputStream is = new FileInputStream(new File(folder, fileName));
 
 		int read = 0;
 		byte[] bytes = new byte[BYTES_DOWNLOAD];
