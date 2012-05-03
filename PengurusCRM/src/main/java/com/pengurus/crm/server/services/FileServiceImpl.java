@@ -6,21 +6,32 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
-import com.google.web.bindery.requestfactory.server.RequestFactoryServlet;
+import org.springframework.web.context.ServletContextAware;
+
 import com.pengurus.crm.client.service.FileService;
 import com.pengurus.crm.client.service.exceptions.FileNotFoundException;
 import com.pengurus.crm.client.service.exceptions.IOException;
 import com.pengurus.crm.server.FileUtils;
 
-public class FileServiceImpl implements FileService {
+public class FileServiceImpl implements FileService, ServletContextAware {
+
+	private ServletContext servletContext;
+	
+	public ServletContext getServletContext() {
+		return servletContext;
+	}
+	
+	@Override
+	public void setServletContext(ServletContext servletContext) {
+		this.servletContext = servletContext;
+	}
 
 	@Override
 	public List<String> getFileList(int quoteId, int jobId, int taskId,
 			int stateId) throws IOException {
 		List<String> result = new ArrayList<String>();
-		ServletContext context = RequestFactoryServlet.getThreadLocalServletContext();
 		try {
-			File folder = new FileUtils().navigateInto(context, quoteId, jobId, taskId, stateId);
+			File folder = new FileUtils().navigateInto(servletContext, quoteId, jobId, taskId, stateId);
 			for (File file: folder.listFiles()) {
 				result.add(file.getName());
 			}
@@ -33,9 +44,8 @@ public class FileServiceImpl implements FileService {
 	@Override
 	public void deleteFile(int quoteId, int jobId, int taskId, int stateId,
 			String fileName) throws IOException {
-		ServletContext context = RequestFactoryServlet.getThreadLocalServletContext();
 		try {
-			File folder = new FileUtils().navigateInto(context, quoteId, jobId, taskId, stateId);
+			File folder = new FileUtils().navigateInto(servletContext, quoteId, jobId, taskId, stateId);
 			File file = new File(folder, fileName);
 			if (!file.exists()) {
 				throw new FileNotFoundException();
