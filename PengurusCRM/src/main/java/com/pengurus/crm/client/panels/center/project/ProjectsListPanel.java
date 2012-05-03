@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.GridEvent;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
@@ -88,30 +84,6 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 					ListStore<ProjectModel> store, Grid<ProjectModel> grid) {
 				if (!init) {
 					init = true;
-					grid.addListener(Events.OnClick,
-							new Listener<GridEvent<ProjectModel>>() {
-
-								public void handleEvent(
-										GridEvent<ProjectModel> be) {
-									for (int i = 0; i < be.getGrid().getStore()
-											.getCount(); i++) {
-										if (be.getGrid().getView()
-												.getWidget(i, be.getColIndex()) != null
-												&& be.getGrid()
-														.getView()
-														.getWidget(
-																i,
-																be.getColIndex()) instanceof BoxComponent) {
-											((BoxComponent) be
-													.getGrid()
-													.getView()
-													.getWidget(i,
-															be.getColIndex()))
-													.setWidth(be.getWidth() - 10);
-										}
-									}
-								}
-							});
 				}
 				ButtonBar buttonBar = new ButtonBar();
 				Button buttomPreview = new Button("PREVIEW",

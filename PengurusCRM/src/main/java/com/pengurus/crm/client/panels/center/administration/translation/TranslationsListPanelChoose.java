@@ -5,11 +5,9 @@ import java.util.List;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.DomEvent;
 import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.GridEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
@@ -24,7 +22,8 @@ public class TranslationsListPanelChoose extends TranslationsListPanel {
 	private Listener<DomEvent> listenerChosen;
 
 	public TranslationsListPanelChoose(
-			ListStore<TranslationModel> listTranslationModel, Listener<DomEvent> listener) {
+			ListStore<TranslationModel> listTranslationModel,
+			Listener<DomEvent> listener) {
 		super();
 		list = listTranslationModel;
 		listenerChosen = listener;
@@ -32,13 +31,12 @@ public class TranslationsListPanelChoose extends TranslationsListPanel {
 		add(modelList);
 	}
 
-
 	protected void addButton(List<ColumnConfig> configs) {
 		ColumnConfig column = new ColumnConfigMy();
 		column.setId("choose");
 		column.setHeader("Choose");
 		column.setRenderer(getButtonRenderer());
-		configs.add(column);	
+		configs.add(column);
 	}
 
 	@Override
@@ -54,32 +52,10 @@ public class TranslationsListPanelChoose extends TranslationsListPanel {
 
 			public Object render(final TranslationModel model, String property,
 					ColumnData config, final int rowIndex, final int colIndex,
-					ListStore<TranslationModel> store, Grid<TranslationModel> grid) {
+					ListStore<TranslationModel> store,
+					Grid<TranslationModel> grid) {
 				if (!init) {
 					init = true;
-					grid.addListener(Events.OnClick,
-							new Listener<GridEvent<TranslationModel>>() {
-
-								public void handleEvent(GridEvent<TranslationModel> be) {
-									for (int i = 0; i < be.getGrid().getStore()
-											.getCount(); i++) {
-										if (be.getGrid().getView()
-												.getWidget(i, be.getColIndex()) != null
-												&& be.getGrid()
-														.getView()
-														.getWidget(
-																i,
-																be.getColIndex()) instanceof BoxComponent) {
-											((BoxComponent) be
-													.getGrid()
-													.getView()
-													.getWidget(i,
-															be.getColIndex()))
-													.setWidth(be.getWidth() - 10);
-										}
-									}
-								}
-							});
 				}
 				Button b = new Button("CHOOSE",
 						new SelectionListener<ButtonEvent>() {
@@ -99,7 +75,7 @@ public class TranslationsListPanelChoose extends TranslationsListPanel {
 	public TranslationModel getTranslation() {
 		return translation;
 	}
-	
+
 	@Override
 	protected void setStyle(ContentPanel cp) {
 		setHeaderVisible(false);

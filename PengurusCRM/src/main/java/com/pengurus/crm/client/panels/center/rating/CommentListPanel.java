@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.GridEvent;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
@@ -22,7 +18,7 @@ import com.pengurus.crm.client.models.CommentModel;
 import com.pengurus.crm.client.panels.center.ListPanel;
 import com.pengurus.crm.shared.dto.CommentDTO;
 
-public class CommentListPanel extends ListPanel<CommentModel>{
+public class CommentListPanel extends ListPanel<CommentModel> {
 
 	@Override
 	protected List<ColumnConfig> getColumns() {
@@ -59,7 +55,8 @@ public class CommentListPanel extends ListPanel<CommentModel>{
 	@Override
 	protected ListStore<CommentModel> getList() {
 		ListStore<CommentModel> comments = new ListStore<CommentModel>();
-		comments.add(new CommentModel(new CommentDTO("kurwa", AuthorizationManager.getCurrentUser())));
+		comments.add(new CommentModel(new CommentDTO("kurwa",
+				AuthorizationManager.getCurrentUser())));
 		return comments;
 	}
 
@@ -71,8 +68,9 @@ public class CommentListPanel extends ListPanel<CommentModel>{
 	@Override
 	protected void setStyle(ContentPanel cp) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	private GridCellRenderer<CommentModel> getButtonRenderer() {
 
 		GridCellRenderer<CommentModel> buttonRenderer = new GridCellRenderer<CommentModel>() {
@@ -84,29 +82,6 @@ public class CommentListPanel extends ListPanel<CommentModel>{
 					ListStore<CommentModel> store, Grid<CommentModel> grid) {
 				if (!init) {
 					init = true;
-					grid.addListener(Events.OnClick,
-							new Listener<GridEvent<CommentModel>>() {
-
-								public void handleEvent(GridEvent<CommentModel> be) {
-									for (int i = 0; i < be.getGrid().getStore()
-											.getCount(); i++) {
-										if (be.getGrid().getView()
-												.getWidget(i, be.getColIndex()) != null
-												&& be.getGrid()
-														.getView()
-														.getWidget(
-																i,
-																be.getColIndex()) instanceof BoxComponent) {
-											((BoxComponent) be
-													.getGrid()
-													.getView()
-													.getWidget(i,
-															be.getColIndex()))
-													.setWidth(be.getWidth() - 10);
-										}
-									}
-								}
-							});
 				}
 				Button b = new Button("DELETE",
 						new SelectionListener<ButtonEvent>() {

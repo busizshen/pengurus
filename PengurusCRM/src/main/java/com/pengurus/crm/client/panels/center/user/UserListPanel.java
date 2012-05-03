@@ -8,11 +8,9 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.GridEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
@@ -48,14 +46,14 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 	private CheckBox allBox;
 
 	private ListPagination<UserModel> listPagination;
-	
+
 	public static UserListPanel getIntance() {
 		if (instance == null) {
 			instance = new UserListPanel();
 		}
 		return instance;
 	}
-	
+
 	public UserListPanel() {
 		initPaging();
 		modelList = new ModelList();
@@ -69,34 +67,39 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 	}
 
 	private void initPaging() {
-		listPagination = new ListPagination<UserModel>(new PaginationRpcProxy<UserModel>() {
-			@Override
-			protected void load(PagingLoadConfigHelper loadConfig,
-					AsyncCallback<PagingLoadResult<UserModel>> callback) {
-				if (allBox.getValue()) {
-					
-					PaginationServiceAsync service = (PaginationServiceAsync) GWT
-							.create(PaginationService.class);
-					service.getPaginatedAllUsers(loadConfig, new PagingCallbackWrapper<UserModel>(callback));
-					
-				} else {
-					
-					Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-					for (Field<?> field: userRoles.getAll()) {
-						if (field instanceof UserRoleBox) {
-							UserRoleBox roleBox = (UserRoleBox) field;
-							if (roleBox.getValue()) {
-								roles.add(roleBox.getUserRole());
+		listPagination = new ListPagination<UserModel>(
+				new PaginationRpcProxy<UserModel>() {
+					@Override
+					protected void load(PagingLoadConfigHelper loadConfig,
+							AsyncCallback<PagingLoadResult<UserModel>> callback) {
+						if (allBox.getValue()) {
+
+							PaginationServiceAsync service = (PaginationServiceAsync) GWT
+									.create(PaginationService.class);
+							service.getPaginatedAllUsers(loadConfig,
+									new PagingCallbackWrapper<UserModel>(
+											callback));
+
+						} else {
+
+							Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+							for (Field<?> field : userRoles.getAll()) {
+								if (field instanceof UserRoleBox) {
+									UserRoleBox roleBox = (UserRoleBox) field;
+									if (roleBox.getValue()) {
+										roles.add(roleBox.getUserRole());
+									}
+								}
 							}
+							PaginationServiceAsync service = (PaginationServiceAsync) GWT
+									.create(PaginationService.class);
+							service.getPaginatedUsersByRoles(loadConfig, roles,
+									new PagingCallbackWrapper<UserModel>(
+											callback));
+
 						}
 					}
-					PaginationServiceAsync service = (PaginationServiceAsync) GWT
-							.create(PaginationService.class);
-					service.getPaginatedUsersByRoles(loadConfig, roles, new PagingCallbackWrapper<UserModel>(callback));
-					
-				}
-			}
-		});
+				});
 	}
 
 	private class UserRoleBox extends CheckBox {
@@ -122,7 +125,7 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 	private void createRoleCheckBoxGroup() {
 		userRoles = new CheckBoxGroup();
 		userRoles.setOrientation(Orientation.VERTICAL);
-		
+
 		allBox = new CheckBox();
 		allBox.setBoxLabel("All users");
 		allBox.addListener(Events.OnClick, new Listener<BaseEvent>() {
@@ -131,7 +134,7 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 				refreshList();
 			}
 		});
-		
+
 		userRoles.add(allBox);
 		userRoles.add(new UserRoleBox("Role user", UserRoleDTO.ROLE_USER));
 		userRoles.add(new UserRoleBox("Role client", UserRoleDTO.ROLE_CLIENT));
@@ -146,48 +149,49 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 				UserRoleDTO.ROLE_PROJECTMANAGER));
 		userRoles.add(new UserRoleBox("Role verificator",
 				UserRoleDTO.ROLE_VERIFICATOR));
-		
+
 		FieldSet fieldSet = new FieldSet();
 		fieldSet.setHeading("User roles");
 		fieldSet.add(userRoles);
 		sideOptions.add(fieldSet);
 	}
-	
+
 	private void deselectAllRoles() {
-		for (Field<?> field: userRoles.getAll()) {
+		for (Field<?> field : userRoles.getAll()) {
 			if (field instanceof CheckBox) {
 				CheckBox checkBox = (CheckBox) field;
 				checkBox.setValue(false);
 			}
 		}
 	}
-	
+
 	public void selectAll() {
 		deselectAllRoles();
 		allBox.setValue(true);
 	}
-	
+
 	public void selectRole(UserRoleDTO role) {
 		deselectAllRoles();
-		for (Field<?> field: userRoles.getAll()) {
+		for (Field<?> field : userRoles.getAll()) {
 			if (field instanceof UserRoleBox) {
 				UserRoleBox userRoleBox = (UserRoleBox) field;
 				if (userRoleBox.getUserRole().equals(role)) {
-					userRoleBox.setValue(true);	
+					userRoleBox.setValue(true);
 				}
 			}
 		}
 	}
 
 	@Override
-	protected void addGridPaging(ContentPanel cp, final EditorGrid<UserModel> grid) {
+	protected void addGridPaging(ContentPanel cp,
+			final EditorGrid<UserModel> grid) {
 		listPagination.addToGrid(cp, grid);
 	}
-	
+
 	public void refreshList() {
 		listPagination.getToolBar().refresh();
 	}
-	
+
 	@Override
 	protected GridCellRenderer<UserModel> getButtonRenderer() {
 		GridCellRenderer<UserModel> buttonRenderer = new GridCellRenderer<UserModel>() {
@@ -199,29 +203,6 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 					ListStore<UserModel> store, Grid<UserModel> grid) {
 				if (!init) {
 					init = true;
-					grid.addListener(Events.OnClick,
-							new Listener<GridEvent<UserModel>>() {
-
-								public void handleEvent(GridEvent<UserModel> be) {
-									for (int i = 0; i < be.getGrid().getStore()
-											.getCount(); i++) {
-										if (be.getGrid().getView()
-												.getWidget(i, be.getColIndex()) != null
-												&& be.getGrid()
-														.getView()
-														.getWidget(
-																i,
-																be.getColIndex()) instanceof BoxComponent) {
-											((BoxComponent) be
-													.getGrid()
-													.getView()
-													.getWidget(i,
-															be.getColIndex()))
-													.setWidth(be.getWidth() - 10);
-										}
-									}
-								}
-							});
 				}
 
 				ButtonBar buttonBar = new ButtonBar();
@@ -229,7 +210,8 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
-								new UserEditPanel(model.getUserDTO()).setAsMain();
+								new UserEditPanel(model.getUserDTO())
+										.setAsMain();
 							}
 						});
 
@@ -237,20 +219,21 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 						colIndex) - 20) / 2);
 				editButton.setToolTip("Click to edit");
 				buttonBar.add(editButton);
-				
-                Button previewButton = new Button("Preview",
-                        new SelectionListener<ButtonEvent>() {
-                            @Override
-                            public void componentSelected(ButtonEvent ce) {
-                                new UserPreviewPanel(model.getUserDTO()).setAsMain();
-                            }
-                        });
 
-                previewButton.setWidth((grid.getColumnModel().getColumnWidth(
-                        colIndex) - 20) / 2);
-                previewButton.setToolTip("Click to see details");
+				Button previewButton = new Button("Preview",
+						new SelectionListener<ButtonEvent>() {
+							@Override
+							public void componentSelected(ButtonEvent ce) {
+								new UserPreviewPanel(model.getUserDTO())
+										.setAsMain();
+							}
+						});
+
+				previewButton.setWidth((grid.getColumnModel().getColumnWidth(
+						colIndex) - 20) / 2);
+				previewButton.setToolTip("Click to see details");
 				buttonBar.add(previewButton);
-                
+
 				return buttonBar;
 			}
 		};

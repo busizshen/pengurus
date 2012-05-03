@@ -1,20 +1,18 @@
 package com.pengurus.crm.client.panels.center.user;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.Window;
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Anchor;
 import com.pengurus.crm.client.panels.center.user.create.UserPreviewPanel;
 import com.pengurus.crm.shared.dto.UserDTO;
 
 public abstract class UserPanel extends FieldSet {
 
 	protected UserDTO userDTO;
-	protected Label name;
-	private Button buttonPreview;
+	protected Anchor name;
 
 	public UserPanel(UserDTO userDTO, String heading) {
 		this.userDTO = userDTO;
@@ -27,30 +25,26 @@ public abstract class UserPanel extends FieldSet {
 	protected void initPanel() {
 		HorizontalPanel hp = new HorizontalPanel();
 
-		if (userDTO != null)
-			name = new Label(userDTO.getFullName());
-		else
-			name = new Label();
+		if (userDTO != null) {
+			name = new Anchor(userDTO.getFullName());
+			name.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					UserPreviewPanel userPanel = new UserPreviewPanel(userDTO);
+					Window window = new Window();
+					window.add(userPanel);
+					window.setAutoHeight(true);
+					window.setAutoWidth(true);
+					window.show();
+				}
 
+			});
+		} else {
+			name = new Anchor();
+		}
 		hp.add(name);
 
-		buttonPreview = new Button("Preview", new SelectionListener<ButtonEvent>() {
-
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				UserPreviewPanel userPanel = new UserPreviewPanel(userDTO);
-				Window window = new Window();
-				window.add(userPanel);
-				window.setAutoHeight(true);
-				window.setAutoWidth(true);
-				window.show();
-			}
-		});
-
-		if (userDTO == null)
-			buttonPreview.setVisible(false);
 		hp.setSpacing(10);
-		hp.add(buttonPreview);
 
 		addEditionPanel(hp);
 		add(hp);
@@ -63,7 +57,6 @@ public abstract class UserPanel extends FieldSet {
 		this.userDTO = userDTO;
 		if (userDTO != null) {
 			name.setText(userDTO.getFullName());
-			buttonPreview.setVisible(true); 
 		}
 	}
 }

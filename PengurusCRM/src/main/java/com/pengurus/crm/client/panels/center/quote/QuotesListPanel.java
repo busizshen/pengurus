@@ -6,12 +6,8 @@ import java.util.List;
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.GridEvent;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
@@ -51,7 +47,7 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 	protected void addGridPaging(ContentPanel cp, EditorGrid<QuoteModel> grid) {
 		listPagination.addToGrid(cp, grid);
 	}
-	
+
 	protected List<ColumnConfig> getColumns() {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
@@ -150,29 +146,6 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 					ListStore<QuoteModel> store, Grid<QuoteModel> grid) {
 				if (!init) {
 					init = true;
-					grid.addListener(Events.OnClick,
-							new Listener<GridEvent<QuoteModel>>() {
-
-								public void handleEvent(GridEvent<QuoteModel> be) {
-									for (int i = 0; i < be.getGrid().getStore()
-											.getCount(); i++) {
-										if (be.getGrid().getView()
-												.getWidget(i, be.getColIndex()) != null
-												&& be.getGrid()
-														.getView()
-														.getWidget(
-																i,
-																be.getColIndex()) instanceof BoxComponent) {
-											((BoxComponent) be
-													.getGrid()
-													.getView()
-													.getWidget(i,
-															be.getColIndex()))
-													.setWidth(be.getWidth() - 10);
-										}
-									}
-								}
-							});
 				}
 				ButtonBar buttonBar = new ButtonBar();
 				Button b = new Button("PREVIEW",
@@ -239,6 +212,5 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 	protected void setStyle(ContentPanel cp) {
 
 	}
-
 
 }

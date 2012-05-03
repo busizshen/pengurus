@@ -1,0 +1,19 @@
+/* .gwt-Anchor:visited {color:#00FF00;} */
+.gwt-Anchor:hover {color:#0093AF;}
+.gwt-Anchor:active {color:#0093AF;}
+
+.gwt-Button { 
+	font-size: 150%;
+	background-image : none;
+	height : 100px;
+	width : 150px;
+}
+.gwt-Button:visited {color:#00FF00;}
+.gwt-Button:hover {color:#FF00FF;}
+.gwt-Button:active {color:#0000FF;}
+
+.gwt-Anchor {
+    font-size: 18px;
+ 	color: #000080;
+ 	text-decoration:none;
+}

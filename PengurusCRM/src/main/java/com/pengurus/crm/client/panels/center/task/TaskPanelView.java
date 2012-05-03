@@ -56,7 +56,7 @@ public class TaskPanelView extends TaskPanel {
 	}
 
 	private void addCommentPanel(VerticalPanel vp2) {
-		commentPanel = new CommentPanel(taskDTO);
+		commentPanel = new CommentPanel(taskDTO, 100, 300);
 		vp2.add(commentPanel);
 	}
 

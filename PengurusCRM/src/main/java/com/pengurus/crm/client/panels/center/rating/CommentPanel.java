@@ -9,11 +9,11 @@ public class CommentPanel extends FieldSet {
 
 	protected TextArea comment;
 	
-	public CommentPanel(TaskDTO taskDTO){
+	public CommentPanel(TaskDTO taskDTO, Integer height ,Integer width){
 		setHeading("Comment");
 		comment = new TextArea();
-		comment.setWidth(300);
-		comment.setHeight(100);
+		comment.setWidth(width);
+		comment.setHeight(height);
 		comment.setValue(taskDTO.getComment());
 		if(!AuthorizationManager.hasVerificatorAccess(taskDTO)){
 			comment.setReadOnly(true);

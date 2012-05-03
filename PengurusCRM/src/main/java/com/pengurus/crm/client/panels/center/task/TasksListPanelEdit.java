@@ -4,12 +4,9 @@ import java.util.Set;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.DomEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.GridEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -25,11 +22,12 @@ import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.TaskDTO;
 
 public class TasksListPanelEdit extends TasksListPanel {
-	
+
 	JobDTO jobDTO;
 	ProjectDTO projectDTO;
 
-	public TasksListPanelEdit(Set<TaskDTO> set, JobDTO jobDTO, ProjectDTO projectDTO) {
+	public TasksListPanelEdit(Set<TaskDTO> set, JobDTO jobDTO,
+			ProjectDTO projectDTO) {
 		super();
 		this.jobDTO = jobDTO;
 		this.projectDTO = projectDTO;
@@ -37,12 +35,12 @@ public class TasksListPanelEdit extends TasksListPanel {
 			tasks.add(new TaskModel(task));
 		initPanel();
 	}
-	
-	protected void initPanel(){
+
+	protected void initPanel() {
 		modelList = new ModelList();
 		HorizontalPanel hp = new HorizontalPanel();
 		hp.setSpacing(20);
-		
+
 		hp.add(addButtonPanel());
 		hp.add(modelList);
 		add(hp);
@@ -62,18 +60,21 @@ public class TasksListPanelEdit extends TasksListPanel {
 						window.setAutoWidth(true);
 						window.setClosable(false);
 						final TaskPanelCreate taskPanel = new TaskPanelCreate(
-								jobDTO,projectDTO,taskListPanel);
+								jobDTO, projectDTO, taskListPanel);
 						Listener<DomEvent> listenerCreateJob = new Listener<DomEvent>() {
 							@Override
 							public void handleEvent(DomEvent be) {
 								if (taskPanel.getTaskDTO() != null) {
-							/*		ml.getGrid().stopEditing();
-									ml.getStore().add(
-											new TaskModel(taskPanel
-													.getTaskDTO()));
-									ml.getGrid().startEditing(0, 0);*/
-/*									jobDTO.getTask()
-											.add(taskPanel.getTaskDTO());*/
+									/*
+									 * ml.getGrid().stopEditing();
+									 * ml.getStore().add( new
+									 * TaskModel(taskPanel .getTaskDTO()));
+									 * ml.getGrid().startEditing(0, 0);
+									 */
+									/*
+									 * jobDTO.getTask()
+									 * .add(taskPanel.getTaskDTO());
+									 */
 									window.hide();
 								}
 							}
@@ -104,29 +105,6 @@ public class TasksListPanelEdit extends TasksListPanel {
 					ListStore<TaskModel> store, Grid<TaskModel> grid) {
 				if (!init) {
 					init = true;
-					grid.addListener(Events.OnClick,
-							new Listener<GridEvent<TaskModel>>() {
-
-								public void handleEvent(GridEvent<TaskModel> be) {
-									for (int i = 0; i < be.getGrid().getStore()
-											.getCount(); i++) {
-										if (be.getGrid().getView()
-												.getWidget(i, be.getColIndex()) != null
-												&& be.getGrid()
-														.getView()
-														.getWidget(
-																i,
-																be.getColIndex()) instanceof BoxComponent) {
-											((BoxComponent) be
-													.getGrid()
-													.getView()
-													.getWidget(i,
-															be.getColIndex()))
-													.setWidth(be.getWidth() - 10);
-										}
-									}
-								}
-							});
 				}
 				ButtonBar buttonBar = new ButtonBar();
 				Button b = new Button("PREVIEW",
@@ -158,13 +136,9 @@ public class TasksListPanelEdit extends TasksListPanel {
 		return buttonRenderer;
 	}
 
-
 	@Override
 	protected ListStore<TaskModel> getList() {
 		return tasks;
 	}
-
-
-
 
 }

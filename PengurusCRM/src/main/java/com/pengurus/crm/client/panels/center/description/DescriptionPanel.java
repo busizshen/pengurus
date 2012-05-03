@@ -10,23 +10,21 @@ public abstract class DescriptionPanel extends FieldSet {
 	public DescriptionPanel(String descr, Integer height ,Integer width) {
 		setHeading("Description");
 		description = new TextArea();
-		description.setHeight(height - 5);
-		description.setWidth(width - 25);
+		description.setHeight(height);
+		description.setWidth(width);
 		description.setValue(descr);
 		description.setStyleName("boxsizingBorder");
 		add(description);
-		setWidth(width);
 		this.setAutoHeight(true);
 	}
 
 	public DescriptionPanel( Integer height ,Integer width) {
 		setHeading("Description");
 		description = new TextArea();
-		description.setHeight(height - 5);
-		description.setWidth(width - 25);
+		description.setHeight(height);
+		description.setWidth(width);
 		description.setStyleName("boxsizingBorder");
 		add(description);
-		setWidth(width);
 		this.setAutoHeight(true);
 	}
 

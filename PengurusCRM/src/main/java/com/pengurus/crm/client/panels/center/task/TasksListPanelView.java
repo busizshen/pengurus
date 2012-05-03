@@ -1,12 +1,8 @@
 package com.pengurus.crm.client.panels.center.task;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.GridEvent;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -26,7 +22,7 @@ import com.pengurus.crm.shared.dto.ProjectDTO;
 public abstract class TasksListPanelView extends TasksListPanel {
 
 	protected ListPagination<TaskModel> listPagination;
-	
+
 	protected void initPanel() {
 		initPaging();
 		modelList = new ModelList();
@@ -52,29 +48,6 @@ public abstract class TasksListPanelView extends TasksListPanel {
 					ListStore<TaskModel> store, Grid<TaskModel> grid) {
 				if (!init) {
 					init = true;
-					grid.addListener(Events.OnClick,
-							new Listener<GridEvent<TaskModel>>() {
-
-								public void handleEvent(GridEvent<TaskModel> be) {
-									for (int i = 0; i < be.getGrid().getStore()
-											.getCount(); i++) {
-										if (be.getGrid().getView()
-												.getWidget(i, be.getColIndex()) != null
-												&& be.getGrid()
-														.getView()
-														.getWidget(
-																i,
-																be.getColIndex()) instanceof BoxComponent) {
-											((BoxComponent) be
-													.getGrid()
-													.getView()
-													.getWidget(i,
-															be.getColIndex()))
-													.setWidth(be.getWidth() - 10);
-										}
-									}
-								}
-							});
 				}
 				ButtonBar buttonBar = new ButtonBar();
 				Button b = new Button("PREVIEW",
@@ -113,7 +86,7 @@ public abstract class TasksListPanelView extends TasksListPanel {
 	protected ListStore<TaskModel> getList() {
 		return listPagination.getStore();
 	}
-	
+
 	@Override
 	protected void addGridPaging(ContentPanel cp, EditorGrid<TaskModel> grid) {
 		listPagination.addToGrid(cp, grid);
