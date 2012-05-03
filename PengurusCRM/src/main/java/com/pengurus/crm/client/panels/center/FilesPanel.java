@@ -6,6 +6,8 @@ import java.util.List;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
@@ -67,6 +69,19 @@ public class FilesPanel extends ContentPanel {
 		configs.add(column);
 
 		ColumnModel cm = new ColumnModel(configs);
+
+		final Grid<FileModel> grid = new Grid<FileModel>(filesNames, cm);
+		grid.addPlugin(r);
+		grid.getView().setForceFit(true);
+		grid.setSelectionModel(sm);
+
+		setButtonAlign(HorizontalAlignment.CENTER);
+		setHeading("Files");
+		setLayout(new FitLayout());
+		setSize(700, 300);
+		add(grid);
+		grid.getAriaSupport().setLabelledBy(getHeader().getId() + "-label");
+
 		ToolBar toolBar = new ToolBar();
 
 		Button upload = new Button("upload new file",
@@ -80,7 +95,7 @@ public class FilesPanel extends ContentPanel {
 				});
 		toolBar.add(upload);
 
-		Button remove = new Button("remove selected file",
+		final Button remove = new Button("remove selected file",
 				new SelectionListener<ButtonEvent>() {
 
 					@Override
@@ -100,9 +115,11 @@ public class FilesPanel extends ContentPanel {
 								public void onSuccess(Void result) {
 									MessageBox.info("Succes",
 											"You have deleted file: "
-											+ sm.getSelectedItem()
-											.getName() + ".",
+													+ sm.getSelectedItem()
+															.getName() + ".",
 											null);
+									grid.getStore()
+											.remove(sm.getSelectedItem());
 								}
 							};
 							FileServiceAsync service = (FileServiceAsync) GWT
@@ -115,39 +132,45 @@ public class FilesPanel extends ContentPanel {
 									"You must select a file first.", null);
 					}
 				});
+		remove.disable();
 		toolBar.add(remove);
 
-		Button download = new Button("download selected file",
+		final Button download = new Button("download selected file",
 				new SelectionListener<ButtonEvent>() {
 
 					@Override
 					public void componentSelected(ButtonEvent ce) {
 						FileModel file = sm.getSelectedItem();
 						if (file != null) {
-							String url = "/file/download/" + quoteId + "/" + jobId + "/" + taskId
-									+ "/" + stateId + "/" + file.getName();
-							com.google.gwt.user.client.Window.Location.assign(url);
+							String url = "/file/download/" + quoteId + "/"
+									+ jobId + "/" + taskId + "/" + stateId
+									+ "/" + file.getName();
+							com.google.gwt.user.client.Window.Location
+									.assign(url);
 						} else {
 							MessageBox.info("Failure",
 									"You must select a file first.", null);
 						}
 					}
 				});
+		download.disable();
 		toolBar.add(download);
 
 		setTopComponent(toolBar);
 
-		Grid<FileModel> grid = new Grid<FileModel>(filesNames, cm);
-		grid.addPlugin(r);
-		grid.getView().setForceFit(true);
-		grid.setSelectionModel(sm);
+		sm.addSelectionChangedListener(new SelectionChangedListener<FileModel>() {
 
-		setButtonAlign(HorizontalAlignment.CENTER);
-		setHeading("Files");
-		setLayout(new FitLayout());
-		setSize(700, 300);
-		add(grid);
-		grid.getAriaSupport().setLabelledBy(getHeader().getId() + "-label");
+			@Override
+			public void selectionChanged(SelectionChangedEvent<FileModel> se) {
+				if (sm.getSelectedItem() != null) {
+					remove.enable();
+					download.enable();
+				} else {
+					remove.disable();
+					download.disable();
+				}
+			}
+		});
 
 	}
 
@@ -208,8 +231,8 @@ public class FilesPanel extends ContentPanel {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				MessageBox.info("Failure", "Downloading files names has failed",
-						null);
+				MessageBox.info("Failure",
+						"Downloading files names has failed", null);
 			}
 
 			@Override
