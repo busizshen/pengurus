@@ -14,7 +14,7 @@ import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.pengurus.crm.client.AuthorizationManager;
-import com.pengurus.crm.shared.dto.StatusDTO;
+import com.pengurus.crm.shared.dto.StatusQuoteDTO;
 
 public class QuoteStatusPanel extends LayoutContainer {
 
@@ -27,7 +27,7 @@ public class QuoteStatusPanel extends LayoutContainer {
 	private Listener<DomEvent> listenerChangeStatus;
 	public Listener<DomEvent> listenerBackStatus;
 
-	public QuoteStatusPanel(StatusDTO status,
+	public QuoteStatusPanel(StatusQuoteDTO status,
 			Listener<DomEvent> listenerChangeStatus,
 			Listener<DomEvent> listenerGenerateProject,
 			Listener<DomEvent> listenerBackStatus) {
@@ -56,7 +56,7 @@ public class QuoteStatusPanel extends LayoutContainer {
 	}
 
 	private class QuoteStatusBar extends HorizontalPanel {
-		Label[] labelsList = new Label[7];
+		Label[] labelsList = new Label[8];
 		Button generateProject;
 		Button nextStatus;
 		Button reOpen;
@@ -65,7 +65,7 @@ public class QuoteStatusPanel extends LayoutContainer {
 		public QuoteStatusBar(int statusNo) {
 			this.status = statusNo;
 
-			for (int i = 0; i < StatusDTO.values().length; i++) {
+			for (int i = 0; i < StatusQuoteDTO.values().length; i++) {
 				labelsList[i] = prepareLabel(i);
 				add(labelsList[i]);
 			}
@@ -74,6 +74,8 @@ public class QuoteStatusPanel extends LayoutContainer {
 				generateProject = new Button("Generate Project");
 				generateProject.addListener(Events.OnClick,
 						listenerGenerateProject);
+				generateProject.addListener(Events.OnClick,
+						listenerChangeStatus);
 				add(generateProject);
 			}
 
@@ -119,27 +121,24 @@ public class QuoteStatusPanel extends LayoutContainer {
 					(status >= statusNo) ? COLOUR_OK : COLOUR_NOT);
 			label.setWidth(150);
 			label.setHeight(100);
-			label.setText(StatusDTO.fromInt(statusNo));
+			label.setText(StatusQuoteDTO.fromInt(statusNo));
 			label.setShadowOffset(windowResizeDelay);
 			return label;
 		}
 
 		private void setVisibility() {
 			nextStatus
-					.setVisible(status == 6 ? false
-							: (((status <= 2 || status == 5) && AuthorizationManager
-									.hasExecutiveAccess())
-									|| (status == 3 && AuthorizationManager
-											.hasClientAccess()) || (status == 4 && AuthorizationManager
+					.setVisible(status == 7 ? false
+							: (((status <= 2 || status >= 6) && AuthorizationManager
+									.hasExecutiveAccess()) || (status == 5 && AuthorizationManager
 									.hasAccountantAccess())) ? true : false);
 
 			generateProject.setVisible(AuthorizationManager
-					.hasExecutiveAccess() && status == 4 ? true : false);
+					.hasExecutiveAccess() && status == 3 ? true : false);
 
-			reOpen.setVisible((AuthorizationManager.hasExecutiveAccess() && status == 2)
-					|| (AuthorizationManager.hasClientAccess() && status == 3) ? true
+			reOpen.setVisible((AuthorizationManager.hasClientAccess() && status == 2) ? true
 					: false);
-			
+
 			this.layout();
 		}
 

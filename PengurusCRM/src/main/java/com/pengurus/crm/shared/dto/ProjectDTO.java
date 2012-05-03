@@ -14,7 +14,7 @@ import com.pengurus.crm.client.service.ProjectServiceAsync;
 
 public class ProjectDTO implements IsSerializable {
 	private Long id;
-	private StatusDTO status;
+	private Long quoteId;
 	private ClientDTO client;
 	private WorkerDTO supervisor;
 	private Set<WorkerDTO> projectManagers = new HashSet<WorkerDTO>();
@@ -27,11 +27,10 @@ public class ProjectDTO implements IsSerializable {
 		super();
 	}
 
-	public ProjectDTO(StatusDTO status, ClientDTO client, WorkerDTO supervisor,
+	public ProjectDTO(ClientDTO client, WorkerDTO supervisor,
 			Set<WorkerDTO> projectManagers, Set<TranslatorDTO> experts,
 			Set<TranslatorDTO> freelancers, Set<JobDTO> jobs, String description) {
 		super();
-		this.status = status;
 		this.client = client;
 		this.supervisor = supervisor;
 		this.projectManagers = projectManagers;
@@ -43,7 +42,7 @@ public class ProjectDTO implements IsSerializable {
 
 	public ProjectDTO(QuoteDTO quoteDTO) {
 		super();
-		this.status = StatusDTO.open;
+		this.quoteId = quoteDTO.getId();
 		this.client = quoteDTO.getClient();
 		this.supervisor = quoteDTO.getSupervisor();
 		this.jobs = quoteDTO.getJobs();
@@ -57,15 +56,7 @@ public class ProjectDTO implements IsSerializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public StatusDTO getStatus() {
-		return status;
-	}
-
-	public void setStatus(StatusDTO status) {
-		this.status = status;
-	}
-
+	
 	public ClientDTO getClient() {
 		return client;
 	}
@@ -144,6 +135,14 @@ public class ProjectDTO implements IsSerializable {
 
 	public boolean isProjectManager(UserDTO currentUser) {
 		return projectManagers.contains(currentUser);
+	}
+
+	public void setQuoteId(Long quoteId) {
+		this.quoteId = quoteId;
+	}
+
+	public Long getQuoteId() {
+		return quoteId;
 	}
 
 }

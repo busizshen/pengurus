@@ -9,7 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import com.pengurus.crm.client.service.TaskService;
 import com.pengurus.crm.daos.TaskDAO;
 import com.pengurus.crm.entities.Task;
-import com.pengurus.crm.enums.Status;
+import com.pengurus.crm.enums.StatusTask;
 import com.pengurus.crm.shared.dto.TaskDTO;
 
 public class TaskServiceImpl implements TaskService {
@@ -35,7 +35,7 @@ public class TaskServiceImpl implements TaskService {
 	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_EXPERT')")
 	public void updateStatus(TaskDTO taskDTO) {
 		Task task = taskDAO.read(taskDTO.getId());
-		task.setStatus(Status.toStatus(taskDTO.getStatus()));
+		task.setStatus(StatusTask.toStatus(taskDTO.getStatus()));
 		taskDAO.update(task);
 	}
 

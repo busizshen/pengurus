@@ -12,10 +12,9 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.shared.dto.JobDTO;
-import com.pengurus.crm.shared.dto.ProjectDTO;
-import com.pengurus.crm.shared.dto.StatusDTO;
+import com.pengurus.crm.shared.dto.StatusJobDTO;
 
-public class JobStatusPanel extends LayoutContainer {
+public abstract class JobStatusPanel extends LayoutContainer {
 
 	private static final String COLOUR_OK = "#BBD5F7";
 	private static final String COLOUR_NOT = "#ECECEC";
@@ -23,48 +22,50 @@ public class JobStatusPanel extends LayoutContainer {
 	private static final String REOPEN = "reopen";
 
 	JobDTO jobDTO;
-	ProjectDTO projectDTO;
+	protected Button nextStatus;
+	protected Button reOpen;
+	protected int status = 0;
 
-	public JobStatusPanel(JobDTO jobDTO, ProjectDTO projectDTO) {
+
+	public JobStatusPanel(JobDTO jobDTO) {
 
 		this.jobDTO = jobDTO;
-		this.projectDTO = projectDTO;
 
 		setLayout(new FlowLayout(10));
 
 		VerticalPanel verticalPanel = new VerticalPanel();
 		verticalPanel.setHeight("Status panel");
 
-		TaskStatusBar taskStatusBar = new TaskStatusBar(
-				jobDTO.getStatus() == null ? StatusDTO.open.toInt() : jobDTO
+		JobStatusBar jobStatusBar = new JobStatusBar(
+				jobDTO.getStatus() == null ? StatusJobDTO.open.toInt() : jobDTO
 						.getStatus().toInt());
-		taskStatusBar.setBorders(true);
-		taskStatusBar.setAutoHeight(true);
-		taskStatusBar.setHorizontalAlign(HorizontalAlignment.CENTER);
-		taskStatusBar.setVerticalAlign(VerticalAlignment.MIDDLE);
+		jobStatusBar.setBorders(true);
+		jobStatusBar.setAutoHeight(true);
+		jobStatusBar.setHorizontalAlign(HorizontalAlignment.CENTER);
+		jobStatusBar.setVerticalAlign(VerticalAlignment.MIDDLE);
 
-		verticalPanel.add(taskStatusBar);
+		verticalPanel.add(jobStatusBar);
 		add(verticalPanel);
 	}
 
-	public StatusDTO getStatus() {
+	public StatusJobDTO getStatus() {
 		return jobDTO.getStatus();
 	}
 
-	private class TaskStatusBar extends HorizontalPanel {
+
+	protected abstract void setVisibility();
+
+	protected class JobStatusBar extends HorizontalPanel {
 		Label[] labelsList = new Label[7];
-		Button nextStatus;
-		Button reOpen;
 		HorizontalPanel horizontalPanelA;
 		HorizontalPanel horizontalPanelB;
-		int status = 0;
 
-		public TaskStatusBar(int statusNo) {
-			this.status = statusNo;
+		public JobStatusBar(int statusNo) {
+			status = statusNo;
 			horizontalPanelA = new HorizontalPanel();
 			horizontalPanelB = new HorizontalPanel();
 
-			for (int i = 0; i < StatusDTO.values().length; i++) {
+			for (int i = 0; i < StatusJobDTO.values().length; i++) {
 				labelsList[i] = prepareLabel(i);
 				add(labelsList[i]);
 			}
@@ -112,21 +113,10 @@ public class JobStatusPanel extends LayoutContainer {
 					status >= statusNo ? COLOUR_OK : COLOUR_NOT);
 			label.setWidth(150);
 			label.setHeight(100);
-			label.setText(StatusDTO.fromInt(statusNo));
+			label.setText(StatusJobDTO.fromInt(statusNo));
 			label.setShadowOffset(windowResizeDelay);
 			return label;
 		}
-
-		private void setVisibility() {
-			nextStatus.setVisible(status == 6 ? false : AuthorizationManager
-					.canEditProject(projectDTO) ? true : false);
-
-			reOpen.setVisible((AuthorizationManager.hasExecutiveAccess() && status == 2) ? true
-					: false);
-
-			this.layout();
-		}
-
 	}
 
 }

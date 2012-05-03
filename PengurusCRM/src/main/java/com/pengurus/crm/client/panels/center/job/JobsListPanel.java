@@ -29,10 +29,10 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 		column.setHeader("Id");
 		configs.add(column);
 
-/*		column = new ColumnConfigMy();
+		column = new ColumnConfigMy();
 		column.setId("status");
 		column.setHeader("Status");
-		configs.add(column);*/
+		configs.add(column);
 
 		/*column = new ColumnConfigMy();
 		column.setId("deadline");

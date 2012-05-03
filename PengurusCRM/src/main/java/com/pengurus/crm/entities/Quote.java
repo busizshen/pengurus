@@ -6,7 +6,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.pengurus.crm.enums.Status;
+import com.pengurus.crm.enums.StatusQuote;
 import com.pengurus.crm.server.services.UserServiceImpl;
 import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.IndividualClientDTO;
@@ -16,7 +16,7 @@ import com.pengurus.crm.shared.dto.QuoteDTO;
 public class Quote {
 
 	private Long id;
-	private Status status;
+	private StatusQuote status;
 	private Client client;
 	private Worker supervisor;
 	private Set<Job> jobs;
@@ -29,7 +29,7 @@ public class Quote {
 		super();
 	}
 
-	public Quote(Status status, Client client, Worker supervisor,
+	public Quote(StatusQuote status, Client client, Worker supervisor,
 			Set<Job> jobs, String description) {
 		super();
 		this.status = status;
@@ -59,7 +59,7 @@ public class Quote {
 		}
 		this.status = null;
 		if (quoteDTO.getStatus() != null) {
-			this.status = Status.toStatus(quoteDTO.getStatus());
+			this.status = StatusQuote.toStatus(quoteDTO.getStatus());
 		}
 		this.jobs = new HashSet<Job>();
 		if (quoteDTO.getJobs() != null) {
@@ -70,11 +70,11 @@ public class Quote {
 		}
 	}
 
-	public Status getStatus() {
+	public StatusQuote getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(StatusQuote status) {
 		this.status = status;
 	}
 

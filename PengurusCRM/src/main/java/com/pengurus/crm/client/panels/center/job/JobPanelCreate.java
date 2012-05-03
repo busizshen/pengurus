@@ -36,7 +36,7 @@ import com.pengurus.crm.shared.dto.CurrencyTypeDTO;
 import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.PriceDTO;
 import com.pengurus.crm.shared.dto.QuoteDTO;
-import com.pengurus.crm.shared.dto.StatusDTO;
+import com.pengurus.crm.shared.dto.StatusJobDTO;
 import com.pengurus.crm.shared.dto.TranslationDTO;
 
 public class JobPanelCreate {
@@ -180,7 +180,7 @@ public class JobPanelCreate {
 							if (translation.getTranslation() != null)
 								jobDTO.setTranslation(translation
 										.getTranslation().getTranslationDTO());
-							jobDTO.setStatus(StatusDTO.open);
+							jobDTO.setStatus(StatusJobDTO.open);
 							if (jobDTO.checked()) {
 								AsyncCallback<JobDTO> callback = new AsyncCallback<JobDTO>() {
 

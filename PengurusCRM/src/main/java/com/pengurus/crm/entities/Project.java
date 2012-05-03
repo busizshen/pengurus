@@ -3,7 +3,6 @@ package com.pengurus.crm.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.pengurus.crm.enums.Status;
 import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.ProjectDTO;
@@ -13,7 +12,7 @@ import com.pengurus.crm.shared.dto.WorkerDTO;
 public class Project {
 
 	private Long id;
-	private Status status;
+	private Long quoteId;
 
 	public Long getId() {
 		return id;
@@ -35,11 +34,11 @@ public class Project {
 		super();
 	}
 
-	public Project(Status status, Client client, Worker supervisor,
+	public Project(Long quoteId, Client client, Worker supervisor,
 			Set<Worker> projectManagers, Set<Translator> experts,
 			Set<Translator> freelancers, Set<Job> jobs, String description) {
 		super();
-		this.status = status;
+		this.quoteId = quoteId;
 		this.client = client;
 		this.supervisor = supervisor;
 		this.projectManagers = projectManagers;
@@ -51,8 +50,6 @@ public class Project {
 
 	public Project(ProjectDTO projectDTO) {
 		super();
-		if (projectDTO.getStatus() != null)
-			this.status = Status.toStatus(projectDTO.getStatus());
 		if (projectDTO.getClient() != null) {
 			if (projectDTO.getClient() instanceof BusinessClientDTO)
 				this.client = new BusinessClient();
@@ -60,6 +57,7 @@ public class Project {
 				this.client = new IndividualClient();
 			this.client.setId(projectDTO.getClient().getId());
 		}
+		this.quoteId = projectDTO.getQuoteId();
 		this.description = projectDTO.getDescription();
 		this.id = projectDTO.getId();
 		this.supervisor = null;
@@ -87,14 +85,6 @@ public class Project {
 				this.projectManagers.add(new Worker(workerDTO));
 			}
 		}
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
 	}
 
 	public Client getClient() {
@@ -172,10 +162,17 @@ public class Project {
 			pDTO.setClient(this.client.toDTOLazy());
 		pDTO.setDescription(this.description);
 		pDTO.setId(this.id);
-		if (this.status != null)
-			pDTO.setStatus(this.status.toDTO());
+		pDTO.setQuoteId(quoteId);
 		if (this.supervisor != null)
 			pDTO.setSupervisor(this.supervisor.toDTOLazy());
 		return pDTO;
+	}
+
+	public void setQuoteId(Long quoteId) {
+		this.quoteId = quoteId;
+	}
+
+	public Long getQuoteId() {
+		return quoteId;
 	}
 }

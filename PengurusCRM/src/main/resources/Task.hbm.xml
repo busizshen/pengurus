@@ -12,7 +12,7 @@
             <column name="STATUS" />
             <type name="org.hibernate.type.EnumType">
                 <param name="type">12</param>
-                <param name="enumClass">com.pengurus.crm.enums.Status</param>
+                <param name="enumClass">com.pengurus.crm.enums.StatusTask</param>
             </type>
         </property>
         <many-to-one name="expert" class="com.pengurus.crm.entities.Translator" fetch="join">

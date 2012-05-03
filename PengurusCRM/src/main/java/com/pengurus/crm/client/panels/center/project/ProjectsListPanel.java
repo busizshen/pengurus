@@ -52,12 +52,7 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 		column.setId("id");
 		column.setHeader("Id");
 		configs.add(column);
-
-		column = new ColumnConfigMy();
-		column.setId("status");
-		column.setHeader("Status");
-		configs.add(column);
-
+		
 		column = new ColumnConfigMy();
 		column.setId("supervisor");
 		column.setHeader("Supervisor");

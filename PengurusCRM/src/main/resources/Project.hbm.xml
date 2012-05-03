@@ -8,12 +8,8 @@
             <column name="PROJECT_ID" />
             <generator class="native" />
         </id>
-        <property name="status">
-            <column name="STATUS" />
-            <type name="org.hibernate.type.EnumType">
-                <param name="type">12</param>
-                <param name="enumClass">com.pengurus.crm.enums.Status</param>
-            </type>
+      	<property name="quoteId" type="java.lang.Long">
+            <column name="QUOTEID" />
         </property>
         <many-to-one name="client" class="com.pengurus.crm.entities.Client" fetch="join">
             <column name="CLIENT" />

@@ -12,7 +12,7 @@
             <column name="STATUS" />
             <type name="org.hibernate.type.EnumType">
                 <param name="type">12</param>
-                <param name="enumClass">com.pengurus.crm.enums.Status</param>
+                <param name="enumClass">com.pengurus.crm.enums.StatusJob</param>
             </type>
         </property>
         <property name="deadline" type="java.util.Date">

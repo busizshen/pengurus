@@ -15,7 +15,7 @@ import com.pengurus.crm.client.service.QuoteServiceAsync;
 public class QuoteDTO implements IsSerializable {
 
 	private Long id;
-	private StatusDTO status;
+	private StatusQuoteDTO status;
 	private ClientDTO client;
 	private WorkerDTO supervisor;
 	private Set<JobDTO> jobs = new HashSet<JobDTO>();
@@ -24,7 +24,7 @@ public class QuoteDTO implements IsSerializable {
 	public QuoteDTO() {
 	}
 
-	public QuoteDTO(Long id, StatusDTO status, ClientDTO client,
+	public QuoteDTO(Long id, StatusQuoteDTO status, ClientDTO client,
 			WorkerDTO supervisor, Set<JobDTO> jobs, String description) {
 		super();
 		this.id = id;
@@ -43,11 +43,11 @@ public class QuoteDTO implements IsSerializable {
 		this.id = id;
 	}
 
-	public StatusDTO getStatus() {
+	public StatusQuoteDTO getStatus() {
 		return status;
 	}
 
-	public void setStatus(StatusDTO status) {
+	public void setStatus(StatusQuoteDTO status) {
 		this.status = status;
 	}
 
@@ -96,7 +96,7 @@ public class QuoteDTO implements IsSerializable {
 				if (quoteDTO.status != null)
 					quoteDTO.status = quoteDTO.status.increase();
 				else
-					quoteDTO.status = StatusDTO.getFirstStatus();
+					quoteDTO.status = StatusQuoteDTO.getFirstStatus();
 				AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 
 					public void onFailure(Throwable t) {
@@ -123,7 +123,7 @@ public class QuoteDTO implements IsSerializable {
 				if (quoteDTO.status != null)
 					quoteDTO.status = quoteDTO.status.decrease();
 				else
-					quoteDTO.status = StatusDTO.getFirstStatus();
+					quoteDTO.status = StatusQuoteDTO.getFirstStatus();
 				AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 
 					public void onFailure(Throwable t) {

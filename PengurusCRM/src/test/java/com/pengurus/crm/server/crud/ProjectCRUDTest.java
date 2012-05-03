@@ -34,7 +34,8 @@ import com.pengurus.crm.entities.TranslationType;
 import com.pengurus.crm.entities.Translator;
 import com.pengurus.crm.entities.Worker;
 import com.pengurus.crm.enums.Rating;
-import com.pengurus.crm.enums.Status;
+import com.pengurus.crm.enums.StatusJob;
+import com.pengurus.crm.enums.StatusTask;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 @ContextConfiguration(locations = { "../testContext.xml" })
@@ -149,10 +150,10 @@ public class ProjectCRUDTest {
         freelancers.add(freelancer2);
 
         // create task
-        Task task = new Task(Status.accepted, translator,translator, Calendar
+        Task task = new Task(StatusTask.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc",
                 null, Rating.bad, "comm");
-        Task task2 = new Task(Status.accepted, translator,translator, Calendar
+        Task task2 = new Task(StatusTask.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc2",
                 null, Rating.bad, "comm2");
         Set<Task> tasks = new HashSet<Task>();
@@ -161,9 +162,9 @@ public class ProjectCRUDTest {
         tasks2.add(task2);
 
         // create jobs
-        Job job = new Job(Status.closed, Calendar.getInstance().getTime(),
+        Job job = new Job(StatusJob.closed, Calendar.getInstance().getTime(),
                 translation, 1000, price, "Job description", tasks);
-        Job job2 = new Job(Status.open, Calendar.getInstance().getTime(),
+        Job job2 = new Job(StatusJob.open, Calendar.getInstance().getTime(),
                 translation, 21000, price, "Job description2", tasks2);
         task.setJob(job);
         task2.setJob(job2);
@@ -197,7 +198,7 @@ public class ProjectCRUDTest {
 
     @Test
     public void simpleProjectCreate() {
-        Project project = new Project(Status.in_progress, individualClient,
+        Project project = new Project(null, individualClient,
                 supervisor, projectManagers, experts, freelancers, jobs,
                 "Project description");
         projectDAO.create(project);
@@ -207,7 +208,7 @@ public class ProjectCRUDTest {
     @Test
     public void simpleProjectGet() {
         // prepare data
-        Project project = new Project(Status.in_progress, individualClient,
+        Project project = new Project(null, individualClient,
                 supervisor, projectManagers, experts, freelancers, jobs,
                 "Project description");
         projectDAO.create(project);
@@ -219,7 +220,6 @@ public class ProjectCRUDTest {
         Assert.assertEquals(project2.getClient().getId(), project.getClient()
                 .getId());
         Assert.assertEquals(project2.getDescription(), project.getDescription());
-        Assert.assertEquals(project2.getStatus(), project.getStatus());
         Assert.assertEquals(project2.getSupervisor().getId(), project
                 .getSupervisor().getId());
     }
@@ -227,7 +227,7 @@ public class ProjectCRUDTest {
     @Test
     public void simpleProjectUpdate() {
         // prepare data
-        Project project = new Project(Status.in_progress, individualClient,
+        Project project = new Project(null, individualClient,
                 supervisor, projectManagers, experts, freelancers, jobs,
                 "Project description");
         projectDAO.create(project);
@@ -252,7 +252,6 @@ public class ProjectCRUDTest {
         Assert.assertEquals(project2.getClient().getId(), project.getClient()
                 .getId());
         Assert.assertEquals(project2.getDescription(), project.getDescription());
-        Assert.assertEquals(project2.getStatus(), project.getStatus());
         Assert.assertEquals(project2.getSupervisor().getId(), project
                 .getSupervisor().getId());
     }
@@ -260,7 +259,7 @@ public class ProjectCRUDTest {
     @Test
     public void simpleProjectDelete(){
      // prepare data
-        Project project = new Project(Status.in_progress, individualClient,
+        Project project = new Project(null, individualClient,
                 supervisor, projectManagers, experts, freelancers, jobs,
                 "Project description");
         projectDAO.create(project);

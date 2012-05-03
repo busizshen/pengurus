@@ -4,14 +4,14 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.pengurus.crm.enums.Status;
+import com.pengurus.crm.enums.StatusJob;
 import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.TaskDTO;
 
 public class Job {
 
 	private Long id;
-	private Status status;
+	private StatusJob status;
 	private Date deadline;
 	private Translation translation;
 	private Integer amount;
@@ -23,7 +23,7 @@ public class Job {
 		super();
 	}
 
-	public Job(Status status, Date deadline, Translation translation,
+	public Job(StatusJob status, Date deadline, Translation translation,
 			Integer amount, Price price, String description, Set<Task> task) {
 		super();
 		this.status = status;
@@ -40,7 +40,7 @@ public class Job {
 		if (jobDTO != null) {
 			this.id = jobDTO.getId();
 			if (jobDTO.getStatus() != null)
-				this.status = Status.toStatus(jobDTO.getStatus());
+				this.status = StatusJob.toStatus(jobDTO.getStatus());
 			this.deadline = jobDTO.getDeadline();
 			this.description = jobDTO.getDescription();
 			if (jobDTO.getPrice() != null)
@@ -68,11 +68,11 @@ public class Job {
 		this.id = id;
 	}
 
-	public Status getStatus() {
+	public StatusJob getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(StatusJob status) {
 		this.status = status;
 	}
 

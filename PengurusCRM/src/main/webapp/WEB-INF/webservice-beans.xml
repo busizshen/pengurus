@@ -42,6 +42,7 @@
 
 	<bean id="jobServiceBean" class="com.pengurus.crm.server.services.JobServiceImpl">
 		<property name="jobDAO" ref="jobDao" />
+		<property name="quoteDAO" ref="quoteDao" />
 		<property name="translationDAO" ref="translationDao" />
 	</bean>
 	<bean id="projectServiceBean" class="com.pengurus.crm.server.services.ProjectServiceImpl">

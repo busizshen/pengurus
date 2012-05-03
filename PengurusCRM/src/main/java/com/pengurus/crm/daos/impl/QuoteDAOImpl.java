@@ -55,4 +55,24 @@ public class QuoteDAOImpl extends GenericDAOImpl<Quote> implements
 		return quotes;
 	}
 
+	@Override
+	public Quote loadByJobId(Long id) {
+        try{
+        	Session session = getHibernateTemplate().getSessionFactory().openSession();
+    		Long[] ids = {id};
+    		String hql = "select distinct q from Quote q " +
+    		                "join q.jobs j " +
+    		                "where j.id in (:ids)";
+    		Query query = session.createQuery(hql);
+    		query.setParameterList("ids", ids);
+    		List<Quote> quotes = query.list();
+    		Quote q = quotes.iterator().next();
+    		q.getJobs().size();
+    		session.close();
+            return q;
+        } catch(Exception e) {
+            return null;
+        }
+	}
+
 }

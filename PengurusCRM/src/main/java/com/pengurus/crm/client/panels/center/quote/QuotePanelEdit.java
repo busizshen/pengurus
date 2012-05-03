@@ -27,7 +27,7 @@ public class QuotePanelEdit extends QuotePanel {
 	protected void addButtonPanel(HorizontalPanel hpPanel) {
 		if (AuthorizationManager.hasExecutiveAccess()) {
 			HorizontalPanel hp = new HorizontalPanel();
-			Button b = new Button("Update",
+			Button buttonUpdate = new Button("Update",
 					new SelectionListener<ButtonEvent>() {
 						@Override
 						public void componentSelected(ButtonEvent ce) {
@@ -45,8 +45,8 @@ public class QuotePanelEdit extends QuotePanel {
 
 						}
 					});
-			hp.add(b);
-			b = new Button("Delete", new SelectionListener<ButtonEvent>() {
+			hp.add(buttonUpdate);
+			Button buttonCancel = new Button("Delete", new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
 					quoteDTO.delete();
@@ -54,16 +54,15 @@ public class QuotePanelEdit extends QuotePanel {
 
 				}
 			});
-			hp.add(b);
-			b = new Button("Cancel", new SelectionListener<ButtonEvent>() {
+			hp.add(buttonCancel);
+			buttonCancel = new Button("Cancel", new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					// pobierz starą wersję
 					QuotePanelView qp = new QuotePanelView(quoteDTO);
 					qp.setAsMain();
 				}
 			});
-			hp.add(b);
+			hp.add(buttonCancel);
 			hpPanel.add(hp);
 		}
 	}
@@ -87,70 +86,11 @@ public class QuotePanelEdit extends QuotePanel {
 
 	@Override
 	protected void addDescriptionPanel(VerticalPanel vpPanel) {
-		descriptionPanel = new DescriptionPanelEdit(quoteDTO.getDescription(),100,300);
+		descriptionPanel = new DescriptionPanelEdit(quoteDTO.getDescription(),
+				100, 300);
 		vpPanel.add(descriptionPanel);
 	}
 
-	/*
-	 * @Override protected void getDescriptionPanel(QuoteView quoteView) {
-	 * descriptionPanel = new DescriptionPanelEdit(quoteDTO.getDescription());
-	 * quoteView.add(descriptionPanel); }
-	 * 
-	 * @Override protected void getClientPanel(final QuoteView quoteView) {
-	 * updateClientPanel(quoteView); if (clientPanel != null) {
-	 * quoteView.add(clientPanel.getInfoPanel()); } }
-	 * 
-	 * protected void updateClientPanel(final QuoteView quoteView) {
-	 * Listener<DomEvent> listener = new Listener<DomEvent>() {
-	 * 
-	 * @Override public void handleEvent(DomEvent be) {
-	 * quoteDTO.setClient(clientPanel.getChosenClient()); getPanel();// do
-	 * zmiany jak zrobić żeby tylko jeden element się // zmieniał a nie trzeb
-	 * było ładować całości na nowo } }; if (quoteDTO.getClient() != null) {
-	 * clientPanel = new ClientPanelEdit(quoteDTO.getClient(), listener); } else
-	 * clientPanel = new ClientPanelEdit(listener); }
-	 * 
-	 * @Override protected void addEditionPanel(QuoteView quoteView) { if
-	 * (AuthorizationManager.hasExecutiveAccess()) { HorizontalPanel vp = new
-	 * HorizontalPanel(); Button b = new Button("Update", new
-	 * SelectionListener<ButtonEvent>() {
-	 * 
-	 * @Override public void componentSelected(ButtonEvent ce) {
-	 * quoteDTO.setDescription(descriptionPanel .getDescription());
-	 * quoteDTO.update(); QuotePanelView qp = new QuotePanelView(quoteDTO);
-	 * qp.getPanel();
-	 * 
-	 * } }); vp.add(b); b = new Button("Delete", new
-	 * SelectionListener<ButtonEvent>() {
-	 * 
-	 * @Override public void componentSelected(ButtonEvent ce) {
-	 * quoteDTO.delete(); MainWindow.addCenterPanel(new ContentPanel());
-	 * 
-	 * } }); vp.add(b); b = new Button("Cancel", new
-	 * SelectionListener<ButtonEvent>() {
-	 * 
-	 * @Override public void componentSelected(ButtonEvent ce) { // pobierz
-	 * starą wersję QuotePanelView qp = new QuotePanelView(quoteDTO);
-	 * qp.getPanel();
-	 * 
-	 * } }); vp.add(b); quoteView.add(vp); }
-	 * 
-	 * }
-	 * 
-	 * @Override protected void getSupervisorPanel(final QuoteView quoteView) {
-	 * updateSupervisorPanel(quoteView); if (workerPanel != null) {
-	 * quoteView.add(workerPanel.getInfoPanel()); } }
-	 * 
-	 * protected void updateSupervisorPanel(QuoteView quoteView) {
-	 * Listener<DomEvent> listener = new Listener<DomEvent>() {
-	 * 
-	 * @Override public void handleEvent(DomEvent be) {
-	 * quoteDTO.setSupervisor(workerPanel.getChosenWorker()); getPanel();// do
-	 * zmiany jak zrobić żeby tylko jeden element się // zmieniał a nie trzeb
-	 * było ładować całości na nowo } }; if (quoteDTO.getSupervisor() != null) {
-	 * workerPanel = new WorkerPanelEdit(quoteDTO.getSupervisor(), listener); }
-	 * else workerPanel = new WorkerPanelEdit(listener); }
-	 */
 	@Override
 	protected void getJobsPanel() {
 		if (quoteDTO.getJobs() != null) {

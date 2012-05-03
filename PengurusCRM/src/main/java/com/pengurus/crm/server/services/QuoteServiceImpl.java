@@ -13,7 +13,7 @@ import com.pengurus.crm.client.service.QuoteService;
 import com.pengurus.crm.daos.ClientDAO;
 import com.pengurus.crm.daos.QuoteDAO;
 import com.pengurus.crm.entities.Quote;
-import com.pengurus.crm.enums.Status;
+import com.pengurus.crm.enums.StatusQuote;
 import com.pengurus.crm.shared.dto.QuoteDTO;
 
 public class QuoteServiceImpl implements QuoteService {
@@ -55,7 +55,7 @@ public class QuoteServiceImpl implements QuoteService {
 	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_ACCOUNTANT') or hasPermission(#quoteDTO, 'write')")
 	public void updateQuoteStatus(QuoteDTO quoteDTO) {
 		Quote quote = this.quoteDAO.read(quoteDTO.getId());
-		quote.setStatus(Status.toStatus(quoteDTO.getStatus()));
+		quote.setStatus(StatusQuote.toStatus(quoteDTO.getStatus()));
 		this.quoteDAO.update(quote);
 	}
 

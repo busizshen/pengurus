@@ -11,7 +11,7 @@ import com.pengurus.crm.client.panels.PaginationRpcProxy;
 import com.pengurus.crm.client.service.PaginationService;
 import com.pengurus.crm.client.service.PaginationServiceAsync;
 import com.pengurus.crm.shared.dto.QuoteDTO;
-import com.pengurus.crm.shared.dto.StatusDTO;
+import com.pengurus.crm.shared.dto.StatusQuoteDTO;
 import com.pengurus.crm.shared.pagination.PagingCallbackWrapper;
 import com.pengurus.crm.shared.pagination.PagingLoadConfigHelper;
 
@@ -26,12 +26,12 @@ public class QuotesListPanelLastEdited extends QuotesListPanel{
 	protected ListStore<QuoteModel> getList(){
 		ListStore<QuoteModel> quoteList = new ListStore<QuoteModel>();
 		QuoteDTO qd = new QuoteDTO();
-		qd.setDescription("assssss");
-		qd.setStatus(StatusDTO.accepted);
+		qd.setDescription("");
+		qd.setStatus(StatusQuoteDTO.accepted);
 		quoteList.add(new QuoteModel(qd));	
 		qd = new QuoteDTO();
 		qd.setDescription("B");
-		qd.setStatus(StatusDTO.open);
+		qd.setStatus(StatusQuoteDTO.open);
 		quoteList.add(new QuoteModel(qd));
 		return quoteList;
   }

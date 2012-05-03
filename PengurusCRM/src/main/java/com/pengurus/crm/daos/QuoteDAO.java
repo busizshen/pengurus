@@ -9,5 +9,6 @@ public interface QuoteDAO extends GenericDAO<Quote>{
     Quote getById(long id);
 	List<Quote> loadAllBySupervisorId(Long id);
 	List<Quote> loadAllByClientId(Long id);
+	Quote loadByJobId(Long id);
 	
 }

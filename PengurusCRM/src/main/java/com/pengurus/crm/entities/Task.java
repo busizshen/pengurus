@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.pengurus.crm.enums.Rating;
-import com.pengurus.crm.enums.Status;
+import com.pengurus.crm.enums.StatusTask;
 import com.pengurus.crm.server.services.UserServiceImpl;
 import com.pengurus.crm.shared.dto.TaskDTO;
 
@@ -16,7 +16,7 @@ public class Task {
 	   
 	
     private Long id;
-    private Status status;
+    private StatusTask status;
     private Translator expert;
     private Translator reviewer;
     private Date deadline;
@@ -40,7 +40,7 @@ public class Task {
         super();
     }
 
-    public Task(Status status, Translator expert, Translator reviewer, Date deadline,
+    public Task(StatusTask status, Translator expert, Translator reviewer, Date deadline,
                 Translation translation, Integer amount, Price price,
                 String description, Job job, Rating rating, String comment) {
         super();
@@ -77,7 +77,7 @@ public class Task {
     	if(taskDTO.getRating() != null)
     		this.rating = Rating.toRating(taskDTO.getRating());
     	if(taskDTO.getStatus() != null)
-    		this.status = Status.toStatus(taskDTO.getStatus());
+    		this.status = StatusTask.toStatus(taskDTO.getStatus());
     	this.comment = taskDTO.getComment();
     }
 
@@ -89,11 +89,11 @@ public class Task {
         this.id = id;
     }
 
-    public Status getStatus() {
+    public StatusTask getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(StatusTask status) {
         this.status = status;
     }
 

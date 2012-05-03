@@ -6,7 +6,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.panels.center.project.ProjectPanel;
 import com.pengurus.crm.client.panels.center.project.ProjectPanelView;
-import com.pengurus.crm.client.panels.center.status.JobStatusPanel;
+import com.pengurus.crm.client.panels.center.status.JobStatusPanelProject;
 import com.pengurus.crm.client.panels.center.task.TasksListPanelEdit;
 import com.pengurus.crm.client.service.ProjectService;
 import com.pengurus.crm.client.service.ProjectServiceAsync;
@@ -16,7 +16,6 @@ import com.pengurus.crm.shared.dto.TaskDTO;
 
 public class JobPanelProject extends JobPanel {
 	ProjectDTO projectDTO;
-	JobStatusPanel jobStatusPanel;
 
 	public JobPanelProject(JobDTO jobDTO, ProjectDTO projectDTO) {
 		super(jobDTO);
@@ -65,7 +64,8 @@ public class JobPanelProject extends JobPanel {
 
 	@Override
 	protected void addStatusPanel(VerticalPanel vp) {
-		this.jobStatusPanel = new JobStatusPanel(jobDTO, projectDTO);
+		this.jobStatusPanel = new JobStatusPanelProject(jobDTO, projectDTO);
 		vp.add(jobStatusPanel);
 	}
+
 }

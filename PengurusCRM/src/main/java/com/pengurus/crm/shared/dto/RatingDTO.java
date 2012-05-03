@@ -21,7 +21,7 @@ public enum RatingDTO implements IsSerializable {
 	}
 
 	public static String fromInt(int stage) {
-		return StatusDTO.values()[stage].toString().replace('_', ' ');
+		return RatingDTO.values()[stage].toString().replace('_', ' ');
 	}
 
 	public RatingDTO increase() {

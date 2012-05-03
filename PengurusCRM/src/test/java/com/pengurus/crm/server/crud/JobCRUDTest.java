@@ -29,7 +29,8 @@ import com.pengurus.crm.entities.Translation;
 import com.pengurus.crm.entities.TranslationType;
 import com.pengurus.crm.entities.Translator;
 import com.pengurus.crm.enums.Rating;
-import com.pengurus.crm.enums.Status;
+import com.pengurus.crm.enums.StatusJob;
+import com.pengurus.crm.enums.StatusTask;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 @ContextConfiguration(locations = { "../testContext.xml" })
@@ -96,10 +97,10 @@ public class JobCRUDTest {
         Job job = new Job();
         jobDAO.create(job);
 
-        Task task = new Task(Status.accepted, translator, translator, Calendar
+        Task task = new Task(StatusTask.accepted, translator, translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc", job,
                 Rating.bad, "comm");
-        Task task2 = new Task(Status.accepted, translator,translator, Calendar
+        Task task2 = new Task(StatusTask.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc2",
                 job, Rating.bad, "comm2");
         taskDAO.create(task);
@@ -113,7 +114,7 @@ public class JobCRUDTest {
 
     @Test
     public void simpleCreateJob() {
-        Job job = new Job(Status.accepted, Calendar.getInstance().getTime(),
+        Job job = new Job(StatusJob.accepted, Calendar.getInstance().getTime(),
                 translation, 1000, price, "job descriptio", tasks);
         jobDAO.create(job);
         Assert.assertNotNull(job.getId());
@@ -122,7 +123,7 @@ public class JobCRUDTest {
     @Test
     public void simpleGetJob() {
         // prepare data
-        Job job = new Job(Status.accepted, Calendar.getInstance().getTime(),
+        Job job = new Job(StatusJob.accepted, Calendar.getInstance().getTime(),
                 translation, 1000, price, "job descriptio", tasks);
         jobDAO.create(job);
 
@@ -139,14 +140,14 @@ public class JobCRUDTest {
     @Test
     public void simpleUpdateJob() {
         // prepare data
-        Job job = new Job(Status.accepted, Calendar.getInstance().getTime(),
+        Job job = new Job(StatusJob.accepted, Calendar.getInstance().getTime(),
                 translation, 1000, price, "job descriptio", tasks);
         jobDAO.create(job);
 
         // test
         job.setAmount(123123);
         job.setDescription("new awesome description");
-        job.setStatus(Status.resolved);
+        job.setStatus(StatusJob.resolved);
         job.setPrice(new Price(100, new CurrencyType("some currency"
                 + Integer.toString(change))));
 
@@ -163,7 +164,7 @@ public class JobCRUDTest {
     @Test
     public void simpleDeleteJob() {
         // prepare data
-        Job job = new Job(Status.accepted, Calendar.getInstance().getTime(),
+        Job job = new Job(StatusJob.accepted, Calendar.getInstance().getTime(),
                 translation, 1000, price, "job descriptio", tasks);
         jobDAO.create(job);
 

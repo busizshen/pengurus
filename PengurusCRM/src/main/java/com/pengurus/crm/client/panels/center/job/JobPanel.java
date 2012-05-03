@@ -38,7 +38,7 @@ public abstract class JobPanel extends MainPanel {
 
 	DateField deadline;
 	DescriptionPanel description;
-	JobStatusPanel status;
+	JobStatusPanel jobStatusPanel;
 	protected TranslationPanel translation;
 	NumberField amount;
 	NumberField price;
@@ -104,8 +104,9 @@ public abstract class JobPanel extends MainPanel {
 		add(hp);
 	}
 
-	protected abstract void addStatusPanel(VerticalPanel vp);
 
+	protected abstract void addStatusPanel(VerticalPanel vp);
+	
 	protected abstract void cancelButton();
 
 	private HorizontalPanel buttonPanel() {

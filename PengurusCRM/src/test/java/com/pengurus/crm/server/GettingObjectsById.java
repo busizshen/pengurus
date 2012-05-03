@@ -253,7 +253,6 @@ public class GettingObjectsById {
 	public void projectIsNotNull(Project project) {
 		Assert.notNull(project.getClient(), "null Client in Project");
 		Assert.notNull(project.getId(), "null Id in Project");
-		Assert.notNull(project.getStatus(), "null Status in Project");
 		Assert.notNull(project.getSupervisor(), "null Supervisor in Project");
 		Assert.notNull(project.getExperts(), "null Experts in Project");
 		Assert.notNull(project.getFreelancers(), "null Experts in Project");
@@ -263,7 +262,6 @@ public class GettingObjectsById {
 	public void projectDTOIsNotNull(ProjectDTO project) {
 		Assert.notNull(project.getClient(), "null Client in Project");
 		Assert.notNull(project.getId(), "null Id in Project");
-		Assert.notNull(project.getStatus(), "null Status in Project");
 		Assert.notNull(project.getSupervisor(), "null Supervisor in Project");
 	}
 

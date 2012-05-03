@@ -35,7 +35,9 @@ import com.pengurus.crm.entities.TranslationType;
 import com.pengurus.crm.entities.Translator;
 import com.pengurus.crm.entities.Worker;
 import com.pengurus.crm.enums.Rating;
-import com.pengurus.crm.enums.Status;
+import com.pengurus.crm.enums.StatusJob;
+import com.pengurus.crm.enums.StatusQuote;
+import com.pengurus.crm.enums.StatusTask;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 @ContextConfiguration(locations = { "../testContext.xml" })
@@ -103,10 +105,10 @@ public class QuoteCRUDTest {
                 new HashSet<Translation>());
         translatorDAO.create(translator);
 
-        Task task = new Task(Status.accepted, translator,translator, Calendar
+        Task task = new Task(StatusTask.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc",
                 null, Rating.bad, "comm");
-        Task task2 = new Task(Status.accepted, translator,translator, Calendar
+        Task task2 = new Task(StatusTask.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc2",
                 null, Rating.bad, "comm2");
         Set<Task> tasks = new HashSet<Task>();
@@ -114,9 +116,9 @@ public class QuoteCRUDTest {
         Set<Task> tasks2 = new HashSet<Task>();
         tasks2.add(task2);
 
-        Job job = new Job(Status.closed, Calendar.getInstance().getTime(),
+        Job job = new Job(StatusJob.closed, Calendar.getInstance().getTime(),
                 translation, 1000, price, "Job description", tasks);
-        Job job2 = new Job(Status.open, Calendar.getInstance().getTime(),
+        Job job2 = new Job(StatusJob.open, Calendar.getInstance().getTime(),
                 translation, 21000, price, "Job description2", tasks2);
         task.setJob(job);
         task2.setJob(job2);
@@ -148,7 +150,7 @@ public class QuoteCRUDTest {
 
     @Test
     public void simpleCreateQuote() {
-        Quote quote = new Quote(Status.in_progress, individualClient,
+        Quote quote = new Quote(StatusQuote.in_progress, individualClient,
                 supervisor, jobs, "Quote description");
         quoteDAO.create(quote);
         Assert.assertNotNull(quote.getId());
@@ -158,7 +160,7 @@ public class QuoteCRUDTest {
     @Test
     public void simpleGetQuote() {
         // prepare data
-        Quote quote = new Quote(Status.in_progress, individualClient,
+        Quote quote = new Quote(StatusQuote.in_progress, individualClient,
                 supervisor, jobs, "Quote description");
         quoteDAO.create(quote);
 
@@ -175,13 +177,13 @@ public class QuoteCRUDTest {
     @Test
     public void simpleUpdateQuote() {
         // prepare data
-        Quote quote = new Quote(Status.in_progress, individualClient,
+        Quote quote = new Quote(StatusQuote.in_progress, individualClient,
                 supervisor, jobs, "Quote description");
         quoteDAO.create(quote);
         
         // test
         quote.setDescription("new quote description");
-        quote.setStatus(Status.open);
+        quote.setStatus(StatusQuote.open);
         quote.setClient(null);
         quoteDAO.update(quote);
         
@@ -196,7 +198,7 @@ public class QuoteCRUDTest {
     @Test
     public void simpleDeleteQuote(){
         // prepare data
-        Quote quote = new Quote(Status.in_progress, individualClient,
+        Quote quote = new Quote(StatusQuote.in_progress, individualClient,
                 supervisor, jobs, "Quote description");
         quoteDAO.create(quote);
         

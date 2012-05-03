@@ -11,7 +11,7 @@ import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.pengurus.crm.client.AuthorizationManager;
-import com.pengurus.crm.shared.dto.StatusDTO;
+import com.pengurus.crm.shared.dto.StatusTaskDTO;
 import com.pengurus.crm.shared.dto.TaskDTO;
 
 public class TaskStatusPanel extends LayoutContainer {
@@ -33,7 +33,7 @@ public class TaskStatusPanel extends LayoutContainer {
 		verticalPanel.setHeight("Status panel");
 
 		TaskStatusBar taskStatusBar = new TaskStatusBar(
-				taskDTO.getStatus() == null ? StatusDTO.open.toInt() : taskDTO
+				taskDTO.getStatus() == null ? StatusTaskDTO.open.toInt() : taskDTO
 						.getStatus().toInt());
 		taskStatusBar.setBorders(true);
 		taskStatusBar.setAutoHeight(true);
@@ -44,7 +44,7 @@ public class TaskStatusPanel extends LayoutContainer {
 		add(verticalPanel);
 	}
 
-	public StatusDTO getStatus() {
+	public StatusTaskDTO getStatus() {
 		return taskDTO.getStatus();
 	}
 
@@ -61,7 +61,7 @@ public class TaskStatusPanel extends LayoutContainer {
 			horizontalPanelA = new HorizontalPanel();
 			horizontalPanelB = new HorizontalPanel();
 
-			for (int i = 0; i < StatusDTO.values().length; i++) {
+			for (int i = 0; i < StatusTaskDTO.values().length; i++) {
 				labelsList[i] = prepareLabel(i);
 				add(labelsList[i]);
 			}
@@ -111,7 +111,7 @@ public class TaskStatusPanel extends LayoutContainer {
 					status >= statusNo ? COLOUR_OK : COLOUR_NOT);
 			label.setWidth(150);
 			label.setHeight(100);
-			label.setText(StatusDTO.fromInt(statusNo));
+			label.setText(StatusTaskDTO.fromInt(statusNo));
 			label.setShadowOffset(windowResizeDelay);
 			return label;
 		}

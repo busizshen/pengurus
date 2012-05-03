@@ -6,6 +6,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.panels.center.quote.QuotePanel;
 import com.pengurus.crm.client.panels.center.quote.QuotePanelView;
+import com.pengurus.crm.client.panels.center.status.JobStatusPanelQuote;
 import com.pengurus.crm.client.service.QuoteService;
 import com.pengurus.crm.client.service.QuoteServiceAsync;
 import com.pengurus.crm.shared.dto.JobDTO;
@@ -51,5 +52,7 @@ public class JobPanelQuote extends JobPanel {
 
 	@Override
 	protected void addStatusPanel(VerticalPanel vp) {
+		this.jobStatusPanel = new JobStatusPanelQuote(jobDTO, quoteDTO);
+		vp.add(jobStatusPanel);
 	}
 }

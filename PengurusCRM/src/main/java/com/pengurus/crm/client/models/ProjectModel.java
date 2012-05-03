@@ -18,9 +18,7 @@ public class ProjectModel extends BaseModel implements IsSerializable {
 	public void setProjectDTO(ProjectDTO projectDTO){
 		this.projectDTO = projectDTO;
 		set("id", projectDTO.getId());
-		if(projectDTO.getStatus() != null){
-			set("status", projectDTO.getStatus());
-		}
+
 		if(projectDTO.getSupervisor() != null){
 			set("supervisor",projectDTO.getSupervisor().getFullName());
 		}

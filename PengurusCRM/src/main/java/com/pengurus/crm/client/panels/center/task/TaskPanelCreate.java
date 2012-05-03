@@ -20,7 +20,7 @@ import com.pengurus.crm.client.service.TaskServiceAsync;
 import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.PriceDTO;
 import com.pengurus.crm.shared.dto.ProjectDTO;
-import com.pengurus.crm.shared.dto.StatusDTO;
+import com.pengurus.crm.shared.dto.StatusTaskDTO;
 import com.pengurus.crm.shared.dto.TaskDTO;
 import com.pengurus.crm.shared.dto.TranslatorDTO;
 public class TaskPanelCreate extends TaskPanel {
@@ -97,7 +97,7 @@ public class TaskPanelCreate extends TaskPanel {
 						if (checked()) {
 							taskDTO.setTranslation(jobDTO.getTranslation());
 							taskDTO.setJob(jobDTO);
-							taskDTO.setStatus(StatusDTO.open);
+							taskDTO.setStatus(StatusTaskDTO.open);
 							taskDTO.setAmount(amount.getValue().intValue());
 							taskDTO.setPrice(new PriceDTO(price.getValue()
 									.intValue(), combo.getValue()

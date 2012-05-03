@@ -12,7 +12,7 @@ import com.pengurus.crm.client.service.TaskServiceAsync;
 public class TaskDTO implements IsSerializable {
 
 	private Long id;
-	private StatusDTO status;
+	private StatusTaskDTO status;
 	private TranslatorDTO expert;
 	private TranslatorDTO reviewer;
 	private Date deadline;
@@ -28,7 +28,7 @@ public class TaskDTO implements IsSerializable {
 		super();
 	}
 
-	public TaskDTO(StatusDTO status, TranslatorDTO expert, TranslatorDTO reviewer, Date deadline,
+	public TaskDTO(StatusTaskDTO status, TranslatorDTO expert, TranslatorDTO reviewer, Date deadline,
 			TranslationDTO translation, Integer amount, PriceDTO price,
 			String description, JobDTO job, RatingDTO rating, String comment) {
 		super();
@@ -53,11 +53,11 @@ public class TaskDTO implements IsSerializable {
 		this.id = id;
 	}
 
-	public StatusDTO getStatus() {
+	public StatusTaskDTO getStatus() {
 		return status;
 	}
 
-	public void setStatus(StatusDTO status) {
+	public void setStatus(StatusTaskDTO status) {
 		this.status = status;
 	}
 

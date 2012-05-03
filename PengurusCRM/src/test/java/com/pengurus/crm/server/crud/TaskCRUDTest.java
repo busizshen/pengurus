@@ -29,7 +29,8 @@ import com.pengurus.crm.entities.Translation;
 import com.pengurus.crm.entities.TranslationType;
 import com.pengurus.crm.entities.Translator;
 import com.pengurus.crm.enums.Rating;
-import com.pengurus.crm.enums.Status;
+import com.pengurus.crm.enums.StatusJob;
+import com.pengurus.crm.enums.StatusTask;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 @ContextConfiguration(locations = { "../testContext.xml" })
@@ -97,7 +98,7 @@ public class TaskCRUDTest {
         job.setAmount(10000);
         job.setDeadline(Calendar.getInstance().getTime());
         job.setDescription("description");
-        job.setStatus(Status.closed);
+        job.setStatus(StatusJob.closed);
         jobDAO.create(job);
         change++;
 
@@ -105,7 +106,7 @@ public class TaskCRUDTest {
 
     @Test
     public void simpleCreateTask() {
-        Task task = new Task(Status.accepted, translator,translator, Calendar
+        Task task = new Task(StatusTask.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc", job,
                 Rating.bad, "comm");
         taskDAO.create(task);
@@ -115,7 +116,7 @@ public class TaskCRUDTest {
     @Test
     public void simpleGetTask() {
         // prepare data
-        Task task = new Task(Status.accepted, translator,translator, Calendar
+        Task task = new Task(StatusTask.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc"
                 + Integer.toString(change), job, Rating.bad, "comm");
         taskDAO.create(task);
@@ -139,7 +140,7 @@ public class TaskCRUDTest {
     @Test
     public void simpleUpdateTask(){
         // prepare data
-        Task task = new Task(Status.accepted, translator,translator, Calendar
+        Task task = new Task(StatusTask.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc"
                 + Integer.toString(change), job, Rating.bad, "comm");
         taskDAO.create(task);
@@ -149,7 +150,7 @@ public class TaskCRUDTest {
         task.setComment("new comment");
         task.setDescription("new description");
         task.setRating(Rating.good);
-        task.setStatus(Status.resolved);
+        task.setStatus(StatusTask.resolved);
         taskDAO.update(task);
         
         Task task2 = taskDAO.read(task.getId());
@@ -169,7 +170,7 @@ public class TaskCRUDTest {
     @Test
     public void simpleDeleteTask(){
         // prepare data
-        Task task = new Task(Status.accepted, translator,translator, Calendar
+        Task task = new Task(StatusTask.accepted, translator,translator, Calendar
                 .getInstance().getTime(), translation, 100, price, "desc"
                 + Integer.toString(change), job, Rating.bad, "comm");
         taskDAO.create(task);

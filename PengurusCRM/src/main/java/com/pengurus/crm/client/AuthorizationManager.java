@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.pengurus.crm.shared.dto.ProjectDTO;
+import com.pengurus.crm.shared.dto.QuoteDTO;
 import com.pengurus.crm.shared.dto.TaskDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
@@ -24,6 +25,14 @@ public class AuthorizationManager {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_CLIENT);
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		return currentUser.haveAuthority(roles);
+	}
+	
+	public static boolean hasClientAccess(QuoteDTO quoteDTO) {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		if(quoteDTO.getClient() != null)
+			return currentUser.haveAuthority(roles) || currentUser.getId() == quoteDTO.getClient().getId();
 		return currentUser.haveAuthority(roles);
 	}
 
@@ -229,6 +238,7 @@ public class AuthorizationManager {
 		roles.add(UserRoleDTO.ROLE_CLIENT);
 		return currentUser.haveAuthority(roles);
 	}
+
 	
 	
 	
