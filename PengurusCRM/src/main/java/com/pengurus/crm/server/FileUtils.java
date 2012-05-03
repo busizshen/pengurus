@@ -10,7 +10,9 @@ public class FileUtils {
 	public File navigateInto(File folder, String subfolder) throws IOException {
 		File result = new File(folder, subfolder);
 		if (!result.exists()) {
-			result.createNewFile();
+			if (!result.mkdir()) {
+				throw new IOException();
+			}
 		}
 		return result;
 	}

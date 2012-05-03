@@ -89,7 +89,7 @@ public class FileStreamController {
 
 	private static final int BYTES_DOWNLOAD = 1024;
 	
-	@RequestMapping(value = "/download/{quoteId}/{jobId}/{taskId}/{stateId}/{fileName}", method = RequestMethod.GET)
+	@RequestMapping(value = "/download/{quoteId}/{jobId}/{taskId}/{stateId}/{fileName:[a-zA-Z0-9.]+}", method = RequestMethod.GET)
 	public void download(
 			@PathVariable int quoteId, @PathVariable int jobId,
 			@PathVariable int taskId, @PathVariable int stateId,
@@ -99,6 +99,8 @@ public class FileStreamController {
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition",
 				"attachment;filename=" + fileName);
+
+		log.error("Download! : " + fileName);
 		
 		ServletContext context = request.getSession().getServletContext();
 		File folder = new FileUtils().navigateInto(context, quoteId, jobId, taskId, stateId);
