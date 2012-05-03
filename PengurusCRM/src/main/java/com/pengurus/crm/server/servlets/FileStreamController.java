@@ -42,7 +42,8 @@ public class FileStreamController {
 			HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		log.error("Upload!");
+		resp.setStatus(HttpServletResponse.SC_OK);
+		resp.setContentType("text/plain");
 
 		File folder = new FileUtils().navigateInto(req.getSession().getServletContext(), quoteId, jobId, taskId, stateId);
 		
@@ -65,25 +66,19 @@ public class FileStreamController {
 					File uploadedFile = new File(folder, fileName);
 					if (uploadedFile.createNewFile()) {
 						item.write(uploadedFile);
-						resp.setStatus(HttpServletResponse.SC_CREATED);
-						resp.getWriter().print(
-								"The file was created successfully.");
-						resp.flushBuffer();
+						resp.getOutputStream().print("The file was created successfully.");
 					} else
 						throw new IOException(
 								"The file already exists in repository.");
 				}
 			} catch (Exception e) {
-				resp.sendError(
-						HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-						"An error occurred while creating the file : "
-								+ e.getMessage());
+				resp.getOutputStream().print("An error occurred while creating the file : "
+						+ e.getMessage());
 				e.printStackTrace();
 			}
 
 		} else {
-			resp.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE,
-					"Request contents type is not supported by the servlet.");
+			resp.getOutputStream().print("Request contents type is not supported by the servlet.");
 		}
 	}
 

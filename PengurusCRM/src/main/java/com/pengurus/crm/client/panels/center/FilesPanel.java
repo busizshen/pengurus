@@ -6,6 +6,9 @@ import java.util.List;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.FormEvent;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
@@ -191,13 +194,22 @@ public class FilesPanel extends ContentPanel {
 		form.setMethod(Method.POST);
 		form.setHeaderVisible(false);
 
-		VerticalPanel p = new VerticalPanel();
-		form.add(p);
-		final FileUploadField file = new FileUploadField();
-		file.setName("uploadedfile");
-		file.setAllowBlank(false);
-		p.add(file);
+		VerticalPanel verticalPanel = new VerticalPanel();
+		form.add(verticalPanel);
+		
+		final FileUploadField fileUploadField = new FileUploadField();
+		fileUploadField.setName("uploadedfile");
+		fileUploadField.setAllowBlank(false);
+		verticalPanel.add(fileUploadField);
+		
+		form.addListener(Events.Submit, new Listener<FormEvent>() {
 
+			@Override
+			public void handleEvent(FormEvent be) {
+				MessageBox.info("Submit response", be.getResultHtml(), null);
+			}
+		});
+		
 		Button btn = new Button("Submit", new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
@@ -205,8 +217,6 @@ public class FilesPanel extends ContentPanel {
 					return;
 				}
 				form.submit();
-				MessageBox
-						.info("Success", "Your file has been uploaded.", null);
 			}
 		});
 		Button cancelButton = new Button("Cancel",
