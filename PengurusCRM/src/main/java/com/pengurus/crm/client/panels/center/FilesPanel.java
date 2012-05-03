@@ -123,12 +123,14 @@ public class FilesPanel extends ContentPanel {
 					@Override
 					public void componentSelected(ButtonEvent ce) {
 						FileModel file = sm.getSelectedItem();
-						if (file != null)
-							MessageBox.info("Succes", "downloaded "
-									+ sm.getSelectedItem().getName(), null);
-						else
+						if (file != null) {
+							String url = "/file/download/" + quoteId + "/" + jobId + "/" + taskId
+									+ "/" + stateId + "/" + file.getName();
+							com.google.gwt.user.client.Window.Location.assign(url);
+						} else {
 							MessageBox.info("Failure",
 									"You must select a file first.", null);
+						}
 					}
 				});
 		toolBar.add(download);
@@ -206,7 +208,7 @@ public class FilesPanel extends ContentPanel {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				MessageBox.info("Failure", "Uploading files names has failed",
+				MessageBox.info("Failure", "Downloading files names has failed",
 						null);
 			}
 
