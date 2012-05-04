@@ -37,13 +37,13 @@ public class FileStreamController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/upload/{quoteId}/{jobId}/{taskId}/{stateId}", method = RequestMethod.POST)
 	protected void upload(
-			@PathVariable int quoteId, @PathVariable int jobId,
-			@PathVariable int taskId, @PathVariable int stateId,
+			@PathVariable Long quoteId, @PathVariable Long jobId,
+			@PathVariable Long taskId, @PathVariable Long stateId,
 			HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
 		resp.setStatus(HttpServletResponse.SC_OK);
-		resp.setContentType("text/plain");
+		resp.setContentType("text/html");
 
 		File folder = new FileUtils().navigateInto(req.getSession().getServletContext(), quoteId, jobId, taskId, stateId);
 		
@@ -86,8 +86,8 @@ public class FileStreamController {
 	
 	@RequestMapping(value = "/download/{quoteId}/{jobId}/{taskId}/{stateId}/{fileName:[a-zA-Z0-9.]+}", method = RequestMethod.GET)
 	public void download(
-			@PathVariable int quoteId, @PathVariable int jobId,
-			@PathVariable int taskId, @PathVariable int stateId,
+			@PathVariable Long quoteId, @PathVariable Long jobId,
+			@PathVariable Long taskId, @PathVariable Long stateId,
 			@PathVariable String fileName,
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException {

@@ -16,24 +16,26 @@ public class FileUtils {
 		}
 		return result;
 	}
-	
+
 	public File getRootFolder(ServletContext servletContext) throws IOException {
-		return navigateInto(new File(servletContext.getRealPath("/")), "fileHierarchy");
+		return navigateInto(new File(servletContext.getRealPath("/")),
+				"fileHierarchy");
 	}
-	
-	public File navigateInto(ServletContext servletContext, int quoteId, int jobId, int taskId, int stateId) throws IOException {
+
+	public File navigateInto(ServletContext servletContext, Long quoteId,
+			Long jobId, Long taskId, Long stateId) throws IOException {
 		File result = getRootFolder(servletContext);
 		if (quoteId > 0) {
 			result = navigateInto(result, "quote_" + quoteId);
 			if (jobId > 0) {
 				result = navigateInto(result, "job_" + jobId);
 				if (taskId > 0) {
-					result = navigateInto(result,  "task_" + taskId);
+					result = navigateInto(result, "task_" + taskId);
 				}
 			}
 		}
 		result = navigateInto(result, "state_" + stateId);
 		return result;
 	}
-	
+
 }

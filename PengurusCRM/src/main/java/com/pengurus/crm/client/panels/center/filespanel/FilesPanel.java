@@ -1,4 +1,4 @@
-package com.pengurus.crm.client.panels.center;
+package com.pengurus.crm.client.panels.center.filespanel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,26 +36,25 @@ import com.pengurus.crm.client.models.FileModel;
 import com.pengurus.crm.client.service.FileService;
 import com.pengurus.crm.client.service.FileServiceAsync;
 
-public class FilesPanel extends ContentPanel {
+public abstract class FilesPanel extends ContentPanel {
 
-	private int quoteId;
-	private int jobId;
-	private int taskId;
-	private int stateId;
+	private Long quoteId;
+	private Long jobId;
+	private Long taskId;
+	private Long stateId;
+	private Grid<FileModel> grid;
 
-	public FilesPanel(int quoteId, int jobId, int taskId, int stateId) {
+	public FilesPanel(Long quoteId, Long jobId, Long taskId, Long stateId) {
 		super();
 		this.quoteId = quoteId;
 		this.jobId = jobId;
 		this.taskId = taskId;
 		this.stateId = stateId;
-		ListStore<FileModel> filesNames = getFilesNames(quoteId, jobId, taskId,
-				stateId);
-		createGrid(filesNames);
+		createGrid();
 
 	}
 
-	private void createGrid(final ListStore<FileModel> filesNames) {
+	private void createGrid() {
 
 		RowNumberer r = new RowNumberer();
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
@@ -73,7 +72,7 @@ public class FilesPanel extends ContentPanel {
 
 		ColumnModel cm = new ColumnModel(configs);
 
-		final Grid<FileModel> grid = new Grid<FileModel>(filesNames, cm);
+		grid = new Grid<FileModel>(getFilesNames(), cm);
 		grid.addPlugin(r);
 		grid.getView().setForceFit(true);
 		grid.setSelectionModel(sm);
@@ -196,20 +195,45 @@ public class FilesPanel extends ContentPanel {
 
 		VerticalPanel verticalPanel = new VerticalPanel();
 		form.add(verticalPanel);
-		
+
 		final FileUploadField fileUploadField = new FileUploadField();
 		fileUploadField.setName("uploadedfile");
 		fileUploadField.setAllowBlank(false);
 		verticalPanel.add(fileUploadField);
-		
+
 		form.addListener(Events.Submit, new Listener<FormEvent>() {
 
 			@Override
 			public void handleEvent(FormEvent be) {
 				MessageBox.info("Submit response", be.getResultHtml(), null);
+
+				AsyncCallback<List<String>> callback = new AsyncCallback<List<String>>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						MessageBox.info("Failure",
+								"Downloading files names has failed", null);
+					}
+
+					@Override
+					public void onSuccess(List<String> result) {
+						ListStore<FileModel> store = grid.getStore();
+						for (String name : result) {
+							if (!store.contains(new FileModel(name))) {
+								store.add(new FileModel(name));
+								break;
+							}
+						}
+
+					}
+
+				};
+				FileServiceAsync service = (FileServiceAsync) GWT
+						.create(FileService.class);
+				service.getFileList(quoteId, jobId, taskId, stateId, callback);
 			}
 		});
-		
+
 		Button btn = new Button("Submit", new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
@@ -234,8 +258,7 @@ public class FilesPanel extends ContentPanel {
 		window.show();
 	}
 
-	private ListStore<FileModel> getFilesNames(int quoteId, int jobId,
-			int taskId, int stateId) {
+	private ListStore<FileModel> getFilesNames() {
 		final ListStore<FileModel> filesNames = new ListStore<FileModel>();
 		AsyncCallback<List<String>> callback = new AsyncCallback<List<String>>() {
 

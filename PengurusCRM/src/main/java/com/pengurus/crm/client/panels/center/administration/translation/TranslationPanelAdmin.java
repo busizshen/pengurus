@@ -11,6 +11,7 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
@@ -22,6 +23,7 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.RowNumberer;
+import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.core.client.GWT;
@@ -43,8 +45,9 @@ import com.pengurus.crm.shared.dto.TranslationTypeDTO;
 
 public class TranslationPanelAdmin extends MainPanel {
 
+	private VerticalPanel verticalPanel;
 	private HorizontalPanel horizontalPanel;
-	private FormPanel mainForm;
+	private ContentPanel mainPanel;
 	private FormPanel createForm;
 	private ComboBox<LanguageModel> fromCombo;
 	private ComboBox<LanguageModel> toCombo;
@@ -57,11 +60,11 @@ public class TranslationPanelAdmin extends MainPanel {
 	private Grid<TranslationModel> grid;
 
 	public TranslationPanelAdmin() {
-		createForm();
+		createMainPanel();
 		createNewTranslationForm();
 		createButton();
 		createTranslationGrid();
-		addVerticalPanel();
+		addHorizontalPanel();
 	}
 
 	private void createTranslationGrid() {
@@ -188,8 +191,8 @@ public class TranslationPanelAdmin extends MainPanel {
 		cp.addButton(removeButton);
 		grid.getAriaSupport().setLabelledBy(cp.getHeader().getId() + "-label");
 
-		mainForm.add(createForm);
-		mainForm.add(cp);
+		
+		verticalPanel.add(cp);
 	}
 
 	private void createButton() {
@@ -253,7 +256,7 @@ public class TranslationPanelAdmin extends MainPanel {
 		createTranslationTypeCombo();
 		createCurrencyCombo();
 		createDefaultPriceField();
-		mainForm.add(createForm);
+		verticalPanel.add(createForm);
 
 	}
 
@@ -380,18 +383,24 @@ public class TranslationPanelAdmin extends MainPanel {
 		createForm.add(toCombo);
 	}
 
-	private void addVerticalPanel() {
+	private void addHorizontalPanel() {
 		horizontalPanel = new HorizontalPanel();
-		horizontalPanel.setSpacing(20);
-		horizontalPanel.add(mainForm);
+		horizontalPanel.setSpacing(10);
+		horizontalPanel.add(mainPanel);
 		add(horizontalPanel);
 	}
 
-	private void createForm() {
-		mainForm = new FormPanel();
-		mainForm.setHeading("Translation panel");
-		mainForm.setFrame(true);
-		mainForm.setPadding(50);
+	private void createMainPanel() {
+		verticalPanel = new VerticalPanel();
+		verticalPanel.setHorizontalAlign(HorizontalAlignment.CENTER);
+		verticalPanel.setSpacing(20);
+		setLayout(new FitLayout());
+		mainPanel = new ContentPanel();
+		mainPanel.setLayout(new CenterLayout());
+		mainPanel.setHeight(620);
+		mainPanel.setHeading("Translation panel");
+		mainPanel.setFrame(true);
+		mainPanel.add(verticalPanel);
 	}
 
 }

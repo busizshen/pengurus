@@ -27,8 +27,8 @@ public class FileServiceImpl implements FileService, ServletContextAware {
 	}
 
 	@Override
-	public List<String> getFileList(int quoteId, int jobId, int taskId,
-			int stateId) throws IOException {
+	public List<String> getFileList(Long quoteId, Long jobId, Long taskId,
+			Long stateId) throws IOException {
 		List<String> result = new ArrayList<String>();
 		try {
 			File folder = new FileUtils().navigateInto(servletContext, quoteId, jobId, taskId, stateId);
@@ -42,7 +42,7 @@ public class FileServiceImpl implements FileService, ServletContextAware {
 	}
 
 	@Override
-	public void deleteFile(int quoteId, int jobId, int taskId, int stateId,
+	public void deleteFile(Long quoteId, Long jobId, Long taskId, Long stateId,
 			String fileName) throws IOException {
 		try {
 			File folder = new FileUtils().navigateInto(servletContext, quoteId, jobId, taskId, stateId);

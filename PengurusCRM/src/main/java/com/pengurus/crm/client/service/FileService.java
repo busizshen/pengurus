@@ -9,7 +9,7 @@ import com.pengurus.crm.client.service.exceptions.IOException;
 @RemoteServiceRelativePath("file.rpc")
 public interface FileService extends RemoteService {
 	
-	public List<String> getFileList(int quoteId, int jobId, int taskId, int stateId) throws IOException;
-	public void deleteFile(int quoteId, int jobId, int taskId, int stateId, String fileName) throws IOException;
+	public List<String> getFileList(Long quoteId, Long jobId, Long taskId, Long stateId) throws IOException;
+	public void deleteFile(Long quoteId, Long jobId, Long taskId, Long stateId, String fileName) throws IOException;
 	
 }

@@ -13,4 +13,9 @@ public class FileModel extends BaseModel{
 	public String getName(){
 		return get("name");
 	}
+	
+	@Override
+	public boolean equals(Object fileModel){
+		return get("name").equals(((FileModel) fileModel).getName());
+	}
 }
