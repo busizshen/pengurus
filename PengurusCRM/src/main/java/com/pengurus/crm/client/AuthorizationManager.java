@@ -152,7 +152,6 @@ public class AuthorizationManager {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
 		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
-		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		return currentUser.haveAuthority(roles);
 	}
 
@@ -175,12 +174,19 @@ public class AuthorizationManager {
 		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		return currentUser.haveAuthority(roles);
 	}
-
-	public static boolean canChangeProject() {
+	
+	public static boolean canEditProject() {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
-		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		return currentUser.haveAuthority(roles);
+	}
+	
+	public static boolean canEditProject(ProjectDTO projectDTO) {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		Set<UserRoleDTO> roles2 = new HashSet<UserRoleDTO>();
+		roles2.add(UserRoleDTO.ROLE_PROJECTMANAGER);
+		return currentUser.haveAuthority(roles) || (currentUser.haveAuthority(roles2) && projectDTO.isProjectManager(currentUser)) ;
 	}
 
 	public static boolean canViewWholeProject() {
@@ -214,14 +220,6 @@ public class AuthorizationManager {
 		return currentUser.haveAuthority(roles);
 	}
 
-	public static boolean canEditProject(ProjectDTO projectDTO) {
-		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
-		Set<UserRoleDTO> roles2 = new HashSet<UserRoleDTO>();
-		roles2.add(UserRoleDTO.ROLE_PROJECTMANAGER);
-		return currentUser.haveAuthority(roles) || (currentUser.haveAuthority(roles2) && projectDTO.isProjectManager(currentUser)) ;
-	}
-
 	public static boolean hasTranslatorAccess(TaskDTO taskDTO) {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXPERT);
@@ -236,8 +234,9 @@ public class AuthorizationManager {
 	}
 
 	public static boolean hasProjectManagerAccess(TaskDTO taskDTO) {
-		// TODO Auto-generated method stub
-		return false;
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
+		return currentUser.haveAuthority(roles);
 	}
 
 	public static boolean isClient() {

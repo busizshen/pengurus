@@ -134,7 +134,11 @@ public class ProjectDTO implements IsSerializable {
 	}
 
 	public boolean isProjectManager(UserDTO currentUser) {
-		return projectManagers.contains(currentUser);
+		for(UserDTO u : projectManagers){
+			if(u.getId().equals(currentUser.getId()))
+					return true;
+		}
+		return false;
 	}
 
 	public void setQuoteId(Long quoteId) {

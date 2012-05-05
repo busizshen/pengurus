@@ -10,6 +10,7 @@ public class JobStatusPanelQuote extends JobStatusPanel{
 	public JobStatusPanelQuote(JobDTO jobDTO, QuoteDTO quoteDTO) {
 		super(jobDTO);
 		this.quoteDTO = quoteDTO;
+		initPanel();
 	}
 
 	@Override

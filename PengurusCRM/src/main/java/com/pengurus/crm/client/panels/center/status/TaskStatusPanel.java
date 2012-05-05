@@ -33,8 +33,8 @@ public class TaskStatusPanel extends LayoutContainer {
 		verticalPanel.setHeight("Status panel");
 
 		TaskStatusBar taskStatusBar = new TaskStatusBar(
-				taskDTO.getStatus() == null ? StatusTaskDTO.open.toInt() : taskDTO
-						.getStatus().toInt());
+				taskDTO.getStatus() == null ? StatusTaskDTO.open.toInt()
+						: taskDTO.getStatus().toInt());
 		taskStatusBar.setBorders(true);
 		taskStatusBar.setAutoHeight(true);
 		taskStatusBar.setHorizontalAlign(HorizontalAlignment.CENTER);
@@ -66,39 +66,34 @@ public class TaskStatusPanel extends LayoutContainer {
 				add(labelsList[i]);
 			}
 
-			if (AuthorizationManager.canChangeQuoteStatus()) {
-				nextStatus = new Button(NEXT_STATUS, null,
-						new SelectionListener<ButtonEvent>() {
+			nextStatus = new Button(NEXT_STATUS, null,
+					new SelectionListener<ButtonEvent>() {
 
-							@Override
-							public void componentSelected(ButtonEvent ce) {
-								labelsList[++status].setStyleAttribute(
-										"background", COLOUR_OK);
-								setVisibility();
-								taskDTO.setStatus(taskDTO.getStatus()
-										.increase());
-								taskDTO.updateStatus();
-							}
-						});
+						@Override
+						public void componentSelected(ButtonEvent ce) {
+							labelsList[++status].setStyleAttribute(
+									"background", COLOUR_OK);
+							setVisibility();
+							taskDTO.setStatus(taskDTO.getStatus().increase());
+							taskDTO.updateStatus();
+						}
+					});
 
-				horizontalPanelB.add(nextStatus);
-			}
-			if (AuthorizationManager.canReOpenQuote()) {
-				reOpen = new Button(REOPEN, null,
-						new SelectionListener<ButtonEvent>() {
+			horizontalPanelB.add(nextStatus);
 
-							@Override
-							public void componentSelected(ButtonEvent ce) {
-								labelsList[status--].setStyleAttribute(
-										"background", COLOUR_NOT);
-								setVisibility();
-								taskDTO.setStatus(taskDTO.getStatus()
-										.decrease());
-								taskDTO.updateStatus();
-							}
-						});
-				horizontalPanelB.add(reOpen);
-			}
+			reOpen = new Button(REOPEN, null,
+					new SelectionListener<ButtonEvent>() {
+
+						@Override
+						public void componentSelected(ButtonEvent ce) {
+							labelsList[status--].setStyleAttribute(
+									"background", COLOUR_NOT);
+							setVisibility();
+							taskDTO.setStatus(taskDTO.getStatus().decrease());
+							taskDTO.updateStatus();
+						}
+					});
+			horizontalPanelB.add(reOpen);
 			add(horizontalPanelA);
 			add(horizontalPanelB);
 			setVisibility();
@@ -118,19 +113,19 @@ public class TaskStatusPanel extends LayoutContainer {
 
 		private void setVisibility() {
 			nextStatus
-					.setVisible(status == 6 ? false
-							: ((AuthorizationManager.hasExecutiveAccess())
+					.setVisible((status == 6 ? false
+							: ((AuthorizationManager.hasExecutiveAccess()) || AuthorizationManager
+									.hasProjectManagerAccess(taskDTO)))
 									|| (status == 4 && AuthorizationManager
 											.hasAccountantAccess())
 									|| (status <= 2 && AuthorizationManager
 											.hasTranslatorAccess(taskDTO))
 									|| (status == 3 && AuthorizationManager
-											.hasVerificatorAccess(taskDTO)) || AuthorizationManager
-									.hasProjectManagerAccess(taskDTO)) ? true
+											.hasVerificatorAccess(taskDTO)) ? true
 									: false);
 
 			reOpen.setVisible((AuthorizationManager.hasVerificatorAccess() && status == 2)
-					|| (AuthorizationManager.hasProjectManagerAccess(taskDTO) && status == 3) ? true
+					|| (AuthorizationManager.hasProjectManagerAccess(taskDTO) && status == 3 || status == 2) ? true
 					: false);
 
 			this.layout();

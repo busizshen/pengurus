@@ -133,7 +133,6 @@ public class JobDTO implements IsSerializable {
 
 				@Override
 				public void onSuccess(Void result) {
-					// TODO Auto-generated method stub
 				}
 			};
 			JobServiceAsync service = (JobServiceAsync) GWT

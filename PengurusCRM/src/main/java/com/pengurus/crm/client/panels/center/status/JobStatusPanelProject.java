@@ -11,17 +11,17 @@ public class JobStatusPanelProject extends JobStatusPanel {
 	public JobStatusPanelProject(JobDTO jobDTO, ProjectDTO projectDTO) {
 		super(jobDTO);
 		this.projectDTO = projectDTO;
+		initPanel();
 
 	}
 
 	@Override
 	protected void setVisibility() {
+		nextStatus.setVisible((status < 2)
+				&& (AuthorizationManager.canEditProject(projectDTO))
+				|| AuthorizationManager.hasExecutiveAccess());
 
-		nextStatus.setVisible((status == 6 || status == 3) ? false : (AuthorizationManager
-				.canEditProject(projectDTO)|| (AuthorizationManager.hasExecutiveAccess() )));
-
-		reOpen.setVisible((AuthorizationManager.hasExecutiveAccess() && status == 2) ? true
-				: false);
+		reOpen.setVisible((AuthorizationManager.hasExecutiveAccess() && status == 2));
 
 		this.layout();
 

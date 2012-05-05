@@ -219,7 +219,7 @@ public class TaskPanelCreate extends TaskPanel {
 			combo.setTriggerAction(TriggerAction.ALL);
 			combo.setData("text", "Choose Language");
 			combo.setStore(listCurrencyModel);
-			combo.addListener(Events.OnChange, new Listener<BaseEvent>() {
+			combo.addListener(Events.SelectionChange, new Listener<BaseEvent>() {
 
 				@Override
 				public void handleEvent(BaseEvent be) {

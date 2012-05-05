@@ -10,7 +10,6 @@ import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.StatusJobDTO;
 
@@ -26,11 +25,12 @@ public abstract class JobStatusPanel extends LayoutContainer {
 	protected Button reOpen;
 	protected int status = 0;
 
-
 	public JobStatusPanel(JobDTO jobDTO) {
 
 		this.jobDTO = jobDTO;
+	}
 
+	protected void initPanel() {
 		setLayout(new FlowLayout(10));
 
 		VerticalPanel verticalPanel = new VerticalPanel();
@@ -46,12 +46,12 @@ public abstract class JobStatusPanel extends LayoutContainer {
 
 		verticalPanel.add(jobStatusBar);
 		add(verticalPanel);
+
 	}
 
 	public StatusJobDTO getStatus() {
 		return jobDTO.getStatus();
 	}
-
 
 	protected abstract void setVisibility();
 
@@ -70,37 +70,35 @@ public abstract class JobStatusPanel extends LayoutContainer {
 				add(labelsList[i]);
 			}
 
-			if (AuthorizationManager.canChangeQuoteStatus()) {
-				nextStatus = new Button(NEXT_STATUS, null,
-						new SelectionListener<ButtonEvent>() {
+			nextStatus = new Button(NEXT_STATUS, null,
+					new SelectionListener<ButtonEvent>() {
 
-							@Override
-							public void componentSelected(ButtonEvent ce) {
-								labelsList[++status].setStyleAttribute(
-										"background", COLOUR_OK);
-								setVisibility();
-								jobDTO.setStatus(jobDTO.getStatus().increase());
-								jobDTO.updateStatus();
-							}
-						});
+						@Override
+						public void componentSelected(ButtonEvent ce) {
+							labelsList[++status].setStyleAttribute(
+									"background", COLOUR_OK);
+							setVisibility();
+							jobDTO.setStatus(jobDTO.getStatus().increase());
+							jobDTO.updateStatus();
+						}
+					});
 
-				horizontalPanelB.add(nextStatus);
-			}
-			if (AuthorizationManager.canReOpenQuote()) {
-				reOpen = new Button(REOPEN, null,
-						new SelectionListener<ButtonEvent>() {
+			horizontalPanelB.add(nextStatus);
 
-							@Override
-							public void componentSelected(ButtonEvent ce) {
-								labelsList[status--].setStyleAttribute(
-										"background", COLOUR_NOT);
-								setVisibility();
-								jobDTO.setStatus(jobDTO.getStatus().decrease());
-								jobDTO.updateStatus();
-							}
-						});
-				horizontalPanelB.add(reOpen);
-			}
+			reOpen = new Button(REOPEN, null,
+					new SelectionListener<ButtonEvent>() {
+
+						@Override
+						public void componentSelected(ButtonEvent ce) {
+							labelsList[status--].setStyleAttribute(
+									"background", COLOUR_NOT);
+							setVisibility();
+							jobDTO.setStatus(jobDTO.getStatus().decrease());
+							jobDTO.updateStatus();
+						}
+					});
+			horizontalPanelB.add(reOpen);
+
 			add(horizontalPanelA);
 			add(horizontalPanelB);
 			setVisibility();
