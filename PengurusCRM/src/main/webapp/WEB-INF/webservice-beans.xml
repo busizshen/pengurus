@@ -67,7 +67,7 @@
 		<property name="userService" ref="userServiceBean" />
 	</bean>
 	
-	<bean id="permissionEvaluator" class="com.pengurus.crm.server.PermissionEvaluatorImpl">
+	<bean id="permissionEvaluator" class="com.pengurus.crm.server.ExtendedPermissionEvaluator">
 		<property name="quoteDAO" ref="quoteDao" />
 		<property name="jobDAO" ref="jobDao" />
 		<property name="taskDAO" ref="taskDao" />

@@ -26,10 +26,10 @@ import com.pengurus.crm.shared.dto.TaskDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
-public class PermissionEvaluatorImpl implements PermissionEvaluator {
+public class ExtendedPermissionEvaluator implements PermissionEvaluator {
 
 	final Logger logger = LoggerFactory
-			.getLogger(PermissionEvaluatorImpl.class);
+			.getLogger(ExtendedPermissionEvaluator.class);
 
 	private TaskDAO taskDAO;
 	private JobDAO jobDAO;
@@ -149,7 +149,7 @@ public class PermissionEvaluatorImpl implements PermissionEvaluator {
 		return result;
 	}
 
-	private boolean hasPermissionToFile(Authentication authentication, long quoteId, long jobId, long taskId, FileType fileType, String permission) throws IOException {
+	public boolean hasPermissionToFile(Authentication authentication, long quoteId, long jobId, long taskId, FileType fileType, String permission) throws IOException {
 		
 		Task task = null;
 		Job job = null;
@@ -182,16 +182,19 @@ public class PermissionEvaluatorImpl implements PermissionEvaluator {
 				throw new IOException();
 			}
 		}
+
+		// Executive can everything
+		if (containRole(authentication.getAuthorities(), UserRoleDTO.ROLE_EXECUTIVE.toString())) {
+			return true;
+		}
 		
+		// When we talk about task...
 		if (taskId != 0) {
-			if (containRole(authentication.getAuthorities(), UserRoleDTO.ROLE_EXECUTIVE.toString())) {
-				return true;
-			}
 			if (usersContainUsername(project.getProjectManagers(), authentication.getName())) {
 				return true;
 			}
 			if (fileType.equals(FileType.output)) {
-				if ("upload".equals(permission)) {
+				if ("upload".equals(permission) || "download".equals(permission)) {
 					if (task.getExpert().getUsername().equals(authentication.getName()) ||
 							task.getReviewer().getUsername().equals(authentication.getName())) {
 						return true;
@@ -200,6 +203,26 @@ public class PermissionEvaluatorImpl implements PermissionEvaluator {
 			}
 			return false;
 		}
+
+		// When we talk about jobs and quotes client can upload input
+		if (quote.getClient().getUsername().equals(authentication.getName())) {
+			if ("download".equals(permission) ||
+					("upload".equals(permission) && fileType.equals(FileType.input))) {
+				return true;
+			}
+		}
+		
+		// Finally, PM can manage jobs
+		if (jobId != 0) {
+			if (usersContainUsername(project.getProjectManagers(), authentication.getName())) {
+				if ("download".equals(permission) ||
+						"upload".equals(permission) ||
+						("delete".equals(permission) && fileType.equals(FileType.output))) {
+					return true;
+				}
+			}
+		}
+		
 		return false;
 	}
 

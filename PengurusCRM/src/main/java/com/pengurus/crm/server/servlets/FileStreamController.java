@@ -19,12 +19,15 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.access.PermissionEvaluator;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.pengurus.crm.enums.FileType;
+import com.pengurus.crm.server.ExtendedPermissionEvaluator;
 import com.pengurus.crm.server.FileUtils;
 import com.pengurus.crm.server.services.UserServiceImpl;
 
@@ -37,13 +40,13 @@ public class FileStreamController {
 
 	private final String fileExp = "[a-zA-Z0-9._]+";
 	
-	private PermissionEvaluator permissionEvaluator;
+	private ExtendedPermissionEvaluator permissionEvaluator;
 	
-	public PermissionEvaluator getPermissionEvaluator() {
+	public ExtendedPermissionEvaluator getPermissionEvaluator() {
 		return permissionEvaluator;
 	}
 
-	public void setPermissionEvaluator(PermissionEvaluator permissionEvaluator) {
+	public void setPermissionEvaluator(ExtendedPermissionEvaluator permissionEvaluator) {
 		this.permissionEvaluator = permissionEvaluator;
 	}
 
@@ -53,11 +56,17 @@ public class FileStreamController {
 			@PathVariable Long quoteId, @PathVariable Long jobId,
 			@PathVariable Long taskId, @PathVariable Long stateId,
 			HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-
+			throws ServletException, IOException, com.pengurus.crm.client.service.exceptions.IOException {
+		
+		if (!permissionEvaluator.hasPermissionToFile(SecurityContextHolder
+				.getContext().getAuthentication(), quoteId, jobId, taskId,
+				FileType.valueOf(stateId), "upload")) {
+			throw new AccessDeniedException("You don't have access to upload files from this folder.");
+		}
+		
 		resp.setStatus(HttpServletResponse.SC_OK);
 		resp.setContentType("text/html");
-
+		
 		File folder = new FileUtils().navigateInto(req.getSession().getServletContext(), quoteId, jobId, taskId, stateId);
 		
 		if (ServletFileUpload.isMultipartContent(req)) {
@@ -103,16 +112,22 @@ public class FileStreamController {
 	private static final int BYTES_DOWNLOAD = 1024;
 	
 	@RequestMapping(value = "/download/{quoteId}/{jobId}/{taskId}/{stateId}/{fileName:" + fileExp + "}", method = RequestMethod.GET)
-	public void download(
+	public void download (
 			@PathVariable Long quoteId, @PathVariable Long jobId,
 			@PathVariable Long taskId, @PathVariable Long stateId,
 			@PathVariable String fileName,
 			HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
+			throws IOException, com.pengurus.crm.client.service.exceptions.IOException {
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition",
 				"attachment;filename=" + fileName);
-
+		
+		if (!permissionEvaluator.hasPermissionToFile(SecurityContextHolder
+				.getContext().getAuthentication(), quoteId, jobId, taskId,
+				FileType.valueOf(stateId), "download")) {
+			throw new AccessDeniedException("You don't have access to download files from this folder.");
+		}
+		
 		log.error("Download! : " + fileName);
 		
 		ServletContext context = request.getSession().getServletContext();
