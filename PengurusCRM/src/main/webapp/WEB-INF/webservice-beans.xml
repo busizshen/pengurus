@@ -69,6 +69,7 @@
 	
 	<bean id="permissionEvaluator" class="com.pengurus.crm.server.ExtendedPermissionEvaluator">
 		<property name="quoteDAO" ref="quoteDao" />
+		<property name="projectDAO" ref="projectDao" />
 		<property name="jobDAO" ref="jobDao" />
 		<property name="taskDAO" ref="taskDao" />
 	</bean>
