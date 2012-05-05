@@ -1,12 +1,12 @@
 package com.pengurus.crm.client.panels.center.filespanel;
 
-import com.pengurus.crm.enums.FileType;
+import com.pengurus.crm.shared.dto.FileTypeDTO;
 
 public class FilesPanelOutput extends FilesPanel{
 
 	public FilesPanelOutput(Long quoteId, Long jobId, Long taskId,
 			boolean canUpload, boolean canDelete) {
-		super(quoteId, jobId, taskId, new Long(FileType.output.type()), canUpload, canDelete);
+		super(quoteId, jobId, taskId, FileTypeDTO.output.type(), canUpload, canDelete);
 	}
 
 }
