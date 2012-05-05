@@ -34,6 +34,8 @@ public class FileStreamController {
 	protected static final Logger log = LoggerFactory
 			.getLogger(UserServiceImpl.class);
 
+	private final String fileExp = "[a-zA-Z0-9._]+";
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/upload/{quoteId}/{jobId}/{taskId}/{stateId}", method = RequestMethod.POST)
 	protected void upload(
@@ -62,6 +64,11 @@ public class FileStreamController {
 					if (fileName != null) {
 						fileName = FilenameUtils.getName(fileName);
 					}
+					fileName.replace(' ', '_');
+					if (!fileName.matches(fileExp)) {
+						throw new IOException(
+								"File name can consist only of letters, numbers, '.' and '_' signs.");
+					}
 
 					File uploadedFile = new File(folder, fileName);
 					if (uploadedFile.createNewFile()) {
@@ -84,7 +91,7 @@ public class FileStreamController {
 
 	private static final int BYTES_DOWNLOAD = 1024;
 	
-	@RequestMapping(value = "/download/{quoteId}/{jobId}/{taskId}/{stateId}/{fileName:[a-zA-Z0-9.]+}", method = RequestMethod.GET)
+	@RequestMapping(value = "/download/{quoteId}/{jobId}/{taskId}/{stateId}/{fileName:" + fileExp + "}", method = RequestMethod.GET)
 	public void download(
 			@PathVariable Long quoteId, @PathVariable Long jobId,
 			@PathVariable Long taskId, @PathVariable Long stateId,
