@@ -98,6 +98,7 @@ public class JobPanelQuote extends JobPanel {
 				}
 
 				public void onSuccess(Set<TranslationDTO> result) {
+					
 					ListStore<TranslationModel> listTranslationModel = new ListStore<TranslationModel>();
 					for (TranslationDTO c : result)
 						listTranslationModel.add(new TranslationModel(c));

@@ -70,16 +70,15 @@ public class QuoteStatusPanel extends LayoutContainer {
 				add(labelsList[i]);
 			}
 
-			if (AuthorizationManager.hasExecutiveAccess()) {
 				generateProject = new Button("Generate Project");
 				generateProject.addListener(Events.OnClick,
 						listenerGenerateProject);
 				generateProject.addListener(Events.OnClick,
 						listenerChangeStatus);
 				add(generateProject);
-			}
+		
 
-			if (AuthorizationManager.canChangeQuoteStatus()) {
+	
 				nextStatus = new Button(NEXT_STATUS, null,
 						new SelectionListener<ButtonEvent>() {
 
@@ -93,9 +92,8 @@ public class QuoteStatusPanel extends LayoutContainer {
 
 				nextStatus.addListener(Events.OnClick, listenerChangeStatus);
 				add(nextStatus);
-			}
 
-			if (AuthorizationManager.canReOpenQuote()) {
+
 				reOpen = new Button(REOPEN, null,
 						new SelectionListener<ButtonEvent>() {
 
@@ -109,7 +107,7 @@ public class QuoteStatusPanel extends LayoutContainer {
 
 				reOpen.addListener(Events.OnClick, listenerBackStatus);
 				add(reOpen);
-			}
+		
 
 			setVisibility();
 		}
@@ -128,7 +126,8 @@ public class QuoteStatusPanel extends LayoutContainer {
 
 		private void setVisibility() {
 			nextStatus
-					.setVisible(status == 7 ? false
+					.setVisible((AuthorizationManager.hasClientAccess() && status == 2) ? true
+							: false || status == 7 ? false
 							: (((status <= 2 || status >= 6) && AuthorizationManager
 									.hasExecutiveAccess()) || (status == 5 && AuthorizationManager
 									.hasAccountantAccess())) ? true : false);

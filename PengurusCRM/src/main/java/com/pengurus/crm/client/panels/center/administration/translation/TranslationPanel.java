@@ -22,7 +22,8 @@ public abstract class TranslationPanel extends FieldSet {
 			PriceDTO price) {
 		this.amount = amount;
 		this.price = price;
-		this.translation = new TranslationModel(translationDTO);
+		if(translationDTO != null)
+			this.translation = new TranslationModel(translationDTO);
 		refresh();
 	}
 

@@ -55,6 +55,7 @@ public class QuoteDAOImpl extends GenericDAOImpl<Quote> implements
 		return quotes;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Quote loadByJobId(Long id) {
         try{
@@ -65,7 +66,7 @@ public class QuoteDAOImpl extends GenericDAOImpl<Quote> implements
     		                "where j.id in (:ids)";
     		Query query = session.createQuery(hql);
     		query.setParameterList("ids", ids);
-    		List<Quote> quotes = query.list();
+			List<Quote> quotes = query.list();
     		Quote q = quotes.iterator().next();
     		q.getJobs().size();
     		session.close();

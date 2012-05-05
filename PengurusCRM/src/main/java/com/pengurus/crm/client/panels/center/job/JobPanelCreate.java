@@ -169,7 +169,7 @@ public class JobPanelCreate {
 			combo.setStore(listCurrencyModel);
 			combo.setData("text", "Choose Language");
 			combo.setAllowBlank(false);
-			combo.addListener(Events.OnChange, new Listener<BaseEvent>() {
+			combo.addListener(Events.SelectionChange, new Listener<BaseEvent>() {
 
 				@Override
 				public void handleEvent(BaseEvent be) {
@@ -261,7 +261,8 @@ public class JobPanelCreate {
 		PriceDTO priceVal = null ;
 		if(combo.getValue() != null && price.getValue() != null)
 			priceVal  = new PriceDTO(price.getValue().intValue(),combo.getValue().getCurrencyDTO());
-		translation.setTranslationValues(translation.getTranslation().getTranslationDTO(), amountVal, priceVal);
-
+		if(translation.getTranslation() != null)
+			translation.setTranslationValues(translation.getTranslation().getTranslationDTO(), amountVal, priceVal);
+		else translation.setTranslationValues(null, amountVal, priceVal);
 	}
 }
