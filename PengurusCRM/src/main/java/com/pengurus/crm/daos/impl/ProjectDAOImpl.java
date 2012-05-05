@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.pengurus.crm.daos.ProjectDAO;
 import com.pengurus.crm.entities.Project;
+import com.pengurus.crm.entities.Quote;
 
 public class ProjectDAOImpl extends GenericDAOImpl<Project> implements
         ProjectDAO {
@@ -90,5 +91,25 @@ public class ProjectDAOImpl extends GenericDAOImpl<Project> implements
 		Query query = session.createQuery(hql);
 		List<Project> projects = query.list();
 		return projects;
+	}
+
+	@Override
+	public Project loadByJobId(Long id) {
+        try{
+        	Session session = getHibernateTemplate().getSessionFactory().openSession();
+    		Long[] ids = {id};
+    		String hql = "select distinct p from Project p " +
+    		                "join p.jobs j " +
+    		                "where j.id in (:ids)";
+    		Query query = session.createQuery(hql);
+    		query.setParameterList("ids", ids);
+    		List<Project> projects = query.list();
+    		Project p = projects.iterator().next();
+    		p.getJobs().size();
+    		session.close();
+            return p;
+        } catch(Exception e) {
+            return null;
+        }
 	}
 }

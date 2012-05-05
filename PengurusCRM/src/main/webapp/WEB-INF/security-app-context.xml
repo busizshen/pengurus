@@ -15,16 +15,14 @@
             always-use-default-target="true" />
 	</http>
 
-	<beans:import resource="dao-beans.xml" />
-	<beans:import resource="webservice-beans.xml" />
-	<beans:import resource="gwt-wrapper-beans.xml" />
-
-	<beans:bean id="permissionEvaluator" class="com.pengurus.crm.server.PermissionEvaluatorImpl" />
-
 	<beans:bean id="expressionHandler"
 		class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler">
 		<beans:property name="permissionEvaluator" ref="permissionEvaluator" />
 	</beans:bean>
+	
+	<beans:import resource="dao-beans.xml" />
+	<beans:import resource="webservice-beans.xml" />
+	<beans:import resource="gwt-wrapper-beans.xml" />
 	
 	<global-method-security pre-post-annotations="enabled">
     	<expression-handler ref="expressionHandler"/>

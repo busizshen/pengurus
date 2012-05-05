@@ -67,7 +67,18 @@
 		<property name="userService" ref="userServiceBean" />
 	</bean>
 	
-	<bean id="fileServiceBean" class="com.pengurus.crm.server.services.FileServiceImpl" />
+	<bean id="permissionEvaluator" class="com.pengurus.crm.server.PermissionEvaluatorImpl">
+		<property name="quoteDAO" ref="quoteDao" />
+		<property name="jobDAO" ref="jobDao" />
+		<property name="taskDAO" ref="taskDao" />
+	</bean>
 	
-	<bean id="fileStreamController" class="com.pengurus.crm.server.servlets.FileStreamController" />
+	<bean id="fileServiceBean" class="com.pengurus.crm.server.services.FileServiceImpl">
+		<property name="permissionEvaluator" ref="permissionEvaluator" />
+	</bean>
+	
+	<bean id="fileStreamController" class="com.pengurus.crm.server.servlets.FileStreamController">
+		<property name="permissionEvaluator" ref="permissionEvaluator" />
+	</bean>
+	
 </beans>

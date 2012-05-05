@@ -19,6 +19,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +37,16 @@ public class FileStreamController {
 
 	private final String fileExp = "[a-zA-Z0-9._]+";
 	
+	private PermissionEvaluator permissionEvaluator;
+	
+	public PermissionEvaluator getPermissionEvaluator() {
+		return permissionEvaluator;
+	}
+
+	public void setPermissionEvaluator(PermissionEvaluator permissionEvaluator) {
+		this.permissionEvaluator = permissionEvaluator;
+	}
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/upload/{quoteId}/{jobId}/{taskId}/{stateId}", method = RequestMethod.POST)
 	protected void upload(

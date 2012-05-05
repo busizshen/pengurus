@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.web.context.ServletContextAware;
 
 import com.pengurus.crm.client.service.FileService;
@@ -16,6 +17,7 @@ import com.pengurus.crm.server.FileUtils;
 public class FileServiceImpl implements FileService, ServletContextAware {
 
 	private ServletContext servletContext;
+	private PermissionEvaluator permissionEvaluator;
 	
 	public ServletContext getServletContext() {
 		return servletContext;
@@ -24,6 +26,14 @@ public class FileServiceImpl implements FileService, ServletContextAware {
 	@Override
 	public void setServletContext(ServletContext servletContext) {
 		this.servletContext = servletContext;
+	}
+
+	public PermissionEvaluator getPermissionEvaluator() {
+		return permissionEvaluator;
+	}
+
+	public void setPermissionEvaluator(PermissionEvaluator permissionEvaluator) {
+		this.permissionEvaluator = permissionEvaluator;
 	}
 
 	@Override

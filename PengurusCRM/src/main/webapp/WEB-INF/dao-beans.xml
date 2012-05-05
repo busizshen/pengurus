@@ -124,7 +124,7 @@
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
-	 <bean id="quoteDao" class="com.pengurus.crm.daos.impl.QuoteDAOImpl">
+	<bean id="quoteDao" class="com.pengurus.crm.daos.impl.QuoteDAOImpl">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean> 
 
