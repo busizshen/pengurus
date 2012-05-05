@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import com.pengurus.crm.daos.ProjectDAO;
 import com.pengurus.crm.entities.Project;
-import com.pengurus.crm.entities.Quote;
 
 public class ProjectDAOImpl extends GenericDAOImpl<Project> implements
         ProjectDAO {
@@ -51,6 +50,7 @@ public class ProjectDAOImpl extends GenericDAOImpl<Project> implements
 		Query query = session.createQuery(hql);
 		query.setParameterList("ids", ids);
 		List<Project> projects = query.list();
+		session.close();
 		return projects;
 	}
 	
@@ -65,6 +65,7 @@ public class ProjectDAOImpl extends GenericDAOImpl<Project> implements
 		Query query = session.createQuery(hql);
 		query.setParameterList("ids", ids);
 		List<Project> projects = query.list();
+		session.close();
 		return projects;
 	}
 	
@@ -79,7 +80,13 @@ public class ProjectDAOImpl extends GenericDAOImpl<Project> implements
 		Query query = session.createQuery(hql);
 		query.setParameterList("ids", ids);
 		List<Project> projects = query.list();
-		return projects.iterator().next();
+		Project project = projects.iterator().next();
+		project.getExperts().size();
+		project.getProjectManagers().size();
+		project.getFreelancers().size();
+		project.getJobs().size();
+		session.close();
+		return project;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -90,6 +97,7 @@ public class ProjectDAOImpl extends GenericDAOImpl<Project> implements
 				"where p.supervisor = " + id;
 		Query query = session.createQuery(hql);
 		List<Project> projects = query.list();
+		session.close();
 		return projects;
 	}
 
@@ -103,7 +111,8 @@ public class ProjectDAOImpl extends GenericDAOImpl<Project> implements
     		                "where j.id in (:ids)";
     		Query query = session.createQuery(hql);
     		query.setParameterList("ids", ids);
-    		List<Project> projects = query.list();
+    		@SuppressWarnings("unchecked")
+			List<Project> projects = query.list();
     		Project p = projects.iterator().next();
     		p.getJobs().size();
     		session.close();

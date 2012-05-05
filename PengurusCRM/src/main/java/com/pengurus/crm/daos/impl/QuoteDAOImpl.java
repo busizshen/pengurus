@@ -10,70 +10,68 @@ import org.slf4j.LoggerFactory;
 import com.pengurus.crm.daos.QuoteDAO;
 import com.pengurus.crm.entities.Quote;
 
-public class QuoteDAOImpl extends GenericDAOImpl<Quote> implements
-        QuoteDAO {
+public class QuoteDAOImpl extends GenericDAOImpl<Quote> implements QuoteDAO {
 
-    protected static final Logger log = LoggerFactory
-            .getLogger(QuoteDAOImpl.class);
+	protected static final Logger log = LoggerFactory
+			.getLogger(QuoteDAOImpl.class);
 
-    public QuoteDAOImpl() {
-        this.type = Quote.class;
-    }
+	public QuoteDAOImpl() {
+		this.type = Quote.class;
+	}
 
-    @Override
-    public Quote getById(long id) {
-        try{
-            Session session = getHibernateTemplate().getSessionFactory().openSession();
-            Quote quote = (Quote) session.get(type, id);
-            quote.getJobs().size();
-            session.close();
-            return quote;
-        } catch(Exception e) {
-            return null;
-        }
-    }
+	@Override
+	public Quote getById(long id) {
+		try {
+			Session session = getHibernateTemplate().getSessionFactory()
+					.openSession();
+			Quote quote = (Quote) session.get(type, id);
+			quote.getJobs().size();
+			session.close();
+			return quote;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Quote> loadAllBySupervisorId(Long id) {
-		Session session = getHibernateTemplate().getSessionFactory().openSession();
-		String hql = "select q from Quote q " +
-				"where q.supervisor = " + id;
-		Query query = session.createQuery(hql);
-		List<Quote> quotes = query.list();
+		List<Quote> quotes = getHibernateTemplate().find(
+				"select q from Quote q " + "where q.supervisor = " + id);
 		return quotes;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Quote> loadAllByClientId(Long id) {
-		Session session = getHibernateTemplate().getSessionFactory().openSession();
-		String hql = "select q from Quote q " +
-				"where q.client = " + id;
+		Session session = getHibernateTemplate().getSessionFactory()
+				.openSession();
+		String hql = "select q from Quote q " + "where q.client = " + id;
 		Query query = session.createQuery(hql);
 		List<Quote> quotes = query.list();
+		session.close();
 		return quotes;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Quote loadByJobId(Long id) {
-        try{
-        	Session session = getHibernateTemplate().getSessionFactory().openSession();
-    		Long[] ids = {id};
-    		String hql = "select distinct q from Quote q " +
-    		                "join q.jobs j " +
-    		                "where j.id in (:ids)";
-    		Query query = session.createQuery(hql);
-    		query.setParameterList("ids", ids);
+		try {
+			Session session = getHibernateTemplate().getSessionFactory()
+					.openSession();
+			Long[] ids = { id };
+			String hql = "select distinct q from Quote q " + "join q.jobs j "
+					+ "where j.id in (:ids)";
+			Query query = session.createQuery(hql);
+			query.setParameterList("ids", ids);
 			List<Quote> quotes = query.list();
-    		Quote q = quotes.iterator().next();
-    		q.getJobs().size();
-    		session.close();
-            return q;
-        } catch(Exception e) {
-            return null;
-        }
+			Quote q = quotes.iterator().next();
+			q.getJobs().size();
+			session.close();
+			return q;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }

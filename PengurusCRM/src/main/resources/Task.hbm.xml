@@ -30,13 +30,13 @@
         <property name="amount" type="java.lang.Integer">
             <column name="AMOUNT" />
         </property>
-        <many-to-one name="price" class="com.pengurus.crm.entities.Price" fetch="join" cascade="save-update">
+        <many-to-one name="price" class="com.pengurus.crm.entities.Price" fetch="join" cascade="save-update" lazy="false">
             <column name="PRICE" />
         </many-to-one>
         <property name="description" type="java.lang.String">
             <column name="DESCRIPTION" />
         </property>
-        <many-to-one name="job" class="com.pengurus.crm.entities.Job" fetch="join">
+        <many-to-one name="job" class="com.pengurus.crm.entities.Job" fetch="join" lazy="false">
             <column name="JOB" />
         </many-to-one>
         <property name="rating">
