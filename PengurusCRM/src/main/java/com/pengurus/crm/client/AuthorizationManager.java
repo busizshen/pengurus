@@ -246,10 +246,40 @@ public class AuthorizationManager {
 		return currentUser.haveAuthority(roles);
 	}
 
-	
-	
-	
-	
+	public static boolean canViewClientQuotes() {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_CLIENT);
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
+		return currentUser.haveAuthority(roles);
+	}
 
+	public static boolean canViewWorkerQuotes() {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
+		return currentUser.haveAuthority(roles);
+	}
+
+	public static boolean canViewWorkerProjects() {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
+		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
+		return currentUser.haveAuthority(roles);
+	}
+
+	public static boolean canViewWorkerTasks() {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
+		roles.add(UserRoleDTO.ROLE_WORKER);
+		roles.add(UserRoleDTO.ROLE_FREELANCER);
+		roles.add(UserRoleDTO.ROLE_VERIFICATOR);
+		roles.add(UserRoleDTO.ROLE_EXPERT);
+		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
+		return currentUser.haveAuthority(roles);
+	}
+	
 
 }

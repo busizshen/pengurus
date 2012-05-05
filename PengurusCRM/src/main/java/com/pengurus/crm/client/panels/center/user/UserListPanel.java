@@ -26,6 +26,7 @@ import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.UserModel;
 import com.pengurus.crm.client.panels.ListPagination;
 import com.pengurus.crm.client.panels.PaginationRpcProxy;
@@ -206,20 +207,21 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 				}
 
 				ButtonBar buttonBar = new ButtonBar();
-				Button editButton = new Button("Edit",
-						new SelectionListener<ButtonEvent>() {
-							@Override
-							public void componentSelected(ButtonEvent ce) {
-								new UserEditPanel(model.getUserDTO())
-										.setAsMain();
-							}
-						});
+				if (AuthorizationManager.hasExecutiveAccess()) {
+					Button editButton = new Button("Edit",
+							new SelectionListener<ButtonEvent>() {
+								@Override
+								public void componentSelected(ButtonEvent ce) {
+									new UserEditPanel(model.getUserDTO())
+											.setAsMain();
+								}
+							});
 
-				editButton.setWidth((grid.getColumnModel().getColumnWidth(
-						colIndex) - 20) / 2);
-				editButton.setToolTip("Click to edit");
-				buttonBar.add(editButton);
-
+					editButton.setWidth((grid.getColumnModel().getColumnWidth(
+							colIndex) - 20) / 2);
+					editButton.setToolTip("Click to edit");
+					buttonBar.add(editButton);
+				}
 				Button previewButton = new Button("Preview",
 						new SelectionListener<ButtonEvent>() {
 							@Override

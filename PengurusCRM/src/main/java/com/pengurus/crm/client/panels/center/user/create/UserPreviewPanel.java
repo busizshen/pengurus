@@ -28,6 +28,7 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.PersonalDataModel;
 import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.MainPanel;
@@ -83,13 +84,15 @@ public class UserPreviewPanel extends MainPanel {
 	}
 
 	private void initClient(ClientDTO client) {
-		if (client instanceof IndividualClientDTO) {
-			initIndividualClient((IndividualClientDTO) client);
-		} else {
-			initBusinessClient((BusinessClientDTO) client);
+		if (AuthorizationManager.canViewClientQuotes()) {
+			if (client instanceof IndividualClientDTO) {
+				initIndividualClient((IndividualClientDTO) client);
+			} else {
+				initBusinessClient((BusinessClientDTO) client);
+			}
+			horizontalPanel.add((new QuotesListPanelByClient(client, 200, 630))
+					.getModelList());
 		}
-		horizontalPanel.add((new QuotesListPanelByClient(client, 200, 630))
-				.getModelList());
 	}
 
 	private void initWorker(WorkerDTO worker) {
@@ -100,29 +103,37 @@ public class UserPreviewPanel extends MainPanel {
 		if (worker instanceof TranslatorDTO) {
 			initTranslator((TranslatorDTO) worker);
 		}
-		if (worker.getAuthorities().contains(UserRoleDTO.ROLE_EXECUTIVE)) {
-			verticalPanel.add((new ProjectsListPanelByUserSupervisor(worker,
-					150, 630)).getModelList());
-		}
-		if (worker.getAuthorities().contains(UserRoleDTO.ROLE_PROJECTMANAGER)) {
-			verticalPanel.add((new ProjectsListPanelByUserProjectManager(
-					worker, 150, 630)).getModelList());
-		}
-		verticalPanel.add((new QuotesListPanelByWorker(worker, 150, 630))
-				.getModelList());
+		if (AuthorizationManager.canViewWorkerProjects())
+			if (worker.getAuthorities().contains(UserRoleDTO.ROLE_EXECUTIVE)) {
+				verticalPanel.add((new ProjectsListPanelByUserSupervisor(
+						worker, 150, 630)).getModelList());
+			}
+		if (AuthorizationManager.canViewWorkerProjects())
+			if (worker.getAuthorities().contains(
+					UserRoleDTO.ROLE_PROJECTMANAGER)) {
+				verticalPanel.add((new ProjectsListPanelByUserProjectManager(
+						worker, 150, 630)).getModelList());
+			}
+		if (AuthorizationManager.canViewWorkerQuotes())
+			if (worker.getAuthorities().contains(UserRoleDTO.ROLE_EXECUTIVE))
+				verticalPanel
+						.add((new QuotesListPanelByWorker(worker, 150, 630))
+								.getModelList());
 		verticalPanel.show();
 		horizontalPanel.add(verticalPanel);
 	}
 
 	private void initTranslator(TranslatorDTO translator) {
-		ListStore<TranslationModel> list = new ListStore<TranslationModel>();
-		for(TranslationDTO translation : translator.getTranslations()){
-			list.add(new TranslationModel(translation));
+		if (AuthorizationManager.canViewWorkerTasks()) {
+			ListStore<TranslationModel> list = new ListStore<TranslationModel>();
+			for (TranslationDTO translation : translator.getTranslations()) {
+				list.add(new TranslationModel(translation));
+			}
+			verticalPanel.add((new TranslationsListPanelView(list, 150, 630))
+					.getModelList());
+			verticalPanel.add((new TasksListPanelViewByUser(translator, 150,
+					630)).getModelList());
 		}
-		verticalPanel.add((new TranslationsListPanelView(list, 150, 630))
-				.getModelList());
-		verticalPanel.add((new TasksListPanelViewByUser(translator, 150, 630))
-				.getModelList());
 	}
 
 	private void initIndividualClient(IndividualClientDTO client) {
