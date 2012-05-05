@@ -8,7 +8,6 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.grid.filters.GridFilters;
-import com.google.gwt.user.client.ui.Widget;
 import com.pengurus.crm.client.models.JobModel;
 import com.pengurus.crm.client.panels.center.ListPanel;
 
@@ -16,8 +15,8 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 
 	protected ListStore<JobModel> jobs = new ListStore<JobModel>();
 
-	public JobsListPanel(){
-		super();
+	public JobsListPanel(int height){
+		super(height);
 		setHeading("Jobs");
 	}
 
@@ -92,7 +91,5 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 	protected ListStore<JobModel> getList() {
 		return jobs;
 	}
-
-	public abstract Widget getPanel();
 
 }

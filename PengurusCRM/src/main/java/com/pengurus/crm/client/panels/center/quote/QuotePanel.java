@@ -3,6 +3,7 @@ package com.pengurus.crm.client.panels.center.quote;
 import com.extjs.gxt.ui.client.event.DomEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
@@ -21,12 +22,14 @@ public abstract class QuotePanel extends MainPanel {
 	ClientPanel clientPanel;
 
 	public QuotePanel() {
+		super(850);
 		setHeading("Quote");
 		this.quoteDTO = new QuoteDTO();
 		getInfoPanel();
 	}
 
 	public QuotePanel(QuoteDTO quoteDTO) {
+		super(850);
 		setHeading("Quote");
 		this.quoteDTO = quoteDTO;
 		getInfoPanel();
@@ -34,24 +37,34 @@ public abstract class QuotePanel extends MainPanel {
 
 	private void getInfoPanel() {
 
-		VerticalPanel vp0 = new VerticalPanel();
-		HorizontalPanel hp0 = new HorizontalPanel();
-		addDescriptionPanel(hp0);
-		addButtonPanel(hp0);
-		vp0.add(hp0);
-		addStatusPanel(vp0);
-		VerticalPanel vp = new VerticalPanel();
-		addSupervisorPanel(vp);
-		addClientPanel(vp);
-		vp0.add(vp);
-		getJobsPanel(vp0);
-		addFilesPanel(vp0);
+		VerticalPanel mainVerticalPanel = new VerticalPanel();
+		mainVerticalPanel.setSpacing(15);
+		mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+		
+		HorizontalPanel topHorizontalPanel = new HorizontalPanel();
+		addDescriptionPanel(topHorizontalPanel);
+		addButtonPanel(topHorizontalPanel);
+		
+		mainVerticalPanel.add(topHorizontalPanel);
+		
+		VerticalPanel personPanel = new VerticalPanel();
+		addSupervisorPanel(personPanel);
+		addClientPanel(personPanel);
+		
+		mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+		mainVerticalPanel.add(personPanel);
 
-		add(vp0);
+		getJobsPanel(mainVerticalPanel);
+		
+		HorizontalPanel filesPanel = new HorizontalPanel();
+		addFilesPanel(filesPanel);
+
+		mainVerticalPanel.add(filesPanel);
+		add(mainVerticalPanel);
 
 	}
 
-	protected abstract void addDescriptionPanel(HorizontalPanel hp0);
+	protected abstract void addDescriptionPanel(HorizontalPanel hpPanel);
 
 	protected abstract void addClientPanel(VerticalPanel vpPanel);
 
@@ -76,5 +89,5 @@ public abstract class QuotePanel extends MainPanel {
 
 	protected abstract void getJobsPanel(VerticalPanel vp0);
 
-	protected abstract void addFilesPanel(VerticalPanel vp0);
+	protected abstract void addFilesPanel(HorizontalPanel vp0);
 }

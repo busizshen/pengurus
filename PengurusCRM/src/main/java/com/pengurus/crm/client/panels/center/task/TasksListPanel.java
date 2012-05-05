@@ -14,10 +14,11 @@ import com.pengurus.crm.shared.dto.TaskDTO;
 
 public abstract class TasksListPanel extends ListPanel<TaskModel> {
 
-	
 	public TasksListPanel(){
+		super(360);
 		setHeading("Tasks");
 	}
+	
 	protected ListStore<TaskModel> tasks = new ListStore<TaskModel>();
 	
 	@Override

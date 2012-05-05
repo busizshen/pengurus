@@ -15,7 +15,7 @@ public class UserListPanelView extends ListPanel<UserModel> {
 	ListStore<UserModel> list;
 	String heading;
 	public UserListPanelView(ListStore<UserModel> list, String heading){
-		super();
+		super(150);
 		this.heading = heading;
 		this.list = list;
 		modelList = new ModelList(150, 300);

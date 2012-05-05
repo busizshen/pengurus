@@ -20,6 +20,14 @@ public abstract class ListPanel<T extends ModelData> extends MainPanel {
 	private ListStore<T> store;
 	protected ModelList modelList;
 
+	public ListPanel(int height){
+		super(height);
+	}
+	
+	public ListPanel(){
+		super();
+	}
+	
 	public class ModelList extends LayoutContainer {
 
 		protected ContentPanel cp = new ContentPanel();

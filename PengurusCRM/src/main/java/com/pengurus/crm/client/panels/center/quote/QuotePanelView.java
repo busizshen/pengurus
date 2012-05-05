@@ -4,6 +4,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelView;
@@ -23,6 +24,9 @@ public class QuotePanelView extends QuotePanel {
 	@Override
 	protected void addButtonPanel(HorizontalPanel hpPanel) {
 		if (AuthorizationManager.hasExecutiveAccess()) {
+			Image img = new Image(
+					"resources/images/default/icons/preview.png");
+			img.setSize("20px", "30px");
 			Button b = new Button("Edit", new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
@@ -31,6 +35,7 @@ public class QuotePanelView extends QuotePanel {
 
 				}
 			});
+			
 			hpPanel.add(b);
 		}
 	}
@@ -54,24 +59,26 @@ public class QuotePanelView extends QuotePanel {
 	@Override
 	protected void addDescriptionPanel(HorizontalPanel vpPanel) {
 		descriptionPanel = new DescriptionPanelView(quoteDTO.getDescription(),
-				50, 450);
+				50, 550);
+		descriptionPanel.setStyleAttribute("margin-right", "265px");
 		vpPanel.add(descriptionPanel);
 
 	}
 
 	protected void getJobsPanel(VerticalPanel vp0) {
 		jobsList = new JobsListPanelQuoteView(quoteDTO);
-		vp0.add(jobsList.getPanel());
+		vp0.add(jobsList);
 	}
 
 	@Override
-	protected void addFilesPanel(VerticalPanel vp0) {
+	protected void addFilesPanel(HorizontalPanel hp0) {
 		FilesPanel filesPanelIn = new FilesPanelInput(quoteDTO.getId(),
 				new Long(0), new Long(0), true, true);
-		vp0.add(filesPanelIn);
+		filesPanelIn.setStyleAttribute("margin-right", "30px");
+		hp0.add(filesPanelIn);
 		FilesPanel filesPanelOut = new FilesPanelOutput(quoteDTO.getId(),
 				new Long(0), new Long(0), true, true);
-		vp0.add(filesPanelOut);
+		hp0.add(filesPanelOut);
 	}
 
 }

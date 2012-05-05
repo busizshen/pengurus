@@ -19,8 +19,8 @@ public abstract class JobsListPanelQuote extends JobsListPanel {
 
 	protected QuoteDTO quoteDTO;
 
-	public JobsListPanelQuote(QuoteDTO quoteDTO) {
-		super();
+	public JobsListPanelQuote(QuoteDTO quoteDTO, int height) {
+		super(height);
 		this.quoteDTO = quoteDTO;
 		for (JobDTO j : quoteDTO.getJobs()) {
 			this.jobs.add(new JobModel(j));

@@ -107,7 +107,7 @@ public class QuotePanelCreate extends QuotePanel {
 	}
 
 	@Override
-	protected void addFilesPanel(VerticalPanel vp0) {
+	protected void addFilesPanel(HorizontalPanel hp0) {
 
 	}
 }

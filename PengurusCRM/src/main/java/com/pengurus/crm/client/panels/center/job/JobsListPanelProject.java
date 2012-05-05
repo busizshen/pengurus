@@ -19,8 +19,8 @@ public abstract class JobsListPanelProject extends JobsListPanel {
 
 	protected ProjectDTO projectDTO;
 
-	public JobsListPanelProject(ProjectDTO projectDTO) {
-		super();
+	public JobsListPanelProject(ProjectDTO projectDTO, int height) {
+		super(height);
 		this.projectDTO = projectDTO;
 		for (JobDTO j : projectDTO.getJobs()) {
 			this.jobs.add(new JobModel(j));

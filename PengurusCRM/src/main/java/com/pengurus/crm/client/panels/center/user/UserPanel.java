@@ -17,7 +17,7 @@ public abstract class UserPanel extends FieldSet {
 	public UserPanel(UserDTO userDTO, String heading) {
 		this.userDTO = userDTO;
 		setHeading(heading);
-		setWidth(500);
+		setWidth(400);
 		setAutoHeight(true);
 
 	}
@@ -44,7 +44,7 @@ public abstract class UserPanel extends FieldSet {
 		}
 		hp.add(name);
 
-		hp.setSpacing(10);
+		hp.setSpacing(7);
 
 		addEditionPanel(hp);
 		add(hp);

@@ -18,6 +18,9 @@ import com.pengurus.crm.client.panels.center.ListPanel;
 
 public class CommentListPanel extends ListPanel<CommentModel> {
 
+	public CommentListPanel(){
+		super(250);
+	}
 	@Override
 	protected List<ColumnConfig> getColumns() {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();

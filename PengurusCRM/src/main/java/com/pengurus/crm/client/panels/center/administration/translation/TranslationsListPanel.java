@@ -14,7 +14,7 @@ public abstract class TranslationsListPanel extends ListPanel<TranslationModel> 
 	ListStore<TranslationModel> list;
 
 	public TranslationsListPanel() {
-		super();
+		super(360);
 	}
 
 	@Override

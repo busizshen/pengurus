@@ -92,7 +92,8 @@ public class QuotePanelEdit extends QuotePanel {
 	@Override
 	protected void addDescriptionPanel(HorizontalPanel vpPanel) {
 		descriptionPanel = new DescriptionPanelEdit(quoteDTO.getDescription(),
-				50, 450);
+				50, 550);
+		descriptionPanel.setStyleAttribute("margin-right", "265px");
 		vpPanel.add(descriptionPanel);
 	}
 
@@ -100,19 +101,17 @@ public class QuotePanelEdit extends QuotePanel {
 	protected void getJobsPanel(VerticalPanel vp0) {
 		if (quoteDTO.getJobs() != null) {
 			jobsList = new JobsListPanelQuoteEdit(quoteDTO);
-			vp0.add(jobsList.getPanel());
+			vp0.add(jobsList);
 		}
 
 	}
 
-	@Override
-	protected void addFilesPanel(VerticalPanel vp0) {
-		FilesPanel filesPanelIn = new FilesPanelInput(quoteDTO.getId(),
-				new Long(0), new Long(0), true, true);
-		vp0.add(filesPanelIn);
-		FilesPanel filesPanelOut = new FilesPanelOutput(quoteDTO.getId(),
-				new Long(0), new Long(0), true, true);
-		vp0.add(filesPanelOut);
+	protected void addFilesPanel(HorizontalPanel hp0) {
+		FilesPanel filesPanelIn = new FilesPanelInput(quoteDTO.getId(),new Long(0), new Long(0), true, true);
+		hp0.add(filesPanelIn);
+		filesPanelIn.setStyleAttribute("margin-right", "30px");
+		FilesPanel filesPanelOut = new FilesPanelOutput(quoteDTO.getId(), new Long(0), new Long(0), true, true);
+		hp0.add(filesPanelOut);
 	}
 
 }

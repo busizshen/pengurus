@@ -39,6 +39,7 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 	protected abstract void initPagination();
 
 	public QuotesListPanel(){
+		super(360);
 		setHeading("Quotes");
 	}
 	

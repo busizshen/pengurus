@@ -3,6 +3,7 @@ package com.pengurus.crm.client.panels.center.task;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.DateField;
@@ -31,9 +32,10 @@ public abstract class TaskPanel extends MainPanel {
 	protected DateField deadline;
 	protected WorkerPanel workerPanel;
 	protected WorkerPanel reviewerPanel;
+	protected ContentPanel mainBox;
 	
 	protected TaskPanel(TaskDTO taskDTO, ProjectDTO projectDTO){
-		super();
+		super(1000);
 		setHeading("Task");
 		this.taskDTO = taskDTO;
 		this.projectDTO = projectDTO;

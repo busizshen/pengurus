@@ -18,17 +18,17 @@ public abstract class ProjectPanel extends MainPanel {
 	private ClientPanelView clientPanel;
 	
 	public ProjectPanel(ProjectDTO projectDTO){
+		super(800);
 		this.projectDTO = projectDTO;
 		setHeading("Project");
 		addInfoPanel();
-		
 	}
 
 	protected abstract void getTranslatorsPanel(HorizontalPanel hp3);
 
 	protected void addJobsPanel(VerticalPanel vp) {
 		JobsListPanelProjectView jobsPanel = new JobsListPanelProjectView(projectDTO);
-		vp.add(jobsPanel.getPanel());	
+		vp.add(jobsPanel);	
 	}
 
 	protected abstract void getProjectMangaersPanel(HorizontalPanel hp3);

@@ -86,7 +86,7 @@ public abstract class FilesPanel extends ContentPanel {
 		setButtonAlign(HorizontalAlignment.CENTER);
 		setHeading("Files");
 		setLayout(new FitLayout());
-		setSize(700, 300);
+		setSize(425, 200);
 		add(grid);
 		grid.getAriaSupport().setLabelledBy(getHeader().getId() + "-label");
 

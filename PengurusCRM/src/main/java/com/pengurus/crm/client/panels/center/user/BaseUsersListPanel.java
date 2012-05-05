@@ -15,6 +15,14 @@ public abstract class BaseUsersListPanel<T extends UserModel> extends ListPanel<
 
 	ListStore<T> clients = new ListStore<T>();
 	
+	public BaseUsersListPanel(int height){
+		super(height);
+	}
+	
+	public BaseUsersListPanel(){
+		super(400);
+	}
+	
 	@Override
 	protected void setStyle(ContentPanel cp) {
 	}

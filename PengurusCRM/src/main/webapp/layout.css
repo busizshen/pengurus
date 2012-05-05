@@ -1,4 +1,12 @@
 /* .gwt-Anchor:visited {color:#00FF00;} */
+
+#topHP {
+	border-style:solid;
+	border-width:5px;
+	align : justify;
+	font-size : 150%;
+}
+
 .gwt-Anchor:hover {color:#0093AF;}
 .gwt-Anchor:active {color:#0093AF;}
 
@@ -6,7 +14,7 @@
 	font-size: 150%;
 	background-image : none;
 	height : 100px;
-	width : 150px;
+	width : 250px;
 }
 .gwt-Button:visited {color:#00FF00;}
 .gwt-Button:hover {color:#FF00FF;}
