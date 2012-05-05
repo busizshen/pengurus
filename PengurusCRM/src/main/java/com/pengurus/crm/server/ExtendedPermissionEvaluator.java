@@ -163,11 +163,11 @@ public class ExtendedPermissionEvaluator implements PermissionEvaluator {
 			task = taskDAO.read(taskId);
 		}
 		if (jobId != 0) {
-			job = jobDAO.read(jobId);
+			job = jobDAO.getById(jobId);
 			project = projectDAO.loadByJobId(jobId);
 		}
 		if (quoteId != 0) {
-			quote = quoteDAO.read(quoteId);
+			quote = quoteDAO.getById(quoteId);
 		} else {
 			throw new IOException();
 		}
