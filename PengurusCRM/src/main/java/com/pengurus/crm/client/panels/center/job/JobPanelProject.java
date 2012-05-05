@@ -5,7 +5,6 @@ import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanelView;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelView;
@@ -95,8 +94,8 @@ public class JobPanelProject extends JobPanel {
 	@Override
 	protected void addTranslationPanel(VerticalPanel vp) {
 		if (jobDTO.getTranslation() != null)
-			translation = new TranslationPanelView(new TranslationModel(
-					jobDTO.getTranslation()), jobDTO.getAmount(),
+			translation = new TranslationPanelView(
+					jobDTO.getTranslation(), jobDTO.getAmount(),
 					jobDTO.getPrice());
 		else
 			translation = new TranslationPanelView();

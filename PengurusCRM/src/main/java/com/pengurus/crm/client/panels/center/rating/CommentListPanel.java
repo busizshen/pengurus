@@ -13,10 +13,8 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.grid.filters.GridFilters;
-import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.CommentModel;
 import com.pengurus.crm.client.panels.center.ListPanel;
-import com.pengurus.crm.shared.dto.CommentDTO;
 
 public class CommentListPanel extends ListPanel<CommentModel> {
 

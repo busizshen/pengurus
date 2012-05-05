@@ -10,7 +10,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.AuthorizationManager;
-import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanelView;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
 import com.pengurus.crm.client.panels.center.filespanel.FilesPanel;
@@ -180,8 +179,8 @@ public class TaskPanelView extends TaskPanel {
 
 	protected void addTranslationPanel(VerticalPanel simple) {
 		if (taskDTO != null && taskDTO.getTranslation() != null)
-			translation = new TranslationPanelView(new TranslationModel(
-					taskDTO.getTranslation()), taskDTO.getAmount(),
+			translation = new TranslationPanelView(
+					taskDTO.getTranslation(), taskDTO.getAmount(),
 					taskDTO.getPrice());
 		else
 			translation = new TranslationPanelView();

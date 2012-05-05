@@ -42,7 +42,7 @@ public class QuoteServiceImpl implements QuoteService {
 	}
 
 	@Override
-	@PreAuthorize("hasRole('ROLE_EXECUTIVE', 'ROLE_ACCOUNTANT')")
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_ACCOUNTANT')")
 	public Set<QuoteDTO> getAllQuotes() {
 		List<Quote> list = quoteDAO.loadAll();
 		Set<QuoteDTO> set = new HashSet<QuoteDTO>();

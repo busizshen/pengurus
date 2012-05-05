@@ -4,6 +4,7 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.google.gwt.user.client.ui.Label;
 import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.shared.dto.PriceDTO;
+import com.pengurus.crm.shared.dto.TranslationDTO;
 
 public abstract class TranslationPanel extends FieldSet {
 
@@ -15,23 +16,13 @@ public abstract class TranslationPanel extends FieldSet {
 	Integer amount;
 	PriceDTO price;
 
-	
-
-	public TranslationPanel() {
-		
-	}
-
-	public TranslationPanel(TranslationModel translation) {
-
-	}
-
 	protected abstract void initTranslationPanel();
 
-	public void setTranslationValues(TranslationModel translation,Integer amount,
+	public void setTranslationValues(TranslationDTO translationDTO,Integer amount,
 			PriceDTO price) {
 		this.amount = amount;
 		this.price = price;
-		this.translation = translation;
+		this.translation = new TranslationModel(translationDTO);
 		refresh();
 	}
 

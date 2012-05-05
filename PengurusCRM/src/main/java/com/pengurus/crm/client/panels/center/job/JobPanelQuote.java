@@ -20,8 +20,10 @@ import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.CurrencyModel;
 import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanelChange;
+import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanelView;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
+import com.pengurus.crm.client.panels.center.description.DescriptionPanelView;
 import com.pengurus.crm.client.panels.center.filespanel.FilesPanel;
 import com.pengurus.crm.client.panels.center.filespanel.FilesPanelInput;
 import com.pengurus.crm.client.panels.center.filespanel.FilesPanelOutput;
@@ -101,13 +103,12 @@ public class JobPanelQuote extends JobPanel {
 						listTranslationModel.add(new TranslationModel(c));
 					if (jobDTO.getTranslation() != null)
 						translation = new TranslationPanelChange(
-								new TranslationModel(jobDTO.getTranslation()),
-								listTranslationModel, jobDTO.getAmount()
-										, jobDTO.getPrice());
+								jobDTO.getTranslation(), listTranslationModel,
+								jobDTO.getAmount(), jobDTO.getPrice());
 					else
 						translation = new TranslationPanelChange(
-								listTranslationModel, jobDTO.getAmount()
-										, jobDTO.getPrice());
+								listTranslationModel, jobDTO.getAmount(),
+								jobDTO.getPrice());
 					vp.add(translation);
 					addFilesPanel(vp);
 
@@ -117,6 +118,11 @@ public class JobPanelQuote extends JobPanel {
 					.create(AdministrationService.class);
 			service.getTranslations(callback);
 
+		} else {
+			translation = new TranslationPanelView(jobDTO.getTranslation(),
+					jobDTO.getAmount(), jobDTO.getPrice());
+			vp.add(translation);
+			addFilesPanel(vp);
 		}
 	}
 
@@ -186,7 +192,7 @@ public class JobPanelQuote extends JobPanel {
 				}
 			});
 			infoForm.add(combo);
-			if(jobDTO.getAmount() != null)
+			if (jobDTO.getAmount() != null)
 				amount.setValue(jobDTO.getAmount());
 			if (jobDTO.getPrice() != null) {
 				price.setValue(jobDTO.getPrice().getPrice());
@@ -215,8 +221,13 @@ public class JobPanelQuote extends JobPanel {
 	}
 
 	protected DescriptionPanel addDescriptionPanel() {
-		description = new DescriptionPanelEdit(jobDTO.getDescription(), 50, 350);
-		return description;
+		if (AuthorizationManager.canEditJob()) {
+			description = new DescriptionPanelEdit(jobDTO.getDescription(), 50, 350);
+			return description;
+		} else {
+			description = new DescriptionPanelView(jobDTO.getDescription(), 50, 350);
+			return description;
+		}
 	}
 
 	protected void updateTranslation() {
@@ -227,7 +238,7 @@ public class JobPanelQuote extends JobPanel {
 		if (combo.getValue() != null && price.getValue() != null)
 			priceVal = new PriceDTO(price.getValue().intValue(), combo
 					.getValue().getCurrencyDTO());
-		translation.setTranslationValues(translation.getTranslation(),
+		translation.setTranslationValues(translation.getTranslation().getTranslationDTO(),
 				amountVal, priceVal);
 
 	}

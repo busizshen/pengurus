@@ -6,29 +6,28 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.google.gwt.user.client.ui.Label;
 import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.shared.dto.PriceDTO;
+import com.pengurus.crm.shared.dto.TranslationDTO;
 
 public class TranslationPanelChange extends TranslationPanel {
 
 	Label defaultPriceLabel;
 
-	public TranslationPanelChange(TranslationModel translation,
+	public TranslationPanelChange(TranslationDTO translationDTO,
 			ListStore<TranslationModel> listTranslationModel) {
-		super(translation);
 		addEditPanel(listTranslationModel);
 		initTranslationPanel();
 		
-		if (translation != null)
-			setTranslationValues(translation, 0, null);
+		if (translationDTO != null)
+			setTranslationValues(translationDTO, 0, null);
 	}
 
-	public TranslationPanelChange(TranslationModel translation,
+	public TranslationPanelChange(TranslationDTO translationDTO,
 			ListStore<TranslationModel> listTranslationModel, Integer amount,
 			PriceDTO price) {
-		super(translation);
 		addEditPanel(listTranslationModel);
 		initTranslationPanel();
-		if (translation != null)
-			setTranslationValues(translation, amount, price);
+		if (translationDTO != null)
+			setTranslationValues(translationDTO, amount, price);
 	}
 
 	public TranslationPanelChange(
@@ -60,7 +59,7 @@ public class TranslationPanelChange extends TranslationPanel {
 		Listener<DomEvent> listenerChosen = new Listener<DomEvent>() {
 			@Override
 			public void handleEvent(DomEvent be) {
-				setTranslationValues(translations.getTranslation(), amount,
+				setTranslationValues(translations.getTranslation().getTranslationDTO(), amount,
 						price);
 			}
 		};

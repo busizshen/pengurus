@@ -3,7 +3,6 @@ package com.pengurus.crm.client.panels.center.quote;
 import com.extjs.gxt.ui.client.event.DomEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
@@ -40,6 +39,7 @@ public abstract class QuotePanel extends MainPanel {
 		addDescriptionPanel(hp0);
 		addButtonPanel(hp0);
 		vp0.add(hp0);
+		addStatusPanel(vp0);
 		VerticalPanel vp = new VerticalPanel();
 		addSupervisorPanel(vp);
 		addClientPanel(vp);

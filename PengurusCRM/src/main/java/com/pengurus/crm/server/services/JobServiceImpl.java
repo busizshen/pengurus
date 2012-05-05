@@ -47,7 +47,7 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_PROJECTMANAGER')")
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_PROJECTMANAGER', 'ROLE_CLIENT')")
 	public JobDTO getJob(Long id) {
 		return jobDAO.getById(id).toDTO();
 	}
@@ -81,7 +81,7 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_PROJECTMANAGER')")
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_PROJECTMANAGER', 'ROLE_CLIENT')")
 	public void updateStatus(JobDTO jobDTO) {
 		Job job = jobDAO.read(jobDTO.getId());
 		job.setStatus(StatusJob.toStatus(jobDTO.getStatus()));

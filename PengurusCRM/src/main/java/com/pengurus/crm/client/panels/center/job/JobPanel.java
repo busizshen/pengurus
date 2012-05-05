@@ -17,9 +17,6 @@ import com.pengurus.crm.client.models.CurrencyModel;
 import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
-import com.pengurus.crm.client.panels.center.filespanel.FilesPanel;
-import com.pengurus.crm.client.panels.center.filespanel.FilesPanelInput;
-import com.pengurus.crm.client.panels.center.filespanel.FilesPanelOutput;
 import com.pengurus.crm.client.panels.center.status.JobStatusPanel;
 import com.pengurus.crm.client.service.JobService;
 import com.pengurus.crm.client.service.JobServiceAsync;
@@ -145,6 +142,9 @@ public abstract class JobPanel extends MainPanel {
 		if (jobDTO != null)
 			deadline.setValue(jobDTO.getDeadline());
 		deadlinePanel.add(deadline);
+		if (!AuthorizationManager.canEditJob()) {
+			deadline.setReadOnly(true);
+		}
 		return deadlinePanel;
 	}
 

@@ -261,7 +261,7 @@ public class JobPanelCreate {
 		PriceDTO priceVal = null ;
 		if(combo.getValue() != null && price.getValue() != null)
 			priceVal  = new PriceDTO(price.getValue().intValue(),combo.getValue().getCurrencyDTO());
-		translation.setTranslationValues(translation.getTranslation(), amountVal, priceVal);
+		translation.setTranslationValues(translation.getTranslation().getTranslationDTO(), amountVal, priceVal);
 
 	}
 }

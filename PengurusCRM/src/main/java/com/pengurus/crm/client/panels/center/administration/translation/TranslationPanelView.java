@@ -1,18 +1,17 @@
 package com.pengurus.crm.client.panels.center.administration.translation;
 
 import com.google.gwt.user.client.ui.Label;
-import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.shared.dto.PriceDTO;
+import com.pengurus.crm.shared.dto.TranslationDTO;
 
 public class TranslationPanelView extends TranslationPanel {
 
 
-	public TranslationPanelView(TranslationModel translation, Integer amount,
+	public TranslationPanelView(TranslationDTO translationDTO, Integer amount,
 			PriceDTO price) {
-		super(translation);
 		initTranslationPanel();
-		if (translation != null)
-			setTranslationValues(translation,amount,price);
+		if (translationDTO != null)
+			setTranslationValues(translationDTO,amount,price);
 	}
 
 	public TranslationPanelView() {

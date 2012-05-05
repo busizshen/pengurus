@@ -24,7 +24,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.CurrencyModel;
-import com.pengurus.crm.client.models.TranslationModel;
 import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanelView;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
 import com.pengurus.crm.client.service.AdministrationService;
@@ -77,8 +76,7 @@ public class TaskPanelCreate extends TaskPanel {
 		add(mainPanel);
 		this.jobDTO = jobDTO;
 		if (jobDTO.getTranslation() != null)
-			translation.setTranslationValues(
-					new TranslationModel(jobDTO.getTranslation()), 0, null);
+			translation.setTranslationValues(jobDTO.getTranslation(), 0, null);
 		combo.setAllowBlank(false);
 		amount.setAllowBlank(false);
 		price.setAllowBlank(false);
@@ -199,7 +197,7 @@ public class TaskPanelCreate extends TaskPanel {
 				@Override
 				public void handleEvent(BaseEvent be) {
 					updateTranslation();
-					
+
 				}
 			});
 
@@ -212,7 +210,7 @@ public class TaskPanelCreate extends TaskPanel {
 				@Override
 				public void handleEvent(BaseEvent be) {
 					updateTranslation();
-					
+
 				}
 			});
 			combo = new ComboBox<CurrencyModel>();
@@ -226,7 +224,7 @@ public class TaskPanelCreate extends TaskPanel {
 				@Override
 				public void handleEvent(BaseEvent be) {
 					updateTranslation();
-					
+
 				}
 			});
 			if (taskDTO != null) {
@@ -267,21 +265,22 @@ public class TaskPanelCreate extends TaskPanel {
 
 	protected void updateTranslation() {
 		Integer amountVal = 0;
-		
-		if(amount.getValue() != null )
+
+		if (amount.getValue() != null)
 			amountVal = amount.getValue().intValue();
-		PriceDTO priceVal = null ;
-		if(combo.getValue() != null && price.getValue() != null)
-			priceVal  = new PriceDTO(price.getValue().intValue(),combo.getValue().getCurrencyDTO());
-		translation.setTranslationValues(translation.getTranslation(), amountVal, priceVal);
+		PriceDTO priceVal = null;
+		if (combo.getValue() != null && price.getValue() != null)
+			priceVal = new PriceDTO(price.getValue().intValue(), combo
+					.getValue().getCurrencyDTO());
+		translation.setTranslationValues(translation.getTranslation()
+				.getTranslationDTO(), amountVal, priceVal);
 
 	}
 
-
 	protected void addTranslationPanel(FormPanel simple) {
 		if (taskDTO != null && taskDTO.getTranslation() != null)
-			translation = new TranslationPanelView(new TranslationModel(
-					taskDTO.getTranslation()), taskDTO.getAmount(), taskDTO.getPrice());
+			translation = new TranslationPanelView(taskDTO.getTranslation(),
+					taskDTO.getAmount(), taskDTO.getPrice());
 		else
 			translation = new TranslationPanelView();
 		simple.add(translation, new FormData(-10, 10));
