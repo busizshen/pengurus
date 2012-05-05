@@ -4,9 +4,13 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelView;
+import com.pengurus.crm.client.panels.center.filespanel.FilesPanel;
+import com.pengurus.crm.client.panels.center.filespanel.FilesPanelInput;
+import com.pengurus.crm.client.panels.center.filespanel.FilesPanelOutput;
 import com.pengurus.crm.client.panels.center.job.JobsListPanelQuoteView;
 import com.pengurus.crm.client.panels.center.user.client.ClientPanelView;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelView;
@@ -48,16 +52,23 @@ public class QuotePanelView extends QuotePanel {
 	}
 
 	@Override
-	protected void addDescriptionPanel(VerticalPanel vpPanel) {
-		descriptionPanel = new DescriptionPanelView(quoteDTO.getDescription(),100,300);
+	protected void addDescriptionPanel(HorizontalPanel vpPanel) {
+		descriptionPanel = new DescriptionPanelView(quoteDTO.getDescription(),50,450);
 		vpPanel.add(descriptionPanel);
 	
 	}
 
-	protected void getJobsPanel() {
+	protected void getJobsPanel(VerticalPanel vp0) {
 		jobsList = new JobsListPanelQuoteView(quoteDTO);
-		add(jobsList.getPanel());
+		vp0.add(jobsList.getPanel());
 	}
 
+	@Override
+	protected void addFilesPanel(VerticalPanel vp0) {
+		FilesPanel filesPanelIn = new FilesPanelInput(quoteDTO.getId(),new Long(0), new Long(0));
+		vp0.add(filesPanelIn);
+		FilesPanel filesPanelOut = new FilesPanelOutput(quoteDTO.getId(), new Long(0), new Long(0));
+		vp0.add(filesPanelOut);
+	}
 
 }

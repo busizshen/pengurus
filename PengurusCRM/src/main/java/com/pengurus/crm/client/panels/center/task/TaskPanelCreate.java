@@ -1,39 +1,58 @@
 package com.pengurus.crm.client.panels.center.task;
 
+import java.util.Set;
+
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.DomEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.form.NumberField;
+import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.pengurus.crm.client.AuthorizationManager;
+import com.pengurus.crm.client.models.CurrencyModel;
 import com.pengurus.crm.client.models.TranslationModel;
+import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanelView;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
+import com.pengurus.crm.client.service.AdministrationService;
+import com.pengurus.crm.client.service.AdministrationServiceAsync;
 import com.pengurus.crm.client.service.TaskService;
 import com.pengurus.crm.client.service.TaskServiceAsync;
+import com.pengurus.crm.shared.dto.CurrencyTypeDTO;
 import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.PriceDTO;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.StatusTaskDTO;
 import com.pengurus.crm.shared.dto.TaskDTO;
 import com.pengurus.crm.shared.dto.TranslatorDTO;
+
 public class TaskPanelCreate extends TaskPanel {
 
 	private Listener<DomEvent> listenerCreateTask;
 	private Listener<DomEvent> listenerClose;
+	private NumberField amount;
+	private NumberField price;
 	private JobDTO jobDTO;
 	Button buttonCancel;
 	Button buttonCreate;
 	TasksListPanelEdit taskList;
 	protected FormPanel mainPanel;
 
-	public TaskPanelCreate(JobDTO jobDTO, ProjectDTO projectDTO, TasksListPanelEdit taskListPanel) {
+	public TaskPanelCreate(JobDTO jobDTO, ProjectDTO projectDTO,
+			TasksListPanelEdit taskListPanel) {
 		super(new TaskDTO(), projectDTO);
 		VerticalPanel vp = new VerticalPanel();
 		vp.setSpacing(5);
@@ -44,8 +63,8 @@ public class TaskPanelCreate extends TaskPanel {
 		mainPanel.setHeaderVisible(false);
 		VerticalPanel vp1 = new VerticalPanel();
 		vp1.setSpacing(10);
+		vp1.add(getDeadlinePanel());
 		addButtonPanel(vp1);
-		addStatusBar(vp1);
 		addInfoPanel(vp1);
 		hp.add(vp1);
 		VerticalPanel vp2 = new VerticalPanel();
@@ -56,13 +75,10 @@ public class TaskPanelCreate extends TaskPanel {
 		mainPanel.add(getTranslatorPanel());
 		mainPanel.add(getReviewerPanel());
 		add(mainPanel);
-		
-		setFrame(false);
-		setHeaderVisible(false);
 		this.jobDTO = jobDTO;
 		if (jobDTO.getTranslation() != null)
-			translation.setTranslation(new TranslationModel(jobDTO
-					.getTranslation()));
+			translation.setTranslationValues(
+					new TranslationModel(jobDTO.getTranslation()), 0, null);
 		combo.setAllowBlank(false);
 		amount.setAllowBlank(false);
 		price.setAllowBlank(false);
@@ -104,12 +120,13 @@ public class TaskPanelCreate extends TaskPanel {
 									.getCurrencyDTO()));
 							taskDTO.setDeadline(deadline.getValue());
 							taskDTO.setDescription(description.getDescription());
-							taskDTO.setExpert((TranslatorDTO) workerPanel.getChosenWorker());
-							taskDTO.setReviewer((TranslatorDTO) reviewerPanel.getChosenWorker());
+							taskDTO.setExpert((TranslatorDTO) workerPanel
+									.getChosenWorker());
+							taskDTO.setReviewer((TranslatorDTO) reviewerPanel
+									.getChosenWorker());
 							AsyncCallback<TaskDTO> callback = new AsyncCallback<TaskDTO>() {
 
 								public void onFailure(Throwable t) {
-									
 
 								}
 
@@ -160,8 +177,114 @@ public class TaskPanelCreate extends TaskPanel {
 	}
 
 	protected void addDescriptionPanel(VerticalPanel vp2) {
-		description = new DescriptionPanelEdit("",100,300);
+		description = new DescriptionPanelEdit("", 100, 300);
 		vp2.add(description);
+	}
+
+	protected void addInfoPanel(VerticalPanel vp1) {
+		FormPanel simple = new FormPanel();
+		simple.setFrame(false);
+		simple.setAutoHeight(true);
+		simple.setAutoWidth(true);
+		simple.setHeaderVisible(false);
+		if (AuthorizationManager.canEditProject(projectDTO)) {
+
+			final ListStore<CurrencyModel> listCurrencyModel = new ListStore<CurrencyModel>();
+			amount = new NumberField();
+			amount.setFieldLabel("Amount");
+			amount.setName("amount");
+			amount.setData("text", "Enter your amount");
+			amount.addListener(Events.OnChange, new Listener<BaseEvent>() {
+
+				@Override
+				public void handleEvent(BaseEvent be) {
+					updateTranslation();
+					
+				}
+			});
+
+			price = new NumberField();
+			price.setFieldLabel("Price");
+			price.setName("price");
+			price.setData("text", "Enter your price and choose Currnecy");
+			price.addListener(Events.OnChange, new Listener<BaseEvent>() {
+
+				@Override
+				public void handleEvent(BaseEvent be) {
+					updateTranslation();
+					
+				}
+			});
+			combo = new ComboBox<CurrencyModel>();
+			combo.setFieldLabel("Currency");
+			combo.setDisplayField("currency");
+			combo.setTriggerAction(TriggerAction.ALL);
+			combo.setData("text", "Choose Language");
+			combo.setStore(listCurrencyModel);
+			combo.addListener(Events.OnChange, new Listener<BaseEvent>() {
+
+				@Override
+				public void handleEvent(BaseEvent be) {
+					updateTranslation();
+					
+				}
+			});
+			if (taskDTO != null) {
+				amount.setValue(taskDTO.getAmount());
+				if (taskDTO.getPrice() != null) {
+					price.setValue(taskDTO.getPrice().getPrice());
+					combo.setValue(new CurrencyModel(taskDTO.getPrice()
+							.getCurrency()));
+				}
+			}
+
+			simple.add(amount);
+			simple.add(price);
+			simple.add(combo);
+
+			AsyncCallback<Set<CurrencyTypeDTO>> callback = new AsyncCallback<Set<CurrencyTypeDTO>>() {
+
+				public void onFailure(Throwable t) {
+					Window.Location.assign("/spring_security_login");
+				}
+
+				public void onSuccess(Set<CurrencyTypeDTO> result) {
+					for (CurrencyTypeDTO c : result)
+						listCurrencyModel.add(new CurrencyModel(c));
+					if (taskDTO != null && taskDTO.getPrice() != null) {
+						combo.setValue(new CurrencyModel(taskDTO.getPrice()
+								.getCurrency()));
+					}
+				}
+			};
+			AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
+					.create(AdministrationService.class);
+			service.getCurrency(callback);
+		}
+		addTranslationPanel(simple);
+		vp1.add(simple);
+	}
+
+	protected void updateTranslation() {
+		Integer amountVal = 0;
+		
+		if(amount.getValue() != null )
+			amountVal = amount.getValue().intValue();
+		PriceDTO priceVal = null ;
+		if(combo.getValue() != null && price.getValue() != null)
+			priceVal  = new PriceDTO(price.getValue().intValue(),combo.getValue().getCurrencyDTO());
+		translation.setTranslationValues(translation.getTranslation(), amountVal, priceVal);
+
+	}
+
+
+	protected void addTranslationPanel(FormPanel simple) {
+		if (taskDTO != null && taskDTO.getTranslation() != null)
+			translation = new TranslationPanelView(new TranslationModel(
+					taskDTO.getTranslation()), taskDTO.getAmount(), taskDTO.getPrice());
+		else
+			translation = new TranslationPanelView();
+		simple.add(translation, new FormData(-10, 10));
 	}
 
 }

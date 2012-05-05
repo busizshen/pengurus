@@ -38,6 +38,10 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 
 	protected abstract void initPagination();
 
+	public QuotesListPanel(){
+		setHeading("Quotes");
+	}
+	
 	@Override
 	protected ListStore<QuoteModel> getList() {
 		return listPagination.getStore();

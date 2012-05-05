@@ -5,7 +5,6 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.models.UserModel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelView;
 import com.pengurus.crm.client.panels.center.user.UserListPanelView;
@@ -20,8 +19,8 @@ public class ProjectPanelView extends ProjectPanel{
 
 
 	@Override
-	protected void addDescriptionPanel(VerticalPanel vp) {
-		descriptionPanel = new DescriptionPanelView(projectDTO.getDescription(),100,300);
+	protected void addDescriptionPanel(HorizontalPanel vp) {
+		descriptionPanel = new DescriptionPanelView(projectDTO.getDescription(),50,450);
 		vp.add(descriptionPanel);
 	}
 

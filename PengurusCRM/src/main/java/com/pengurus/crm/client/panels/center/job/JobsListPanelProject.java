@@ -38,7 +38,7 @@ public abstract class JobsListPanelProject extends JobsListPanel {
 					ListStore<JobModel> store, Grid<JobModel> grid) {
 				if (!init) {
 					init = true;
-				}
+	}
 				Button b = new Button("PREVIEW",
 						new SelectionListener<ButtonEvent>() {
 							@Override

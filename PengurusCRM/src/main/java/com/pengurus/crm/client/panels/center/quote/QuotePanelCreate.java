@@ -26,31 +26,6 @@ public class QuotePanelCreate extends QuotePanel {
 		super();
 	}
 
-	/*
-	 * 
-	 * @Override protected void getDescriptionPanel() { descriptionPanel = new
-	 * DescriptionPanelEdit(""); quoteView.add(descriptionPanel);
-	 * 
-	 * }
-	 * 
-	 * @Override protected void getSupervisorPanel(final QuoteView quoteView) {
-	 * updateSupervisorPanel(quoteView); if (workerPanel != null) {
-	 * quoteView.add(workerPanel.getInfoPanel()); } }
-	 * 
-	 * protected void updateSupervisorPanel(QuoteView quoteView) {
-	 * Listener<DomEvent> listener = new Listener<DomEvent>() {
-	 * 
-	 * @Override public void handleEvent(DomEvent be) {
-	 * quoteDTO.setSupervisor(workerPanel.getChosenWorker()); getPanel();// do
-	 * zmiany jak zrobić żeby tylko jeden element się // zmieniał a nie trzeb
-	 * było ładować całości na nowo } }; if (quoteDTO.getSupervisor() != null) {
-	 * workerPanel = new WorkerPanelEdit(quoteDTO.getSupervisor(), listener); }
-	 * else workerPanel = new WorkerPanelEdit(listener); }
-	 * 
-	 * @Override protected void getClientPanel(final QuoteView quoteView) {
-	 * updateClientPanel(quoteView); if (clientPanel != null) {
-	 * quoteView.add(clientPanel.getInfoPanel()); } }
-	 */
 	@Override
 	protected void addButtonPanel(HorizontalPanel hp2) {
 		HorizontalPanel vp = new HorizontalPanel();
@@ -114,8 +89,8 @@ public class QuotePanelCreate extends QuotePanel {
 	}
 
 	@Override
-	protected void addDescriptionPanel(VerticalPanel vpPanel) {
-		descriptionPanel = new DescriptionPanelEdit(100,300);
+	protected void addDescriptionPanel(HorizontalPanel vpPanel) {
+		descriptionPanel = new DescriptionPanelEdit(50,450);
 		vpPanel.add(descriptionPanel);
 	}
 	
@@ -123,5 +98,16 @@ public class QuotePanelCreate extends QuotePanel {
 	@Override
 	protected  void addStatusPanel(VerticalPanel vp1){
 		
+	}
+
+	@Override
+	protected void getJobsPanel(VerticalPanel vp0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void addFilesPanel(VerticalPanel vp0) {
+
 	}
 }

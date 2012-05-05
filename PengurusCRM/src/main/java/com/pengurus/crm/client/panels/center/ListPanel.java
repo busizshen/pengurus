@@ -119,7 +119,7 @@ public abstract class ListPanel<T extends ModelData> extends MainPanel {
 	}
 
 	public void setList(List<T> list) {
-		setHeaderVisible(false);
+	//	setHeaderVisible(false);
 		grid.stopEditing();
 		store.removeAll();
 		store.add(list);

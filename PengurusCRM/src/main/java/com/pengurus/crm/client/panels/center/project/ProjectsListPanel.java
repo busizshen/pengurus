@@ -29,6 +29,9 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 
 	ListPagination<ProjectModel> listPagination;
 
+	public ProjectsListPanel(){
+		setHeading("Projects");
+	}
 	protected abstract void initPagination();
 
 	@Override

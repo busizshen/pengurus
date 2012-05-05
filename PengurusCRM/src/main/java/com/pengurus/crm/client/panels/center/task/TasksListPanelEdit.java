@@ -15,7 +15,6 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
-import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.TaskModel;
 import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.ProjectDTO;
@@ -65,16 +64,6 @@ public class TasksListPanelEdit extends TasksListPanel {
 							@Override
 							public void handleEvent(DomEvent be) {
 								if (taskPanel.getTaskDTO() != null) {
-									/*
-									 * ml.getGrid().stopEditing();
-									 * ml.getStore().add( new
-									 * TaskModel(taskPanel .getTaskDTO()));
-									 * ml.getGrid().startEditing(0, 0);
-									 */
-									/*
-									 * jobDTO.getTask()
-									 * .add(taskPanel.getTaskDTO());
-									 */
 									window.hide();
 								}
 							}
@@ -118,18 +107,6 @@ public class TasksListPanelEdit extends TasksListPanel {
 						});
 				b.setToolTip("Click to see");
 				buttonBar.add(b);
-				if (AuthorizationManager.canChangeTask()) {
-					b = new Button("DELETE",
-
-					new SelectionListener<ButtonEvent>() {
-						@Override
-						public void componentSelected(ButtonEvent ce) {
-
-						}
-					});
-					b.setToolTip("Click to see");
-					buttonBar.add(b);
-				}
 				return buttonBar;
 			}
 		};

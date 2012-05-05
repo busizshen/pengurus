@@ -69,7 +69,16 @@ public class TranslationModel extends BaseModel {
 
 	@Override
 	public String toString() {
-		return "" + getFrom() + " -> " + getTo() + " - " + getTo() + " ("
+		return "" + getFrom() + " -> " + getTo() +  " ("
 				+ getDefaultPrice() + " " + getDefaultPriceCurrency() + ")";
 	}
+	
+	public String toStringTranslation() {
+		return "" + getFrom() + " -> " + getTo();
+	}
+	
+	public String toStringAmount(Integer amount) {
+		return "" + amount + "  " + translationDTO.getType().getUnit();
+	}
+	
 }

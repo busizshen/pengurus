@@ -6,10 +6,10 @@ import java.util.List;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.google.gwt.user.client.Timer;
+import com.pengurus.crm.client.panels.center.MainPanel;
 
 /**
  * Monitors the valid state of a form and enabled / disabled all buttons.
@@ -21,9 +21,9 @@ public class UserFormButtonBinding {
 	private int interval = 500;
 	private Listener<ComponentEvent> listener;
 	private List<Button> buttons;
-	private ContentPanel panel;
+	private MainPanel panel;
 
-	public UserFormButtonBinding(ContentPanel panel) {
+	public UserFormButtonBinding(MainPanel panel) {
 		this.panel = panel;
 		
 		fields = new ArrayList<Field<?>>();

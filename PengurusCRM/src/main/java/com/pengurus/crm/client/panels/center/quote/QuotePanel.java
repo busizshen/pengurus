@@ -22,65 +22,36 @@ public abstract class QuotePanel extends MainPanel {
 	ClientPanel clientPanel;
 
 	public QuotePanel() {
+		setHeading("Quote");
 		this.quoteDTO = new QuoteDTO();
 		getInfoPanel();
 	}
 
 	public QuotePanel(QuoteDTO quoteDTO) {
+		setHeading("Quote");
 		this.quoteDTO = quoteDTO;
 		getInfoPanel();
-		getJobsPanel();
 	}
-
-	/*
-	 * class QuoteView extends ContentPanel {
-	 */
-	/*
-	 * public QuoteView() { setLayout(new FlowLayout(10));
-	 * addEditionPanel(this); setHeading("Quote Panel"); getInfoPanel();
-	 * getStatusPanel(this); getClientPanel(this); getSupervisorPanel(this);
-	 * getJobsPanel(this); getDescriptionPanel(this); }
-	 */
 
 	private void getInfoPanel() {
-		FormPanel simple = new FormPanel();
-		simple.setFrame(false);
-		simple.setHeaderVisible(false);
-		simple.setBorders(true);
-		simple.setAutoHeight(true);
-		simple.setAutoWidth(true);
 
-		HorizontalPanel hp = new HorizontalPanel();
-		hp.setSpacing(10);
+		VerticalPanel vp0 = new VerticalPanel();
+		HorizontalPanel hp0 = new HorizontalPanel();
+		addDescriptionPanel(hp0);
+		addButtonPanel(hp0);
+		vp0.add(hp0);
+		VerticalPanel vp = new VerticalPanel();
+		addSupervisorPanel(vp);
+		addClientPanel(vp);
+		vp0.add(vp);
+		getJobsPanel(vp0);
+		addFilesPanel(vp0);
 
-		// pierwsza kolumna
-		VerticalPanel vp1 = new VerticalPanel();
-		vp1.setSpacing(5);
+		add(vp0);
 
-		HorizontalPanel hp2 = new HorizontalPanel();
-		hp2.setSpacing(5);
-		addButtonPanel(hp2);
-
-		vp1.add(hp2);
-
-		addStatusPanel(vp1);
-
-		addSupervisorPanel(vp1);
-
-		addClientPanel(vp1);
-
-		hp.add(vp1);
-
-		// druga kolumna
-		VerticalPanel vp2 = new VerticalPanel();
-		vp1.setSpacing(5);
-		addDescriptionPanel(vp2);
-		hp.add(vp2);
-		simple.add(hp);
-		add(simple);
 	}
 
-	protected abstract void addDescriptionPanel(VerticalPanel vpPanel);
+	protected abstract void addDescriptionPanel(HorizontalPanel hp0);
 
 	protected abstract void addClientPanel(VerticalPanel vpPanel);
 
@@ -103,7 +74,7 @@ public abstract class QuotePanel extends MainPanel {
 		vp1.add(statusPanel);
 	}
 
-	protected void getJobsPanel() {
-	}
+	protected abstract void getJobsPanel(VerticalPanel vp0);
 
+	protected abstract void addFilesPanel(VerticalPanel vp0);
 }

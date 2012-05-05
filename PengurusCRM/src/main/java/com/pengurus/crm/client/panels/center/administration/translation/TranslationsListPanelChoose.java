@@ -78,7 +78,7 @@ public class TranslationsListPanelChoose extends TranslationsListPanel {
 
 	@Override
 	protected void setStyle(ContentPanel cp) {
-		setHeaderVisible(false);
+	//	setHeaderVisible(false);
 		setAutoHeight(false);
 		setAutoWidth(false);
 		cp.setCollapsible(true);

@@ -3,6 +3,7 @@ package com.pengurus.crm.client.panels.center.job;
 import java.util.Set;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.DomEvent;
 import com.extjs.gxt.ui.client.event.Events;
@@ -45,7 +46,12 @@ public class JobPanelCreate {
 	private Listener<DomEvent> listenerClose;
 	private ListStore<CurrencyModel> listCurrencyModel;
 	private ListStore<TranslationModel> listTranslationModel;
+	private NumberField amount;
+	private NumberField price;
+	private ComboBox<CurrencyModel> combo; 
+	private TranslationPanel translation;
 
+	
 	public JobPanelCreate() {
 		listCurrencyModel = new ListStore<CurrencyModel>();
 		listTranslationModel = new ListStore<TranslationModel>();
@@ -99,8 +105,7 @@ public class JobPanelCreate {
 	public class JobPanelInfo extends LayoutContainer {
 
 		private VerticalPanel panel;
-		private TranslationPanel translation;
-
+		
 		public JobPanelInfo() {
 			panel = new VerticalPanel();
 			panel.setSpacing(10);
@@ -129,25 +134,49 @@ public class JobPanelCreate {
 			date.setData("text", "Enter deadline");
 			simple2.add(date);
 
-			final NumberField amount = new NumberField();
+			amount = new NumberField();
 			amount.setFieldLabel("Amount");
 			amount.setAllowBlank(false);
 			amount.setData("text", "Enter amount and choose Currnecy");
+			amount.addListener(Events.OnChange, new Listener<BaseEvent>() {
+
+				@Override
+				public void handleEvent(BaseEvent be) {
+					updateTranslation();
+					
+				}
+			});
 			simple2.add(amount);
 
-			final NumberField price = new NumberField();
+			price = new NumberField();
 			price.setFieldLabel("Price");
 			price.setAllowBlank(false);
 			price.setData("text", "Enter price and choose Currnecy");
+			price.addListener(Events.OnChange, new Listener<BaseEvent>() {
+
+				@Override
+				public void handleEvent(BaseEvent be) {
+					updateTranslation();
+					
+				}
+			});
 			simple2.add(price);
 
-			final ComboBox<CurrencyModel> combo = new ComboBox<CurrencyModel>();
+			combo = new ComboBox<CurrencyModel>();
 			combo.setFieldLabel("Currency");
 			combo.setDisplayField("currency");
 			combo.setTriggerAction(TriggerAction.ALL);
 			combo.setStore(listCurrencyModel);
 			combo.setData("text", "Choose Language");
 			combo.setAllowBlank(false);
+			combo.addListener(Events.OnChange, new Listener<BaseEvent>() {
+
+				@Override
+				public void handleEvent(BaseEvent be) {
+					updateTranslation();
+					
+				}
+			});
 			simple2.add(combo);
 			hp.add(simple2);
 			final DescriptionPanel descr = new DescriptionPanelEdit(100,300);
@@ -155,8 +184,7 @@ public class JobPanelCreate {
 
 			simple.add(hp);
 
-			translation = new TranslationPanelChange(listTranslationModel);
-			translation.setAllowBlank(false);
+			translation = new TranslationPanelChange(listTranslationModel,0,null);
 			simple.add(translation);
 
 			Button buttonSubmit = new Button("Submit",
@@ -192,6 +220,7 @@ public class JobPanelCreate {
 
 									public void onSuccess(JobDTO result) {
 										quoteDTO.getJobs().add(result);
+										quoteDTO.update();
 										jobsList.refreshList(result);
 									}
 								};
@@ -222,5 +251,17 @@ public class JobPanelCreate {
 
 			panel.add(simple);
 		}
+	}
+	
+	protected void updateTranslation() {
+		Integer amountVal = 0;
+		
+		if(amount.getValue() != null )
+			amountVal = amount.getValue().intValue();
+		PriceDTO priceVal = null ;
+		if(combo.getValue() != null && price.getValue() != null)
+			priceVal  = new PriceDTO(price.getValue().intValue(),combo.getValue().getCurrencyDTO());
+		translation.setTranslationValues(translation.getTranslation(), amountVal, priceVal);
+
 	}
 }

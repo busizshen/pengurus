@@ -1,6 +1,6 @@
 package com.pengurus.crm.client.panels.center.job;
 
-import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 
 public class JobsListPanelProjectView extends JobsListPanelProject{
@@ -9,7 +9,7 @@ public class JobsListPanelProjectView extends JobsListPanelProject{
 		super(projectDTO);
 	}
 
-	public ContentPanel getPanel() {
+	public MainPanel getPanel() {
 		setHeading("Jobs");
 		modelList = new ModelList();
 		add(modelList);

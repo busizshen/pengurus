@@ -15,6 +15,9 @@ import com.pengurus.crm.shared.dto.TaskDTO;
 public abstract class TasksListPanel extends ListPanel<TaskModel> {
 
 	
+	public TasksListPanel(){
+		setHeading("Tasks");
+	}
 	protected ListStore<TaskModel> tasks = new ListStore<TaskModel>();
 	
 	@Override
@@ -81,9 +84,6 @@ public abstract class TasksListPanel extends ListPanel<TaskModel> {
 
 	@Override
 	protected void setStyle(ContentPanel cp) {
-		setHeading("Tasks");
-		setAnimCollapse(true);
-		setCollapsible(true);
 		expand();
 	}
 	

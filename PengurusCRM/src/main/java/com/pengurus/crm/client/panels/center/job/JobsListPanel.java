@@ -18,6 +18,7 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 
 	public JobsListPanel(){
 		super();
+		setHeading("Jobs");
 	}
 
 	@Override

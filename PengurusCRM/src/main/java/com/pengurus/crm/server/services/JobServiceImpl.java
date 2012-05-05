@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.pengurus.crm.client.service.JobService;
@@ -16,13 +18,14 @@ import com.pengurus.crm.entities.Quote;
 import com.pengurus.crm.enums.StatusJob;
 import com.pengurus.crm.enums.StatusQuote;
 import com.pengurus.crm.shared.dto.JobDTO;
+import com.pengurus.crm.shared.dto.StatusJobDTO;
 
 public class JobServiceImpl implements JobService {
 
 	private QuoteDAO quoteDAO;
 	private JobDAO jobDAO;
 	private TranslationDAO translationDAO;
-
+	
 	public JobDAO getJobDAO() {
 		return jobDAO;
 	}

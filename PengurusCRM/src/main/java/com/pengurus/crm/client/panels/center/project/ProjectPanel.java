@@ -1,7 +1,6 @@
 package com.pengurus.crm.client.panels.center.project;
 
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.panels.center.MainPanel;
@@ -20,62 +19,44 @@ public abstract class ProjectPanel extends MainPanel {
 	
 	public ProjectPanel(ProjectDTO projectDTO){
 		this.projectDTO = projectDTO;
-		setHeading("Project Panel View");
+		setHeading("Project");
 		addInfoPanel();
-		addJobsPanel();
 		
 	}
 
 	protected abstract void getTranslatorsPanel(HorizontalPanel hp3);
 
-	protected void addJobsPanel() {
+	protected void addJobsPanel(VerticalPanel vp) {
 		JobsListPanelProjectView jobsPanel = new JobsListPanelProjectView(projectDTO);
-		add(jobsPanel.getPanel());	
+		vp.add(jobsPanel.getPanel());	
 	}
 
 	protected abstract void getProjectMangaersPanel(HorizontalPanel hp3);
 	
 	protected void addInfoPanel() {
-		FormPanel simple = new FormPanel(); 
-		simple.setFrame(false);
-		simple.setHeaderVisible(false);
-		simple.setBorders(true);
-		simple.setAutoHeight(true);
-		simple.setAutoWidth(true);
-		HorizontalPanel hp2 = new HorizontalPanel();
-		hp2.setSpacing(5);
-
-		addButtonPanel(hp2);
-
-		simple.add(hp2);
-		HorizontalPanel hp = new HorizontalPanel();
-		hp.setSpacing(10);
+		VerticalPanel vp0 = new VerticalPanel();
+		HorizontalPanel hp0 = new HorizontalPanel();
+		addDescriptionPanel(hp0);
+		addButtonPanel(hp0);
+		vp0.add(hp0);
 		VerticalPanel vp = new VerticalPanel();
-		vp.setSpacing(5);
-		
 		addSupervisorPanel(vp);
-		
 		addClientPanel(vp);
-		
-		hp.add(vp);
-
-		VerticalPanel vp2 = new VerticalPanel();
-		vp2.setSpacing(20);
-		addDescriptionPanel(vp2);
-		
-		hp.add(vp2);
-		simple.add(hp);
+		vp0.add(vp);
 		HorizontalPanel hp3 = new HorizontalPanel();
 		hp3.setSpacing(20);
 		getProjectMangaersPanel(hp3);
 		getTranslatorsPanel(hp3);
-		simple.add(hp3);
-		add(simple);
+		vp0.add(hp3);
+		addJobsPanel(vp0);
+		
+		add(vp0);
+
 	}
 
 	protected abstract void addButtonPanel(HorizontalPanel hp2);
 
-	protected abstract void addDescriptionPanel(VerticalPanel vp);
+	protected abstract void addDescriptionPanel(HorizontalPanel vp);
 
 	protected void addSupervisorPanel(VerticalPanel vp) {
 		supervisorPanel = new WorkerPanelView(projectDTO.getSupervisor(),"Supervisor");

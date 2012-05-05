@@ -40,5 +40,10 @@ public class PriceDTO implements IsSerializable {
 	    public void setId(Long id) {
 	        this.id = id;
 	    }
+	    
+	    public String toString(){
+	    	return price.toString() + " " + currency.getCurrency();
+	    
+	    }
 
 }

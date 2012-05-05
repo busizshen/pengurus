@@ -114,9 +114,9 @@ public class ProjectPanelEdit extends ProjectPanel {
 	}
 
 	@Override
-	protected void addDescriptionPanel(VerticalPanel vp) {
+	protected void addDescriptionPanel(HorizontalPanel vp) {
 		descriptionPanel = new DescriptionPanelEdit(
-				projectDTO.getDescription(), 100, 300);
+				projectDTO.getDescription(), 50, 450);
 		vp.add(descriptionPanel);
 	}
 

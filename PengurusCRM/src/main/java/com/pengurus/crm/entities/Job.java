@@ -43,6 +43,7 @@ public class Job {
 				this.status = StatusJob.toStatus(jobDTO.getStatus());
 			this.deadline = jobDTO.getDeadline();
 			this.description = jobDTO.getDescription();
+			this.amount = jobDTO.getAmount();
 			if (jobDTO.getPrice() != null)
 				this.price = new Price(jobDTO.getPrice());
 			if (jobDTO.getTranslation() != null)

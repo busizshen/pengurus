@@ -1,9 +1,17 @@
 package com.pengurus.crm.client.panels.center.job;
 
+import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.pengurus.crm.client.models.TranslationModel;
+import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanelView;
+import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
+import com.pengurus.crm.client.panels.center.description.DescriptionPanelView;
+import com.pengurus.crm.client.panels.center.filespanel.FilesPanel;
+import com.pengurus.crm.client.panels.center.filespanel.FilesPanelInput;
+import com.pengurus.crm.client.panels.center.filespanel.FilesPanelOutput;
 import com.pengurus.crm.client.panels.center.project.ProjectPanel;
 import com.pengurus.crm.client.panels.center.project.ProjectPanelView;
 import com.pengurus.crm.client.panels.center.status.JobStatusPanelProject;
@@ -20,13 +28,29 @@ public class JobPanelProject extends JobPanel {
 	public JobPanelProject(JobDTO jobDTO, ProjectDTO projectDTO) {
 		super(jobDTO);
 		this.projectDTO = projectDTO;
-		addTasksList();
+		addInfoPanel();
 	}
 
-	private void addTasksList() {
+	@Override
+	protected void addInfoPanel() {
+		VerticalPanel vp0 = new VerticalPanel();
+		HorizontalPanel hp0 = new HorizontalPanel();
+		hp0.add(getDeadlinePanel());
+		deadline.setReadOnly(true);
+		hp0.add(addDescriptionPanel());
+		hp0.add(getbuttonPanel());
+		vp0.add(hp0);
+		addStatusPanel(vp0);
+		addTranslationPanel(vp0);
+		addTasksList(vp0);
+		addFilesPanel(vp0);
+		add(vp0);
+	}
+
+	private void addTasksList(VerticalPanel vp) {
 		TasksListPanelEdit tasks = new TasksListPanelEdit(jobDTO.getTask(),
 				jobDTO, projectDTO);
-		add(tasks);
+		vp.add(tasks);
 	}
 
 	@Override
@@ -66,6 +90,32 @@ public class JobPanelProject extends JobPanel {
 	protected void addStatusPanel(VerticalPanel vp) {
 		this.jobStatusPanel = new JobStatusPanelProject(jobDTO, projectDTO);
 		vp.add(jobStatusPanel);
+	}
+
+	@Override
+	protected void addTranslationPanel(VerticalPanel vp) {
+		if (jobDTO.getTranslation() != null)
+			translation = new TranslationPanelView(new TranslationModel(
+					jobDTO.getTranslation()), jobDTO.getAmount(),
+					jobDTO.getPrice());
+		else
+			translation = new TranslationPanelView();
+		vp.add(translation);
+	}
+
+	protected DescriptionPanel addDescriptionPanel() {
+		description = new DescriptionPanelView(jobDTO.getDescription(), 50, 350);
+		return description;
+	}
+
+	@Override
+	protected void addFilesPanel(VerticalPanel vp0) {
+		FilesPanel filesPanelIn = new FilesPanelInput(projectDTO.getQuoteId(),
+				jobDTO.getId(), new Long(0));
+		vp0.add(filesPanelIn);
+		FilesPanel filesPanelOut = new FilesPanelOutput(
+				projectDTO.getQuoteId(), jobDTO.getId(), new Long(0));
+		vp0.add(filesPanelOut);
 	}
 
 }

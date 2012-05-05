@@ -55,8 +55,6 @@ public class CommentListPanel extends ListPanel<CommentModel> {
 	@Override
 	protected ListStore<CommentModel> getList() {
 		ListStore<CommentModel> comments = new ListStore<CommentModel>();
-		comments.add(new CommentModel(new CommentDTO("kurwa",
-				AuthorizationManager.getCurrentUser())));
 		return comments;
 	}
 

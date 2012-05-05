@@ -12,6 +12,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.MainWindow;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
+import com.pengurus.crm.client.panels.center.filespanel.FilesPanel;
+import com.pengurus.crm.client.panels.center.filespanel.FilesPanelInput;
+import com.pengurus.crm.client.panels.center.filespanel.FilesPanelOutput;
 import com.pengurus.crm.client.panels.center.job.JobsListPanelQuoteEdit;
 import com.pengurus.crm.client.panels.center.user.client.ClientPanelEdit;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEditByRoles;
@@ -61,8 +64,7 @@ public class QuotePanelEdit extends QuotePanel {
 					QuotePanelView qp = new QuotePanelView(quoteDTO);
 					qp.setAsMain();
 				}
-			});
-			hp.add(buttonCancel);
+			});			hp.add(buttonCancel);
 			hpPanel.add(hp);
 		}
 	}
@@ -85,19 +87,27 @@ public class QuotePanelEdit extends QuotePanel {
 	}
 
 	@Override
-	protected void addDescriptionPanel(VerticalPanel vpPanel) {
+	protected void addDescriptionPanel(HorizontalPanel vpPanel) {
 		descriptionPanel = new DescriptionPanelEdit(quoteDTO.getDescription(),
-				100, 300);
+				50, 450);
 		vpPanel.add(descriptionPanel);
 	}
 
 	@Override
-	protected void getJobsPanel() {
+	protected void getJobsPanel(VerticalPanel vp0) {
 		if (quoteDTO.getJobs() != null) {
 			jobsList = new JobsListPanelQuoteEdit(quoteDTO);
-			add(jobsList.getPanel());
+			vp0.add(jobsList.getPanel());
 		}
 
+	}
+
+	@Override
+	protected void addFilesPanel(VerticalPanel vp0) {
+		FilesPanel filesPanelIn = new FilesPanelInput(quoteDTO.getId(),new Long(0), new Long(0));
+		vp0.add(filesPanelIn);
+		FilesPanel filesPanelOut = new FilesPanelOutput(quoteDTO.getId(), new Long(0), new Long(0));
+		vp0.add(filesPanelOut);
 	}
 
 }
