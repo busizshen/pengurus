@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 
 import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
+import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 public class PermissionEvaluatorImpl implements PermissionEvaluator {
 
@@ -33,17 +34,20 @@ public class PermissionEvaluatorImpl implements PermissionEvaluator {
 		}
 		
 		if (targetDomainObject instanceof UserDTO) {
-			return hasPermission(authentication.getName(), (UserDTO)targetDomainObject, permission);
+			return hasPermission(authentication, (UserDTO)targetDomainObject, permission);
 		} else if (targetDomainObject instanceof ProjectDTO) {
 			return hasPermission(authentication.getName(), (ProjectDTO)targetDomainObject, permission);
 		}
 		return false;
 	}
 
-	private boolean hasPermission(String username,
+	private boolean hasPermission(Authentication authentication,
 			UserDTO user, Object permission) {
+		String username = authentication.getName();
 		if ("read".equals(permission)) {
-			return username.equals(user.getUsername());
+			return username.equals(user.getUsername()) ||
+					user.getAuthorities().contains(UserRoleDTO.ROLE_EXECUTIVE) ||
+					authentication.getAuthorities().contains(UserRoleDTO.ROLE_WORKER.toString());
 		} else if ("write".equals(permission)) {
 			return username.equals(user.getUsername());
 		}

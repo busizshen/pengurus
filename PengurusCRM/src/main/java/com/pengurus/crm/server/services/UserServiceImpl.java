@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
@@ -103,7 +104,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@PreAuthorize("hasRole('ROLE_WORKER')")
+	@PostFilter("hasPermission(filterObject, 'read')")
 	public Set<UserDTO> getAllUsers() {
 		List<User> list = userDAO.getAll();
 		Set<UserDTO> set = new HashSet<UserDTO>();
@@ -114,7 +115,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@PreAuthorize("hasRole('ROLE_WORKER')")
+	@PostFilter("hasPermission(filterObject, 'read')")
 	public Set<UserDTO> getUsersByRoles(Set<UserRoleDTO> roles) {
 		List<User> list = userDAO.getAll();
 		Set<UserDTO> set = new HashSet<UserDTO>();
