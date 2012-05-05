@@ -10,6 +10,7 @@ import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 
 import com.pengurus.crm.shared.dto.ProjectDTO;
+import com.pengurus.crm.shared.dto.QuoteDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
@@ -37,7 +38,19 @@ public class PermissionEvaluatorImpl implements PermissionEvaluator {
 			return hasPermission(authentication, (UserDTO)targetDomainObject, permission);
 		} else if (targetDomainObject instanceof ProjectDTO) {
 			return hasPermission(authentication.getName(), (ProjectDTO)targetDomainObject, permission);
+		}	else if (targetDomainObject instanceof QuoteDTO) {
+			return hasPermission(authentication.getName(), (QuoteDTO)targetDomainObject, permission);
 		}
+		return false;
+	}
+
+	private boolean hasPermission(String name, QuoteDTO quote,
+			Object permission) {
+		logger.error(quote.getClient().getUsername());
+
+		logger.error(name);
+		if(quote.getClient() != null)
+			return quote.getClient().getUsername().equals(name);
 		return false;
 	}
 

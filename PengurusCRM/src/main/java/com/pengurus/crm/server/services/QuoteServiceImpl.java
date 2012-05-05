@@ -41,7 +41,7 @@ public class QuoteServiceImpl implements QuoteService {
 	}
 
 	@Override
-	@PreAuthorize("hasRole('ROLE_EXECUTIVE')")
+	@PreAuthorize("hasRole('ROLE_EXECUTIVE', 'ROLE_ACCOUNTANT')")
 	public Set<QuoteDTO> getAllQuotes() {
 		List<Quote> list = quoteDAO.loadAll();
 		Set<QuoteDTO> set = new HashSet<QuoteDTO>();
@@ -79,7 +79,7 @@ public class QuoteServiceImpl implements QuoteService {
 	}
 
 	@Override
-	@PostAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_ACCOUNTANT') or hasPermission(#quoteDTO, 'write')")
+	@PostAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_ACCOUNTANT') or hasPermission(returnObject, 'write')")
 	public QuoteDTO getQuote(Long id) {
 		return quoteDAO.getById(id).toDTO();
 	}

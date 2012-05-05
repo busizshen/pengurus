@@ -83,6 +83,14 @@ public class AuthorizationManager {
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
 		return currentUser.haveAuthority(roles);
 	}
+	
+	public static boolean canViewAllQuotes() {
+		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
+		roles.add(UserRoleDTO.ROLE_ACCOUNTANT);
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
+		return currentUser.haveAuthority(roles);
+	}
+
 
 	public static boolean canViewAll() {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
@@ -109,7 +117,6 @@ public class AuthorizationManager {
 
 	public static boolean canViewProjects() {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		roles.add(UserRoleDTO.ROLE_CLIENT);
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
 		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		return currentUser.haveAuthority(roles);

@@ -24,7 +24,7 @@ public class QuotesMenuPanel extends TabMenuPanel {
 	}
 
 	private void addButtonCreate() {
-		if (AuthorizationManager.hasExecutiveAccess()) {
+		if (AuthorizationManager.canViewAllQuotes()) {
 			Button b = new Button("Create New");
 			b.addSelectionListener(new SelectionListener<ButtonEvent>() {
 				@Override
@@ -59,7 +59,7 @@ public class QuotesMenuPanel extends TabMenuPanel {
 	}
 
 	private void addButtonAll() {
-		if (AuthorizationManager.canViewAll()) {
+		if (AuthorizationManager.canViewAllQuotes()) {
 			Button b = new Button("All");
 			b.addSelectionListener(new SelectionListener<ButtonEvent>() {
 				@Override
