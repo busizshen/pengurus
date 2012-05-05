@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.pengurus.crm.client.service.TaskService;
@@ -25,14 +26,14 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_EXPERT')")
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_PROJECTMANAGER')")
 	public TaskDTO createTask(TaskDTO taskDTO) {
 		taskDTO.setId(taskDAO.create(new Task(taskDTO)));
 		return taskDTO;
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_EXPERT')")
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_PROJECTMANAGER') or hasPermission(#taskDTO, 'write')")
 	public void updateStatus(TaskDTO taskDTO) {
 		Task task = taskDAO.read(taskDTO.getId());
 		task.setStatus(StatusTask.toStatus(taskDTO.getStatus()));
@@ -40,7 +41,7 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_EXPERT')")
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_PROJECTMANAGER') or hasPermission(#taskDTO, 'write')")
 	public void update(TaskDTO taskDTO) {
 		Task task = new Task(taskDTO);
 		taskDAO.update(task);
@@ -54,7 +55,8 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_EXPERT', 'ROLE_ACCOUNTANT')")
+	@PreAuthorize("hasRole('ROLE_WORKER')")
+	@PostFilter("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_PROJECTMANAGER', 'ROLE_ACCOUNTANT') or hasPermission(filterObject, 'read')")
 	public Set<TaskDTO> getTasksByExpertId(Long id) {
 		List<Task> list = taskDAO.loadAllByExpertId(id);
 		Set<TaskDTO> set = new HashSet<TaskDTO>();
@@ -65,7 +67,8 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_EXPERT', 'ROLE_ACCOUNTANT')")
+	@PreAuthorize("hasRole('ROLE_WORKER')")
+	@PostFilter("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_PROJECTMANAGER', 'ROLE_ACCOUNTANT') or hasPermission(filterObject, 'read')")
 	public Set<TaskDTO> getAllTasks() {
 		List<Task> list = taskDAO.loadAll();
 		Set<TaskDTO> set = new HashSet<TaskDTO>();

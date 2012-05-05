@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 
 import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.QuoteDTO;
+import com.pengurus.crm.shared.dto.TaskDTO;
 import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
@@ -38,19 +39,11 @@ public class PermissionEvaluatorImpl implements PermissionEvaluator {
 			return hasPermission(authentication, (UserDTO)targetDomainObject, permission);
 		} else if (targetDomainObject instanceof ProjectDTO) {
 			return hasPermission(authentication.getName(), (ProjectDTO)targetDomainObject, permission);
-		}	else if (targetDomainObject instanceof QuoteDTO) {
+		} else if (targetDomainObject instanceof QuoteDTO) {
 			return hasPermission(authentication.getName(), (QuoteDTO)targetDomainObject, permission);
+		} else if (targetDomainObject instanceof TaskDTO) {
+			return hasPermission(authentication.getName(), (TaskDTO)targetDomainObject, permission);
 		}
-		return false;
-	}
-
-	private boolean hasPermission(String name, QuoteDTO quote,
-			Object permission) {
-		logger.error(quote.getClient().getUsername());
-
-		logger.error(name);
-		if(quote.getClient() != null)
-			return quote.getClient().getUsername().equals(name);
 		return false;
 	}
 
@@ -85,6 +78,24 @@ public class PermissionEvaluatorImpl implements PermissionEvaluator {
 			return containUsername(new ArrayList<UserDTO>(project.getProjectManagers()), username);
 		}
 		return false;
+	}
+
+	private boolean hasPermission(String name, QuoteDTO quote, Object permission) {
+		if(quote.getClient() != null) {
+			return quote.getClient().getUsername().equals(name);
+		}
+		return false;
+	}
+	
+	private boolean hasPermission(String username, TaskDTO task, Object permission) {
+		boolean result = false;
+		if (task.getExpert() != null) {
+			result |= task.getExpert().getUsername().equals(username);
+		}
+		if (task.getReviewer() != null) {
+			result |= task.getReviewer().getUsername().equals(username);
+		}
+		return result;
 	}
 	
 	@Override

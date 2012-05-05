@@ -7,6 +7,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.pengurus.crm.client.service.QuoteService;
@@ -97,6 +98,7 @@ public class QuoteServiceImpl implements QuoteService {
 
 	@Override
 	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_ACCOUNTANT', 'ROLE_CLIENT')")
+	@PostFilter("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_ACCOUNTANT') or hasPermission(filterObject, 'read')")
 	public Set<QuoteDTO> getQuotesByClientId(Long id) {
 		List<Quote> list = quoteDAO.loadAllByClientId(id);
 		Set<QuoteDTO> set = new HashSet<QuoteDTO>();
