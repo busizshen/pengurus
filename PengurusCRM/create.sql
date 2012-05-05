@@ -541,9 +541,9 @@ INSERT INTO price (id, price, currency) VALUES (507, 250, 90);
 -- Data for Name: project; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO project (project_id, quoteid, client, supervisor, description) VALUES (472, 0, 383, 424, 'Intérprete de personal para la conferencia en Nueva York.
+INSERT INTO project (project_id, quoteid, client, supervisor, description) VALUES (472, 428, 383, 424, 'Intérprete de personal para la conferencia en Nueva York.
 Personal interpreter for the conference in New York.');
-INSERT INTO project (project_id, quoteid, client, supervisor, description) VALUES (484, 0, 450, 426, 'Translation of latin manuscript, which is going to be part of a horror scenario.');
+INSERT INTO project (project_id, quoteid, client, supervisor, description) VALUES (484, 477, 450, 426, 'Translation of latin manuscript, which is going to be part of a horror scenario.');
 
 
 --
