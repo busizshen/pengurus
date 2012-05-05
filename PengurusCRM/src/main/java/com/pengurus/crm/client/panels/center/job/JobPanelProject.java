@@ -111,10 +111,11 @@ public class JobPanelProject extends JobPanel {
 	@Override
 	protected void addFilesPanel(VerticalPanel vp0) {
 		FilesPanel filesPanelIn = new FilesPanelInput(projectDTO.getQuoteId(),
-				jobDTO.getId(), new Long(0));
+				jobDTO.getId(), new Long(0), true, true);
 		vp0.add(filesPanelIn);
 		FilesPanel filesPanelOut = new FilesPanelOutput(
-				projectDTO.getQuoteId(), jobDTO.getId(), new Long(0));
+				projectDTO.getQuoteId(), jobDTO.getId(), new Long(0), true,
+				true);
 		vp0.add(filesPanelOut);
 	}
 

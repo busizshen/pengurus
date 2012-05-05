@@ -49,22 +49,25 @@ public class QuotePanelEdit extends QuotePanel {
 						}
 					});
 			hp.add(buttonUpdate);
-			Button buttonCancel = new Button("Delete", new SelectionListener<ButtonEvent>() {
-				@Override
-				public void componentSelected(ButtonEvent ce) {
-					quoteDTO.delete();
-					MainWindow.addCenterPanel(new ContentPanel());
+			Button buttonCancel = new Button("Delete",
+					new SelectionListener<ButtonEvent>() {
+						@Override
+						public void componentSelected(ButtonEvent ce) {
+							quoteDTO.delete();
+							MainWindow.addCenterPanel(new ContentPanel());
 
-				}
-			});
+						}
+					});
 			hp.add(buttonCancel);
-			buttonCancel = new Button("Cancel", new SelectionListener<ButtonEvent>() {
-				@Override
-				public void componentSelected(ButtonEvent ce) {
-					QuotePanelView qp = new QuotePanelView(quoteDTO);
-					qp.setAsMain();
-				}
-			});			hp.add(buttonCancel);
+			buttonCancel = new Button("Cancel",
+					new SelectionListener<ButtonEvent>() {
+						@Override
+						public void componentSelected(ButtonEvent ce) {
+							QuotePanelView qp = new QuotePanelView(quoteDTO);
+							qp.setAsMain();
+						}
+					});
+			hp.add(buttonCancel);
 			hpPanel.add(hp);
 		}
 	}
@@ -104,9 +107,11 @@ public class QuotePanelEdit extends QuotePanel {
 
 	@Override
 	protected void addFilesPanel(VerticalPanel vp0) {
-		FilesPanel filesPanelIn = new FilesPanelInput(quoteDTO.getId(),new Long(0), new Long(0));
+		FilesPanel filesPanelIn = new FilesPanelInput(quoteDTO.getId(),
+				new Long(0), new Long(0), true, true);
 		vp0.add(filesPanelIn);
-		FilesPanel filesPanelOut = new FilesPanelOutput(quoteDTO.getId(), new Long(0), new Long(0));
+		FilesPanel filesPanelOut = new FilesPanelOutput(quoteDTO.getId(),
+				new Long(0), new Long(0), true, true);
 		vp0.add(filesPanelOut);
 	}
 

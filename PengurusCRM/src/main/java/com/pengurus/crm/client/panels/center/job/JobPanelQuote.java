@@ -235,10 +235,10 @@ public class JobPanelQuote extends JobPanel {
 	@Override
 	protected void addFilesPanel(VerticalPanel vp0) {
 		FilesPanel filesPanelIn = new FilesPanelInput(quoteDTO.getId(),
-				jobDTO.getId(), new Long(0));
+				jobDTO.getId(), new Long(0), true, true);
 		vp0.add(filesPanelIn);
 		FilesPanel filesPanelOut = new FilesPanelOutput(quoteDTO.getId(),
-				jobDTO.getId(), new Long(0));
+				jobDTO.getId(), new Long(0), true, true);
 		vp0.add(filesPanelOut);
 	}
 }

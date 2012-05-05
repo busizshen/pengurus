@@ -190,11 +190,11 @@ public class TaskPanelView extends TaskPanel {
 
 	protected void addFilesPanel(VerticalPanel vp0) {
 		FilesPanel filesPanelIn = new FilesPanelInput(projectDTO.getQuoteId(),
-				taskDTO.getJob().getId(), taskDTO.getId());
+				taskDTO.getJob().getId(), taskDTO.getId(), true, true);
 		vp0.add(filesPanelIn);
 		FilesPanel filesPanelOut = new FilesPanelOutput(
 				projectDTO.getQuoteId(), taskDTO.getJob().getId(),
-				taskDTO.getId());
+				taskDTO.getId(), true, true);
 		vp0.add(filesPanelOut);
 	}
 

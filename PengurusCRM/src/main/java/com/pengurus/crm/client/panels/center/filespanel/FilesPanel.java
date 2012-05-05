@@ -42,14 +42,20 @@ public abstract class FilesPanel extends ContentPanel {
 	private Long jobId;
 	private Long taskId;
 	private Long stateId;
+	private boolean canUpload;
+	private boolean canDelete;
+	private Button remove;
 	private Grid<FileModel> grid;
 
-	public FilesPanel(Long quoteId, Long jobId, Long taskId, Long stateId) {
+	public FilesPanel(Long quoteId, Long jobId, Long taskId, Long stateId,
+			boolean canUpload, boolean canDelete) {
 		super();
 		this.quoteId = quoteId;
 		this.jobId = jobId;
 		this.taskId = taskId;
 		this.stateId = stateId;
+		this.canUpload = canUpload;
+		this.canDelete = canDelete;
 		createGrid();
 
 	}
@@ -85,57 +91,62 @@ public abstract class FilesPanel extends ContentPanel {
 		grid.getAriaSupport().setLabelledBy(getHeader().getId() + "-label");
 
 		ToolBar toolBar = new ToolBar();
+		if (canUpload) {
+			Button upload = new Button("upload new file",
+					new SelectionListener<ButtonEvent>() {
 
-		Button upload = new Button("upload new file",
-				new SelectionListener<ButtonEvent>() {
+						@Override
+						public void componentSelected(ButtonEvent ce) {
+							createWindow();
+						}
 
-					@Override
-					public void componentSelected(ButtonEvent ce) {
-						createWindow();
-					}
+					});
+			toolBar.add(upload);
+		}
 
-				});
-		toolBar.add(upload);
+		if (canDelete) {
+			remove = new Button("remove selected file",
+					new SelectionListener<ButtonEvent>() {
 
-		final Button remove = new Button("remove selected file",
-				new SelectionListener<ButtonEvent>() {
+						@Override
+						public void componentSelected(ButtonEvent ce) {
+							FileModel file = sm.getSelectedItem();
+							if (file != null) {
+								AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 
-					@Override
-					public void componentSelected(ButtonEvent ce) {
-						FileModel file = sm.getSelectedItem();
-						if (file != null) {
-							AsyncCallback<Void> callback = new AsyncCallback<Void>() {
+									@Override
+									public void onFailure(Throwable caught) {
+										MessageBox.info("Succes",
+												"Removing file: "
+														+ sm.getSelectedItem()
+																.getName()
+														+ " has failed", null);
+									}
 
-								@Override
-								public void onFailure(Throwable caught) {
-									MessageBox.info("Succes", "Removing file: "
-											+ sm.getSelectedItem().getName()
-											+ " has failed", null);
-								}
+									@Override
+									public void onSuccess(Void result) {
+										MessageBox.info("Succes",
+												"You have deleted file: "
+														+ sm.getSelectedItem()
+																.getName()
+														+ ".", null);
+										grid.getStore().remove(
+												sm.getSelectedItem());
+									}
+								};
+								FileServiceAsync service = (FileServiceAsync) GWT
+										.create(FileService.class);
+								service.deleteFile(quoteId, jobId, taskId,
+										stateId, file.getName(), callback);
 
-								@Override
-								public void onSuccess(Void result) {
-									MessageBox.info("Succes",
-											"You have deleted file: "
-													+ sm.getSelectedItem()
-															.getName() + ".",
-											null);
-									grid.getStore()
-											.remove(sm.getSelectedItem());
-								}
-							};
-							FileServiceAsync service = (FileServiceAsync) GWT
-									.create(FileService.class);
-							service.deleteFile(quoteId, jobId, taskId, stateId,
-									file.getName(), callback);
-
-						} else
-							MessageBox.info("Failure",
-									"You must select a file first.", null);
-					}
-				});
-		remove.disable();
-		toolBar.add(remove);
+							} else
+								MessageBox.info("Failure",
+										"You must select a file first.", null);
+						}
+					});
+			remove.disable();
+			toolBar.add(remove);
+		}
 
 		final Button download = new Button("download selected file",
 				new SelectionListener<ButtonEvent>() {
