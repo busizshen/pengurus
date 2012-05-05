@@ -44,12 +44,8 @@ public class QuoteDAOImpl extends GenericDAOImpl<Quote> implements QuoteDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Quote> loadAllByClientId(Long id) {
-		Session session = getHibernateTemplate().getSessionFactory()
-				.openSession();
-		String hql = "select q from Quote q " + "where q.client = " + id;
-		Query query = session.createQuery(hql);
-		List<Quote> quotes = query.list();
-		session.close();
+		List<Quote> quotes = getHibernateTemplate().find(
+				"select q from Quote q " + "where q.client = " + id);
 		return quotes;
 	}
 
