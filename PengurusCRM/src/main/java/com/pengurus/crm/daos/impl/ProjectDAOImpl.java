@@ -113,10 +113,13 @@ public class ProjectDAOImpl extends GenericDAOImpl<Project> implements
     		query.setParameterList("ids", ids);
     		@SuppressWarnings("unchecked")
 			List<Project> projects = query.list();
-    		Project p = projects.iterator().next();
-    		p.getJobs().size();
+    		Project project = projects.iterator().next();
+    		project.getExperts().size();
+    		project.getProjectManagers().size();
+    		project.getFreelancers().size();
+    		project.getJobs().size();
     		session.close();
-            return p;
+            return project;
         } catch(Exception e) {
             return null;
         }

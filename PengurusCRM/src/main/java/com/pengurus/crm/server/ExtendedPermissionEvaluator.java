@@ -173,12 +173,21 @@ public class ExtendedPermissionEvaluator implements PermissionEvaluator {
 		}
 		
 		if (taskId != 0) {
-			if (!job.getTask().contains(task)) {
+			boolean contains = false;
+			for (Task jobTask: job.getTask()) {
+				contains |= jobTask.getId().equals(taskId);
+			}
+			if (!contains) {
 				throw new IOException();
 			}
 		}
+
 		if (jobId != 0) {
-			if (!quote.getJobs().contains(job)) {
+			boolean contains = false;
+			for (Job quoteJob: quote.getJobs()) {
+				contains |= quoteJob.getId().equals(jobId);
+			}
+			if (!contains) {
 				throw new IOException();
 			}
 		}
@@ -187,16 +196,19 @@ public class ExtendedPermissionEvaluator implements PermissionEvaluator {
 		if (containRole(authentication.getAuthorities(), UserRoleDTO.ROLE_EXECUTIVE.toString())) {
 			return true;
 		}
-		
+
 		// When we talk about task...
 		if (taskId != 0) {
 			if (usersContainUsername(project.getProjectManagers(), authentication.getName())) {
 				return true;
 			}
-			if (fileType.equals(FileType.output)) {
-				if ("upload".equals(permission) || "download".equals(permission)) {
-					if (task.getExpert().getUsername().equals(authentication.getName()) ||
-							task.getReviewer().getUsername().equals(authentication.getName())) {
+			if (task.getExpert().getUsername().equals(authentication.getName()) ||
+					task.getReviewer().getUsername().equals(authentication.getName())) {
+				if ("download".equals(permission)) {
+					return true;
+				}
+				if ("upload".equals(permission)) {
+					if (fileType.equals(FileType.output)) {
 						return true;
 					}
 				}
