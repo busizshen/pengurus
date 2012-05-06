@@ -21,12 +21,10 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.RowNumberer;
-import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.pengurus.crm.client.models.LanguageModel;
 import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.client.service.AdministrationService;
@@ -37,8 +35,6 @@ import com.pengurus.crm.shared.dto.LanguageDTO;
 public class LanguagePanel extends MainPanel {
 
 	private VerticalPanel verticalPanel;
-	private HorizontalPanel horizontalPanel;
-	private ContentPanel mainPanel;
 	private FormPanel createForm;
 	private TextField<String> languageField;
 	private FormData formData;
@@ -47,11 +43,13 @@ public class LanguagePanel extends MainPanel {
 	private Grid<LanguageModel> grid;
 
 	public LanguagePanel() {
+		super(500);
+		setHeading("Language panel");
 		createForm();
 		createLanguageField();
 		createButton();
 		createLanguageGrid();
-		addVerticalPanel();
+		add(verticalPanel);
 	}
 
 	private void createLanguageGrid() {
@@ -160,14 +158,6 @@ public class LanguagePanel extends MainPanel {
 		verticalPanel = new VerticalPanel();
 		verticalPanel.setHorizontalAlign(HorizontalAlignment.CENTER);
 		verticalPanel.setSpacing(20);
-		
-		setLayout(new FitLayout());
-		mainPanel = new ContentPanel();
-		mainPanel.setLayout(new CenterLayout());
-		mainPanel.setHeight(520);
-		mainPanel.setHeading("Language panel");
-		mainPanel.setFrame(true);
-		mainPanel.add(verticalPanel);
 
 		createForm = new FormPanel();
 		createForm.setHeading("Create new language");
@@ -180,13 +170,6 @@ public class LanguagePanel extends MainPanel {
 		languageField.setFieldLabel("Language");
 		languageField.setAllowBlank(false);
 		createForm.add(languageField, formData);
-	}
-
-	private void addVerticalPanel() {
-		horizontalPanel = new HorizontalPanel();
-		horizontalPanel.setSpacing(20);
-		horizontalPanel.add(mainPanel);
-		add(horizontalPanel);
 	}
 
 	private void createButton() {

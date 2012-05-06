@@ -63,6 +63,7 @@ public class UserPreviewPanel extends MainPanel {
 	final Window window = new Window();
 
 	public UserPreviewPanel(UserDTO user) {
+		setLayout(new FlowLayout());
 		createPersonalDataForm();
 		createBussinesClientForm();
 		createCompanyNameField();

@@ -21,12 +21,10 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.RowNumberer;
-import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.pengurus.crm.client.models.CurrencyModel;
 import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.client.service.AdministrationService;
@@ -37,21 +35,21 @@ import com.pengurus.crm.shared.dto.CurrencyTypeDTO;
 public class CurrencyTypePanel extends MainPanel {
 
 	private VerticalPanel verticalPanel;
-	private HorizontalPanel horizontalPanel;
 	private TextField<String> currencyType;
 	private FormData formData;
 	private Button createButton;
-	private FormPanel mainPanel;
 	private FormPanel createForm;
 	private Button removeButton;
 	private Grid<CurrencyModel> grid;
 
 	public CurrencyTypePanel() {
+		super(500);
+		setHeading("Currency panel");
 		createForm();
 		createCurrencyField();
 		createButton();
 		createCurrencyGrid();
-		addVerticalPanel();
+		add(verticalPanel);
 	}
 
 	private void createCurrencyGrid() {
@@ -161,14 +159,6 @@ public class CurrencyTypePanel extends MainPanel {
 		verticalPanel = new VerticalPanel();
 		verticalPanel.setHorizontalAlign(HorizontalAlignment.CENTER);
 		verticalPanel.setSpacing(20);
-		
-		setLayout(new FitLayout());
-		mainPanel = new FormPanel();
-		mainPanel.setLayout(new CenterLayout());
-		mainPanel.setHeight(510);
-		mainPanel.setHeading("Currency panel");
-		mainPanel.setFrame(true);
-		mainPanel.add(verticalPanel);
 
 		createForm = new FormPanel();
 		createForm.setHeading("Create new currency");
@@ -181,13 +171,6 @@ public class CurrencyTypePanel extends MainPanel {
 		currencyType.setFieldLabel("Currency");
 		currencyType.setAllowBlank(false);
 		createForm.add(currencyType, formData);
-	}
-
-	private void addVerticalPanel() {
-		horizontalPanel = new HorizontalPanel();
-		horizontalPanel.setSpacing(20);
-		horizontalPanel.add(mainPanel);
-		add(horizontalPanel);
 	}
 
 	private void createButton() {

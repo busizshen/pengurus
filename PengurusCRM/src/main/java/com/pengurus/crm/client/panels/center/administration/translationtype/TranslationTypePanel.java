@@ -21,12 +21,10 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.RowNumberer;
-import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.pengurus.crm.client.models.TranslationTypeModel;
 import com.pengurus.crm.client.panels.center.MainPanel;
 import com.pengurus.crm.client.service.AdministrationService;
@@ -37,8 +35,8 @@ import com.pengurus.crm.shared.dto.TranslationTypeDTO;
 public class TranslationTypePanel extends MainPanel {
 
 	private VerticalPanel verticalPanel;
-	private HorizontalPanel horizontalPanel;
-	private ContentPanel mainPanel;
+	/*private HorizontalPanel horizontalPanel;
+	private ContentPanel mainPanel;*/
 	private FormPanel createForm;
 	private TextField<String> unitField;
 	private TextField<String> descriptionField;
@@ -48,12 +46,14 @@ public class TranslationTypePanel extends MainPanel {
 	private Grid<TranslationTypeModel> grid;
 
 	public TranslationTypePanel() {
+		super(520);
+		setHeading("Translation type panel");
 		createForm();
 		createUnitField();
 		createDescriptionField();
 		createButton();
 		createLanguageGrid();
-		addVerticalPanel();
+		add(verticalPanel);
 	}
 
 	private void createLanguageGrid() {
@@ -171,14 +171,6 @@ public class TranslationTypePanel extends MainPanel {
 		verticalPanel.setHorizontalAlign(HorizontalAlignment.CENTER);
 		verticalPanel.setSpacing(20);
 		
-		setLayout(new FitLayout());
-		mainPanel = new ContentPanel();
-		mainPanel.setLayout(new CenterLayout());
-		mainPanel.setHeight(550);
-		mainPanel.setHeading("Translation type panel");
-		mainPanel.setFrame(true);
-		mainPanel.add(verticalPanel);
-		
 		createForm = new FormPanel();
 		createForm.setHeading("Create new translation type");
 		createForm.setPadding(20);
@@ -197,13 +189,6 @@ public class TranslationTypePanel extends MainPanel {
 		descriptionField.setFieldLabel("Description");
 		descriptionField.setAllowBlank(false);
 		createForm.add(descriptionField, formData);
-	}
-
-	private void addVerticalPanel() {
-		horizontalPanel = new HorizontalPanel();
-		horizontalPanel.setSpacing(20);
-		horizontalPanel.add(mainPanel);
-		add(horizontalPanel);
 	}
 
 	private void createButton() {

@@ -23,12 +23,10 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.RowNumberer;
-import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.pengurus.crm.client.models.CurrencyModel;
 import com.pengurus.crm.client.models.LanguageModel;
 import com.pengurus.crm.client.models.TranslationModel;
@@ -46,8 +44,6 @@ import com.pengurus.crm.shared.dto.TranslationTypeDTO;
 public class TranslationPanelAdmin extends MainPanel {
 
 	private VerticalPanel verticalPanel;
-	private HorizontalPanel horizontalPanel;
-	private ContentPanel mainPanel;
 	private FormPanel createForm;
 	private ComboBox<LanguageModel> fromCombo;
 	private ComboBox<LanguageModel> toCombo;
@@ -60,11 +56,13 @@ public class TranslationPanelAdmin extends MainPanel {
 	private Grid<TranslationModel> grid;
 
 	public TranslationPanelAdmin() {
-		createMainPanel();
+		super(600);
+		setHeading("Translation panel");
+		createVerticalPanel();
 		createNewTranslationForm();
 		createButton();
 		createTranslationGrid();
-		addHorizontalPanel();
+		add(verticalPanel);
 	}
 
 	private void createTranslationGrid() {
@@ -383,24 +381,10 @@ public class TranslationPanelAdmin extends MainPanel {
 		createForm.add(toCombo);
 	}
 
-	private void addHorizontalPanel() {
-		horizontalPanel = new HorizontalPanel();
-		horizontalPanel.setSpacing(10);
-		horizontalPanel.add(mainPanel);
-		add(horizontalPanel);
-	}
-
-	private void createMainPanel() {
+	private void createVerticalPanel() {
 		verticalPanel = new VerticalPanel();
 		verticalPanel.setHorizontalAlign(HorizontalAlignment.CENTER);
 		verticalPanel.setSpacing(20);
-		setLayout(new FitLayout());
-		mainPanel = new ContentPanel();
-		mainPanel.setLayout(new CenterLayout());
-		mainPanel.setHeight(620);
-		mainPanel.setHeading("Translation panel");
-		mainPanel.setFrame(true);
-		mainPanel.add(verticalPanel);
 	}
 
 }
