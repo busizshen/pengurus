@@ -16,9 +16,11 @@ import com.pengurus.crm.client.panels.center.filespanel.FilesPanel;
 import com.pengurus.crm.client.panels.center.filespanel.FilesPanelInput;
 import com.pengurus.crm.client.panels.center.filespanel.FilesPanelOutput;
 import com.pengurus.crm.client.panels.center.job.JobsListPanelQuoteEdit;
+import com.pengurus.crm.client.panels.center.job.JobsListPanelQuoteView;
 import com.pengurus.crm.client.panels.center.user.client.ClientPanelEdit;
 import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEditByRoles;
 import com.pengurus.crm.shared.dto.QuoteDTO;
+import com.pengurus.crm.shared.dto.StatusQuoteDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 public class QuotePanelEdit extends QuotePanel {
@@ -100,7 +102,10 @@ public class QuotePanelEdit extends QuotePanel {
 	@Override
 	protected void getJobsPanel(VerticalPanel vp0) {
 		if (quoteDTO.getJobs() != null) {
-			jobsList = new JobsListPanelQuoteEdit(quoteDTO);
+			if (quoteDTO.getStatus().toInt() < StatusQuoteDTO.agreed.toInt())
+				jobsList = new JobsListPanelQuoteEdit(quoteDTO);
+			else
+				jobsList = new JobsListPanelQuoteView(quoteDTO);
 			vp0.add(jobsList);
 		}
 

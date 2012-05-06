@@ -101,7 +101,7 @@ public class JobPanelQuote extends JobPanel {
 				}
 
 				public void onSuccess(Set<TranslationDTO> result) {
-					
+
 					ListStore<TranslationModel> listTranslationModel = new ListStore<TranslationModel>();
 					for (TranslationDTO c : result)
 						listTranslationModel.add(new TranslationModel(c));
@@ -137,24 +137,24 @@ public class JobPanelQuote extends JobPanel {
 	@Override
 	protected void addInfoPanel() {
 
-		
 		VerticalPanel mainVerticalPanel = new VerticalPanel();
 		HorizontalPanel topHorizontalPanel = new HorizontalPanel();
-		mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		mainVerticalPanel
+				.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		mainVerticalPanel.setSpacing(15);
-		
+
 		topHorizontalPanel.add(getDeadlinePanel());
 		topHorizontalPanel.add(addDescriptionPanel());
 		topHorizontalPanel.add(getbuttonPanel());
-		
+
 		mainVerticalPanel.add(topHorizontalPanel);
-		
-		//mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+
+		// mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
 		addStatusPanel(mainVerticalPanel);
-		
+
 		addInfoForm(mainVerticalPanel);
 		addTranslationPanel(mainVerticalPanel);
-		
+
 		add(mainVerticalPanel);
 
 	}
@@ -200,14 +200,15 @@ public class JobPanelQuote extends JobPanel {
 			combo.setTriggerAction(TriggerAction.ALL);
 			combo.setStore(listCurrencyModel);
 			combo.setData("text", "Choose Language");
-			combo.addListener(Events.OnChange, new Listener<BaseEvent>() {
+			combo.addListener(Events.SelectionChange,
+					new Listener<BaseEvent>() {
 
-				@Override
-				public void handleEvent(BaseEvent be) {
-					updateTranslation();
+						@Override
+						public void handleEvent(BaseEvent be) {
+							updateTranslation();
 
-				}
-			});
+						}
+					});
 			infoForm.add(combo);
 			if (jobDTO.getAmount() != null)
 				amount.setValue(jobDTO.getAmount());
@@ -239,11 +240,13 @@ public class JobPanelQuote extends JobPanel {
 
 	protected DescriptionPanel addDescriptionPanel() {
 		if (AuthorizationManager.canEditJob()) {
-			description = new DescriptionPanelEdit(jobDTO.getDescription(), 50, 400);
+			description = new DescriptionPanelEdit(jobDTO.getDescription(), 50,
+					400);
 			description.setStyleAttribute("margin-right", "40px");
 			return description;
 		} else {
-			description = new DescriptionPanelView(jobDTO.getDescription(), 50, 400);
+			description = new DescriptionPanelView(jobDTO.getDescription(), 50,
+					400);
 			description.setStyleAttribute("margin-right", "40px");
 			return description;
 		}
@@ -257,8 +260,12 @@ public class JobPanelQuote extends JobPanel {
 		if (combo.getValue() != null && price.getValue() != null)
 			priceVal = new PriceDTO(price.getValue().intValue(), combo
 					.getValue().getCurrencyDTO());
-		translation.setTranslationValues(translation.getTranslation().getTranslationDTO(),
-				amountVal, priceVal);
+		if (translation != null)
+			if (translation.getTranslation() != null)
+				translation.setTranslationValues(translation.getTranslation()
+						.getTranslationDTO(), amountVal, priceVal);
+			else
+				translation.setTranslationValues(null, amountVal, priceVal);
 
 	}
 

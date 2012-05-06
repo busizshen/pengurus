@@ -543,7 +543,7 @@ INSERT INTO price (id, price, currency) VALUES (507, 250, 90);
 
 INSERT INTO project (project_id, quoteid, client, supervisor, description) VALUES (472, 428, 383, 424, 'Intérprete de personal para la conferencia en Nueva York.
 Personal interpreter for the conference in New York.');
-INSERT INTO project (project_id, quoteid, client, supervisor, description) VALUES (484, 477, 450, 426, 'Translation of latin manuscript, which is going to be part of a horror scenario.');
+INSERT INTO project (project_id, quoteid, client, supervisor, description) VALUES (484, 477, 450, 300, 'Translation of latin manuscript, which is going to be part of a horror scenario.');
 
 
 --
@@ -576,8 +576,8 @@ INSERT INTO project_worker (project_id, user_id) VALUES (484, 446);
 
 INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (428, 'accepted', 383, 424, 'Intérprete de personal para la conferencia en Nueva York.
 Personal interpreter for the conference in New York.');
-INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (477, 'in_progress', 450, 426, 'Translation of latin manuscript, which is going to be part of a horror scenario.');
-INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (501, 'in_progress', 381, 446, 'english -> french, some tech-documentation + one sworn paper.');
+INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (477, 'in_progress', 450, 300, 'Translation of latin manuscript, which is going to be part of a horror scenario.');
+INSERT INTO quote (quote_id, status, client, supervisor, description) VALUES (501, 'in_progress', 381, 300, 'english -> french, some tech-documentation + one sworn paper.');
 
 
 --

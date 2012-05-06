@@ -12,16 +12,16 @@ import com.pengurus.crm.shared.dto.UserDTO;
 import com.pengurus.crm.shared.pagination.PagingCallbackWrapper;
 import com.pengurus.crm.shared.pagination.PagingLoadConfigHelper;
 
-public class TasksListPanelViewByUser extends TasksListPanelView {
+public class TasksListPanelViewByExpert extends TasksListPanelView {
 
 	UserDTO user;
 	
-	public TasksListPanelViewByUser(UserDTO user) {
+	public TasksListPanelViewByExpert(UserDTO user) {
 		this.user = user;
 		initPanel();
 	}
 	
-	public TasksListPanelViewByUser(UserDTO user, int height, int width) {
+	public TasksListPanelViewByExpert(UserDTO user, int height, int width) {
 		this.user = user;
 		initPanel(height, width);
 	}

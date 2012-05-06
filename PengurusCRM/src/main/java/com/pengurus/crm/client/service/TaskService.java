@@ -16,5 +16,5 @@ public interface TaskService extends RemoteService {
 
 	public Set<TaskDTO> getAllTasks();
 	public Set<TaskDTO> getTasksByExpertId(Long id);
-	
+	public Set<TaskDTO> getTasksByReviewerId(Long id);
 }

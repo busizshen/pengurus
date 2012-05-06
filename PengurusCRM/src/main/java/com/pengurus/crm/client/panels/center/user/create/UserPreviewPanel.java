@@ -37,7 +37,7 @@ import com.pengurus.crm.client.panels.center.project.ProjectsListPanelByUserProj
 import com.pengurus.crm.client.panels.center.project.ProjectsListPanelByUserSupervisor;
 import com.pengurus.crm.client.panels.center.quote.QuotesListPanelByClient;
 import com.pengurus.crm.client.panels.center.quote.QuotesListPanelByWorker;
-import com.pengurus.crm.client.panels.center.task.TasksListPanelViewByUser;
+import com.pengurus.crm.client.panels.center.task.TasksListPanelViewByExpert;
 import com.pengurus.crm.shared.dto.BusinessClientDTO;
 import com.pengurus.crm.shared.dto.ClientDTO;
 import com.pengurus.crm.shared.dto.IndividualClientDTO;
@@ -131,7 +131,7 @@ public class UserPreviewPanel extends MainPanel {
 			}
 			verticalPanel.add((new TranslationsListPanelView(list, 150, 630))
 					.getModelList());
-			verticalPanel.add((new TasksListPanelViewByUser(translator, 150,
+			verticalPanel.add((new TasksListPanelViewByExpert(translator, 150,
 					630)).getModelList());
 		}
 	}

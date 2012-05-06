@@ -24,4 +24,12 @@ public class TaskDAOImpl extends GenericDAOImpl<Task> implements TaskDAO {
 				"select t from Task t " + "where t.expert = " + id);
 		return tasks;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Task> loadAllByReviewerId(Long id) {
+		List<Task> tasks = getHibernateTemplate().find(
+				"select t from Task t " + "where t.reviewer = " + id);
+		return tasks;
+	}
 }

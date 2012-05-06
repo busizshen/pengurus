@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanelView;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
+import com.pengurus.crm.client.panels.center.description.DescriptionPanelView;
 import com.pengurus.crm.client.panels.center.filespanel.FilesPanel;
 import com.pengurus.crm.client.panels.center.filespanel.FilesPanelInput;
 import com.pengurus.crm.client.panels.center.filespanel.FilesPanelOutput;
@@ -72,8 +73,13 @@ public class TaskPanelView extends TaskPanel {
 	}
 
 	protected void addDescriptionPanel(LayoutContainer container) {
-		description = new DescriptionPanelEdit(taskDTO.getDescription(), 50,
-				450);
+		if (AuthorizationManager.canEditProject(projectDTO)) {
+			description = new DescriptionPanelEdit(taskDTO.getDescription(),
+					50, 450);
+		} else {
+			description = new DescriptionPanelView(taskDTO.getDescription(),
+					50, 450);
+		}
 		container.add(description);
 	}
 
@@ -179,9 +185,8 @@ public class TaskPanelView extends TaskPanel {
 
 	protected void addTranslationPanel(VerticalPanel simple) {
 		if (taskDTO != null && taskDTO.getTranslation() != null)
-			translation = new TranslationPanelView(
-					taskDTO.getTranslation(), taskDTO.getAmount(),
-					taskDTO.getPrice());
+			translation = new TranslationPanelView(taskDTO.getTranslation(),
+					taskDTO.getAmount(), taskDTO.getPrice());
 		else
 			translation = new TranslationPanelView();
 		simple.add(translation);

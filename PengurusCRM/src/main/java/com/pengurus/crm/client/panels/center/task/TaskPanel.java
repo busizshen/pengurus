@@ -79,6 +79,8 @@ public abstract class TaskPanel extends MainPanel {
 		if (taskDTO != null)
 			deadline.setValue(taskDTO.getDeadline());
 		deadlinePanel.add(deadline);
+		if(AuthorizationManager.canEditProject(projectDTO))
+			deadline.setReadOnly(true);
 		return deadlinePanel;
 	}
 	

@@ -162,5 +162,15 @@ public class PaginationServiceImpl implements PaginationService {
 		}
 		return PaginationUtils.paginate(loadConfig, userModelList);
 	}
+	@Override
+	public PagingLoadResultHelper<TaskModel> getPaginatedTasksByReviewerId(
+			PagingLoadConfigHelper loadConfig, Long id) {
+		List<TaskModel> taskModelList = new ArrayList<TaskModel>();
+		for (TaskDTO user : taskService.getTasksByReviewerId(id)) {
+			taskModelList.add(new TaskModel(user));
+		}
+		return PaginationUtils.paginate(loadConfig, taskModelList);
+
+	}
 
 }

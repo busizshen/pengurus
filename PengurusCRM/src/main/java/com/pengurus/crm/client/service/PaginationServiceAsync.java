@@ -33,7 +33,10 @@ public interface PaginationServiceAsync {
 			AsyncCallback<PagingLoadResultHelper<TaskModel>> callback);
 	public void getPaginatedTasksByExpertId(PagingLoadConfigHelper loadConfig, Long id,
 			AsyncCallback<PagingLoadResultHelper<TaskModel>> callback);
+	public void getPaginatedTasksByReviewerId(PagingLoadConfigHelper loadConfig, Long id,
+			AsyncCallback<PagingLoadResultHelper<TaskModel>> callback);
 
+	
 	public void getPaginatedAllUsers(PagingLoadConfigHelper loadConfig,
 			AsyncCallback<PagingLoadResultHelper<UserModel>> callback);
 	public void getPaginatedUsersByRoles(PagingLoadConfigHelper loadConfig,

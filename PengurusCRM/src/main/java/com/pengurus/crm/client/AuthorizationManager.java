@@ -32,7 +32,7 @@ public class AuthorizationManager {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
 		if(quoteDTO.getClient() != null)
-			return currentUser.haveAuthority(roles) || currentUser.getId() == quoteDTO.getClient().getId();
+			return currentUser.haveAuthority(roles) || currentUser.getId().equals(quoteDTO.getClient().getId());
 		return currentUser.haveAuthority(roles);
 	}
 
@@ -221,16 +221,11 @@ public class AuthorizationManager {
 	}
 
 	public static boolean hasTranslatorAccess(TaskDTO taskDTO) {
-		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		roles.add(UserRoleDTO.ROLE_EXPERT);
-		roles.add(UserRoleDTO.ROLE_FREELANCER);
-		return currentUser.haveAuthority(roles) && (taskDTO.getExpert() == currentUser);
+		return taskDTO.getExpert().getId().equals(currentUser.getId());
 	}
 
 	public static boolean hasVerificatorAccess(TaskDTO taskDTO) {
-		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
-		return (taskDTO.getReviewer().getId() == currentUser.getId()) || currentUser.haveAuthority(roles);
+		return taskDTO.getReviewer().getId().equals(currentUser.getId());
 	}
 
 	public static boolean hasProjectManagerAccess(TaskDTO taskDTO) {

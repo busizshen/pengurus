@@ -133,9 +133,9 @@ public class ProjectDTO implements IsSerializable {
 		service.createProject(projectDTO, callback);
 	}
 
-	public boolean isProjectManager(UserDTO currentUser) {
+	public boolean isProjectManager(UserDTO user) {
 		for(UserDTO u : projectManagers){
-			if(u.getId().equals(currentUser.getId()))
+			if(u.getId().equals(user.getId()))
 					return true;
 		}
 		return false;
@@ -147,6 +147,14 @@ public class ProjectDTO implements IsSerializable {
 
 	public Long getQuoteId() {
 		return quoteId;
+	}
+
+	public boolean isExpert(TranslatorDTO user) {
+		for(UserDTO u : experts){
+			if(u.getId().equals(user.getId()))
+					return true;
+		}
+		return false;
 	}
 
 }

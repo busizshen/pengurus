@@ -63,7 +63,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_EXPERT')")
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_PROJECTMANAGER')")
 	public Set<ProjectDTO> getProjectsByProjectManagerId(Long id) {
 		List<Project> list = projectDAO.loadAllByProjectManagerId(id);
 		Set<ProjectDTO> set = new HashSet<ProjectDTO>();
@@ -97,6 +97,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
+	@PreAuthorize("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_PROJECTMANAGER')")
 	public Set<ProjectDTO> getProjectsBySupervisorId(Long id) {
 		List<Project> list = projectDAO.loadAllBySupervisorId(id);
 		Set<ProjectDTO> set = new HashSet<ProjectDTO>();

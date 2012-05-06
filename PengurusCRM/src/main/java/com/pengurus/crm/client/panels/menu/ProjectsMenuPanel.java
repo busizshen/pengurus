@@ -23,7 +23,7 @@ public class ProjectsMenuPanel extends TabMenuPanel {
 	}
 	
 	private void addButtonMineSupervisor() {
-		if(AuthorizationManager.canViewProjects()){ 
+		if(AuthorizationManager.canViewAllProjects()){ 
 			Button b = new Button("Mine As Supervisor");
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override

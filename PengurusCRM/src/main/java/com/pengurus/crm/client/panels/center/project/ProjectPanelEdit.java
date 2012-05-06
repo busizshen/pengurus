@@ -49,8 +49,8 @@ public class ProjectPanelEdit extends ProjectPanel {
 
 			public void onSuccess(Set<TranslatorDTO> result) {
 				List<UserModel> models = new ArrayList<UserModel>();
-				for (UserDTO user : result) {
-					if (!projectDTO.getExperts().contains(user))
+				for (TranslatorDTO user : result) {
+					if (!projectDTO.isExpert(user))
 						models.add(new UserModel(user));
 				}
 				List<UserModel> modelsTo = new ArrayList<UserModel>();
@@ -87,8 +87,8 @@ public class ProjectPanelEdit extends ProjectPanel {
 
 			public void onSuccess(Set<WorkerDTO> result) {
 				List<UserModel> models = new ArrayList<UserModel>();
-				for (UserDTO user : result) {
-					if (!projectDTO.getProjectManagers().contains(user))
+				for (WorkerDTO user : result) {
+					if (!projectDTO.isProjectManager(user))
 						models.add(new UserModel(user));
 				}
 				List<UserModel> modelsTo = new ArrayList<UserModel>();

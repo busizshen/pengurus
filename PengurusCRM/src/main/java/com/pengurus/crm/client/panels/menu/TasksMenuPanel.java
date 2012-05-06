@@ -5,7 +5,8 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.panels.center.task.TasksListPanelViewAll;
-import com.pengurus.crm.client.panels.center.task.TasksListPanelViewByUser;
+import com.pengurus.crm.client.panels.center.task.TasksListPanelViewByExpert;
+import com.pengurus.crm.client.panels.center.task.TasksListPanelViewByReviewer;
 
 
 public class TasksMenuPanel extends TabMenuPanel {
@@ -13,20 +14,35 @@ public class TasksMenuPanel extends TabMenuPanel {
 	public TasksMenuPanel() {
 		super("Tasks");
 	    addButtonAll();
-	    addButtonMine();
+	    addButtonMineExpert();
+	    addButtonMineReviewer();
 	}
 	
 	public TabMenuPanel getPanel() {
 		return new ProjectsMenuPanel();
 	}
 
-	private void addButtonMine() {
+	private void addButtonMineExpert() {
 		if(AuthorizationManager.canViewTasks()){ 
-			Button b = new Button("Mine");
+			Button b = new Button("Mine as Expert");
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					TasksListPanelViewByUser taskListPanel = new TasksListPanelViewByUser(AuthorizationManager.getCurrentUser());
+					TasksListPanelViewByExpert taskListPanel = new TasksListPanelViewByExpert(AuthorizationManager.getCurrentUser());
+					taskListPanel.setAsMain();
+				}
+			});
+		    add(b);
+		}
+	}
+	
+	private void addButtonMineReviewer() {
+		if(AuthorizationManager.canViewTasks()){ 
+			Button b = new Button("Mine as Reviewer");
+			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
+				@Override
+				public void componentSelected(ButtonEvent ce) {
+					TasksListPanelViewByReviewer taskListPanel = new TasksListPanelViewByReviewer(AuthorizationManager.getCurrentUser());
 					taskListPanel.setAsMain();
 				}
 			});

@@ -75,7 +75,7 @@ public class QuotePanelCreate extends QuotePanel {
 	@Override
 	protected void addSupervisorPanel(VerticalPanel vpPanel) {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
-		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
+		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
 		workerPanel = new WorkerPanelEditByRoles(quoteDTO.getSupervisor(),"Supervisor",roles);
 		workerPanel.setHeading("Supervisor");
 		vpPanel.add(workerPanel);

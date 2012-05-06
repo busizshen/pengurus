@@ -26,6 +26,8 @@ public interface PaginationService extends RemoteService {
 
 	public PagingLoadResultHelper<TaskModel> getPaginatedAllTasks(PagingLoadConfigHelper loadConfig);
 	public PagingLoadResultHelper<TaskModel> getPaginatedTasksByExpertId(PagingLoadConfigHelper loadConfig, Long id);
+	public PagingLoadResultHelper<TaskModel> getPaginatedTasksByReviewerId(PagingLoadConfigHelper loadConfig, Long id);
+
 	
 	public PagingLoadResultHelper<UserModel> getPaginatedAllUsers(PagingLoadConfigHelper loadConfig);
 	public PagingLoadResultHelper<UserModel> getPaginatedUsersByRoles(PagingLoadConfigHelper loadConfig, Set<UserRoleDTO> roles);

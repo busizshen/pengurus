@@ -121,23 +121,20 @@ public class TaskStatusPanel extends LayoutContainer {
 
 		private void setVisibility() {
 			nextStatus
-					.setVisible((status == 6 ? false
-							: ((AuthorizationManager.hasExecutiveAccess()) || AuthorizationManager
+					.setVisible((status != 6)
+							&& (((AuthorizationManager.hasExecutiveAccess()) || AuthorizationManager
 									.hasProjectManagerAccess(taskDTO)))
-									|| (status == 4 && AuthorizationManager
-											.hasAccountantAccess())
-									|| (status <= 2 && AuthorizationManager
-											.hasTranslatorAccess(taskDTO))
-									|| (status == 3 && AuthorizationManager
-											.hasVerificatorAccess(taskDTO)) ? true
-									: false);
+							|| (status == 3 && AuthorizationManager
+									.hasAccountantAccess())
+							|| (status < 2 && AuthorizationManager
+									.hasTranslatorAccess(taskDTO))
+							|| (status == 2 && AuthorizationManager
+									.hasVerificatorAccess(taskDTO)));
 
 			reOpen.setVisible((AuthorizationManager.hasVerificatorAccess() && status == 2)
-					|| (AuthorizationManager.hasProjectManagerAccess(taskDTO) && status == 3 || status == 2) ? true
-					: false);
+					|| (AuthorizationManager.hasProjectManagerAccess(taskDTO) && (status == 3 || status == 2)));
 
 			this.layout();
 		}
-
 	}
 }

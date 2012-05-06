@@ -77,4 +77,16 @@ public class TaskServiceImpl implements TaskService {
 		}
 		return set;
 	}
+
+	@Override
+	@PreAuthorize("hasRole('ROLE_WORKER')")
+	@PostFilter("hasAnyRole('ROLE_EXECUTIVE', 'ROLE_PROJECTMANAGER', 'ROLE_ACCOUNTANT') or hasPermission(filterObject, 'read')")
+	public Set<TaskDTO> getTasksByReviewerId(Long id) {
+		List<Task> list = taskDAO.loadAllByReviewerId(id);
+		Set<TaskDTO> set = new HashSet<TaskDTO>();
+		for (Task q : list) {
+			set.add(q.toDTO());
+		}
+		return set;
+	}
 }

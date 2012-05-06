@@ -14,5 +14,6 @@ public interface TaskServiceAsync {
 
 	public void getAllTasks(AsyncCallback<Set<TaskDTO>> callback);
 	public void getTasksByExpertId(Long id,AsyncCallback<Set<TaskDTO>> callback);
+	public void getTasksByReviewerId(Long id,AsyncCallback<Set<TaskDTO>> callback);
 	
 }
