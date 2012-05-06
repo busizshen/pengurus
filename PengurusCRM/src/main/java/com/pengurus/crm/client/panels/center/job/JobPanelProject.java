@@ -4,6 +4,7 @@ import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.panels.center.administration.translation.TranslationPanelView;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanel;
@@ -25,25 +26,40 @@ public class JobPanelProject extends JobPanel {
 	ProjectDTO projectDTO;
 
 	public JobPanelProject(JobDTO jobDTO, ProjectDTO projectDTO) {
-		super(jobDTO);
+		super(jobDTO, 900);
 		this.projectDTO = projectDTO;
 		addInfoPanel();
 	}
 
 	@Override
 	protected void addInfoPanel() {
-		VerticalPanel vp0 = new VerticalPanel();
-		HorizontalPanel hp0 = new HorizontalPanel();
-		hp0.add(getDeadlinePanel());
+		VerticalPanel mainVerticalPanel = new VerticalPanel();
+		HorizontalPanel topHorizontalPanel = new HorizontalPanel();
+		mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		mainVerticalPanel.setSpacing(15);
+		
+		topHorizontalPanel.add(getDeadlinePanel());
 		deadline.setReadOnly(true);
-		hp0.add(addDescriptionPanel());
-		hp0.add(getbuttonPanel());
-		vp0.add(hp0);
-		addStatusPanel(vp0);
-		addTranslationPanel(vp0);
-		addTasksList(vp0);
-		addFilesPanel(vp0);
-		add(vp0);
+		topHorizontalPanel.add(addDescriptionPanel());
+		topHorizontalPanel.add(getbuttonPanel());
+		
+		mainVerticalPanel.add(topHorizontalPanel);
+		
+		
+		mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		addStatusPanel(mainVerticalPanel);
+		
+		
+		addTranslationPanel(mainVerticalPanel);
+		
+		
+		addTasksList(mainVerticalPanel);
+		
+		HorizontalPanel filesPanel = new HorizontalPanel();
+		addFilesPanel(filesPanel);
+		mainVerticalPanel.add(filesPanel);
+		
+		add(mainVerticalPanel);
 	}
 
 	private void addTasksList(VerticalPanel vp) {
@@ -99,23 +115,27 @@ public class JobPanelProject extends JobPanel {
 					jobDTO.getPrice());
 		else
 			translation = new TranslationPanelView();
+		
+		translation.setWidth(200);
 		vp.add(translation);
 	}
 
 	protected DescriptionPanel addDescriptionPanel() {
-		description = new DescriptionPanelView(jobDTO.getDescription(), 50, 350);
+		description = new DescriptionPanelView(jobDTO.getDescription(), 50, 400);
+		description.setStyleAttribute("margin-right", "30px");
 		return description;
 	}
 
 	@Override
-	protected void addFilesPanel(VerticalPanel vp0) {
+	protected void addFilesPanel(HorizontalPanel hp0) {
 		FilesPanel filesPanelIn = new FilesPanelInput(projectDTO.getQuoteId(),
 				jobDTO.getId(), new Long(0), true, true);
-		vp0.add(filesPanelIn);
+		hp0.add(filesPanelIn);
+		filesPanelIn.setStyleAttribute("margin-right", "40px");
 		FilesPanel filesPanelOut = new FilesPanelOutput(
 				projectDTO.getQuoteId(), jobDTO.getId(), new Long(0), true,
 				true);
-		vp0.add(filesPanelOut);
+		hp0.add(filesPanelOut);
 	}
 
 }

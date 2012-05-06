@@ -12,9 +12,11 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.models.CurrencyModel;
@@ -45,7 +47,8 @@ public class JobPanelQuote extends JobPanel {
 	private QuoteDTO quoteDTO;
 
 	public JobPanelQuote(JobDTO jobDTO, QuoteDTO quoteDTO) {
-		super(jobDTO);
+		super(jobDTO, 950);
+		setLayout(new BorderLayout());
 		this.quoteDTO = quoteDTO;
 		addInfoPanel();
 	}
@@ -111,7 +114,9 @@ public class JobPanelQuote extends JobPanel {
 								listTranslationModel, jobDTO.getAmount(),
 								jobDTO.getPrice());
 					vp.add(translation);
-					addFilesPanel(vp);
+					HorizontalPanel filesPanel = new HorizontalPanel();
+					addFilesPanel(filesPanel);
+					vp.add(filesPanel);
 
 				}
 			};
@@ -123,23 +128,34 @@ public class JobPanelQuote extends JobPanel {
 			translation = new TranslationPanelView(jobDTO.getTranslation(),
 					jobDTO.getAmount(), jobDTO.getPrice());
 			vp.add(translation);
-			addFilesPanel(vp);
+			HorizontalPanel filesPanel = new HorizontalPanel();
+			addFilesPanel(filesPanel);
+			vp.add(filesPanel);
 		}
 	}
 
 	@Override
 	protected void addInfoPanel() {
 
-		VerticalPanel vp0 = new VerticalPanel();
-		HorizontalPanel hp0 = new HorizontalPanel();
-		hp0.add(getDeadlinePanel());
-		hp0.add(addDescriptionPanel());
-		hp0.add(getbuttonPanel());
-		vp0.add(hp0);
-		addStatusPanel(vp0);
-		addInfoForm(vp0);
-		addTranslationPanel(vp0);
-		add(vp0);
+		
+		VerticalPanel mainVerticalPanel = new VerticalPanel();
+		HorizontalPanel topHorizontalPanel = new HorizontalPanel();
+		mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		mainVerticalPanel.setSpacing(15);
+		
+		topHorizontalPanel.add(getDeadlinePanel());
+		topHorizontalPanel.add(addDescriptionPanel());
+		topHorizontalPanel.add(getbuttonPanel());
+		
+		mainVerticalPanel.add(topHorizontalPanel);
+		
+		//mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+		addStatusPanel(mainVerticalPanel);
+		
+		addInfoForm(mainVerticalPanel);
+		addTranslationPanel(mainVerticalPanel);
+		
+		add(mainVerticalPanel);
 
 	}
 
@@ -223,10 +239,12 @@ public class JobPanelQuote extends JobPanel {
 
 	protected DescriptionPanel addDescriptionPanel() {
 		if (AuthorizationManager.canEditJob()) {
-			description = new DescriptionPanelEdit(jobDTO.getDescription(), 50, 350);
+			description = new DescriptionPanelEdit(jobDTO.getDescription(), 50, 400);
+			description.setStyleAttribute("margin-right", "40px");
 			return description;
 		} else {
-			description = new DescriptionPanelView(jobDTO.getDescription(), 50, 350);
+			description = new DescriptionPanelView(jobDTO.getDescription(), 50, 400);
+			description.setStyleAttribute("margin-right", "40px");
 			return description;
 		}
 	}
@@ -245,12 +263,13 @@ public class JobPanelQuote extends JobPanel {
 	}
 
 	@Override
-	protected void addFilesPanel(VerticalPanel vp0) {
+	protected void addFilesPanel(HorizontalPanel hp0) {
 		FilesPanel filesPanelIn = new FilesPanelInput(quoteDTO.getId(),
 				jobDTO.getId(), new Long(0), true, true);
-		vp0.add(filesPanelIn);
+		hp0.add(filesPanelIn);
+		filesPanelIn.setStyleAttribute("margin-right", "40px");
 		FilesPanel filesPanelOut = new FilesPanelOutput(quoteDTO.getId(),
 				jobDTO.getId(), new Long(0), true, true);
-		vp0.add(filesPanelOut);
+		hp0.add(filesPanelOut);
 	}
 }

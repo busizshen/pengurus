@@ -93,7 +93,7 @@ public class QuotePanelEdit extends QuotePanel {
 	protected void addDescriptionPanel(HorizontalPanel vpPanel) {
 		descriptionPanel = new DescriptionPanelEdit(quoteDTO.getDescription(),
 				50, 550);
-		descriptionPanel.setStyleAttribute("margin-right", "265px");
+		descriptionPanel.setStyleAttribute("margin-right", "200px");
 		vpPanel.add(descriptionPanel);
 	}
 

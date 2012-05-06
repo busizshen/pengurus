@@ -17,6 +17,7 @@ public abstract class JobStatusPanel extends LayoutContainer {
 
 	private static final String COLOUR_OK = "#BBD5F7";
 	private static final String COLOUR_NOT = "#ECECEC";
+	private static final String COLOUR_CURRENT = "#C0E5FF";
 	private static final String NEXT_STATUS = "next status";
 	private static final String REOPEN = "reopen";
 
@@ -34,12 +35,14 @@ public abstract class JobStatusPanel extends LayoutContainer {
 		setLayout(new FlowLayout(10));
 
 		VerticalPanel verticalPanel = new VerticalPanel();
-		verticalPanel.setHeight("Status panel");
+		verticalPanel.setStyleAttribute("font-size", "16px");
+		verticalPanel.setStyleAttribute("font-family",
+				"Arial, Helvetica, sans-serif");
 
 		JobStatusBar jobStatusBar = new JobStatusBar(
 				jobDTO.getStatus() == null ? StatusJobDTO.open.toInt() : jobDTO
 						.getStatus().toInt());
-		jobStatusBar.setBorders(true);
+		jobStatusBar.setBorders(false);
 		jobStatusBar.setAutoHeight(true);
 		jobStatusBar.setHorizontalAlign(HorizontalAlignment.CENTER);
 		jobStatusBar.setVerticalAlign(VerticalAlignment.MIDDLE);
@@ -107,8 +110,13 @@ public abstract class JobStatusPanel extends LayoutContainer {
 		private Label prepareLabel(int statusNo) {
 			Label label = new Label();
 			label.setBorders(true);
+			label.setStyleAttribute("padding", "5px");
 			label.setStyleAttribute("background",
-					status >= statusNo ? COLOUR_OK : COLOUR_NOT);
+					(status > statusNo) ? COLOUR_OK
+							: (status == statusNo) ? COLOUR_CURRENT
+									: COLOUR_NOT);
+			label.setStyleAttribute("font-weight",
+					(status == statusNo) ? "bold" : "normal");
 			label.setWidth(150);
 			label.setHeight(100);
 			label.setText(StatusJobDTO.fromInt(statusNo));

@@ -16,6 +16,10 @@ public abstract class TranslationsListPanel extends ListPanel<TranslationModel> 
 	public TranslationsListPanel() {
 		super(360);
 	}
+	
+	public TranslationsListPanel(int height){
+		super(height);
+	}
 
 	@Override
 	protected List<ColumnConfig> getColumns() {

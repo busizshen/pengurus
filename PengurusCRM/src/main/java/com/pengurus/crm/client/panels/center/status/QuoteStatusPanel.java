@@ -20,6 +20,7 @@ public class QuoteStatusPanel extends LayoutContainer {
 
 	private static final String COLOUR_OK = "#BBD5F7";
 	private static final String COLOUR_NOT = "#ECECEC";
+	private static final String COLOUR_CURRENT = "#C0E5FF";
 	private static final String NEXT_STATUS = "next status";
 	private static final String REOPEN = "reopen";
 
@@ -39,17 +40,20 @@ public class QuoteStatusPanel extends LayoutContainer {
 		setLayout(new FlowLayout(10));
 
 		VerticalPanel verticalPanel = new VerticalPanel();
-		verticalPanel.setHeight("Status panel");
+		verticalPanel.setStyleAttribute("font-size", "16px");
+		verticalPanel.setStyleAttribute("font-family",
+				"Arial, Helvetica, sans-serif");
 
 		QuoteStatusBar quoteStatusBar;
 
 		quoteStatusBar = (status != null) ? new QuoteStatusBar(status.toInt())
 				: new QuoteStatusBar(0);
-		quoteStatusBar.setBorders(true);
+		quoteStatusBar.setBorders(false);
 		quoteStatusBar.setAutoHeight(true);
 		quoteStatusBar.setHorizontalAlign(HorizontalAlignment.CENTER);
 		quoteStatusBar.setVerticalAlign(VerticalAlignment.MIDDLE);
-		quoteStatusBar.setSpacing(2);
+		//quoteStatusBar.setSpacing(5);
+		quoteStatusBar.setStyleName("boxsizingBorder");
 
 		verticalPanel.add(quoteStatusBar);
 		add(verticalPanel);
@@ -70,44 +74,39 @@ public class QuoteStatusPanel extends LayoutContainer {
 				add(labelsList[i]);
 			}
 
-				generateProject = new Button("Generate Project");
-				generateProject.addListener(Events.OnClick,
-						listenerGenerateProject);
-				generateProject.addListener(Events.OnClick,
-						listenerChangeStatus);
-				add(generateProject);
-		
+			generateProject = new Button("Generate Project");
+			generateProject
+					.addListener(Events.OnClick, listenerGenerateProject);
+			generateProject.addListener(Events.OnClick, listenerChangeStatus);
+			add(generateProject);
 
-	
-				nextStatus = new Button(NEXT_STATUS, null,
-						new SelectionListener<ButtonEvent>() {
+			nextStatus = new Button(NEXT_STATUS, null,
+					new SelectionListener<ButtonEvent>() {
 
-							@Override
-							public void componentSelected(ButtonEvent ce) {
-								labelsList[++status].setStyleAttribute(
-										"background", COLOUR_OK);
-								setVisibility();
-							}
-						});
+						@Override
+						public void componentSelected(ButtonEvent ce) {
+							labelsList[++status].setStyleAttribute(
+									"background", COLOUR_OK);
+							setVisibility();
+						}
+					});
 
-				nextStatus.addListener(Events.OnClick, listenerChangeStatus);
-				add(nextStatus);
+			nextStatus.addListener(Events.OnClick, listenerChangeStatus);
+			add(nextStatus);
 
+			reOpen = new Button(REOPEN, null,
+					new SelectionListener<ButtonEvent>() {
 
-				reOpen = new Button(REOPEN, null,
-						new SelectionListener<ButtonEvent>() {
+						@Override
+						public void componentSelected(ButtonEvent ce) {
+							labelsList[status--].setStyleAttribute(
+									"background", COLOUR_NOT);
+							setVisibility();
+						}
+					});
 
-							@Override
-							public void componentSelected(ButtonEvent ce) {
-								labelsList[status--].setStyleAttribute(
-										"background", COLOUR_NOT);
-								setVisibility();
-							}
-						});
-
-				reOpen.addListener(Events.OnClick, listenerBackStatus);
-				add(reOpen);
-		
+			reOpen.addListener(Events.OnClick, listenerBackStatus);
+			add(reOpen);
 
 			setVisibility();
 		}
@@ -115,8 +114,13 @@ public class QuoteStatusPanel extends LayoutContainer {
 		private Label prepareLabel(int statusNo) {
 			Label label = new Label();
 			label.setBorders(true);
+			label.setStyleAttribute("padding", "5px");
 			label.setStyleAttribute("background",
-					(status >= statusNo) ? COLOUR_OK : COLOUR_NOT);
+					(status > statusNo) ? COLOUR_OK
+							: (status == statusNo) ? COLOUR_CURRENT
+									: COLOUR_NOT);
+			label.setStyleAttribute("font-weight",
+					(status == statusNo) ? "bold" : "normal");
 			label.setWidth(150);
 			label.setHeight(100);
 			label.setText(StatusQuoteDTO.fromInt(statusNo));
@@ -128,9 +132,10 @@ public class QuoteStatusPanel extends LayoutContainer {
 			nextStatus
 					.setVisible((AuthorizationManager.hasClientAccess() && status == 2) ? true
 							: false || status == 7 ? false
-							: (((status <= 2 || status >= 6) && AuthorizationManager
-									.hasExecutiveAccess()) || (status == 5 && AuthorizationManager
-									.hasAccountantAccess())) ? true : false);
+									: (((status <= 2 || status >= 6) && AuthorizationManager
+											.hasExecutiveAccess()) || (status == 5 && AuthorizationManager
+											.hasAccountantAccess())) ? true
+											: false);
 
 			generateProject.setVisible(AuthorizationManager
 					.hasExecutiveAccess() && status == 3 ? true : false);

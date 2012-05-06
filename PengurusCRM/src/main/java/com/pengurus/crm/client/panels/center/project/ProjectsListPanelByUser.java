@@ -1,5 +1,6 @@
 package com.pengurus.crm.client.panels.center.project;
 
+import com.pengurus.crm.client.panels.center.ListPanel.ModelList;
 import com.pengurus.crm.shared.dto.UserDTO;
 
 public abstract class ProjectsListPanelByUser extends ProjectsListPanel {

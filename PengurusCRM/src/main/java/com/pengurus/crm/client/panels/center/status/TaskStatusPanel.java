@@ -18,6 +18,7 @@ public class TaskStatusPanel extends LayoutContainer {
 
 	private static final String COLOUR_OK = "#BBD5F7";
 	private static final String COLOUR_NOT = "#ECECEC";
+	private static final String COLOUR_CURRENT = "#C0E5FF";
 	private static final String NEXT_STATUS = "next status";
 	private static final String REOPEN = "reopen";
 
@@ -30,12 +31,14 @@ public class TaskStatusPanel extends LayoutContainer {
 		setLayout(new FlowLayout(10));
 
 		VerticalPanel verticalPanel = new VerticalPanel();
-		verticalPanel.setHeight("Status panel");
+		verticalPanel.setStyleAttribute("font-size", "16px");
+		verticalPanel.setStyleAttribute("font-family",
+				"Arial, Helvetica, sans-serif");
 
 		TaskStatusBar taskStatusBar = new TaskStatusBar(
 				taskDTO.getStatus() == null ? StatusTaskDTO.open.toInt()
 						: taskDTO.getStatus().toInt());
-		taskStatusBar.setBorders(true);
+		taskStatusBar.setBorders(false);
 		taskStatusBar.setAutoHeight(true);
 		taskStatusBar.setHorizontalAlign(HorizontalAlignment.CENTER);
 		taskStatusBar.setVerticalAlign(VerticalAlignment.MIDDLE);
@@ -102,8 +105,13 @@ public class TaskStatusPanel extends LayoutContainer {
 		private Label prepareLabel(int statusNo) {
 			Label label = new Label();
 			label.setBorders(true);
+			label.setStyleAttribute("padding", "5px");
 			label.setStyleAttribute("background",
-					status >= statusNo ? COLOUR_OK : COLOUR_NOT);
+					(status > statusNo) ? COLOUR_OK
+							: (status == statusNo) ? COLOUR_CURRENT
+									: COLOUR_NOT);
+			label.setStyleAttribute("font-weight",
+					(status == statusNo) ? "bold" : "normal");
 			label.setWidth(150);
 			label.setHeight(100);
 			label.setText(StatusTaskDTO.fromInt(statusNo));

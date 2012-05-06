@@ -21,7 +21,8 @@ public class ProjectPanelView extends ProjectPanel {
 	@Override
 	protected void addDescriptionPanel(HorizontalPanel vp) {
 		descriptionPanel = new DescriptionPanelView(
-				projectDTO.getDescription(), 50, 450);
+				projectDTO.getDescription(), 50, 550);
+		descriptionPanel.setStyleAttribute("margin-right", "250px");
 		vp.add(descriptionPanel);
 	}
 
@@ -52,7 +53,7 @@ public class ProjectPanelView extends ProjectPanel {
 	}
 
 	@Override
-	protected void getProjectMangaersPanel(HorizontalPanel hp3) {
+	protected void getProjectManagersPanel(HorizontalPanel hp3) {
 		ListStore<UserModel> list = new ListStore<UserModel>();
 		for (UserDTO u : projectDTO.getProjectManagers())
 			list.add(new UserModel(u));

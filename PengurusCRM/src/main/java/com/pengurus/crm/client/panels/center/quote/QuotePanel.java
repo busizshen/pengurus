@@ -22,14 +22,14 @@ public abstract class QuotePanel extends MainPanel {
 	ClientPanel clientPanel;
 
 	public QuotePanel() {
-		super(850);
+		super(900);
 		setHeading("Quote");
 		this.quoteDTO = new QuoteDTO();
 		getInfoPanel();
 	}
 
 	public QuotePanel(QuoteDTO quoteDTO) {
-		super(850);
+		super(900);
 		setHeading("Quote");
 		this.quoteDTO = quoteDTO;
 		getInfoPanel();
@@ -47,6 +47,10 @@ public abstract class QuotePanel extends MainPanel {
 		
 		mainVerticalPanel.add(topHorizontalPanel);
 		
+		
+		mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		addStatusPanel(mainVerticalPanel);
+		
 		VerticalPanel personPanel = new VerticalPanel();
 		addSupervisorPanel(personPanel);
 		addClientPanel(personPanel);
@@ -54,6 +58,7 @@ public abstract class QuotePanel extends MainPanel {
 		mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
 		mainVerticalPanel.add(personPanel);
 
+		mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		getJobsPanel(mainVerticalPanel);
 		
 		HorizontalPanel filesPanel = new HorizontalPanel();

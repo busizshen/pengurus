@@ -28,6 +28,7 @@ public class ChangePasswordPanel extends MainPanel {
 	private TextField<String> currentPassword, newPassword, confirmedPassword;
 
 	public ChangePasswordPanel() {
+		super(275);
 		createForm();
 		addOldPasswordField();
 		addNewPasswordField();

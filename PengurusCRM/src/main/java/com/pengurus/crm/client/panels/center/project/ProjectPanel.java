@@ -1,6 +1,7 @@
 package com.pengurus.crm.client.panels.center.project;
 
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.panels.center.MainPanel;
@@ -31,26 +32,36 @@ public abstract class ProjectPanel extends MainPanel {
 		vp.add(jobsPanel);	
 	}
 
-	protected abstract void getProjectMangaersPanel(HorizontalPanel hp3);
+	protected abstract void getProjectManagersPanel(HorizontalPanel hp3);
 	
 	protected void addInfoPanel() {
-		VerticalPanel vp0 = new VerticalPanel();
-		HorizontalPanel hp0 = new HorizontalPanel();
-		addDescriptionPanel(hp0);
-		addButtonPanel(hp0);
-		vp0.add(hp0);
-		VerticalPanel vp = new VerticalPanel();
-		addSupervisorPanel(vp);
-		addClientPanel(vp);
-		vp0.add(vp);
-		HorizontalPanel hp3 = new HorizontalPanel();
-		hp3.setSpacing(20);
-		getProjectMangaersPanel(hp3);
-		getTranslatorsPanel(hp3);
-		vp0.add(hp3);
-		addJobsPanel(vp0);
+		VerticalPanel mainVerticalPanel = new VerticalPanel();
+		mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+		mainVerticalPanel.setSpacing(10);
 		
-		add(vp0);
+		HorizontalPanel topHorizontalPanel = new HorizontalPanel();
+		addDescriptionPanel(topHorizontalPanel);
+		addButtonPanel(topHorizontalPanel);
+		
+		mainVerticalPanel.add(topHorizontalPanel);
+		
+		VerticalPanel personalVerticalPanel = new VerticalPanel();
+		addSupervisorPanel(personalVerticalPanel);
+		addClientPanel(personalVerticalPanel);
+		mainVerticalPanel.add(personalVerticalPanel);
+		
+		HorizontalPanel expertsHorizontalPanel = new HorizontalPanel();
+		
+		getProjectManagersPanel(expertsHorizontalPanel);
+		getTranslatorsPanel(expertsHorizontalPanel);
+		
+		mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		mainVerticalPanel.add(expertsHorizontalPanel);
+		
+		mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+		addJobsPanel(mainVerticalPanel);
+		
+		add(mainVerticalPanel);
 
 	}
 

@@ -76,7 +76,7 @@ public class ProjectPanelEdit extends ProjectPanel {
 	}
 
 	@Override
-	protected void getProjectMangaersPanel(HorizontalPanel hp3) {
+	protected void getProjectManagersPanel(HorizontalPanel hp3) {
 		AsyncCallback<Set<WorkerDTO>> callback = new AsyncCallback<Set<WorkerDTO>>() {
 
 			public void onFailure(Throwable t) {
@@ -109,13 +109,15 @@ public class ProjectPanelEdit extends ProjectPanel {
 		projectManagersPanel = new WorkerPanelChoose("Project Managers");
 
 		projectManagersPanel.setWidth(470);
+		projectManagersPanel.setStyleAttribute("margin-right", "20px");
 		hp3.add(projectManagersPanel);
 	}
 
 	@Override
 	protected void addDescriptionPanel(HorizontalPanel vp) {
 		descriptionPanel = new DescriptionPanelEdit(
-				projectDTO.getDescription(), 50, 450);
+				projectDTO.getDescription(), 50, 550);
+		descriptionPanel.setStyleAttribute("margin-right", "200px");
 		vp.add(descriptionPanel);
 	}
 

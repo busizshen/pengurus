@@ -7,7 +7,7 @@ public class JobsListPanelProjectView extends JobsListPanelProject{
 	public JobsListPanelProjectView(ProjectDTO projectDTO) {
 		super(projectDTO, 275);
 		setHeading("Jobs");
-		modelList = new ModelList();
+		modelList = new ModelList(225, 825);
 		add(modelList);
 	}
 

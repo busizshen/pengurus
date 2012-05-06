@@ -34,8 +34,8 @@ public abstract class JobPanel extends MainPanel {
 	ComboBox<CurrencyModel> combo;
 	protected JobDTO jobDTO;
 
-	public JobPanel(JobDTO jobDTO) {
-		super();
+	public JobPanel(JobDTO jobDTO, int height) {
+		super(height);
 		setHeading("Job");
 		this.jobDTO = jobDTO;
 	}
@@ -56,7 +56,7 @@ public abstract class JobPanel extends MainPanel {
 
 	protected HorizontalPanel getbuttonPanel() {
 		HorizontalPanel hp = new HorizontalPanel();
-		hp.setSpacing(5);
+		//hp.setSpacing(5);
 		if (AuthorizationManager.canEditJob()) {
 			Button b = new Button("Update",
 					new SelectionListener<ButtonEvent>() {
@@ -145,8 +145,9 @@ public abstract class JobPanel extends MainPanel {
 		if (!AuthorizationManager.canEditJob()) {
 			deadline.setReadOnly(true);
 		}
+		deadlinePanel.setStyleAttribute("margin-right", "40px");
 		return deadlinePanel;
 	}
 
-	protected abstract void addFilesPanel(VerticalPanel vp0);
+	protected abstract void addFilesPanel(HorizontalPanel hp0);
 }

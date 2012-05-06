@@ -15,7 +15,10 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.models.TaskModel;
+import com.pengurus.crm.client.panels.center.ListPanel.ModelList;
 import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.TaskDTO;
@@ -36,13 +39,13 @@ public class TasksListPanelEdit extends TasksListPanel {
 	}
 
 	protected void initPanel() {
-		modelList = new ModelList();
-		HorizontalPanel hp = new HorizontalPanel();
-		hp.setSpacing(20);
-
-		hp.add(addButtonPanel());
-		hp.add(modelList);
-		add(hp);
+		VerticalPanel vp = new VerticalPanel();
+		vp.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		modelList = new ModelList(200, 825);;
+		vp.setSpacing(5);
+		vp.add(addButtonPanel());
+		vp.add(modelList);
+		add(vp);
 	}
 
 	private FormPanel addButtonPanel() {

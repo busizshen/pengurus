@@ -24,7 +24,7 @@ public class TranslationsListPanelChoose extends TranslationsListPanel {
 	public TranslationsListPanelChoose(
 			ListStore<TranslationModel> listTranslationModel,
 			Listener<DomEvent> listener) {
-		super();
+		super(400);
 		list = listTranslationModel;
 		listenerChosen = listener;
 		modelList = new ModelList();

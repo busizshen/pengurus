@@ -1,13 +1,17 @@
 package com.pengurus.crm.client.panels.center;
 
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
+import com.extjs.gxt.ui.client.widget.layout.HBoxLayout;
+import com.extjs.gxt.ui.client.widget.layout.VBoxLayout;
 import com.pengurus.crm.client.MainWindow;
 
 public abstract class MainPanel extends ContentPanel {
 	
 	public MainPanel(){
 		this.setLayout(new CenterLayout());
+		//this.setLayout(new BorderLayout());
 		this.setFrame(true);
 	}
 	
