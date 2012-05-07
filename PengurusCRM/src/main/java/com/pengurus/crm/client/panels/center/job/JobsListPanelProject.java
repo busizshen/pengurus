@@ -38,8 +38,8 @@ public abstract class JobsListPanelProject extends JobsListPanel {
 					ListStore<JobModel> store, Grid<JobModel> grid) {
 				if (!init) {
 					init = true;
-	}
-				Button b = new Button("Preview",
+				}
+				Button previewButton = new Button("Preview",
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
@@ -61,9 +61,11 @@ public abstract class JobsListPanelProject extends JobsListPanel {
 
 							}
 						});
-				b.setToolTip("Click to see");
+				previewButton.setToolTip("Click to see");
+				previewButton.setWidth((grid.getColumnModel().getColumnWidth(
+						colIndex) - 22) / 2);
 
-				return b;
+				return previewButton;
 			}
 		};
 		return buttonRenderer;

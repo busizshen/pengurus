@@ -208,6 +208,21 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 				}
 
 				ButtonBar buttonBar = new ButtonBar();
+				
+				Button previewButton = new Button("Preview",
+						new SelectionListener<ButtonEvent>() {
+							@Override
+							public void componentSelected(ButtonEvent ce) {
+								new UserPreviewPanel(model.getUserDTO())
+										.setAsMain();
+							}
+						});
+
+				previewButton.setWidth((grid.getColumnModel().getColumnWidth(
+						colIndex) - 22) / 2);
+				previewButton.setToolTip("Click to see details");
+				buttonBar.add(previewButton);
+
 				if (AuthorizationManager.hasExecutiveAccess()) {
 					Button editButton = new Button("Edit",
 							new SelectionListener<ButtonEvent>() {
@@ -219,23 +234,10 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 							});
 
 					editButton.setWidth((grid.getColumnModel().getColumnWidth(
-							colIndex) - 20) / 2);
+							colIndex) - 22) / 2);
 					editButton.setToolTip("Click to edit");
 					buttonBar.add(editButton);
 				}
-				Button previewButton = new Button("Preview",
-						new SelectionListener<ButtonEvent>() {
-							@Override
-							public void componentSelected(ButtonEvent ce) {
-								new UserPreviewPanel(model.getUserDTO())
-										.setAsMain();
-							}
-						});
-
-				previewButton.setWidth((grid.getColumnModel().getColumnWidth(
-						colIndex) - 20) / 2);
-				previewButton.setToolTip("Click to see details");
-				buttonBar.add(previewButton);
 
 				return buttonBar;
 			}

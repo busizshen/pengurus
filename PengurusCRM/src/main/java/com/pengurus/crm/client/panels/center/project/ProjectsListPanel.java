@@ -90,7 +90,7 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 					init = true;
 				}
 				ButtonBar buttonBar = new ButtonBar();
-				Button buttomPreview = new Button("Preview",
+				Button previewButton = new Button("Preview",
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
@@ -111,10 +111,13 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 										.getId(), callback);
 							}
 						});
-				buttomPreview.setToolTip("Click to see");
-				buttonBar.add(buttomPreview);
+				previewButton.setToolTip("Click to see");
+				previewButton.setWidth((grid.getColumnModel().getColumnWidth(
+						colIndex) - 22) / 2);
+				buttonBar.add(previewButton);
+				
 				if (AuthorizationManager.canEditProject()) {
-					Button buttonEdit = new Button("Edit",
+					Button editButton = new Button("Edit",
 
 					new SelectionListener<ButtonEvent>() {
 						@Override
@@ -136,8 +139,10 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 									callback);
 						}
 					});
-					buttonEdit.setToolTip("Click to edit");
-					buttonBar.add(buttonEdit);
+					editButton.setToolTip("Click to edit");
+					editButton.setWidth((grid.getColumnModel().getColumnWidth(
+							colIndex) - 22) / 2);
+					buttonBar.add(editButton);
 				}
 				return buttonBar;
 			}

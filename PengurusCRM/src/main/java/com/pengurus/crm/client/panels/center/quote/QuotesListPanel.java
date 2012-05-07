@@ -153,7 +153,7 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 					init = true;
 				}
 				ButtonBar buttonBar = new ButtonBar();
-				Button b = new Button("Preview",
+				Button previewButton = new Button("Preview",
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
@@ -177,10 +177,13 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 
 							}
 						});
-				b.setToolTip("Click to see");
-				buttonBar.add(b);
+				previewButton.setToolTip("Click to see");
+				previewButton.setWidth((grid.getColumnModel().getColumnWidth(
+						colIndex) - 22) / 2);
+				buttonBar.add(previewButton);
+				
 				if (AuthorizationManager.hasExecutiveAccess()) {
-					b = new Button("Edit",
+					Button editButton = new Button("Edit",
 							new SelectionListener<ButtonEvent>() {
 								@Override
 								public void componentSelected(ButtonEvent ce) {
@@ -204,8 +207,10 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 
 								}
 							});
-					b.setToolTip("Click to see");
-					buttonBar.add(b);
+					editButton.setToolTip("Click to see");
+					editButton.setWidth((grid.getColumnModel().getColumnWidth(
+							colIndex) - 22) / 2);
+					buttonBar.add(editButton);
 				}
 				return buttonBar;
 			}

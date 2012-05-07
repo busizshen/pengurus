@@ -100,7 +100,7 @@ public class TasksListPanelEdit extends TasksListPanel {
 					init = true;
 				}
 				ButtonBar buttonBar = new ButtonBar();
-				Button b = new Button("Preview",
+				Button previewButton = new Button("Preview",
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
@@ -109,8 +109,9 @@ public class TasksListPanelEdit extends TasksListPanel {
 								taskPanel.setAsMain();
 							}
 						});
-				b.setToolTip("Click to see");
-				buttonBar.add(b);
+				previewButton.setToolTip("Click to see");
+				buttonBar.add(previewButton);
+				
 				return buttonBar;
 			}
 		};
