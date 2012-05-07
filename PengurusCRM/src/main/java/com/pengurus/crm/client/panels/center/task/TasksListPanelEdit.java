@@ -2,12 +2,12 @@ package com.pengurus.crm.client.panels.center.task;
 
 import java.util.Set;
 
+import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.DomEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
@@ -15,10 +15,10 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.models.TaskModel;
-import com.pengurus.crm.client.panels.center.ListPanel.ModelList;
 import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.ProjectDTO;
 import com.pengurus.crm.shared.dto.TaskDTO;
@@ -30,7 +30,7 @@ public class TasksListPanelEdit extends TasksListPanel {
 
 	public TasksListPanelEdit(Set<TaskDTO> set, JobDTO jobDTO,
 			ProjectDTO projectDTO) {
-		super();
+		setLayout(new FitLayout());
 		this.jobDTO = jobDTO;
 		this.projectDTO = projectDTO;
 		for (TaskDTO task : set)
@@ -78,12 +78,13 @@ public class TasksListPanelEdit extends TasksListPanel {
 							}
 						};
 						taskPanel
-								.setListeners(listenerClose, listenerCreateJob);
+								.setListeners(listenerClose, listenerCreateJob);						
 						window.add(taskPanel);
 						window.show();
 					}
 				});
-		formPanel.add(b);
+		formPanel.setButtonAlign(HorizontalAlignment.CENTER);
+		formPanel.addButton(b);
 		return formPanel;
 	}
 
@@ -99,7 +100,7 @@ public class TasksListPanelEdit extends TasksListPanel {
 					init = true;
 				}
 				ButtonBar buttonBar = new ButtonBar();
-				Button b = new Button("PREVIEW",
+				Button b = new Button("Preview",
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {

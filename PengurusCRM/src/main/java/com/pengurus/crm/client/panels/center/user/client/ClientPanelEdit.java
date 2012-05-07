@@ -47,7 +47,7 @@ public class ClientPanelEdit extends ClientPanel {
 		Button b2 = new Button("Cancel");
 		b2.addListener(Events.OnClick, listenerCloseTab);
 		window.add(b2);
-		Button b = new Button("Change Client",
+		Button b = new Button("Select",
 				new SelectionListener<ButtonEvent>() {
 					@Override
 					public void componentSelected(ButtonEvent ce) {

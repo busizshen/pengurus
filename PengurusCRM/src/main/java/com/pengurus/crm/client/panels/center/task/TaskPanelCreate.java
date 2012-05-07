@@ -17,6 +17,7 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
+import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -53,6 +54,7 @@ public class TaskPanelCreate extends TaskPanel {
 	public TaskPanelCreate(JobDTO jobDTO, ProjectDTO projectDTO,
 			TasksListPanelEdit taskListPanel) {
 		super(new TaskDTO(), projectDTO);
+		setLayout(new FlowLayout());
 		VerticalPanel vp = new VerticalPanel();
 		vp.setSpacing(5);
 		HorizontalPanel hp = new HorizontalPanel();

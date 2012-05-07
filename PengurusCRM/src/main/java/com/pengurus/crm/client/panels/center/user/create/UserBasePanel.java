@@ -78,6 +78,7 @@ public abstract class UserBasePanel extends MainPanel {
 	final Window window = new Window();
 
 	public UserBasePanel() {
+		setLayout(new FlowLayout());
 		createForm();
 		createUsernameField();
 		createPasswordField();
@@ -94,9 +95,7 @@ public abstract class UserBasePanel extends MainPanel {
 		addVerticalPanel();
 	}
 
-
 	protected abstract void createForm();
-
 
 	private void addVerticalPanel() {
 		horizontalPanel = new HorizontalPanel();
@@ -138,9 +137,9 @@ public abstract class UserBasePanel extends MainPanel {
 	protected void disableUserTypes() {
 		userType.disable();
 	}
-	
+
 	protected void selectUserType(UserType type) {
-		for (Field<?> field: userType.getAll()) {
+		for (Field<?> field : userType.getAll()) {
 			if (field instanceof UserTypeRadio) {
 				UserTypeRadio radio = (UserTypeRadio) field;
 				if (radio.getType().equals(type)) {
@@ -150,16 +149,16 @@ public abstract class UserBasePanel extends MainPanel {
 			}
 		}
 	}
-	
+
 	private void disableAllRoles() {
-		for (Field<?> field :userRoles.getAll()) {
+		for (Field<?> field : userRoles.getAll()) {
 			if (field instanceof UserRoleBox) {
 				UserRoleBox userRoleBox = (UserRoleBox) field;
 				userRoleBox.setEnabled(false);
 			}
 		}
 	}
-	
+
 	private void setRoleEnable(UserRoleDTO userRole, Boolean value) {
 		for (Field<?> field : userRoles.getAll()) {
 			if (field instanceof UserRoleBox) {
@@ -170,25 +169,24 @@ public abstract class UserBasePanel extends MainPanel {
 			}
 		}
 	}
-	
+
 	protected void enableRole(UserRoleDTO userRole) {
 		setRoleEnable(userRole, true);
 	}
-	
+
 	protected void disableRole(UserRoleDTO userRole) {
 		setRoleEnable(userRole, false);
 	}
-	
-	
+
 	protected void deselectAllRoles() {
-		for (Field<?> field: userRoles.getAll()) {
+		for (Field<?> field : userRoles.getAll()) {
 			if (field instanceof UserRoleBox) {
 				UserRoleBox userRoleBox = (UserRoleBox) field;
 				userRoleBox.setValue(false);
 			}
 		}
 	}
-	
+
 	private void setRoleValue(UserRoleDTO userRole, Boolean value) {
 		for (Field<?> field : userRoles.getAll()) {
 			if (field instanceof UserRoleBox) {
@@ -207,11 +205,11 @@ public abstract class UserBasePanel extends MainPanel {
 	protected void deselectRole(UserRoleDTO userRole) {
 		setRoleValue(userRole, false);
 	}
-	
+
 	protected enum UserType {
 		Worker, Translator, IndividualClient, BusinessClient;
 	}
-	
+
 	protected abstract class UserTypeRadio extends Radio {
 		public UserTypeRadio(String label) {
 			super();
@@ -230,37 +228,38 @@ public abstract class UserBasePanel extends MainPanel {
 
 			});
 		}
-		
+
 		public abstract UserType getType();
 
 		protected void onSelect() {
 			binding.getFields().add(username);
 			selectRole(UserRoleDTO.ROLE_USER);
 		}
-		
+
 		protected void onDeselect() {
 			deselectAllRoles();
 			disableAllRoles();
 		}
-		
+
 		protected abstract UserDTO createUser();
+
 		protected void fillBasicUser(UserDTO user) {
 			user.setUsername(username.getValue());
 			user.setPassword(password.getValue());
 			user.setDescription(description.getValue());
 			Set<UserRoleDTO> authorities = new HashSet<UserRoleDTO>();
-			for (CheckBox checkBox: userRoles.getValues()) {
-				authorities.add(((UserRoleBox)checkBox).getUserRole());
+			for (CheckBox checkBox : userRoles.getValues()) {
+				authorities.add(((UserRoleBox) checkBox).getUserRole());
 			}
 			user.setAuthorities(authorities);
 		}
 	}
-	
+
 	protected abstract class ClientTypeRadio extends UserTypeRadio {
 		public ClientTypeRadio(String label) {
 			super(label);
 		}
-		
+
 		@Override
 		protected void onSelect() {
 			super.onSelect();
@@ -282,7 +281,7 @@ public abstract class UserBasePanel extends MainPanel {
 		protected void onSelect() {
 			super.onSelect();
 			personalDataEdit.show();
-			for (Field<?> field: personalDataEdit.getFields()) {
+			for (Field<?> field : personalDataEdit.getFields()) {
 				binding.getFields().add(field);
 			}
 		}
@@ -290,7 +289,7 @@ public abstract class UserBasePanel extends MainPanel {
 		@Override
 		protected void onDeselect() {
 			super.onDeselect();
-			for (Field<?> field: personalDataEdit.getFields()) {
+			for (Field<?> field : personalDataEdit.getFields()) {
 				binding.getFields().remove(field);
 			}
 		}
@@ -338,8 +337,8 @@ public abstract class UserBasePanel extends MainPanel {
 			fillBasicUser(businessClientDTO);
 			businessClientDTO.setName(fullName.getValue());
 			Set<PersonalDataDTO> agents = new HashSet<PersonalDataDTO>();
-			for (BaseModel model :personalDataStore.getModels()) {
-				agents.add(((PersonalDataModel)model).getPersonalDataDTO());
+			for (BaseModel model : personalDataStore.getModels()) {
+				agents.add(((PersonalDataModel) model).getPersonalDataDTO());
 			}
 			businessClientDTO.setAgents(agents);
 			return businessClientDTO;
@@ -355,7 +354,7 @@ public abstract class UserBasePanel extends MainPanel {
 		public UserType getType() {
 			return UserType.Worker;
 		}
-		
+
 		public WorkerRadio(String label) {
 			super(label);
 		}
@@ -368,7 +367,7 @@ public abstract class UserBasePanel extends MainPanel {
 			enableRole(UserRoleDTO.ROLE_EXECUTIVE);
 			enableRole(UserRoleDTO.ROLE_PROJECTMANAGER);
 			personalDataEdit.show();
-			for (Field<?> field: personalDataEdit.getFields()) {
+			for (Field<?> field : personalDataEdit.getFields()) {
 				binding.getFields().add(field);
 			}
 		}
@@ -377,7 +376,7 @@ public abstract class UserBasePanel extends MainPanel {
 		protected void onDeselect() {
 			super.onDeselect();
 			personalDataEdit.hide();
-			for (Field<?> field: personalDataEdit.getFields()) {
+			for (Field<?> field : personalDataEdit.getFields()) {
 				binding.getFields().remove(field);
 			}
 
@@ -429,7 +428,8 @@ public abstract class UserBasePanel extends MainPanel {
 			fillBasicUser(translatorDTO);
 			translatorDTO.setPersonalData(personalDataEdit.toPersonalData());
 			Set<TranslationDTO> translations = new HashSet<TranslationDTO>();
-			for (TranslationModel translationModel: translationStore.getModels()) {
+			for (TranslationModel translationModel : translationStore
+					.getModels()) {
 				translations.add(translationModel.getTranslationDTO());
 			}
 			translatorDTO.setTranslations(translations);
@@ -468,14 +468,10 @@ public abstract class UserBasePanel extends MainPanel {
 		userRoles = new CheckBoxGroup();
 		userRoles.setFieldLabel("User roles");
 		userRoles.setOrientation(Orientation.VERTICAL);
-		userRoles.add(new UserRoleBox("Role user",
-				UserRoleDTO.ROLE_USER));
-		userRoles.add(new UserRoleBox("Role client",
-				UserRoleDTO.ROLE_CLIENT));
-		userRoles.add(new UserRoleBox("Role worker",
-				UserRoleDTO.ROLE_WORKER));
-		userRoles.add(new UserRoleBox("Role expert",
-				UserRoleDTO.ROLE_EXPERT));
+		userRoles.add(new UserRoleBox("Role user", UserRoleDTO.ROLE_USER));
+		userRoles.add(new UserRoleBox("Role client", UserRoleDTO.ROLE_CLIENT));
+		userRoles.add(new UserRoleBox("Role worker", UserRoleDTO.ROLE_WORKER));
+		userRoles.add(new UserRoleBox("Role expert", UserRoleDTO.ROLE_EXPERT));
 		userRoles.add(new UserRoleBox("Role accountant",
 				UserRoleDTO.ROLE_ACCOUNTANT));
 		userRoles.add(new UserRoleBox("Role executive",
@@ -622,7 +618,8 @@ public abstract class UserBasePanel extends MainPanel {
 								PersonalDataDTO newPersonalData = personalDataEdit
 										.toPersonalData();
 								personalDataStore.insert(new PersonalDataModel(
-										newPersonalData), personalDataStore.getCount());
+										newPersonalData), personalDataStore
+										.getCount());
 								personalDataStore.commitChanges();
 								window.hide();
 							}
@@ -678,7 +675,7 @@ public abstract class UserBasePanel extends MainPanel {
 		additionalDataForm.setLabelAlign(LabelAlign.TOP);
 		additionalDataForm.hide();
 	}
-	
+
 	private void createWindow() {
 		window.setPlain(true);
 		window.setHeading("Edit personal data");
@@ -699,80 +696,86 @@ public abstract class UserBasePanel extends MainPanel {
 		translationComboBox.setDisplayField("name");
 		translationComboBox.setEmptyText("Select translation");
 		translationComboBox.setTriggerAction(TriggerAction.ALL);
-		
+
 		AsyncCallback<Set<TranslationDTO>> callback = new AsyncCallback<Set<TranslationDTO>>() {
-			
+
 			@Override
 			public void onSuccess(Set<TranslationDTO> result) {
-				for (TranslationDTO translationDTO: result) {
-					translationComboStore.add(new TranslationModel(translationDTO));
+				for (TranslationDTO translationDTO : result) {
+					translationComboStore.add(new TranslationModel(
+							translationDTO));
 				}
 			}
-			
+
 			@Override
 			public void onFailure(Throwable caught) {
 				if (caught instanceof UsernameExistsException) {
-					MessageBox.info("Failure", "Chosen username already exists.", null);
+					MessageBox.info("Failure",
+							"Chosen username already exists.", null);
 				} else {
-					MessageBox.info("Failure", "Creating new user has failed.", null);
+					MessageBox.info("Failure", "Creating new user has failed.",
+							null);
 				}
 			}
 		};
-		
+
 		AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
 				.create(AdministrationService.class);
 		service.getTranslations(callback);
-		
+
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
-		
+
 		final CheckBoxSelectionModel<TranslationModel> checkBoxSelection = new CheckBoxSelectionModel<TranslationModel>();
 		configs.add(checkBoxSelection.getColumn());
-		
+
 		ColumnConfig column = new ColumnConfig();
-		
-        column.setId("from");
-        column.setHeader("From");
-        column.setWidth(80);
-        configs.add(column);
 
-        column = new ColumnConfig();
-        column.setId("to");
-        column.setHeader("To");
-        column.setWidth(80);
-        configs.add(column);
+		column.setId("from");
+		column.setHeader("From");
+		column.setWidth(80);
+		configs.add(column);
 
-        column = new ColumnConfig();
-        column.setId("type");
-        column.setHeader("Translation type");
-        column.setWidth(80);
-        configs.add(column);
+		column = new ColumnConfig();
+		column.setId("to");
+		column.setHeader("To");
+		column.setWidth(80);
+		configs.add(column);
 
-        column = new ColumnConfig();
-        column.setId("defaultPrice");
-        column.setHeader("Price");
-        column.setWidth(50);
-        column.setAlignment(HorizontalAlignment.CENTER);
-        configs.add(column);
+		column = new ColumnConfig();
+		column.setId("type");
+		column.setHeader("Translation type");
+		column.setWidth(80);
+		configs.add(column);
 
-        column = new ColumnConfig();
-        column.setId("defaultPriceCurrency");
-        column.setHeader("Currency");
-        column.setWidth(70);
-        configs.add(column);
+		column = new ColumnConfig();
+		column.setId("defaultPrice");
+		column.setHeader("Price");
+		column.setWidth(50);
+		column.setAlignment(HorizontalAlignment.CENTER);
+		configs.add(column);
 
-        ColumnModel cm = new ColumnModel(configs);
+		column = new ColumnConfig();
+		column.setId("defaultPriceCurrency");
+		column.setHeader("Currency");
+		column.setWidth(70);
+		configs.add(column);
+
+		ColumnModel cm = new ColumnModel(configs);
 
 		translationStore = new ListStore<TranslationModel>();
 
 		ToolBar toolBar = new ToolBar();
-		Button add = new Button("Add translation type", new SelectionListener<ButtonEvent>() {
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				translationsGrid.stopEditing();
-		        translationStore.insert(translationComboBox.getValue(), translationStore.getCount());  
-		        translationsGrid.startEditing(translationStore.getCount() - 1, 0);
-			}
-		});
+		Button add = new Button("Add translation type",
+				new SelectionListener<ButtonEvent>() {
+					@Override
+					public void componentSelected(ButtonEvent ce) {
+						translationsGrid.stopEditing();
+						translationStore.insert(translationComboBox.getValue(),
+								translationStore.getCount());
+						translationsGrid.startEditing(
+								translationStore.getCount() - 1, 0);
+					}
+				});
 		toolBar.add(add);
 		Button remove = new Button("Remove");
 		remove.addSelectionListener(new SelectionListener<ButtonEvent>() {
@@ -788,7 +791,7 @@ public abstract class UserBasePanel extends MainPanel {
 
 		});
 		toolBar.add(remove);
-		
+
 		translationsGridPanel = new ContentPanel();
 		translationsGridPanel.setBodyBorder(false);
 		translationsGridPanel.setHeading("Translations");
@@ -797,14 +800,15 @@ public abstract class UserBasePanel extends MainPanel {
 		translationsGridPanel.setSize(400, 200);
 		translationsGridPanel.setTopComponent(toolBar);
 
-		translationsGrid = new EditorGrid<TranslationModel>(translationStore, cm);
+		translationsGrid = new EditorGrid<TranslationModel>(translationStore,
+				cm);
 		translationsGrid.setStyleAttribute("borderTop", "none");
 		translationsGrid.setBorders(true);
 		translationsGrid.setSelectionModel(checkBoxSelection);
 		translationsGrid.addPlugin(checkBoxSelection);
 		translationsGridPanel.add(translationsGrid);
 		translationsGridPanel.hide();
-		
+
 		additionalDataForm.add(translationComboBox, addFormData);
 		additionalDataForm.add(translationsGridPanel, addFormData);
 	}

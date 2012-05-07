@@ -153,7 +153,7 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 					init = true;
 				}
 				ButtonBar buttonBar = new ButtonBar();
-				Button b = new Button("PREVIEW",
+				Button b = new Button("Preview",
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
@@ -180,7 +180,7 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 				b.setToolTip("Click to see");
 				buttonBar.add(b);
 				if (AuthorizationManager.hasExecutiveAccess()) {
-					b = new Button("EDIT",
+					b = new Button("Edit",
 							new SelectionListener<ButtonEvent>() {
 								@Override
 								public void componentSelected(ButtonEvent ce) {

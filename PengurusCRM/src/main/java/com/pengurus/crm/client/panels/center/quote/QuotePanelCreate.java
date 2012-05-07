@@ -24,6 +24,7 @@ public class QuotePanelCreate extends QuotePanel {
 
 	public QuotePanelCreate() {
 		super();
+		setHeight(350);
 	}
 
 	@Override

@@ -50,7 +50,7 @@ public abstract class TasksListPanelView extends TasksListPanel {
 					init = true;
 				}
 				ButtonBar buttonBar = new ButtonBar();
-				Button b = new Button("PREVIEW",
+				Button b = new Button("Preview",
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {

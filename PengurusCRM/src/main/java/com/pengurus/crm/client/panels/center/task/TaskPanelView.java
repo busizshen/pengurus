@@ -37,29 +37,33 @@ public class TaskPanelView extends TaskPanel {
 
 	public TaskPanelView(TaskDTO taskDTO, ProjectDTO projectDTO) {
 		super(taskDTO, projectDTO);
-		VerticalPanel vp = new VerticalPanel();
-		vp.setSpacing(10);
-		final HorizontalPanel hp1 = new HorizontalPanel();
-		hp1.add(getDeadlinePanel());
-		addDescriptionPanel(hp1);
-		addButtonPanel(hp1);
-		vp.add(hp1);
-		addStatusBar(vp);
-		HorizontalPanel hp2 = new HorizontalPanel();
-		VerticalPanel vp1 = new VerticalPanel();
-		vp1.setSpacing(10);
-		addTranslationPanel(vp1);
-		vp1.add(getTranslatorPanel());
-		vp1.add(getReviewerPanel());
-		hp2.add(vp1);
-		VerticalPanel vp2 = new VerticalPanel();
-		vp2.setSpacing(10);
-		addCommentPanel(vp2);
-		// addRatingPanel(vp2);
-		hp2.add(vp2);
-		vp.add(hp2);
-		addFilesPanel(vp);
-		add(vp);
+		setHeight(750);
+		VerticalPanel mainVerticalPanel = new VerticalPanel();
+		mainVerticalPanel.setSpacing(10);
+			
+		HorizontalPanel topPanel = new HorizontalPanel();
+		topPanel.add(getDeadlinePanel());
+		addDescriptionPanel(topPanel);
+		addButtonPanel(topPanel);
+		mainVerticalPanel.add(topPanel);
+		addStatusBar(mainVerticalPanel);
+		
+		HorizontalPanel centerPanel = new HorizontalPanel();
+		VerticalPanel translationPanel = new VerticalPanel();
+		translationPanel.setSpacing(10);
+		addTranslationPanel(translationPanel);
+		translationPanel.add(getTranslatorPanel());
+		translationPanel.add(getReviewerPanel());
+		centerPanel.add(translationPanel);
+		
+		VerticalPanel commentPanel = new VerticalPanel();
+		commentPanel.setSpacing(10);
+		addCommentPanel(commentPanel);
+		// addRatingPanel(commentPanel);
+		centerPanel.add(commentPanel);
+		mainVerticalPanel.add(centerPanel);
+		addFilesPanel(mainVerticalPanel);
+		add(mainVerticalPanel);
 	}
 
 	private void addCommentPanel(VerticalPanel vp2) {
@@ -193,13 +197,16 @@ public class TaskPanelView extends TaskPanel {
 	}
 
 	protected void addFilesPanel(VerticalPanel vp0) {
+		HorizontalPanel filesPanel = new HorizontalPanel();
 		FilesPanel filesPanelIn = new FilesPanelInput(projectDTO.getQuoteId(),
 				taskDTO.getJob().getId(), taskDTO.getId(), true, true);
-		vp0.add(filesPanelIn);
+		filesPanelIn.setStyleAttribute("margin-right", "30px");
+		filesPanel.add(filesPanelIn);
 		FilesPanel filesPanelOut = new FilesPanelOutput(
 				projectDTO.getQuoteId(), taskDTO.getJob().getId(),
 				taskDTO.getId(), true, true);
-		vp0.add(filesPanelOut);
+		filesPanel.add(filesPanelOut);
+		vp0.add(filesPanel);
 	}
 
 }

@@ -6,7 +6,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.ProjectModel;
 import com.pengurus.crm.client.panels.ListPagination;
 import com.pengurus.crm.client.panels.PaginationRpcProxy;
-import com.pengurus.crm.client.panels.center.ListPanel.ModelList;
 import com.pengurus.crm.client.service.PaginationService;
 import com.pengurus.crm.client.service.PaginationServiceAsync;
 import com.pengurus.crm.shared.pagination.PagingCallbackWrapper;

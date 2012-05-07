@@ -90,7 +90,7 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 					init = true;
 				}
 				ButtonBar buttonBar = new ButtonBar();
-				Button buttomPreview = new Button("PREVIEW",
+				Button buttomPreview = new Button("Preview",
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
@@ -114,7 +114,7 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 				buttomPreview.setToolTip("Click to see");
 				buttonBar.add(buttomPreview);
 				if (AuthorizationManager.canEditProject()) {
-					Button buttonEdit = new Button("EDIT",
+					Button buttonEdit = new Button("Edit",
 
 					new SelectionListener<ButtonEvent>() {
 						@Override

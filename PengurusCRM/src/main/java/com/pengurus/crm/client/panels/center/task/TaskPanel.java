@@ -35,7 +35,7 @@ public abstract class TaskPanel extends MainPanel {
 	protected ContentPanel mainBox;
 	
 	protected TaskPanel(TaskDTO taskDTO, ProjectDTO projectDTO){
-		super(1000);
+		super();
 		setHeading("Task");
 		this.taskDTO = taskDTO;
 		this.projectDTO = projectDTO;

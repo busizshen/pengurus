@@ -39,7 +39,7 @@ public abstract class JobsListPanelQuote extends JobsListPanel {
 				if (!init) {
 					init = true;
 				}
-				Button b = new Button("PREVIEW",
+				Button b = new Button("Preview",
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {

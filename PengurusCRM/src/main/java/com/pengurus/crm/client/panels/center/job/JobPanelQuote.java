@@ -12,7 +12,6 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -47,8 +46,7 @@ public class JobPanelQuote extends JobPanel {
 	private QuoteDTO quoteDTO;
 
 	public JobPanelQuote(JobDTO jobDTO, QuoteDTO quoteDTO) {
-		super(jobDTO, 950);
-		setLayout(new BorderLayout());
+		super(jobDTO, 800);
 		this.quoteDTO = quoteDTO;
 		addInfoPanel();
 	}
@@ -93,6 +91,7 @@ public class JobPanelQuote extends JobPanel {
 	@Override
 	protected void addTranslationPanel(final VerticalPanel vp) {
 		if (AuthorizationManager.canEditJob()) {
+			final ListStore<TranslationModel> listTranslationModel = new ListStore<TranslationModel>();
 			AsyncCallback<Set<TranslationDTO>> callback = new AsyncCallback<Set<TranslationDTO>>() {
 
 				public void onFailure(Throwable t) {
@@ -102,27 +101,26 @@ public class JobPanelQuote extends JobPanel {
 
 				public void onSuccess(Set<TranslationDTO> result) {
 
-					ListStore<TranslationModel> listTranslationModel = new ListStore<TranslationModel>();
 					for (TranslationDTO c : result)
 						listTranslationModel.add(new TranslationModel(c));
-					if (jobDTO.getTranslation() != null)
-						translation = new TranslationPanelChange(
-								jobDTO.getTranslation(), listTranslationModel,
-								jobDTO.getAmount(), jobDTO.getPrice());
-					else
-						translation = new TranslationPanelChange(
-								listTranslationModel, jobDTO.getAmount(),
-								jobDTO.getPrice());
-					vp.add(translation);
-					HorizontalPanel filesPanel = new HorizontalPanel();
-					addFilesPanel(filesPanel);
-					vp.add(filesPanel);
-
 				}
+
 			};
 			AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
 					.create(AdministrationService.class);
 			service.getTranslations(callback);
+
+			if (jobDTO.getTranslation() != null)
+				translation = new TranslationPanelChange(
+						jobDTO.getTranslation(), listTranslationModel,
+						jobDTO.getAmount(), jobDTO.getPrice());
+			else
+				translation = new TranslationPanelChange(listTranslationModel,
+						jobDTO.getAmount(), jobDTO.getPrice());
+			vp.add(translation);
+			HorizontalPanel filesPanel = new HorizontalPanel();
+			addFilesPanel(filesPanel);
+			vp.add(filesPanel);
 
 		} else {
 			translation = new TranslationPanelView(jobDTO.getTranslation(),
@@ -149,7 +147,6 @@ public class JobPanelQuote extends JobPanel {
 
 		mainVerticalPanel.add(topHorizontalPanel);
 
-		// mainVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
 		addStatusPanel(mainVerticalPanel);
 
 		addInfoForm(mainVerticalPanel);

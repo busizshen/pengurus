@@ -15,7 +15,12 @@ import com.pengurus.crm.shared.dto.TaskDTO;
 public abstract class TasksListPanel extends ListPanel<TaskModel> {
 
 	public TasksListPanel(){
-		super(275);
+		super(350);
+		setHeading("Tasks");
+	}
+	
+	public TasksListPanel(int height){
+		super(height);
 		setHeading("Tasks");
 	}
 	

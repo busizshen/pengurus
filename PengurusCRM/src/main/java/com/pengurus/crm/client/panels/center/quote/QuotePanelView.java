@@ -4,7 +4,6 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelView;
@@ -24,9 +23,9 @@ public class QuotePanelView extends QuotePanel {
 	@Override
 	protected void addButtonPanel(HorizontalPanel hpPanel) {
 		if (AuthorizationManager.hasExecutiveAccess()) {
-			Image img = new Image(
+			/*Image img = new Image(
 					"resources/images/default/icons/preview.png");
-			img.setSize("20px", "30px");
+			img.setSize("20px", "30px");*/
 			Button b = new Button("Edit", new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
