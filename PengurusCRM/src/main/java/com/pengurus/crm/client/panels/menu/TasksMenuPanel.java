@@ -3,16 +3,19 @@ package com.pengurus.crm.client.panels.menu;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.core.client.GWT;
 import com.pengurus.crm.client.AuthorizationManager;
+import com.pengurus.crm.client.i18nConstants;
 import com.pengurus.crm.client.panels.center.task.TasksListPanelViewAll;
 import com.pengurus.crm.client.panels.center.task.TasksListPanelViewByExpert;
 import com.pengurus.crm.client.panels.center.task.TasksListPanelViewByReviewer;
 
 
 public class TasksMenuPanel extends TabMenuPanel {
+	private static i18nConstants myConstants=(i18nConstants)GWT.create(i18nConstants.class);
 
 	public TasksMenuPanel() {
-		super("Tasks");
+		super(myConstants.Tasks());
 	    addButtonAll();
 	    addButtonMineExpert();
 	    addButtonMineReviewer();
@@ -24,7 +27,7 @@ public class TasksMenuPanel extends TabMenuPanel {
 
 	private void addButtonMineExpert() {
 		if(AuthorizationManager.canViewTasks()){ 
-			Button b = new Button("Mine as Expert");
+			Button b = new Button(myConstants.MineAsExpert());
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
@@ -38,7 +41,7 @@ public class TasksMenuPanel extends TabMenuPanel {
 	
 	private void addButtonMineReviewer() {
 		if(AuthorizationManager.canViewTasks()){ 
-			Button b = new Button("Mine as Reviewer");
+			Button b = new Button(myConstants.MineAsReviewer());
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
@@ -52,7 +55,7 @@ public class TasksMenuPanel extends TabMenuPanel {
 
 	private void addButtonAll() {
 		if(AuthorizationManager.canViewAllTasks()){ 
-			Button b = new Button("All");
+			Button b = new Button(myConstants.All());
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {

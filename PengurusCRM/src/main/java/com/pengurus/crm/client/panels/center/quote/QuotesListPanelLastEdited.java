@@ -52,7 +52,7 @@ public class QuotesListPanelLastEdited extends QuotesListPanel{
 
 	@Override
 	protected String getName() {
-		return "Quote List - Last Edited";
+		return myConstants.QuotesList();
 	}
 
 }

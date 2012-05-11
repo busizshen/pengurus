@@ -32,7 +32,7 @@ public class QuotePanelEdit extends QuotePanel {
 	protected void addButtonPanel(HorizontalPanel hpPanel) {
 		if (AuthorizationManager.hasExecutiveAccess()) {
 			HorizontalPanel hp = new HorizontalPanel();
-			Button buttonUpdate = new Button("Update",
+			Button buttonUpdate = new Button(myConstants.Update(),
 					new SelectionListener<ButtonEvent>() {
 						@Override
 						public void componentSelected(ButtonEvent ce) {
@@ -51,7 +51,7 @@ public class QuotePanelEdit extends QuotePanel {
 						}
 					});
 			hp.add(buttonUpdate);
-			Button buttonCancel = new Button("Delete",
+			Button buttonCancel = new Button(myConstants.Delete(),
 					new SelectionListener<ButtonEvent>() {
 						@Override
 						public void componentSelected(ButtonEvent ce) {
@@ -61,7 +61,7 @@ public class QuotePanelEdit extends QuotePanel {
 						}
 					});
 			hp.add(buttonCancel);
-			buttonCancel = new Button("Cancel",
+			buttonCancel = new Button(myConstants.Cancel(),
 					new SelectionListener<ButtonEvent>() {
 						@Override
 						public void componentSelected(ButtonEvent ce) {
@@ -79,15 +79,15 @@ public class QuotePanelEdit extends QuotePanel {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		workerPanel = new WorkerPanelEditByRoles(quoteDTO.getSupervisor(),
-				"Supervisor", roles);
-		workerPanel.setHeading("Supervisor");
+				myConstants.Supervisor(), roles);
+		workerPanel.setHeading(myConstants.Supervisor());
 		vpPanel.add(workerPanel);
 	}
 
 	@Override
 	protected void addClientPanel(VerticalPanel vpPanel) {
-		clientPanel = new ClientPanelEdit(quoteDTO.getClient(), "Client");
-		clientPanel.setHeading("Client");
+		clientPanel = new ClientPanelEdit(quoteDTO.getClient(), myConstants.Client());
+		clientPanel.setHeading(myConstants.Client());
 		vpPanel.add(clientPanel);
 	}
 

@@ -26,7 +26,7 @@ public class QuotePanelView extends QuotePanel {
 			/*Image img = new Image(
 					"resources/images/default/icons/preview.png");
 			img.setSize("20px", "30px");*/
-			Button b = new Button("Edit", new SelectionListener<ButtonEvent>() {
+			Button b = new Button(myConstants.Edit(), new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
 					QuotePanelEdit qp = new QuotePanelEdit(quoteDTO);
@@ -42,16 +42,16 @@ public class QuotePanelView extends QuotePanel {
 	@Override
 	protected void addSupervisorPanel(VerticalPanel vpPanel) {
 		workerPanel = new WorkerPanelView(quoteDTO.getSupervisor(),
-				"Supervisor");
-		workerPanel.setHeading("Supervisor");
+				myConstants.Supervisor());
+		workerPanel.setHeading(myConstants.Supervisor());
 		vpPanel.add(workerPanel);
 
 	}
 
 	@Override
 	protected void addClientPanel(VerticalPanel vpPanel) {
-		clientPanel = new ClientPanelView(quoteDTO.getClient(), "Client");
-		clientPanel.setHeading("Client");
+		clientPanel = new ClientPanelView(quoteDTO.getClient(), myConstants.Client());
+		clientPanel.setHeading(myConstants.Client());
 		vpPanel.add(clientPanel);
 	}
 

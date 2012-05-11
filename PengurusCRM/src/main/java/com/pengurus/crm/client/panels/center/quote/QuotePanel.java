@@ -23,14 +23,14 @@ public abstract class QuotePanel extends MainPanel {
 
 	public QuotePanel() {
 		super(900);
-		setHeading("Quote");
+		setHeading(myConstants.Quote());
 		this.quoteDTO = new QuoteDTO();
 		getInfoPanel();
 	}
 
 	public QuotePanel(QuoteDTO quoteDTO) {
 		super(900);
-		setHeading("Quote");
+		setHeading(myConstants.Quote());
 		this.quoteDTO = quoteDTO;
 		getInfoPanel();
 	}

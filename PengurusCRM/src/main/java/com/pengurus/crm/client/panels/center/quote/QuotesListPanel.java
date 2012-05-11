@@ -35,11 +35,11 @@ import com.pengurus.crm.shared.dto.QuoteDTO;
 public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 
 	ListPagination<QuoteModel> listPagination;
-
 	protected abstract void initPagination();
 
 	public QuotesListPanel(){
 		super(360);
+
 		setHeading("Quotes");
 	}
 	
@@ -64,27 +64,27 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 
 		column = new ColumnConfigMy();
 		column.setId("status");
-		column.setHeader("Status");
+		column.setHeader(myConstants.Status());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("client");
-		column.setHeader("Client");
+		column.setHeader(myConstants.Client());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("supervisor");
-		column.setHeader("Supervisor");
+		column.setHeader(myConstants.Supervisor());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("description");
-		column.setHeader("Description");
+		column.setHeader(myConstants.Description());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("preview");
-		column.setHeader("Preview");
+		column.setHeader(myConstants.previewButton());
 		column.setRenderer(getButtonRenderer());
 		configs.add(column);
 

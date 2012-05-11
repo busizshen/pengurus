@@ -17,6 +17,7 @@ public class QuotesListPanelAll extends QuotesListPanel {
 		initPagination();
 		modelList = new ModelList();
 		add(modelList);
+
 		setStyleName("background-panel");
 	}
 	
@@ -36,6 +37,6 @@ public class QuotesListPanelAll extends QuotesListPanel {
 	
 	@Override
 	protected String getName() {
-		return "Quote List - All";
+		return myConstants.QuotesList();
 	}
 }

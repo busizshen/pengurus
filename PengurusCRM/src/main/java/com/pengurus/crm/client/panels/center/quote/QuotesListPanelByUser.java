@@ -22,7 +22,7 @@ public abstract class QuotesListPanelByUser extends QuotesListPanel {
 
 	@Override
 	protected String getName() {
-		return userDTO.getFullName() + " quotes list";
+		return myMessages.QuotesList(userDTO.getFullName());
 	}
 
 }

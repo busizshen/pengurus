@@ -30,7 +30,7 @@ public class QuotePanelCreate extends QuotePanel {
 	@Override
 	protected void addButtonPanel(HorizontalPanel hp2) {
 		HorizontalPanel vp = new HorizontalPanel();
-		Button b = new Button("Create", new SelectionListener<ButtonEvent>() {
+		Button b = new Button(myConstants.Create(), new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
 				quoteDTO.setDescription(descriptionPanel.getDescription());
@@ -55,14 +55,14 @@ public class QuotePanelCreate extends QuotePanel {
 					service.createQuote(quoteDTO, callback);
 				} else {
 					MessageBox mb = new MessageBox();
-					mb.setMessage("Please choose Client and Supervisor");
+					mb.setMessage(myMessages.PleaseChoose(myConstants.Client(),myConstants.Supervisor()));
 					mb.show();
 				}
 
 			}
 		});
 		vp.add(b);
-		b = new Button("Cancel", new SelectionListener<ButtonEvent>() {
+		b = new Button(myConstants.Cancel(), new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
 				MainWindow.addCenterPanel(new HorizontalPanel());
@@ -77,15 +77,15 @@ public class QuotePanelCreate extends QuotePanel {
 	protected void addSupervisorPanel(VerticalPanel vpPanel) {
 		Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 		roles.add(UserRoleDTO.ROLE_EXECUTIVE);
-		workerPanel = new WorkerPanelEditByRoles(quoteDTO.getSupervisor(),"Supervisor",roles);
-		workerPanel.setHeading("Supervisor");
+		workerPanel = new WorkerPanelEditByRoles(quoteDTO.getSupervisor(),myConstants.Supervisor(),roles);
+		workerPanel.setHeading(myConstants.Supervisor());
 		vpPanel.add(workerPanel);
 	}
 
 	@Override
 	protected void addClientPanel(VerticalPanel vpPanel) {
-		clientPanel = new ClientPanelEdit(quoteDTO.getClient(),"Client");
-		clientPanel.setHeading("Client");
+		clientPanel = new ClientPanelEdit(quoteDTO.getClient(),myConstants.Client());
+		clientPanel.setHeading(myConstants.Client());
 		vpPanel.add(clientPanel);
 	}
 

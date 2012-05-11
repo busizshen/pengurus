@@ -3,15 +3,18 @@ package com.pengurus.crm.client.panels.menu;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.core.client.GWT;
 import com.pengurus.crm.client.AuthorizationManager;
+import com.pengurus.crm.client.i18nConstants;
 import com.pengurus.crm.client.panels.center.user.UserListPanel;
 import com.pengurus.crm.client.panels.center.user.create.UserCreatePanel;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 public class UsersMenuPanel extends TabMenuPanel {
+	private static i18nConstants myConstants=(i18nConstants)GWT.create(i18nConstants.class);
 
 	public UsersMenuPanel() {
-		super("Users");
+		super(myConstants.Users());
 		addAllButton();
 		addClientsButton();
 		addExecutivesButton();
@@ -23,7 +26,7 @@ public class UsersMenuPanel extends TabMenuPanel {
 
 	private void addAllButton() {
 		if (AuthorizationManager.hasExecutiveAccess()) {
-			Button button = new Button("All users");
+			Button button = new Button(myConstants.AllUsers());
 			button.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
 				@Override
@@ -40,7 +43,7 @@ public class UsersMenuPanel extends TabMenuPanel {
 
 	private void addVerificatorsButton() {
 		if (AuthorizationManager.canViewTranslators()) {
-			Button b = new Button("Verificators");
+			Button b = new Button(myConstants.Verificators());
 			b.addSelectionListener(new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
@@ -56,7 +59,7 @@ public class UsersMenuPanel extends TabMenuPanel {
 
 	private void addFreelancersButton() {
 		if (AuthorizationManager.canViewTranslators()) {
-			Button b = new Button("Freelancers");
+			Button b = new Button(myConstants.Freelancers());
 			b.addSelectionListener(new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
@@ -72,7 +75,7 @@ public class UsersMenuPanel extends TabMenuPanel {
 
 	private void addExpertsButton() {
 		if (AuthorizationManager.canViewTranslators()) {
-			Button b = new Button("Experts");
+			Button b = new Button(myConstants.Experts());
 			b.addSelectionListener(new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
@@ -88,7 +91,7 @@ public class UsersMenuPanel extends TabMenuPanel {
 
 	private void addExecutivesButton() {
 		if (AuthorizationManager.canViewExecutives()) {
-			Button b = new Button("Executives");
+			Button b = new Button(myConstants.Executives());
 			b.addSelectionListener(new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
@@ -104,7 +107,7 @@ public class UsersMenuPanel extends TabMenuPanel {
 
 	private void addClientsButton() {
 		if (AuthorizationManager.canViewClients()) {
-			Button b = new Button("Clients");
+			Button b = new Button(myConstants.Clients());
 			b.addSelectionListener(new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
@@ -120,7 +123,7 @@ public class UsersMenuPanel extends TabMenuPanel {
 
 	private void addCreateButton() {
 		if (AuthorizationManager.hasExecutiveAccess()) {
-			Button button = new Button("Create user");
+			Button button = new Button(myConstants.CreateUser());
 			button.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
 				@Override

@@ -3,7 +3,9 @@ package com.pengurus.crm.client.panels.menu;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.core.client.GWT;
 import com.pengurus.crm.client.AuthorizationManager;
+import com.pengurus.crm.client.i18nConstants;
 import com.pengurus.crm.client.panels.center.project.ProjectsListPanelAll;
 import com.pengurus.crm.client.panels.center.project.ProjectsListPanelByUser;
 import com.pengurus.crm.client.panels.center.project.ProjectsListPanelByUserProjectManager;
@@ -11,8 +13,10 @@ import com.pengurus.crm.client.panels.center.project.ProjectsListPanelByUserSupe
 
 public class ProjectsMenuPanel extends TabMenuPanel {
 
+	private static i18nConstants myConstants=(i18nConstants)GWT.create(i18nConstants.class);
+
 	public ProjectsMenuPanel() {
-		super("Projects");
+		super(myConstants.Projects());
 	    addButtonAll();
 	    addButtonMineSupervisor();
 	    addButtonMineProjectManager();
@@ -24,7 +28,7 @@ public class ProjectsMenuPanel extends TabMenuPanel {
 	
 	private void addButtonMineSupervisor() {
 		if(AuthorizationManager.canViewAllProjects()){ 
-			Button b = new Button("Mine As Supervisor");
+			Button b = new Button(myConstants.MineAsSupervisor());
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
@@ -38,7 +42,7 @@ public class ProjectsMenuPanel extends TabMenuPanel {
 
 	private void addButtonMineProjectManager() {
 		if(AuthorizationManager.canViewProjects()){ 
-			Button b = new Button("Mine As ProjectManager");
+			Button b = new Button(myConstants.MineAsProjectManager());
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
@@ -51,7 +55,7 @@ public class ProjectsMenuPanel extends TabMenuPanel {
 	}
 	private void addButtonAll() {
 		if(AuthorizationManager.canViewAllProjects()){ 
-			Button b = new Button("All");
+			Button b = new Button(myConstants.All());
 			b.addSelectionListener(new SelectionListener<ButtonEvent>(){
 				@Override
 				public void componentSelected(ButtonEvent ce) {
