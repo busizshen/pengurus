@@ -44,7 +44,7 @@ public class LanguagePanel extends MainPanel {
 
 	public LanguagePanel() {
 		super(500);
-		setHeading("Language panel");
+		setHeading(myConstants.Languages());
 		createForm();
 		createLanguageField();
 		createButton();
@@ -64,8 +64,8 @@ public class LanguagePanel extends MainPanel {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				MessageBox.info("Failure", "Uploading languages has "
-						+ "failed.", null);
+				MessageBox.info(myConstants.Failure(),
+						myMessages.UploadFailed(myConstants.languages()), null);
 			}
 		};
 
@@ -80,7 +80,7 @@ public class LanguagePanel extends MainPanel {
 
 		ColumnConfig column = new ColumnConfig();
 		column.setId("lang");
-		column.setHeader("Language");
+		column.setHeader(myConstants.Language());
 		column.setWidth(200);
 		configs.add(column);
 
@@ -91,58 +91,56 @@ public class LanguagePanel extends MainPanel {
 		grid.addPlugin(r);
 		grid.getView().setForceFit(true);
 
-		removeButton = new Button("Remove selected language",
-				new SelectionListener<ButtonEvent>() {
-					@Override
-					public void componentSelected(ButtonEvent ce) {
-						if (grid.getSelectionModel().getSelectedItem() != null) {
+		removeButton = new Button(myMessages.RemoveSelected(myConstants
+				.language()), new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				if (grid.getSelectionModel().getSelectedItem() != null) {
 
-							AsyncCallback<LanguageDTO> callback = new AsyncCallback<LanguageDTO>() {
+					AsyncCallback<LanguageDTO> callback = new AsyncCallback<LanguageDTO>() {
 
-								@Override
-								public void onSuccess(LanguageDTO result) {
-									grid.getStore().remove(
-											grid.getSelectionModel()
-													.getSelectedItem());
+						@Override
+						public void onSuccess(LanguageDTO result) {
+							grid.getStore().remove(
+									grid.getSelectionModel().getSelectedItem());
 
-									MessageBox.info("Success",
-											"You have succesfully deleted "
-													+ result.getLanguage()
-													+ " language.", null);
-								}
-
-								@Override
-								public void onFailure(Throwable caught) {
-									if (caught instanceof DependencyException)
-										MessageBox
-												.info("Failure",
-														"This language cannot be removed as"
-																+ " there are existing dependencies.",
-														null);
-									else
-										MessageBox
-												.info("Failure",
-														"Deleting language has failed.",
-														null);
-								}
-							};
-							AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
-									.create(AdministrationService.class);
-							service.deleteLanguage(grid.getSelectionModel()
-									.getSelectedItem().getLanguageDTO(),
-									callback);
+							MessageBox.info(
+									myConstants.Success(),
+									myMessages.DeleteSuccess(
+											myConstants.language(),
+											result.getLanguage()), null);
 						}
 
-						if (grid.getStore().getCount() == 0) {
-							ce.getComponent().disable();
+						@Override
+						public void onFailure(Throwable caught) {
+							if (caught instanceof DependencyException)
+								MessageBox.info(
+										myConstants.Failure(),
+										myMessages
+												.DependencyException(myConstants
+														.language()), null);
+							else
+								MessageBox.info(myConstants.Failure(),
+										myMessages.DeleteFailed(myConstants
+												.languageFailed()), null);
 						}
-					}
+					};
+					AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
+							.create(AdministrationService.class);
+					service.deleteLanguage(grid.getSelectionModel()
+							.getSelectedItem().getLanguageDTO(), callback);
+				}
 
-				});
+				if (grid.getStore().getCount() == 0) {
+					ce.getComponent().disable();
+				}
+			}
+
+		});
 
 		ContentPanel cp = new ContentPanel();
 		cp.setButtonAlign(HorizontalAlignment.CENTER);
-		cp.setHeading("List of languages");
+		cp.setHeading(myMessages.ListOf(myConstants.languages()));
 		cp.setLayout(new FitLayout());
 		cp.setSize(450, 300);
 		cp.add(grid);
@@ -160,20 +158,20 @@ public class LanguagePanel extends MainPanel {
 		verticalPanel.setSpacing(20);
 
 		createForm = new FormPanel();
-		createForm.setHeading("Create new language");
+		createForm.setHeading(myMessages.CreateNew(myConstants.language()));
 		createForm.setPadding(20);
 		createForm.setLabelAlign(LabelAlign.LEFT);
 	}
 
 	private void createLanguageField() {
 		languageField = new TextField<String>();
-		languageField.setFieldLabel("Language");
+		languageField.setFieldLabel(myConstants.Language());
 		languageField.setAllowBlank(false);
 		createForm.add(languageField, formData);
 	}
 
 	private void createButton() {
-		createButton = new Button("Create",
+		createButton = new Button(myConstants.Create(),
 				new SelectionListener<ButtonEvent>() {
 
 					@Override
@@ -185,20 +183,18 @@ public class LanguagePanel extends MainPanel {
 								if (!removeButton.isEnabled())
 									removeButton.enable();
 								grid.getStore().add(new LanguageModel(result));
-								MessageBox.info("Success",
-										"You have succesfully created new language: "
-												+ result.getLanguage() + ".",
-										null);
+								MessageBox.info(
+										myConstants.Success(),
+										myMessages.CreateSuccess(
+												myConstants.language(),
+												result.getLanguage()), null);
 							}
 
 							@Override
 							public void onFailure(Throwable caught) {
-								MessageBox
-										.info("Failure",
-												"Creating new currency has "
-														+ "failed. The language is"
-														+ " already on the list.",
-												null);
+								MessageBox.info(myConstants.Failure(),
+										myMessages.CreateFailed(myConstants
+												.languageFailed()), null);
 							}
 						};
 

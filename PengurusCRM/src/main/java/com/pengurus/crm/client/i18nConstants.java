@@ -127,5 +127,56 @@ public interface i18nConstants extends Constants {
 	String Expert();
 
 	String Id();
+	
+	/* LANGUAGE */
+	String Language();
+	
+	String languages();
+	
+	/* TRANSLATION */
+	String Translation();
+	
+	String translation();
+	
+	String translations();
+	
+	String LanguageFrom();
+	
+	String LanguageTo();
+	
+	String DefaultPrice();
+	
+	String SelectCurrency();
+	
+	String SelectLanguage();
+	
+	String SelectTranslationType();
+	
+	String CreateSuccess();
+	
+	String DeleteSuccess();
+	
+	/* TRANSLATION TYPE */
+	String TranslationType();
+	
+	String translationType();
+	
+	String translationTypeList();
+	
+	String Unit();
+	
+	/* CURRENCY */
+	String currency();
+	
+	String currencyList();
 
+	String languageFailed();
+	
+	String translationTypeFailed();
+	
+	String currencyFailed();
+	
+	String Failure();
+	
+	String Success();
 }

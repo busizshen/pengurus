@@ -57,7 +57,7 @@ public class TranslationPanelAdmin extends MainPanel {
 
 	public TranslationPanelAdmin() {
 		super(600);
-		setHeading("Translation panel");
+		setHeading(myConstants.Translations());
 		createVerticalPanel();
 		createNewTranslationForm();
 		createButton();
@@ -77,8 +77,9 @@ public class TranslationPanelAdmin extends MainPanel {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				MessageBox.info("Failure", "Uploading translation has "
-						+ "failed.", null);
+				MessageBox.info(myConstants.Failure(),
+						myMessages.UploadFailed(myConstants.translations()),
+						null);
 			}
 		};
 
@@ -95,32 +96,31 @@ public class TranslationPanelAdmin extends MainPanel {
 		ColumnConfig column = new ColumnConfig();
 
 		column.setId("from");
-		column.setHeader("From");
+		column.setHeader(myConstants.From());
 		column.setWidth(100);
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId("to");
-		column.setHeader("To");
+		column.setHeader(myConstants.To());
 		column.setWidth(100);
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId("type");
-		column.setHeader("Translation type");
+		column.setHeader(myConstants.TranslationType());
 		column.setWidth(200);
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId("defaultPrice");
-		column.setHeader("Price");
+		column.setHeader(myConstants.Price());
 		column.setWidth(100);
-		column.setAlignment(HorizontalAlignment.CENTER);
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId("defaultPriceCurrency");
-		column.setHeader("Currency");
+		column.setHeader(myConstants.Currency());
 		column.setWidth(200);
 		configs.add(column);
 
@@ -130,71 +130,66 @@ public class TranslationPanelAdmin extends MainPanel {
 		grid.addPlugin(r);
 		grid.getView().setForceFit(true);
 
-		removeButton = new Button("Remove selected translation",
-				new SelectionListener<ButtonEvent>() {
+		removeButton = new Button(myMessages.RemoveSelectedFem(myConstants
+				.translation()), new SelectionListener<ButtonEvent>() {
 
-					@Override
-					public void componentSelected(ButtonEvent ce) {
-						if (grid.getSelectionModel().getSelectedItem() != null) {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				if (grid.getSelectionModel().getSelectedItem() != null) {
 
-							AsyncCallback<TranslationDTO> callback = new AsyncCallback<TranslationDTO>() {
+					AsyncCallback<TranslationDTO> callback = new AsyncCallback<TranslationDTO>() {
 
-								@Override
-								public void onSuccess(TranslationDTO result) {
-									grid.getStore().remove(
-											grid.getSelectionModel()
-													.getSelectedItem());
+						@Override
+						public void onSuccess(TranslationDTO result) {
+							grid.getStore().remove(
+									grid.getSelectionModel().getSelectedItem());
 
-									MessageBox
-											.info("Success",
-													"You have succesfully deleted translation.",
-													null);
-								}
-
-								@Override
-								public void onFailure(Throwable caught) {
-									if (caught instanceof DependencyException)
-										MessageBox
-												.info("Failure",
-														"This translation cannot be removed as"
-																+ " there are existing dependencies.",
-														null);
-									else
-										MessageBox
-												.info("Failure",
-														"Deleting translation has failed.",
-														null);
-								}
-							};
-							AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
-									.create(AdministrationService.class);
-							service.deleteTranslation(grid.getSelectionModel()
-									.getSelectedItem().getTranslationDTO(),
-									callback);
+							MessageBox.info(myConstants.Success(),
+									myConstants.DeleteSuccess(), null);
 						}
 
-						if (grid.getStore().getCount() == 0) {
-							ce.getComponent().disable();
+						@Override
+						public void onFailure(Throwable caught) {
+							if (caught instanceof DependencyException)
+								MessageBox.info(
+										myConstants.Failure(),
+										myMessages
+												.DependencyExceptionFem(myConstants
+														.Translation()
+														.toLowerCase()), null);
+							else
+								MessageBox.info(myConstants.Failure(),
+										myMessages.DeleteFailed(myConstants
+												.translations()), null);
 						}
-					}
+					};
+					AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
+							.create(AdministrationService.class);
+					service.deleteTranslation(grid.getSelectionModel()
+							.getSelectedItem().getTranslationDTO(), callback);
+				}
 
-				});
+				if (grid.getStore().getCount() == 0) {
+					ce.getComponent().disable();
+				}
+			}
+
+		});
 		// btn.setIcon(Resources.ICONS.delete());
 		ContentPanel cp = new ContentPanel();
 		cp.setButtonAlign(HorizontalAlignment.CENTER);
-		cp.setHeading("List of translation types");
+		cp.setHeading(myMessages.ListOf(myConstants.translations()));
 		cp.setLayout(new FitLayout());
 		cp.setSize(700, 300);
 		cp.add(grid);
 		cp.addButton(removeButton);
 		grid.getAriaSupport().setLabelledBy(cp.getHeader().getId() + "-label");
 
-		
 		verticalPanel.add(cp);
 	}
 
 	private void createButton() {
-		createButton = new Button("Create",
+		createButton = new Button(myConstants.Create(),
 				new SelectionListener<ButtonEvent>() {
 
 					@Override
@@ -210,16 +205,15 @@ public class TranslationPanelAdmin extends MainPanel {
 								grid.getStore().add(
 										new TranslationModel(result));
 
-								MessageBox.info("Success",
-										"You have succesfully created"
-												+ " new translation.", null);
+								MessageBox.info(myConstants.Success(),
+										myConstants.CreateSuccess(), null);
 							}
 
 							@Override
 							public void onFailure(Throwable caught) {
-								MessageBox.info("Failure",
-										"Creating new translation has "
-												+ "failed.", null);
+								MessageBox.info(myConstants.Failure(),
+										myMessages.CreateFailedFem(myConstants
+												.translations()), null);
 							}
 						};
 						TranslationDTO translation = new TranslationDTO();
@@ -246,7 +240,8 @@ public class TranslationPanelAdmin extends MainPanel {
 
 	private void createNewTranslationForm() {
 		createForm = new FormPanel();
-		createForm.setHeading("Create new translation");
+		createForm
+				.setHeading(myMessages.CreateNewFem(myConstants.translation()));
 		createForm.setPadding(20);
 		createForm.setLabelAlign(LabelAlign.LEFT);
 		createForm.setLabelWidth(100);
@@ -260,15 +255,15 @@ public class TranslationPanelAdmin extends MainPanel {
 
 	private void createDefaultPriceField() {
 		defaultPriceField = new NumberField();
-		defaultPriceField.setFieldLabel("Default price");
+		defaultPriceField.setFieldLabel(myConstants.DefaultPrice());
 		defaultPriceField.setAllowBlank(false);
 		createForm.add(defaultPriceField, formData);
 	}
 
 	private void createCurrencyCombo() {
 		currencyCombo = new ComboBox<CurrencyModel>();
-		currencyCombo.setFieldLabel("Currency");
-		currencyCombo.setEmptyText("Select currency");
+		currencyCombo.setFieldLabel(myConstants.Currency());
+		currencyCombo.setEmptyText(myConstants.SelectCurrency());
 		final ListStore<CurrencyModel> list = new ListStore<CurrencyModel>();
 		AsyncCallback<Set<CurrencyTypeDTO>> callback = new AsyncCallback<Set<CurrencyTypeDTO>>() {
 
@@ -280,8 +275,9 @@ public class TranslationPanelAdmin extends MainPanel {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				MessageBox.info("Failure", "Uploading currencies has "
-						+ "failed.", null);
+				MessageBox.info(myConstants.Failure(),
+						myMessages.UploadFailed(myConstants.currencyList()),
+						null);
 			}
 		};
 
@@ -302,8 +298,8 @@ public class TranslationPanelAdmin extends MainPanel {
 
 	private void createTranslationTypeCombo() {
 		translationTypeCombo = new ComboBox<TranslationTypeModel>();
-		translationTypeCombo.setFieldLabel("Translation type");
-		translationTypeCombo.setEmptyText("Select translation Type");
+		translationTypeCombo.setFieldLabel(myConstants.TranslationType());
+		translationTypeCombo.setEmptyText(myConstants.SelectTranslationType());
 		final ListStore<TranslationTypeModel> list = new ListStore<TranslationTypeModel>();
 		AsyncCallback<Set<TranslationTypeDTO>> callback = new AsyncCallback<Set<TranslationTypeDTO>>() {
 
@@ -315,8 +311,8 @@ public class TranslationPanelAdmin extends MainPanel {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				MessageBox.info("Failure", "Uploading translation types has "
-						+ "failed.", null);
+				MessageBox.info(myConstants.Failure(), myMessages
+						.UploadFailed(myConstants.translationTypeList()), null);
 			}
 		};
 
@@ -336,12 +332,12 @@ public class TranslationPanelAdmin extends MainPanel {
 
 	private void createLanguageCombos() {
 		fromCombo = new ComboBox<LanguageModel>();
-		fromCombo.setFieldLabel("Language from");
-		fromCombo.setEmptyText("Select language from");
+		fromCombo.setFieldLabel(myConstants.LanguageFrom());
+		fromCombo.setEmptyText(myConstants.SelectLanguage());
 
 		toCombo = new ComboBox<LanguageModel>();
-		toCombo.setFieldLabel("Language to");
-		toCombo.setEmptyText("Select language to");
+		toCombo.setFieldLabel(myConstants.LanguageTo());
+		toCombo.setEmptyText(myConstants.SelectLanguage());
 
 		final ListStore<LanguageModel> list = new ListStore<LanguageModel>();
 		AsyncCallback<Set<LanguageDTO>> callback = new AsyncCallback<Set<LanguageDTO>>() {
@@ -354,8 +350,8 @@ public class TranslationPanelAdmin extends MainPanel {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				MessageBox.info("Failure", "Uploading languages has "
-						+ "failed.", null);
+				MessageBox.info(myConstants.Failure(),
+						myMessages.UploadFailed(myConstants.languages()), null);
 			}
 		};
 

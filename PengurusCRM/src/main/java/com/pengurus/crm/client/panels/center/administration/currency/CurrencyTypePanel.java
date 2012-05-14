@@ -44,7 +44,7 @@ public class CurrencyTypePanel extends MainPanel {
 
 	public CurrencyTypePanel() {
 		super(500);
-		setHeading("Currency panel");
+		setHeading(myConstants.Currency());
 		createForm();
 		createCurrencyField();
 		createButton();
@@ -64,8 +64,9 @@ public class CurrencyTypePanel extends MainPanel {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				MessageBox.info("Failure", "Uploading currencies has "
-						+ "failed.", null);
+				MessageBox.info(myConstants.Failure(),
+						myMessages.UploadFailed(myConstants.currencyList()),
+						null);
 			}
 		};
 
@@ -80,7 +81,7 @@ public class CurrencyTypePanel extends MainPanel {
 
 		ColumnConfig column = new ColumnConfig();
 		column.setId("currency");
-		column.setHeader("Currency");
+		column.setHeader(myConstants.Currency());
 		column.setWidth(200);
 		configs.add(column);
 
@@ -91,59 +92,58 @@ public class CurrencyTypePanel extends MainPanel {
 		grid.addPlugin(r);
 		grid.getView().setForceFit(true);
 
-		removeButton = new Button("Remove selected currency",
-				new SelectionListener<ButtonEvent>() {
-					@Override
-					public void componentSelected(ButtonEvent ce) {
-						if (grid.getSelectionModel().getSelectedItem() != null) {
+		removeButton = new Button(myMessages.RemoveSelectedFem(myConstants
+				.currency()), new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				if (grid.getSelectionModel().getSelectedItem() != null) {
 
-							AsyncCallback<CurrencyTypeDTO> callback = new AsyncCallback<CurrencyTypeDTO>() {
+					AsyncCallback<CurrencyTypeDTO> callback = new AsyncCallback<CurrencyTypeDTO>() {
 
-								@Override
-								public void onSuccess(CurrencyTypeDTO result) {
-									grid.getStore().remove(
-											grid.getSelectionModel()
-													.getSelectedItem());
+						@Override
+						public void onSuccess(CurrencyTypeDTO result) {
+							grid.getStore().remove(
+									grid.getSelectionModel().getSelectedItem());
 
-									MessageBox.info("Success",
-											"You have succesfully deleted "
-													+ result.getCurrency()
-													+ " currency.", null);
-								}
-
-								@Override
-								public void onFailure(Throwable caught) {
-									if (caught instanceof DependencyException)
-										MessageBox
-												.info("Failure",
-														"This currency cannot be removed as"
-																+ " there are existing dependencies.",
-														null);
-									else
-										MessageBox
-												.info("Failure",
-														"Deleting currency has failed.",
-														null);
-								}
-							};
-							AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
-									.create(AdministrationService.class);
-							service.deleteCurrency(grid.getSelectionModel()
-									.getSelectedItem().getCurrencyDTO(),
-									callback);
+							MessageBox.info(
+									myConstants.Success(),
+									myMessages.DeleteSuccess(
+											myConstants.currency(),
+											result.getCurrency()), null);
 						}
 
-						if (grid.getStore().getCount() == 0) {
-							ce.getComponent().disable();
+						@Override
+						public void onFailure(Throwable caught) {
+							if (caught instanceof DependencyException)
+								MessageBox.info(
+										myConstants.Failure(),
+										myMessages
+												.DependencyExceptionFem(myConstants
+														.Currency()
+														.toLowerCase()), null);
+							else
+								MessageBox.info(myConstants.Failure(),
+										myMessages.DeleteFailed(myConstants
+												.currencyFailed()), null);
 						}
-					}
+					};
+					AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
+							.create(AdministrationService.class);
+					service.deleteCurrency(grid.getSelectionModel()
+							.getSelectedItem().getCurrencyDTO(), callback);
+				}
 
-				});
+				if (grid.getStore().getCount() == 0) {
+					ce.getComponent().disable();
+				}
+			}
+
+		});
 
 		// btn.setIcon(Resources.ICONS.delete());
 		ContentPanel cp = new ContentPanel();
 		cp.setButtonAlign(HorizontalAlignment.CENTER);
-		cp.setHeading("List of currencies");
+		cp.setHeading(myMessages.ListOf(myConstants.currencyList()));
 		cp.setLayout(new FitLayout());
 		cp.setSize(450, 300);
 		cp.add(grid);
@@ -161,20 +161,20 @@ public class CurrencyTypePanel extends MainPanel {
 		verticalPanel.setSpacing(20);
 
 		createForm = new FormPanel();
-		createForm.setHeading("Create new currency");
+		createForm.setHeading(myMessages.CreateNewFem(myConstants.currency()));
 		createForm.setPadding(20);
 		createForm.setLabelAlign(LabelAlign.LEFT);
 	}
 
 	private void createCurrencyField() {
 		currencyType = new TextField<String>();
-		currencyType.setFieldLabel("Currency");
+		currencyType.setFieldLabel(myConstants.Currency());
 		currencyType.setAllowBlank(false);
 		createForm.add(currencyType, formData);
 	}
 
 	private void createButton() {
-		createButton = new Button("Create",
+		createButton = new Button(myConstants.Create(),
 				new SelectionListener<ButtonEvent>() {
 
 					@Override
@@ -186,20 +186,18 @@ public class CurrencyTypePanel extends MainPanel {
 								if (!removeButton.isEnabled())
 									removeButton.enable();
 								grid.getStore().add(new CurrencyModel(result));
-								MessageBox.info("Success",
-										"You have succesfully created new "
-												+ result.getCurrency()
-												+ " currency.", null);
+								MessageBox.info(
+										myConstants.Success(),
+										myMessages.CreateSuccessFem(
+												myConstants.currency(),
+												result.getCurrency()), null);
 							}
 
 							@Override
 							public void onFailure(Throwable caught) {
-								MessageBox
-										.info("Failure",
-												"Creating new currency has "
-														+ "failed. The currency is"
-														+ " already on the list.",
-												null);
+								MessageBox.info(myConstants.Failure(),
+										myMessages.CreateFailedFem(myConstants
+												.currencyFailed()), null);
 							}
 						};
 

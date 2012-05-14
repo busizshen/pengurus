@@ -35,8 +35,6 @@ import com.pengurus.crm.shared.dto.TranslationTypeDTO;
 public class TranslationTypePanel extends MainPanel {
 
 	private VerticalPanel verticalPanel;
-	/*private HorizontalPanel horizontalPanel;
-	private ContentPanel mainPanel;*/
 	private FormPanel createForm;
 	private TextField<String> unitField;
 	private TextField<String> descriptionField;
@@ -47,7 +45,7 @@ public class TranslationTypePanel extends MainPanel {
 
 	public TranslationTypePanel() {
 		super(520);
-		setHeading("Translation type panel");
+		setHeading(myConstants.TranslationTypes());
 		createForm();
 		createUnitField();
 		createDescriptionField();
@@ -68,8 +66,8 @@ public class TranslationTypePanel extends MainPanel {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				MessageBox.info("Failure", "Uploading translation types has "
-						+ "failed.", null);
+				MessageBox.info(myConstants.Failure(), myMessages
+						.UploadFailed(myConstants.translationTypeList()), null);
 			}
 		};
 
@@ -86,13 +84,13 @@ public class TranslationTypePanel extends MainPanel {
 		ColumnConfig column = new ColumnConfig();
 
 		column.setId("unit");
-		column.setHeader("Unit");
+		column.setHeader(myConstants.Unit());
 		column.setWidth(100);
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId("type");
-		column.setHeader("Description");
+		column.setHeader(myConstants.Description());
 		column.setWidth(300);
 		configs.add(column);
 
@@ -102,60 +100,59 @@ public class TranslationTypePanel extends MainPanel {
 		grid.addPlugin(r);
 		grid.getView().setForceFit(true);
 
-		removeButton = new Button("Remove selected translation type",
-				new SelectionListener<ButtonEvent>() {
-					@Override
-					public void componentSelected(ButtonEvent ce) {
-						if (grid.getSelectionModel().getSelectedItem() != null) {
+		removeButton = new Button(myMessages.RemoveSelected(myConstants
+				.translationType()), new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				if (grid.getSelectionModel().getSelectedItem() != null) {
 
-							AsyncCallback<TranslationTypeDTO> callback = new AsyncCallback<TranslationTypeDTO>() {
+					AsyncCallback<TranslationTypeDTO> callback = new AsyncCallback<TranslationTypeDTO>() {
 
-								@Override
-								public void onSuccess(TranslationTypeDTO result) {
-									grid.getStore().remove(
-											grid.getSelectionModel()
-													.getSelectedItem());
+						@Override
+						public void onSuccess(TranslationTypeDTO result) {
+							grid.getStore().remove(
+									grid.getSelectionModel().getSelectedItem());
 
-									MessageBox.info("Success",
-											"You have succesfully deleted "
-													+ result.getUnit() + " "
-													+ result.getDescription()
-													+ " translation type.",
-											null);
-								}
-
-								@Override
-								public void onFailure(Throwable caught) {
-									if (caught instanceof DependencyException)
-										MessageBox
-												.info("Failure",
-														"This translation type cannot be removed as"
-																+ " there are existing dependencies.",
-														null);
-									else
-										MessageBox
-												.info("Failure",
-														"Deleting translation type has failed.",
-														null);
-								}
-							};
-							AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
-									.create(AdministrationService.class);
-							service.deleteTranslationType(grid
-									.getSelectionModel().getSelectedItem()
-									.getTranslationTypeDTO(), callback);
+							MessageBox.info(myConstants.Success(), myMessages
+									.DeleteSuccess(
+											myConstants.translationType(),
+											result.getUnit() + " - "
+													+ result.getDescription()),
+									null);
 						}
 
-						if (grid.getStore().getCount() == 0) {
-							ce.getComponent().disable();
+						@Override
+						public void onFailure(Throwable caught) {
+							if (caught instanceof DependencyException)
+								MessageBox.info(
+										myConstants.Failure(),
+										myMessages
+												.DependencyException(myConstants
+														.translationType()),
+										null);
+							else
+								MessageBox.info(myConstants.Failure(),
+										myMessages.DeleteFailed(myConstants
+												.translationTypeFailed()), null);
 						}
-					}
+					};
+					AdministrationServiceAsync service = (AdministrationServiceAsync) GWT
+							.create(AdministrationService.class);
+					service.deleteTranslationType(grid.getSelectionModel()
+							.getSelectedItem().getTranslationTypeDTO(),
+							callback);
+				}
 
-				});
+				if (grid.getStore().getCount() == 0) {
+					ce.getComponent().disable();
+				}
+			}
+
+		});
 		// btn.setIcon(Resources.ICONS.delete());
 		ContentPanel cp = new ContentPanel();
 		cp.setButtonAlign(HorizontalAlignment.CENTER);
-		cp.setHeading("List of translation types");
+		cp.setHeading(myMessages.ListOf(myConstants.translationTypeList()));
 		cp.setLayout(new FitLayout());
 		cp.setSize(450, 300);
 		cp.add(grid);
@@ -170,29 +167,30 @@ public class TranslationTypePanel extends MainPanel {
 		verticalPanel = new VerticalPanel();
 		verticalPanel.setHorizontalAlign(HorizontalAlignment.CENTER);
 		verticalPanel.setSpacing(20);
-		
+
 		createForm = new FormPanel();
-		createForm.setHeading("Create new translation type");
+		createForm.setHeading(myMessages.CreateNew(myConstants
+				.translationType()));
 		createForm.setPadding(20);
 		createForm.setLabelAlign(LabelAlign.LEFT);
 	}
 
 	private void createUnitField() {
 		unitField = new TextField<String>();
-		unitField.setFieldLabel("Unit");
+		unitField.setFieldLabel(myConstants.Unit());
 		unitField.setAllowBlank(false);
 		createForm.add(unitField, formData);
 	}
 
 	private void createDescriptionField() {
 		descriptionField = new TextField<String>();
-		descriptionField.setFieldLabel("Description");
+		descriptionField.setFieldLabel(myConstants.Description());
 		descriptionField.setAllowBlank(false);
 		createForm.add(descriptionField, formData);
 	}
 
 	private void createButton() {
-		createButton = new Button("Create",
+		createButton = new Button(myConstants.Create(),
 				new SelectionListener<ButtonEvent>() {
 
 					@Override
@@ -205,20 +203,21 @@ public class TranslationTypePanel extends MainPanel {
 									removeButton.enable();
 								grid.getStore().add(
 										new TranslationTypeModel(result));
-								MessageBox
-										.info("Success",
-												"You have succesfully created new translation type: "
-														+ result.getUnit()
+								MessageBox.info(
+										myConstants.Success(),
+										myMessages.CreateSuccess(
+												myConstants.translationType(),
+												result.getUnit()
 														+ "-"
-														+ result.getDescription()
-														+ ".", null);
+														+ result.getDescription()),
+										null);
 							}
 
 							@Override
 							public void onFailure(Throwable caught) {
-								MessageBox.info("Failure",
-										"Creating new translation type has "
-												+ "failed.", null);
+								MessageBox.info(myConstants.Failure(),
+										myMessages.CreateFailedFem(myConstants
+												.translationTypeFailed()), null);
 							}
 						};
 						TranslationTypeDTO translationType = new TranslationTypeDTO(
