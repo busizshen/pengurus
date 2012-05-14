@@ -21,7 +21,7 @@ public abstract class ProjectPanel extends MainPanel {
 	public ProjectPanel(ProjectDTO projectDTO){
 		super(800);
 		this.projectDTO = projectDTO;
-		setHeading("Project");
+		setHeading(myConstants.Project());
 		addInfoPanel();
 	}
 
@@ -70,16 +70,16 @@ public abstract class ProjectPanel extends MainPanel {
 	protected abstract void addDescriptionPanel(HorizontalPanel vp);
 
 	protected void addSupervisorPanel(VerticalPanel vp) {
-		supervisorPanel = new WorkerPanelView(projectDTO.getSupervisor(),"Supervisor");
-		supervisorPanel.setHeading("Supervisor");
+		supervisorPanel = new WorkerPanelView(projectDTO.getSupervisor(),myConstants.Supervisor());
+		supervisorPanel.setHeading(myConstants.Supervisor());
 		vp.add(supervisorPanel);
 	}
 
 
 	protected void addClientPanel(VerticalPanel vp) {
 		if(AuthorizationManager.canViewWholeProject()){
-			clientPanel = new ClientPanelView(projectDTO.getClient(),"Client");
-			clientPanel.setHeading("Client");
+			clientPanel = new ClientPanelView(projectDTO.getClient(),myConstants.Client());
+			clientPanel.setHeading(myConstants.Client());
 			vp.add(clientPanel);
 		}
 	}

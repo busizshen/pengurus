@@ -16,12 +16,12 @@ public abstract class TasksListPanel extends ListPanel<TaskModel> {
 
 	public TasksListPanel(){
 		super(350);
-		setHeading("Tasks");
+		setHeading(myConstants.Tasks());
 	}
 	
 	public TasksListPanel(int height){
 		super(height);
-		setHeading("Tasks");
+		setHeading(myConstants.Tasks());
 	}
 	
 	protected ListStore<TaskModel> tasks = new ListStore<TaskModel>();
@@ -31,42 +31,42 @@ public abstract class TasksListPanel extends ListPanel<TaskModel> {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 		ColumnConfigMy column = new ColumnConfigMy();
 		column.setId("id");
-		column.setHeader("Id");
+		column.setHeader(myConstants.Id());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("status");
-		column.setHeader("Status");
+		column.setHeader(myConstants.Status());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("expert");
-		column.setHeader("Expert");
+		column.setHeader(myConstants.Expert());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("translationFrom");
-		column.setHeader("From");
+		column.setHeader(myConstants.From());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("translationTo");
-		column.setHeader("To");
+		column.setHeader(myConstants.To());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("deadline");
-		column.setHeader("Deadline");
+		column.setHeader(myConstants.Deadline());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("description");
-		column.setHeader("Description");
+		column.setHeader(myConstants.Description());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("preview");
-		column.setHeader("Preview");
+		column.setHeader(myConstants.previewButton());
 		column.setRenderer(getButtonRenderer());
 		configs.add(column);
 
@@ -79,7 +79,7 @@ public abstract class TasksListPanel extends ListPanel<TaskModel> {
 
 	@Override
 	protected String getName() {
-		return "Tasks List Panel";
+		return myMessages.ListPanel(myConstants.Tasks());
 	}
 
 	@Override

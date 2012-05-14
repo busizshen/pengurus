@@ -20,7 +20,6 @@ import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.pengurus.crm.client.AuthorizationManager;
@@ -141,7 +140,7 @@ public class TaskPanelCreate extends TaskPanel {
 							service.createTask(taskDTO, callback);
 						} else {
 							MessageBox mb = new MessageBox();
-							mb.setMessage("Please fill all fields");
+							mb.setMessage(myConstants.PleaseFillAllFields());
 							mb.show();
 						}
 					}
@@ -191,9 +190,9 @@ public class TaskPanelCreate extends TaskPanel {
 
 			final ListStore<CurrencyModel> listCurrencyModel = new ListStore<CurrencyModel>();
 			amount = new NumberField();
-			amount.setFieldLabel("Amount");
+			amount.setFieldLabel(myConstants.Amount());
 			amount.setName("amount");
-			amount.setData("text", "Enter your amount");
+			amount.setData("text", myMessages.Enter1(myConstants.Amount()));
 			amount.addListener(Events.OnChange, new Listener<BaseEvent>() {
 
 				@Override
@@ -204,9 +203,9 @@ public class TaskPanelCreate extends TaskPanel {
 			});
 
 			price = new NumberField();
-			price.setFieldLabel("Price");
+			price.setFieldLabel(myConstants.Price());
 			price.setName("price");
-			price.setData("text", "Enter your price and choose Currnecy");
+			price.setData("text", myMessages.Enter2(myConstants.Price(),myConstants.Currency()));
 			price.addListener(Events.OnChange, new Listener<BaseEvent>() {
 
 				@Override
@@ -216,10 +215,10 @@ public class TaskPanelCreate extends TaskPanel {
 				}
 			});
 			combo = new ComboBox<CurrencyModel>();
-			combo.setFieldLabel("Currency");
+			combo.setFieldLabel(myConstants.Currency());
 			combo.setDisplayField("currency");
 			combo.setTriggerAction(TriggerAction.ALL);
-			combo.setData("text", "Choose Language");
+			combo.setData("text", myMessages.Choose(myConstants.Currency()));
 			combo.setStore(listCurrencyModel);
 			combo.addListener(Events.SelectionChange, new Listener<BaseEvent>() {
 
@@ -245,7 +244,9 @@ public class TaskPanelCreate extends TaskPanel {
 			AsyncCallback<Set<CurrencyTypeDTO>> callback = new AsyncCallback<Set<CurrencyTypeDTO>>() {
 
 				public void onFailure(Throwable t) {
-					Window.Location.assign("/spring_security_login");
+					MessageBox mb = new MessageBox();
+					mb.setMessage(myMessages.ServerError(t.getMessage()));
+					mb.show();
 				}
 
 				public void onSuccess(Set<CurrencyTypeDTO> result) {

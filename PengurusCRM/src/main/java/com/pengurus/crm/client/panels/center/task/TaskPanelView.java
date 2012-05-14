@@ -117,7 +117,7 @@ public class TaskPanelView extends TaskPanel {
 		HorizontalPanel hp = new HorizontalPanel();
 		setStyle(hp);
 		hp.setSpacing(5);
-		Button b = new Button("Update", new SelectionListener<ButtonEvent>() {
+		Button b = new Button(myConstants.Update(), new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
 				taskDTO.setComment(commentPanel.getComment());
@@ -134,7 +134,7 @@ public class TaskPanelView extends TaskPanel {
 
 					public void onFailure(Throwable t) {
 						MessageBox mb = new MessageBox();
-						mb.setMessage("Server error - Task cannot be updated");
+						mb.setMessage(myMessages.ServerError(t.getMessage()));
 						mb.show();
 					}
 
@@ -150,7 +150,7 @@ public class TaskPanelView extends TaskPanel {
 			}
 		});
 		hp.add(b);
-		Button b2 = new Button("Cancel", new SelectionListener<ButtonEvent>() {
+		Button b2 = new Button(myConstants.Cancel(), new SelectionListener<ButtonEvent>() {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
@@ -159,7 +159,7 @@ public class TaskPanelView extends TaskPanel {
 		});
 		hp.add(b2);
 		if (AuthorizationManager.canEditProject(projectDTO)) {
-			Button b3 = new Button("Delete",
+			Button b3 = new Button(myConstants.Delete(),
 					new SelectionListener<ButtonEvent>() {
 
 						@Override
@@ -168,7 +168,7 @@ public class TaskPanelView extends TaskPanel {
 
 								public void onFailure(Throwable t) {
 									MessageBox mb = new MessageBox();
-									mb.setMessage("Server Error - cannot delete");
+									mb.setMessage(myMessages.ServerError(t.getMessage()));
 									mb.show();
 								}
 

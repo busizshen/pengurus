@@ -36,7 +36,7 @@ public abstract class JobPanel extends MainPanel {
 
 	public JobPanel(JobDTO jobDTO, int height) {
 		super(height);
-		setHeading("Job");
+		setHeading(myConstants.Job());
 		this.jobDTO = jobDTO;
 	}
 
@@ -58,7 +58,7 @@ public abstract class JobPanel extends MainPanel {
 		HorizontalPanel hp = new HorizontalPanel();
 		//hp.setSpacing(5);
 		if (AuthorizationManager.canEditJob()) {
-			Button b = new Button("Update",
+			Button b = new Button(myConstants.Update(),
 					new SelectionListener<ButtonEvent>() {
 						@Override
 						public void componentSelected(ButtonEvent ce) {
@@ -77,7 +77,7 @@ public abstract class JobPanel extends MainPanel {
 
 								public void onFailure(Throwable t) {
 									MessageBox mb = new MessageBox();
-									mb.setMessage("ServerError");
+									mb.setMessage(myMessages.ServerError(t.getMessage()));
 									mb.show();
 								}
 
@@ -95,7 +95,7 @@ public abstract class JobPanel extends MainPanel {
 					});
 			hp.add(b);
 
-			Button b2 = new Button("Delete",
+			Button b2 = new Button(myConstants.Delete(),
 					new SelectionListener<ButtonEvent>() {
 						@Override
 						public void componentSelected(ButtonEvent ce) {
@@ -104,7 +104,7 @@ public abstract class JobPanel extends MainPanel {
 
 								public void onFailure(Throwable t) {
 									MessageBox mb = new MessageBox();
-									mb.setMessage(t.getMessage());
+									mb.setMessage(myMessages.ServerError(t.getMessage()));
 									mb.show();
 								}
 
@@ -122,7 +122,7 @@ public abstract class JobPanel extends MainPanel {
 			hp.add(b2);
 		}
 
-		Button b3 = new Button("Cancel", new SelectionListener<ButtonEvent>() {
+		Button b3 = new Button(myConstants.Cancel(), new SelectionListener<ButtonEvent>() {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
@@ -136,9 +136,9 @@ public abstract class JobPanel extends MainPanel {
 	protected FieldSet getDeadlinePanel() {
 
 		FieldSet deadlinePanel = new FieldSet();
-		deadlinePanel.setHeading("Deadline");
+		deadlinePanel.setHeading(myConstants.Deadline());
 		deadline = new DateField();
-		deadline.setData("text", "Enter deadline");
+		deadline.setData("text", myConstants.EnterDeadline());
 		if (jobDTO != null)
 			deadline.setValue(jobDTO.getDeadline());
 		deadlinePanel.add(deadline);

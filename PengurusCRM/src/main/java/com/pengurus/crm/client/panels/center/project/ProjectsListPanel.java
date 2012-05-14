@@ -7,6 +7,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
@@ -31,7 +32,7 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 
 	public ProjectsListPanel(){
 		super(360);
-		setHeading("Projects");
+		setHeading(myConstants.Projects());
 	}
 	protected abstract void initPagination();
 
@@ -55,22 +56,22 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 		
 		column = new ColumnConfigMy();
 		column.setId("supervisor");
-		column.setHeader("Supervisor");
+		column.setHeader(myConstants.Supervisor());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("client");
-		column.setHeader("Client");
+		column.setHeader(myConstants.Client());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("description");
-		column.setHeader("Description");
+		column.setHeader(myConstants.Description());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("preview");
-		column.setHeader("Preview");
+		column.setHeader(myConstants.previewButton());
 		column.setRenderer(getButtonRenderer());
 		configs.add(column);
 
@@ -90,13 +91,16 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 					init = true;
 				}
 				ButtonBar buttonBar = new ButtonBar();
-				Button previewButton = new Button("Preview",
+				Button previewButton = new Button(myConstants.previewButton(),
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
 								AsyncCallback<ProjectDTO> callback = new AsyncCallback<ProjectDTO>() {
 
 									public void onFailure(Throwable t) {
+										MessageBox mb = new MessageBox();
+										mb.setMessage(myMessages.ServerError(t.getMessage()));
+										mb.show();
 									}
 
 									public void onSuccess(ProjectDTO result) {
@@ -111,13 +115,13 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 										.getId(), callback);
 							}
 						});
-				previewButton.setToolTip("Click to see");
+				previewButton.setToolTip(myMessages.ClickTo((String) myConstants.See()));
 				previewButton.setWidth((grid.getColumnModel().getColumnWidth(
 						colIndex) - 22) / 2);
 				buttonBar.add(previewButton);
 				
 				if (AuthorizationManager.canEditProject()) {
-					Button editButton = new Button("Edit",
+					Button editButton = new Button(myConstants.Edit(),
 
 					new SelectionListener<ButtonEvent>() {
 						@Override
@@ -125,6 +129,9 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 							AsyncCallback<ProjectDTO> callback = new AsyncCallback<ProjectDTO>() {
 
 								public void onFailure(Throwable t) {
+									MessageBox mb = new MessageBox();
+									mb.setMessage(myMessages.ServerError(t.getMessage()));
+									mb.show();
 								}
 
 								public void onSuccess(ProjectDTO result) {
@@ -139,7 +146,7 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 									callback);
 						}
 					});
-					editButton.setToolTip("Click to edit");
+					editButton.setToolTip(myMessages.ClickTo(myConstants.Edit()));
 					editButton.setWidth((grid.getColumnModel().getColumnWidth(
 							colIndex) - 22) / 2);
 					buttonBar.add(editButton);
@@ -152,7 +159,7 @@ public abstract class ProjectsListPanel extends ListPanel<ProjectModel> {
 
 	@Override
 	protected String getName() {
-		return "Projects List Panel";
+		return myMessages.ListPanel(myConstants.Projects());
 	}
 
 	@Override

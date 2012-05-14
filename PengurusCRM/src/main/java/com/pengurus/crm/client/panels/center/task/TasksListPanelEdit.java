@@ -53,7 +53,7 @@ public class TasksListPanelEdit extends TasksListPanel {
 		final TasksListPanelEdit taskListPanel = this;
 		formPanel.setHeaderVisible(false);
 		formPanel.setFrame(false);
-		Button b = new Button("Create new",
+		Button b = new Button(myConstants.CreateNew(),
 				new SelectionListener<ButtonEvent>() {
 					@Override
 					public void componentSelected(ButtonEvent ce) {
@@ -100,7 +100,7 @@ public class TasksListPanelEdit extends TasksListPanel {
 					init = true;
 				}
 				ButtonBar buttonBar = new ButtonBar();
-				Button previewButton = new Button("Preview",
+				Button previewButton = new Button(myConstants.previewButton(),
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
@@ -109,7 +109,7 @@ public class TasksListPanelEdit extends TasksListPanel {
 								taskPanel.setAsMain();
 							}
 						});
-				previewButton.setToolTip("Click to see");
+				previewButton.setToolTip(myMessages.ClickTo(myConstants.See()));
 				buttonBar.add(previewButton);
 				
 				return buttonBar;

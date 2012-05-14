@@ -91,5 +91,41 @@ public interface i18nConstants extends Constants {
 	String Description();
 
 	String QuotesList();
+	/*PROJECT*/
+
+	String Project();
+
+	String ProjectManagers();
+
+	String See();
+
+	String ProjectManager();
+
+	String EnterDeadline();
+
+	String Deadline();
+
+	/*TASK*/
+	String Translator();
+
+	String Reviewer();
+
+	String Task();
+
+	String Price();
+
+	String Amount();
+
+	String PleaseFillAllFields();
+
+	String Job();
+
+	String To();
+
+	String From();
+
+	String Expert();
+
+	String Id();
 
 }

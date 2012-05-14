@@ -48,7 +48,7 @@ public class ProjectPanelView extends ProjectPanel {
 		for (UserDTO u : projectDTO.getExperts())
 			list.add(new UserModel(u));
 		UserListPanelView translatorsPanel = new UserListPanelView(list,
-				"Experts");
+				myConstants.Experts());
 		hp3.add(translatorsPanel.getModelList());
 	}
 
@@ -58,7 +58,7 @@ public class ProjectPanelView extends ProjectPanel {
 		for (UserDTO u : projectDTO.getProjectManagers())
 			list.add(new UserModel(u));
 		UserListPanelView projectManagers = new UserListPanelView(list,
-				"Project Managers");
+				myConstants.ProjectManagers());
 		hp3.add(projectManagers.getModelList());
 	}
 

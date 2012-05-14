@@ -27,7 +27,7 @@ UserDTO user;
 
 	@Override
 	protected String getName() {
-		return user.getFullName() + " tasks list";
+		return myMessages.TaskList(user.getFullName());
 	}
 
 	@Override

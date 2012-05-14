@@ -11,7 +11,6 @@ import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.pengurus.crm.client.models.UserModel;
 import com.pengurus.crm.client.panels.center.description.DescriptionPanelEdit;
@@ -68,7 +67,7 @@ public class ProjectPanelEdit extends ProjectPanel {
 		roles.add(UserRoleDTO.ROLE_EXPERT);
 		service.getTranslatorsByRoles(roles, callback);
 
-		workersPanel = new WorkerPanelChoose("Experts");
+		workersPanel = new WorkerPanelChoose(myConstants.Experts());
 
 		workersPanel.setWidth(470);
 		hp3.add(workersPanel);
@@ -106,7 +105,7 @@ public class ProjectPanelEdit extends ProjectPanel {
 		roles.add(UserRoleDTO.ROLE_PROJECTMANAGER);
 		service.getWorkersByRoles(roles, callback);
 
-		projectManagersPanel = new WorkerPanelChoose("Project Managers");
+		projectManagersPanel = new WorkerPanelChoose(myConstants.ProjectManagers());
 
 		projectManagersPanel.setWidth(470);
 		projectManagersPanel.setStyleAttribute("margin-right", "20px");
@@ -145,14 +144,15 @@ public class ProjectPanelEdit extends ProjectPanel {
 				AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 
 					public void onFailure(Throwable t) {
-						Window.Location.assign("/spring_security_login");
-
+						MessageBox mb = new MessageBox();
+						mb.setMessage(myMessages.ServerError(t.getMessage()));
+						mb.show();
 					}
 
 					@Override
 					public void onSuccess(Void result) {
 						MessageBox mb = new MessageBox();
-						mb.setMessage("Project updated");
+						mb.setMessage(myMessages.Updated(myConstants.Project()));
 						mb.show();
 					}
 				};
@@ -179,15 +179,18 @@ public class ProjectPanelEdit extends ProjectPanel {
 				AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 
 					public void onFailure(Throwable t) {
-						Window.Location.assign("/spring_security_login");
-
+						MessageBox mb = new MessageBox();
+						mb.setMessage(myMessages.ServerError(t.getMessage()));
+						mb.show();
 					}
 
 					@Override
 					public void onSuccess(Void result) {
+						MessageBox mb = new MessageBox();
+						mb.setMessage(myMessages.Delete(myConstants.Project()));
+						mb.show();
 						ProjectsListPanelAll projectsList = new ProjectsListPanelAll();
-						projectsList.setAsMain();// zmienić na project List
-													// Panel Main
+						projectsList.setAsMain();
 
 					}
 				};

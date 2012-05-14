@@ -39,7 +39,7 @@ public class ProjectsListPanelByUserSupervisor extends ProjectsListPanelByUser {
 	
 	@Override
 	protected String getName() {
-		return user.getFullName() + " projects list as supervisor";
+		return  myMessages.ProjectsList(user.getFullName(),myConstants.Supervisor());
 	}
 
 }

@@ -26,7 +26,7 @@ public class ProjectsListPanelByUserProjectManager extends
 	
 	@Override
 	protected String getName() {
-		return user.getFullName() + " projects list as project manager";
+		return myMessages.ProjectsList(user.getFullName(),myConstants.ProjectManager());
 	}
 
 	@Override

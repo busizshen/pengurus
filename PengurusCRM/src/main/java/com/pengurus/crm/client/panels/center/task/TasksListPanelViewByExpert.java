@@ -28,7 +28,7 @@ public class TasksListPanelViewByExpert extends TasksListPanelView {
 
 	@Override
 	protected String getName() {
-		return user.getFullName() + " tasks list";
+		return myMessages.TaskList(user.getFullName());
 	}
 
 	@Override

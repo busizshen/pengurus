@@ -36,7 +36,7 @@ public abstract class TaskPanel extends MainPanel {
 	
 	protected TaskPanel(TaskDTO taskDTO, ProjectDTO projectDTO){
 		super();
-		setHeading("Task");
+		setHeading(myConstants.Task());
 		this.taskDTO = taskDTO;
 		this.projectDTO = projectDTO;
 	}
@@ -45,9 +45,9 @@ public abstract class TaskPanel extends MainPanel {
 			Set<UserRoleDTO> roles = new HashSet<UserRoleDTO>();
 			roles.add(UserRoleDTO.ROLE_VERIFICATOR);
 			reviewerPanel = new WorkerPanelEditByRoles(taskDTO.getReviewer(),
-					"Reviewer", roles);
+					myConstants.Reviewer(), roles);
 		} else {
-			reviewerPanel = new WorkerPanelView(taskDTO.getReviewer(), "Reviewer");
+			reviewerPanel = new WorkerPanelView(taskDTO.getReviewer(), myConstants.Reviewer());
 		}
 		return reviewerPanel;
 	}
@@ -57,9 +57,9 @@ public abstract class TaskPanel extends MainPanel {
 			Set<WorkerDTO> translators = new HashSet<WorkerDTO>();
 			translators.addAll(projectDTO.getExperts());
 			workerPanel = new WorkerPanelEditByList(taskDTO.getExpert(),
-					"Translator", translators);
+					myConstants.Translator(), translators);
 		} else {
-			workerPanel = new WorkerPanelView(taskDTO.getExpert(), "Translator");
+			workerPanel = new WorkerPanelView(taskDTO.getExpert(), myConstants.Translator());
 		}
 		return workerPanel;
 
@@ -75,7 +75,7 @@ public abstract class TaskPanel extends MainPanel {
 		FieldSet deadlinePanel = new FieldSet();
 		deadlinePanel.setHeading("Deadline");
 		deadline = new DateField();
-		deadline.setData("text", "Enter deadline");
+		deadline.setData("text", myConstants.EnterDeadline());
 		if (taskDTO != null)
 			deadline.setValue(taskDTO.getDeadline());
 		deadlinePanel.add(deadline);

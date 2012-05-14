@@ -50,7 +50,7 @@ public abstract class TasksListPanelView extends TasksListPanel {
 					init = true;
 				}
 				ButtonBar buttonBar = new ButtonBar();
-				Button previewButton = new Button("Preview",
+				Button previewButton = new Button(myConstants.previewButton(),
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
@@ -58,7 +58,7 @@ public abstract class TasksListPanelView extends TasksListPanel {
 
 									public void onFailure(Throwable t) {
 										MessageBox mb = new MessageBox();
-										mb.setMessage("Server Error");
+										mb.setMessage(myMessages.ServerError(t.getMessage()));
 										mb.show();
 									}
 
@@ -75,7 +75,7 @@ public abstract class TasksListPanelView extends TasksListPanel {
 										.getId(), callback);
 							}
 						});
-				previewButton.setToolTip("Click to see");
+				previewButton.setToolTip(myMessages.ClickTo(myConstants.See()));
 				buttonBar.add(previewButton);
 				
 				return buttonBar;
