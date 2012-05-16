@@ -119,6 +119,17 @@ public class TaskStatusPanel extends LayoutContainer {
 			return label;
 		}
 
+		private void refreshLabelList() {
+			for (int i = 0; i < StatusTaskDTO.values().length; i++) {
+				labelsList[i].setStyleAttribute("background",
+						(status > i) ? COLOUR_OK
+								: (status == i) ? COLOUR_CURRENT : COLOUR_NOT);
+				labelsList[i].setStyleAttribute("font-weight",
+						(status == i) ? "bold" : "normal");
+			}
+
+		}
+
 		private void setVisibility() {
 			nextStatus
 					.setVisible((status != 6)
@@ -133,8 +144,7 @@ public class TaskStatusPanel extends LayoutContainer {
 
 			reOpen.setVisible((AuthorizationManager.hasVerificatorAccess() && status == 2)
 					|| (AuthorizationManager.hasProjectManagerAccess(taskDTO) && (status == 3 || status == 2)));
-
-			this.layout();
+			refreshLabelList();
 		}
 	}
 }

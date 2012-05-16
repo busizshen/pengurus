@@ -15,6 +15,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.shared.dto.StatusQuoteDTO;
+import com.pengurus.crm.shared.dto.StatusTaskDTO;
 
 public class QuoteStatusPanel extends LayoutContainer {
 
@@ -143,7 +144,19 @@ public class QuoteStatusPanel extends LayoutContainer {
 			reOpen.setVisible((AuthorizationManager.hasClientAccess() && status == 2) ? true
 					: false);
 
-			this.layout();
+			refreshLabelList();
+		}
+		
+		private void refreshLabelList() {
+			for (int i = 0; i < StatusTaskDTO.values().length; i++) {
+				labelsList[i].setStyleAttribute("background",
+						(status > i) ? COLOUR_OK
+								: (status == i) ? COLOUR_CURRENT : COLOUR_NOT);
+				labelsList[i].setStyleAttribute("font-weight",
+						(status == i) ? "bold" : "normal");
+	
+			}
+
 		}
 
 	}

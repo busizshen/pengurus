@@ -25,6 +25,7 @@ public abstract class JobStatusPanel extends LayoutContainer {
 	protected Button nextStatus;
 	protected Button reOpen;
 	protected int status = 0;
+	JobStatusBar jobStatusBar;
 
 	public JobStatusPanel(JobDTO jobDTO) {
 
@@ -39,7 +40,7 @@ public abstract class JobStatusPanel extends LayoutContainer {
 		verticalPanel.setStyleAttribute("font-family",
 				"Arial, Helvetica, sans-serif");
 
-		JobStatusBar jobStatusBar = new JobStatusBar(
+		jobStatusBar = new JobStatusBar(
 				jobDTO.getStatus() == null ? StatusJobDTO.open.toInt() : jobDTO
 						.getStatus().toInt());
 		jobStatusBar.setBorders(false);
@@ -123,6 +124,25 @@ public abstract class JobStatusPanel extends LayoutContainer {
 			label.setShadowOffset(windowResizeDelay);
 			return label;
 		}
+
+		protected void refreshList() {
+
+			for (int i = 0; i < StatusJobDTO.values().length; i++) {
+				labelsList[i].setStyleAttribute("background",
+						(status > i) ? COLOUR_OK
+								: (status == i) ? COLOUR_CURRENT
+										: COLOUR_NOT);
+				labelsList[i].setStyleAttribute("font-weight",
+						(status == i) ? "bold" : "normal");
+	
+			}
+
+		}
 	}
+	
+		protected void refresh(){
+			if(jobStatusBar != null)
+				jobStatusBar.refreshList();
+		}
 
 }

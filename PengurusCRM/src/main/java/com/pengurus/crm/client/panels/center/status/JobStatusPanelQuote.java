@@ -20,7 +20,7 @@ public class JobStatusPanelQuote extends JobStatusPanel{
 		reOpen.setVisible(status != 3 ? false : AuthorizationManager
 				.hasClientAccess(quoteDTO));
 
-		this.layout();
+		refresh();
 	}
 
 }

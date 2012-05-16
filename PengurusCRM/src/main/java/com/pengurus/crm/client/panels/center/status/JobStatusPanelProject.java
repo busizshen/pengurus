@@ -23,8 +23,7 @@ public class JobStatusPanelProject extends JobStatusPanel {
 
 		reOpen.setVisible((AuthorizationManager.hasExecutiveAccess() && status == 2));
 
-		this.layout();
-
+		refresh();
 	}
 
 }
