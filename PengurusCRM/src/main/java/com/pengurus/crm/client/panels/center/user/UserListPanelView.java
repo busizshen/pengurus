@@ -28,7 +28,7 @@ public class UserListPanelView extends ListPanel<UserModel> {
 		List<ColumnConfig> configs   = new ArrayList<ColumnConfig>();  
 		ColumnConfig column = new ColumnConfig();
 	    column.setId("fullName");
-	    column.setHeader("Full name");
+	    column.setHeader(myConstants.FullName());
 	    configs.add(column);
 	    return configs;
 	}

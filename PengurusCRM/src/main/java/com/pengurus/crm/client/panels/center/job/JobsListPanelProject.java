@@ -39,7 +39,7 @@ public abstract class JobsListPanelProject extends JobsListPanel {
 				if (!init) {
 					init = true;
 				}
-				Button previewButton = new Button("Preview",
+				Button previewButton = new Button(myConstants.previewButton(),
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
@@ -61,7 +61,7 @@ public abstract class JobsListPanelProject extends JobsListPanel {
 
 							}
 						});
-				previewButton.setToolTip("Click to see");
+				previewButton.setToolTip(myMessages.ClickTo(myConstants.See()));
 				previewButton.setWidth((grid.getColumnModel().getColumnWidth(
 						colIndex) - 22) / 2);
 

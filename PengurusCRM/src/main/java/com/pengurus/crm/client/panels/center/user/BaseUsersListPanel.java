@@ -39,7 +39,7 @@ public abstract class BaseUsersListPanel<T extends UserModel> extends ListPanel<
 		  
 	    ColumnConfig column = new ColumnConfigMy();  
 	    column.setId("id");
-	    column.setHeader("Id");
+	    column.setHeader(myConstants.Id());
 	    configs.add(column);  
 	  
 /*	    column = new ColumnConfig();  
@@ -49,23 +49,23 @@ public abstract class BaseUsersListPanel<T extends UserModel> extends ListPanel<
 	    
 	    column = new ColumnConfigMy();  
 	    column.setId("username");  
-	    column.setHeader("Username");
+	    column.setHeader(myConstants.Username());
 	    configs.add(column);
 	      
 
 	    column = new ColumnConfigMy();  
 	    column.setId("description");  
-	    column.setHeader("Description");  
+	    column.setHeader(myConstants.Description());  
 	    configs.add(column); 
 	    
 	    column = new ColumnConfigMy();
 	    column.setId("fullName");
-	    column.setHeader("Full name");
+	    column.setHeader(myConstants.FullName());
 	    configs.add(column);
 
 	    column = new ColumnConfigMy(); 
 	    column.setId("choose");  
-	    column.setHeader("Choose");  
+	    column.setHeader(myConstants.Choose());  
 	    column.setRenderer(getButtonRenderer()); 
 	    configs.add(column);
 	   

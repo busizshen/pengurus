@@ -105,7 +105,7 @@ public class TaskPanelCreate extends TaskPanel {
 	protected void addButtonPanel(VerticalPanel vp1) {
 		HorizontalPanel simple = new HorizontalPanel();
 		setStyle(simple);
-		buttonCreate = new Button("Create",
+		buttonCreate = new Button(myConstants.Create(),
 				new SelectionListener<ButtonEvent>() {
 					@Override
 					public void componentSelected(ButtonEvent ce) {
@@ -148,7 +148,7 @@ public class TaskPanelCreate extends TaskPanel {
 				});
 		buttonCreate.addListener(Events.OnClick, listenerCreateTask);
 		mainPanel.addButton(buttonCreate);
-		buttonCancel = new Button("Cancel");
+		buttonCancel = new Button(myConstants.Cancel());
 		buttonCancel.addListener(Events.OnClick, listenerClose);
 		mainPanel.addButton(buttonCancel);
 

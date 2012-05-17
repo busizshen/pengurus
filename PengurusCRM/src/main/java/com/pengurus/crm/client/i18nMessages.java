@@ -55,5 +55,7 @@ public interface i18nMessages extends Messages{
 	String DependencyException(String type);
 	
 	String DependencyExceptionFem(String type);
+
+	String Select(String client);
 	
 }

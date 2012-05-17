@@ -42,12 +42,12 @@ public class ClientPanelEdit extends ClientPanel {
 		window.setAutoWidth(true);
 		window.setAutoHide(true);
 		window.setEnabled(true);
-		window.setHeading("Select Client");
+		window.setHeading(myMessages.Select(myConstants.Client()));
 		window.setClosable(false);
 		Button b2 = new Button("Cancel");
 		b2.addListener(Events.OnClick, listenerCloseTab);
 		window.add(b2);
-		Button b = new Button("Select",
+		Button b = new Button(myConstants.Select(),
 				new SelectionListener<ButtonEvent>() {
 					@Override
 					public void componentSelected(ButtonEvent ce) {

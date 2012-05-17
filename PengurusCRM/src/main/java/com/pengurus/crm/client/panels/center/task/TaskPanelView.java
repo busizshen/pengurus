@@ -43,6 +43,8 @@ public class TaskPanelView extends TaskPanel {
 			
 		HorizontalPanel topPanel = new HorizontalPanel();
 		topPanel.add(getDeadlinePanel());
+		if(AuthorizationManager.canEditProject(projectDTO))
+			deadline.setReadOnly(true);
 		addDescriptionPanel(topPanel);
 		addButtonPanel(topPanel);
 		mainVerticalPanel.add(topPanel);

@@ -47,7 +47,7 @@ public abstract class WorkersListPanel extends BaseUsersListPanel<WorkerModel>{
 					init = true;
 				}
 
-				Button b = new Button("Choose",
+				Button b = new Button(myConstants.Choose(),
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {

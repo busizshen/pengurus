@@ -209,7 +209,7 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 
 				ButtonBar buttonBar = new ButtonBar();
 				
-				Button previewButton = new Button("Preview",
+				Button previewButton = new Button(myConstants.previewButton(),
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
@@ -224,7 +224,7 @@ public class UserListPanel extends BaseUsersListPanel<UserModel> {
 				buttonBar.add(previewButton);
 
 				if (AuthorizationManager.hasExecutiveAccess()) {
-					Button editButton = new Button("Edit",
+					Button editButton = new Button(myConstants.Edit(),
 							new SelectionListener<ButtonEvent>() {
 								@Override
 								public void componentSelected(ButtonEvent ce) {

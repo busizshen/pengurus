@@ -40,7 +40,7 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 	public QuotesListPanel(){
 		super(360);
 
-		setHeading("Quotes");
+		setHeading(myConstants.Quotes());
 	}
 	
 	@Override
@@ -153,7 +153,7 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 					init = true;
 				}
 				ButtonBar buttonBar = new ButtonBar();
-				Button previewButton = new Button("Preview",
+				Button previewButton = new Button(myConstants.previewButton(),
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
@@ -177,13 +177,13 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 
 							}
 						});
-				previewButton.setToolTip("Click to see");
+				previewButton.setToolTip(myMessages.ClickTo(myConstants.See()));
 				previewButton.setWidth((grid.getColumnModel().getColumnWidth(
 						colIndex) - 22) / 2);
 				buttonBar.add(previewButton);
 				
 				if (AuthorizationManager.hasExecutiveAccess()) {
-					Button editButton = new Button("Edit",
+					Button editButton = new Button(myConstants.Edit(),
 							new SelectionListener<ButtonEvent>() {
 								@Override
 								public void componentSelected(ButtonEvent ce) {
@@ -207,7 +207,7 @@ public abstract class QuotesListPanel extends ListPanel<QuoteModel> {
 
 								}
 							});
-					editButton.setToolTip("Click to see");
+					editButton.setToolTip(myMessages.ClickTo(myConstants.See()));
 					editButton.setWidth((grid.getColumnModel().getColumnWidth(
 							colIndex) - 22) / 2);
 					buttonBar.add(editButton);

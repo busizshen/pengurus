@@ -41,12 +41,12 @@ public abstract class WorkerPanelEdit extends WorkerPanel {
 		window.add(workersListPanel.getModelList());
 		window.setAutoWidth(true);
 		window.setAutoHide(true);
-		window.setHeading("Select");
+		window.setHeading(myConstants.Select());
 		window.setClosable(false);
-		Button b2 = new Button("Cancel");
+		Button b2 = new Button(myConstants.Cancel());
 		b2.addListener(Events.OnClick, listenerCloseTab);
 		window.add(b2);
-		Button b = new Button("Select", new SelectionListener<ButtonEvent>() {
+		Button b = new Button(myConstants.Select(), new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {		
 				window.show();

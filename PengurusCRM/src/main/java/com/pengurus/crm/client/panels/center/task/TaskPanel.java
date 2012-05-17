@@ -73,15 +73,13 @@ public abstract class TaskPanel extends MainPanel {
 	protected FieldSet getDeadlinePanel() {
 
 		FieldSet deadlinePanel = new FieldSet();
-		deadlinePanel.setHeading("Deadline");
+		deadlinePanel.setHeading(myConstants.Deadline());
 		deadline = new DateField();
 		deadline.setData("text", myConstants.EnterDeadline());
 		if (taskDTO != null)
 			deadline.setValue(taskDTO.getDeadline());
 		deadlinePanel.add(deadline);
-		if(AuthorizationManager.canEditProject(projectDTO))
-			deadline.setReadOnly(true);
 		return deadlinePanel;
 	}
-	
+
 }

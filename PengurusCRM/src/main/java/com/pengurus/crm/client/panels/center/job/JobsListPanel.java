@@ -17,7 +17,7 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 
 	public JobsListPanel(int height){
 		super(height);
-		setHeading("Jobs");
+		setHeading(myConstants.Jobs());
 	}
 
 	@Override
@@ -26,12 +26,12 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 
 		ColumnConfig column = new ColumnConfigMy();
 		column.setId("id");
-		column.setHeader("Id");
+		column.setHeader(myConstants.Id());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("status");
-		column.setHeader("Status");
+		column.setHeader(myConstants.Status());
 		configs.add(column);
 
 		/*column = new ColumnConfigMy();
@@ -42,12 +42,12 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 */
 		column = new ColumnConfigMy();
 		column.setId("translationFrom");
-		column.setHeader("Translation From");
+		column.setHeader(myConstants.From());
 		configs.add(column);
 
 		column = new ColumnConfigMy();
 		column.setId("translationTo");
-		column.setHeader("Translation To");
+		column.setHeader(myConstants.To());
 		configs.add(column);
 
 /*		column = new ColumnConfigMy();
@@ -58,7 +58,7 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 		
 		  column = new ColumnConfigMy(); 
 		  column.setId("preview");
-		  column.setHeader("Preview"); 
+		  column.setHeader(myConstants.previewButton()); 
 		  column.setRenderer(getButtonRenderer());
 		  configs.add(column);
 		 
@@ -69,7 +69,7 @@ public abstract class JobsListPanel extends ListPanel<JobModel> {
 
 	@Override
 	protected String getName() {
-		return "Job List";
+		return myConstants.JobList();
 	}
 
 	@Override

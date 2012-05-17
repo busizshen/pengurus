@@ -179,4 +179,19 @@ public interface i18nConstants extends Constants {
 	String Failure();
 	
 	String Success();
+
+	String Comment();
+
+	String JobList();
+
+	String Jobs();
+
+	String FullName();
+
+	String Select();
+
+	String Username();
+
+	String Choose();
+
 }

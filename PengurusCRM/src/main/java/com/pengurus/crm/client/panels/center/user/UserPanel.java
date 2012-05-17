@@ -3,9 +3,12 @@ package com.pengurus.crm.client.panels.center.user;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Anchor;
+import com.pengurus.crm.client.i18nConstants;
+import com.pengurus.crm.client.i18nMessages;
 import com.pengurus.crm.client.panels.center.user.create.UserPreviewPanel;
 import com.pengurus.crm.shared.dto.UserDTO;
 
@@ -13,8 +16,12 @@ public abstract class UserPanel extends FieldSet {
 
 	protected UserDTO userDTO;
 	protected Anchor name;
+	protected i18nConstants myConstants;
+	protected i18nMessages myMessages;
 
 	public UserPanel(UserDTO userDTO, String heading) {
+		myConstants = (i18nConstants)GWT.create(i18nConstants.class);
+		myMessages=(i18nMessages)GWT.create(i18nMessages.class);
 		this.userDTO = userDTO;
 		setHeading(heading);
 		setWidth(400);

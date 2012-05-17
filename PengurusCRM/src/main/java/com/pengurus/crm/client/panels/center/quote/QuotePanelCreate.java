@@ -18,6 +18,7 @@ import com.pengurus.crm.client.panels.center.user.worker.WorkerPanelEditByRoles;
 import com.pengurus.crm.client.service.QuoteService;
 import com.pengurus.crm.client.service.QuoteServiceAsync;
 import com.pengurus.crm.shared.dto.QuoteDTO;
+import com.pengurus.crm.shared.dto.StatusQuoteDTO;
 import com.pengurus.crm.shared.dto.UserRoleDTO;
 
 public class QuotePanelCreate extends QuotePanel {
@@ -36,16 +37,18 @@ public class QuotePanelCreate extends QuotePanel {
 				quoteDTO.setDescription(descriptionPanel.getDescription());
 				quoteDTO.setSupervisor(workerPanel.getChosenWorker());
 				quoteDTO.setClient(clientPanel.getChosenClient());
+				quoteDTO.setStatus(StatusQuoteDTO.open);
 				if (quoteDTO.check()) {
 					AsyncCallback<QuoteDTO> callback = new AsyncCallback<QuoteDTO>() {
 
 						public void onFailure(Throwable t) {
-
+							MessageBox mb = new MessageBox();
+							mb.setMessage(myMessages.ServerError(t.getMessage()));
+							mb.show();
 						}
 
 						@Override
 						public void onSuccess(QuoteDTO quoteDTO) {
-
 							QuotePanelEdit qp = new QuotePanelEdit(quoteDTO);
 							qp.setAsMain();
 						}

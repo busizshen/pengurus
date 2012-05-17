@@ -47,7 +47,7 @@ public class ClientsListPanel extends BaseUsersListPanel<ClientModel> {
 					init = true;
 				}
 
-				Button b = new Button("Choose",
+				Button b = new Button(myConstants.Choose(),
 						new SelectionListener<ButtonEvent>() {
 							@Override
 							public void componentSelected(ButtonEvent ce) {
