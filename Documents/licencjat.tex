@@ -197,7 +197,66 @@ Spring Security
 \section{Google Web Toolkit (ExtGWT)}
 zalety gwt i alternatywy (inne gwt, UiBinder)
 \section{Hibernate}
-zalety hibernate i alternatywy
+Hibernate jest najpopularniejszą biblioteką mapowania obiektowo-relacyjnego przeznaczoną dla języka prograwania Java.
+Zapewnia ona przede wszystkim translację danych pomiędzy relacyjną bazą danych, a światem obiektowym. 
+Opiera się na wykorzystaniu opisu struktury danych za pomocą języka XML lub annotacji, dzięki czemu można mapować obiekty, 
+bezpośrednio na istniejące tabele bazy danych. Cechy biblioteki: 
+\begin{itemize}
+\item wysoka wydajność (leniwa inicjalizacja, wiele strategii pobierania danych)
+\item wiarygodność i skalowalność (używana przez dziesiątki tysięcy deweloperów)
+\item rozszerzalność
+\item obszerne wsparcie języków zapytań (HQL, JPAQL, SQL) 
+\end{itemize}
+Hibernate zawiera wiele zalet i możliwości. Poniżej zostały opisane te, które 
+są najbardziej zauważalne i pomocne w naszej aplikacji.
+
+\paragraph{Mapowanie za pomocą języka XML}
+Mapowania za pomocą języka XML jest jednym z dwóch mechanizmów mapowania oferowanych przez Hibernate. Umożliwia przeniesienie 
+w prosty sposób całej hierarchii klas na język bazy danych. Do każdej klasy z hierarchii należy storzyć odpowiadający jej plik XML, 
+który powie Hibernate'owi jaką ma stworzyć tabele do bazy danych. W pliku tym możemy zawrzeć wiele informacji, na przykład:
+\begin{itemize}
+\item czy kolekcje będa leniwie wyjmowane (opcja lazy)
+\item relacje między poszczególnymi klasami (wiele do wielu, jeden do wielu, itp.)
+\item czy przy zapisywaniu/usuwaniu obiektu równiez obiekty, które są z nim powiązane będą zapisywane/usuwane (opcja cascade)
+\item dziedziczenie występujące miedzy klasami
+\end{itemize}
+Nasz zespół skrócił sobie czasy pracy nad plikami XML poprzez wykorzystanie wtyczki do Eclipse'a, która automatycznie je generuje   
+na podstawie zaimplementowanych klas. Często jednak należy poprawić te pliki, ponieważ wtyczka ta nie radzi sobie z odwzorowaniem 
+asocjacji między klasami. Wykorzystanie mechanizmu mapowania Hibernate'a zaoszczędziło nam wielu czasu, który musielibyśmy przeznaczyć 
+na planowanie struktury bazy danych.
+
+\paragraph{Data access object}
+Jest to obiekt, który zapewnia interfejs do bazy danych jednocześnie nie ujawiając jej szczegółów. Głównym celem stosowania DAO jest
+oddzielenie logiki biznesowej od dostępu do danych. W naszej aplikacji został wykorzystany wzorzec generycznego DAO, który oferuje 
+pięć metod: create, read, update, delete (CRUD) oraz loadAll, które odpowiednio: tworzą nowy obiekt, wyjmują obiekt, aktualizują 
+istniejący obiekt, kasują obiekt oraz pobierają wszystkie obiekty danej klasy z bazy danych. Każda klasa z modelu danych ma własny 
+obiekt DAO dziedziczący po tym generycznym. Rozwiązanie to zaoszczędziło nam czas, który musielibyśmy poświęcić na implementowanie 
+dla każdej z osobna klasy operacji CRUD. Niektóre DAO posiadają dodatkowe, bardziej skomplikowane metody jak na przykład wyjęcie projektów, 
+w których brał udział kierownik o danym identyfikatorze. Wykorzystanie DAO skutkuje stworzeniem dodatkowej warstwy interfejsu ale dzięki 
+temu kod staje się czytelniejszy, ponieważ szczegóły przechowywania danych są ukryte. Operacje na bazie danych ograniczają 
+się tylko do wywołania odpowiedniej metody z DAO.
+
+\paragraph{Znajomość biblioteki} 
+Ważnym czynnikiem, który pomógł nam w wyborze Hibernate'a był fakt, że trzy osoby z naszego zespołu 
+były już dobrze zaznajomione z biblioteką, ponieważ w tym samym czasie uczęszczały na zajęcia z zaawansowanych baz danych, na których 
+poznały podstawy działania oraz możliwości biblioteki. Zanim rozpoczęliśmy pracę na kodem naszej aplikacji te trzy osoby zdążyły już 
+napisać dwa programy z wykorzystaniem Hibernate'a i wyniosły same pozytywne doświadczenia. Stwierdziliśmy, że lepiej wykorzystać narzędzie, 
+które już poznaliśmy, wypróbowaliśmy i wiedzieliśmy, że jest dobre i w pełni spełnia nasze oczekiwania, niż szukać czegoś nowego.
+
+\paragraph{Alternatywne narzędzie - TopLink}
+TopLink jest taka samo jak Hibernate biblioteką mapowania obiektowo-relacyjnego dla języka programowania Java. Cechy TopLink:
+\begin{itemize}
+\item zestaw mapowań bezpośrednich i relacyjnych
+\item mapowanie obiektów do XML
+\item obsługuje wiele języków zapytań
+\item wizualny edytor mapowania
+\item keszowanie w celu zapewnienia tożsamości obiektu
+\end{itemize}
+Głównym powodem dla którego zdecydowaliśmy się na Hibernate'a, a nie na TopLink'a był fakt, że większa część zespołu miała już 
+doświadczenie związane z użyciem tej pierwszej biblioteki, która całkowicie spełniała nasze wymagania związane z tworzeniem bazy 
+danych. Kolejnym argumentem przeciwko TopLink był fakt, że musielibyśmy poświęcić czas na jego poznanie, który moglibyśmy 
+przeznaczyć na implementacje.
+
 \section{System klas i uprawnień użytkowników}
 Projektowana przez nas aplikacja w oczywisty sposób musiała przechowywać dane użytkowników oraz umożliwiać im logowanie się do systemu. Mogliśmy podjąć jedną z dwóch decyzji: wykorzystać istniejący system w oparciu o protokół LDAP, bądź też zaprojektować i zaimplementować własny system.
 
