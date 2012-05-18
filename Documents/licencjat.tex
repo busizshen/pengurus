@@ -74,8 +74,32 @@ Opis tego jak ostatecznie wygląda nasza aplikacja. Nie wiem jak bardzo szczegó
 \section{Podstawowy przypadek użycia}
 
 \chapter{Rozwiązania}
-\section{Spring}
-zalety springa i alternatywy (tu coś znajdę)
+\section{Spring Framework}
+
+Spring Framework jest jedną z najpopularniejszych i najlepiej działających platform programistycznych dla Javy. Zalet tego frameworku jest wiele, poniżej przedstawione zostały jednak te najbardziej zauważalne w pracy nad naszym projektem.
+
+\paragraph{Wzorzec projektowy MVC}
+Spring MVC jest jednym z pakietów oferowanych przez Spring Framework. Został on zaprojektowany do tworzenia aplikacji działających na bazie wzorca projektowego Model-View-Controller i oferuje wiele mechanizmów ułatwiających pracę z nimi. Przebieg akcji z użyciem Spring MVC w naszej aplikacji wygląda następująco:
+
+\begin{itemize}
+  \item Klient prosi o zasoby aplikację
+  \item Zapytanie jest przechwytywane przez Spring Front Controller które zajmuje się znalezieniem odpowiednich mapowań adresów
+  \item Mapowania wykorzystywane są do znalezienia odpowiedniego kontrolera aplikacji odpowiadającego za odpowiedzenia na zapytanie
+  \item Kontroler przetwarza zapytanie i generuje lub odnajduje dane, o które poproszono w zapytaniu
+  \item Stworzony widok zostaje odesłany do klienta
+\end{itemize}
+
+Dodatkową zaletą implementacji tego modelu przez Spring jest fakt, że pozwala on na integrację z innymi frameworkami i wybór obiektów odpowiedzialnych za wykonanie poszczególnych akcji, co jest jedną z większych motywacji. W projekcie bowiem wykorzystujemy to do połączenia tego modelu z możliwościami oferowanymi przez frameworki Hibernate i ExtGWT.
+
+To właśnie dlatego w przepływie tym pominięte zostało generowanie widoku na podstawie danych, gdyż klientem jest samodzielny framework prezentujący dane użytkownikowi.
+
+\paragraph{Inwersja kontroli}
+Inwersja kontroli (ang. IoC) to w programowaniu obiektowym praktyka, w której powiązania obiektów ustalane są dopiero podczas wykonania, a nie w trakcie kompilacji. Jest to bezpośrednio związane z oddzieleniem logiki aplikacji od kodu. Zmniejsza 
+
+\paragraph{Spring Security}
+
+Spring Security
+
 \section{Google Web Toolkit (ExtGWT)}
 zalety gwt i alternatywy (inne gwt, UiBinder)
 \section{Hibernate}
