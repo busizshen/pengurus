@@ -64,9 +64,7 @@
 %\listoftables
 
 \chapter{Wprowadzenie - Wizja}
-\section{Opis projektu}
-\begin{enumerate}
-\item Miejsce na rynku \\
+\section{Miejsce na rynku}
 W dzisiejszym świecie bardzo istotną kwestią wydaje się być szeroko pojęte usprawnianie zarządzania firmą. 
 Jednym z najważniejszych jego aspektów jest przyspieszanie i formalizacja przebiegu procesu biznesowego. 
 Problem ten można rozwiązać, dokonując jego informatyzacji przy użyciu najnowszych technologii dostępnych na rynku, co okazuje się być jednym z najłatwiejszych i najtańszych rozwiązań. \\
@@ -292,7 +290,62 @@ który dostosuje wersję do danego produktu.
 todo (netbeans)
 \chapter{Praca}
 \section{Projektowanie systemu}
-Wiele niespełnionych godzin, brak klienta z którym można pogadać.
+Rozpoczynając pracę nad projektowaniem systemu do zarządzania biurem tłumaczeń postawiliśmy sobie cel, aby w ramach tego tematu był on jak najbardziej funkcjonalny,
+co oznaczało , że miał się wykazywać jak największą elastycznością w dziedzinie tłumaczeń (np. musiał uwzględniać możliwość dodania nowej usługi tłumaczeń). 
+Wymagało to od nas dogłębnego przeanalizowania rynku. Nasz produkt musiał być odpowiedni dla małych biur prowadzących proste, krótkie tłumaczenia, jak i dla większych 
+przedsiębiorstw, których projekty są znacznie obszerniejsze.\\
+
+
+Pomocne okazały się już istniejące aplikacje. Przeanalizowaliśmy ich wady oraz zalety i wyciągnęliśmy z nich wnioski. Ponadto zauważyliśmy analogie pomiędzy procesem projektowania
+systemu informatycznego, a procesem tłumaczenia. Przekładając nasze doświadczenie oraz zebrane wnioski przystąpiliśmy do tworzenia wstępnego szkicu projektu. 
+Po jego uzgodnieniu zasięgnęliśmy informacji z oficjalnych dokumentów : Polskiej Normy PL-EN 15038 Usługi tłumaczeniowe. Wymagania dotyczące świadczenia usług. oraz
+Schematu systemu zarządzania biurem tłumaczeń przygotowanej przez klienta.
+Przyjęta kolejność miała wyeliminować niepotrzebny biurokratyczny formalizm, który utrudniłby pracę tłumaczom dla których ta aplikacja miała upraszczać ów proces, a nie go jeszcze utrudniać.\\
+
+
+Projekt systemu składał się z dwóch równie istotnych części : schemat reprezentacji użytkowników oraz schemat przebiegu realizacji projektu.\\
+
+
+Reprezentacja użytkowników oraz stworzony przez nas system ról został szczegółowo opisnay w punkcie 3.4. 
+Jego realizacja była bardzo ciężka i czasochłonna, gdyż musiała uwzględniać problemy, jakie możemy napotkać z implementacją i wykorzystaniem tego systemu, 
+a z drugiej strony musiała odzwierciedlać rzeczywisty stan podczas tłumaczenia.\\
+
+
+Model danych zawierający wszystkie etapy przebiegu realizacji projektu został przedstawiony poniżej.\\
+\{Tu ma być ten schemat - Pengurus-Diagram-ModelDanychBezUzytkownikow.jpeg\} \\
+Szczegółowy opis procesu został opisany w punkcie 2. Podczas projektowania schematu rozważaliśmy różne koncepcje.
+\begin{itemize}
+\item Głównym problemem, jaki rozważaliśmy była ilość etapów, jakie zlecenie musi przejść od momentu rozpoczęcia do końca jego realizacji. 
+Na początku schemat nie zawierał Oferty, a kontakt pomiędzy biurem tłumaczeń a Klientem miał się odbywać za pomocą Projektu. 
+Postanowiliśmy, jednak dodać klasę Oferta, aby rozdzielić etap projektowania zlecenia i kontaktu z klientem od etapu realizacji - tłumaczenia. 
+Służyło to poprawie przejrzystości projektu (oba etapy zawierały kompletnie różne funkcjonalności), a ponadto miało to na celu ochronę danych osobowych i własności intelektualnej.
+Uważaliśmy, iż zwykli pracownicy nie powinni znać klienta i całego projektu (za wyjątkiem kierowników i menadżerów),a tylko powinni mieć dostęp do informacji zawartych w Zadaniu.
+ Z drugiej strony klient nie powinien znać wszystkich szczegółów realizacji projektów, a jedynie efekty poszczególnych etapów (Prac).
+\item Drugim problemem z jakim się zmierzyliśmy był sposób, w jaki wyrazimy Ofertę przedstawianą Klientowi.
+Chcieliśmy w prosty sposób móc przedstawić, co ma zrealizować dane zlecenie oraz podstawowe dane jakie powinno zawierać (deadline, zapłata, rodzaj tłumaczenia, dotarczone pliki).
+Najprostsze rozwiązanie zakładało, iż to Oferta zawiera te informacje, co w etapie realizacji miało się prosto mapować na Projekt.
+Rozważyliśmy, jednak przypadek tłumaczenia dużej książki. Klient chciałby np. aby zlecenie było realizowane etapami, bądź opłata za poszczególne części miałaby się różnić.
+Przy tym rozwiązaniu należałoby stworzyć kilka Ofert, co nie byłoby wygodne. 
+Postanowiliśmy zatem, aby potrakotwać zarówno Ofertę, jak Projekt jako pudełka, które służą do zarządzania zleceniem, którego poszczególne etapy (części) znajdują się w liście Prac.
+To w Pracy miały zawierać się wszystkie techniczne informacje dotyczące tłumaczenia (pliki, deadline, rodzaj). I tak np. na poziomie Oferty  znajdują się dane o kliencie,
+możliwość wysyłania przez niego plików, a w Pracy istnieje możliwość oceny rozwiązania, jego przyjęcie/odrzucenie i zaksięgowanie.
+Ponadto Praca jest współdzielona przez Ofertę jak i Projket (nie ma oddzielnych instancji).
+\item Następnym problemem, jaki rozważaliśmy był nadzór nad realizacją zlecenia. Zgodnie z wymaganiami stworzyliśmy lidera tłumaczenia (u nas Menadżer Projektu), 
+który zajmował się przydzielaniem Zadań do pracowników pracujących przy danym projekcie. Do projetku pracownicy byli przydzielni przez kierownika zlecenia.
+Nie wiedzieliśmy natomiast ilu takich Menadżerów przypisać oraz czy powinni oni być powiązania stricte z Pracą , czy wyżej z Projektem. 
+Po długich dyskusjach i licznych pomysłach zdecydowaliśmy się na najbardziej elastyczny model. Ilość menadżerów miała zależeć od Kierownika zlecenia, który przygotował Ofertę. 
+Menadżerowie mieli być przydzieleni do Projektu, tak aby nie trzeba było za każdym wybierać menadżerów do poszczególnych Prac.
+Miało to byc realizowane nieformalnie.
+\item Z bardziej szczegółowych problemów, jakie napotkaliśmy było stworzenie systemu typów tłumaczeń (chodziło o rozróżnienie tłumaczeń ustnych, sądowych, technicznych, itp.).
+Pierwszy pomysł przewidywał stworzenie odpowiednich enumeratorów. Uniemożliwiałoby to jednak rozszerzenie - dodanie nowego rodzaju (tzn wymagałoby zmian w kodzie). 
+Postanowiliśmy zatem stworzyć oddzielną klasę TranslationType posiadający odpowiednie napisy. Kierownik (admnistrator) za pomocą aplikacji mógłby dzięki temu w łatwy sposób dodać nowy typ.
+\end{itemize}
+Przedstawione wyżej różne problemy, jakie natrafiliśmy na etapie projektowania są tylko częścią tego z czym musieliśmy się zmierzyć. 
+Uważamy, że zrealizowany przez nas schemat spełnia wszystkie wymagane funkcjonalności oraz pozwala na wystarczającą zdolność przystosowania się.
+Ponadto liczymy na to, iż praca przy takim schemacie zapewnia wystarczającą ilość formalizmu, ale jednocześnie nie powoduje wydłużenia czasu pracy, bądź jej utrudnienia zwłaszcza w małych projektach. 
+
+ 
+
 \section{Przygotowanie środowiska pracy}
 Problemy z serwerem, podział pracy i opłat pomiędzy dwa zespoły.
 \section{Problemy z użytymi narzędziami}
