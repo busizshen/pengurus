@@ -12,6 +12,7 @@
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usepackage{verbatim}
+\usepackage{color}
 
 % Tutaj każdy wstawia swoje dane drukując pracę licencjacką
 \author{Jakub Oćwieja}
@@ -63,34 +64,44 @@
 %\listoftables
 
 \chapter{Wprowadzenie - Wizja}
-\section{Miejsce na rynku}
-W dzisiejszym świecie bardzo istotną kwestią jest usprawnianie zarządzania firmą. 
-Najważniejsze jest przyspieszenie i sformalizowanie przebiegu procesu biznesowego. 
-Najłatwiejszym i najtańszym sposobem jest wykorzystanie nowych technologii i zinformatyzowanie procesu. \\
+\section{Opis projektu}
+\begin{enumerate}
+\item Miejsce na rynku \\
+W dzisiejszym świecie bardzo istotną kwestią wydaje się być szeroko pojęte usprawnianie zarządzania firmą. 
+Jednym z najważniejszych jego aspektów jest przyspieszanie i formalizacja przebiegu procesu biznesowego. 
+Problem ten można rozwiązać, dokonując jego informatyzacji przy użyciu najnowszych technologii dostępnych na rynku, co okazuje się być jednym z najłatwiejszych i najtańszych rozwiązań. \\
 
 
-Z takim problemem muszą zmierzyć się również biura tłumaczeń. Duża konkurencja wymaga od nich usprawnienie procesu tłumaczenia, 
-łatwy kontakt z klientem oraz pracownikami nietatowymi, którzy zazwyczaj pracują poza siedzibą firmy , 
-możliwość wprowadzenia szybkich korekt. Ponadto wymagane jest bezpieczeństwo przechowywania ( danych osobowych, plików, własności intelektualnej ),
-prostota użytkowania i powszechny dostęp. \\
+Z podobnym problemem muszą zmierzyć się również biura tłumaczeń. Duża konkurencja wymaga od nich: 
+\begin{itemize}
+\item usprawniania procesu tłumaczenia, 
+\item ułatwienia kontaktu na linii biuro - klient, 
+\item ułatwienia kontaktu na linii biuro - pracownicy nieetatowi (pracujący zazwyczaj poza siedzibą firmy), 
+\item możliwości wprowadzenia szybkich korekt \textcolor{red}{(G: nie rozumiem, nie widzę różnicy między pkt wcześniejszym)},
+\item wysokiego bezpieczeństwa przechowywania danych (dane osobowe, pliki, własność intelektualna),
+\item prostoty użytkowania \textcolor{red}{(G: czego?)},
+\item powszechnego dostępu \textcolor{red}{(G: do czego?)}. 
+\end{itemize} 
 
 
-Na rynku znajdują się projekty, które są przeznaczone dla biur tłumaczeń.
-Są to jednak produkty, które są ograniczone jedynie do pracowników biura ( nie jest możliwa praca mobilna ), 
-bądź w przypadku projektów webowych są napisane w starych technologiach (PHP) , zapewniają małe bezpieczeństwo i nie są przeznaczone do kontaktów z klientami.
-Pengurus CRM ma być aplikacją, która rozwiązuje te problemy. 
-Będzie to pierwsza na rynku aplikacja WWW przeznaczona bezpośrednio dla biur tłumaczeń, w której wykorzystano nowe technnologie (GWT, Hibernate, Spring),
-przeznaczona do kontaktów z pracownikami oraz klientami. Do obsługi będzie wystarczać przeglądarka WWW zatem umożliwi to  mobilną pracę 
+Oczywiście na rynku znajdują się produkty, które są przeznaczone do zarządzania biurem tłumaczeń, 
+są one jednak ograniczone jedynie do pracowników biura (nie jest możliwa praca mobilna) \textcolor{red}{(G: nie rozumiem, O: mobilna praca)}, 
+bądź w przypadku aplikacji webowych zostały stworzone przy użyciu starych technologii (np. PHP). 
+Ponadto produkty te często zapewniają niski poziom bezpieczeństwa i nie są przeznaczone do kontaktów z klientami.
+Pengurus CRM ma być aplikacją, która wychodzi naprzeciw tym problemom. 
+Będzie to pierwsza na rynku aplikacja WWW stworzona przy użyciu gamy nowych technnologii - ExtGWT, Hibernate, Spring.
+Skierowana bezpośrednio do właścicieli biur tłumaczeń, w znacznym stopniu ułatwiająca kontakt z klientem, jak również kontakt pomiędzy pracownikami. 
+Do jej obsługi będzie wystarczać przeglądarka WWW, zatem umożliwi to mobilną pracę \textcolor{red}{G: mobilna praca} 
 oraz skróci klientowi czas jaki musi poświęcić na nadzorowanie projektu. 
 
 \section{Użytkownicy}
 \begin{itemize}
-\item Kierownik (Executive) – pracownik firmy, posiadający najwięcej praw w systemie Pengurus, fizycznie rola przewidziana dla osób postawionych najwyżej w hierarchii firmy. Jako jedyny posiada dostęp do panelu administratora.
-\item Menadżer Projektu (Project Manager)– pracownik firmy, odpowiadający za nadzorowanie projektów.
-\item Ekspert (Expert)– pracownik firmy, odpowiedzialny za tłumaczenie dokumentów, zleconych przez Menadżera Projektu (Tłumacz).
-\item Księgowy (Accountant)– pracownik firmy, odpowiedzialny za księgowość firmy.
-\item Pracownik nieetatowy (Freelancer)– osoba nie będąca na stałe zatrudniona w firmie, która na potrzeby chwili wykonuje odpłatnie zlecone tłumaczenia (Tłumacz).
-\item Klient (Client)– klient indywidualny bądź biznesowy zlecający tłumaczenie firmie.
+\item Kierownik (ang. Executive) – pracownik firmy, posiadający najwięcej praw w systemie Pengurus, fizycznie rola przewidziana dla osób postawionych najwyżej w hierarchii firmy. Jako jedyny posiada dostęp do panelu administratora.
+\item Menadżer Projektu (ang. Project Manager)– pracownik firmy, odpowiadający za nadzorowanie projektów.
+\item Ekspert (ang. Expert)– pracownik firmy, odpowiedzialny za tłumaczenie dokumentów, zleconych przez Menadżera Projektu (Tłumacz).
+\item Księgowy (ang. Accountant)– pracownik firmy, odpowiedzialny za księgowość firmy.
+\item Pracownik nieetatowy (ang. Freelancer)– osoba nie będąca na stałe zatrudniona w firmie, która na potrzeby chwili wykonuje odpłatnie zlecone tłumaczenia (Tłumacz).
+\item Klient (ang. Client)– klient indywidualny bądź biznesowy zlecający tłumaczenie firmie.
 \end{itemize}
 
 \section{Przypadki użycia}
@@ -293,6 +304,34 @@ Dużo nieprzespanych nocy.
 Problem i jego rozwiązanie
 % te dwa podpunkty można ując inaczej
 \section{Zasoby czasowe i organizacja pracy}
+Kiedy mowa o realizacji projektu, należy zwrócić uwagę na nakład i styl pracy z nim związany. 
+Poddajmy analizie przebieg realizacji projektu Pengurus CRM w kontekście zasobów czasowych oraz przyjętego schematu pracy.
+
+
+Realizacja projektu była rozłożona na niemal jeden pełny rok akademicki i w naturalny sposób podzieliła się na dwa etapy. 
+Pierwszy etap można uznać za część teoretyczną, która opiewała w przygotowanie różnej maści dokumentów stanowiących fundament do implementacji projektu, 
+m.in. wizja, model danych, mapa aplikacji.
+W trakcie trwania tego etapu rodziły się wszelkie pomysły, które wykrystalizowały ostateczny obraz projektu. 
+Już w trakcie pierwszego miesiąca zespół zdał sobie sprawę, że pogodzenie regularnych zajęć, wymagających bieżącej nauki
+(kolokwia, zadania zaliczeniowe, etc.) z pracą nad projektem licencjackim nie będzie prostym zadaniem. 
+Wizja spotkań trzy razy w tygodniu, szybko została zredukowana do kilkugodzinnych spotkań raz w tygodniu, 
+w trakcie których rozwiązywano bieżące problemy i rozdzielano zadania na najbliższy tydzień. 
+Taki cykl pracy przyświecał niemal przez cały pierwszy etap realizacji projektu.
+Przygotowanie każdego z dokumentów poprzedzone było debatą, 
+a następnie do przygotowania ostatecznej formy dokumentu delegowane były dwie osoby z zespołu.
+
+
+Taki styl pracy uległ drastycznej zmianie kiedy wkroczyliśmy w drugi etap projektu, czyli implementację.
+Plan pracy stał się nieregularny i całkowicie zależny od innych obowiązków związanych głównie z uczelnią, 
+największy wpływ miała z pewnością sesja zimowa, która ograniczyła pracę nad projektem do minimum na czas około dwóch miesięcy.
+Mimo problemów i napiętego planu, drużyna starała się spotykać raz w tygodniu, aby wspólnie poświęcić czas na implementację 
+kolejnych komponentów systemu. Ostatecznie jednak, największy nakład pracy nad projektem skupił sie w dwóch, około 10-cio dniowych odcinkach czasowych:
+ferie zimowe oraz długi weekend majowy, kiedy to pozostałe obowiązki naukowe drużyny zostały tymczasowo odłożone na bok.
+
+
+Pomimo pewnego rodzaju perturbacji, które pojawiały się w trakcie implementacji systemu, drużyna jednogłośnie stwierdziła,
+że pomimo skokowego nakładu pracy, chwilami siegającego bardzo wysokiego poziomu, byliśmy dobrze zorganizowaną grupą.
+Dzięku temu wersja RC naszego projektu pojawiła się już 23 maja 2012. 
 Wszyscy mieszkamy blisko, wszyscy się znamy, łatwo się spotkać, łatwo dyskutować, a mimo to musieliśmy się spotykać w ferie i weekendy, ponieważ nigdy nie było czasu.
 \section{Komunikacja w zespole}
 Znamy swoje możliwości, jesteśmy blisko, a mimo to czasami nie dało się dogadać. Ciężko zwrócić komuś uwagę, ciężko coś wymóc, ze względu na osobiste relacje. Każdy inaczej reaguje na problemy (jedni się martwią, inni się denerwują, inni nie dadzą sobie nic powiedzieć), ale na szczęście po kilku godzinach znowu wszyscy się lubią. 
