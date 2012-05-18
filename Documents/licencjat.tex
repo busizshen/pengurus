@@ -63,9 +63,99 @@
 %\listoftables
 
 \chapter{Wprowadzenie}
-\section{Wizja}
-Tu opiszemy co chcieliśmy zrobić, jak to miało wyglądać.
+\section{Opis projektu}
+\begin{enumerate}
+\item Miejsce na rynku \\
+W dzisiejszym świecie bardzo istotną kwestią jest usprawnianie zarządzania firmą. 
+Najważniejsze jest przyspieszenie i sformalizowanie przebiegu procesu biznesowego. 
+Najłatwiejszym i najtańszym sposobem jest wykorzystanie nowych technologii i zinformatyzowanie procesu. \\
 
+
+Z takim problemem muszą zmierzyć się również biura tłumaczeń. Duża konkurencja wymaga od nich usprawnienie procesu tłumaczenia, 
+łatwy kontakt z klientem oraz pracownikami nietatowymi, którzy zazwyczaj pracują poza siedzibą firmy , 
+możliwość wprowadzenia szybkich korekt. Ponadto wymagane jest bezpieczeństwo przechowywania ( danych osobowych, plików, własności intelektualnej ),
+prostota użytkowania i powszechny dostęp. \\
+
+
+Na rynku znajdują się projekty, które są przeznaczone dla biur tłumaczeń.
+Są to jednak produkty, które są ograniczone jedynie do pracowników biura ( nie jest możliwa praca mobilna ), 
+bądź w przypadku projektów webowych są napisane w starych technologiach (PHP) , zapewniają małe bezpieczeństwo i nie są przeznaczone do kontaktów z klientami.
+Pengurus CRM ma być aplikacją, która rozwiązuje te problemy. 
+Będzie to pierwsza na rynku aplikacja WWW przeznaczona bezpośrednio dla biur tłumaczeń, w której wykorzystano nowe technnologie (GWT, Hibernate, Spring),
+przeznaczona do kontaktów z pracownikami oraz klientami. Do obsługi będzie wystarczać przeglądarka WWW zatem umożliwi to  mobilną pracę 
+oraz skróci klientowi czas jaki musi poświęcić na nadzorowanie projektu. 
+
+\item Użytkownicy 
+\begin{itemize}
+\item Kierownik (Executive) – pracownik firmy, posiadający najwięcej praw w systemie Pengurus, fizycznie rola przewidziana dla osób postawionych najwyżej w hierarchii firmy. Jako jedyny posiada dostęp do panelu administratora.
+\item Menadżer Projektu (Project Manager)– pracownik firmy, odpowiadający za nadzorowanie projektów.
+\item Ekspert (Expert)– pracownik firmy, odpowiedzialny za tłumaczenie dokumentów, zleconych przez Menadżera Projektu (Tłumacz).
+\item Księgowy (Accountant)– pracownik firmy, odpowiedzialny za księgowość firmy.
+\item Pracownik nieetatowy (Freelancer)– osoba nie będąca na stałe zatrudniona w firmie, która na potrzeby chwili wykonuje odpłatnie zlecone tłumaczenia (Tłumacz).
+\item Klient (Client)– klient indywidualny bądź biznesowy zlecający tłumaczenie firmie.
+\end{itemize}
+
+\item Przypadki użycia
+\begin{itemize} 
+\item Przyjęcie zlecenia
+
+Kierownik zlecenia ( Menadżer ds. produkcji/ Stanowisko ds. relacji z klientami i produkcji ) 
+jest odpowiedzialny za przyjęcie zlecenia od klienta oraz przygotowanie odpowiedniej oferty, 
+która następnie zostaje podana ocenie klientowi.
+
+
+Kierownik zlecenia odbiera dokumenty od klienta wraz z tekstem oryginału , zapoznaje się on z przesłanym/odebranym materiałem,
+a następnie ustala ze zlecającym szczegóły dotyczące zlecenia takie jak data realizacji, cena,  tryb zlecenia, rodzajem tłumaczenia,  
+materiały pomocnicze.
+
+
+
+Kierownik zlecenia przgotowuje dziennik zlecenia. W dzienniku zapisywana jest historia pracy z dokumentem i 
+odnotowywane są wszystkie istotne zdarzenia mające wpływ na jakość i/lub bezpieczeństwo informacji przekazanych przez klienta. 
+Ponadto przechowywane są : data utworzenia zlecenia, data przyjęcia tekstu źródłowego oraz związanych z nim materiałów,
+,numer zlecenia, informację o podjętych działaniach w celu usunięcia niezgodności. 
+
+Przed rozpoczęciem realizacji projektu klient jest zobowiązany do zaakceptowania przygotowanej oferty.
+
+\item Rejestracja zlecenia \\
+Kierownik zlecenia wyznacza lidera/liderów dla tłumaczenia (Menadżera Projektu). W uzasadnionych przypadkach działania Lidera wykonuje kierownik zlecenia.
+Ponadto jest on odpowiedzialny za przypisanie odpowiednich tłumaczy/ weryfikatorów do projektu
+Kierownik ponadto udostępnia menadżerom przesłane przez klienta zasoby ( pliki ) i wyznacza im temin realizacji poszczygólnych etapów projektu.
+
+\item Tłumaczenie i weryfikacja\\
+Menadżer Projektu przekazuje odpowiednim tłumaczom materiały oraz wyznacza termin realizacji tłumaczenia.
+W tym celu tworzy nowe pliki i udostępnia je tłumaczowi.
+Ponadto menadżer wyznacza odpwiedniego Weryfikatora.
+Tłumacz przesyła pliki ze zrealizownym etapami pracy. Każdy z tych plików może być edytowany przez autora, a dostęp do nich posiadają menadżerowie oraz weryfikatorzy.
+Po zakończonym tłumaczeniu weryfikator sprawdza wykonaną pracę, a następnie wysyła plik z poprawkami zapisuje uwagi oraz akceptuje wykonaną pracę lub nakazuje ponowne rozpatrzenie.
+Po ostatecznym zaakceptowaniu przez weryfikator menadżer odbiera pliki.
+W przypadku pracowników nieetatowych następuje rozliczenie z tłumaczem, które jest potwierdzane przez księgowego.
+
+\item Przekazanie gotowego tłumaczenia do zleceniodawcy\\
+Menadżer projektu odbiera od tłumaczy i weryfikatorów pliki oraz przygotowuje ostateczny dokument, który następnie zostaje podany ocenie kierownikowi zlecenia.
+Kieronik zlecenia po zaakceptowaniu przekazuje go klientowi, który podaje go swojej ocenie. W razie reklamacji dokument wraz z uwagami zostaje przesłany 
+menadżerowi projektu do ponownego rozpatrzenia.
+
+\item Archiwizacja zleceń\\
+Po zamknięciu obsługi zlecenia – formularz zlecenia przechowywany jest,
+wraz z adnotacją dotyczącą danych faktury oraz danych określających uczestników 
+procesu realizacji, w wersji papierowej w kolejności odpowiadającej numerom 
+wewnętrznym nadanym na początku procesu.
+Pliki danego zlecenia wraz z dziennikiem zlecenia, przechowywane są w 
+katalogu przeznaczonym do obsługi danego zlecenia na serwerze.
+Dane znajdujące się na serwerze poddawane są archiwizacji, zgodnie z 
+Polityką tworzenia kopii zapasowych Pl-4.1
+
+\item Tworzenie i edycja użytkowników systemu\\
+Kierownik tworzy użytkownika oraz nadaje mu odpowiednie role ( tłumacz , klient, menadżer projektu, itd. ).
+Pracownik posiada : login, dane osobowe i kontaktowe , posiadane umiejętności tłumaczenia ( razem z posiadanymi prawamy - tłumaczenia sądowe, techniczne ).
+Klient może być kilentem biznesowym ( posiada pośredników ) , bądź klientem indywidualnym.
+
+\end{itemize}
+
+
+
+\end{enumerate}
 \chapter{Aplikacja}
 \section{Definicje}
 Tutaj zdefiniujemy rzeczy, o których będziemy mówić na kolejnych stronach.
