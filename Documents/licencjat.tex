@@ -62,7 +62,7 @@
 %\listoffigures
 %\listoftables
 
-\chapter{Wprowadzenie}
+\chapter{Wprowadzenie - Wizja}
 \section{Miejsce na rynku}
 W dzisiejszym świecie bardzo istotną kwestią jest usprawnianie zarządzania firmą. 
 Najważniejsze jest przyspieszenie i sformalizowanie przebiegu procesu biznesowego. 
@@ -181,22 +181,11 @@ Dodatkową zaletą implementacji tego modelu przez Spring jest fakt, że pozwala
 To właśnie dlatego w przepływie tym pominięte zostało generowanie widoku na podstawie danych, gdyż klientem jest samodzielny framework prezentujący dane użytkownikowi.
 
 \paragraph{Inwersja kontroli}
-Inwersja kontroli (ang. IoC) to w programowaniu obiektowym praktyka, w której powiązania obiektów ustalane są dopiero podczas wykonania, a nie w trakcie kompilacji. Jest to bezpośrednio związane z oddzieleniem logiki aplikacji od kodu. Główną metodą osiągnięcia tego celu jest stosowanie Dependency Injection, co oznacza, że obiekty są "wkładane" jeden w drugi.
-
-Spośród kilku możliwych technik implementacji inwersji kontroli Spring implementuje dwie: z użyciem konstruktora oraz z użyciem setterów. W naszej aplikacji używamy tej drugiej. Do konfigurowania zależności pomiędzy obiektami używamy plików xml, w których znajdują się definicję fasolek (ang. beans) dla zarządzanych obiektów oraz ustawienia zależności między nimi.
-
-IoC zwiększa znacząco czytelność kodu i zmniejsza jego ilość, a co ważniejsze, do minimum skraca się czas potrzebny do zarządzania tworzeniem, usuwaniem, przekazywaniem i łączeniem obiektów tworzących aplikację w spójną całość. Dodanie zależności obiektów sprowadza się stworzenia metod $set()$ and $get()$ oraz dołączenia odpowiedniego wpisu w pliku konfiguracyjnym.
-
-Podział nieprzeplatających się ze sobą modułów implementujących określone interfejsy pozwala skupić się na ich rzeczywistym przeznaczeniu dodatkowo zwiększając testowalność kodu pozwalając na podstawianie spreparowanych obiektów w miejsce zależności.
+Inwersja kontroli (ang. IoC) to w programowaniu obiektowym praktyka, w której powiązania obiektów ustalane są dopiero podczas wykonania, a nie w trakcie kompilacji. Jest to bezpośrednio związane z oddzieleniem logiki aplikacji od kodu. Zmniejsza 
 
 \paragraph{Spring Security}
-Jednym z projektów wchodzących z zestaw Springowych narzędzi jest Spring Security. Projekt ten implementuje pełen zestaw funkcjonalności związanych z bezpieczeństwem aplikacji począwszy od logowania (czy to z własnym systemem użytkowników, LDAPem, OAUTHem) skończywszy na filtrowaniu danych przesyłanych do użytkownika.
 
-Pierwszym miejscem w którym wykorzystujemy tą część frameworku jest strona logowania. Osoba nieautoryzowana przez system próbująca dostać się do zasobów (w tym przypadku samej aplikacji), do których nie ma uprawnień zostaje przekierowana na stronę logowania. Osoba zalogowana, ale bez uprawnień po prostu zostanie o tym poinformowana. Spring pozwala definiować prawa dostępów do zasobów na podstawie ról użytkowników oraz adresów zasobów, co odbywa się już na poziomie dyspozytora (ang. dispatcher).
-
-Sam mechanizm logowania jest również odpowiedzialnością Spring Security. Mechanizm ten wykorzystuje naszą własną implementację systemu użytkowników dopasowaną do odpowiedniego interfejsu. Informacja o tym jaki użytkownik jest zalogowany zostaje zapamiętana wewnątrz sesji i jest dostępna w każdym miejscu, które wymaga jej użycia. To także Spring zapewnia szyfrowanie haseł użytkowników z użyciem hashu nazwy użytkownika i soli.
-
-Ostatecznie projekt ten wykorzystujemy do ograniczania dostępu do konkretnych funkcji oferowanych przez stronę serwera aplikacji lub danych przez nie zwracanych. Osiągamy to przy użyciu systemu adnotacji, które umieszczone przed definicją metody definiują dla niej cechy bezpieczeństwa. W ten sposób określamy, czy użytkownik może wywołać tę funkcję na podstawie jego roli, bądź przy użyciu zdefiniowanych przez siebie warunktów. W podobny sposób możemy przefiltrować kolekcję obiektów zwracanych przez funkcję. 
+Spring Security
 
 \section{Google Web Toolkit (ExtGWT)}
 zalety gwt i alternatywy (inne gwt, UiBinder)
@@ -206,13 +195,57 @@ zalety hibernate i alternatywy
 zalety naszego i alternatywy (ldap)
 \section{Środowisko pracy}
 \subsection{Git}
-todo (svn)
+Jest to rozproszony system kontroli wersji. Git jest opublikowany na licencji GNU GPL w wersji 2.
 \subsection{Gerrit}
 todo
 \subsection{Jira}
-todo (redmine)
+Jira jest to oprogramowanie firmy Atlassian służące do zarządzania projektem oraz śledzenia błędów. 
+Narzędzie to "łączy zespół z wykonywanym zadaniem".
+
+
+\paragraph{Zarządzanie projektem} 
+
+Podczas realizacji projektu wykorzystaliśmy metodykę agile'ową, która jest wspierana przez Jirę. 
+Umożliwiło nam na łatwe i wygodne zarządzanie projektem. W szczególności korzystaliśmy z :
+\begin{itemize}
+\item Wersjonowania wydań - dzięki temu mogliśmy wyznaczać kolejne terminy realizacji danych wersji 
+  dało nam to możliwość kontrolowania postępu prac i w razie potrzeby szybko reagować na zastoje;
+\item Tworzenia raportów - informowało nas o stanie realizacji projektu oraz o postępie prac przez poszczególnych członków zespołu;
+\item Tworzenia zadań - przydzielanie poszczególnym członkom zespołu, ustawianie terminów, komentowanie, oraz przydzielanie zasobów 
+umożliwia wygodną komunikację oraz szybkie odnalezienie się w projekcie i w zadaniu jakie zostało nam przydzielone do realizacji;
+\item Plansz agile'owych - np. Planning Board, Task Board w przejrzysty sposób informowały nas o stanie realizacji poszczególnych zadań oraz o 
+etapie prac nad daną wersją projektu, umożliwiały prostą i wygodną edycję tych danych wspierając przyjętą przez nas metodykę agile'ową
+\item Dashboardów - podobnie jak w podpunktach powyżej służyły do informowania nas o stanie realizacji projektu i o pracy poszczególnych członków zespołu
+\end{itemize}
+
+\paragraph{Zintegrowanie z innymi komponentami}
+Jira jest integrowalna z innymi produktami Atlassiana, a w szczególności wykorzystywanym przez nas Confluencem.
+Ponadto zintegrowaliśmy Jirę z kontem pocztowym (gmail) dzięki czemu otrzymywaliśmy powiadomienia o przydzielonych zadaniach, bądź innych zmianach w projekcie.
+
+
+Bardzo istotna była integracja z systemem kontroli wersji oraz z webowym narzędziem do przeglądu kodu.
+Jira umożliwia integrację z najbardziej popularnymi systemami jak : GIT, SVN, CVS, Clearcase i inne.
+W naszym przypadku wykorzystaliśmy GITa, a do przeglądu kodu za pomocą przeglądarki używaliśmy Gerrita. 
+Dzięki systemowi znaczników (przypisaniu numeru Zadania z Jiry do commita) możliwy był szybki podgląd zmian w Gerricie za pomocą automatycznie dodawanych linków do Zadań w Jirze.
+Integrowało to zmiany w kodzie z postępem prac umieszczonym w schematach Jiry.  
+
+\paragraph{Produkty konkurencyjne}
+Jednym z produktów konkurencyjnych, których wykorzystanie rozważaliśmy jest stworzony na wydziale MIM Uniwersytetu Warszawskiego JLoXiM Redmine.
+Produkt ten posiada większość z funkcjonalności jakie posiada Jira. W szczególności umożliwia tworzenie zadań, przydzielanie ich do członków zespołu, 
+konfiguracją uprawnień użytkowników i zarządzanie całym projektem. Analogicznie jak Jira generuje raporty oraz w przejrzysty sposób pokazuje stan 
+realizacji projektu.
+Postanowiliśmy, jednakże wykorzystać produkt Atlassianowy, ponieważ część członków zespołu pracowała pod tymi narzędziami, Jira była łatwiej integrowalna
+ z innymi produktami oraz posiadała bardziej przejrzysty i zaawansowany interfejs użytkownika.
 \subsection{Confluence}
-todo (word, libreoffice)
+Confluence jest narzędziem dla zespołów służącym do uproszczenia współpracy, dzielenia się wiedzą, dyskusją pomysłów.
+W naszym projekcie był on wykorzystywany w szczególności podczas etapu projektowania systemu oraz przy tworzeninu dokumentacji.
+Confluence zapewnia wiele wygodnych rozwiązań.
+\begin{itemize}
+\item Przejrzysty podział na projekty - tworzenie dynamicznych stron , podstron , dowiązań, projektowanie dashboardów.
+\item Proste w obsłudze i wygodne wiki - dodawanie linków, mockapów, filmów, plików.
+\item Udostępnia pluginy do tworzenia schematów i diagramów np.: Gliffy
+\item Integracja z Officem  
+\end{itemize}
 \subsection{Maven}
 todo (to Wy wiecie)
 \subsection{Eclipse}
