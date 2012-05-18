@@ -151,8 +151,6 @@ Klient może być kilentem biznesowym ( posiada pośredników ) , bądź kliente
 
 \end{itemize}
 
-
-
 \chapter{Aplikacja}
 \section{Definicje}
 Tutaj zdefiniujemy rzeczy, o których będziemy mówić na kolejnych stronach.
@@ -192,7 +190,27 @@ zalety gwt i alternatywy (inne gwt, UiBinder)
 \section{Hibernate}
 zalety hibernate i alternatywy
 \section{System klas i uprawnień użytkowników}
-zalety naszego i alternatywy (ldap)
+Projektowana przez nas aplikacja w oczywisty sposób musiała przechowywać dane użytkowników oraz umożliwiać im logowanie się do systemu. Mogliśmy podjąć jedną z dwóch decyzji: wykorzystać istniejący system w oparciu o protokół LDAP, bądź też zaprojektować i zaimplementować własny system.
+
+\paragraph{Lightweight Directory Access Protocol}
+Protokół ten jest przeznaczony do korzystania z usług katalogowych za pośrednictwem protokołu internetowego. LDAP obsługuje podstawowe operacje pozwalające na logowanie, wyszukanie wpisów katalogowych, dodawanie, usuwanie, sprawdzanie i modyfikowanie wpisów oraz kilka innych. Operacje te umożliwiają przechowywanie w systemie zarządzającym autentykacją praktycznie dowolnych danych i pozwalają na unifikację systemu logowania dla wielu współdziałających aplikacji.
+
+Do logowania w naszej aplikacji nie użyliśmy jednak tego protokołu. Zaprojektowany przez nas, z użyciem hierarchii klas i atrybutów, model użytkownika ma obsługiwać użytkowników wielu typów i dla każdego z nich zapamiętywać dostosowane do potrzeb aplikacji informacje. Użycie protokołu LDAP wymagałoby żmudnego, nieintuicyjnego i nierozszerzalnego mapowania pól klas na strukturę wpisów katalogowych. Jako że nie projektowaliśmy systemu mającego w założeniach integrację z innymi projektami, nic nie stało na przeszkodzie zastosowaniu innego rozwiązania.
+
+\paragraph{Własny system}
+Możliwość łatwego mapowania obiektów javowych na obiekty bazodanowe przy użycia frameworku Hibernate przekonała nas do stworzenia własnego systemu zarządzania użytkownikami. Dzięki temu mogliśmy dostosować strukturę klas przechowujących wszystkie dane użytkownika do naszych potrzeb i skonfigurować tę platformę do przechowywania i zarządzania także tymi obiektami.
+
+Zaletą tego rozwiązania oprócz prostoty implementacji i przejrzystości kodu jest także możliwość wykorzystania wszystkich zalet oferowanych przez Hibernate.
+
+\paragraph{System klas}
+Ponieważ prawie każdy użytkownik naszej aplikacji jest osobą, w pierwszej kolejności potrzebowaliśmy klasy, która będzie przechowywała dane osobowe użytkownika (class PersonalData). Obiekt ten będzie pojawiał się jako jedno z pól użytkowników naszej aplikacji.
+
+Użytkowników naszej aplikacji podzieliliśmy na dwie grupy - klientów i pracowników. Klient indywidualny opisywany jest przez swoje dane osobowe, klient biznesowy - nazwę firmy oraz listę danych osobowych przedstawicieli tej firmy. Pracownicy również opisywani są przy użyciu swoich danych osobowych. Jedynie ich część, osoby zatrudnione w roli tłumacza, posiadają dodatkowo informację o wykonywanych przez nich tłumaczeniach.
+Wszystkie te klasy tworzą hierarchię klas użytkowników rozszerzając abstraktycjną klasę użytkownika zawierającą informacje o loginie i haśle użytkownika, liście jego ról w systemie oraz ewentualnie jego dodatkowy opis.
+
+\paragraph{System ról}
+System klas użytkowników nie wyczerpuje wszystkich typów użytkowników, które miałyby być rozróżniane i obługiwane przez naszą aplikację. Ponadto nie nadaje się on do wyznaczania uprawnień użytkownika. Dlatego każdemu użytkownikowi przypisaliśmy listę ról, które pełni on w systemie. Jest to całkiem oczywisty wybór, gdyż ten sposób opisywania uprawnień użytkownika jest powszechnie stosowany i w szczególności wpasowuje się w wymagany przez Spring interfejs. Pozwala on także na filtrowanie określonych typów użytkowników w systemie np. w momencie, gdy potrzebujemy wyślietlić użytkownikowi tylko określony ich rodzaj.
+
 \section{Środowisko pracy}
 \subsection{Git}
 Jest to rozproszony system kontroli wersji. Git jest opublikowany na licencji GNU GPL w wersji 2.
