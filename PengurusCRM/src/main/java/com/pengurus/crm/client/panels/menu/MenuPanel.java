@@ -26,7 +26,7 @@ public class MenuPanel extends ContentPanel {
 		return super.add(tabMenuPanel);
 	}
 	
-	private MenuPanel() {
+	public MenuPanel() {
 		quotesMenu = new QuotesMenuPanel();
 		projectsMenu = new ProjectsMenuPanel();
 		tasksMenu = new TasksMenuPanel();
@@ -41,9 +41,5 @@ public class MenuPanel extends ContentPanel {
 		add(usersMenu);
 		add(administrationMenu);
 		setSize(200, 325);
-	}
-
-	public static ContentPanel getPanel() {
-		return new MenuPanel();
 	}
 }

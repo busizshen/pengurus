@@ -25,3 +25,11 @@
  	color: #000080;
  	text-decoration:none;
 }
+
+.x-border-layout-ct {
+	background-color: transparent;
+}
+
+.header {
+	background: #DFE8F6 url('resources/images/logo.png') no-repeat;
+}
