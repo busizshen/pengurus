@@ -13,6 +13,7 @@
 	<properties>
 		<gwt.version>2.4.0</gwt.version>
 		<springframework.version>3.1.0.RELEASE</springframework.version>
+		<jstl.version>1.2</jstl.version>
 		<gxt.version>2.2.5</gxt.version>
 
 		<hibernate.version>3.6.7.Final</hibernate.version>
@@ -95,6 +96,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
 		</dependency>
 		<!-- end: Spring Framework -->
 		<!-- begin: Google Web Toolkit -->
