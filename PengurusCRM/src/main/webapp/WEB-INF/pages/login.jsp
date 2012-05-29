@@ -10,43 +10,66 @@
 	padding: 8px;
 	margin: 16px;
 }
+
+body {
+	text-align: center;
+}
+
+div.container {
+	border: 1px solid;
+	border-color: #99BBE8;
+	background-color: #DFE8F6;
+	position: relative;
+	display: inline-block;
+}
+
+div.logo {
+	height: 120px;
+	width: 400px;
+	background: url('resources/images/logo.png') no-repeat;
+	border-bottom: 1px solid;
+	border-color: #99BBE8;
+}
+
+td {
+	text-align: left;
+	font: normal 12px tahoma, arial, helvetica, sans-serif;
+}
 </style>
+
 </head>
 <body onload='document.f.j_username.focus();'>
-	<h3>Login with Username and Password (Custom Page)</h3>
- 
+	<div class="container">
+		<div class="logo">
+		</div>
+		<form style="margin: 15px;" name='f' action="<c:url value='j_spring_security_check' />"
+			method='POST'>
+			<table style="margin: 0px auto;">
+				<tr>
+					<td>User:</td>
+				</tr>
+				<tr>
+					<td><input type='text' name='j_username' value=''></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+				</tr>
+				<tr>
+					<td><input type='password' name='j_password' /></td>
+				</tr>
+				<tr>
+					<td style='text-align: right'><input name="submit"
+						type="submit" value="login" /></td>
+				</tr>
+			</table>
+
+		</form>
+	</div>
 	<c:if test="${not empty error}">
 		<div class="errorblock">
 			Your login attempt was not successful, try again.<br /> Caused :
 			${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
 		</div>
 	</c:if>
- 
-	<form name='f' action="<c:url value='j_spring_security_check' />"
-		method='POST'>
- 
-		<table>
-			<tr>
-				<td>User:</td>
-				<td><input type='text' name='j_username' value=''>
-				</td>
-			</tr>
-			<tr>
-				<td>Password:</td>
-				<td><input type='password' name='j_password' />
-				</td>
-			</tr>
-			<tr>
-				<td colspan='2'><input name="submit" type="submit"
-					value="submit" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan='2'><input name="reset" type="reset" />
-				</td>
-			</tr>
-		</table>
- 
-	</form>
 </body>
 </html>

@@ -48,7 +48,7 @@ public class MainWindow extends LayoutContainer {
 
 	private void addHeaderPanel() {
 		BorderLayoutData northData = new BorderLayoutData(LayoutRegion.NORTH,
-				125);
+				145);
 		northData.setCollapsible(true);
 		northData.setFloatable(true);
 		northData.setHideCollapseTool(true);
