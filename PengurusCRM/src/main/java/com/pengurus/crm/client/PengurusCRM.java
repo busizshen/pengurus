@@ -5,19 +5,20 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.pengurus.crm.client.panels.center.user.create.UserPreviewPanel;
 import com.pengurus.crm.client.service.CurrentSessionService;
 import com.pengurus.crm.client.service.CurrentSessionServiceAsync;
 import com.pengurus.crm.shared.dto.UserDTO;
 
 public class PengurusCRM implements EntryPoint {
-	
+
 	public MainWindow mainWindow;
 	public AuthorizationManager authManager;
-		
+
 	public void onModuleLoad() {
 		startWithCurrentUserLoaded();
 	}
-	
+
 	private void startWithCurrentUserLoaded() {
 		AsyncCallback<UserDTO> callback = new AsyncCallback<UserDTO>() {
 
@@ -38,6 +39,7 @@ public class PengurusCRM implements EntryPoint {
 
 	private void loadMainWindow() {
 		mainWindow = GWT.create(MainWindow.class);
+		new UserPreviewPanel(AuthorizationManager.getCurrentUser()).setAsMain();
 		RootPanel.get().add(mainWindow);
 	}
 

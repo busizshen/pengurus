@@ -8,7 +8,6 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.SplitButton;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
-import com.extjs.gxt.ui.client.widget.toolbar.LabelToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
@@ -17,13 +16,14 @@ import com.google.gwt.user.client.Window;
 import com.pengurus.crm.client.AuthorizationManager;
 import com.pengurus.crm.client.i18nConstants;
 import com.pengurus.crm.client.panels.center.ChangePasswordPanel;
+import com.pengurus.crm.client.panels.center.user.create.UserPreviewPanel;
 
 public class HeaderMenu extends ToolBar {
 
 	private i18nConstants myConstants;
 
 	public HeaderMenu() {
-		myConstants = (i18nConstants)GWT.create(i18nConstants.class);
+		myConstants = (i18nConstants) GWT.create(i18nConstants.class);
 		setAlignment(HorizontalAlignment.RIGHT);
 		addCurrentUserName();
 		add(new SeparatorToolItem());
@@ -33,10 +33,19 @@ public class HeaderMenu extends ToolBar {
 	}
 
 	private void addCurrentUserName() {
-		LabelToolItem usernameLabel = new LabelToolItem();
-		usernameLabel.setLabel(AuthorizationManager.getCurrentUser()
-				.getUsername());
-		add(usernameLabel);
+		SelectionListener<ButtonEvent> listener = new SelectionListener<ButtonEvent>() {
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				new UserPreviewPanel(AuthorizationManager.getCurrentUser())
+						.setAsMain();
+			}
+
+		};
+
+		Button homeButton = new Button(AuthorizationManager.getCurrentUser()
+				.getUsername(), listener);
+		add(homeButton);
 	}
 
 	private void addLogout() {
