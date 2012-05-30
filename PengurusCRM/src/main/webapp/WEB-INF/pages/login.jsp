@@ -21,6 +21,7 @@ div.container {
 	background-color: #DFE8F6;
 	position: relative;
 	display: inline-block;
+	margin: 80px;
 }
 
 div.logo {
