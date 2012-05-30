@@ -6,7 +6,7 @@ public class FilesPanelOutput extends FilesPanel{
 
 	public FilesPanelOutput(Long quoteId, Long jobId, Long taskId,
 			boolean canUpload, boolean canDelete) {
-		super(quoteId, jobId, taskId, FileTypeDTO.output.type(), canUpload, canDelete);
+		super(quoteId, jobId, taskId, FileTypeDTO.output.type(), canUpload, canDelete, myConstants.FilesOutput());
 	}
 
 }

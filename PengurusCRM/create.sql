@@ -736,7 +736,6 @@ INSERT INTO user_userrole (user_id, user_role) VALUES (450, 'ROLE_CLIENT');
 INSERT INTO user_userrole (user_id, user_role) VALUES (393, 'ROLE_USER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (393, 'ROLE_WORKER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (393, 'ROLE_EXPERT');
-INSERT INTO user_userrole (user_id, user_role) VALUES (393, 'ROLE_CLIENT');
 INSERT INTO user_userrole (user_id, user_role) VALUES (393, 'ROLE_VERIFICATOR');
 INSERT INTO user_userrole (user_id, user_role) VALUES (468, 'ROLE_USER');
 INSERT INTO user_userrole (user_id, user_role) VALUES (468, 'ROLE_WORKER');

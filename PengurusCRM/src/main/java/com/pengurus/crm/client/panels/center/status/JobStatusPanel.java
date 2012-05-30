@@ -10,6 +10,8 @@ import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import com.google.gwt.core.client.GWT;
+import com.pengurus.crm.client.i18nConstants;
 import com.pengurus.crm.shared.dto.JobDTO;
 import com.pengurus.crm.shared.dto.StatusJobDTO;
 
@@ -18,8 +20,9 @@ public abstract class JobStatusPanel extends LayoutContainer {
 	private static final String COLOUR_OK = "#BBD5F7";
 	private static final String COLOUR_NOT = "#ECECEC";
 	private static final String COLOUR_CURRENT = "#C0E5FF";
-	private static final String NEXT_STATUS = "next status";
-	private static final String REOPEN = "reopen";
+	protected static i18nConstants myConstants = (i18nConstants)GWT.create(i18nConstants.class);
+	private static final String NEXT_STATUS = myConstants.nextStatus();
+	private static final String REOPEN = myConstants.reopen();
 
 	JobDTO jobDTO;
 	protected Button nextStatus;

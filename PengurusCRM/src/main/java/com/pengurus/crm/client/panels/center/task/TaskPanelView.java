@@ -142,7 +142,8 @@ public class TaskPanelView extends TaskPanel {
 
 					@Override
 					public void onSuccess(Void result) {
-						getJobPanel();
+						if(AuthorizationManager.canEditProject(projectDTO))
+							getJobPanel();
 					}
 				};
 				TaskServiceAsync service = (TaskServiceAsync) GWT
@@ -176,7 +177,9 @@ public class TaskPanelView extends TaskPanel {
 
 								@Override
 								public void onSuccess(Void result) {
-									getJobPanel();
+
+									if(AuthorizationManager.canEditProject(projectDTO))
+										getJobPanel();
 								}
 							};
 							TaskServiceAsync service = (TaskServiceAsync) GWT

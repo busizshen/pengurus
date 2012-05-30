@@ -194,4 +194,23 @@ public interface i18nConstants extends Constants {
 
 	String Choose();
 
+	String FilesName();
+
+	String removeSelectedFile();
+
+	String uploadNewFile();
+
+	String downloadSelectedFile();
+
+	String UploadAFile();
+
+	String Submit();
+
+	String FilesInput();
+
+	String FilesOutput();
+
+	String nextStatus();
+
+	String reopen();
 }

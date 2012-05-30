@@ -32,9 +32,11 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.pengurus.crm.client.i18nConstants;
 import com.pengurus.crm.client.models.FileModel;
 import com.pengurus.crm.client.service.FileService;
 import com.pengurus.crm.client.service.FileServiceAsync;
+
 
 public abstract class FilesPanel extends ContentPanel {
 
@@ -46,9 +48,12 @@ public abstract class FilesPanel extends ContentPanel {
 	private boolean canDelete;
 	private Button remove;
 	private Grid<FileModel> grid;
+	protected static i18nConstants myConstants = (i18nConstants)GWT.create(i18nConstants.class);
+	private String name;
 
+	
 	public FilesPanel(Long quoteId, Long jobId, Long taskId, Long stateId,
-			boolean canUpload, boolean canDelete) {
+			boolean canUpload, boolean canDelete, String name) {
 		super();
 		this.quoteId = quoteId;
 		this.jobId = jobId;
@@ -56,6 +61,7 @@ public abstract class FilesPanel extends ContentPanel {
 		this.stateId = stateId;
 		this.canUpload = canUpload;
 		this.canDelete = canDelete;
+		this.name = name; 
 		createGrid();
 
 	}
@@ -71,7 +77,7 @@ public abstract class FilesPanel extends ContentPanel {
 
 		ColumnConfig column = new ColumnConfig();
 		column.setId("name");
-		column.setHeader("File name");
+		column.setHeader(myConstants.FilesName());
 		column.setWidth(80);
 		configs.add(sm.getColumn());
 		configs.add(column);
@@ -84,7 +90,7 @@ public abstract class FilesPanel extends ContentPanel {
 		grid.setSelectionModel(sm);
 
 		setButtonAlign(HorizontalAlignment.CENTER);
-		setHeading("Files");
+		setHeading(name);
 		setLayout(new FitLayout());
 		setSize(425, 200);
 		add(grid);
@@ -92,7 +98,7 @@ public abstract class FilesPanel extends ContentPanel {
 
 		ToolBar toolBar = new ToolBar();
 		if (canUpload) {
-			Button upload = new Button("upload new file",
+			Button upload = new Button(myConstants.uploadNewFile(),
 					new SelectionListener<ButtonEvent>() {
 
 						@Override
@@ -105,7 +111,7 @@ public abstract class FilesPanel extends ContentPanel {
 		}
 
 		if (canDelete) {
-			remove = new Button("remove selected file",
+			remove = new Button(myConstants.removeSelectedFile(),
 					new SelectionListener<ButtonEvent>() {
 
 						@Override
@@ -148,7 +154,7 @@ public abstract class FilesPanel extends ContentPanel {
 			toolBar.add(remove);
 		}
 
-		final Button download = new Button("download selected file",
+		final Button download = new Button(myConstants.downloadSelectedFile(),
 				new SelectionListener<ButtonEvent>() {
 
 					@Override
@@ -190,7 +196,7 @@ public abstract class FilesPanel extends ContentPanel {
 	private void createWindow() {
 		final Window window = new Window();
 		window.setPlain(true);
-		window.setHeading("Upload a file");
+		window.setHeading(myConstants.UploadAFile());
 		window.setLayout(new FlowLayout());
 		window.setAutoHeight(true);
 		window.setAutoWidth(true);
@@ -245,7 +251,7 @@ public abstract class FilesPanel extends ContentPanel {
 			}
 		});
 
-		Button btn = new Button("Submit", new SelectionListener<ButtonEvent>() {
+		Button btn = new Button(myConstants.Submit(), new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
 				if (!form.isValid()) {
@@ -254,7 +260,7 @@ public abstract class FilesPanel extends ContentPanel {
 				form.submit();
 			}
 		});
-		Button cancelButton = new Button("Cancel",
+		Button cancelButton = new Button(myConstants.Cancel(),
 				new SelectionListener<ButtonEvent>() {
 					@Override
 					public void componentSelected(ButtonEvent ce) {
