@@ -188,11 +188,22 @@ Dodatkową zaletą implementacji tego modelu przez Spring jest fakt, że pozwala
 To właśnie dlatego w przepływie tym pominięte zostało generowanie widoku na podstawie danych, gdyż klientem jest samodzielny framework prezentujący dane użytkownikowi.
 
 \paragraph{Inwersja kontroli}
-Inwersja kontroli (ang. IoC) to w programowaniu obiektowym praktyka, w której powiązania obiektów ustalane są dopiero podczas wykonania, a nie w trakcie kompilacji. Jest to bezpośrednio związane z oddzieleniem logiki aplikacji od kodu. Zmniejsza 
+Inwersja kontroli (ang. IoC) to w programowaniu obiektowym praktyka, w której powiązania obiektów ustalane są dopiero podczas wykonania, a nie w trakcie kompilacji. Jest to bezpośrednio związane z oddzieleniem logiki aplikacji od kodu. Główną metodą osiągnięcia tego celu jest stosowanie Dependency Injection, co oznacza, że obiekty są "wkładane" jeden w drugi.
+
+Spośród kilku możliwych technik implementacji inwersji kontroli Spring implementuje dwie: z użyciem konstruktora oraz z użyciem setterów. W naszej aplikacji używamy tej drugiej. Do konfigurowania zależności pomiędzy obiektami używamy plików xml, w których znajdują się definicję fasolek (ang. beans) dla zarządzanych obiektów oraz ustawienia zależności między nimi.
+
+IoC zwiększa znacząco czytelność kodu i zmniejsza jego ilość, a co ważniejsze, do minimum skraca się czas potrzebny do zarządzania tworzeniem, usuwaniem, przekazywaniem i łączeniem obiektów tworzących aplikację w spójną całość. Dodanie zależności obiektów sprowadza się stworzenia metod $set()$ and $get()$ oraz dołączenia odpowiedniego wpisu w pliku konfiguracyjnym.
+
+Podział nieprzeplatających się ze sobą modułów implementujących określone interfejsy pozwala skupić się na ich rzeczywistym przeznaczeniu dodatkowo zwiększając testowalność kodu pozwalając na podstawianie spreparowanych obiektów w miejsce zależności.
 
 \paragraph{Spring Security}
+Jednym z projektów wchodzących z zestaw Springowych narzędzi jest Spring Security. Projekt ten implementuje pełen zestaw funkcjonalności związanych z bezpieczeństwem aplikacji począwszy od logowania (czy to z własnym systemem użytkowników, LDAPem, OAUTHem) skończywszy na filtrowaniu danych przesyłanych do użytkownika.
 
-Spring Security
+Pierwszym miejscem w którym wykorzystujemy tą część frameworku jest strona logowania. Osoba nieautoryzowana przez system próbująca dostać się do zasobów (w tym przypadku samej aplikacji), do których nie ma uprawnień zostaje przekierowana na stronę logowania. Osoba zalogowana, ale bez uprawnień po prostu zostanie o tym poinformowana. Spring pozwala definiować prawa dostępów do zasobów na podstawie ról użytkowników oraz adresów zasobów, co odbywa się już na poziomie dyspozytora (ang. dispatcher).
+
+Sam mechanizm logowania jest również odpowiedzialnością Spring Security. Mechanizm ten wykorzystuje naszą własną implementację systemu użytkowników dopasowaną do odpowiedniego interfejsu. Informacja o tym jaki użytkownik jest zalogowany zostaje zapamiętana wewnątrz sesji i jest dostępna w każdym miejscu, które wymaga jej użycia. To także Spring zapewnia szyfrowanie haseł użytkowników z użyciem hashu nazwy użytkownika i soli.
+
+Ostatecznie projekt ten wykorzystujemy do ograniczania dostępu do konkretnych funkcji oferowanych przez stronę serwera aplikacji lub danych przez nie zwracanych. Osiągamy to przy użyciu systemu adnotacji, które umieszczone przed definicją metody definiują dla niej cechy bezpieczeństwa. W ten sposób określamy, czy użytkownik może wywołać tę funkcję na podstawie jego roli, bądź przy użyciu zdefiniowanych przez siebie warunktów. W podobny sposób możemy przefiltrować kolekcję obiektów zwracanych przez funkcję. 
 
 \section{Google Web Toolkit (ExtGWT)}
 zalety gwt i alternatywy (inne gwt, UiBinder)
