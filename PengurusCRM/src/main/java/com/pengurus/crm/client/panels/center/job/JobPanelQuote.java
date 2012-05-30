@@ -129,6 +129,7 @@ public class JobPanelQuote extends JobPanel {
 			HorizontalPanel filesPanel = new HorizontalPanel();
 			addFilesPanel(filesPanel);
 			vp.add(filesPanel);
+			setHeight(700);
 		}
 	}
 
