@@ -135,7 +135,7 @@ public class QuoteStatusPanel extends LayoutContainer {
 
 		private void setVisibility() {
 			nextStatus
-					.setVisible((AuthorizationManager.hasClientAccess() && status == 2) ? true
+					.setVisible((AuthorizationManager.hasClientAccess() && (status==4 || status == 2)) ? true
 							: false || status == 7 ? false
 									: (((status <= 2 || status >= 6) && AuthorizationManager
 											.hasExecutiveAccess()) || (status == 5 && AuthorizationManager
