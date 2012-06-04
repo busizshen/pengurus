@@ -13,6 +13,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{verbatim}
 \usepackage{color}
+\usepackage{graphicx}
 
 % Tutaj każdy wstawia swoje dane drukując pracę licencjacką
 \author{Jakub Oćwieja}
@@ -420,7 +421,40 @@ Ponadto liczymy na to, iż praca przy takim schemacie zapewnia wystarczającą i
 Problemy z serwerem, podział pracy i opłat pomiędzy dwa zespoły.
 \section{Problemy z użytymi narzędziami}
 \subsection{Spring + ExtGWT}
-Problemy z integracją, kilka wieczorów, kilka problemów, ostatecznie wszystko działa sprawnie.
+Pierwszym krokiem od którego musielismy zacząć implementację aplikacji było zintegrowanie wykorzystywanych przez nas technologii. Z trzech podstawowych (ExtGWT, Spring, Hibernate) nie mieliśmy jeszcze doświadczeń z Google Web Toolkit i to w pierwszej kolejności nim należało się zająć.
+
+W aplikacjach GWT podział struktury obiektów pomiędzy te tłumaczone na kod javascriptowy i te kompilowane i uruchamiane na wirtualnej maszynie javy wygląda następująco:
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.60\textwidth]{resources/gwt_spring_1.png}
+\caption{czerwony - importowane klasy GWT, niebieski - własne klasy, zielony - klasy generowane automatycznie}
+\end{figure}
+
+W ramach implementacji serwisów będących kolejkami RPC klasy, których metody mają być udostępniane, powinny rozszerzać importowaną z frameworku GWT klasę \textit{RemoteServiceServlet}. W ten sposób odpowiedzialność za serializowanie przesyłanych danych przekazywana jest do metod nadklasy. Dodatkowo, serwer aplikacji powinien udostępniać interfejsy implementowanych przez siebie serwisów i odpowiadające im interfejsy asynchroniczne. One, przetłumaczone do kodu javascriptowego, pozwalają klienckiej stronie aplikacji na generowanie zapytań ajax i komunikację z serwerem.
+
+System komunikacji oparty o SOAP implementowany jest także przez platformę Spring i w naszej aplikacji to właśnie jego chcielibyśmy użyć u podstaw projektu. Klasy mające udostępniać metody serwisów muszą tutaj implementować Springowy interfejs \textit{Controller}. 
+
+Aby uniknąć komplikacji związanych z duplikowaniem metod dla rozszerzania klasy GWT i interfejsu Springowego do rozwiązania problemu wykorzystujemy mechanizm inwersji kontroli Springa. Pomysł polega na stworzeniu klasy, która będzie tłumaczyć wywołania metod GWT na wywołania metod używanych przez platformę Spring. Do tej klasy będziemy następnie "wstrzykiwać" gotowe implementacje serwisów w jednej technologii, aby użyte mogły zostać do obsługi zapytań w drugiej.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{resources/gwt_spring_2.png}
+\caption{czerwony - importowane klasy GWT, żółty - importowane klasy Spring, niebieski - własne klasy, zielony - klasy wygenerowane automatycznie}
+\end{figure}
+
+W naszym przypadku klasą tą jest \textit{GwtRpcController}: 
+\begin{verbatim}
+public class GwtRpcController extends RemoteServiceServlet implements
+    Controller, ServletContextAware {
+  private static final long serialVersionUID = -3618261744853211777L;
+          
+  private ServletContext servletContext;
+  private RemoteService remoteService;
+  ...
+\end{verbatim}
+Meteody zaimplementowane w dalszej części klasy służą do pośredniczenia pomiędzy wywołaniami metod udostępnianych przez interfejsy, a dostępem do opakowywanego obiektu. W ten sposób stworzenie nowego serwisu nie wiąże się już z duplikowaniem kodu. Aby dodać nowy serwis do tych już istniejących wystarczy implementować symboliczny jedynie interfejs RemoteService oraz dodać krótki wpis w pliku konfiguracyjnym Springa \textit{gwt-wrapper-beans.xml}. W ten sposób Spring automatycznie opakuje nasz serwis w powyższą klasę, która zadba o serializację obiektów wymaganą przez ExtGWT. 
+
 \subsection{Hibernate}
 Dużo nieprzespanych nocy.
 \subsection{Data Transfer Object}
