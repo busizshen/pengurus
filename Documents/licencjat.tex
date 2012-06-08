@@ -181,7 +181,8 @@ Spring MVC jest jednym z pakietów oferowanych przez Spring Framework. Został o
   \item Zapytanie jest przechwytywane przez Spring Front Controller które zajmuje się znalezieniem odpowiednich mapowań adresów
   \item Mapowania wykorzystywane są do znalezienia odpowiedniego kontrolera aplikacji odpowiadającego za odpowiedzenia na zapytanie
   \item Kontroler przetwarza zapytanie i generuje lub odnajduje dane, o które poproszono w zapytaniu
-  \item Stworzony widok zostaje odesłany do klienta
+  \item Przygotowane dane zostają zserializowane
+  \item Wynik jest odsyłany do klienta
 \end{itemize}
 
 Dodatkową zaletą implementacji tego modelu przez Spring jest fakt, że pozwala on na integrację z innymi frameworkami i wybór obiektów odpowiedzialnych za wykonanie poszczególnych akcji, co jest jedną z większych motywacji. W projekcie bowiem wykorzystujemy to do połączenia tego modelu z możliwościami oferowanymi przez frameworki Hibernate i ExtGWT.
@@ -293,9 +294,31 @@ System klas użytkowników nie wyczerpuje wszystkich typów użytkowników, któ
 
 \section{Środowisko pracy}
 \subsection{Git}
-Jest to rozproszony system kontroli wersji. Git jest opublikowany na licencji GNU GPL w wersji 2.
+Spośród dostępnych na rynku darmowych i popularnych systemów kontroli wersji zdecydowaliśmy się używać GITa. Na fakt dokonania takiego wyboru wpłynęły trzy rzeczy.
+
+Pierwszym argumentem za użyciem tego właśie systemu jest fakt, że każdy z nas miał już doświadczenie w pracy z tym narzędziem, niektórzy całkiem świeże. Pozostali spotkali się z nim chociażby w czasie jednego z uczelnianych przedmiotów.
+  
+Drugim argumentem za wyborem tego system jest fakt, iż GIT jest działa na zasadzie rozproszonego modelu. Pozwala to na pracę bez stałego dostępu do serwera, co w pracy nieetatowej w zmiennym środowisku pracy jest ważnym argumentem do zapewnienia ciągłości pracy nad projektem.
+
+W końcu GIT jest systemem wersji, z którym pracuje wybrany przez nas system rewizji kodu.
+
 \subsection{Gerrit}
+Gerrit to wykorzystywane przez nas narzędzie do rewizji kodu. Powstało jako narzędzie rozwjane przez Google na potrzeby Androida. Jako sprawdzone już narzędzie Open Source okazał się dobrym wyborem.\\
+
+Narzędzie to zostało wybrane w celu podniesienia jakości tworzonego przez nas kodu. Jako niedoświadczony jeszcze zespół musieliśmy kontrolować nawzajem produkowany przez nas kod. Rewizja kodu wpływa na jakość kodu w trojaki sposób:
+\begin{itemize}
+\item Ogranicza liczbę błędów w kodzie wpływającym do repozytorium
+\item Pozwala na bierząco kontrolować postępy prac pozostałych członków zespołu i zapewnia ciągłość w rozumieniu architektury systemu
+\item Pomaga w dzieleniu się doświadczeniem w stosowaniu rozmaitych technik wewnątrz zespołu
+\end{itemize}
+
+Ostatecznie jednak rewizja kodu sprowadzała się do kontrolowania go przez lidera naszego zespołu. W teorii posiadał największe doświadczenie i miał kontrolować pracę całego zespołu, poprawiać błędy projektowe lub pomyłki oraz zwracać uwagę na dobre zwyczaje i techniki. O ile było to możliwe w początkowym stadium rozwoju projektu, o tyle kontrola przestawała być możwliwa gdy źródło kodu zaczęło przyrastać impulsywnie, większymi partiami, co uniemożliwiało dokładne jego sprawdzanie. \\
+
+Oprócz ręcznej rewizji kodu Gerrit, dzięki integracji z Jenkinsem, pozwalał na automatyczne testowanie zmian przesyłanych do repozytorium, co sprowadzało się do uruchomienia zbioru przygotowanych testów na teoretycznym stanie projektu po zaakceptowaniu zmian. Zostanie to opisane w sekcji \ref{r:jenkins}.
+
+\subsection{Jenkins}\label{r:jenkins}
 todo
+
 \subsection{Jira}
 Jira jest to oprogramowanie firmy Atlassian służące do zarządzania projektem oraz śledzenia błędów. 
 Narzędzie to "łączy zespół z wykonywanym zadaniem".
