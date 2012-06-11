@@ -70,7 +70,6 @@ W dzisiejszym świecie bardzo istotną kwestią wydaje się być szeroko pojęte
 Jednym z najważniejszych jego aspektów jest przyspieszanie i formalizacja przebiegu procesu biznesowego. 
 Problem ten można rozwiązać, dokonując jego informatyzacji przy użyciu najnowszych technologii dostępnych na rynku, co okazuje się być jednym z najłatwiejszych i najtańszych rozwiązań. \\
 
-
 Z podobnym problemem muszą zmierzyć się również biura tłumaczeń. Duża konkurencja wymaga od nich: 
 \begin{itemize}
 \item usprawniania procesu tłumaczenia, 
@@ -81,7 +80,6 @@ Z podobnym problemem muszą zmierzyć się również biura tłumaczeń. Duża ko
 \item prostoty użytkowania \textcolor{red}{(G: czego?)},
 \item powszechnego dostępu \textcolor{red}{(G: do czego?)}. 
 \end{itemize} 
-
 
 Oczywiście na rynku znajdują się produkty, które są przeznaczone do zarządzania biurem tłumaczeń, 
 są one jednak ograniczone jedynie do pracowników biura (nie jest możliwa praca mobilna) \textcolor{red}{(G: nie rozumiem, O: mobilna praca)}, 
@@ -111,12 +109,9 @@ Kierownik zlecenia ( Menadżer ds. produkcji/ Stanowisko ds. relacji z klientami
 jest odpowiedzialny za przyjęcie zlecenia od klienta oraz przygotowanie odpowiedniej oferty, 
 która następnie zostaje podana ocenie klientowi.
 
-
 Kierownik zlecenia odbiera dokumenty od klienta wraz z tekstem oryginału , zapoznaje się on z przesłanym/odebranym materiałem,
 a następnie ustala ze zlecającym szczegóły dotyczące zlecenia takie jak data realizacji, cena,  tryb zlecenia, rodzajem tłumaczenia,  
 materiały pomocnicze.
-
-
 
 Kierownik zlecenia przgotowuje dziennik zlecenia. W dzienniku zapisywana jest historia pracy z dokumentem i 
 odnotowywane są wszystkie istotne zdarzenia mające wpływ na jakość i/lub bezpieczeństwo informacji przekazanych przez klienta. 
@@ -162,15 +157,17 @@ Klient może być kilentem biznesowym ( posiada pośredników ) , bądź kliente
 \end{itemize}
 
 \chapter{Aplikacja}
+
 \section{Definicje}
 Tutaj zdefiniujemy rzeczy, o których będziemy mówić na kolejnych stronach.
+
 \section{Opis aplikacji}
 Opis tego jak ostatecznie wygląda nasza aplikacja. Nie wiem jak bardzo szczegółowo - to w zależności od tego jakie szczegóły będziemy chcieli opisać w dalszej części pracy. Chociaż myślę, że możemy tu napisać i oscreenować wszystko, co robi aplikacja (ale tylko zewnętrzne cechy). Chyba, że ten topic przeniesiemy w późniejsze miejsce. Ale jak dla mnie tu jest idealnie.
+
 \section{Podstawowy przypadek użycia}
 
 \chapter{Rozwiązania}
 \section{Spring Framework}
-
 Spring Framework jest jedną z najpopularniejszych i najlepiej działających platform programistycznych dla Javy. Zalet tego frameworku jest wiele, poniżej przedstawione zostały jednak te najbardziej zauważalne w pracy nad naszym projektem.
 
 \paragraph{Wzorzec projektowy MVC}
@@ -209,6 +206,7 @@ Ostatecznie projekt ten wykorzystujemy do ograniczania dostępu do konkretnych f
 
 \section{Google Web Toolkit (ExtGWT)}
 zalety gwt i alternatywy (inne gwt, UiBinder)
+
 \section{Hibernate}
 Hibernate jest najpopularniejszą biblioteką mapowania obiektowo-relacyjnego przeznaczoną dla języka prograwania Java.
 Zapewnia ona przede wszystkim translację danych pomiędzy relacyjną bazą danych, a światem obiektowym. 
@@ -293,6 +291,7 @@ Wszystkie te klasy tworzą hierarchię klas użytkowników rozszerzając abstrak
 System klas użytkowników nie wyczerpuje wszystkich typów użytkowników, które miałyby być rozróżniane i obługiwane przez naszą aplikację. Ponadto nie nadaje się on do wyznaczania uprawnień użytkownika. Dlatego każdemu użytkownikowi przypisaliśmy listę ról, które pełni on w systemie. Jest to całkiem oczywisty wybór, gdyż ten sposób opisywania uprawnień użytkownika jest powszechnie stosowany i w szczególności wpasowuje się w wymagany przez Spring interfejs. Pozwala on także na filtrowanie określonych typów użytkowników w systemie np. w momencie, gdy potrzebujemy wyślietlić użytkownikowi tylko określony ich rodzaj.
 
 \section{Środowisko pracy}
+
 \subsection{Git}
 Spośród dostępnych na rynku darmowych i popularnych systemów kontroli wersji zdecydowaliśmy się używać GITa. Na fakt dokonania takiego wyboru wpłynęły trzy rzeczy.
 
@@ -312,20 +311,26 @@ Narzędzie to zostało wybrane w celu podniesienia jakości tworzonego przez nas
 \item Pomaga w dzieleniu się doświadczeniem w stosowaniu rozmaitych technik wewnątrz zespołu
 \end{itemize}
 
-Ostatecznie jednak rewizja kodu sprowadzała się do kontrolowania go przez lidera naszego zespołu. W teorii posiadał największe doświadczenie i miał kontrolować pracę całego zespołu, poprawiać błędy projektowe lub pomyłki oraz zwracać uwagę na dobre zwyczaje i techniki. O ile było to możliwe w początkowym stadium rozwoju projektu, o tyle kontrola przestawała być możwliwa gdy źródło kodu zaczęło przyrastać impulsywnie, większymi partiami, co uniemożliwiało dokładne jego sprawdzanie. \\
+Ostatecznie jednak rewizja kodu sprowadzała się do kontrolowania go przez lidera naszego zespołu. W teorii posiadał największe doświadczenie i miał kontrolować pracę całego zespołu, poprawiać błędy projektowe lub pomyłki oraz zwracać uwagę na dobre zwyczaje i techniki. O ile było to możliwe w początkowym stadium rozwoju projektu, o tyle kontrola przestawała być możwliwa gdy źródła aplikacji zaczęły przyrastać impulsywnie, większymi partiami, co uniemożliwiało dokładne ich sprawdzanie. \\
 
 Oprócz ręcznej rewizji kodu Gerrit, dzięki integracji z Jenkinsem, pozwalał na automatyczne testowanie zmian przesyłanych do repozytorium, co sprowadzało się do uruchomienia zbioru przygotowanych testów na teoretycznym stanie projektu po zaakceptowaniu zmian. Zostanie to opisane w sekcji \ref{r:jenkins}.
 
 \subsection{Jenkins}\label{r:jenkins}
-todo
+Jenkins to narzędzie Open Source napisane w Javie służące do ciągłej integracji. Narzędzie to pomaga w zapewnieniu spójności projektu. Oznacza to, że w każdym momencie istnienia projektu implementowana aplikacja kompiluje się bezbłędnie, a uruchomiona działa poprawnie. Dzięki temu ogranicza się przestoje w pracy spowodowane błędami programistycznymi za które odpowiedzialność zrzucana jest na pojedynczych członków zespołu. Jest to przyczyną także dodatkowego stresu, którego można uniknąć przez wczesne wykonanie błędnego fragmentu kodu.
+
+\paragraph{Testowanie kodu}
+Jedną z dwóch odpowiedzialności zrzuconych na to narzędzie było częste wykonywanie przygotowanych wcześniej testów. W podstawowej konfiguracji możliwe jest, aby testy były wykonywane cyklicznie, co pewien czas. Jest to odpowiedni model gdy projekt ulega częstym zmianom które wymagają stałego uruchamiania testów. W naszym przypadku, to jest pracy niedoświaczonego, małego zespołu, lepszą metodą jest wykonywanie testów po każdej zmianie stanu repozytorium, a wręcz przed jej dokonaniem. Dzięki integracji z narzędziem do rewizji kodu na każdej zmianie wprowadzanej do repozytorium wymuszone zostały dwa warunki: dodany fragment kodu powinien zostać zaakceptowany przez osobę kontrolującą kod oraz musiał przechodzić zadane testy.
+
+\paragraph{Przykładowa aplikacja}
+Drugą odpowiedzialnoścą Jenkinsa było uruchamianie przykładowej wersji aplikacji. Pozwalało to na wykrywanie błędów interfejsu aplikacji w produkcyjnej jej wersji, ułatwiało projektowanie aplikacji oraz prezentowało samą aplikację zainteresowanym osobom.
+
+Działająca w ten sposób aplikacja była dla nas wielką pomocą i ułatwieniem. Aplikacja uruchomiana lokalnie w trybie developerskim uruchamiała się bardzo długo, zużywała ogromną ilość zasobów komputera oraz działała niesamowicie wolno, przez co stawała się całkowicie nieprzydatna w celu szybkiego sprawdzenia jej stanu i wyszukiwania drobnych błędów. Dodatkowo pełna kompilacja aplikacji trwała bardzo długo (od 5 do 15 minut) i uniemożwiwiała pracę w tym czasie na komputerze. Dlatego też przykładowa wersja aplikacji była restartowana raz dziennie w środku nocy, bądź tez na życzenie developerów.  
 
 \subsection{Jira}
 Jira jest to oprogramowanie firmy Atlassian służące do zarządzania projektem oraz śledzenia błędów. 
 Narzędzie to "łączy zespół z wykonywanym zadaniem".
 
-
 \paragraph{Zarządzanie projektem} 
-
 Podczas realizacji projektu wykorzystaliśmy metodykę agile'ową, która jest wspierana przez Jirę. 
 Pozwoliła nam łatwo i wygodnie zarządzać projektem. W szczególności korzystaliśmy z :
 \begin{itemize}
@@ -342,7 +347,6 @@ etapie prac nad daną wersją projektu, umożliwiały prostą i wygodną edycję
 \paragraph{Zintegrowanie z innymi komponentami}
 Jira jest integrowalna z innymi produktami Atlassiana, a w szczególności wykorzystywanym przez nas Confluencem.
 Ponadto zintegrowaliśmy Jirę z kontem pocztowym (gmail) dzięki czemu otrzymywaliśmy powiadomienia o przydzielonych zadaniach, bądź innych zmianach w projekcie.
-
 
 Bardzo istotna była integracja z systemem kontroli wersji oraz z webowym narzędziem do przeglądu kodu.
 Jira umożliwia integrację z najbardziej popularnymi systemami jak : GIT, SVN, CVS, Clearcase i inne.
@@ -387,21 +391,17 @@ co oznaczało , że miał się wykazywać jak największą elastycznością w dz
 Wymagało to od nas dogłębnego przeanalizowania rynku. Nasz produkt musiał być odpowiedni dla małych biur prowadzących proste, krótkie tłumaczenia, jak i dla większych 
 przedsiębiorstw, których projekty są znacznie obszerniejsze.\\
 
-
 Pomocne okazały się już istniejące aplikacje. Przeanalizowaliśmy ich wady oraz zalety i wyciągnęliśmy z nich wnioski. Ponadto zauważyliśmy analogie pomiędzy procesem projektowania
 systemu informatycznego, a procesem tłumaczenia. Przekładając nasze doświadczenie oraz zebrane wnioski przystąpiliśmy do tworzenia wstępnego szkicu projektu. 
 Po jego uzgodnieniu zasięgnęliśmy informacji z oficjalnych dokumentów : "Polskiej Normy PL-EN 15038 Usługi tłumaczeniowe. Wymagania dotyczące świadczenia usług." oraz
 schematu systemu zarządzania biurem tłumaczeń przygotowanej przez klienta.
 Przyjęta kolejność miała wyeliminować niepotrzebny biurokratyczny formalizm, który utrudniłby pracę tłumaczom dla których ta aplikacja miała upraszczać ów proces, a nie go jeszcze utrudniać.\\
 
-
 Projekt systemu składał się z dwóch równie istotnych części : schematu reprezentacji użytkowników oraz schematu przebiegu realizacji projektu.\\
-
 
 Reprezentacja użytkowników oraz stworzony przez nas system ról został szczegółowo opisnay w punkcie 3.4. 
 Jego realizacja była bardzo ciężka i czasochłonna, gdyż musiała uwzględniać problemy, jakie możemy napotkać z implementacją i wykorzystaniem tego systemu, 
 a z drugiej strony musiała odzwierciedlać rzeczywisty stan podczas tłumaczenia.\\
-
 
 Model danych zawierający wszystkie etapy przebiegu realizacji projektu został przedstawiony poniżej.\\
 \{Tu ma być ten schemat - Pengurus-Diagram-ModelDanychBezUzytkownikow.jpeg\} \\
@@ -435,8 +435,6 @@ Postanowiliśmy zatem stworzyć oddzielną klasę TranslationType posiadający o
 Przedstawione wyżej różne problemy, na jakie natrafiliśmy podczas etapu projektowania są tylko częścią tego z czym musieliśmy się zmierzyć. 
 Uważamy, że zrealizowany przez nas schemat spełnia wszystkie wymagane funkcjonalności oraz pozwala na wystarczającą zdolność przystosowania się do zmian na rynku tłumaczeń.
 Ponadto liczymy na to, iż praca przy takim schemacie zapewnia wystarczającą ilość formalizmu, ale jednocześnie nie powoduje wydłużenia czasu pracy, bądź jej utrudnienia zwłaszcza w małych projektach. 
-
- 
 
 \section{Przygotowanie środowiska pracy}
 Praca w zespole, w którym praca nad tymi samymi elementami projektu dzielona jest pomiędzy wiele osób wymaga stałego dostępu do wszystkich używanych narzędzi i technologii dla każdego członka zespołu. Brak takiej możliwości lub problemy z komunikacją mogą spowodować opóźnienie w pracy jednego członka zespołu, co z kolei może doprowadzić do przestoju pracy całego zespołu. Aby uniknąć takich problemów postanowiliśmy uniezależnić się od zewnętrznych dostawców sprzętu i narzędzi i stworzyć własny serwer który odpowiadałby za utrzymywanie oprogramowania do zarządzania projektem czy wykonywania testów i prezentowaniu aplikacji. \\
@@ -492,7 +490,6 @@ Problem i jego rozwiązanie
 Kiedy mowa o realizacji projektu, należy zwrócić uwagę na nakład i styl pracy z nim związany. 
 Poddajmy analizie przebieg realizacji projektu Pengurus CRM w kontekście zasobów czasowych oraz przyjętego schematu pracy.
 
-
 Realizacja projektu była rozłożona na niemal jeden pełny rok akademicki i w naturalny sposób podzieliła się na dwa etapy. 
 Pierwszy etap można uznać za część teoretyczną, która opiewała w przygotowanie różnej maści dokumentów stanowiących fundament do implementacji projektu, 
 m.in. wizja, model danych, mapa aplikacji.
@@ -505,7 +502,6 @@ Taki cykl pracy przyświecał niemal przez cały pierwszy etap realizacji projek
 Przygotowanie każdego z dokumentów poprzedzone było debatą, 
 a następnie do przygotowania ostatecznej formy dokumentu delegowane były dwie osoby z zespołu.
 
-
 Taki styl pracy uległ drastycznej zmianie kiedy wkroczyliśmy w drugi etap projektu, czyli implementację.
 Plan pracy stał się nieregularny i całkowicie zależny od innych obowiązków związanych głównie z uczelnią, 
 największy wpływ miała z pewnością sesja zimowa, która ograniczyła pracę nad projektem do minimum na czas około dwóch miesięcy.
@@ -513,15 +509,17 @@ Mimo problemów i napiętego planu, drużyna starała się spotykać raz w tygod
 kolejnych komponentów systemu. Ostatecznie jednak, największy nakład pracy nad projektem skupił sie w dwóch, około 10-cio dniowych odcinkach czasowych:
 ferie zimowe oraz długi weekend majowy, kiedy to pozostałe obowiązki naukowe drużyny zostały tymczasowo odłożone na bok.
 
-
 Pomimo pewnego rodzaju perturbacji, które pojawiały się w trakcie implementacji systemu, drużyna jednogłośnie stwierdziła,
 że pomimo skokowego nakładu pracy, chwilami siegającego bardzo wysokiego poziomu, byliśmy dobrze zorganizowaną grupą.
 Dzięku temu wersja RC naszego projektu pojawiła się już 23 maja 2012. 
 Wszyscy mieszkamy blisko, wszyscy się znamy, łatwo się spotkać, łatwo dyskutować, a mimo to musieliśmy się spotykać w ferie i weekendy, ponieważ nigdy nie było czasu.
+
 \section{Komunikacja w zespole}
 Znamy swoje możliwości, jesteśmy blisko, a mimo to czasami nie dało się dogadać. Ciężko zwrócić komuś uwagę, ciężko coś wymóc, ze względu na osobiste relacje. Każdy inaczej reaguje na problemy (jedni się martwią, inni się denerwują, inni nie dadzą sobie nic powiedzieć), ale na szczęście po kilku godzinach znowu wszyscy się lubią. 
+
 \section{Widoki na przyszłość}
 Dużo umiemy, mamy możliwość przekształcenia aplikacji w cokolwiek, blebleble.
+
 \chapter{Podział pracy w zespole}
 todo
 
