@@ -383,7 +383,17 @@ który dostosuje wersję do danego produktu. Poszczególne wtyczki, biblioteki s
 
 Podsumowując, narzędzie to pozwala na łatwe i szybkie uruchamianie produktu w nowym środowisku. Dzięki niemu nie musimy samodzielnie zarządzać paczkami zawierającymi wykorzystywane przez nas biblioteki. Uruchomienie projektu na nowym serwerze bądź komputerze roboczym z dostępem do internetu sprowadza się do skopiowania źródeł projektu i użyciu jednej komendy tego właśnie narzędzia, które samo zadba o pobranie potrzebnych bibliotek, skompilowanie projektu z użyciem odpowiednich narzędzi i dostarczenie wyprodukowanego, gotowego do użycia, archiwum we wyspecyfikowane miejsce.
 \subsection{Eclipse}
-todo (netbeans)
+
+Eclipse to wybrane przez nas środowisko programistyczne, które łączy ze sobą zintegrowane środowisko programistyczne oraz rozszerzalność zapewnianą przez bibliotekę wtyczek umożliwiającą pracę praktycznie z każdym narzędziem. Praca z użyciem tego środowiska jest bardzo wygodna, ponieważ Eclipse udostępnia niezliczoną ilość skrótów klawiszowych umożliwiających niezwykle proste poruszanie się po całym projekcie. Podstawowe skróty obsługują nie tylko standardowe zarządzanie tekstem, ale zarządzanie kodem. Możliwe jest m. in. wydzielanie funkcji, globalne zmiany nazw klas, metod zmiennych, automatyczne tworzenie szkieletów obiektów, intuicyjne poruszanie się po strukturze hierarchii obiektów i wiele innych. Upraszcza to zmiany w istniejącym kodzie przez co samo tworzenie aplikacji staje się bardziej elastyczne, klasy czytelniejsze, a programiści nie boją się zaglądać i modyfikować kodu stworzonego przez poprzedników.
+
+\paragraph{Wtyczki}
+\begin{itemize}
+\item \textbf{Maven Integration for Eclipse} - wtyczka integrująca eclipsa z Mavenem. Dzięki niej Eclipse potrafił wykrywać, które biblioteki spośród wymaganych przez projekt były zapewnione przez lokalne repozytorium Mavena oraz potrafił zarządzać pobieraniem tych, których brakowało.
+\item \textbf{FindBugs Eclipse Plugin} - wtyczka pozwalające na używanie narzędzia FindBuds. Pozwala ono na drobnych i nie tylko błędów, łatwych do przeoczenia pomyłek lub naruszających dobre nawyki pisania w języku Java elementów kodu. Pozwala to na zmniejszenie ilości problemów, których w łatwy sposób można uniknąć.
+\item \textbf{Eclipse JBoss Plugin} - 
+
+\end{itemize}
+
 \chapter{Praca}
 \section{Projektowanie systemu}
 Rozpoczynając pracę nad projektowaniem systemu do zarządzania biurem tłumaczeń postawiliśmy sobie cel, aby w ramach tego tematu był on jak najbardziej funkcjonalny,
