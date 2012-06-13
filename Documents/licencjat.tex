@@ -88,7 +88,7 @@ Ponadto produkty te często zapewniają niski poziom bezpieczeństwa i nie są p
 Pengurus CRM ma być aplikacją, która wychodzi naprzeciw tym problemom. 
 Będzie to pierwsza na rynku aplikacja WWW stworzona przy użyciu gamy nowych technnologii - ExtGWT, Hibernate, Spring.
 Skierowana bezpośrednio do właścicieli biur tłumaczeń, w znacznym stopniu ułatwiająca kontakt z klientem, jak również kontakt pomiędzy pracownikami. 
-Do jej obsługi będzie wystarczać przeglądarka WWW, zatem umożliwi to mobilną pracę 
+Do jej obsługi będzie wystarczać przeglądarka WWW, zatem umożliwi to pracę poza biurem
 oraz skróci klientowi czas jaki musi poświęcić na nadzorowanie projektu. 
 
 \section{Użytkownicy}
@@ -162,9 +162,113 @@ Klient może być kilentem biznesowym ( posiada pośredników ) , bądź kliente
 Tutaj zdefiniujemy rzeczy, o których będziemy mówić na kolejnych stronach.
 
 \section{Opis aplikacji}
-Opis tego jak ostatecznie wygląda nasza aplikacja. Nie wiem jak bardzo szczegółowo - to w zależności od tego jakie szczegóły będziemy chcieli opisać w dalszej części pracy. Chociaż myślę, że możemy tu napisać i oscreenować wszystko, co robi aplikacja (ale tylko zewnętrzne cechy). Chyba, że ten topic przeniesiemy w późniejsze miejsce. Ale jak dla mnie tu jest idealnie.
+System Zarządzania Biurem Tłumaczeń Pengurus jest aplikacją przeznczaną dla użytkowników pełniących różne role w procesie tłumaczenia.
+Główna strona aplikacji jest podzielona na 3 moduły:
+\begin{itemize}
+\item Panel górny, w którym użytkownik może wybrać preferowany język, wylogować się oraz zmienić ustawienia
+\item  Menu boczne, w którym znajdują się odnośniki do poszczególnych projektów / zadań oraz paneli administracyjnych
+\item  Panel główny, w którym wyświetlane są akcje proawdzone przez użytkownika.  
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{resources/panel_glowny.png}
+\caption{Panel Główny podzielony na 3 moduły}
+\end{figure}
+\end{itemize}
+
+Zgodnie z założeniami i przypadkami użycia wyróżniliśmy kilka ról użytkowników. W zależności od pełnionej roli użytkownik aplikacji posiada specyficzną bazę uprawnień do zarządzania danymi. W szczególności niektórzy użytkownicy mają zablokowaną możliwość podglądu, bądź edycji niektórych danych. Wszystkie dozwolone operacje - dane do których istnieje dostęp mają odnośnik w menu bocznym.
+Więcej szczegółów dotyczących realizacji autoryzacji danych znajduje się w dalszej części pracy.\\
+
+Każdy z użytkowników systemu ma możliwość edytować dane dotyczące jego osoby.\\ 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{resources/edycja_danych.png}
+\caption{Panel do edycji danych osobowych użytkownika}
+\end{figure}
+
+Ponadto każdy Kierownik ma prawo do wglądu i edycji danych osobowych każdego z użykowników. 
+Kierownicy będący jednnocześnie administratorami systemu zarządzają aspektami technicznymi.\\
+Panel administracyjny udostępnia im między innymi:
+\begin{itemize}
+\item Zarządzanie użytkownikami - tworzenie, edycja danych osobowych oraz danych zawodowych (np. znajomość języków),
+\item  Administrowanie językami - edytowanie oferty dostępnej przez biuro tłumaczeń, dodawnie i edycja języków oraz dostępnych typów tłumaczeń (np. tłumaczenia sądowe, naukowe - informatyczne), przypisywanie stałych cen za jednostkę pracy,
+\item  Zarządzanie dodatkowymi danymi - tworzenie bądź usuwanie dostępnej formy płatności.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\textwidth]{resources/panel_administracyjny.png}
+\caption{Panel Administracyjny - dodanie nowego tłumaczenia}
+\end{figure}
+\end{itemize}
+W celu przedstawienia możliwości, jakie udostępnia aplikacja przedstawimy podstawowy przebieg procesu tłumaczenia od przyjęcia zlecenia od Klienta do ostatecznego przyjęcia rozwiązania.\\
+\begin{itemize}
+\item Oferta - Jest to pierwszy etap realizacji projektu. Wgląd w niego mają kierownicy, a w szczególności kierownik danej oferty, a także klient.
+Przygotowanie Oferty polega na przesłaniu przez klienta odpowiednich plików i dokumentów oraz sprecyzowaniu problemu w opisie.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{resources/quote.png}
+\caption{Oferta}
+\end{figure}
+
+Następnie kierownik oferty jest zobowiązany do podzielenia pracy na poszczególne etapy. W tym celu tworzy Prace (ang. Jobs), które zawierają:
+\begin{enumerate}
+	\item	Przydzielone pliki
+	\item 	Opis
+	\item	Termin zakończenia pracy
+	\item 	Cenę
+\end{enumerate}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{resources/job.png}
+\caption{Stworzona przez Kierownika Praca}
+\end{figure}
+
+Tak przygotowana Oferta zostaje poddana ocenie Klienta, który w razie braku uwag akceptuje ją za pomocą odpowiedniego pasku stanu.
+
+\item Projekt - Jest to kolejny etap realizacji zlecenia związany stricte z procesem tłumaczenia. Wgląd w proces tłumaczenia mają kierownicy oraz menadżerowie projektu ,tłumacze i weryfikatorzy, którzy zostali wybrani przez kierownika projektu z puli pracowników o odpowiednich do danego projektu wymogach.\\
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{resources/project.png}
+\caption{Projekt - etap realizacji zamówienia}
+\end{figure}
+ 
+Menadżerowie projektów zgodnie z ustalonym podziałem pracy są zobowiązani do podzielenia kolejnych etapów na zadania, które zlecają tłumaczom i weryfikatorom. Są oni odpowiedzialni za ustalenie terminu przyjęcia rozwiązania, przydzielenie odpowiedniego pliku do tłumaczenia oraz ostatecznej oceny pracy zarówno tłumacza, jak i weryfikatora.Szczegółowy opis etapu tłumaczenia zostanie opisany w dalszej części.\\
+Po zakończeniu etapu, tzn. przetłumaczeniu całego tekstu załączonego do Pracy Menadżerowie Projektu są zobowiązani do przygotowania ostateczenej wersji pliku i udostępnienie jej Klientowi. Klient może za pomocą pasku stanu zaakceptować tak wykonane zadanie, bądź może poprosić o dokonanie odpowiednich poprawek.
+
+\item Zakończenie  zlecenia - Klient akceptując wykonanie etapu zlecenia (Pracy) jest zobowiązany do rozliczenia jej. Gdy takowe nastąpi księgowy zaznacza ten fakt i możliwe jest zakończenie przez Kierownika przebiegu Pracy. Gdy zostaną zakończone wszystkie Prace następuje rozliczenie i ostateczne zamknięcie całej Oferty. Zamknięta Oferta wraz ze wszystkimi dokumentami trafia następnie do archiwum. 
+\end{itemize}  
 
 \section{Podstawowy przypadek użycia}
+Uznaliśmy, że najważniejszym przypadkiem użycia wymagającym głębszego wyjaśnienia jest etap tłumaczenia. Przedstaiwony zostanie on bardziej szczegółowo, aby wyjaśnić wszelkie wątpliwości i ukazać możliwości naszej aplikacji.
+
+\begin{enumerate}
+\item	Tworzenie Zadania - Menadżer Projektu odpowiedzialny za daną Pracę tworzy nowe Zadanie wybierając termin, jego realizacji, cenę i walutę w jakiej zostanie rozliczone zadanie oraz opis wyjaśniający problem . Ponadto Menadżer wybiera Tłumacza i Weryfikatora z listy pracowników przydzielonych do Projektu, którzy odpowiadają profilowi zadania. \\
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{resources/task_create.png}
+\caption{Tworzenie Zadania}
+\end{figure}
+Po stworzeniu zadania Menadżer Projektu przydziela pliki, które mają zostać przetłumaczone. Pliki do tłumaczenia są umieszczane w katalogu "Pliki Źródłowe" (ang. Source Files).
+\item 	Realizacja Tłumaczenia - Przydzielony do tłumaczenia ekspert przystępuje do jego realizacji zaznaczając to na pasku stanu i przechodząc do etapu "in progress".Ekspert wykonujac swoje zadanie może (a nawet powinien w celu zachowania bezpieczeństwa) po każdym etapie swojej pracy umieścić pliki z cząstkowym rozwiązaniem. Takie pliki powinny się znaleźć w katalogu "Pliki Docelowe" (ang. Target Files).\\
+Tłumacz informuje o zakończeniu pracy poprzez umieszczenie rozwiązania w katalogu "Pliki Docelowe" i przejściu na pasku stanu do etapu "resolved".   
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{resources/task_reopen.png}
+\caption{Weryfikowanie Zadania - weryfikator nie akceptuje rozwiązania}
+\end{figure}
+\item Weryfikacja - Po rozwiązaniu zadania następuje etap weryfikacji dokonywany przez przydzieloną do tego osobę. Weryfikator ma za zadanie pobrać odpowiedni plik, a następnie poprawić. W razie poważniejszych błędów weryfikator może umieścić odpowiedni komentarz pod zadaniem i nie przyjąć rozwiązania. Zaznacza to wybierając akcję "re-open" na pasku stanu.	
+\item 	Przyjęcie rozwiązania przez Menadżera Projektu - Każde zadanie po zweryfikowniu musi zostać zaakceptowane przez jednego z Menadżerów Projektu. W razie uwag (podobnie jak to było w etapie weryfikacji) Menadżer może ponownie odesłać pracę do weryfikatora. Jeśli praca nie wymaga poprawek zostaje ona zaakceptowana.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{resources/task.png}
+\caption{Panel Zadania}
+\end{figure}
+\\
+\item Rozliczenie - w przypadku pracowników nieetatowych, czyli tzw. freelancerów, bądź pracowników na umowę o dzieło po każdym rozwiązanym zadaniu następuje rozliczenie. Gdy takowe zostanie wykonane księgowy zmienia status Zadania na "accounted".\\
+Gdy ekspert jest pracownikiem etatowym wszystkie zadania wykonuje automatycznie Menadżer Projektu.
+\item Zakończenie - Po rozliczeniu Zadania Menadżer Projektu może go zakończyć a wszystkie pliki i informacje trafiają do archiwum. 
+\end{enumerate}
+
 
 \chapter{Rozwiązania}
 \section{Spring Framework}
@@ -417,8 +521,13 @@ Reprezentacja użytkowników oraz stworzony przez nas system ról został szczeg
 Jego realizacja była bardzo ciężka i czasochłonna, gdyż musiała uwzględniać problemy, jakie możemy napotkać z implementacją i wykorzystaniem tego systemu, 
 a z drugiej strony musiała odzwierciedlać rzeczywisty stan podczas tłumaczenia.\\
 
-Model danych zawierający wszystkie etapy przebiegu realizacji projektu został przedstawiony poniżej.\\
-\{Tu ma być ten schemat - Pengurus-Diagram-ModelDanychBezUzytkownikow.jpeg\} \\
+
+\begin{figure}[h!]
+\includegraphics[width=1.1\textwidth]{resources/data.png}
+\caption{Model danych zawierający wszystkie etapy przebiegu realizacji projektu}
+\end{figure}
+
+
 Szczegółowy opis procesu został opisany w punkcie 2. Podczas projektowania schematu rozważaliśmy różne koncepcje.
 \begin{itemize}
 \item Głównym problemem, jaki rozważaliśmy była ilość etapów, jakie zlecenie musi przejść od momentu rozpoczęcia do końca jego realizacji. 
