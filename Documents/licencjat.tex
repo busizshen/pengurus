@@ -709,7 +709,7 @@ Będziemy bazować na wspomnianym wcześniej podziale pracy na dwa etapy: przygo
 \section{przygotowanie dokumentacji}
 Ten etap pracy rozłożył się między członków grupy niemal równo. Wszelkie ustalenia i pomysły przedstawiane były na wspólnych spotkaniach,
 natomiast spisywanie dokumentów, bądź też przygotowywane było w parach. Dla przykładu: w trakcie proseminarium, prezentację narzędzi jakich planujemy użyć
-przeprowadzili wspólnie Karol Nienałtowski oraz Jakub Oćwieja, natomiast przedstawienie technologii przy użyciu których będziemy realizować projekt, przypadło prze Michał Sabaciński i Krzysztof Gogolewski.
+przeprowadzili wspólnie Karol Nienałtowski oraz Jakub Oćwieja, natomiast przedstawienie technologii przy użyciu których będziemy realizować projekt, przypadło parze: Michał Sabaciński i Krzysztof Gogolewski.
 
 \section{implementacja systemu}
 W odróżnieniu od wcześniejszego etapu, implementacja systemu składała się z wyraźnie odrębnych elementów, których realizacjami zajmowali
@@ -717,7 +717,7 @@ się poszczególni członkowie. Najłatwiejszą metodą omówienia wkładu pracy
 będzie zaprezentowanie tych elementów i wskazanie osób, które nad nimi pracowały. W miarę możliwości postaramy się także wskazać,
 co dokładnie dana osoba zrealizowała w omawianej części implementacji systemu.
 
-\subsection{baza danych}
+\paragraph{baza danych}
 Implementacja klas występujących w systemie, które będą przechowywane w bazie danych oraz dokonanie mapowania obiektowo-relacyjnego 
 spoczywało w rękach Michała Sabacińskiego oraz Krzysztofa Gogolewskiego. Głównym ich zadaniem była realizacja takiego mapowania,
 które gwarantuje, że przyszłe zapytania do bazy danych będą wyciągać tylko potrzebne informacje, np. obiekt nie zwraca wszystkich
@@ -725,33 +725,33 @@ swoich kolekcji kiedy nie jest to potrzebne (mechanizm leniwego wyliczania w hib
 obiektów DAO, do komunikacji z bazą danych, po jego realizacji dokonaliśmy podziału. Michał zajął się pisaniem testów do bazy i obiektów DAO, 
 natomiast Krzysztof dopisywał funkcje, które były potrzebne osobom piszącym już wyższą warstwę projektu, tzn. realizowali funkcjonalności.
 
-\subsection{bezpieczeństwo}
+\paragraph{bezpieczeństwo}
 Realizacją bezpieczeństwa aplikacji zajął się Jakub Oćwieja. Zapewnił on bezpieczne logowanie, w oparciu o możliwości jakie daje Spring oraz
 zapewnił obustronne filtrowanie danych, zarówno po stronie klienta jak i serwera, aby nie dopuścić do przekazania bądź wyświetlenia danych
 użytkownikowi, który nie jest do tego uprawniony. Skoro natomiast jesteśmy już przy użytkownikach, należało zaimplementować hierarchię użytkowników, 
 omówioną we wcześniszych rozdziałach tej pracy. Powstanie tej hierarchii to także zasługa Jakuba, 
 jej sprawna realizacja pozwoliła na efektywne zarządzanie użytkownikami systemu i zapewniła wysokie bezpieczeństwo aplikacji.
 
-\subsection{funkcjonalności dot. procesu tłumaczenia}
+\paragraph{funkcjonalności dot. procesu tłumaczenia}
 Główną osobą i w zasadzie patronem tego etapu implementacyjnego był Karol Nienałtowski. Przygotował on silnie generyczną hierarchię klas składającą
 się na realizacje procesu tłmuaczenia, od stworzenia zlecenia, aż do zamnięcia projektu tłumaczeniowego. Dzięki starannie przygotowanej hierarchii
 oraz wymodelowaniu efektywnego dziedziczenia, przebieg tłumaczenia bardzo dobrze realizuje założenia normy do której nasz system miał być dostosowany.
 W momencie, kiedy praca nad bazą danych w zasadzie dobiegła końca, pomocnicze funkcjonalności i klasy implementował Krzysztof.
 
-\subsection{funkcjonalności dot. administracji systemu}
+\paragraph{funkcjonalności dot. administracji systemu}
 Zarządzanie językami translacji, walutami dostępnymi przy realizacji płatności, tworzeniem obiektów translacji dla tłumaczy oraz innymi funkcjonalnościami
 związanymi z administracyjną częścią systemu zajmował się Michał. Swoją część w tym rozdziale implementacji miał także Jakub, który zapewnił tworzenie użytkowników,
 które w zasadzie powstawało już na etapie realizacji bezpieczeństwa systemu.
 
-\subsection{zarządzanie plikami}
+\paragraph{zarządzanie plikami}
 Przetrzymywanie plików zgłoszonych do tłumaczenia, jak i plików już przetłumaczonych to zasługa Michała i Jakuba. Przygotowali oni mechanizm, który pozwalał
 zarządzać plikami zarówno po stronie klienta jak i serwera.
 
-\subsection{front-end}
+\paragraph{front-end}
 Końcowa faza projektu, to nadanie w miarę przyjaznego, intuicyjnego dla użytkownika interfejsu aplikacji. Tą częścią implementacji zajmował się Krzysztof,
 korzystając z możliwości proponowanych przez GWT starał się nadać systemowi wygląd, który zachęca do użytkowania.
 
-\subsection{pozostałe}
+\paragraph{pozostałe}
 Oczwiście nie wszystko co zostało wykonane w projekcie podlega klasyfikacji do powyższych kategorii. Poniżej znajdują się te części pracy, 
 które nie znalazły swojego miejsca.
 \begin{itemize}
