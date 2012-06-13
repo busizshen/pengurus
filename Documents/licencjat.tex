@@ -497,7 +497,39 @@ Meteody zaimplementowane w dalszej części klasy służą do pośredniczenia po
 \subsection{Hibernate}
 Dużo nieprzespanych nocy.
 \subsection{Data Transfer Object}
-Problem i jego rozwiązanie
+W pewnym momencie pracy nad implementacją naszej aplikacji doszliśmy do miejsca, w którym chcieliśmy zapewnić komunikacje pomiędzy stroną
+serwera i klienta. Ponieważ korzystaliśmy z GWT, komunikację tę miał zapewnić mechanizm kolejek RPC polegającym na wywołaniu kodu 
+strony serwera, który nazywany jest serwisem, przez klienta. Korzystając z doświadczenia części członków zespołu wiedzieliśmy, że 
+obiekty wysyłane za pomocą kolejek RPC muszą być serializowane, to znaczy, że klasa opisująca dany obiekt musi implementować interfejs 
+\textit{Serializable} lub interfejs \textit{IsSerializable}. Wobec tego wybraliśmy jedną z zamapowanych do bazy danych klas, która implementowała jeden z 
+dwóch wyżej wymienionych interfejsów, napisaliśmy dla niej odpowiedni serwis i test, który miał pobrać obiekt z bazy danych, wysłać go na stronę klienta
+i wyświetlić informacje, które ze sobą ten obiekt niesie. Niestety test się nie powiódł, patrząc na konsole trybu developement GWT dowiedziliśmy 
+się, że typ: \textit{'org.hibernate.collection.PersistentSet'}, który był zawarty w wysłanym przez nas obiekcie, nie jest serializowany. Wynik testu nas 
+zaskoczył, ponieważ klasa którą chcieliśmy przesłać była serializowana i nie zawierała żadnego typu \textit{'org.hibernate.collection.PersistentSet'}.
+Wobec tego zaczeliśmy szukać błędu, który zwróciła konsola GWT, w sieci. Okazało się, że obiekty wyciągane przez Hibernate'a z bazy danych są 
+rozszerzone w taki sposób, żeby były trwałe. Ta trwałość nie jest osiągana bez pewnego rodzaju oprzyrządowania obiektu. W przypadku Hibernate'a 
+biblioteka \textit{Javassist} faktycznie zastępuje i przepisuje kod bajtowy tych obiektów przez trwałe encje. Dla kolejek RPC ma to takie 
+znaczenie, że do czasu kiedy obiekt jest gotowy do przesłania nie jest tym samym obiektem, który kompilator myslał, 
+że będzie wysyłany, więc podczas próby deserializacji, mechanizm GWT RPC nie wie dłużej jaki jest typ i odmawia deserializowania go.
+Bogatsi o nową wiedzę zaczeliśmy szukać rozwiązania trapiącego nas problemu, niestety przez dłuższy czas nie byliśmy w stanie znaleźć żadnego 
+rozwiązania i do zespołu wkradło się pewne zawahanie czy na pewno dobrze zrobiliśmy probując łączyć ze sobą GWT i Hibernate. 
+
+Na szczęście nie poddaliśmy się i jednemu z nas udało się znaleźć rozwiązanie naszego kłopotu. Remedium okazał się wzorzec projektowy Data Transfer Object (DTO).
+DTO jest prostym Plain Old Java Object, zawierającym jedynie te pola, do których możemy mieć dostęp po stronie klienta w celu wyświetlenia ich 
+na stronie. Obiekt Hibernate'owy może być stworzony za pomocą danych zawartych w DTO co umożliwia przesłanie danych ze strony klienta i zapisanie ich 
+w bazie danych, tak samo można stworzyć DTO korzystając z informacji zawartych w obiektach Hibernate'owych, ale wówczas już nie są przepisywane typy, które 
+nie umożliwiały przesyłanie danych z serwera do klienta. Tak stworzony obiekt gotowy jest do przesłania za pomocą kolejki RPC. Oczywiście DTO również musi być 
+serializowany.
+
+Wykorzystanie wzorca projektowego DTO wiązało się z dodatkową pracą, ponieważ każda klasa z modelu danych musiała być na nowo napisana jako DTO. Dodatkowo 
+trzeba było dopisać metody, które kopiowałyby obiekty Hibernate'owe z bazy danych do ich odpowiedników DTO oraz metody, które na podstawie DTO tworzyłyby obiekt 
+Hibernate'owy gotowy do zapisu do bazy danych. Ponadto trzeba było zwracać uwagę na opcje leniwego wyciągania elementów z bazy danych i w zależności od nich 
+wykorzystać odpowiednią technika przepisywania obiektów.
+
+Wydaje nam się, że wykorzystanie wzorca projektowego Data Transfer Object okazało się dobrym ruchem, ponieważ dzięki niemu mogliśmy zacząć przesyłanie lekkich 
+obiektów między serwerem i klientem oraz zmusiło nas to do myślenia nad strategiami kopiowania obiektów jako, że wyciagając z bazy danych pełny graf 
+obiektu Hibernate'owego optymalizujemy go pod kątem tego, co jest potrzebne do wyświetlenia na stronie.
+
 % te dwa podpunkty można ując inaczej
 \section{Zasoby czasowe i organizacja pracy}
 Kiedy mowa o realizacji projektu, należy zwrócić uwagę na nakład i styl pracy z nim związany. 
