@@ -160,8 +160,12 @@ Klient może być kilentem biznesowym ( posiada pośredników ) , bądź kliente
 \chapter{Aplikacja}
 
 \section{Definicje}
-Tutaj zdefiniujemy rzeczy, o których będziemy mówić na kolejnych stronach.
-
+\begin{itemize}
+\item Oferta (ang. Quote) – przygotowana przez firmę, przedstawiana klientowi, który zgadza się na przedstawione warunki, bądź je renegocjuje. (oferta jest modyfikowana przez firmę). Każda Oferta składa się z Prac i opisu.
+\item Praca (ang.Job) – jednostka określająca część zlecenia (np. przetłumaczenie jednego tomu książki), na którą składa się lista Zadań.
+\item Projekt (ang.Project)– tworzony jest na podstawie ostatecznej wersji Oferty zaakceptowanej przez dwie strony (klient, firma). Zawiera Prace składające się na Ofertę. Do każdego Projektu przypisany jest co najmniej jeden Menadżer Projektu oraz ewentualnie lista Tłumaczy i Weryfikatorów. Z Prac powstają Zadania.
+\item Zadanie (ang. Task) – przypisywane Tłumaczowi i Weryfikatorowi. Każde Zadanie jest częścią dokładnie jednej Pracy.
+\end{itemize}
 \section{Opis aplikacji}
 System Zarządzania Biurem Tłumaczeń Pengurus jest aplikacją przeznczaną dla użytkowników pełniących różne role w procesie tłumaczenia.
 Główna strona aplikacji jest podzielona na 3 moduły:
@@ -211,13 +215,9 @@ Przygotowanie Oferty polega na przesłaniu przez klienta odpowiednich plików i 
 \caption{Oferta}
 \end{figure}
 
-Następnie kierownik oferty jest zobowiązany do podzielenia pracy na poszczególne etapy. W tym celu tworzy Prace (ang. Jobs), które zawierają:
-\begin{enumerate}
-	\item	Przydzielone pliki
-	\item 	Opis
-	\item	Termin zakończenia pracy
-	\item 	Cenę
-\end{enumerate}
+Następnie kierownik oferty jest zobowiązany do podzielenia pracy na poszczególne etapy. W tym celu tworzy Prace, które zawierają:
+przydzielone pliki, opis, termin zakończenia pracy,cenę.
+
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/job.png}
@@ -226,48 +226,49 @@ Następnie kierownik oferty jest zobowiązany do podzielenia pracy na poszczegó
 
 Tak przygotowana Oferta zostaje poddana ocenie Klienta, który w razie braku uwag akceptuje ją za pomocą odpowiedniego pasku stanu.
 
-\item Projekt - Jest to kolejny etap realizacji zlecenia związany stricte z procesem tłumaczenia. Wgląd w proces tłumaczenia mają kierownicy oraz menadżerowie projektu ,tłumacze i weryfikatorzy, którzy zostali wybrani przez kierownika projektu z puli pracowników o odpowiednich do danego projektu wymogach.\\
+\item Projekt - Jest to kolejny etap realizacji zlecenia związany stricte z procesem tłumaczenia. Wgląd w proces tłumaczenia mają Kierownicy oraz Menadżerowie Projektu ,Tłumacze i Weryfikatorzy, którzy zostali wybrani przez kierownika projektu z puli pracowników o odpowiednich do danego Projektu wymogach.\\
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/project.png}
 \caption{Projekt - etap realizacji zamówienia}
 \end{figure}
  
-Menadżerowie projektów zgodnie z ustalonym podziałem pracy są zobowiązani do podzielenia kolejnych etapów na zadania, które zlecają tłumaczom i weryfikatorom. Są oni odpowiedzialni za ustalenie terminu przyjęcia rozwiązania, przydzielenie odpowiedniego pliku do tłumaczenia oraz ostatecznej oceny pracy zarówno tłumacza, jak i weryfikatora.Szczegółowy opis etapu tłumaczenia zostanie opisany w dalszej części.\\
-Po zakończeniu etapu, tzn. przetłumaczeniu całego tekstu załączonego do Pracy Menadżerowie Projektu są zobowiązani do przygotowania ostateczenej wersji pliku i udostępnienie jej Klientowi. Klient może za pomocą pasku stanu zaakceptować tak wykonane zadanie, bądź może poprosić o dokonanie odpowiednich poprawek.
+Menadżerowie Projektów zgodnie z ustalonym podziałem pracy są zobowiązani do podzielenia kolejnych Prac na Zadania, które zlecają Tłumaczom i Weryfikatorom. Są oni odpowiedzialni za ustalenie terminu przyjęcia rozwiązania, przydzielenie odpowiedniego pliku do tłumaczenia oraz ostatecznej oceny pracy zarówno tłumacza, jak i weryfikatora. Szczegółowy opis etapu tłumaczenia (Zadania) zostanie opisany w dalszej części.\\
+Po zakończeniu pojedynczej Pracy, tzn. przetłumaczeniu całego tekstu załączonego do Pracy, Menadżerowie Projektu są zobowiązani do przygotowania ostateczenej wersji pliku i udostępnienie jej Klientowi. Klient może za pomocą pasku stanu zaakceptować tak wykonaną Pracę, bądź może poprosić o dokonanie odpowiednich poprawek.
 
-\item Zakończenie  zlecenia - Klient akceptując wykonanie etapu zlecenia (Pracy) jest zobowiązany do rozliczenia jej. Gdy takowe nastąpi księgowy zaznacza ten fakt i możliwe jest zakończenie przez Kierownika przebiegu Pracy. Gdy zostaną zakończone wszystkie Prace następuje rozliczenie i ostateczne zamknięcie całej Oferty. Zamknięta Oferta wraz ze wszystkimi dokumentami trafia następnie do archiwum. 
+\item Zakończenie  realizacji Pracy - Klient akceptując wykonanie Pracy jest zobowiązany do rozliczenia jej. Gdy takowe nastąpi księgowy zaznacza ten fakt i możliwe jest zakończenie przez Kierownika przebiegu Pracy. 
+\item Zakończenie  realizacji Oferty - Gdy zostaną zakończone wszystkie Prace następuje rozliczenie i ostateczne zamknięcie całej Oferty. Zamknięta Oferta wraz ze wszystkimi dokumentami trafia następnie do archiwum. 
 \end{itemize}  
 
 \section{Podstawowy przypadek użycia}
-Uznaliśmy, że najważniejszym przypadkiem użycia wymagającym głębszego wyjaśnienia jest etap tłumaczenia. Przedstaiwony zostanie on bardziej szczegółowo, aby wyjaśnić wszelkie wątpliwości i ukazać możliwości naszej aplikacji.
+Uznaliśmy, że najważniejszym przypadkiem użycia wymagającym głębszego wyjaśnienia jest etap tłumaczenia - Zadanie. Przedstaiwony zostanie on bardziej szczegółowo, aby wyjaśnić wszelkie wątpliwości i ukazać możliwości naszej aplikacji.
 
 \begin{enumerate}
-\item	Tworzenie Zadania - Menadżer Projektu odpowiedzialny za daną Pracę tworzy nowe Zadanie wybierając termin, jego realizacji, cenę i walutę w jakiej zostanie rozliczone zadanie oraz opis wyjaśniający problem . Ponadto Menadżer wybiera Tłumacza i Weryfikatora z listy pracowników przydzielonych do Projektu, którzy odpowiadają profilowi zadania. \\
+\item	Tworzenie Zadania - Menadżer Projektu odpowiedzialny za daną Pracę tworzy nowe Zadanie wybierając termin, jego realizacji, cenę i walutę w jakiej zostanie rozliczone zadanie oraz opis wyjaśniający problem . Ponadto Menadżer wybiera Tłumacza i Weryfikatora z listy pracowników przydzielonych do Projektu, którzy odpowiadają profilowi danego problemu. \\
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/task_create.png}
 \caption{Tworzenie Zadania}
 \end{figure}
-Po stworzeniu zadania Menadżer Projektu przydziela pliki, które mają zostać przetłumaczone. Pliki do tłumaczenia są umieszczane w katalogu "Pliki Źródłowe" (ang. Source Files).
-\item 	Realizacja Tłumaczenia - Przydzielony do tłumaczenia ekspert przystępuje do jego realizacji zaznaczając to na pasku stanu i przechodząc do etapu "in progress".Ekspert wykonujac swoje zadanie może (a nawet powinien w celu zachowania bezpieczeństwa) po każdym etapie swojej pracy umieścić pliki z cząstkowym rozwiązaniem. Takie pliki powinny się znaleźć w katalogu "Pliki Docelowe" (ang. Target Files).\\
+Po stworzeniu Zadania Menadżer Projektu przydziela pliki, które mają zostać przetłumaczone. Pliki do tłumaczenia są umieszczane w katalogu "Pliki Źródłowe" (ang. Source Files).
+\item 	Realizacja Tłumaczenia - Przydzielony do tłumaczenia ekspert przystępuje do jego realizacji zaznaczając to na pasku stanu i przechodząc do etapu "in progress". Ekspert wykonujac swoje zadanie może (a nawet powinien w celu zachowania bezpieczeństwa) po każdym etapie swojej pracy umieścić pliki z cząstkowym rozwiązaniem. Takie pliki powinny się znaleźć w katalogu "Pliki Docelowe" (ang. Target Files).\\
 Tłumacz informuje o zakończeniu pracy poprzez umieszczenie rozwiązania w katalogu "Pliki Docelowe" i przejściu na pasku stanu do etapu "resolved".   
+\item Weryfikacja - Po rozwiązaniu Zadania następuje etap weryfikacji dokonywany przez przydzieloną do tego osobę. Weryfikator ma za zadanie pobrać odpowiedni plik, a następnie poprawić. W razie poważniejszych błędów weryfikator może umieścić odpowiedni komentarz pod zadaniem i nie przyjąć rozwiązania. Zaznacza to wybierając akcję "re-open" na pasku stanu.	
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/task_reopen.png}
 \caption{Weryfikowanie Zadania - weryfikator nie akceptuje rozwiązania}
 \end{figure}
-\item Weryfikacja - Po rozwiązaniu zadania następuje etap weryfikacji dokonywany przez przydzieloną do tego osobę. Weryfikator ma za zadanie pobrać odpowiedni plik, a następnie poprawić. W razie poważniejszych błędów weryfikator może umieścić odpowiedni komentarz pod zadaniem i nie przyjąć rozwiązania. Zaznacza to wybierając akcję "re-open" na pasku stanu.	
-\item 	Przyjęcie rozwiązania przez Menadżera Projektu - Każde zadanie po zweryfikowniu musi zostać zaakceptowane przez jednego z Menadżerów Projektu. W razie uwag (podobnie jak to było w etapie weryfikacji) Menadżer może ponownie odesłać pracę do weryfikatora. Jeśli praca nie wymaga poprawek zostaje ona zaakceptowana.
+\item 	Przyjęcie rozwiązania przez Menadżera Projektu - Każde Zadanie po zweryfikowniu musi zostać zaakceptowane przez jednego z Menadżerów Projektu. W razie uwag (podobnie jak to było w etapie weryfikacji) Menadżer może ponownie odesłać Zadanie do weryfikatora. Jeśli natomiast nie wymaga ono poprawek zostaje to zaakceptowane, a następnie dołączone do reszty rozwiązania zawartego w Pracy.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/task.png}
 \caption{Panel Zadania}
 \end{figure}
 \\
-\item Rozliczenie - w przypadku pracowników nieetatowych, czyli tzw. freelancerów, bądź pracowników na umowę o dzieło po każdym rozwiązanym zadaniu następuje rozliczenie. Gdy takowe zostanie wykonane księgowy zmienia status Zadania na "accounted".\\
+\item Rozliczenie - w przypadku pracowników nieetatowych, czyli tzw. freelancerów, bądź pracowników na umowę o dzieło po każdym rozwiązanym Zadaniu następuje rozliczenie. Gdy takowe zostanie wykonane księgowy zmienia status Zadania na "accounted".\\
 Gdy ekspert jest pracownikiem etatowym wszystkie zadania wykonuje automatycznie Menadżer Projektu.
-\item Zakończenie - Po rozliczeniu Zadania Menadżer Projektu może go zakończyć a wszystkie pliki i informacje trafiają do archiwum. 
+\item Zakończenie - Po rozliczeniu Zadania Menadżer Projektu może go zakończyć,a wszystkie pliki i informacje z nim związane trafiają do archiwum. 
 \end{enumerate}
 
 
