@@ -50,7 +50,7 @@ public class UserModel extends BaseModel implements IsSerializable {
 		return get("fullName");
 	}
 	
-	public Boolean compare(UserModel user){
-		return this.userDTO.getId() == user.getUserDTO().getId();
+	public Boolean equals(UserModel user){
+		return this.userDTO.getId().equals(user.getUserDTO().getId());
 	}
 }

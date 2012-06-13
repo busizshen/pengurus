@@ -2,7 +2,6 @@ package com.pengurus.crm.client.panels.center.rating;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -56,10 +55,6 @@ public class RatingPanel extends FormPanel {
 	}
 
 	private void addRatingPanel() {
-
-	}
-
-	private class RatingBar extends HorizontalPanel {
 
 	}
 }

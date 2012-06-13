@@ -86,7 +86,7 @@ public class WorkerPanelChoose extends FormPanel {
 		List<UserModel> removeModels = new ArrayList<UserModel>();
 		for (UserModel userModelsTo : modelsTo) {
 			for (UserModel userModels : models) {
-				if (userModels.compare(userModelsTo)) {
+				if (userModels.equals(userModelsTo)) {
 					removeModels.add(userModels);
 				}
 			}

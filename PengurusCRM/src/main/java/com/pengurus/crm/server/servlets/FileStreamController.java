@@ -84,7 +84,7 @@ public class FileStreamController {
 					if (fileName != null) {
 						fileName = FilenameUtils.getName(fileName);
 					}
-					fileName.replace(' ', '_');
+					fileName = fileName.replace(' ', '_');
 					if (!fileName.matches(fileExp)) {
 						throw new IOException(
 								"File name can consist only of letters, numbers, '.' and '_' signs.");
