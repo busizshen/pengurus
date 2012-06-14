@@ -173,7 +173,7 @@ Główna strona aplikacji jest podzielona na 3 moduły:
 \item Panel górny, w którym użytkownik może wybrać preferowany język, wylogować się oraz zmienić ustawienia
 \item  Menu boczne, w którym znajdują się odnośniki do poszczególnych projektów / zadań oraz paneli administracyjnych
 \item  Panel główny, w którym wyświetlane są akcje proawdzone przez użytkownika.  
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/panel_glowny.png}
 \caption{Panel Główny podzielony na 3 moduły}
@@ -185,7 +185,7 @@ Więcej szczegółów dotyczących realizacji autoryzacji danych znajduje się w
 
 Każdy z użytkowników systemu ma możliwość edytować dane dotyczące jego osoby.\\ 
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/edycja_danych.png}
 \caption{Panel do edycji danych osobowych użytkownika}
@@ -198,7 +198,7 @@ Panel administracyjny udostępnia im między innymi:
 \item Zarządzanie użytkownikami - tworzenie, edycja danych osobowych oraz danych zawodowych (np. znajomość języków),
 \item  Administrowanie językami - edytowanie oferty dostępnej przez biuro tłumaczeń, dodawnie i edycja języków oraz dostępnych typów tłumaczeń (np. tłumaczenia sądowe, naukowe - informatyczne), przypisywanie stałych cen za jednostkę pracy,
 \item  Zarządzanie dodatkowymi danymi - tworzenie bądź usuwanie dostępnej formy płatności.
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \includegraphics[width=0.7\textwidth]{resources/panel_administracyjny.png}
 \caption{Panel Administracyjny - dodanie nowego tłumaczenia}
@@ -209,7 +209,7 @@ W celu przedstawienia możliwości, jakie udostępnia aplikacja przedstawimy pod
 \item Oferta - Jest to pierwszy etap realizacji projektu. Wgląd w niego mają kierownicy, a w szczególności kierownik danej oferty, a także klient.
 Przygotowanie Oferty polega na przesłaniu przez klienta odpowiednich plików i dokumentów oraz sprecyzowaniu problemu w opisie.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/quote.png}
 \caption{Oferta}
@@ -218,7 +218,7 @@ Przygotowanie Oferty polega na przesłaniu przez klienta odpowiednich plików i 
 Następnie kierownik oferty jest zobowiązany do podzielenia pracy na poszczególne etapy. W tym celu tworzy Prace, które zawierają:
 przydzielone pliki, opis, termin zakończenia pracy,cenę.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/job.png}
 \caption{Stworzona przez Kierownika Praca}
@@ -227,7 +227,7 @@ przydzielone pliki, opis, termin zakończenia pracy,cenę.
 Tak przygotowana Oferta zostaje poddana ocenie Klienta, który w razie braku uwag akceptuje ją za pomocą odpowiedniego pasku stanu.
 
 \item Projekt - Jest to kolejny etap realizacji zlecenia związany stricte z procesem tłumaczenia. Wgląd w proces tłumaczenia mają Kierownicy oraz Menadżerowie Projektu ,Tłumacze i Weryfikatorzy, którzy zostali wybrani przez kierownika projektu z puli pracowników o odpowiednich do danego Projektu wymogach.\\
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/project.png}
 \caption{Projekt - etap realizacji zamówienia}
@@ -245,7 +245,7 @@ Uznaliśmy, że najważniejszym przypadkiem użycia wymagającym głębszego wyj
 
 \begin{enumerate}
 \item	Tworzenie Zadania - Menadżer Projektu odpowiedzialny za daną Pracę tworzy nowe Zadanie wybierając termin, jego realizacji, cenę i walutę w jakiej zostanie rozliczone zadanie oraz opis wyjaśniający problem . Ponadto Menadżer wybiera Tłumacza i Weryfikatora z listy pracowników przydzielonych do Projektu, którzy odpowiadają profilowi danego problemu. \\
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/task_create.png}
 \caption{Tworzenie Zadania}
@@ -254,13 +254,13 @@ Po stworzeniu Zadania Menadżer Projektu przydziela pliki, które mają zostać 
 \item 	Realizacja Tłumaczenia - Przydzielony do tłumaczenia ekspert przystępuje do jego realizacji zaznaczając to na pasku stanu i przechodząc do etapu "in progress". Ekspert wykonujac swoje zadanie może (a nawet powinien w celu zachowania bezpieczeństwa) po każdym etapie swojej pracy umieścić pliki z cząstkowym rozwiązaniem. Takie pliki powinny się znaleźć w katalogu "Pliki Docelowe" (ang. Target Files).\\
 Tłumacz informuje o zakończeniu pracy poprzez umieszczenie rozwiązania w katalogu "Pliki Docelowe" i przejściu na pasku stanu do etapu "resolved".   
 \item Weryfikacja - Po rozwiązaniu Zadania następuje etap weryfikacji dokonywany przez przydzieloną do tego osobę. Weryfikator ma za zadanie pobrać odpowiedni plik, a następnie poprawić. W razie poważniejszych błędów weryfikator może umieścić odpowiedni komentarz pod zadaniem i nie przyjąć rozwiązania. Zaznacza to wybierając akcję "re-open" na pasku stanu.	
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/task_reopen.png}
 \caption{Weryfikowanie Zadania - weryfikator nie akceptuje rozwiązania}
 \end{figure}
 \item 	Przyjęcie rozwiązania przez Menadżera Projektu - Każde Zadanie po zweryfikowniu musi zostać zaakceptowane przez jednego z Menadżerów Projektu. W razie uwag (podobnie jak to było w etapie weryfikacji) Menadżer może ponownie odesłać Zadanie do weryfikatora. Jeśli natomiast nie wymaga ono poprawek zostaje to zaakceptowane, a następnie dołączone do reszty rozwiązania zawartego w Pracy.
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/task.png}
 \caption{Panel Zadania}
@@ -378,7 +378,7 @@ przeznaczyć na implementacje.
 \section{System klas i uprawnień użytkowników}
 Projektowana przez nas aplikacja w oczywisty sposób musiała przechowywać dane użytkowników oraz umożliwiać im logowanie się do systemu. Mogliśmy podjąć jedną z dwóch decyzji: wykorzystać istniejący system w oparciu o protokół LDAP, bądź też zaprojektować i zaimplementować własny system.
 
-\paragraph{Ligh!weigh! Directory Access Protocol}
+\paragraph{Light!weight! Directory Access Protocol}
 Protokół ten jest przeznaczony do korzystania z usług katalogowych za pośrednictwem protokołu internetowego. LDAP obsługuje podstawowe operacje pozwalające na logowanie, wyszukanie wpisów katalogowych, dodawanie, usuwanie, sprawdzanie i modyfikowanie wpisów oraz kilka innych. Operacje te umożliwiają przechowywanie w systemie zarządzającym autentykacją praktycznie dowolnych danych i pozwalają na unifikację systemu logowania dla wielu współdziałających aplikacji.
 
 Do logowania w naszej aplikacji nie użyliśmy jednak tego protokołu. Zaprojektowany przez nas, z użyciem hierarchii klas i atrybutów, model użytkownika ma obsługiwać użytkowników wielu typów i dla każdego z nich zapamiętywać dostosowane do potrzeb aplikacji informacje. Użycie protokołu LDAP wymagałoby żmudnego, nieintuicyjnego i nierozszerzalnego mapowania pól klas na strukturę wpisów katalogowych. Jako że nie projektowaliśmy systemu mającego w założeniach integrację z innymi projektami, nic nie stało na przeszkodzie zastosowaniu innego rozwiązania.
@@ -525,7 +525,7 @@ Jego realizacja była bardzo ciężka i czasochłonna, gdyż musiała uwzględni
 a z drugiej strony musiała odzwierciedlać rzeczywisty stan podczas tłumaczenia.\\
 
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \includegraphics[width=1.1\textwidth]{resources/data.png}
 \caption{Model danych zawierający wszystkie etapy przebiegu realizacji projektu}
 \end{figure}
@@ -577,7 +577,7 @@ Pierwszym krokiem od którego musielismy zacząć implementację aplikacji było
 
 W aplikacjach GWT podział struktury obiektów pomiędzy te tłumaczone na kod javascriptowy i te kompilowane i uruchamiane na wirtualnej maszynie javy wygląda następująco:
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \includegraphics[width=0.60\textwidth]{resources/gwt_spring_1.png}
 \caption{czerwony - importowane klasy GWT, niebieski - własne klasy, zielony - klasy generowane automatycznie}
@@ -589,7 +589,7 @@ System komunikacji oparty o SOAP implementowany jest także przez platformę Spr
 
 Aby uniknąć komplikacji związanych z duplikowaniem metod dla rozszerzania klasy GWT i interfejsu Springowego do rozwiązania problemu wykorzystujemy mechanizm inwersji kontroli Springa. Pomysł polega na stworzeniu klasy, która będzie tłumaczyć wywołania metod GWT na wywołania metod używanych przez platformę Spring. Do tej klasy będziemy następnie "wstrzykiwać" gotowe implementacje serwisów w jednej technologii, aby użyte mogły zostać do obsługi zapytań w drugiej.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \includegraphics[width=\textwidth]{resources/gwt_spring_2.png}
 \caption{czerwony - importowane klasy GWT, żółty - importowane klasy Spring, niebieski - własne klasy, zielony - klasy wygenerowane automatycznie}
@@ -812,19 +812,19 @@ które nie znalazły swojego miejsca.
 
 \begin{itemize}
 \item Podręcznik Spring Framework w wersji 3.1 \\
-\url{h!tp://static.springsource.org/spring/docs/3.1.x/spring-framework-reference/h!ml/}
+\url{http://static.springsource.org/spring/docs/3.1.x/spring-framework-reference/ht!ml/}
 \item Tutorial Google Web Toolkit \\
-\url{h!tps://developers.google.com/web-toolkit/doc/latest/tutorial/}
+\url{https://developers.google.com/web-toolkit/doc/latest/tutorial/}
 \item Biblioteka komponentów ExtGWT \\
-\url{h!tp://www.sencha.com/examples/}
+\url{http://www.sencha.com/examples/}
 \item Podręcznik frameworku Hibernate w wersji 3.6 \\
-\url{h!tp://docs.jboss.org/hibernate/orm/3.6/reference/en-US/h!ml/}
+\url{http://docs.jboss.org/hibernate/orm/3.6/reference/en-US/ht!ml/}
 \item Przewodnik użytkownika EGit \\
-\url{h!tp://wiki.eclipse.org/EGit/User_Guide/}
+\url{http://wiki.eclipse.org/EGit/User_Guide/}
 \item Dokumentacja Jiry \\
-\url{h!tps://confluence.atlassian.com/display/JIRA/}
+\url{https://confluence.atlassian.com/display/JIRA/}
 \item Dokumentacja Confluence'a \\
-\url{h!tps://confluence.atlassian.com/display/DOC/}
+\url{https://confluence.atlassian.com/display/DOC/}
 
 \end{itemize}
 
@@ -879,7 +879,7 @@ fetorycznej:
   \emph{Fetorem} nazwiemy skupienie blaba spe³niaj±ce nastêpuj±cy
   \emph{aksjomat reperkusatywno¶ci}:
   $$\forall \mathcal{X}\in Z(t)\ \exists
-  \pi\subseteq\oint_{\Omega^2}\kappa\leftrigh!arrow 42$$
+  \pi\subseteq\oint_{\Omega^2}\kappa\leftright!arrow 42$$
 \end{defi}
 
 
