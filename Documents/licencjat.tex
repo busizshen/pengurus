@@ -311,8 +311,19 @@ Sam mechanizm logowania jest również odpowiedzialnością Spring Security. Mec
 Ostatecznie projekt ten wykorzystujemy do ograniczania dostępu do konkretnych funkcji oferowanych przez stronę serwera aplikacji lub danych przez nie zwracanych. Osiągamy to przy użyciu systemu adnotacji, które umieszczone przed definicją metody definiują dla niej cechy bezpieczeństwa. W ten sposób określamy, czy użytkownik może wywołać tę funkcję na podstawie jego roli, bądź przy użyciu zdefiniowanych przez siebie warunktów. W podobny sposób możemy przefiltrować kolekcję obiektów zwracanych przez funkcję. 
 
 \section{Google Web Toolkit (ExtGWT)}
-Framework do budowania aplikacji webowych w oparciu oparciu o AJAX, przy użyciu języka Java, tak w skrócie można opisać Google Web Toolkit.
-zalety gwt i alternatywy (inne gwt, UiBinder)
+
+Google Web Toolkit to framework umożliwiający tworzenie skomplikowanych aplikacji opartych o przeglądarke. GWT rodziela samą aplikację na część serwera pisaną w języku Java, oraz część kliencką uruchamianą w przeglądarce, komunikującą się z serwerem za pomocą technologii AJAX. Ta druga część tworzona jest w języku JavaScript bądź Java, tak jak w naszej aplikacji. Sam sposób komunikacji tych dwóch części został dokładniej opisany w dziale \ref{r:spring_gxt}. Aplikacje tworzone w ten sposób przerzucając odpowiedzialność za jej wykonanie na barki przeglądarki internetowej uniezależnia swoje działanie od środowiska (systemu operacyjnego, innego oprogramowania) i umożliwia uruchomienie bez instalacji.
+
+\paragraph{Biblioteka komponentów}
+Główną zaletą wykorzystania rozszerzenia Google Web Toolkit (oprócz przenośności aplikacji) jest oferowana przez niego bogata biblioteka komponentów. Dzięki temu możliwe jest stworzenie rozbudowanej aplikacji bez potrzebny tworzenia każdego elementu aplikacji od samego początku. Ponieważ aplikacje użytkowe w wielu przypadkach opierają się na podobnych założeniach, dlatego wszystkie komponenty są dopracowane i ułatwiają tworzenie wygodnego i intuicyjnego interfejsu użytkownika. GWT zapewnia między innymi pakiet kontrolek wykorzystywanych w formularzach, wiele rodzai tabel i wykresów, rozmaite menu czy paski narzędzi.
+
+\paragraph{Mechanizm stronicowania}
+GWT oferuje udostępnia wiele mechanizmów ułatwiających tworzenie aplikacji bądź przyspieszających jej działanie. Jednym z nich jest mechanizm stronicowania. Opisany wcześniej podział aplikacji na dwie części generuje potrzebę przesyłania między nimi dużych ilości danych. Jedną z metod wykorzystanych do jej zmniejszenia jest dzielenie danych listowanych przez użytkownika na porcje, które zaspakoją jego potrzeby a jednocześnie rozłożą lub ograniczą transfer danych. W tym przypadku jednak mechanizm ten nie został dopracowany bądź w ciągu rozwoju frameworku zapomniany. Na szczęście ręczna implementacja niektórych jego fragmentów umożliwiła usunięcie błędów i wykorzystanie tej techniki w naszej aplikacji.
+
+\paragraph{ExtGWT a ExtJS, UBinder}
+Budowanie aplikacji klienckiej możliwe było także bezpośrednio z użyciem języka JavaScript. Odeszliśmy jednak od tego pomysłu, ponieważ baliśmy się, że aplikacja tworzona w tym języku szybko wymknie się spod kontroli, a namnożenie się ukrytych błędów uniemożliwi pracę nad projektem. Użycie natomiast wersji, w której to kod Javowy kompiluje się do JavaScriptowego umożliwiło wykorzystanie wszystkich zalet statycznego sprawdzania kodu oferowanego przez środowisko programistyczne Eclipse.
+
+Projektowanie wyglądu aplikacji możliwe było także z użyciem UIBindera, w którym komponowanie strony odbywało się z użyciem plików .xml. Pomimo tego, że prawdopodobnie umożliwiłoby to obejście problemów z zarządzaniem interfejsem, na które czasmi się natykaliśmy, to jednak nakład pracy włożony w naukę obsługi tego narzędzia przekroczyłby wartość oczekiwanych z tego zysków.
 
 \section{Hibernate}
 Hibernate jest najpopularniejszą biblioteką mapowania obiektowo-relacyjnego przeznaczoną dla języka prograwania Java.
@@ -378,7 +389,7 @@ przeznaczyć na implementacje.
 \section{System klas i uprawnień użytkowników}
 Projektowana przez nas aplikacja w oczywisty sposób musiała przechowywać dane użytkowników oraz umożliwiać im logowanie się do systemu. Mogliśmy podjąć jedną z dwóch decyzji: wykorzystać istniejący system w oparciu o protokół LDAP, bądź też zaprojektować i zaimplementować własny system.
 
-\paragraph{Light!weight! Directory Access Protocol}
+\paragraph{Lightweight Directory Access Protocol}
 Protokół ten jest przeznaczony do korzystania z usług katalogowych za pośrednictwem protokołu internetowego. LDAP obsługuje podstawowe operacje pozwalające na logowanie, wyszukanie wpisów katalogowych, dodawanie, usuwanie, sprawdzanie i modyfikowanie wpisów oraz kilka innych. Operacje te umożliwiają przechowywanie w systemie zarządzającym autentykacją praktycznie dowolnych danych i pozwalają na unifikację systemu logowania dla wielu współdziałających aplikacji.
 
 Do logowania w naszej aplikacji nie użyliśmy jednak tego protokołu. Zaprojektowany przez nas, z użyciem hierarchii klas i atrybutów, model użytkownika ma obsługiwać użytkowników wielu typów i dla każdego z nich zapamiętywać dostosowane do potrzeb aplikacji informacje. Użycie protokołu LDAP wymagałoby żmudnego, nieintuicyjnego i nierozszerzalnego mapowania pól klas na strukturę wpisów katalogowych. Jako że nie projektowaliśmy systemu mającego w założeniach integrację z innymi projektami, nic nie stało na przeszkodzie zastosowaniu innego rozwiązania.
@@ -572,7 +583,7 @@ Mając serwer gotowy do użycia należało zapewnić wybranym osobom z obu zespo
 Ostatecznie w ramach przygotowania serwera do pracy zainstalowaliśmy / skonfigurowaliśmy: repozytorium (git), narzędzie do rewizji kodu (gerrit), które oczywiście kooperowało z użytym repozytorium, narzędzie do ciągłej integracji użyte do testowania i uruchamiania pokazowej wersji aplikacji (Jenkins) które odbierało polecenia od tego poprzedniego, serwer aplikacji javowych (Jetty) na których uruchamiana była aplikacja, narzędzie do zarządzania dokumentacją (Confluencem) oraz narzędzie do zarządzania projektem (Jira) zintegrowane z większością do tej pory wymienionych narzędzi. W celach administracyjnych skonfigurowane były zdalny dostęp do urządzenia (ssh), usługa udostępniająca dostęp do tych narzędzi (Apache) i narzędzie nadzorujące pracę ich wszystkich (Nagios).
 
 \section{Problemy z użytymi narzędziami}
-\subsection{Spring + ExtGWT}
+\subsection{Spring + ExtGWT}\label{r:spring_gxt}
 Pierwszym krokiem od którego musielismy zacząć implementację aplikacji było zintegrowanie wykorzystywanych przez nas technologii. Z trzech podstawowych (ExtGWT, Spring, Hibernate) nie mieliśmy jeszcze doświadczeń z Google Web Toolkit i to w pierwszej kolejności nim należało się zająć.
 
 W aplikacjach GWT podział struktury obiektów pomiędzy te tłumaczone na kod javascriptowy i te kompilowane i uruchamiane na wirtualnej maszynie javy wygląda następująco:
@@ -812,13 +823,13 @@ które nie znalazły swojego miejsca.
 
 \begin{itemize}
 \item Podręcznik Spring Framework w wersji 3.1 \\
-\url{http://static.springsource.org/spring/docs/3.1.x/spring-framework-reference/ht!ml/}
+\url{http://static.springsource.org/spring/docs/3.1.x/spring-framework-reference/html/}
 \item Tutorial Google Web Toolkit \\
 \url{https://developers.google.com/web-toolkit/doc/latest/tutorial/}
 \item Biblioteka komponentów ExtGWT \\
 \url{http://www.sencha.com/examples/}
 \item Podręcznik frameworku Hibernate w wersji 3.6 \\
-\url{http://docs.jboss.org/hibernate/orm/3.6/reference/en-US/ht!ml/}
+\url{http://docs.jboss.org/hibernate/orm/3.6/reference/en-US/html/}
 \item Przewodnik użytkownika EGit \\
 \url{http://wiki.eclipse.org/EGit/User_Guide/}
 \item Dokumentacja Jiry \\
