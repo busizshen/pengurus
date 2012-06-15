@@ -76,8 +76,8 @@ Z podobnym problemem muszą zmierzyć się również biura tłumaczeń. Duża ko
 \item usprawniania procesu tłumaczenia, 
 \item ułatwienia kontaktu na linii biuro - klient, 
 \item ułatwienia kontaktu na linii biuro - pracownicy nieetatowi (pracujący zazwyczaj poza siedzibą firmy), 
-\item możliwości wprowadzenia szybkich korekt,
-\item wysokiego bezpieczeństwa przechowywania danych (dane osobowe, pliki, własność intelektualna),
+\item możliwości wprowadzania szybkich korekt,
+\item wysokiego bezpieczeństwa przechowywania danych (danych osobowych, plików, własności intelektualnej),
 \item prostoty użytkowania,
 \item powszechnego dostępu. 
 \end{itemize} 
@@ -89,60 +89,58 @@ Ponadto produkty te często zapewniają niski poziom bezpieczeństwa i nie są p
 Pengurus CRM ma być aplikacją, która wychodzi naprzeciw tym problemom. 
 Będzie to pierwsza na rynku aplikacja WWW stworzona przy użyciu gamy nowych technnologii - ExtGWT, Hibernate, Spring.
 Skierowana bezpośrednio do właścicieli biur tłumaczeń, w znacznym stopniu ułatwiająca kontakt z klientem, jak również kontakt pomiędzy pracownikami. 
-Do jej obsługi będzie wystarczać przeglądarka WWW, zatem umożliwi to pracę poza biurem
+Do jej obsługi będzie wystarczać przeglądarka internetowa, zatem umożliwi to pracę poza biurem
 oraz skróci klientowi czas jaki musi poświęcić na nadzorowanie projektu. 
 
 \section{Użytkownicy}
 \begin{itemize}
 \item Kierownik (ang. Executive) – pracownik firmy, posiadający najwięcej praw w systemie Pengurus, fizycznie rola przewidziana dla osób postawionych najwyżej w hierarchii firmy. Jako jedyny posiada dostęp do panelu administratora.
 \item Menadżer Projektu (ang. Project Manager)– pracownik firmy, odpowiadający za nadzorowanie projektów.
-\item Ekspert (ang. Expert)– pracownik firmy, odpowiedzialny za tłumaczenie dokumentów, zleconych przez Menadżera Projektu (Tłumacz).
-\item Księgowy (ang. Accountant)– pracownik firmy, odpowiedzialny za księgowość firmy.
-\item Pracownik nieetatowy (ang. Freelancer)– osoba nie będąca na stałe zatrudniona w firmie, która na potrzeby chwili wykonuje odpłatnie zlecone tłumaczenia (Tłumacz).
-\item Klient (ang. Client)– klient indywidualny bądź biznesowy zlecający tłumaczenie firmie.
+\item Ekspert (ang. Expert) – pracownik firmy, odpowiedzialny za tłumaczenie dokumentów, zleconych przez Menadżera Projektu (Tłumacz).
+\item Księgowy (ang. Accountant) – pracownik firmy, odpowiedzialny za księgowość firmy.
+\item Pracownik nieetatowy (ang. Freelancer) – osoba nie będąca na stałe zatrudniona w firmie, która na potrzeby chwili wykonuje odpłatnie zlecone tłumaczenia (Tłumacz).
+\item Klient (ang. Client) – klient indywidualny bądź biznesowy zlecający tłumaczenie firmie.
 \end{itemize}
 
 \section{Przypadki użycia}
 \begin{itemize} 
 \item Przyjęcie zlecenia
 
-Kierownik zlecenia ( Menadżer ds. produkcji/ Stanowisko ds. relacji z klientami i produkcji ) 
+Kierownik zlecenia (Menadżer ds. produkcji/Stanowisko ds. relacji z klientami i produkcji) 
 jest odpowiedzialny za przyjęcie zlecenia od klienta oraz przygotowanie odpowiedniej oferty, 
-która następnie zostaje podana ocenie klientowi.
+która następnie zostaje poddana ocenie klienta.
 
-Kierownik zlecenia odbiera dokumenty od klienta wraz z tekstem oryginału , zapoznaje się on z przesłanym/odebranym materiałem,
-a następnie ustala ze zlecającym szczegóły dotyczące zlecenia takie jak data realizacji, cena,  tryb zlecenia, rodzajem tłumaczenia,  
-materiały pomocnicze.
+Kierownik zlecenia odbiera dokumenty od klienta wraz z tekstem oryginału, zapoznaje się on z przesłanym/odebranym materiałem,
+a następnie ustala ze zlecającym szczegóły dotyczące zlecenia takie jak data realizacji, cena,  tryb zlecenia, rodzaj tłumaczenia, materiały pomocnicze.
 
 Kierownik zlecenia przgotowuje dziennik zlecenia. W dzienniku zapisywana jest historia pracy z dokumentem i 
 odnotowywane są wszystkie istotne zdarzenia mające wpływ na jakość i/lub bezpieczeństwo informacji przekazanych przez klienta. 
-Ponadto przechowywane są : data utworzenia zlecenia, data przyjęcia tekstu źródłowego oraz związanych z nim materiałów,
-,numer zlecenia, informację o podjętych działaniach w celu usunięcia niezgodności. 
+Ponadto przechowywane są: data utworzenia zlecenia, data przyjęcia tekstu źródłowego oraz związanych z nim materiałów, numer zlecenia oraz informację o podjętych działaniach w celu usunięcia niezgodności. 
 
 Przed rozpoczęciem realizacji projektu klient jest zobowiązany do zaakceptowania przygotowanej oferty.
 
 \item Rejestracja zlecenia \\
-Kierownik zlecenia wyznacza lidera/liderów dla tłumaczenia (Menadżera Projektu). W uzasadnionych przypadkach działania Lidera wykonuje kierownik zlecenia.
-Ponadto jest on odpowiedzialny za przypisanie odpowiednich tłumaczy/ weryfikatorów do projektu
-Kierownik ponadto udostępnia menadżerom przesłane przez klienta zasoby ( pliki ) i wyznacza im temin realizacji poszczygólnych etapów projektu.
+Kierownik zlecenia wyznacza lidera/liderów dla tłumaczenia (Menadżera Projektu). W uzasadnionych przypadkach działania lidera wykonuje kierownik zlecenia.
+Ponadto jest on odpowiedzialny za przypisanie odpowiednich tłumaczy/weryfikatorów do projektu.
+Kierownik ponadto udostępnia menadżerom przesłane przez klienta zasoby (pliki) i wyznacza im temin realizacji poszczególnych etapów projektu.
 
 \item Tłumaczenie i weryfikacja\\
 Menadżer Projektu przekazuje odpowiednim tłumaczom materiały oraz wyznacza termin realizacji tłumaczenia.
 W tym celu tworzy nowe pliki i udostępnia je tłumaczowi.
 Ponadto menadżer wyznacza odpwiedniego Weryfikatora.
-Tłumacz przesyła pliki ze zrealizownym etapami pracy. Każdy z tych plików może być edytowany przez autora, a dostęp do nich posiadają menadżerowie oraz weryfikatorzy.
+Tłumacz przesyła pliki ze zrealizownym etapami pracy. Każdy z tych plików może być edytowany przez autora, a dostęp do nich posiadają także menadżerowie oraz weryfikatorzy.
 Po zakończonym tłumaczeniu weryfikator sprawdza wykonaną pracę, a następnie wysyła plik z poprawkami zapisuje uwagi oraz akceptuje wykonaną pracę lub nakazuje ponowne rozpatrzenie.
-Po ostatecznym zaakceptowaniu przez weryfikator menadżer odbiera pliki.
-W przypadku pracowników nieetatowych następuje rozliczenie z tłumaczem, które jest potwierdzane przez księgowego.
+Po ostatecznym zaakceptowaniu przez weryfikatora menadżer odbiera pliki.
+W przypadku pracowników nieetatowych następuje rozliczenie z tłumaczenia, które jest potwierdzane przez księgowego.
 
 \item Przekazanie gotowego tłumaczenia do zleceniodawcy\\
 Menadżer projektu odbiera od tłumaczy i weryfikatorów pliki oraz przygotowuje ostateczny dokument, który następnie zostaje podany ocenie kierownikowi zlecenia.
-Kieronik zlecenia po zaakceptowaniu przekazuje go klientowi, który podaje go swojej ocenie. W razie reklamacji dokument wraz z uwagami zostaje przesłany 
+Kieronik zlecenia po zaakceptowaniu przekazuje go klientowi, który poddaje go swojej ocenie. W razie reklamacji dokument wraz z uwagami zostaje przesłany 
 menadżerowi projektu do ponownego rozpatrzenia.
 
 \item Archiwizacja zleceń\\
 Po zamknięciu obsługi zlecenia – formularz zlecenia przechowywany jest,
-wraz z adnotacją dotyczącą danych faktury oraz danych określających uczestników 
+wraz z adnotacją dotyczącą danych faktury oraz danymi określających uczestników 
 procesu realizacji, w wersji papierowej w kolejności odpowiadającej numerom 
 wewnętrznym nadanym na początku procesu.
 Pliki danego zlecenia wraz z dziennikiem zlecenia, przechowywane są w 
@@ -151,9 +149,9 @@ Dane znajdujące się na serwerze poddawane są archiwizacji, zgodnie z
 Polityką tworzenia kopii zapasowych Pl-4.1
 
 \item Tworzenie i edycja użytkowników systemu\\
-Kierownik tworzy użytkownika oraz nadaje mu odpowiednie role ( tłumacz , klient, menadżer projektu, itd. ).
-Pracownik posiada : login, dane osobowe i kontaktowe , posiadane umiejętności tłumaczenia ( razem z posiadanymi prawamy - tłumaczenia sądowe, techniczne ).
-Klient może być kilentem biznesowym ( posiada pośredników ) , bądź klientem indywidualnym.
+Kierownik tworzy użytkownika oraz nadaje mu odpowiednie role (tłumacz, klient, menadżer projektu, itd.).
+Pracownik posiada: login, dane osobowe i kontaktowe, posiadane umiejętności tłumaczenia (wraz z prawami do ich tworzenia - tłumaczenia sądowe, techniczne).
+Klient może być kilentem biznesowym (posiada pośredników), bądź klientem indywidualnym.
 
 \end{itemize}
 
@@ -161,17 +159,17 @@ Klient może być kilentem biznesowym ( posiada pośredników ) , bądź kliente
 
 \section{Definicje}
 \begin{itemize}
-\item Oferta (ang. Quote) – przygotowana przez firmę, przedstawiana klientowi, który zgadza się na przedstawione warunki, bądź je renegocjuje. (oferta jest modyfikowana przez firmę). Każda Oferta składa się z Prac i opisu.
-\item Praca (ang.Job) – jednostka określająca część zlecenia (np. przetłumaczenie jednego tomu książki), na którą składa się lista Zadań.
-\item Projekt (ang.Project)– tworzony jest na podstawie ostatecznej wersji Oferty zaakceptowanej przez dwie strony (klient, firma). Zawiera Prace składające się na Ofertę. Do każdego Projektu przypisany jest co najmniej jeden Menadżer Projektu oraz ewentualnie lista Tłumaczy i Weryfikatorów. Z Prac powstają Zadania.
-\item Zadanie (ang. Task) – przypisywane Tłumaczowi i Weryfikatorowi. Każde Zadanie jest częścią dokładnie jednej Pracy.
+\item Oferta (ang. Quote) – przygotowana przez firmę, przedstawiana klientowi, który zgadza się na przedstawione warunki, bądź je renegocjuje (oferta jest modyfikowana przez pracowników firmy). Każda oferta składa się z prac i opisu.
+\item Projekt (ang. Project)– tworzony jest na podstawie ostatecznej wersji oferty zaakceptowanej przez dwie strony (klient, firma). Zawiera prace które składały się na ofertę. Do każdego projektu przypisany jest co najmniej jeden menadżer projektu oraz ewentualnie lista tłumaczy i weryfikatorów.
+\item Praca (ang. Job) – jednostka określająca część zlecenia (np. przetłumaczenie jednego tomu książki), na którą składa się lista zadań.
+\item Zadanie (ang. Task) – przypisywane tłumaczowi i weryfikatorowi. Każde zadanie jest częścią dokładnie jednej pracy.
 \end{itemize}
 \section{Opis aplikacji}
 System Zarządzania Biurem Tłumaczeń Pengurus jest aplikacją przeznczaną dla użytkowników pełniących różne role w procesie tłumaczenia.
 Główna strona aplikacji jest podzielona na 3 moduły:
 \begin{itemize}
 \item Panel górny, w którym użytkownik może wybrać preferowany język, wylogować się oraz zmienić ustawienia
-\item  Menu boczne, w którym znajdują się odnośniki do poszczególnych projektów / zadań oraz paneli administracyjnych
+\item  Menu boczne, w którym znajdują się odnośniki do poszczególnych projektów, zadań oraz paneli administracyjnych
 \item  Panel główny, w którym wyświetlane są akcje proawdzone przez użytkownika.  
 \begin{figure}[ht!]
 \centering
@@ -206,8 +204,8 @@ Panel administracyjny udostępnia im między innymi:
 \end{itemize}
 W celu przedstawienia możliwości, jakie udostępnia aplikacja przedstawimy podstawowy przebieg procesu tłumaczenia od przyjęcia zlecenia od Klienta do ostatecznego przyjęcia rozwiązania.\\
 \begin{itemize}
-\item Oferta - Jest to pierwszy etap realizacji projektu. Wgląd w niego mają kierownicy, a w szczególności kierownik danej oferty, a także klient.
-Przygotowanie Oferty polega na przesłaniu przez klienta odpowiednich plików i dokumentów oraz sprecyzowaniu problemu w opisie.
+\item Oferta - jest to pierwszy etap realizacji projektu. Wgląd w niego mają kierownicy, a w szczególności kierownik danej oferty, a także klient.
+Przygotowanie oferty polega na przesłaniu przez klienta odpowiednich plików i dokumentów oraz sprecyzowaniu problemu w opisie.
 
 \begin{figure}[ht!]
 \centering
@@ -215,8 +213,8 @@ Przygotowanie Oferty polega na przesłaniu przez klienta odpowiednich plików i 
 \caption{Oferta}
 \end{figure}
 
-Następnie kierownik oferty jest zobowiązany do podzielenia pracy na poszczególne etapy. W tym celu tworzy Prace, które zawierają:
-przydzielone pliki, opis, termin zakończenia pracy,cenę.
+Następnie kierownik oferty jest zobowiązany do podzielenia pracy na poszczególne etapy. W tym celu tworzy prace, które zawierają:
+przydzielone pliki, opis, termin zakończenia pracy, cenę.
 
 \begin{figure}[ht!]
 \centering
@@ -224,53 +222,56 @@ przydzielone pliki, opis, termin zakończenia pracy,cenę.
 \caption{Stworzona przez Kierownika Praca}
 \end{figure}
 
-Tak przygotowana Oferta zostaje poddana ocenie Klienta, który w razie braku uwag akceptuje ją za pomocą odpowiedniego pasku stanu.
+Tak przygotowana oferta zostaje poddana ocenie klienta, który w razie braku uwag akceptuje ją za pomocą przycisku. Zmiana zostanie wyświetlona w odpowiednim pasku stanu.
 
-\item Projekt - Jest to kolejny etap realizacji zlecenia związany stricte z procesem tłumaczenia. Wgląd w proces tłumaczenia mają Kierownicy oraz Menadżerowie Projektu ,Tłumacze i Weryfikatorzy, którzy zostali wybrani przez kierownika projektu z puli pracowników o odpowiednich do danego Projektu wymogach.\\
+\item Projekt - jest to kolejny etap realizacji zlecenia związany stricte z procesem tłumaczenia. Wgląd w proces tłumaczenia mają kierownicy oraz menadżerowie projektu, tłumacze i weryfikatorzy, którzy zostali wybrani przez kierownika projektu z puli pracowników o odpowiednich do danego projektu wymogach.
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/project.png}
 \caption{Projekt - etap realizacji zamówienia}
 \end{figure}
  
-Menadżerowie Projektów zgodnie z ustalonym podziałem pracy są zobowiązani do podzielenia kolejnych Prac na Zadania, które zlecają Tłumaczom i Weryfikatorom. Są oni odpowiedzialni za ustalenie terminu przyjęcia rozwiązania, przydzielenie odpowiedniego pliku do tłumaczenia oraz ostatecznej oceny pracy zarówno tłumacza, jak i weryfikatora. Szczegółowy opis etapu tłumaczenia (Zadania) zostanie opisany w dalszej części.\\
-Po zakończeniu pojedynczej Pracy, tzn. przetłumaczeniu całego tekstu załączonego do Pracy, Menadżerowie Projektu są zobowiązani do przygotowania ostateczenej wersji pliku i udostępnienie jej Klientowi. Klient może za pomocą pasku stanu zaakceptować tak wykonaną Pracę, bądź może poprosić o dokonanie odpowiednich poprawek.
+Menadżerowie projektów zgodnie z ustalonym podziałem pracy są zobowiązani do podzielenia kolejnych prac na zadania, które zlecają tłumaczom i weryfikatorom. Są oni odpowiedzialni za ustalenie terminu przyjęcia rozwiązania, przydzielenie odpowiedniego pliku do tłumaczenia oraz ostatecznej oceny pracy zarówno tłumacza, jak i weryfikatora. Szczegółowy opis etapu tłumaczenia (zadania) zostanie opisany w dalszej części.\\
+Po zakończeniu pojedynczej pracy, tzn. przetłumaczeniu całego tekstu załączonego do pracy, menadżerowie projektu są zobowiązani do przygotowania ostateczenej wersji pliku i udostępnienie jej klientowi. Klient może za pomocą pasku stanu zaakceptować tak wykonaną pracę, bądź może poprosić o dokonanie odpowiednich poprawek.
 
-\item Zakończenie  realizacji Pracy - Klient akceptując wykonanie Pracy jest zobowiązany do rozliczenia jej. Gdy takowe nastąpi księgowy zaznacza ten fakt i możliwe jest zakończenie przez Kierownika przebiegu Pracy. 
-\item Zakończenie  realizacji Oferty - Gdy zostaną zakończone wszystkie Prace następuje rozliczenie i ostateczne zamknięcie całej Oferty. Zamknięta Oferta wraz ze wszystkimi dokumentami trafia następnie do archiwum. 
+\item Zakończenie realizacji pracy - klient akceptując wykonanie pracy jest zobowiązany do jej rozliczenia. Gdy tak się stanie, księgowy zaznacza ten fakt i możliwe jest zakończenie przez kierownika przebiegu pracy.
+ 
+\item Zakończenie realizacji oferty - gdy zostaną zakończone wszystkie prace następuje rozliczenie i ostateczne zamknięcie całej oferty. Zamknięta oferta wraz ze wszystkimi dokumentami trafia ostatecznie do archiwum. 
 \end{itemize}  
 
 \section{Podstawowy przypadek użycia}
-Uznaliśmy, że najważniejszym przypadkiem użycia wymagającym głębszego wyjaśnienia jest etap tłumaczenia - Zadanie. Przedstaiwony zostanie on bardziej szczegółowo, aby wyjaśnić wszelkie wątpliwości i ukazać możliwości naszej aplikacji.
+Uznaliśmy, że najważniejszym przypadkiem użycia wymagającym głębszego wyjaśnienia jest etap tłumaczenia - zadanie. Przedstaiwony zostanie on bardziej szczegółowo, aby wyjaśnić wszelkie wątpliwości i ukazać możliwości naszej aplikacji.
 
 \begin{enumerate}
-\item	Tworzenie Zadania - Menadżer Projektu odpowiedzialny za daną Pracę tworzy nowe Zadanie wybierając termin, jego realizacji, cenę i walutę w jakiej zostanie rozliczone zadanie oraz opis wyjaśniający problem . Ponadto Menadżer wybiera Tłumacza i Weryfikatora z listy pracowników przydzielonych do Projektu, którzy odpowiadają profilowi danego problemu. \\
+\item Tworzenie zadania - menadżer projektu odpowiedzialny za daną pracę tworzy nowe zadanie wybierając termin, jego realizacji, cenę i walutę w jakiej zostanie rozliczone zadanie oraz opis wyjaśniający problem . Ponadto menadżer wybiera tłumacza i weryfikatora z listy pracowników przydzielonych do projektu, którzy odpowiadają profilowi danego problemu.
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/task_create.png}
 \caption{Tworzenie Zadania}
 \end{figure}
-Po stworzeniu Zadania Menadżer Projektu przydziela pliki, które mają zostać przetłumaczone. Pliki do tłumaczenia są umieszczane w katalogu "Pliki Źródłowe" (ang. Source Files).
-\item 	Realizacja Tłumaczenia - Przydzielony do tłumaczenia ekspert przystępuje do jego realizacji zaznaczając to na pasku stanu i przechodząc do etapu "in progress". Ekspert wykonujac swoje zadanie może (a nawet powinien w celu zachowania bezpieczeństwa) po każdym etapie swojej pracy umieścić pliki z cząstkowym rozwiązaniem. Takie pliki powinny się znaleźć w katalogu "Pliki Docelowe" (ang. Target Files).\\
+
+Po stworzeniu zadania menadżer projektu przydziela pliki, które mają zostać przetłumaczone. Pliki do tłumaczenia są umieszczane w katalogu "Pliki Źródłowe" (ang. Source Files).
+\item Realizacja tłumaczenia - przydzielony do tłumaczenia ekspert przystępuje do jego realizacji zaznaczając to na pasku stanu i przechodząc do etapu "in progress". Ekspert wykonujac swoje zadanie może (a nawet powinien w celu zachowania bezpieczeństwa) po każdym etapie swojej pracy umieścić pliki z cząstkowym rozwiązaniem. Takie pliki powinny się znaleźć w katalogu "Pliki Docelowe" (ang. Target Files).
+
 Tłumacz informuje o zakończeniu pracy poprzez umieszczenie rozwiązania w katalogu "Pliki Docelowe" i przejściu na pasku stanu do etapu "resolved".   
-\item Weryfikacja - Po rozwiązaniu Zadania następuje etap weryfikacji dokonywany przez przydzieloną do tego osobę. Weryfikator ma za zadanie pobrać odpowiedni plik, a następnie poprawić. W razie poważniejszych błędów weryfikator może umieścić odpowiedni komentarz pod zadaniem i nie przyjąć rozwiązania. Zaznacza to wybierając akcję "re-open" na pasku stanu.	
+\item Weryfikacja - Po rozwiązaniu zadania następuje etap weryfikacji dokonywany przez przydzieloną do tego osobę. Weryfikator ma za zadanie pobrać odpowiedni plik, a następnie go poprawić. W razie poważniejszych błędów weryfikator może umieścić odpowiedni komentarz pod zadaniem i nie przyjąć rozwiązania. Zaznacza to wybierając akcję "re-open" na pasku stanu.	
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/task_reopen.png}
 \caption{Weryfikowanie Zadania - weryfikator nie akceptuje rozwiązania}
 \end{figure}
-\item 	Przyjęcie rozwiązania przez Menadżera Projektu - Każde Zadanie po zweryfikowniu musi zostać zaakceptowane przez jednego z Menadżerów Projektu. W razie uwag (podobnie jak to było w etapie weryfikacji) Menadżer może ponownie odesłać Zadanie do weryfikatora. Jeśli natomiast nie wymaga ono poprawek zostaje to zaakceptowane, a następnie dołączone do reszty rozwiązania zawartego w Pracy.
+\item Przyjęcie rozwiązania przez menadżera projektu - każde zadanie po zweryfikowniu musi zostać zaakceptowane przez jednego z menadżerów projektu. W razie uwag (podobnie jak to było w etapie weryfikacji) menadżer może ponownie odesłać zadanie do weryfikatora. Jeśli natomiast nie wymaga ono poprawek zostaje to zaakceptowane, a następnie dołączone do reszty rozwiązania zawartego w pracy.
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=0.8\textwidth]{resources/task.png}
 \caption{Panel Zadania}
 \end{figure}
-\\
-\item Rozliczenie - w przypadku pracowników nieetatowych, czyli tzw. freelancerów, bądź pracowników na umowę o dzieło po każdym rozwiązanym Zadaniu następuje rozliczenie. Gdy takowe zostanie wykonane księgowy zmienia status Zadania na "accounted".\\
-Gdy ekspert jest pracownikiem etatowym wszystkie zadania wykonuje automatycznie Menadżer Projektu.
-\item Zakończenie - Po rozliczeniu Zadania Menadżer Projektu może go zakończyć,a wszystkie pliki i informacje z nim związane trafiają do archiwum. 
-\end{enumerate}
 
+\item Rozliczenie - w przypadku pracowników nieetatowych, czyli tzw. freelancerów, bądź pracowników na umowę o dzieło po każdym rozwiązanym zadaniu następuje rozliczenie. Gdy takowe zostanie wykonane księgowy zmienia status zadania na "accounted".
+
+Gdy ekspert jest pracownikiem etatowym wszystkie zadania wykonuje automatycznie Menadżer Projektu.
+\item Zakończenie - Po rozliczeniu zadania menadżer projektu może go zakończyć,a wszystkie pliki i informacje z nim związane trafiają do archiwum. 
+\end{enumerate}
 
 \chapter{Rozwiązania}
 \section{Spring Framework}
@@ -302,9 +303,9 @@ IoC zwiększa znacząco czytelność kodu i zmniejsza jego ilość, a co ważnie
 Podział nieprzeplatających się ze sobą modułów implementujących określone interfejsy pozwala skupić się na ich rzeczywistym przeznaczeniu dodatkowo zwiększając testowalność kodu pozwalając na podstawianie spreparowanych obiektów w miejsce zależności.
 
 \paragraph{Spring Security}
-Jednym z projektów wchodzących z zestaw Springowych narzędzi jest Spring Security. Projekt ten implementuje pełen zestaw funkcjonalności związanych z bezpieczeństwem aplikacji począwszy od logowania (czy to z własnym systemem użytkowników, LDAPem, OAUTHem) skończywszy na filtrowaniu danych przesyłanych do użytkownika.
+Kolejnym z projektów wchodzących z zestaw Springowych narzędzi jest Spring Security. Projekt ten implementuje pełen zestaw funkcjonalności związanych z bezpieczeństwem aplikacji począwszy od logowania (czy to z własnym systemem użytkowników, czy LDAPem, OAUTHem i innymi) skończywszy na filtrowaniu danych przesyłanych do użytkownika.
 
-Pierwszym miejscem w którym wykorzystujemy tą część frameworku jest strona logowania. Osoba nieautoryzowana przez system próbująca dostać się do zasobów (w tym przypadku samej aplikacji), do których nie ma uprawnień zostaje przekierowana na stronę logowania. Osoba zalogowana, ale bez uprawnień po prostu zostanie o tym poinformowana. Spring pozwala definiować prawa dostępów do zasobów na podstawie ról użytkowników oraz adresów zasobów, co odbywa się już na poziomie dyspozytora (ang. dispatcher).
+Pierwszym miejscem w którym wykorzystujemy tą część frameworku jest strona logowania. Osoba nieautoryzowana przez system próbująca dostać się do zasobów (w tym przypadku samej aplikacji), do których nie ma uprawnień zostaje przekierowana na stronę logowania. Osoba zalogowana, ale bez uprawnień zostanie o tym poinformowana i nie dopuszczona dalej. Spring pozwala definiować prawa dostępów do zasobów na podstawie ról użytkowników oraz adresów zasobów, co odbywa się już na poziomie dyspozytora (ang. dispatcher).
 
 Sam mechanizm logowania jest również odpowiedzialnością Spring Security. Mechanizm ten wykorzystuje naszą własną implementację systemu użytkowników dopasowaną do odpowiedniego interfejsu. Informacja o tym jaki użytkownik jest zalogowany zostaje zapamiętana wewnątrz sesji i jest dostępna w każdym miejscu, które wymaga jej użycia. To także Spring zapewnia szyfrowanie haseł użytkowników z użyciem hashu nazwy użytkownika i soli.
 
@@ -312,7 +313,7 @@ Ostatecznie projekt ten wykorzystujemy do ograniczania dostępu do konkretnych f
 
 \section{Google Web Toolkit (ExtGWT)}
 
-Google Web Toolkit to framework umożliwiający tworzenie skomplikowanych aplikacji opartych o przeglądarke. GWT rodziela samą aplikację na część serwera pisaną w języku Java, oraz część kliencką uruchamianą w przeglądarce, komunikującą się z serwerem za pomocą technologii AJAX. Ta druga część tworzona jest w języku JavaScript bądź Java, tak jak w naszej aplikacji. Sam sposób komunikacji tych dwóch części został dokładniej opisany w dziale \ref{r:spring_gxt}. Aplikacje tworzone w ten sposób przerzucając odpowiedzialność za jej wykonanie na barki przeglądarki internetowej uniezależnia swoje działanie od środowiska (systemu operacyjnego, innego oprogramowania) i umożliwia uruchomienie bez instalacji.
+Google Web Toolkit to framework umożliwiający tworzenie skomplikowanych aplikacji opartych o przeglądarke. GWT rodziela samą aplikację na część serwera pisaną w języku Java, oraz część kliencką uruchamianą w przeglądarce, komunikującą się z serwerem za pomocą technologii AJAX. Ta druga część tworzona jest w języku JavaScript bądź Java, tak jak w naszej aplikacji. Sam sposób komunikacji tych dwóch części został dokładniej opisany w dziale \ref{r:spring_gxt}. Aplikacje tworzone w ten sposób przerzucają odpowiedzialność za jej wykonanie na barki przeglądarki internetowej uniezależniając swoje działanie od środowiska (systemu operacyjnego, innego oprogramowania) i umożliwiając uruchamienie bez dodatkowej instalacji.
 
 \paragraph{Biblioteka komponentów}
 Główną zaletą wykorzystania rozszerzenia Google Web Toolkit (oprócz przenośności aplikacji) jest oferowana przez niego bogata biblioteka komponentów. Dzięki temu możliwe jest stworzenie rozbudowanej aplikacji bez potrzebny tworzenia każdego elementu aplikacji od samego początku. Ponieważ aplikacje użytkowe w wielu przypadkach opierają się na podobnych założeniach, dlatego wszystkie komponenty są dopracowane i ułatwiają tworzenie wygodnego i intuicyjnego interfejsu użytkownika. GWT zapewnia między innymi pakiet kontrolek wykorzystywanych w formularzach, wiele rodzai tabel i wykresów, rozmaite menu czy paski narzędzi.
@@ -323,13 +324,13 @@ GWT oferuje udostępnia wiele mechanizmów ułatwiających tworzenie aplikacji b
 \paragraph{ExtGWT a ExtJS, UBinder}
 Budowanie aplikacji klienckiej możliwe było także bezpośrednio z użyciem języka JavaScript. Odeszliśmy jednak od tego pomysłu, ponieważ baliśmy się, że aplikacja tworzona w tym języku szybko wymknie się spod kontroli, a namnożenie się ukrytych błędów uniemożliwi pracę nad projektem. Użycie natomiast wersji, w której to kod Javowy kompiluje się do JavaScriptowego umożliwiło wykorzystanie wszystkich zalet statycznego sprawdzania kodu oferowanego przez środowisko programistyczne Eclipse.
 
-Projektowanie wyglądu aplikacji możliwe było także z użyciem UIBindera, w którym komponowanie strony odbywało się z użyciem plików .xml. Pomimo tego, że prawdopodobnie umożliwiłoby to obejście problemów z zarządzaniem interfejsem, na które czasmi się natykaliśmy, to jednak nakład pracy włożony w naukę obsługi tego narzędzia przekroczyłby wartość oczekiwanych z tego zysków.
+Projektowanie wyglądu aplikacji możliwe było także z użyciem UIBindera, w którym komponowanie strony odbywa się z użyciem plików .xml. Pomimo tego, że prawdopodobnie umożliwiłoby to obejście problemów z zarządzaniem interfejsem, na które czasmi się natykaliśmy, to jednak nakład pracy włożony w naukę obsługi tego narzędzia przekroczyłby wartość oczekiwanych z tego zysków.
 
 \section{Hibernate}
 Hibernate jest najpopularniejszą biblioteką mapowania obiektowo-relacyjnego przeznaczoną dla języka prograwania Java.
 Zapewnia ona przede wszystkim translację danych pomiędzy relacyjną bazą danych, a światem obiektowym. 
 Opiera się na wykorzystaniu opisu struktury danych za pomocą języka XML lub annotacji, dzięki czemu można mapować obiekty, 
-bezpośrednio na istniejące tabele bazy danych. Cechy biblioteki: 
+bezpośrednio na istniejące tabele bazy danych. Cechy biblioteki to: 
 \begin{itemize}
 \item wysoka wydajność (leniwa inicjalizacja, wiele strategii pobierania danych)
 \item wiarygodność i skalowalność (używana przez dziesiątki tysięcy deweloperów)
@@ -342,7 +343,7 @@ są najbardziej zauważalne i pomocne w naszej aplikacji.
 \paragraph{Mapowanie za pomocą języka XML}
 Mapowania za pomocą języka XML jest jednym z dwóch mechanizmów mapowania oferowanych przez Hibernate. Umożliwia przeniesienie 
 w prosty sposób całej hierarchii klas na język bazy danych. Do każdej klasy z hierarchii należy storzyć odpowiadający jej plik XML, 
-który powie Hibernate'owi jaką ma stworzyć tabele do bazy danych. W pliku tym możemy zawrzeć wiele informacji, na przykład:
+który powie Hibernate'owi jakie należy stworzyć tabele w bazie danych i w jaki sposób zapisywać do nich obiekty. W pliku tym możemy zawrzeć wiele informacji, na przykład:
 \begin{itemize}
 \item czy kolekcje będa leniwie wyjmowane (opcja lazy)
 \item relacje między poszczególnymi klasami (wiele do wielu, jeden do wielu, itp.)
@@ -354,7 +355,7 @@ na podstawie zaimplementowanych klas. Często jednak należy poprawić te pliki,
 asocjacji między klasami. Wykorzystanie mechanizmu mapowania Hibernate'a zaoszczędziło nam wielu czasu, który musielibyśmy przeznaczyć 
 na planowanie struktury bazy danych.
 
-\paragraph{Data access object}
+\paragraph{Data Access Object}
 Jest to obiekt, który zapewnia interfejs do bazy danych jednocześnie nie ujawiając jej szczegółów. Głównym celem stosowania DAO jest
 oddzielenie logiki biznesowej od dostępu do danych. W naszej aplikacji został wykorzystany wzorzec generycznego DAO, który oferuje 
 pięć metod: create, read, update, delete (CRUD) oraz loadAll, które odpowiednio: tworzą nowy obiekt, wyjmują obiekt, aktualizują 
@@ -379,7 +380,7 @@ TopLink jest taka samo jak Hibernate biblioteką mapowania obiektowo-relacyjnego
 \item mapowanie obiektów do XML
 \item obsługuje wiele języków zapytań
 \item wizualny edytor mapowania
-\item keszowanie w celu zapewnienia tożsamości obiektu
+\item cache'owanie w celu zapewnienia tożsamości obiektu
 \end{itemize}
 Głównym powodem dla którego zdecydowaliśmy się na Hibernate'a, a nie na TopLink'a był fakt, że większa część zespołu miała już 
 doświadczenie związane z użyciem tej pierwszej biblioteki, która całkowicie spełniała nasze wymagania związane z tworzeniem bazy 
@@ -473,7 +474,7 @@ Dzięki systemowi znaczników (przypisaniu numeru Zadania z Jiry do commita) mo�
 Integrowało to zmiany w kodzie z postępem prac umieszczonym w schematach Jiry.  
 
 \paragraph{Produkty konkurencyjne}
-Jednym z produktów konkurencyjnych, których wykorzystanie rozważaliśmy jest stworzony na wydziale MIM Uniwersytetu Warszawskiego JLoXiM Redmine.
+Jednym z produktów konkurencyjnych, których wykorzystanie rozważaliśmy jest udostępniany na wydziale MIM Uniwersytetu Warszawskiego JLoXiM Redmine.
 Produkt ten posiada większość z funkcjonalności jakie posiada Jira. W szczególności umożliwia tworzenie zadań, przydzielanie ich do członków zespołu, 
 konfiguracją uprawnień użytkowników i zarządzanie całym projektem. Analogicznie jak Jira generuje raporty oraz w przejrzysty sposób pokazuje stan 
 realizacji projektu.
@@ -484,8 +485,8 @@ Confluence jest narzędziem dla zespołów służącym do uproszczenia współpr
 W naszym projekcie był on wykorzystywany w szczególności podczas etapu projektowania systemu oraz przy tworzeninu dokumentacji.
 Confluence zapewnia wiele wygodnych rozwiązań.
 \begin{itemize}
-\item Przejrzysty podział na projekty - tworzenie dynamicznych stron , podstron , dowiązań, projektowanie dashboardów.
-\item Proste w obsłudze i wygodne wiki - dodawanie linków, mockapów, filmów, plików.
+\item Przejrzysty podział na projekty - tworzenie dynamicznych stron, podstron, dowiązań, projektowanie dashboardów.
+\item Proste w obsłudze i wygodne wiki - dodawanie linków, makiet (ang. mockup), filmów, plików.
 \item Udostępnia pluginy do tworzenia schematów i diagramów np.: Gliffy
 \item Integracja z Officem  
 \end{itemize}
@@ -502,13 +503,13 @@ który dostosuje wersję do danego produktu. Poszczególne wtyczki, biblioteki s
 Podsumowując, narzędzie to pozwala na łatwe i szybkie uruchamianie produktu w nowym środowisku. Dzięki niemu nie musimy samodzielnie zarządzać paczkami zawierającymi wykorzystywane przez nas biblioteki. Uruchomienie projektu na nowym serwerze bądź komputerze roboczym z dostępem do internetu sprowadza się do skopiowania źródeł projektu i użyciu jednej komendy tego właśnie narzędzia, które samo zadba o pobranie potrzebnych bibliotek, skompilowanie projektu z użyciem odpowiednich narzędzi i dostarczenie wyprodukowanego, gotowego do użycia, archiwum we wyspecyfikowane miejsce.
 \subsection{Eclipse}
 
-Eclipse to wybrane przez nas środowisko programistyczne, które łączy ze sobą zintegrowane środowisko programistyczne oraz rozszerzalność zapewnianą przez bibliotekę wtyczek umożliwiającą pracę praktycznie z każdym narzędziem. Praca z użyciem tego środowiska jest bardzo wygodna, ponieważ Eclipse udostępnia niezliczoną ilość skrótów klawiszowych umożliwiających niezwykle proste poruszanie się po całym projekcie. Podstawowe skróty obsługują nie tylko standardowe zarządzanie tekstem, ale zarządzanie kodem. Możliwe jest m. in. wydzielanie funkcji, globalne zmiany nazw klas, metod zmiennych, automatyczne tworzenie szkieletów obiektów, intuicyjne poruszanie się po strukturze hierarchii obiektów i wiele innych. Upraszcza to zmiany w istniejącym kodzie przez co samo tworzenie aplikacji staje się bardziej elastyczne, klasy czytelniejsze, a programiści nie boją się zaglądać i modyfikować kodu stworzonego przez poprzedników.
+Eclipse to wybrane przez nas środowisko programistyczne, które łączy ze sobą zintegrowane środowisko programistyczne oraz rozszerzalność zapewnianą przez bibliotekę wtyczek umożliwiającą pracę praktycznie z każdym narzędziem. Praca z użyciem tego środowiska jest bardzo wygodna, ponieważ Eclipse udostępnia niezliczoną ilość skrótów klawiszowych umożliwiających niezwykle proste poruszanie się po całym projekcie. Podstawowe skróty obsługują nie tylko standardowe zarządzanie tekstem, ale zarządzanie kodem. Możliwe jest m. in. wydzielanie funkcji, globalne zmiany nazw klas, metod zmiennych, automatyczne tworzenie szkieletów obiektów, intuicyjne poruszanie się po strukturze hierarchii obiektów i wiele innych. Upraszcza to dokonywanie zmian w istniejącym kodzie przez co samo tworzenie aplikacji staje się bardziej elastyczne, klasy czytelniejsze, a programiści nie boją się zaglądać i modyfikować kodu stworzonego przez poprzedników.
 
 \paragraph{Wtyczki}
 \begin{itemize}
 \item \textbf{EGit - Git Team Provider} - wtyczka pozwalająca obsługiwać repozytorium Gita z poziomu Eclipse'a. Oprócz tego, że wtyczka ta umożliwia wykonywanie wszystkich poleceń, które dostępne są z poziomu konsoli, EGit zapewnia także dodatkowe funkcjonalności ułatwiające prace, takie jak zastępowanie fragmentu dowolnego pliku przez fragment tego samego pliku w historii gita czy możliowść szybkiego podglądu kto i kiedy jako ostani modyfikował wskazaną linię kodu. Wtyczka ta umożliwia także integrację z Gerritem.
 \item \textbf{Maven Integration for Eclipse} - wtyczka integrująca eclipsa z Mavenem. Dzięki niej Eclipse potrafił wykrywać, które biblioteki spośród wymaganych przez projekt były zapewnione przez lokalne repozytorium Mavena oraz potrafił zarządzać pobieraniem tych, których brakowało.
-\item \textbf{FindBugs Eclipse Plugin} - wtyczka pozwalające na używanie narzędzia FindBuds. Pozwala ono na drobnych i nie tylko błędów, łatwych do przeoczenia pomyłek lub naruszających dobre nawyki pisania w języku Java elementów kodu. Pozwala to na zmniejszenie ilości problemów, których w łatwy sposób można uniknąć.
+\item \textbf{FindBugs Eclipse Plugin} - wtyczka pozwalające na używanie narzędzia FindBuds. Pozwala ono na wykrycie drobnych i nie tylko błędów, łatwych do przeoczenia pomyłek lub naruszających dobre nawyki pisania w języku Java elementów kodu. Pozwala to na zmniejszenie ilości problemów, których w łatwy sposób można uniknąć.
 \item \textbf{Eclipse JBoss Plugin} - wyczka pozwalająca na zainstalowanie narzędzi Hibernate Tools do pracy z Hibernatem, jak również JBoss Maven Hibernate Configurator do zintegrowania współpracy Mavena z Hibernatem
 \end{itemize}
 
@@ -519,7 +520,7 @@ Netbeans, podobnie jak Eclipse, jest zintegrowanym oferującym dużo możliwośc
 \chapter{Praca}
 \section{Projektowanie systemu}
 Rozpoczynając pracę nad projektowaniem systemu do zarządzania biurem tłumaczeń postawiliśmy sobie cel, aby w ramach tego tematu był on jak najbardziej funkcjonalny,
-co oznaczało , że miał się wykazywać jak największą elastycznością w dziedzinie tłumaczeń (np. musiał uwzględniać możliwość dodania nowej usługi tłumaczeń). 
+co oznaczało, że miał się wykazywać jak największą elastycznością w dziedzinie tłumaczeń (np. musiał uwzględniać możliwość dodania nowej usługi tłumaczeń). 
 Wymagało to od nas dogłębnego przeanalizowania rynku. Nasz produkt musiał być odpowiedni dla małych biur prowadzących proste, krótkie tłumaczenia, jak i dla większych 
 przedsiębiorstw, których projekty są znacznie obszerniejsze.\\
 
@@ -561,7 +562,7 @@ możliwość wysyłania przez niego plików, a w Pracy istnieje możliwość oce
 Ponadto Praca jest współdzielona przez Ofertę jak i Projket (nie ma oddzielnych instancji).
 \item Następnym problemem, jaki rozważaliśmy był nadzór nad realizacją zlecenia. Zgodnie z wymaganiami stworzyliśmy lidera tłumaczenia (u nas Menadżer Projektu), 
 który zajmował się przydzielaniem Zadań do pracowników pracujących przy danym projekcie. Do projetku pracownicy byli przydzielni przez kierownika zlecenia.
-Nie wiedzieliśmy natomiast ilu takich Menadżerów przypisać oraz czy powinni oni być powiązania stricte z Pracą , czy ogólniej z Projektem. 
+Nie wiedzieliśmy natomiast ilu takich Menadżerów przypisać oraz czy powinni oni być powiązania stricte z Pracą, czy ogólniej z Projektem. 
 Po długich dyskusjach i licznych pomysłach realizacji zdecydowaliśmy się na najbardziej elastyczny model. Ilość menadżerów miała zależeć od Kierownika zlecenia, który przygotował Ofertę. 
 Menadżerowie mieli być przydzieleni do Projektu, tak aby nie trzeba było za każdym wybierać menadżerów do poszczególnych Prac.
 Miało to byc realizowane nieformalnie.
@@ -1060,13 +1061,13 @@ utajnieniu.
   [13;[!xz]].
   [42;[{,x},[[2],{'a'},14]]].
   [br;[XQ*10]].
- ), 2q, for, [1,]2, [..].[7]{x}],[(((,[[1{{123,},},;.112]],
+), 2q, for, [1,]2, [..].[7]{x}],[(((,[[1{{123,},},;.112]],
         else 42;
    . 'b'.. '9', [[13141],{13414}], 11),
  [1; [[134,sigma],22]].
  [2; [[rho,-],11]].
- )[14].
- ), {1234}],]. [map [cc], 1, 22]. [rho x 1]. {22; [22]},
+)[14].
+), {1234}],]. [map [cc], 1, 22]. [rho x 1]. {22; [22]},
        dd.
  [11; sigma].
         ss.4.c.q.42.b.ll.ls.chmod.aux.rm.foo;
