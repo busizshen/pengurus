@@ -155,7 +155,7 @@ Klient może być klientem biznesowym (posiada pośredników), bądź klientem i
 
 \end{itemize}
 
-\chapter{Aplikacja}
+\chapter{Aplikacja}\label{r:aplikacja}
 
 \section{Definicje}
 \begin{itemize}
@@ -387,7 +387,7 @@ doświadczenie związane z użyciem tej pierwszej biblioteki, która całkowicie
 danych. Kolejnym argumentem przeciwko TopLink był fakt, że musielibyśmy poświęcić czas na jego poznanie, który moglibyśmy 
 przeznaczyć na implementacje.
 
-\section{System klas i uprawnień użytkowników}
+\section{System klas i uprawnień użytkowników}\label{r:uzytkownicy}
 Projektowana przez nas aplikacja w oczywisty sposób musiała przechowywać dane użytkowników oraz umożliwiać im logowanie się do systemu. Mogliśmy podjąć jedną z dwóch decyzji: wykorzystać istniejący system w oparciu o protokół LDAP, bądź też zaprojektować i zaimplementować własny system.
 
 \paragraph{Lightweight Directory Access Protocol}
@@ -526,13 +526,13 @@ przedsiębiorstw, których projekty są znacznie obszerniejsze.\\
 
 Pomocne okazały się już istniejące aplikacje. Przeanalizowaliśmy ich wady oraz zalety i wyciągnęliśmy z nich wnioski. Ponadto zauważyliśmy analogie pomiędzy procesem projektowania
 systemu informatycznego, a procesem tłumaczenia. Przekładając nasze doświadczenie oraz zebrane wnioski przystąpiliśmy do tworzenia wstępnego szkicu projektu. 
-Po jego uzgodnieniu zasięgnęliśmy informacji z oficjalnych dokumentów : "Polskiej Normy PL-EN 15038 Usługi tłumaczeniowe. Wymagania dotyczące świadczenia usług." oraz
+Po jego uzgodnieniu zasięgnęliśmy informacji z oficjalnych dokumentów: "Polskiej Normy PL-EN 15038 Usługi tłumaczeniowe. Wymagania dotyczące świadczenia usług." oraz
 schematu systemu zarządzania biurem tłumaczeń przygotowanej przez klienta.
 Przyjęta kolejność miała wyeliminować niepotrzebny biurokratyczny formalizm, który utrudniłby pracę tłumaczom dla których ta aplikacja miała upraszczać ów proces, a nie go jeszcze utrudniać.\\
 
-Projekt systemu składał się z dwóch równie istotnych części : schematu reprezentacji użytkowników oraz schematu przebiegu realizacji projektu.\\
+Projekt systemu składał się z dwóch równie istotnych części: schematu reprezentacji użytkowników oraz schematu przebiegu realizacji projektu.\\
 
-Reprezentacja użytkowników oraz stworzony przez nas system ról został szczegółowo opisany w punkcie 3.4. 
+Reprezentacja użytkowników oraz stworzony przez nas system ról zostały szczegółowo opisnae w punkcie \ref{r:uzytkownicy}. 
 Jego realizacja była bardzo ciężka i czasochłonna, gdyż musiała uwzględniać problemy, jakie możemy napotkać z implementacją i wykorzystaniem tego systemu, 
 a z drugiej strony musiała odzwierciedlać rzeczywisty stan podczas tłumaczenia.\\
 
@@ -543,16 +543,16 @@ a z drugiej strony musiała odzwierciedlać rzeczywisty stan podczas tłumaczeni
 \end{figure}
 
 
-Szczegółowy opis procesu został opisany w punkcie 2. Podczas projektowania schematu rozważaliśmy różne koncepcje.
+Szczegółowy opis procesu został opisany w punkcie \ref{r:aplikacja}. Podczas projektowania schematu rozważaliśmy różne koncepcje.
 \begin{itemize}
 \item Głównym problemem, jaki rozważaliśmy była ilość etapów, jakie zlecenie musi przejść od momentu rozpoczęcia do końca jego realizacji. 
 Na początku schemat nie zawierał Oferty, a kontakt pomiędzy biurem tłumaczeń a Klientem miał się odbywać za pomocą Projektu. 
 Postanowiliśmy, jednak dodać klasę Oferta, aby rozdzielić etap projektowania zlecenia i kontaktu z klientem od etapu realizacji - tłumaczenia. 
 Służyło to poprawie przejrzystości projektu (oba etapy zawierały kompletnie różne funkcjonalności), a ponadto miało to na celu ochronę danych osobowych i własności intelektualnej.
-Uważaliśmy, iż zwykli pracownicy nie powinni znać informacji o Kliencie i całym projekcie (za wyjątkiem kierowników i menadżerów),a jedynie powinni mieć dostęp do informacji zawartych w przydzielonych im Zadaniach.
+Uważaliśmy, iż zwykli pracownicy nie powinni znać informacji o Kliencie i całym projekcie (za wyjątkiem kierowników i menadżerów), a jedynie powinni mieć dostęp do informacji zawartych w przydzielonych im Zadaniach.
  Z drugiej strony klient nie powinien znać wszystkich szczegółów realizacji projektu, a jedynie efekty poszczególnych etapów (Prac).
 \item Drugim problemem z jakim się zmierzyliśmy był sposób, w jaki wyrazimy Ofertę przedstawianą Klientowi.
-Chcieliśmy w prosty sposób móc przedstawić, co ma zrealizować dane zlecenie oraz podstawowe dane jakie powinno zawierać (deadline, zapłata, rodzaj tłumaczenia, dostarczone pliki).
+Chcieliśmy w prosty sposób przedstawić informację o tym, co ma zrealizować dane zlecenie oraz pozostałe dane na temat tego zlecenia (deadline, zapłata, rodzaj tłumaczenia, dotarczone pliki).
 Najprostsze rozwiązanie zakładało, iż to Oferta zawiera te informacje, co w etapie realizacji miało się prosto mapować na Projekt.
 Rozważyliśmy, jednak przypadek tłumaczenia dużej książki. Klient chciałby np. aby zlecenie było realizowane etapami, bądź opłata za poszczególne części miałaby się różnić.
 Przy tym rozwiązaniu należałoby stworzyć kilka Ofert, co nie byłoby wygodne. 
@@ -565,10 +565,10 @@ który zajmował się przydzielaniem Zadań do pracowników pracujących przy da
 Nie wiedzieliśmy natomiast ilu takich Menadżerów przypisać oraz czy powinni oni być powiązania stricte z Pracą, czy ogólniej z Projektem. 
 Po długich dyskusjach i licznych pomysłach realizacji zdecydowaliśmy się na najbardziej elastyczny model. Ilość menadżerów miała zależeć od Kierownika zlecenia, który przygotował Ofertę. 
 Menadżerowie mieli być przydzieleni do Projektu, tak aby nie trzeba było za każdym wybierać menadżerów do poszczególnych Prac.
-Miało to być realizowane nieformalnie.
-\item Z bardziej szczegółowych problemów, jakie napotkaliśmy było stworzenie systemu typów tłumaczeń (chodziło o rozróżnienie tłumaczeń ustnych, sądowych, technicznych, itp.).
-Pierwszy pomysł przewidywał stworzenie odpowiednich enumeratorów. Uniemożliwiałoby to jednak rozszerzenie - dodanie nowego rodzaju (tzn wymagałoby zmian w kodzie). 
-Postanowiliśmy zatem stworzyć oddzielną klasę TranslationType posiadający odpowiednie napisy. Kierownik (administrator) za pomocą aplikacji mógłby dzięki temu w łatwy sposób dodać nowy typ.
+Miało to byc realizowane nieformalnie.
+\item Jako przykład bardziej szczegółowego problemu jaki napotkaliśmy było stworzenie systemu typów tłumaczeń (chodziło o rozróżnienie tłumaczeń ustnych, sądowych, technicznych, itp.).
+Pierwszy pomysł przewidywał stworzenie odpowiednich enumeratorów. Uniemożliwiałoby to jednak rozszerzenie - dodanie nowego rodzaju wymagałoby zmian w kodzie. 
+Postanowiliśmy zatem stworzyć oddzielną klasę TranslationType posiadającą odpowiednie informacje. Kierownik (admnistrator) za pomocą aplikacji mógłby dzięki temu w łatwy sposób dodać nowy typ.
 \end{itemize}
 Przedstawione wyżej różne problemy, na jakie natrafiliśmy podczas etapu projektowania są tylko częścią tego z czym musieliśmy się zmierzyć. 
 Uważamy, że zrealizowany przez nas schemat spełnia wszystkie wymagane funkcjonalności oraz pozwala na wystarczającą zdolność przystosowania się do zmian na rynku tłumaczeń.
@@ -581,7 +581,7 @@ Zapewnienie sprzętu mającego posłużyć za bazę serwera nie stworzyło probl
 
 Mając serwer gotowy do użycia należało zapewnić wybranym osobom z obu zespołów dostęp do niego z prawami administratora oraz wspólnie skonfigurować wybrane narzędzia. Ponieważ większość z nas do tej pory jedynie pracowała z użyciem tych narzędzi więc przygotowanie każdego z nich do pracy zabierało dużo czasu. Ponieważ niektóre z tych narzędzie miały pracować wspólnie należało poświęcić dodatkowy czas na ich integrację, a nieraz na ponowne ich instalowanie. Należy dodać, że w tej fazie rozważaliśmy jeszcze wybór dodatkowych, płatnych narzędzi, które należało wcześniej przetestować, a więc i zainstalować i skonfigurować. Ze względy na zużycie czasu na ostateczny wybór użytych narzędzi wpływał nie tylko zalety wynikające z ich eksploatacji, ale także łatwość konfiguracji i dostosowywania do potrzeb. \\
 
-Ostatecznie w ramach przygotowania serwera do pracy zainstalowaliśmy / skonfigurowaliśmy: repozytorium (git), narzędzie do rewizji kodu (gerrit), które oczywiście kooperowało z użytym repozytorium, narzędzie do ciągłej integracji użyte do testowania i uruchamiania pokazowej wersji aplikacji (Jenkins) które odbierało polecenia od tego poprzedniego, serwer aplikacji javowych (Jetty) na których uruchamiana była aplikacja, narzędzie do zarządzania dokumentacją (Confluencem) oraz narzędzie do zarządzania projektem (Jira) zintegrowane z większością do tej pory wymienionych narzędzi. W celach administracyjnych skonfigurowane były zdalny dostęp do urządzenia (ssh), usługa udostępniająca dostęp do tych narzędzi (Apache) i narzędzie nadzorujące pracę ich wszystkich (Nagios).
+Ostatecznie w ramach przygotowania serwera do pracy zainstalowaliśmy/skonfigurowaliśmy: repozytorium (git), narzędzie do rewizji kodu (gerrit), które oczywiście kooperowało z użytym repozytorium, narzędzie do ciągłej integracji użyte do testowania i uruchamiania pokazowej wersji aplikacji (Jenkins) które odbierało polecenia od tego poprzedniego, serwer aplikacji javowych (Jetty) na których uruchamiana była aplikacja, narzędzie do zarządzania dokumentacją (Confluencem) oraz narzędzie do zarządzania projektem (Jira) zintegrowane z większością do tej pory wymienionych narzędzi. W celach administracyjnych skonfigurowane były zdalny dostęp do urządzenia (ssh), usługa udostępniająca dostęp do tych narzędzi (Apache) i narzędzie nadzorujące pracę ich wszystkich (Nagios).
 
 \section{Problemy z użytymi narzędziami}
 \subsection{Spring + ExtGWT}\label{r:spring_gxt}
@@ -620,7 +620,7 @@ public class GwtRpcController extends RemoteServiceServlet implements
 Metody zaimplementowane w dalszej części klasy służą do pośredniczenia pomiędzy wywołaniami metod udostępnianych przez interfejsy, a dostępem do opakowywanego obiektu. W ten sposób stworzenie nowego serwisu nie wiąże się już z duplikowaniem kodu. Aby dodać nowy serwis do tych już istniejących wystarczy implementować symboliczny jedynie interfejs RemoteService oraz dodać krótki wpis w pliku konfiguracyjnym Springa \textit{gwt-wrapper-beans.xml}. W ten sposób Spring automatycznie opakuje nasz serwis w powyższą klasę, która zadba o serializację obiektów wymaganą przez ExtGWT. 
 
 \subsection{Hibernate}
-Problemy związane z Hibernate'm wynikały głównie z powodu dużej hierarchii klas, w której występowało wiele zależności pomiędzy poszczególnymi klasami. 
+Problemy związane z Hibernatem wynikały głównie z powodu dużej hierarchii klas, w której występowało wiele zależności pomiędzy poszczególnymi klasami. 
 Najwięcej kłopotów sprawiły nam rzeczy wymienione poniżej:
 \begin{itemize}
 \item odwzorowanie asocjacji pomiędzy klasami,
@@ -641,10 +641,9 @@ W naszym systemie unikaliśmy sytuacji, w których pobierane są dodatkowe infor
 w danym momencie. Dla przykładu jak chcemy wyświetlić listę wszystkich projektów, to nie potrzebujemy pobierać dla żadnego 
 z projektów listy tłumaczów biorących w nim udział. W celu uniknięcia takiej sytuacji wykorzystaliśmy mechanizm oferowany przez Hibernate'a jakim 
 jest leniwe wyjmowanie kolekcji. W dalszej części implementacji naszego systemu napotkaliśmy problemy z nim związane, 
-ponieważ przepisując obiekty danej klasy na Data Transfer Object (opisane poniżej), staraliśmy się również przepisać jego kolekcje, do których nie 
+ponieważ przepisując obiekty danej klasy na Data Transfer Object (opisane poniżej) staraliśmy się również przepisać jego kolekcje, do których nie 
 mieliśmy dostępu. W związku z zaistniałą sytuacją musieliśmy dopisać odpowiednie metody, które wyjmowały obiekty z bazy danych wraz z wymaganymi 
 kolekcjami.
-
 
 \subsection{Data Transfer Object}
 W pewnym momencie pracy nad implementacją naszej aplikacji doszliśmy do miejsca, w którym chcieliśmy zapewnić komunikacje pomiędzy stroną
@@ -653,7 +652,7 @@ strony serwera, który nazywany jest serwisem, przez klienta. Korzystając z do�
 obiekty wysyłane za pomocą kolejek RPC muszą być serializowane, to znaczy, że klasa opisująca dany obiekt musi implementować interfejs 
 \textit{Serializable} lub interfejs \textit{IsSerializable}. Wobec tego wybraliśmy jedną z zamapowanych do bazy danych klas, która implementowała jeden z 
 dwóch wyżej wymienionych interfejsów, napisaliśmy dla niej odpowiedni serwis i test, który miał pobrać obiekt z bazy danych, wysłać go na stronę klienta
-i wyświetlić informacje, które ze sobą ten obiekt niesie. Niestety test się nie powiódł, patrząc na konsole trybu developement GWT dowiedziliśmy 
+i wyświetlić informacje, które ze sobą ten obiekt niesie. Niestety test się nie powiódł. Patrząc na konsole trybu developement GWT dowiedziliśmy 
 się, że typ: \textit{'org.hibernate.collection.PersistentSet'}, który był zawarty w wysłanym przez nas obiekcie, nie jest serializowany. Wynik testu nas 
 zaskoczył, ponieważ klasa którą chcieliśmy przesłać była serializowana i nie zawierała żadnego typu \textit{'org.hibernate.collection.PersistentSet'}.
 Wobec tego zaczeliśmy szukać błędu, który zwróciła konsola GWT, w sieci. Okazało się, że obiekty wyciągane przez Hibernate'a z bazy danych są 
@@ -664,7 +663,7 @@ znaczenie, że do czasu kiedy obiekt jest gotowy do przesłania nie jest tym sam
 Bogatsi o nową wiedzę zaczęliśmy szukać rozwiązania trapiącego nas problemu, niestety przez dłuższy czas nie byliśmy w stanie znaleźć żadnego 
 rozwiązania i do zespołu wkradło się pewne zawahanie czy na pewno dobrze zrobiliśmy probując łączyć ze sobą GWT i Hibernate. 
 
-Na szczęście nie poddaliśmy się i jednemu z nas udało się znaleźć rozwiązanie naszego kłopotu. Remedium okazał się wzorzec projektowy Data Transfer Object (DTO).
+Na szczęście nie poddaliśmy się i jednemu z nas udało się znaleźć rozwiązanie naszego kłopotu. Remedium okazał się wzorzec projektowy Data Transfer Object.
 DTO jest prostym Plain Old Java Object, zawierającym jedynie te pola, do których możemy mieć dostęp po stronie klienta w celu wyświetlenia ich 
 na stronie. Obiekt Hibernate'owy może być stworzony za pomocą danych zawartych w DTO co umożliwia przesłanie danych ze strony klienta i zapisanie ich 
 w bazie danych, tak samo można stworzyć DTO korzystając z informacji zawartych w obiektach Hibernate'owych, ale wówczas już nie są przepisywane typy, które 
@@ -698,11 +697,11 @@ Przygotowanie każdego z dokumentów poprzedzone było debatą,
 a następnie do przygotowania ostatecznej formy dokumentu delegowane były dwie osoby z zespołu.\\
 
 Taki styl pracy uległ drastycznej zmianie kiedy wkroczyliśmy w drugi etap projektu, czyli implementację.
-Plan pracy stał się nieregularny i całkowicie zależny od innych obowiązków związanych głównie z uczelnią, 
-największy wpływ miała z pewnością sesja zimowa, która ograniczyła pracę nad projektem do minimum na czas około dwóch miesięcy.
+Plan pracy stał się nieregularny i całkowicie zależny od innych obowiązków związanych głównie z uczelnią. 
+Największy wpływ miała z pewnością sesja zimowa, która ograniczyła pracę nad projektem do minimum na czas około dwóch miesięcy.
 Mimo problemów i napiętego planu, drużyna starała się spotykać raz w tygodniu, aby wspólnie poświęcić czas na implementację 
 kolejnych komponentów systemu. Ostatecznie jednak, największy nakład pracy nad projektem skupił sie w dwóch, około 10-cio dniowych odcinkach czasowych:
-ferie zimowe oraz długi weekend majowy, kiedy to pozostałe obowiązki naukowe drużyny zostały tymczasowo odłożone na bok.\\
+ferii zimowych oraz długiego weekendu majowego, kiedy to pozostałe obowiązki naukowe drużyny zostały tymczasowo odłożone na bok.\\
 
 Pomimo pewnego rodzaju perturbacji, które pojawiały się w trakcie implementacji systemu, drużyna jednogłośnie stwierdziła,
 że pomimo skokowego nakładu pracy, chwilami sięgającego bardzo wysokiego poziomu, byliśmy dobrze zorganizowaną grupą.
@@ -744,18 +743,18 @@ Możliwości jest wiele, a to czy jakaś z nich wejdzie w życie z pewnością p
 Tytułem zakończenia, należy przejść do omówienia wkładu pracy poszczególnych członków zespołu w realizację projektu Pengurus.
 
 Będziemy bazować na wspomnianym wcześniej podziale pracy na dwa etapy: przygotowywanie dokumentacji i implementacja systemu.
-\section{przygotowanie dokumentacji}
+\section{Przygotowanie dokumentacji}
 Ten etap pracy rozłożył się między członków grupy niemal równo. Wszelkie ustalenia i pomysły przedstawiane były na wspólnych spotkaniach,
 natomiast spisywanie dokumentów, bądź też przygotowywane było w parach. Dla przykładu: w trakcie proseminarium, prezentację narzędzi jakich planujemy użyć
 przeprowadzili wspólnie Karol Nienałtowski oraz Jakub Oćwieja, natomiast przedstawienie technologii przy użyciu których będziemy realizować projekt, przypadło parze: Michał Sabaciński i Krzysztof Gogolewski.
 
-\section{implementacja systemu}
+\section{Implementacja systemu}
 W odróżnieniu od wcześniejszego etapu, implementacja systemu składała się z wyraźnie odrębnych elementów, których realizacjami zajmowali
 się poszczególni członkowie. Najłatwiejszą metodą omówienia wkładu pracy poszczególnych członków grupy,
 będzie zaprezentowanie tych elementów i wskazanie osób, które nad nimi pracowały. W miarę możliwości postaramy się także wskazać,
 co dokładnie dana osoba zrealizowała w omawianej części implementacji systemu.
 
-\paragraph{baza danych}
+\paragraph{Baza danych}
 Implementacja klas występujących w systemie, które będą przechowywane w bazie danych oraz dokonanie mapowania obiektowo-relacyjnego 
 spoczywało w rękach Michała Sabacińskiego oraz Krzysztofa Gogolewskiego. Głównym ich zadaniem była realizacja takiego mapowania,
 które gwarantuje, że przyszłe zapytania do bazy danych będą wyciągać tylko potrzebne informacje, np. obiekt nie zwraca wszystkich
@@ -763,33 +762,33 @@ swoich kolekcji kiedy nie jest to potrzebne (mechanizm leniwego wyliczania w hib
 obiektów DAO, do komunikacji z bazą danych, po jego realizacji dokonaliśmy podziału. Michał zajął się pisaniem testów do bazy i obiektów DAO, 
 natomiast Krzysztof dopisywał funkcje, które były potrzebne osobom piszącym już wyższą warstwę projektu, tzn. realizowali funkcjonalności.
 
-\paragraph{bezpieczeństwo}
+\paragraph{Bezpieczeństwo}
 Realizacją bezpieczeństwa aplikacji zajął się Jakub Oćwieja. Zapewnił on bezpieczne logowanie, w oparciu o możliwości jakie daje Spring oraz
 zapewnił obustronne filtrowanie danych, zarówno po stronie klienta jak i serwera, aby nie dopuścić do przekazania bądź wyświetlenia danych
 użytkownikowi, który nie jest do tego uprawniony. Skoro natomiast jesteśmy już przy użytkownikach, należało zaimplementować hierarchię użytkowników, 
 omówioną we wcześniejszych rozdziałach tej pracy. Powstanie tej hierarchii to także zasługa Jakuba, 
 jej sprawna realizacja pozwoliła na efektywne zarządzanie użytkownikami systemu i zapewniła wysokie bezpieczeństwo aplikacji.
 
-\paragraph{funkcjonalności dot. procesu tłumaczenia}
+\paragraph{Funkcjonalności dot. procesu tłumaczenia}
 Główną osobą i w zasadzie patronem tego etapu implementacyjnego był Karol Nienałtowski. Przygotował on silnie generyczną hierarchię klas składającą
 się na realizacje procesu tłumaczenia, od stworzenia zlecenia, aż do zamknięcia projektu tłumaczeniowego. Dzięki starannie przygotowanej hierarchii
 oraz wymodelowaniu efektywnego dziedziczenia, przebieg tłumaczenia bardzo dobrze realizuje założenia normy do której nasz system miał być dostosowany.
 W momencie, kiedy praca nad bazą danych w zasadzie dobiegła końca, pomocnicze funkcjonalności i klasy implementował Krzysztof.
 
-\paragraph{funkcjonalności dot. administracji systemu}
+\paragraph{Funkcjonalności dot. administracji systemu}
 Zarządzanie językami translacji, walutami dostępnymi przy realizacji płatności, tworzeniem obiektów translacji dla tłumaczy oraz innymi funkcjonalnościami
 związanymi z administracyjną częścią systemu zajmował się Michał. Swoją część w tym rozdziale implementacji miał także Jakub, który zapewnił tworzenie użytkowników,
 które w zasadzie powstawało już na etapie realizacji bezpieczeństwa systemu.
 
-\paragraph{zarządzanie plikami}
+\paragraph{Zarządzanie plikami}
 Przetrzymywanie plików zgłoszonych do tłumaczenia, jak i plików już przetłumaczonych to zasługa Michała i Jakuba. Przygotowali oni mechanizm, który pozwalał
 zarządzać plikami zarówno po stronie klienta jak i serwera.
 
-\paragraph{front-end}
-Końcowa faza projektu, to nadanie w miarę przyjaznego, intuicyjnego dla użytkownika interfejsu aplikacji. Tą częścią implementacji zajmował się Krzysztof,
-korzystając z możliwości proponowanych przez GWT starał się nadać systemowi wygląd, który zachęca do użytkowania.
+\paragraph{Front-end}
+Końcowa faza projektu, to nadanie w miarę przyjaznego, intuicyjnego dla użytkownika interfejsu aplikacji. Tą częścią implementacji zajmował się Krzysztof.
+Korzystając z możliwości proponowanych przez GWT starał się nadać systemowi wygląd, który zachęca do użytkowania.
 
-\paragraph{pozostałe}
+\paragraph{Pozostałe}
 Oczywiście nie wszystko co zostało wykonane w projekcie podlega klasyfikacji do powyższych kategorii. Poniżej znajdują się te części pracy, 
 które nie znalazły swojego miejsca.
 \begin{itemize}
