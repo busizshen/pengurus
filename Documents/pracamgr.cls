@@ -53,6 +53,8 @@
       \begin{flushright}\large
         \begin{tabular}{l}
           Praca wykonana pod kierunkiem\\
+          \bfseries \@kierownictwo \\
+          pod opiekÂ¡\\
           \bfseries \@opiekun
         \end{tabular}
       \end{flushright}
@@ -67,15 +69,15 @@
     \null
     \vfill
     
-   \textbf{\Large O\'swiadczenie kieruj¡cego prac¡ }
+   \textbf{\Large O\'swiadczenie kierujÂ¡cego pracÂ¡ }
       \vspace{10mm}
       
    Potwierdzam, {\.z}e niniejsza praca zosta{\l}a przygotowana pod moim 
-   kierunkiem i kwalifikuje si¦ do przedstawienia jej w post¦powaniu 
+   kierunkiem i kwalifikuje siÂ¦ do przedstawienia jej w postÂ¦powaniu 
    o nadanie tytu{\l}u zawodowego. 
    \vspace{15mm}
    
-   Data \hfill Podpis kieruj¡cego prac¡ 
+   Data \hfill Podpis kierujÂ¡cego pracÂ¡ 
    
    \vspace{3cm}
    \textbf{\Large O\'swiadczenie autora (autor\'ow) pracy}
@@ -83,12 +85,12 @@
     
    \'{S}wiadom odpowiedzialno\'sci prawnej o\'swiadczam, {\.z}e niniejsza praca dyplomowa zosta{\l}a 
    napisana przeze mnie samodzielnie i nie zawiera tre\'sci uzyskanych w spos\'ob niezgodny 
-   z obowi¡zuj¡cymi przepisami. 
+   z obowiÂ¡zujÂ¡cymi przepisami. 
    
    O\'swiadczam r\'ownie{\.z}, {\.z}e przedstawiona praca nie by{\l}a 
-   wcze\'sniej przedmiotem procedur zwi¡zanych z uzyskaniem tytu{\l}u zawodowego w wy{\.z}szej uczelni. 
+   wcze\'sniej przedmiotem procedur zwiÂ¡zanych z uzyskaniem tytu{\l}u zawodowego w wy{\.z}szej uczelni. 
    
-   O\'swiadczam ponadto, {\.z}e niniejsza wersja pracy jest identyczna z za{\l}¡czon¡ wersj¡ elektroniczn¡. 
+   O\'swiadczam ponadto, {\.z}e niniejsza wersja pracy jest identyczna z za{\l}Â¡czonÂ¡ wersjÂ¡ elektronicznÂ¡. 
    \vspace{15mm}
    
    Data \hfill Podpis autora (autor\'ow) pracy
@@ -115,6 +117,8 @@
 \def\@zakres{}
 \def\opiekun#1{\gdef\@opiekun{#1}}
 \def\@opiekun{???\ClassError{pracamgr}{Brak danych opiekuna pracy}\@ehc}
+\def\kierownictwo#1{\gdef\@kierownictwo{#1}}
+\def\@kierownictwo{???\ClassError{pracamgr}{Brak danych kierownictwoa pracy}\@ehc}
 \def\keywords#1{\gdef\@keywords{#1}}
 \def\@keywords{???\ClassError{pracamgr}{Brak slow kluczowych}\@ehc}
 \def\dziedzina#1{\gdef\@dziedzina{#1}}
@@ -156,7 +160,7 @@
   \vspace*{26pt}%
 %-------------------nowosc----------------
   \begin{center}%
-    \bfseries\large Tytu{\l} pracy w j¦zyku angielskim
+    \bfseries\large Tytu{\l} pracy w jÂ¦zyku angielskim
     \@endparpenalty\@M
   \end{center}
   \@tytulang\par

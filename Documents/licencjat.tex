@@ -30,7 +30,8 @@
 % (poda¿ tytu¿/stopie¿ imi¿ i nazwisko opiekuna
 % Instytut
 % ew. Wydzia¿ ew. Uczelnia (je¿eli nie MIM UW))
-\opiekun{Michał Możdżonek}
+\kierownictwo{dr Janusza Jabłonowskiego\\Instytut Informatyki}
+\opiekun{mgr Michała Możdżonka}
 
 \date{Czerwiec 2012}
 
@@ -66,7 +67,7 @@
 %\listoftables
 
 \chapter{Wprowadzenie - Wizja}
-\section{Miejsce na rynku}
+\section{Problem}
 W dzisiejszym świecie bardzo istotną kwestią wydaje się być szeroko pojęte usprawnianie zarządzania firmą. 
 Jednym z najważniejszych jego aspektów jest przyspieszanie i formalizacja przebiegu procesu biznesowego. 
 Problem ten można rozwiązać, dokonując jego informatyzacji przy użyciu najnowszych technologii dostępnych na rynku, co okazuje się być jednym z najłatwiejszych i najtańszych rozwiązań. \\
@@ -82,10 +83,10 @@ Z podobnym problemem muszą zmierzyć się również biura tłumaczeń. Duża ko
 \item powszechnego dostępu. 
 \end{itemize} 
 
-Oczywiście na rynku znajdują się produkty, które są przeznaczone do zarządzania biurem tłumaczeń, 
-są one jednak ograniczone jedynie do pracowników biura (nie jest możliwa praca mobilna),
-bądź w przypadku aplikacji webowych zostały stworzone przy użyciu starych technologii (np. PHP). 
-Ponadto produkty te często zapewniają niski poziom bezpieczeństwa i nie są przeznaczone do kontaktów z klientami.
+Oczywiście na rynku znajdują się produkty, które są przeznaczone do zarządzania biurem tłumaczeń. 
+Są one jednak ograniczone jedynie do pracowników biura i nie jest możliwa praca mobilna (\textit{quahill}),
+bądź w przypadku aplikacji webowych zostały stworzone przy użyciu starych technologii, takich jak PHP (\textit{]project-open[}). 
+Ponadto produkty te często zapewniają niski poziom bezpieczeństwa, czy też nie są przeznaczone do kontaktów z klientami (\textit{Projetex}).
 Pengurus CRM ma być aplikacją, która wychodzi naprzeciw tym problemom. 
 Będzie to pierwsza na rynku aplikacja WWW stworzona przy użyciu gamy nowych technologii - ExtGWT, Hibernate, Spring.
 Skierowana bezpośrednio do właścicieli biur tłumaczeń, w znacznym stopniu ułatwiająca kontakt z klientem, jak również kontakt pomiędzy pracownikami. 
@@ -96,10 +97,10 @@ oraz skróci klientowi czas jaki musi poświęcić na nadzorowanie projektu.
 \begin{itemize}
 \item Kierownik (ang. Executive) – pracownik firmy, posiadający najwięcej praw w systemie Pengurus, fizycznie rola przewidziana dla osób postawionych najwyżej w hierarchii firmy. Jako jedyny posiada dostęp do panelu administratora.
 \item Menadżer Projektu (ang. Project Manager)– pracownik firmy, odpowiadający za nadzorowanie projektów.
-\item Ekspert (ang. Expert) – pracownik firmy, odpowiedzialny za tłumaczenie dokumentów, zleconych przez Menadżera Projektu (Tłumacz).
+\item Ekspert (ang. Expert) – tłumacz zatrudniony w firmie bądź wykonujący zlecenie, odpowiedzialny za tłumaczenie dokumentów wyznaczanych przez Menadżera Projektu.
 \item Księgowy (ang. Accountant) – pracownik firmy, odpowiedzialny za księgowość firmy.
-\item Pracownik nieetatowy (ang. Freelancer) – osoba nie będąca na stałe zatrudniona w firmie, która na potrzeby chwili wykonuje odpłatnie zlecone tłumaczenia (Tłumacz).
-\item Klient (ang. Client) – klient indywidualny bądź biznesowy zlecający tłumaczenie firmie.
+\item Pracownik nieetatowy (ang. Freelancer) – osoba nie będąca na stałe zatrudniona w firmie, która na potrzeby chwili wykonuje odpłatnie zlecone tłumaczenia, ekspert.
+\item Klient Indywidualny, Klient Biznesowy (ang. Individual Client, Bussines Client) – podmioty zlecające tłumaczenie firmie.
 \end{itemize}
 
 \section{Przypadki użycia}
@@ -273,7 +274,7 @@ Gdy ekspert jest pracownikiem etatowym wszystkie zadania wykonuje automatycznie 
 \item Zakończenie - Po rozliczeniu zadania menadżer projektu może go zakończyć,a wszystkie pliki i informacje z nim związane trafiają do archiwum. 
 \end{enumerate}
 
-\chapter{Rozwiązania}
+\chapter{Technologie}
 \section{Spring Framework}
 Spring Framework jest jedną z najpopularniejszych i najlepiej działających platform programistycznych dla Javy. Zalet tego frameworku jest wiele, poniżej przedstawione zostały jednak te najbardziej zauważalne w pracy nad naszym projektem.
 
@@ -387,31 +388,8 @@ doświadczenie związane z użyciem tej pierwszej biblioteki, która całkowicie
 danych. Kolejnym argumentem przeciwko TopLink był fakt, że musielibyśmy poświęcić czas na jego poznanie, który moglibyśmy 
 przeznaczyć na implementacje.
 
-\section{System klas i uprawnień użytkowników}\label{r:uzytkownicy}
-Projektowana przez nas aplikacja w oczywisty sposób musiała przechowywać dane użytkowników oraz umożliwiać im logowanie się do systemu. Mogliśmy podjąć jedną z dwóch decyzji: wykorzystać istniejący system w oparciu o protokół LDAP, bądź też zaprojektować i zaimplementować własny system.
-
-\paragraph{Lightweight Directory Access Protocol}
-Protokół ten jest przeznaczony do korzystania z usług katalogowych za pośrednictwem protokołu internetowego. LDAP obsługuje podstawowe operacje pozwalające na logowanie, wyszukanie wpisów katalogowych, dodawanie, usuwanie, sprawdzanie i modyfikowanie wpisów oraz kilka innych. Operacje te umożliwiają przechowywanie w systemie zarządzającym uwierzytelnianiem (ang. authentication) praktycznie dowolnych danych i pozwalają na unifikację systemu logowania dla wielu współdziałających aplikacji.
-
-Do logowania w naszej aplikacji nie użyliśmy jednak tego protokołu. Zaprojektowany przez nas, z użyciem hierarchii klas i atrybutów, model użytkownika ma obsługiwać użytkowników wielu typów i dla każdego z nich zapamiętywać dostosowane do potrzeb aplikacji informacje. Użycie protokołu LDAP wymagałoby żmudnego, nieintuicyjnego i nierozszerzalnego mapowania pól klas na strukturę wpisów katalogowych. Jako że nie projektowaliśmy systemu mającego w założeniach integrację z innymi projektami, nic nie stało na przeszkodzie zastosowaniu innego rozwiązania.
-
-\paragraph{Własny system}
-Możliwość łatwego mapowania obiektów javowych na obiekty bazodanowe przy użycia frameworku Hibernate przekonała nas do stworzenia własnego systemu zarządzania użytkownikami. Dzięki temu mogliśmy dostosować strukturę klas przechowujących wszystkie dane użytkownika do naszych potrzeb i skonfigurować tę platformę do przechowywania i zarządzania także tymi obiektami.
-
-Zaletą tego rozwiązania oprócz prostoty implementacji i przejrzystości kodu jest także możliwość wykorzystania wszystkich zalet oferowanych przez Hibernate.
-
-\paragraph{System klas}
-Ponieważ prawie każdy użytkownik naszej aplikacji jest osobą, w pierwszej kolejności potrzebowaliśmy klasy, która będzie przechowywała dane osobowe użytkownika (class PersonalData). Obiekt ten będzie pojawiał się jako jedno z pól użytkowników naszej aplikacji.
-
-Użytkowników naszej aplikacji podzieliliśmy na dwie grupy - klientów i pracowników. Klient indywidualny opisywany jest przez swoje dane osobowe, klient biznesowy - nazwę firmy oraz listę danych osobowych przedstawicieli tej firmy. Pracownicy również opisywani są przy użyciu swoich danych osobowych. Jedynie ich część, osoby zatrudnione w roli tłumacza, posiadają dodatkowo informację o wykonywanych przez nich tłumaczeniach.
-Wszystkie te klasy tworzą hierarchię klas użytkowników rozszerzając abstrakcyjną klasę użytkownika zawierającą informacje o loginie i haśle użytkownika, liście jego ról w systemie oraz ewentualnie jego dodatkowy opis.
-
-\paragraph{System ról}
-System klas użytkowników nie wyczerpuje wszystkich typów użytkowników, które miałyby być rozróżniane i obsługiwane przez naszą aplikację. Ponadto nie nadaje się on do wyznaczania uprawnień użytkownika. Dlatego każdemu użytkownikowi przypisaliśmy listę ról, które pełni on w systemie. Jest to całkiem oczywisty wybór, gdyż ten sposób opisywania uprawnień użytkownika jest powszechnie stosowany i w szczególności wpasowuje się w wymagany przez Spring interfejs. Pozwala on także na filtrowanie określonych typów użytkowników w systemie np. w momencie, gdy potrzebujemy wyświetlić użytkownikowi tylko określony ich rodzaj.
-
-\section{Środowisko pracy}
-
-\subsection{Git}
+\chapter{Narzędzia}
+\section{Git}
 Spośród dostępnych na rynku darmowych i popularnych systemów kontroli wersji zdecydowaliśmy się używać GITa. Na fakt dokonania takiego wyboru wpłynęły trzy rzeczy.
 
 Pierwszym argumentem za użyciem tego właśnie systemu jest fakt, że każdy z nas miał już doświadczenie w pracy z tym narzędziem, niektórzy całkiem świeże. Pozostali spotkali się z nim chociażby w czasie jednego z uczelnianych przedmiotów.
@@ -420,7 +398,7 @@ Drugim argumentem za wyborem tego system jest fakt, iż GIT jest działa na zasa
 
 W końcu GIT jest systemem wersji, z którym pracuje wybrany przez nas system rewizji kodu.
 
-\subsection{Gerrit}
+\section{Gerrit}
 Gerrit to wykorzystywane przez nas narzędzie do rewizji kodu. Powstało jako narzędzie rozwijane przez Google na potrzeby Androida. Jako sprawdzone już narzędzie Open Source okazał się dobrym wyborem.\\
 
 Narzędzie to zostało wybrane w celu podniesienia jakości tworzonego przez nas kodu. Jako niedoświadczony jeszcze zespół musieliśmy kontrolować nawzajem produkowany przez nas kod. Rewizja kodu wpływa na jakość kodu w trojaki sposób:
@@ -434,7 +412,7 @@ Ostatecznie jednak rewizja kodu sprowadzała się do kontrolowania go przez lide
 
 Oprócz ręcznej rewizji kodu Gerrit, dzięki integracji z Jenkinsem, pozwalał na automatyczne testowanie zmian przesyłanych do repozytorium, co sprowadzało się do uruchomienia zbioru przygotowanych testów na teoretycznym stanie projektu po zaakceptowaniu zmian. Zostanie to opisane w sekcji \ref{r:jenkins}.
 
-\subsection{Jenkins}\label{r:jenkins}
+\section{Jenkins}\label{r:jenkins}
 Jenkins to narzędzie Open Source napisane w Javie służące do ciągłej integracji. Narzędzie to pomaga w zapewnieniu spójności projektu. Oznacza to, że w każdym momencie istnienia projektu implementowana aplikacja kompiluje się bezbłędnie, a uruchomiona działa poprawnie. Dzięki temu ogranicza się przestoje w pracy spowodowane błędami programistycznymi za które odpowiedzialność zrzucana jest na pojedynczych członków zespołu. Jest to przyczyną także dodatkowego stresu, którego można uniknąć przez wczesne wykonanie błędnego fragmentu kodu.
 
 \paragraph{Testowanie kodu}
@@ -445,7 +423,7 @@ Drugą odpowiedzialnością Jenkinsa było uruchamianie przykładowej wersji apl
 
 Działająca w ten sposób aplikacja była dla nas wielką pomocą i ułatwieniem. Aplikacja uruchomiana lokalnie w trybie developerskim uruchamiała się bardzo długo, zużywała ogromną ilość zasobów komputera oraz działała niesamowicie wolno, przez co stawała się całkowicie nieprzydatna w celu szybkiego sprawdzenia jej stanu i wyszukiwania drobnych błędów. Dodatkowo pełna kompilacja aplikacji trwała bardzo długo (od 5 do 15 minut) i uniemożliwiała pracę w tym czasie na komputerze. Dlatego też przykładowa wersja aplikacji była restartowana raz dziennie w środku nocy, bądź tez na życzenie developerów.  
 
-\subsection{Jira}
+\section{Jira}
 Jira jest to oprogramowanie firmy Atlassian służące do zarządzania projektem oraz śledzenia błędów. 
 Narzędzie to "łączy zespół z wykonywanym zadaniem".
 
@@ -480,7 +458,7 @@ konfiguracją uprawnień użytkowników i zarządzanie całym projektem. Analogi
 realizacji projektu.
 Postanowiliśmy, jednakże wykorzystać produkt Atlassianowy, ponieważ część członków zespołu pracowała pod tymi narzędziami, Jira była łatwiej integrowalna
  z innymi produktami oraz posiadała bardziej przejrzysty i zaawansowany interfejs użytkownika.
-\subsection{Confluence}
+\section{Confluence}
 Confluence jest narzędziem dla zespołów służącym do uproszczenia współpracy, dzielenia się wiedzą, dyskusją pomysłów.
 W naszym projekcie był on wykorzystywany w szczególności podczas etapu projektowania systemu oraz przy tworzeniu dokumentacji.
 Confluence zapewnia wiele wygodnych rozwiązań.
@@ -489,8 +467,8 @@ Confluence zapewnia wiele wygodnych rozwiązań.
 \item Proste w obsłudze i wygodne wiki - dodawanie linków, makiet (ang. mockup), filmów, plików.
 \item Udostępnia pluginy do tworzenia schematów i diagramów np.: Gliffy
 \item Integracja z Officem  
-\end{itemize}
-\subsection{Maven}
+ \end{itemize}
+\section{Maven}
 Maven jest to narzędzie wspierające zarządzanie projektem. Służy ono do automatycznej budowy Javowego oprogramowania oraz do raportowania i tworzenia dokumentacji.
 
 Budowa aplikacji jest określona w POM (Project Objected Model) - w Mavenie nosi nazwę pom.xml . 
@@ -501,7 +479,7 @@ Maven posiada duże i ciągle rosnące repozytorium bibliotek. Użytkownik może
 który dostosuje wersję do danego produktu. Poszczególne wtyczki, biblioteki są pobierane podczas pierwszego jej wykorzystania.  \\
 
 Podsumowując, narzędzie to pozwala na łatwe i szybkie uruchamianie produktu w nowym środowisku. Dzięki niemu nie musimy samodzielnie zarządzać paczkami zawierającymi wykorzystywane przez nas biblioteki. Uruchomienie projektu na nowym serwerze bądź komputerze roboczym z dostępem do internetu sprowadza się do skopiowania źródeł projektu i użyciu jednej komendy tego właśnie narzędzia, które samo zadba o pobranie potrzebnych bibliotek, skompilowanie projektu z użyciem odpowiednich narzędzi i dostarczenie wyprodukowanego, gotowego do użycia, archiwum we wyspecyfikowane miejsce.
-\subsection{Eclipse}
+\section{Eclipse}
 
 Eclipse to wybrane przez nas środowisko programistyczne, które łączy ze sobą zintegrowane środowisko programistyczne oraz rozszerzalność zapewnianą przez bibliotekę wtyczek umożliwiającą pracę praktycznie z każdym narzędziem. Praca z użyciem tego środowiska jest bardzo wygodna, ponieważ Eclipse udostępnia niezliczoną ilość skrótów klawiszowych umożliwiających niezwykle proste poruszanie się po całym projekcie. Podstawowe skróty obsługują nie tylko standardowe zarządzanie tekstem, ale zarządzanie kodem. Możliwe jest m. in. wydzielanie funkcji, globalne zmiany nazw klas, metod zmiennych, automatyczne tworzenie szkieletów obiektów, intuicyjne poruszanie się po strukturze hierarchii obiektów i wiele innych. Upraszcza to dokonywanie zmian w istniejącym kodzie przez co samo tworzenie aplikacji staje się bardziej elastyczne, klasy czytelniejsze, a programiści nie boją się zaglądać i modyfikować kodu stworzonego przez poprzedników.
 
@@ -582,6 +560,28 @@ Zapewnienie sprzętu mającego posłużyć za bazę serwera nie stworzyło probl
 Mając serwer gotowy do użycia należało zapewnić wybranym osobom z obu zespołów dostęp do niego z prawami administratora oraz wspólnie skonfigurować wybrane narzędzia. Ponieważ większość z nas do tej pory jedynie pracowała z użyciem tych narzędzi więc przygotowanie każdego z nich do pracy zabierało dużo czasu. Ponieważ niektóre z tych narzędzie miały pracować wspólnie należało poświęcić dodatkowy czas na ich integrację, a nieraz na ponowne ich instalowanie. Należy dodać, że w tej fazie rozważaliśmy jeszcze wybór dodatkowych, płatnych narzędzi, które należało wcześniej przetestować, a więc i zainstalować i skonfigurować. Ze względy na zużycie czasu na ostateczny wybór użytych narzędzi wpływał nie tylko zalety wynikające z ich eksploatacji, ale także łatwość konfiguracji i dostosowywania do potrzeb. \\
 
 Ostatecznie w ramach przygotowania serwera do pracy zainstalowaliśmy/skonfigurowaliśmy: repozytorium (git), narzędzie do rewizji kodu (gerrit), które oczywiście kooperowało z użytym repozytorium, narzędzie do ciągłej integracji użyte do testowania i uruchamiania pokazowej wersji aplikacji (Jenkins) które odbierało polecenia od tego poprzedniego, serwer aplikacji javowych (Jetty) na których uruchamiana była aplikacja, narzędzie do zarządzania dokumentacją (Confluencem) oraz narzędzie do zarządzania projektem (Jira) zintegrowane z większością do tej pory wymienionych narzędzi. W celach administracyjnych skonfigurowane były zdalny dostęp do urządzenia (ssh), usługa udostępniająca dostęp do tych narzędzi (Apache) i narzędzie nadzorujące pracę ich wszystkich (Nagios).
+
+\section{System klas i uprawnień użytkowników}\label{r:uzytkownicy}
+Projektowana przez nas aplikacja w oczywisty sposób musiała przechowywać dane użytkowników oraz umożliwiać im logowanie się do systemu. Mogliśmy podjąć jedną z dwóch decyzji: wykorzystać istniejący system w oparciu o protokół LDAP, bądź też zaprojektować i zaimplementować własny system.
+
+\paragraph{Lightweight Directory Access Protocol}
+Protokół ten jest przeznaczony do korzystania z usług katalogowych za pośrednictwem protokołu internetowego. LDAP obsługuje podstawowe operacje pozwalające na logowanie, wyszukanie wpisów katalogowych, dodawanie, usuwanie, sprawdzanie i modyfikowanie wpisów oraz kilka innych. Operacje te umożliwiają przechowywanie w systemie zarządzającym uwierzytelnianiem (ang. authentication) praktycznie dowolnych danych i pozwalają na unifikację systemu logowania dla wielu współdziałających aplikacji.
+
+Do logowania w naszej aplikacji nie użyliśmy jednak tego protokołu. Zaprojektowany przez nas, z użyciem hierarchii klas i atrybutów, model użytkownika ma obsługiwać użytkowników wielu typów i dla każdego z nich zapamiętywać dostosowane do potrzeb aplikacji informacje. Użycie protokołu LDAP wymagałoby żmudnego, nieintuicyjnego i nierozszerzalnego mapowania pól klas na strukturę wpisów katalogowych. Jako że nie projektowaliśmy systemu mającego w założeniach integrację z innymi projektami, nic nie stało na przeszkodzie zastosowaniu innego rozwiązania.
+
+\paragraph{Własny system}
+Możliwość łatwego mapowania obiektów javowych na obiekty bazodanowe przy użycia frameworku Hibernate przekonała nas do stworzenia własnego systemu zarządzania użytkownikami. Dzięki temu mogliśmy dostosować strukturę klas przechowujących wszystkie dane użytkownika do naszych potrzeb i skonfigurować tę platformę do przechowywania i zarządzania także tymi obiektami.
+
+Zaletą tego rozwiązania oprócz prostoty implementacji i przejrzystości kodu jest także możliwość wykorzystania wszystkich zalet oferowanych przez Hibernate.
+
+\paragraph{System klas}
+Ponieważ prawie każdy użytkownik naszej aplikacji jest osobą, w pierwszej kolejności potrzebowaliśmy klasy, która będzie przechowywała dane osobowe użytkownika (class PersonalData). Obiekt ten będzie pojawiał się jako jedno z pól użytkowników naszej aplikacji.
+
+Użytkowników naszej aplikacji podzieliliśmy na dwie grupy - klientów i pracowników. Klient indywidualny opisywany jest przez swoje dane osobowe, klient biznesowy - nazwę firmy oraz listę danych osobowych przedstawicieli tej firmy. Pracownicy również opisywani są przy użyciu swoich danych osobowych. Jedynie ich część, osoby zatrudnione w roli tłumacza, posiadają dodatkowo informację o wykonywanych przez nich tłumaczeniach.
+Wszystkie te klasy tworzą hierarchię klas użytkowników rozszerzając abstrakcyjną klasę użytkownika zawierającą informacje o loginie i haśle użytkownika, liście jego ról w systemie oraz ewentualnie jego dodatkowy opis.
+
+\paragraph{System ról}
+System klas użytkowników nie wyczerpuje wszystkich typów użytkowników, które miałyby być rozróżniane i obsługiwane przez naszą aplikację. Ponadto nie nadaje się on do wyznaczania uprawnień użytkownika. Dlatego każdemu użytkownikowi przypisaliśmy listę ról, które pełni on w systemie. Jest to całkiem oczywisty wybór, gdyż ten sposób opisywania uprawnień użytkownika jest powszechnie stosowany i w szczególności wpasowuje się w wymagany przez Spring interfejs. Pozwala on także na filtrowanie określonych typów użytkowników w systemie np. w momencie, gdy potrzebujemy wyświetlić użytkownikowi tylko określony ich rodzaj.
 
 \section{Problemy z użytymi narzędziami}
 \subsection{Spring + ExtGWT}\label{r:spring_gxt}
@@ -822,6 +822,7 @@ które nie znalazły swojego miejsca.
 \chapter{Bibliografia}
 
 \begin{itemize}
+\item PN-EN 15038 : 2006 Usługi tłumaczeniowe - Wymagania dotyczące świadczenia usług
 \item Podręcznik Spring Framework w wersji 3.1 \\
 \url{http://static.springsource.org/spring/docs/3.1.x/spring-framework-reference/html/}
 \item Tutorial Google Web Toolkit \\
