@@ -95,51 +95,60 @@ oraz skróci klientowi czas jaki musi poświęcić na nadzorowanie projektu.
 
 \section{Użytkownicy}
 \begin{itemize}
-\item Kierownik (ang. Executive) – pracownik firmy, posiadający najwięcej praw w systemie Pengurus, fizycznie rola przewidziana dla osób postawionych najwyżej w hierarchii firmy. Jako jedyny posiada dostęp do panelu administratora.
-\item Menadżer Projektu (ang. Project Manager)– pracownik firmy, odpowiadający za nadzorowanie projektów.
+\item Klient - podmiot zlecający tłumaczenie firmie. Rozróżniamy dwa rodzaje klientów
+\begin{itemize}
+\item Klient Indywidualny (ang. Individual Client).
+\item Klient Biznesowy (ang. Bussines Client) - w szczególności klient biznesowy może posiadać pełnomocników zajmujących się zleceniem.
+\end{itemize}
+\item Tłumacz (ang. Translator) - podmiot wykonujący tłumaczenia bądź weryfikacje. W szczególności może pełnić role Pracownika. Wyróżniamy różne typy Tłumaczy:
+\begin{itemize}
 \item Ekspert (ang. Expert) – tłumacz zatrudniony w firmie bądź wykonujący zlecenie, odpowiedzialny za tłumaczenie dokumentów wyznaczanych przez Menadżera Projektu.
-\item Księgowy (ang. Accountant) – pracownik firmy, odpowiedzialny za księgowość firmy.
-\item Pracownik nieetatowy (ang. Freelancer) – osoba nie będąca na stałe zatrudniona w firmie, która na potrzeby chwili wykonuje odpłatnie zlecone tłumaczenia, ekspert.
-\item Klient Indywidualny, Klient Biznesowy (ang. Individual Client, Bussines Client) – podmioty zlecające tłumaczenie firmie.
+\item Pracownik nieetatowy (ang. Freelancer) – osoba nie będąca na stałe zatrudniona w firmie, która na potrzeby chwili wykonuje odpłatnie zlecone tłumaczenia.
+\end{itemize}  
+\item Pracownik (ang. Worker) - pracownik firmy, który nie jest Tłumaczem.  
+\begin{itemize}
+\item Kierownik (ang. Executive) – Menadżer ds. produkcji/Stanowisko ds. relacji z klientami i produkcji. Kierownik zlecenia. 
+Podmiot posiadający najwięcej praw w systemie Pengurus, fizycznie rola przewidziana dla osób postawionych najwyżej w hierarchii firmy.
+Jako jedyny posiada dostęp do panelu administratora.
+\item Menadżer Projektu (ang. Project Manager)– Lider dla tłumaczenia. Osoba odpowiadająca za nadzorowanie projektów.
+\item Księgowy (ang. Accountant) – osoba odpowiedzialna za księgowość firmy.
+\end{itemize}
 \end{itemize}
 
 \section{Przypadki użycia}
-\begin{itemize} 
-\item Przyjęcie zlecenia
+\subsection{Przyjęcie zlecenia}
 
-Kierownik zlecenia (Menadżer ds. produkcji/Stanowisko ds. relacji z klientami i produkcji) 
-jest odpowiedzialny za przyjęcie zlecenia od klienta oraz przygotowanie odpowiedniej oferty, 
+Kierownik jest odpowiedzialny za przyjęcie zlecenia od klienta oraz przygotowanie odpowiedniej oferty, 
 która następnie zostaje poddana ocenie klienta.
 
-Kierownik zlecenia odbiera dokumenty od klienta wraz z tekstem oryginału, zapoznaje się on z przesłanym/odebranym materiałem,
+Kierownik odbiera dokumenty od klienta wraz z tekstem oryginału, zapoznaje się on z przesłanym/odebranym materiałem,
 a następnie ustala ze zlecającym szczegóły dotyczące zlecenia takie jak data realizacji, cena,  tryb zlecenia, rodzaj tłumaczenia, materiały pomocnicze.
 
-Kierownik zlecenia przygotowuje dziennik zlecenia. W dzienniku zapisywana jest historia pracy z dokumentem i 
+Ponadto następuje przygotowanie dziennik zlecenia. W dzienniku zapisywana jest historia pracy z dokumentem i 
 odnotowywane są wszystkie istotne zdarzenia mające wpływ na jakość i/lub bezpieczeństwo informacji przekazanych przez klienta. 
 Ponadto przechowywane są: data utworzenia zlecenia, data przyjęcia tekstu źródłowego oraz związanych z nim materiałów, numer zlecenia oraz informację o podjętych działaniach w celu usunięcia niezgodności. 
 
 Przed rozpoczęciem realizacji projektu klient jest zobowiązany do zaakceptowania przygotowanej oferty.
 
-\item Rejestracja zlecenia \\
-Kierownik zlecenia wyznacza lidera/liderów dla tłumaczenia (Menadżera Projektu). W uzasadnionych przypadkach działania lidera wykonuje kierownik zlecenia.
-Ponadto jest on odpowiedzialny za przypisanie odpowiednich tłumaczy/weryfikatorów do projektu.
-Kierownik ponadto udostępnia menadżerom przesłane przez klienta zasoby (pliki) i wyznacza im termin realizacji poszczególnych etapów projektu.
+\subsection{Rejestracja zlecenia}
+Kierownik zlecenia wyznacza Menadżera Projektu. W uzasadnionych przypadkach działania Menadżera Projektu wykonuje Kierownik zlecenia.
+Ponadto jest on odpowiedzialny za przypisanie odpowiednich tłumaczy/weryfikatorów do projektu oraz udostępnia menadżerom przesłane przez klienta zasoby (pliki) i wyznacza im termin realizacji poszczególnych etapów projektu.
 
-\item Tłumaczenie i weryfikacja\\
-Menadżer Projektu przekazuje odpowiednim tłumaczom materiały oraz wyznacza termin realizacji tłumaczenia.
-W tym celu tworzy nowe pliki i udostępnia je tłumaczowi.
+\subsection{Tłumaczenie i weryfikacja}
+Menadżer Projektu przekazuje odpowiednim Tłumaczom materiały oraz wyznacza termin realizacji tłumaczenia.
+W tym celu tworzy nowe pliki i udostępnia je Tłumaczowi.
 Ponadto menadżer wyznacza odpowiedniego Weryfikatora.
 Tłumacz przesyła pliki ze zrealizowanymi etapami pracy. Każdy z tych plików może być edytowany przez autora, a dostęp do nich posiadają także menadżerowie oraz weryfikatorzy.
 Po zakończonym tłumaczeniu weryfikator sprawdza wykonaną pracę, a następnie wysyła plik z poprawkami zapisuje uwagi oraz akceptuje wykonaną pracę lub nakazuje ponowne rozpatrzenie.
 Po ostatecznym zaakceptowaniu przez weryfikatora menadżer odbiera pliki.
 W przypadku pracowników nieetatowych następuje rozliczenie z tłumaczenia, które jest potwierdzane przez księgowego.
 
-\item Przekazanie gotowego tłumaczenia do zleceniodawcy\\
-Menadżer projektu odbiera od tłumaczy i weryfikatorów pliki oraz przygotowuje ostateczny dokument, który następnie zostaje podany ocenie kierownikowi zlecenia.
-Kierownik zlecenia po zaakceptowaniu przekazuje go klientowi, który poddaje go swojej ocenie. W razie reklamacji dokument wraz z uwagami zostaje przesłany 
-menadżerowi projektu do ponownego rozpatrzenia.
+\subsection{Przekazanie gotowego tłumaczenia do zleceniodawcy}
+Menadżer Projektu odbiera od Tłumaczy pliki oraz przygotowuje ostateczny dokument, który następnie zostaje podany ocenie Kierownikowi. 
+Po zaakceptowaniu projekt trafia do Klienta, który poddaje go swojej ocenie, a w razie reklamacji dokument wraz z uwagami zostaje przesłany 
+Menadżerowi Projektu do ponownego rozpatrzenia.
 
-\item Archiwizacja zleceń\\
+\subsection{Archiwizacja zleceń}
 Po zamknięciu obsługi zlecenia – formularz zlecenia przechowywany jest,
 wraz z adnotacją dotyczącą danych faktury oraz danymi określających uczestników 
 procesu realizacji, w wersji papierowej w kolejności odpowiadającej numerom 
@@ -149,12 +158,12 @@ katalogu przeznaczonym do obsługi danego zlecenia na serwerze.
 Dane znajdujące się na serwerze poddawane są archiwizacji, zgodnie z 
 Polityką tworzenia kopii zapasowych Pl-4.1
 
-\item Tworzenie i edycja użytkowników systemu\\
-Kierownik tworzy użytkownika oraz nadaje mu odpowiednie role (tłumacz, klient, menadżer projektu, itd.).
-Pracownik posiada: login, dane osobowe i kontaktowe, posiadane umiejętności tłumaczenia (wraz z prawami do ich tworzenia - tłumaczenia sądowe, techniczne).
-Klient może być klientem biznesowym (posiada pośredników), bądź klientem indywidualnym.
+\subsection{Tworzenie i edycja użytkowników systemu}
+Kierownik tworzy użytkownika oraz nadaje mu odpowiednie role.
+Pracownik/Tłumacz posiada: login, dane osobowe i kontaktowe. 
+Tłumacz ma również przypisane odpowiednie umiejętności tłumaczenia (wraz z prawami do ich tworzenia - tłumaczenia sądowe, techniczne).
+Klient posiada login, dane kontaktowe oraz dane służace do przygotowania umowy i faktur. W przypadku Klienta biznesowego każdy, z jego pełnomocników posiada dane osobowe i kontaktowe. 
 
-\end{itemize}
 
 \chapter{Aplikacja}\label{r:aplikacja}
 
@@ -167,10 +176,14 @@ Klient może być klientem biznesowym (posiada pośredników), bądź klientem i
 \end{itemize}
 \section{Opis aplikacji}
 System Zarządzania Biurem Tłumaczeń Pengurus jest aplikacją przeznaczoną dla użytkowników pełniących różne role w procesie tłumaczenia.
+W zależności od pełnionej roli użytkownik aplikacji posiada specyficzną bazę uprawnień do zarządzania danymi.
+ W szczególności niektórzy użytkownicy mają zablokowaną możliwość podglądu, bądź edycji niektórych danych.
+Więcej szczegółów dotyczących realizacji autoryzacji danych znajduje się w dalszej części pracy.\\
 Główna strona aplikacji jest podzielona na 3 moduły:
 \begin{itemize}
 \item Panel górny, w którym użytkownik może wybrać preferowany język, wylogować się oraz zmienić ustawienia
-\item  Menu boczne, w którym znajdują się odnośniki do poszczególnych projektów, zadań oraz paneli administracyjnych
+\item  Menu boczne, w którym znajdują się odnośniki do poszczególnych projektów, zadań oraz paneli administracyjnych. 
+Wszystkie dozwolone operacje - dane do których istnieje dostęp mają odnośnik.
 \item  Panel główny, w którym wyświetlane są akcje prowadzone przez użytkownika.  
 \begin{figure}[ht!]
 \centering
@@ -178,9 +191,6 @@ Główna strona aplikacji jest podzielona na 3 moduły:
 \caption{Panel Główny podzielony na 3 moduły}
 \end{figure}
 \end{itemize}
-
-Zgodnie z założeniami i przypadkami użycia wyróżniliśmy kilka ról użytkowników. W zależności od pełnionej roli użytkownik aplikacji posiada specyficzną bazę uprawnień do zarządzania danymi. W szczególności niektórzy użytkownicy mają zablokowaną możliwość podglądu, bądź edycji niektórych danych. Wszystkie dozwolone operacje - dane do których istnieje dostęp mają odnośnik w menu bocznym.
-Więcej szczegółów dotyczących realizacji autoryzacji danych znajduje się w dalszej części pracy.\\
 
 Każdy z użytkowników systemu ma możliwość edytować dane dotyczące jego osoby.\\ 
 
@@ -203,6 +213,7 @@ Panel administracyjny udostępnia im między innymi:
 \caption{Panel Administracyjny - dodanie nowego tłumaczenia}
 \end{figure}
 \end{itemize}
+\section{Realizacja przebiegu zlecenia w aplikacji}
 W celu przedstawienia możliwości, jakie udostępnia aplikacja przedstawimy podstawowy przebieg procesu tłumaczenia od przyjęcia zlecenia od Klienta do ostatecznego przyjęcia rozwiązania.\\
 \begin{itemize}
 \item Oferta - jest to pierwszy etap realizacji projektu. Wgląd w niego mają kierownicy, a w szczególności kierownik danej oferty, a także klient.
@@ -232,7 +243,7 @@ Tak przygotowana oferta zostaje poddana ocenie klienta, który w razie braku uwa
 \caption{Projekt - etap realizacji zamówienia}
 \end{figure}
  
-Menadżerowie projektów zgodnie z ustalonym podziałem pracy są zobowiązani do podzielenia kolejnych prac na zadania, które zlecają tłumaczom i weryfikatorom. Są oni odpowiedzialni za ustalenie terminu przyjęcia rozwiązania, przydzielenie odpowiedniego pliku do tłumaczenia oraz ostatecznej oceny pracy zarówno tłumacza, jak i weryfikatora. Szczegółowy opis etapu tłumaczenia (zadania) zostanie opisany w dalszej części.\\
+Menadżerowie projektów zgodnie z ustalonym podziałem pracy są zobowiązani do podzielenia kolejnych prac na zadania, które zlecają tłumaczom i weryfikatorom. Są oni odpowiedzialni za ustalenie terminu przyjęcia rozwiązania, przydzielenie odpowiedniego pliku do tłumaczenia oraz ostatecznej oceny pracy zarówno tłumacza, jak i weryfikatora \ref{r:tlumaczenie} .
 Po zakończeniu pojedynczej pracy, tzn. przetłumaczeniu całego tekstu załączonego do pracy, menadżerowie projektu są zobowiązani do przygotowania ostatecznej wersji pliku i udostępnienie jej klientowi. Klient może za pomocą pasku stanu zaakceptować tak wykonaną pracę, bądź może poprosić o dokonanie odpowiednich poprawek.
 
 \item Zakończenie realizacji pracy - klient akceptując wykonanie pracy jest zobowiązany do jej rozliczenia. Gdy tak się stanie, księgowy zaznacza ten fakt i możliwe jest zakończenie przez kierownika przebiegu pracy.
@@ -240,9 +251,13 @@ Po zakończeniu pojedynczej pracy, tzn. przetłumaczeniu całego tekstu załącz
 \item Zakończenie realizacji oferty - gdy zostaną zakończone wszystkie prace następuje rozliczenie i ostateczne zamknięcie całej oferty. Zamknięta oferta wraz ze wszystkimi dokumentami trafia ostatecznie do archiwum. 
 \end{itemize}  
 
-\section{Podstawowy przypadek użycia}
-Uznaliśmy, że najważniejszym przypadkiem użycia wymagającym głębszego wyjaśnienia jest etap tłumaczenia - zadanie. Przedstawiony zostanie on bardziej szczegółowo, aby wyjaśnić wszelkie wątpliwości i ukazać możliwości naszej aplikacji.
-
+\section{Podstawowy przypadek użycia}\label{r:tlumaczenie}
+Podstawowym przypadkiem użycia jest etap tłumaczenia - Zadanie. Przedstawiony zostanie on bardziej szczegółowo, aby wyjaśnić wszelkie wątpliwości i ukazać możliwości naszej aplikacji.
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=0.7\textwidth]{resources/tlumaczenie.png}
+\caption{Diagram przedstawiający proces tłumaczenia}
+\end{figure}
 \begin{enumerate}
 \item Tworzenie zadania - menadżer projektu odpowiedzialny za daną pracę tworzy nowe zadanie wybierając termin, jego realizacji, cenę i walutę w jakiej zostanie rozliczone zadanie oraz opis wyjaśniający problem . Ponadto menadżer wybiera tłumacza i weryfikatora z listy pracowników przydzielonych do projektu, którzy odpowiadają profilowi danego problemu.
 \begin{figure}[ht!]
