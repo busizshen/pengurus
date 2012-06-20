@@ -369,7 +369,65 @@ który powie Hibernate'owi jakie należy stworzyć tabele w bazie danych i w jak
 Nasz zespół skrócił sobie czasy pracy nad plikami XML poprzez wykorzystanie wtyczki do Eclipse'a, która automatycznie je generuje   
 na podstawie zaimplementowanych klas. Często jednak należy poprawić te pliki, ponieważ wtyczka ta nie radzi sobie z odwzorowaniem 
 asocjacji między klasami. Wykorzystanie mechanizmu mapowania Hibernate'a zaoszczędziło nam wielu czasu, który musielibyśmy przeznaczyć 
-na planowanie struktury bazy danych.
+na planowanie struktury bazy danych.\\\\
+Poniżej przedstawiono przykładowe mapowanie klasy projekt w naszym systemie, w którym możemy zauważyć, że każdy 
+projekt ma swój zbiór menadżerów, ekspertów oraz freelancerów. Funkcja lazy = true przy tych zbiorach mówi, że 
+kolekcje te będą wyjmowane leniwie, co oznacza, że prosząc o projekt dostaniemy ten projekt bez zbiorów pracowników w nim pracujących.
+Aby wyciągnać projekt z jego zbiorami należy się do nich odwołać, kiedy projekt został już wyjęty z bazy danych i ciągle mamy otwartą sesję w 
+Hibernate, wówczas zostaną również pobrane dodatkowe dane. Ponadto w załączonym fragmencie kodu widzimy relacje pomiędzy poszczególnymi klasami, 
+na przykład pracownik może nadzorować wiele projektów ale jeden projekt może mieć jednego nadzorcę (relacja wiele do jednego).
+\begin{verbatim}
+
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2012-02-13 22:28:55 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.pengurus.crm.entities.Project" table="PROJECT">
+        <id name="id" type="java.lang.Long">
+            <column name="PROJECT_ID" />
+            <generator class="native" />
+        </id>
+      	<property name="quoteId" type="java.lang.Long">
+            <column name="QUOTEID" />
+        </property>
+        <many-to-one name="client" class="com.pengurus.crm.entities.Client" fetch="join">
+            <column name="CLIENT" />
+        </many-to-one>
+        <many-to-one name="supervisor" class="com.pengurus.crm.entities.Worker" fetch="join">
+            <column name="SUPERVISOR" />
+        </many-to-one>
+        <set name="projectManagers" table="PROJECT_WORKER" inverse="false" lazy="true">
+            <key>
+                <column name="PROJECT_ID" />
+            </key>
+            <many-to-many class="com.pengurus.crm.entities.Worker" column="USER_ID" />
+        </set>
+        <set name="experts" table="PROJECT_EXPERTS" inverse="false" lazy="true">
+            <key>
+                <column name="PROJECT_ID" />
+            </key>
+            <many-to-many class="com.pengurus.crm.entities.Translator" column="USER_ID" />
+        </set>
+        <set name="freelancers" table="PROJECT_FREELANCERS" inverse="false" lazy="true">
+            <key>
+                <column name="PROJECT_ID" />
+            </key>
+            <many-to-many class="com.pengurus.crm.entities.Translator" column="USER_ID"/>
+        </set>
+        <set name="jobs" table="JOB" inverse="false" lazy="true">
+            <key>
+                <column name="PROJECT_ID" />
+            </key>
+            <one-to-many class="com.pengurus.crm.entities.Job" />
+        </set>
+        <property name="description" type="java.lang.String">
+            <column name="DESCRIPTION" />
+        </property>
+    </class>
+</hibernate-mapping>
+
+\end{verbatim}
 
 \paragraph{Data Access Object}
 Jest to obiekt, który zapewnia interfejs do bazy danych jednocześnie nie ujawniając jej szczegółów. Głównym celem stosowania DAO jest
@@ -722,6 +780,56 @@ Pomimo pewnego rodzaju perturbacji, które pojawiały się w trakcie implementac
 że pomimo skokowego nakładu pracy, chwilami sięgającego bardzo wysokiego poziomu, byliśmy dobrze zorganizowaną grupą.
 Dzięki temu wersja RC naszego projektu pojawiła się już 23 maja 2012. 
 
+\section{Podział pracy w zespole}
+Tytułem zakończenia, należy przejść do omówienia wkładu pracy poszczególnych członków zespołu w realizację projektu Pengurus.
+
+Będziemy bazować na wspomnianym wcześniej podziale pracy na dwa etapy: przygotowywanie dokumentacji i implementacja systemu.
+\subsection{Przygotowanie dokumentacji}
+Ten etap pracy rozłożył się między członków grupy niemal równo. Wszelkie ustalenia i pomysły przedstawiane były na wspólnych spotkaniach,
+natomiast spisywanie dokumentów, bądź też przygotowywane było w parach. Dla przykładu: w trakcie proseminarium, prezentację narzędzi jakich planujemy użyć
+przeprowadzili wspólnie Karol Nienałtowski oraz Jakub Oćwieja, natomiast przedstawienie technologii przy użyciu których będziemy realizować projekt, przypadło parze: Michał Sabaciński i Krzysztof Gogolewski.
+
+\subsection{Implementacja systemu}
+W odróżnieniu od wcześniejszego etapu, implementacja systemu składała się z wyraźnie odrębnych elementów, których realizacjami zajmowali
+się poszczególni członkowie. Poniżej przedstawiono nad czym pracował każdy z członków i jaki był jego wpływ na nasz system. 
+
+\paragraph{Krzysztof Gogolewski}
+Krzysztof w początkowej fazie pracy zajmował się implementacją klas występujacych w systemie, które miały być przechowywane w bazie 
+danych. Następnie przystąpił do etapu mapowania obiektowo-relacyjnego klas, które zostały stworzone. Podczas tego etapu starał się, aby 
+przyszłe zapytania do bazy danych wyciągały jedynie niezbędne w danej sytuacji informacje, na przykład obiekt nie zawraca wszystkich swoich 
+kolekcji, kiedy nie jest to potrzebne (mechanizm leniwego wyjmowania w Hibernate). Kolejnym zadaniem było zaimplementowanie obiektów DAO, 
+do komunikacją z baza danych. Warto wspomnieć, że nad wszystkimi wspomnianymi etapami Krzysztof pracował wspólnie z Michałem. Później Krzysztof 
+zajął się dopisywaniem funkcji bazodanowych, które były potrzebne osobom piszącym już wyższą warstwę projektu, tzn. realizowali funkcjonalności. 
+Kolejną zasługą Krzysztofa było napisanie skryptu, który pozwalał zapisywać stan bazy danych do pliku oraz z tego pliku wczytywać dane do bazy 
+danych. Na koniec, Krzystof pracował nad poprawą interfejsu aplikacji, starał się aby był on bardziej przyjazny oraz intuicyjny dla użytkownika. 
+Wartym odnotowania jest również jego wkład włożony w pracę nad plakatem oraz logiem.
+
+\paragraph{Karol Nienałtowski}
+Najważniejszym zadaniem Karola było przygotowanie funkcjonalności dotyczących procesu tłumaczenia. Przygotował on silnie generyczną hierarchię klas składającą
+się na realizacje procesu tłumaczenia, od stworzenia zlecenia, aż do zamknięcia projektu tłumaczeniowego. Dzięki starannie przygotowanej hierarchii
+oraz wymodelowaniu efektywnego dziedziczenia, przebieg tłumaczenia bardzo dobrze realizuje założenia normy do której nasz system miał być dostosowany. 
+Zasługą Karola jest również wdrożenie mechanizmu internajconalizacji w naszej aplikacji oraz jej przetłumaczenie.
+
+\paragraph{Jakub Oćwieja}
+Jednym z zadań Jakuba było zaprojektowania naszego systemu w takim sposób, aby był on bezpieczny. Zapewnił on bezpieczne logowanie, 
+w oparciu o możliwości jakie daje Spring oraz zapewnił obustronne filtrowanie danych, zarówno po stronie klienta jak i serwera, 
+aby nie dopuścić do przekazania bądź wyświetlenia danych użytkownikowi, który nie jest do tego uprawniony. Skoro natomiast jesteśmy 
+już przy użytkownikach, należało zaimplementować hierarchię użytkowników, omówioną we wcześniejszych rozdziałach tej pracy. 
+Powstanie tej hierarchii to także zasługa Jakuba, jej sprawna realizacja pozwoliła na efektywne zarządzanie użytkownikami systemu i 
+zapewniła wysokie bezpieczeństwo aplikacji. Jakubowi zawdzięczamy również stworzenie interfejsu do tworzenia oraz edycji użytkowników w 
+systemie. Jego zasługą jest również mechanizm zarządzania plikami po stronie serwera oraz mechanizm stronicowania, do porcjowania przesyłanych 
+danych między klientem i serwerem. Na koniec Jakub zajmował się również tworzeniem loga i plakatu.
+
+\paragraph{Michał Sabaciński}
+Michał, podobnie jak Krzysztof, zajmował się na początku implementowaniem klas występujacych w systemie oraz ich odwzorowaniem na bazę danych 
+za pomocą mapowania obiektowo-relacyjnego. Kolejnym etapem jego pracy była implementacja obiektów DAO, które miały zapewnić niezbędny interfejs do 
+bazy danych. Kolejnym zadaniem Michała było napisanie testów do wyżej wymienionych obiektów DAO. Następnie zaimplementował funkcjonalności dotyczące 
+administracji systemu, do których należało między innymi zarządzanie językami translacji, walutami dostępnymi przy realizacji płatności, tworzenie 
+obiektów translacji dla tłumaczy. Zasługą Michała jest również stworzenie strony użytkownika, na której znajdują się szczegółowe informacje o danym 
+użytkowniku. Na koniec Michał zajmował się mechanizmem zarządzania plikami po stronie klienta oraz tłumaczeniem części aplikacji dla mechanizmu 
+internacjonalizacji.
+
+
 \section{Komunikacja w zespole}
 Jak każda praca zespołowa, tak i praca nad projektem Pengurus nie obyła się bez licznych dyskusji dotyczących, np. stosowanych rozwiązań, czy przydziału zadań.
 Można by rzec, że chwilami dyskusje te przeradzały się w kłótnie czy małe konflikty, które wywoływały srogą ciszę w trakcie wspólnej pracy. 
@@ -736,14 +844,9 @@ ale bezproblemowo w takich sytuacjach można było liczyć na pomoc partnerów. 
 starał się wspierać cały zespół.
 
 \section{Widoki na przyszłość}
-Po zamknięciu pewnego etapu, zawsze warto przeanalizować coś co właśnie się zakończyło. Odpowiedzmy na pytanie: Co pozostało po zamknięciu projektu Pengurus?
-Czy możemy mówić o sukcesie? Wydaje się, że choć nie jest to sukces komercyjny, a zespół nie został okrzyknięty twórcą innowacyjnego oprogramowania, 
-które może wprowadzić ogromne zmiany w świecie biur tłumaczeń, to osiągnęliśmy pewien sukces. Sukces, który można rozpatrywać 
-w dwóch kategoriach: sukces jako zespół i osobisty sukces każdego z nas. \\
-
 Każdy z członków zespołu spotykał się z pełnym przebiegiem tworzenia aplikacji, począwszy od pomysłu, udokumentowania projektu, aż po ostatnie linie kodu 
 podczas implementacji i zamknięcie projektu. Zasmakowaliśmy sukcesów i porażek, borykaliśmy się z problemami, które wspólnie rozwiązywaliśmy. Z pewnością 
-jest to doświadczenie, które nie pójdzie na marne, a jedynie może się nam przydać w przyszłości. Być może jeszcze czeka nas Wspólna praca w tym samym składzie,
+jest to doświadczenie, które nie pójdzie na marne, a jedynie może się nam przydać w przyszłości. Być może jeszcze czeka nas wspólna praca w tym samym składzie,
 nikt tego nie wyklucza, w końcu aplikacja, która powstała ma w sobie pewien potencjał. Już teraz jest ona w stanie, 
 który pozwala na wdrożenie do użycia w biurze, co jest właśnie objawem sukcesu grupowego. Ponadto, w przypadku dodatkowej współpracy ze specjalistami, 
 można stworzyć moduł generowania dokumentów czy rozwijać moduły, które już istnieją, ale z pewnością mogą zostać ulepszone, 
@@ -753,64 +856,6 @@ Gdyby jednak środowisko biur tłumaczeń nie okazało się dobrym celem, z narz
 z pewnością moglibyśmy podjąć się stworzenia systemu do zarządzania innym biurem. Bądź też, nie ograniczając się do jednej grupy odbiorców, 
 systemu na tyle generycznego, że potrafiłby się dostosować do obsługi szerokiej gamy biur. 
 Możliwości jest wiele, a to czy jakaś z nich wejdzie w życie z pewnością pokaże czas.
-
-\chapter{Podział pracy w zespole}
-Tytułem zakończenia, należy przejść do omówienia wkładu pracy poszczególnych członków zespołu w realizację projektu Pengurus.
-
-Będziemy bazować na wspomnianym wcześniej podziale pracy na dwa etapy: przygotowywanie dokumentacji i implementacja systemu.
-\section{Przygotowanie dokumentacji}
-Ten etap pracy rozłożył się między członków grupy niemal równo. Wszelkie ustalenia i pomysły przedstawiane były na wspólnych spotkaniach,
-natomiast spisywanie dokumentów, bądź też przygotowywane było w parach. Dla przykładu: w trakcie proseminarium, prezentację narzędzi jakich planujemy użyć
-przeprowadzili wspólnie Karol Nienałtowski oraz Jakub Oćwieja, natomiast przedstawienie technologii przy użyciu których będziemy realizować projekt, przypadło parze: Michał Sabaciński i Krzysztof Gogolewski.
-
-\section{Implementacja systemu}
-W odróżnieniu od wcześniejszego etapu, implementacja systemu składała się z wyraźnie odrębnych elementów, których realizacjami zajmowali
-się poszczególni członkowie. Najłatwiejszą metodą omówienia wkładu pracy poszczególnych członków grupy,
-będzie zaprezentowanie tych elementów i wskazanie osób, które nad nimi pracowały. W miarę możliwości postaramy się także wskazać,
-co dokładnie dana osoba zrealizowała w omawianej części implementacji systemu.
-
-\paragraph{Baza danych}
-Implementacja klas występujących w systemie, które będą przechowywane w bazie danych oraz dokonanie mapowania obiektowo-relacyjnego 
-spoczywało w rękach Michała Sabacińskiego oraz Krzysztofa Gogolewskiego. Głównym ich zadaniem była realizacja takiego mapowania,
-które gwarantuje, że przyszłe zapytania do bazy danych będą wyciągać tylko potrzebne informacje, np. obiekt nie zwraca wszystkich
-swoich kolekcji kiedy nie jest to potrzebne (mechanizm leniwego wyliczania w hibernate). Następnym ich zadaniem było zaimplementowanie 
-obiektów DAO, do komunikacji z bazą danych, po jego realizacji dokonaliśmy podziału. Michał zajął się pisaniem testów do bazy i obiektów DAO, 
-natomiast Krzysztof dopisywał funkcje, które były potrzebne osobom piszącym już wyższą warstwę projektu, tzn. realizowali funkcjonalności.
-
-\paragraph{Bezpieczeństwo}
-Realizacją bezpieczeństwa aplikacji zajął się Jakub Oćwieja. Zapewnił on bezpieczne logowanie, w oparciu o możliwości jakie daje Spring oraz
-zapewnił obustronne filtrowanie danych, zarówno po stronie klienta jak i serwera, aby nie dopuścić do przekazania bądź wyświetlenia danych
-użytkownikowi, który nie jest do tego uprawniony. Skoro natomiast jesteśmy już przy użytkownikach, należało zaimplementować hierarchię użytkowników, 
-omówioną we wcześniejszych rozdziałach tej pracy. Powstanie tej hierarchii to także zasługa Jakuba, 
-jej sprawna realizacja pozwoliła na efektywne zarządzanie użytkownikami systemu i zapewniła wysokie bezpieczeństwo aplikacji.
-
-\paragraph{Funkcjonalności dot. procesu tłumaczenia}
-Główną osobą i w zasadzie patronem tego etapu implementacyjnego był Karol Nienałtowski. Przygotował on silnie generyczną hierarchię klas składającą
-się na realizacje procesu tłumaczenia, od stworzenia zlecenia, aż do zamknięcia projektu tłumaczeniowego. Dzięki starannie przygotowanej hierarchii
-oraz wymodelowaniu efektywnego dziedziczenia, przebieg tłumaczenia bardzo dobrze realizuje założenia normy do której nasz system miał być dostosowany.
-W momencie, kiedy praca nad bazą danych w zasadzie dobiegła końca, pomocnicze funkcjonalności i klasy implementował Krzysztof.
-
-\paragraph{Funkcjonalności dot. administracji systemu}
-Zarządzanie językami translacji, walutami dostępnymi przy realizacji płatności, tworzeniem obiektów translacji dla tłumaczy oraz innymi funkcjonalnościami
-związanymi z administracyjną częścią systemu zajmował się Michał. Swoją część w tym rozdziale implementacji miał także Jakub, który zapewnił tworzenie użytkowników,
-które w zasadzie powstawało już na etapie realizacji bezpieczeństwa systemu.
-
-\paragraph{Zarządzanie plikami}
-Przetrzymywanie plików zgłoszonych do tłumaczenia, jak i plików już przetłumaczonych to zasługa Michała i Jakuba. Przygotowali oni mechanizm, który pozwalał
-zarządzać plikami zarówno po stronie klienta jak i serwera.
-
-\paragraph{Front-end}
-Końcowa faza projektu, to nadanie w miarę przyjaznego, intuicyjnego dla użytkownika interfejsu aplikacji. Tą częścią implementacji zajmował się Krzysztof.
-Korzystając z możliwości proponowanych przez GWT starał się nadać systemowi wygląd, który zachęca do użytkowania.
-
-\paragraph{Pozostałe}
-Oczywiście nie wszystko co zostało wykonane w projekcie podlega klasyfikacji do powyższych kategorii. Poniżej znajdują się te części pracy, 
-które nie znalazły swojego miejsca.
-\begin{itemize}
-\item wdrożenie mechanizmu internacjonalizacji oraz dokonanie tłumaczenia aplikacji to zasługa Karola i Michała,
-\item stworzenie mechanizmu stronicowania, do porcjowania przesyłanych danych między klientem i serwerem, przygotował Jakub,
-\item przygotowanie loga systemu i plakatu prezentującego projekt zawdzięczamy Jakubowi i Krzysztofowi.
-\end{itemize}
 
 \chapter{Załączone pliki}
 
