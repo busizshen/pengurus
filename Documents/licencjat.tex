@@ -15,6 +15,7 @@
 \usepackage{color}
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{listings}
 
 % Tutaj każdy wstawia swoje dane drukując pracę licencjacką
 \author{Krzysztof Gogolewski, Karol Nienałtowski\\Jakub Oćwieja, Michał Sabaciński}
@@ -271,6 +272,7 @@ Podstawowym przypadkiem użycia jest etap tłumaczenia - Zadanie. Przedstawiony 
 \caption{Diagram przedstawiający proces tłumaczenia}
 \end{figure}
 \begin{enumerate}
+\newpage
 \item Tworzenie zadania - menadżer projektu odpowiedzialny za daną pracę tworzy nowe zadanie wybierając termin, jego realizacji, cenę i walutę w jakiej zostanie rozliczone zadanie oraz opis wyjaśniający problem . Ponadto menadżer wybiera tłumacza i weryfikatora z listy pracowników przydzielonych do projektu, którzy odpowiadają profilowi danego problemu.
 \begin{figure}[ht!]
 \centering
@@ -386,10 +388,12 @@ Poniżej przedstawiono przykładowe mapowanie klasy projekt w naszym systemie, w
 projekt ma swój zbiór menadżerów, ekspertów oraz freelancerów. Funkcja lazy = true przy tych zbiorach mówi, że 
 kolekcje te będą wyjmowane leniwie, co oznacza, że prosząc o projekt dostaniemy ten projekt bez zbiorów pracowników w nim pracujących.
 Aby wyciągnać projekt z jego zbiorami należy się do nich odwołać, kiedy projekt został już wyjęty z bazy danych i ciągle mamy otwartą sesję w 
-Hibernate, wówczas zostaną również pobrane dodatkowe dane. Ponadto w załączonym fragmencie kodu widzimy relacje pomiędzy poszczególnymi klasami, 
+Hibernate, wówczas zostaną również pobrane dodatkowe dane. Ponadto w poniższym fragmencie kodu widzimy relacje pomiędzy poszczególnymi klasami, 
 na przykład pracownik może nadzorować wiele projektów ale jeden projekt może mieć jednego nadzorcę (relacja wiele do jednego).
-\begin{verbatim}
-
+\bigskip
+%\begin{verbatim}
+\lstset{numbers=left, language=XML, stepnumber=1, frame=single, breaklines=true,basicstyle=\footnotesize,}
+\begin{lstlisting}
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
@@ -438,8 +442,8 @@ na przykład pracownik może nadzorować wiele projektów ale jeden projekt moż
         </property>
     </class>
 </hibernate-mapping>
-
-\end{verbatim}
+\end{lstlisting}
+%\end{verbatim}
 
 \paragraph{Data Access Object}
 Jest to obiekt, który zapewnia interfejs do bazy danych jednocześnie nie ujawniając jej szczegółów. Głównym celem stosowania DAO jest
@@ -451,7 +455,7 @@ dla każdej z osobna klasy operacji CRUD. Niektóre DAO posiadają dodatkowe, ba
 w których brał udział kierownik o danym identyfikatorze. Wykorzystanie DAO skutkuje stworzeniem dodatkowej warstwy interfejsu ale dzięki 
 temu kod staje się czytelniejszy, ponieważ szczegóły przechowywania danych są ukryte. Operacje na bazie danych ograniczają 
 się tylko do wywołania odpowiedniej metody z DAO.
-
+\newpage
 \paragraph{Znajomość biblioteki} 
 Ważnym czynnikiem, który pomógł nam w wyborze Hibernate'a był fakt, że trzy osoby z naszego zespołu 
 były już dobrze zaznajomione z biblioteką, ponieważ w tym samym czasie uczęszczały na zajęcia z zaawansowanych baz danych, na których 
@@ -567,7 +571,7 @@ Podsumowując, narzędzie to pozwala na łatwe i szybkie uruchamianie produktu w
 \section{Eclipse}
 
 Eclipse to wybrane przez nas środowisko programistyczne, które łączy ze sobą zintegrowane środowisko programistyczne oraz rozszerzalność zapewnianą przez bibliotekę wtyczek umożliwiającą pracę praktycznie z każdym narzędziem. Praca z użyciem tego środowiska jest bardzo wygodna, ponieważ Eclipse udostępnia niezliczoną ilość skrótów klawiszowych umożliwiających niezwykle proste poruszanie się po całym projekcie. Podstawowe skróty obsługują nie tylko standardowe zarządzanie tekstem, ale zarządzanie kodem. Możliwe jest m. in. wydzielanie funkcji, globalne zmiany nazw klas, metod zmiennych, automatyczne tworzenie szkieletów obiektów, intuicyjne poruszanie się po strukturze hierarchii obiektów i wiele innych. Upraszcza to dokonywanie zmian w istniejącym kodzie przez co samo tworzenie aplikacji staje się bardziej elastyczne, klasy czytelniejsze, a programiści nie boją się zaglądać i modyfikować kodu stworzonego przez poprzedników.
-
+\newpage
 \paragraph{Wtyczki}
 \begin{itemize}
 \item \textbf{EGit - Git Team Provider} - wtyczka pozwalająca obsługiwać repozytorium Gita z poziomu Eclipse'a. Oprócz tego, że wtyczka ta umożliwia wykonywanie wszystkich poleceń, które dostępne są z poziomu konsoli, EGit zapewnia także dodatkowe funkcjonalności ułatwiające prace, takie jak zastępowanie fragmentu dowolnego pliku przez fragment tego samego pliku w historii gita czy możliwość szybkiego podglądu kto i kiedy jako ostatni modyfikował wskazaną linię kodu. Wtyczka ta umożliwia także integrację z Gerritem.
@@ -681,7 +685,9 @@ Aby uniknąć komplikacji związanych z duplikowaniem metod dla rozszerzania kla
 \end{figure}
 
 W naszym przypadku klasą tą jest \textit{GwtRpcController}: 
-\begin{verbatim}
+%\begin{verbatim}
+\lstset{numbers=left, language=Java, stepnumber=1, frame=single, breaklines=true,basicstyle=\footnotesize,}
+\begin{lstlisting}
 public class GwtRpcController extends RemoteServiceServlet implements
     Controller, ServletContextAware {
   private static final long serialVersionUID = -3618261744853211777L;
@@ -689,7 +695,8 @@ public class GwtRpcController extends RemoteServiceServlet implements
   private ServletContext servletContext;
   private RemoteService remoteService;
   ...
-\end{verbatim}
+\end{lstlisting}
+%\end{verbatim}
 Metody zaimplementowane w dalszej części klasy służą do pośredniczenia pomiędzy wywołaniami metod udostępnianych przez interfejsy, a dostępem do opakowywanego obiektu. W ten sposób stworzenie nowego serwisu nie wiąże się już z duplikowaniem kodu. Aby dodać nowy serwis do tych już istniejących wystarczy implementować symboliczny jedynie interfejs RemoteService oraz dodać krótki wpis w pliku konfiguracyjnym Springa \textit{gwt-wrapper-beans.xml}. W ten sposób Spring automatycznie opakuje nasz serwis w powyższą klasę, która zadba o serializację obiektów wymaganą przez ExtGWT. 
 
 \subsection{Hibernate}
