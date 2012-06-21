@@ -67,6 +67,18 @@
 %\listoftables
 
 \chapter{Wprowadzenie - Wizja}
+
+Rozpoczynając pracę nad projektowaniem systemu do zarządzania biurem tłumaczeń postawiliśmy sobie cel, aby w ramach tego tematu był on jak najbardziej funkcjonalny,
+co oznaczało, że miał się wykazywać jak największą elastycznością w dziedzinie tłumaczeń (np. musiał uwzględniać możliwość dodania nowej usługi tłumaczeń). 
+Wymagało to od nas dogłębnego przeanalizowania rynku. Nasz produkt musiał być odpowiedni dla małych biur prowadzących proste, krótkie tłumaczenia, jak i dla większych 
+przedsiębiorstw, których projekty są znacznie obszerniejsze.\\
+
+Pomocne okazały się już istniejące aplikacje. Przeanalizowaliśmy ich wady oraz zalety i wyciągnęliśmy z nich wnioski. Ponadto zauważyliśmy analogie pomiędzy procesem projektowania
+systemu informatycznego, a procesem tłumaczenia. Przekładając nasze doświadczenie oraz zebrane wnioski przystąpiliśmy do tworzenia wstępnego szkicu projektu. 
+Po jego uzgodnieniu zasięgnęliśmy informacji z oficjalnych dokumentów: "Polskiej Normy PL-EN 15038 Usługi tłumaczeniowe. Wymagania dotyczące świadczenia usług." oraz
+schematu systemu zarządzania biurem tłumaczeń przygotowanej przez klienta.
+Przyjęta kolejność miała wyeliminować niepotrzebny biurokratyczny formalizm, który utrudniłby pracę tłumaczom dla których ta aplikacja miała upraszczać ów proces, a nie go jeszcze utrudniać.
+
 \section{Problem}
 W dzisiejszym świecie bardzo istotną kwestią wydaje się być szeroko pojęte usprawnianie zarządzania firmą. 
 Jednym z najważniejszych jego aspektów jest przyspieszanie i formalizacja przebiegu procesu biznesowego. 
@@ -570,29 +582,17 @@ Netbeans, podobnie jak Eclipse, jest zintegrowanym oferującym dużo możliwośc
 
 \chapter{Praca}
 \section{Projektowanie systemu}
-Rozpoczynając pracę nad projektowaniem systemu do zarządzania biurem tłumaczeń postawiliśmy sobie cel, aby w ramach tego tematu był on jak najbardziej funkcjonalny,
-co oznaczało, że miał się wykazywać jak największą elastycznością w dziedzinie tłumaczeń (np. musiał uwzględniać możliwość dodania nowej usługi tłumaczeń). 
-Wymagało to od nas dogłębnego przeanalizowania rynku. Nasz produkt musiał być odpowiedni dla małych biur prowadzących proste, krótkie tłumaczenia, jak i dla większych 
-przedsiębiorstw, których projekty są znacznie obszerniejsze.\\
 
-Pomocne okazały się już istniejące aplikacje. Przeanalizowaliśmy ich wady oraz zalety i wyciągnęliśmy z nich wnioski. Ponadto zauważyliśmy analogie pomiędzy procesem projektowania
-systemu informatycznego, a procesem tłumaczenia. Przekładając nasze doświadczenie oraz zebrane wnioski przystąpiliśmy do tworzenia wstępnego szkicu projektu. 
-Po jego uzgodnieniu zasięgnęliśmy informacji z oficjalnych dokumentów: "Polskiej Normy PL-EN 15038 Usługi tłumaczeniowe. Wymagania dotyczące świadczenia usług." oraz
-schematu systemu zarządzania biurem tłumaczeń przygotowanej przez klienta.
-Przyjęta kolejność miała wyeliminować niepotrzebny biurokratyczny formalizm, który utrudniłby pracę tłumaczom dla których ta aplikacja miała upraszczać ów proces, a nie go jeszcze utrudniać.\\
+Projekt systemu składał się z dwóch równie istotnych części: schematu reprezentacji użytkowników oraz schematu przebiegu realizacji projektu.
 
-Projekt systemu składał się z dwóch równie istotnych części: schematu reprezentacji użytkowników oraz schematu przebiegu realizacji projektu.\\
+\begin{figure}[ht!]
+\includegraphics[width=0.95\textwidth]{resources/data.png}
+\caption{Model danych zawierający wszystkie etapy przebiegu realizacji projektu}
+\end{figure}
 
 Reprezentacja użytkowników oraz stworzony przez nas system ról zostały szczegółowo opisnae w punkcie \ref{r:uzytkownicy}. 
 Jego realizacja była bardzo ciężka i czasochłonna, gdyż musiała uwzględniać problemy, jakie możemy napotkać z implementacją i wykorzystaniem tego systemu, 
 a z drugiej strony musiała odzwierciedlać rzeczywisty stan podczas tłumaczenia.\\
-
-
-\begin{figure}[ht!]
-\includegraphics[width=1.1\textwidth]{resources/data.png}
-\caption{Model danych zawierający wszystkie etapy przebiegu realizacji projektu}
-\end{figure}
-
 
 Szczegółowy opis procesu został opisany w punkcie \ref{r:aplikacja}. Podczas projektowania schematu rozważaliśmy różne koncepcje.
 \begin{itemize}
