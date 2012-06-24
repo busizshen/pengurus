@@ -175,7 +175,7 @@ Polityką tworzenia kopii zapasowych Pl-4.1
 Kierownik tworzy użytkownika oraz nadaje mu odpowiednie role.
 Pracownik/Tłumacz posiada: login, dane osobowe i kontaktowe. 
 Tłumacz ma również przypisane odpowiednie umiejętności tłumaczenia (wraz z prawami do ich tworzenia - tłumaczenia sądowe, techniczne).
-Klient posiada login, dane kontaktowe oraz dane służace do przygotowania umowy i faktur. W przypadku Klienta biznesowego każdy, z jego pełnomocników posiada dane osobowe i kontaktowe. 
+Klient posiada login, dane kontaktowe oraz dane służące do przygotowania umowy i faktur. W przypadku Klienta biznesowego każdy, z jego pełnomocników posiada dane osobowe i kontaktowe. 
 
 
 \chapter{Aplikacja}\label{r:aplikacja}
@@ -387,7 +387,7 @@ na planowanie struktury bazy danych.\\\\
 Poniżej przedstawiono przykładowe mapowanie klasy projekt w naszym systemie, w którym możemy zauważyć, że każdy 
 projekt ma swój zbiór menadżerów, ekspertów oraz freelancerów. Funkcja lazy = true przy tych zbiorach mówi, że 
 kolekcje te będą wyjmowane leniwie, co oznacza, że prosząc o projekt dostaniemy ten projekt bez zbiorów pracowników w nim pracujących.
-Aby wyciągnać projekt z jego zbiorami należy się do nich odwołać, kiedy projekt został już wyjęty z bazy danych i ciągle mamy otwartą sesję w 
+Aby wyciągnąć projekt z jego zbiorami należy się do nich odwołać, kiedy projekt został już wyjęty z bazy danych i ciągle mamy otwartą sesję w 
 Hibernate, wówczas zostaną również pobrane dodatkowe dane. Ponadto w poniższym fragmencie kodu widzimy relacje pomiędzy poszczególnymi klasami, 
 na przykład pracownik może nadzorować wiele projektów ale jeden projekt może mieć jednego nadzorcę (relacja wiele do jednego).
 \bigskip
@@ -576,7 +576,7 @@ Eclipse to wybrane przez nas środowisko programistyczne, które łączy ze sob�
 \begin{itemize}
 \item \textbf{EGit - Git Team Provider} - wtyczka pozwalająca obsługiwać repozytorium Gita z poziomu Eclipse'a. Oprócz tego, że wtyczka ta umożliwia wykonywanie wszystkich poleceń, które dostępne są z poziomu konsoli, EGit zapewnia także dodatkowe funkcjonalności ułatwiające prace, takie jak zastępowanie fragmentu dowolnego pliku przez fragment tego samego pliku w historii gita czy możliwość szybkiego podglądu kto i kiedy jako ostatni modyfikował wskazaną linię kodu. Wtyczka ta umożliwia także integrację z Gerritem.
 \item \textbf{Maven Integration for Eclipse} - wtyczka integrująca eclipsa z Mavenem. Dzięki niej Eclipse potrafił wykrywać, które biblioteki spośród wymaganych przez projekt były zapewnione przez lokalne repozytorium Mavena oraz potrafił zarządzać pobieraniem tych, których brakowało.
-\item \textbf{FindBugs Eclipse Plugin} - wtyczka pozwalające na używanie narzędzia FindBuds. Pozwala ono na wykrycie drobnych i nie tylko błędów, łatwych do przeoczenia pomyłek lub naruszających dobre nawyki pisania w języku Java elementów kodu. Pozwala to na zmniejszenie ilości problemów, których w łatwy sposób można uniknąć.
+\item \textbf{FindBugs Eclipse Plugin} - wtyczka pozwalające na używanie narzędzia FindBugs. Pozwala ono na wykrycie drobnych i nie tylko błędów, łatwych do przeoczenia pomyłek lub naruszających dobre nawyki pisania w języku Java elementów kodu. Pozwala to na zmniejszenie ilości problemów, których w łatwy sposób można uniknąć.
 \item \textbf{Eclipse JBoss Plugin} - wtyczka pozwalająca na zainstalowanie narzędzi Hibernate Tools do pracy z Hibernatem, jak również JBoss Maven Hibernate Configurator do zintegrowania współpracy Mavena z Hibernatem
 \end{itemize}
 
@@ -594,7 +594,7 @@ Projekt systemu składał się z dwóch równie istotnych części: schematu rep
 \caption{Model danych zawierający wszystkie etapy przebiegu realizacji projektu}
 \end{figure}
 
-Reprezentacja użytkowników oraz stworzony przez nas system ról zostały szczegółowo opisnae w punkcie \ref{r:uzytkownicy}. 
+Reprezentacja użytkowników oraz stworzony przez nas system ról zostały szczegółowo opisane w punkcie \ref{r:uzytkownicy}. 
 Jego realizacja była bardzo ciężka i czasochłonna, gdyż musiała uwzględniać problemy, jakie możemy napotkać z implementacją i wykorzystaniem tego systemu, 
 a z drugiej strony musiała odzwierciedlać rzeczywisty stan podczas tłumaczenia.\\
 
@@ -607,7 +607,7 @@ Służyło to poprawie przejrzystości projektu (oba etapy zawierały kompletnie
 Uważaliśmy, iż zwykli pracownicy nie powinni znać informacji o Kliencie i całym projekcie (za wyjątkiem kierowników i menadżerów), a jedynie powinni mieć dostęp do informacji zawartych w przydzielonych im Zadaniach.
  Z drugiej strony klient nie powinien znać wszystkich szczegółów realizacji projektu, a jedynie efekty poszczególnych etapów (Prac).
 \item Drugim problemem z jakim się zmierzyliśmy był sposób, w jaki wyrazimy Ofertę przedstawianą Klientowi.
-Chcieliśmy w prosty sposób przedstawić informację o tym, co ma zrealizować dane zlecenie oraz pozostałe dane na temat tego zlecenia (deadline, zapłata, rodzaj tłumaczenia, dotarczone pliki).
+Chcieliśmy w prosty sposób przedstawić informację o tym, co ma zrealizować dane zlecenie oraz pozostałe dane na temat tego zlecenia (deadline, zapłata, rodzaj tłumaczenia, dostarczone pliki).
 Najprostsze rozwiązanie zakładało, iż to Oferta zawiera te informacje, co w etapie realizacji miało się prosto mapować na Projekt.
 Rozważyliśmy, jednak przypadek tłumaczenia dużej książki. Klient chciałby np. aby zlecenie było realizowane etapami, bądź opłata za poszczególne części miałaby się różnić.
 Przy tym rozwiązaniu należałoby stworzyć kilka Ofert, co nie byłoby wygodne. 
@@ -620,10 +620,10 @@ który zajmował się przydzielaniem Zadań do pracowników pracujących przy da
 Nie wiedzieliśmy natomiast ilu takich Menadżerów przypisać oraz czy powinni oni być powiązania stricte z Pracą, czy ogólniej z Projektem. 
 Po długich dyskusjach i licznych pomysłach realizacji zdecydowaliśmy się na najbardziej elastyczny model. Ilość menadżerów miała zależeć od Kierownika zlecenia, który przygotował Ofertę. 
 Menadżerowie mieli być przydzieleni do Projektu, tak aby nie trzeba było za każdym wybierać menadżerów do poszczególnych Prac.
-Miało to byc realizowane nieformalnie.
+Miało to być realizowane nieformalnie.
 \item Jako przykład bardziej szczegółowego problemu jaki napotkaliśmy było stworzenie systemu typów tłumaczeń (chodziło o rozróżnienie tłumaczeń ustnych, sądowych, technicznych, itp.).
 Pierwszy pomysł przewidywał stworzenie odpowiednich enumeratorów. Uniemożliwiałoby to jednak rozszerzenie - dodanie nowego rodzaju wymagałoby zmian w kodzie. 
-Postanowiliśmy zatem stworzyć oddzielną klasę TranslationType posiadającą odpowiednie informacje. Kierownik (admnistrator) za pomocą aplikacji mógłby dzięki temu w łatwy sposób dodać nowy typ.
+Postanowiliśmy zatem stworzyć oddzielną klasę TranslationType posiadającą odpowiednie informacje. Kierownik (administrator) za pomocą aplikacji mógłby dzięki temu w łatwy sposób dodać nowy typ.
 \end{itemize}
 Przedstawione wyżej różne problemy, na jakie natrafiliśmy podczas etapu projektowania są tylko częścią tego z czym musieliśmy się zmierzyć. 
 Uważamy, że zrealizowany przez nas schemat spełnia wszystkie wymagane funkcjonalności oraz pozwala na wystarczającą zdolność przystosowania się do zmian na rynku tłumaczeń.
@@ -713,8 +713,8 @@ w modelu danych. Pliki z mapowaniami wygenerowaliśmy za pomocą wtyczki zainsta
 naszych oczekiwań i musieliśmy wprowadzić odpowiednie zmiany. Na bieżąco dokonywaliśmy poprawek w mapowaniu jednocześnie sprawdzając czy wszystkie 
 zmienione przez nas elementy dodają się w odpowiedni sposób do bazy danych. Była to praca bardzo żmudna, ponieważ należało przerobić i sprawdzić wiele 
 klas. W celu ułatwienia sobie zadania podzieliliśmy klasy na niezależne grupy i staraliśmy się z osobna skonfigurować każdą z nich, gdy już to zrobiliśmy 
-wzieliśmy się za integracje ze sobą wszystkich grup. W między czasie pisaliśmy odpowiednie testy, w których staraliśmy się pokryć wszystkie możliwe 
-przypadki, jednocześnie wykrywając i naprawiając pojawiające się błędy. Zbiór testów powstał dla klażdej klasy mapowanej do bazy danych.\\\\
+wzięliśmy się za integracje ze sobą wszystkich grup. W między czasie pisaliśmy odpowiednie testy, w których staraliśmy się pokryć wszystkie możliwe 
+przypadki, jednocześnie wykrywając i naprawiając pojawiające się błędy. Zbiór testów powstał dla każdej klasy mapowanej do bazy danych.\\\\
 \textbf{Leniwe wyjmowanie kolekcji.}
 
 W naszym systemie unikaliśmy sytuacji, w których pobierane są dodatkowe informacje związane z wyjmowanym obiektem z bazy danych, które nie są potrzebne 
@@ -729,26 +729,26 @@ kolekcjami.
 W pewnym momencie pracy nad implementacją naszej aplikacji doszliśmy do miejsca, w którym chcieliśmy zapewnić komunikacje pomiędzy stroną
 serwera i klienta. Ponieważ korzystaliśmy z GWT, komunikację tę miał zapewnić mechanizm kolejek RPC polegającym na wywołaniu kodu 
 strony serwera, który nazywany jest serwisem, przez klienta. Korzystając z doświadczenia części członków zespołu wiedzieliśmy, że 
-obiekty wysyłane za pomocą kolejek RPC muszą być serializowane, to znaczy, że klasa opisująca dany obiekt musi implementować interfejs 
+obiekty wysyłane za pomocą kolejek RPC muszą być serializowalne, to znaczy, że klasa opisująca dany obiekt musi implementować interfejs 
 \textit{Serializable} lub interfejs \textit{IsSerializable}. Wobec tego wybraliśmy jedną z zamapowanych do bazy danych klas, która implementowała jeden z 
 dwóch wyżej wymienionych interfejsów, napisaliśmy dla niej odpowiedni serwis i test, który miał pobrać obiekt z bazy danych, wysłać go na stronę klienta
-i wyświetlić informacje, które ze sobą ten obiekt niesie. Niestety test się nie powiódł. Patrząc na konsole trybu developement GWT dowiedziliśmy 
+i wyświetlić informacje, które ze sobą ten obiekt niesie. Niestety test się nie powiódł. Patrząc na konsole trybu developement GWT dowiedzieliśmy 
 się, że typ: \textit{'org.hibernate.collection.PersistentSet'}, który był zawarty w wysłanym przez nas obiekcie, nie jest serializowany. Wynik testu nas 
-zaskoczył, ponieważ klasa którą chcieliśmy przesłać była serializowana i nie zawierała żadnego typu \textit{'org.hibernate.collection.PersistentSet'}.
-Wobec tego zaczeliśmy szukać błędu, który zwróciła konsola GWT, w sieci. Okazało się, że obiekty wyciągane przez Hibernate'a z bazy danych są 
+zaskoczył, ponieważ klasa którą chcieliśmy przesłać była serializowalna i nie zawierała żadnego typu \textit{'org.hibernate.collection.PersistentSet'}.
+Wobec tego zaczęliśmy szukać błędu, który zwróciła konsola GWT, w sieci. Okazało się, że obiekty wyciągane przez Hibernate'a z bazy danych są 
 rozszerzone w taki sposób, żeby były trwałe. Ta trwałość nie jest osiągana bez pewnego rodzaju oprzyrządowania obiektu. W przypadku Hibernate'a 
 biblioteka \textit{Javassist} faktycznie zastępuje i przepisuje kod bajtowy tych obiektów przez trwałe encje. Dla kolejek RPC ma to takie 
 znaczenie, że do czasu kiedy obiekt jest gotowy do przesłania nie jest tym samym obiektem, który kompilator myślał, 
 że będzie wysyłany, więc podczas próby deserializacji, mechanizm GWT RPC nie wie dłużej jaki jest typ i odmawia deserializowania go.
 Bogatsi o nową wiedzę zaczęliśmy szukać rozwiązania trapiącego nas problemu, niestety przez dłuższy czas nie byliśmy w stanie znaleźć żadnego 
-rozwiązania i do zespołu wkradło się pewne zawahanie czy na pewno dobrze zrobiliśmy probując łączyć ze sobą GWT i Hibernate. 
+rozwiązania i do zespołu wkradło się pewne zawahanie czy na pewno dobrze zrobiliśmy próbując łączyć ze sobą GWT i Hibernate. 
 
 Na szczęście nie poddaliśmy się i jednemu z nas udało się znaleźć rozwiązanie naszego kłopotu. Remedium okazał się wzorzec projektowy Data Transfer Object.
 DTO jest prostym Plain Old Java Object, zawierającym jedynie te pola, do których możemy mieć dostęp po stronie klienta w celu wyświetlenia ich 
 na stronie. Obiekt Hibernate'owy może być stworzony za pomocą danych zawartych w DTO co umożliwia przesłanie danych ze strony klienta i zapisanie ich 
 w bazie danych, tak samo można stworzyć DTO korzystając z informacji zawartych w obiektach Hibernate'owych, ale wówczas już nie są przepisywane typy, które 
 nie umożliwiały przesyłanie danych z serwera do klienta. Tak stworzony obiekt gotowy jest do przesłania za pomocą kolejki RPC. Oczywiście DTO również musi być 
-serializowany.
+serializowalny.
 
 Wykorzystanie wzorca projektowego DTO wiązało się z dodatkową pracą, ponieważ każda klasa z modelu danych musiała być na nowo napisana jako DTO. Dodatkowo 
 trzeba było dopisać metody, które kopiowałyby obiekty Hibernate'owe z bazy danych do ich odpowiedników DTO oraz metody, które na podstawie DTO tworzyłyby obiekt 
@@ -808,7 +808,7 @@ kolekcji, kiedy nie jest to potrzebne (mechanizm leniwego wyjmowania w Hibernate
 do komunikacją z baza danych. Warto wspomnieć, że nad wszystkimi wspomnianymi etapami Krzysztof pracował wspólnie z Michałem. Później Krzysztof 
 zajął się dopisywaniem funkcji bazodanowych, które były potrzebne osobom piszącym już wyższą warstwę projektu, tzn. realizowali funkcjonalności. 
 Kolejną zasługą Krzysztofa było napisanie skryptu, który pozwalał zapisywać stan bazy danych do pliku oraz z tego pliku wczytywać dane do bazy 
-danych. Na koniec, Krzystof pracował nad poprawą interfejsu aplikacji, starał się aby był on bardziej przyjazny oraz intuicyjny dla użytkownika. 
+danych. Na koniec, Krzysztof pracował nad poprawą interfejsu aplikacji, starał się aby był on bardziej przyjazny oraz intuicyjny dla użytkownika. 
 Wartym odnotowania jest również jego wkład włożony w pracę nad plakatem oraz logiem.
 
 \paragraph{Karol Nienałtowski}
